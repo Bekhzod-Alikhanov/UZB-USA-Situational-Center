@@ -1,0 +1,183 @@
+{
+  "brand": {
+    "title": "O‘zbekiston – AQSh",
+    "subtitle": "Vaziyat Markazi",
+    "full": "O‘zbekiston Respublikasining Amerika Qo‘shma Shtatlari bilan hamkorligi bo‘yicha Vaziyat Markazi"
+  },
+  "nav": {
+    "overview": "Umumiy ko‘rinish",
+    "trade": "Tashqi savdo",
+    "investments": "Investitsiyalar",
+    "visits": "Tashriflar va delegatsiyalar",
+    "prepare": "Tashrifga tayyorgarlik",
+    "commitments": "Kelishuvlar reestri",
+    "agreements": "Ikki tomonlama bitimlar",
+    "events": "Tadbirlar va kalendar",
+    "grants": "Grantlar",
+    "map": "Interaktiv xarita",
+    "compliance": "AQSh kompliyans",
+    "counterparts": "Hamkorlar",
+    "benchmark": "Mintaqaviy taqqoslash",
+    "staff": "Shtab KPI",
+    "contacts": "Kontaktlar",
+    "news": "Yangiliklar tasmasi",
+    "assistant": "AI-yordamchi",
+    "admin": "Boshqaruv"
+  },
+  "navGroups": {
+    "monitoring": "Monitoring",
+    "execution": "Ijro",
+    "knowledge": "Bilimlar bazasi",
+    "internal": "Ichki"
+  },
+  "top": {
+    "title": "Ikki tomonlama kun tartibini muvofiqlashtirish portali",
+    "sub": "Investitsiya · savdo · bitimlar · tashriflar · natijalar monitoringi",
+    "online": "Tizim onlayn",
+    "search": "Shaxslar, tashriflar, bitimlar, loyihalarni qidirish…",
+    "shortcut": "⌘K"
+  },
+  "demo": {
+    "badge": "DEMO",
+    "tooltip": "Namoyish ma’lumotlari. {source} tomonidan yangilanadi.",
+    "banner": "Ushbu bo‘limda namoyish ma’lumotlari mavjud. Haqiqiy ma’lumotlar tegishli idoralardan olingach yangilanadi.",
+    "hide": "Namoyish ma’lumotlarini yashirish",
+    "presentation": "Taqdimot rejimi"
+  },
+  "overview": {
+    "title": "Umumiy ko‘rinish",
+    "subtitle": "Asosiy ko‘rsatkichlar, faol kun tartibi va e’tibor talab qiladigan signallar",
+    "kpi": {
+      "turnover2025": "Tovar aylanmasi (2025)",
+      "exports2025": "UZ → AQSh eksport",
+      "imports2025": "AQSh → UZ import",
+      "balance2025": "Savdo saldosi",
+      "agreements": "Hujjatlar soni",
+      "projects": "Investitsiya portfeli",
+      "relations": "Diplomatik munosabatlar",
+      "nextVisit": "Keyingi muhim tashrif",
+      "delegations": "Harakatdagi delegatsiyalar"
+    },
+    "flow": "Savdo oqimi 2017–2025",
+    "timeline": "So‘nggi faoliyat",
+    "upcoming": "Bo‘lajak tadbirlar",
+    "alerts": "E’tibor talab qiladi"
+  },
+  "trade": {
+    "title": "Tashqi savdo",
+    "subtitle": "AQSh bilan tashqi savdo, 2017 – 2026-yil yanvar",
+    "source": "Manba: O‘zbekiston Respublikasi Statistika qo‘mitasi",
+    "columns": {
+      "indicator": "Ko‘rsatkich",
+      "growth2017": "2017 ga nisbatan",
+      "growth2024": "2024 ga nisbatan"
+    },
+    "indicators": {
+      "turnover": "Tovar aylanmasi",
+      "exports": "Eksport",
+      "imports": "Import",
+      "balance": "Saldo"
+    },
+    "structure": {
+      "export": "2025-yil eksport tarkibi",
+      "import": "2025-yil import tarkibi"
+    },
+    "ranking": {
+      "exporters": "AQShga eksport qiluvchi UZ kompaniyalari",
+      "importers": "O‘zbekistonga import qiluvchi AQSh kompaniyalari"
+    }
+  },
+  "visits": {
+    "title": "Tashriflar va delegatsiyalar",
+    "subtitle": "1992 – 2026-yillar xronologiyasi, barcha formatlar",
+    "tabs": {
+      "timeline": "Xronologiya",
+      "grid": "Kartalar",
+      "table": "Jadval"
+    }
+  },
+  "prepare": {
+    "title": "Tashrifga tayyorgarlik",
+    "subtitle": "Workflow · chek-listlar · optimallashtirish",
+    "stages": {
+      "plan": "Reja",
+      "coord": "Muvofiqlashtirish",
+      "brief": "Brifing",
+      "exec": "Ijro",
+      "follow": "Follow-up"
+    },
+    "optimize": {
+      "title": "Delegatsiya optimallashtirgichi",
+      "sub": "Algoritmik tavsiya"
+    }
+  },
+  "commitments": {
+    "title": "Kelishuvlar reestri",
+    "subtitle": "Sammit, uchrashuv va MoU bo‘yicha barcha majburiyatlar monitoringi",
+    "statuses": {
+      "done": "Bajarildi",
+      "progress": "Bajarilmoqda",
+      "watch": "Nazoratda",
+      "overdue": "Muddati o‘tgan"
+    }
+  },
+  "agreements": {
+    "title": "Ikki tomonlama bitimlar",
+    "subtitle": "138 asos hujjat + 16 investitsiya bitim",
+    "categories": {
+      "interstate": "Davlatlararo",
+      "intergov": "Hukumatlararo",
+      "interagency": "Idoralararo",
+      "other": "Boshqa",
+      "invest": "Investitsiya"
+    }
+  },
+  "map": {
+    "title": "Interaktiv xarita",
+    "subtitle": "Investitsiyalar, savdo oqimlari, jonli delegatsiyalar",
+    "layers": {
+      "invest": "Investitsiyalar",
+      "trade": "Savdo",
+      "delegations": "Delegatsiyalar"
+    },
+    "toggle3d": "3D globusga o‘tish"
+  },
+  "admin": {
+    "title": "Boshqaruv",
+    "toggles": "Toggles",
+    "hideDemo": "Namoyish ma’lumotlarini yashirish",
+    "hideDemoDesc": "is_demo=true qiymatlar bor bo‘lgan barcha komponentlarni yashiradi.",
+    "presentation": "Taqdimot rejimi",
+    "presentationDesc": "DEMO belgilari va nuqtali tagchiziqlarni yashiradi, lekin ma’lumotlar qoladi.",
+    "theme": "Mavzu",
+    "ai": "AI-yordamchi",
+    "aiDesc": "Claude asosidagi yordamchini yoqish. Standart model: Sonnet 4.6.",
+    "model": "AI model",
+    "registry": "Demo ma’lumotlar reestri",
+    "registryDesc": "Har bir sintetik qiymat va haqiqiy ma’lumotni yetkazib beruvchi idora ro‘yxati.",
+    "audit": "Audit jurnali",
+    "import": "CSV / XLSX import",
+    "users": "Foydalanuvchilar",
+    "delegationLocation": "Delegatsiyalarning jonli lokatsiyasi"
+  },
+  "actions": {
+    "export": "Eksport",
+    "exportCsv": "CSV eksport",
+    "exportXlsx": "XLSX eksport",
+    "exportPdf": "PDF eksport",
+    "print": "Chop etish",
+    "filter": "Filtr",
+    "reset": "Qayta tiklash",
+    "details": "Tafsilotlar",
+    "close": "Yopish",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish"
+  },
+  "common": {
+    "updated": "Yangilandi",
+    "source": "Manba",
+    "viewAll": "Barchasini ko‘rish",
+    "loading": "Yuklanmoqda…",
+    "empty": "Ma’lumot yo‘q"
+  }
+}

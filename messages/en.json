@@ -1,0 +1,183 @@
+{
+  "brand": {
+    "title": "Uzbekistan – USA",
+    "subtitle": "Situational Center",
+    "full": "Situational Center on cooperation of the Republic of Uzbekistan with the United States of America"
+  },
+  "nav": {
+    "overview": "Overview",
+    "trade": "Trade",
+    "investments": "Investments",
+    "visits": "Visits & delegations",
+    "prepare": "Visit preparation",
+    "commitments": "Commitments registry",
+    "agreements": "Bilateral agreements",
+    "events": "Events & calendar",
+    "grants": "Grants",
+    "map": "Interactive map",
+    "compliance": "US compliance",
+    "counterparts": "Counterparts",
+    "benchmark": "Regional benchmark",
+    "staff": "Staff KPI",
+    "contacts": "Contacts",
+    "news": "Curated news",
+    "assistant": "AI assistant",
+    "admin": "Admin"
+  },
+  "navGroups": {
+    "monitoring": "Monitoring",
+    "execution": "Execution",
+    "knowledge": "Knowledge base",
+    "internal": "Internal"
+  },
+  "top": {
+    "title": "Coordination portal of the bilateral agenda",
+    "sub": "Investments · trade · agreements · visits · outcome monitoring",
+    "online": "System online",
+    "search": "Search people, visits, agreements, projects…",
+    "shortcut": "⌘K"
+  },
+  "demo": {
+    "badge": "DEMO",
+    "tooltip": "Demonstration data. To be updated from {source}.",
+    "banner": "This section contains demonstration data. Real data will be supplied by the responsible agencies.",
+    "hide": "Hide demo data",
+    "presentation": "Presentation mode"
+  },
+  "overview": {
+    "title": "Overview",
+    "subtitle": "Key indicators, active agenda and signals requiring attention",
+    "kpi": {
+      "turnover2025": "Trade turnover 2025",
+      "exports2025": "UZ → US exports",
+      "imports2025": "US → UZ imports",
+      "balance2025": "Trade balance",
+      "agreements": "Bilateral documents",
+      "projects": "Investment portfolio",
+      "relations": "Diplomatic relations",
+      "nextVisit": "Next anchor visit",
+      "delegations": "Delegations in transit"
+    },
+    "flow": "Trade flow 2017–2025",
+    "timeline": "Recent activity",
+    "upcoming": "Upcoming events",
+    "alerts": "Requires attention"
+  },
+  "trade": {
+    "title": "Trade",
+    "subtitle": "External trade with the USA, 2017 – Jan 2026",
+    "source": "Source: State Statistics Committee of Uzbekistan",
+    "columns": {
+      "indicator": "Indicator",
+      "growth2017": "Growth vs 2017",
+      "growth2024": "Growth vs 2024"
+    },
+    "indicators": {
+      "turnover": "Turnover",
+      "exports": "Exports",
+      "imports": "Imports",
+      "balance": "Balance"
+    },
+    "structure": {
+      "export": "2025 export structure",
+      "import": "2025 import structure"
+    },
+    "ranking": {
+      "exporters": "Top UZ exporters to the USA",
+      "importers": "Top US importers to Uzbekistan"
+    }
+  },
+  "visits": {
+    "title": "Visits & delegations",
+    "subtitle": "Chronology 1992 – 2026 across all formats",
+    "tabs": {
+      "timeline": "Timeline",
+      "grid": "Grid",
+      "table": "Table"
+    }
+  },
+  "prepare": {
+    "title": "Visit preparation",
+    "subtitle": "Workflow · checklists · optimization",
+    "stages": {
+      "plan": "Plan",
+      "coord": "Coordination",
+      "brief": "Briefing",
+      "exec": "Execution",
+      "follow": "Follow-up"
+    },
+    "optimize": {
+      "title": "Delegation optimizer",
+      "sub": "Algorithmic recommendation"
+    }
+  },
+  "commitments": {
+    "title": "Commitments registry",
+    "subtitle": "Tracking every commitment from summits, meetings and MoUs",
+    "statuses": {
+      "done": "Completed",
+      "progress": "In progress",
+      "watch": "On watch",
+      "overdue": "Overdue"
+    }
+  },
+  "agreements": {
+    "title": "Bilateral agreements",
+    "subtitle": "138 base documents + 16 investment agreements",
+    "categories": {
+      "interstate": "Interstate",
+      "intergov": "Intergovernmental",
+      "interagency": "Inter-agency",
+      "other": "Other",
+      "invest": "Investment"
+    }
+  },
+  "map": {
+    "title": "Interactive map",
+    "subtitle": "Investments, trade flows, live delegations",
+    "layers": {
+      "invest": "Investments",
+      "trade": "Trade",
+      "delegations": "Delegations"
+    },
+    "toggle3d": "Switch to 3D globe"
+  },
+  "admin": {
+    "title": "Administration",
+    "toggles": "Feature toggles",
+    "hideDemo": "Hide all demonstration data",
+    "hideDemoDesc": "Hides every component that contains is_demo=true values.",
+    "presentation": "Presentation mode",
+    "presentationDesc": "Removes DEMO badges and dotted underlines but keeps the data.",
+    "theme": "Theme",
+    "ai": "AI assistant",
+    "aiDesc": "Toggle to enable the Claude-powered assistant. Default model: Sonnet 4.6.",
+    "model": "AI model",
+    "registry": "Demo data registry",
+    "registryDesc": "Master list of every synthetic value and the agency responsible for supplying real data.",
+    "audit": "Audit log",
+    "import": "CSV / XLSX import",
+    "users": "Users",
+    "delegationLocation": "Delegation live location"
+  },
+  "actions": {
+    "export": "Export",
+    "exportCsv": "Export CSV",
+    "exportXlsx": "Export XLSX",
+    "exportPdf": "Export PDF",
+    "print": "Print",
+    "filter": "Filter",
+    "reset": "Reset",
+    "details": "Details",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "common": {
+    "updated": "Updated",
+    "source": "Source",
+    "viewAll": "View all",
+    "loading": "Loading…",
+    "empty": "No data available"
+  }
+}

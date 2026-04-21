@@ -1,0 +1,201 @@
+export type AgreementCategory = "interstate" | "intergov" | "interagency" | "other" | "invest";
+export type AgreementSphere =
+  | "political"
+  | "economy-trade"
+  | "investment"
+  | "finance"
+  | "energy"
+  | "minerals"
+  | "agriculture"
+  | "education"
+  | "healthcare"
+  | "it-digital"
+  | "transport"
+  | "defense"
+  | "humanitarian"
+  | "other";
+
+export interface Agreement {
+  id: string;
+  title: string;
+  category: AgreementCategory;
+  sphere: AgreementSphere;
+  signedOn: string;
+  signedBy: { uz: string; us: string };
+  status: "in-force" | "signed" | "pending" | "expired";
+  textRefBy?: "MFA of Uzbekistan";
+  is_demo: boolean;
+}
+
+export const agreementsAggregate = {
+  totalDocuments: 138,
+  totalInvestAgreements: 16,
+  byCategory: { interstate: 1, intergov: 71, interagency: 44, other: 22 } as Record<AgreementCategory, number>,
+  source: "MFA of the Republic of Uzbekistan",
+  is_demo: false,
+};
+
+const sign = (uz: string, us: string) => ({ uz, us });
+
+export const agreements: Agreement[] = [
+  {
+    id: "a-1992-relations",
+    title: "Establishment of diplomatic relations",
+    category: "interstate",
+    sphere: "political",
+    signedOn: "1992-02-19",
+    signedBy: sign("President of Uzbekistan", "U.S. Secretary of State"),
+    status: "in-force",
+    is_demo: false,
+  },
+  {
+    id: "a-2018-strategic-partnership",
+    title: "Joint Statement on Strategic Partnership",
+    category: "intergov",
+    sphere: "political",
+    signedOn: "2018-05-16",
+    signedBy: sign("President Mirziyoyev", "President Trump"),
+    status: "in-force",
+    is_demo: false,
+  },
+  {
+    id: "a-2021-strategic-dialogue",
+    title: "Memorandum on Strategic Partnership Dialogue",
+    category: "intergov",
+    sphere: "political",
+    signedOn: "2021-12-01",
+    signedBy: sign("MFA of Uzbekistan", "U.S. Department of State"),
+    status: "in-force",
+    is_demo: false,
+  },
+  {
+    id: "a-2024-minerals-dialogue",
+    title: "Launch of the Critical Minerals Dialogue (C5+1)",
+    category: "intergov",
+    sphere: "minerals",
+    signedOn: "2024-02-01",
+    signedBy: sign("MFA of Uzbekistan", "U.S. Department of State"),
+    status: "in-force",
+    is_demo: false,
+  },
+  {
+    id: "a-2026-minerals-mou",
+    title: "MoU on supply-chain resilience — critical minerals and rare earths",
+    category: "intergov",
+    sphere: "minerals",
+    signedOn: "2026-02-04",
+    signedBy: sign("FM Saidov", "U.S. Department of State"),
+    status: "in-force",
+    is_demo: false,
+  },
+  {
+    id: "a-demo-tax-dta",
+    title: "Double Taxation Avoidance Agreement (DTA) — modernization",
+    category: "intergov",
+    sphere: "finance",
+    signedOn: "2024-11-13",
+    signedBy: sign("Ministry of Finance", "U.S. Department of the Treasury"),
+    status: "signed",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-gsp",
+    title: "Agreement on Generalized System of Preferences (GSP)",
+    category: "intergov",
+    sphere: "economy-trade",
+    signedOn: "2021-03-01",
+    signedBy: sign("MFA", "USTR"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-air-services",
+    title: "Open Skies / Air Services Agreement",
+    category: "intergov",
+    sphere: "transport",
+    signedOn: "2019-10-01",
+    signedBy: sign("MoT", "DoT"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-usaid-health",
+    title: "USAID Country Development Cooperation Strategy 2022–2027",
+    category: "interagency",
+    sphere: "humanitarian",
+    signedOn: "2022-06-01",
+    signedBy: sign("MFA", "USAID"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-customs",
+    title: "Cooperation in customs matters",
+    category: "interagency",
+    sphere: "economy-trade",
+    signedOn: "2018-05-16",
+    signedBy: sign("State Customs Committee", "CBP"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-ifdc",
+    title: "International Finance Development Cooperation (DFC) framework",
+    category: "intergov",
+    sphere: "investment",
+    signedOn: "2023-09-20",
+    signedBy: sign("MIIT", "DFC"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-fbi-law",
+    title: "Law-enforcement cooperation MoU",
+    category: "interagency",
+    sphere: "other",
+    signedOn: "2019-03-01",
+    signedBy: sign("MVD of Uzbekistan", "FBI"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-export-import",
+    title: "EXIM Bank general financing framework",
+    category: "intergov",
+    sphere: "finance",
+    signedOn: "2023-11-07",
+    signedBy: sign("MoF", "EXIM Bank"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-fulbright",
+    title: "Fulbright academic exchange MoU (renewal)",
+    category: "interagency",
+    sphere: "education",
+    signedOn: "2023-02-28",
+    signedBy: sign("Ministry of Higher Education", "State Department / ECA"),
+    status: "in-force",
+    is_demo: true,
+  },
+  {
+    id: "a-demo-usda",
+    title: "Cooperation in agriculture and food safety",
+    category: "interagency",
+    sphere: "agriculture",
+    signedOn: "2022-04-01",
+    signedBy: sign("MinAgri of Uzbekistan", "USDA"),
+    status: "in-force",
+    is_demo: true,
+  },
+];
+
+export function byCategoryCount(): Record<AgreementCategory, number> {
+  return agreements.reduce<Record<AgreementCategory, number>>(
+    (acc, a) => {
+      acc[a.category] = (acc[a.category] ?? 0) + 1;
+      return acc;
+    },
+    { interstate: 0, intergov: 0, interagency: 0, other: 0, invest: 0 },
+  );
+}
