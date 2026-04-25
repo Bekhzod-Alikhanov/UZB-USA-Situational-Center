@@ -132,6 +132,119 @@
       "invest": "Investitsiya"
     }
   },
+  "investments": {
+    "title": "Investitsiya portfeli",
+    "subtitle": "AQSh hamkorlari bilan tarmoqlar va hududlar bo‘yicha loyihalar",
+    "portfolio": "Faol portfel",
+    "stats": {
+      "projects": "Loyihalar",
+      "value": "Umumiy qiymat",
+      "jobs": "Ish o‘rinlari",
+      "operating": "Faoliyatda",
+      "construction": "Qurilmoqda",
+      "pipeline": "Tayyorgarlikda"
+    }
+  },
+  "events": {
+    "title": "Tadbirlar va kalendar",
+    "subtitle": "Rejalashtirilgan va so‘nggi tadbirlar",
+    "filters": {
+      "all": "Barchasi",
+      "summit": "Sammitlar",
+      "visit": "Tashriflar",
+      "business": "Biznes",
+      "signing": "Imzolashlar"
+    },
+    "ics": ".ics eksport"
+  },
+  "grants": {
+    "title": "Grantlar portfeli",
+    "subtitle": "O‘zbekistonni qo‘llab-quvvatlovchi 7 ta AQSh grant dasturi",
+    "stats": {
+      "programs": "Dasturlar",
+      "value": "Jami mablag‘",
+      "donors": "Donorlar"
+    },
+    "filters": {
+      "all": "Barcha donorlar",
+      "sector": "Tarmoq"
+    }
+  },
+  "contacts": {
+    "title": "Kontaktlar ro‘yxati",
+    "subtitle": "Asosiy idoralar, elchixonalar va muvofiqlashtirish organlari",
+    "search": "Tashkilot, shaxs yoki mavzuni qidirish…",
+    "sections": {
+      "center": "Vaziyat Markazi",
+      "embassy": "Elchixonalar",
+      "aucc": "Biznes kengashlari",
+      "coordination": "Muvofiqlashtirish organlari"
+    }
+  },
+  "counterparts": {
+    "title": "AQSh hamkorlari",
+    "subtitle": "Ijro hokimiyati, Kongress va O‘zbekiston bilan ishlayotgan rasmiylar",
+    "search": "Ism, lavozim yoki rolni qidirish…",
+    "groups": {
+      "executive": "Ijro hokimiyati",
+      "senate": "AQSh Senati",
+      "house": "AQSh Vakillar palatasi",
+      "state": "Davlat departamenti",
+      "other": "Boshqa"
+    },
+    "briefing": "Briefing kartasi",
+    "generatePdf": "Briefing PDF yaratish",
+    "party": "Partiya",
+    "position": "Lavozim",
+    "uzHistory": "O‘zbekiston bilan tarix",
+    "keyVotes": "Muhim ovozlar",
+    "quotes": "Iqtiboslar"
+  },
+  "compliance": {
+    "title": "AQSh kompliyans holati",
+    "subtitle": "Sanksiyalar · eksport nazorati · savdo imtiyozlari — manbalar tekshirilgan",
+    "sections": {
+      "status": "Holatlar matritsasi",
+      "eccn": "ECCN nazorati",
+      "calculator": "Eksport kalkulyatori",
+      "federal": "Federal Register"
+    },
+    "fetchedAt": "Olindi",
+    "source": "Manba"
+  },
+  "staff": {
+    "title": "Shtab KPI",
+    "subtitle": "Markaz tahlilchilari va muvofiqlashtiruvchilarining oylik ko‘rsatkichlari",
+    "columns": {
+      "name": "Tahlilchi",
+      "role": "Rol",
+      "briefs": "Briefing",
+      "visits": "Tashriflar",
+      "commitments": "Kelishuvlar",
+      "score": "Ball"
+    },
+    "month": "Oy"
+  },
+  "news": {
+    "title": "Yangiliklar tasmasi",
+    "subtitle": "Teglangan tasma, qo‘lda tonallik baholash",
+    "filters": {
+      "all": "Barchasi",
+      "positive": "Ijobiy",
+      "neutral": "Neytral",
+      "critical": "Tanqidiy"
+    },
+    "read": "Manbani o‘qish"
+  },
+  "assistant": {
+    "title": "AI-yordamchi",
+    "subtitle": "Portfel haqida yordamchidan so‘rang — RAG barcha ma’lumot fayllari bo‘yicha",
+    "disabled": "Yordamchi o‘chirilgan. Uni Boshqaruv → AI sozlamalaridan yoqing.",
+    "placeholder": "Loyiha, tashrif, kelishuv, hamkor haqida so‘rang…",
+    "send": "Jo‘natish",
+    "thinking": "O‘ylanmoqda…",
+    "model": "Model"
+  },
   "map": {
     "title": "Interaktiv xarita",
     "subtitle": "Investitsiyalar, savdo oqimlari, jonli delegatsiyalar",

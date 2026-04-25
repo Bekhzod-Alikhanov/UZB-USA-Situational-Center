@@ -132,6 +132,119 @@
       "invest": "Investment"
     }
   },
+  "investments": {
+    "title": "Investment portfolio",
+    "subtitle": "Projects with U.S. partners across sectors and regions of Uzbekistan",
+    "portfolio": "Active portfolio",
+    "stats": {
+      "projects": "Projects",
+      "value": "Total value",
+      "jobs": "Jobs",
+      "operating": "Operating",
+      "construction": "Building",
+      "pipeline": "Pipeline"
+    }
+  },
+  "events": {
+    "title": "Events & calendar",
+    "subtitle": "Upcoming and recent diplomatic and business events",
+    "filters": {
+      "all": "All",
+      "summit": "Summits",
+      "visit": "Visits",
+      "business": "Business",
+      "signing": "Signings"
+    },
+    "ics": "Export .ics"
+  },
+  "grants": {
+    "title": "Grants portfolio",
+    "subtitle": "7 active U.S. grant programs supporting Uzbekistan",
+    "stats": {
+      "programs": "Programs",
+      "value": "Total funding",
+      "donors": "Donors"
+    },
+    "filters": {
+      "all": "All donors",
+      "sector": "Sector"
+    }
+  },
+  "contacts": {
+    "title": "Contacts directory",
+    "subtitle": "Primary organizations, embassies, and coordination bodies",
+    "search": "Search organization, person or topic…",
+    "sections": {
+      "center": "Situational Center",
+      "embassy": "Embassies & missions",
+      "aucc": "Business councils",
+      "coordination": "Coordination bodies"
+    }
+  },
+  "counterparts": {
+    "title": "U.S. counterparts",
+    "subtitle": "Executive Branch, Congress and senior officials engaging on Uzbekistan",
+    "search": "Search name, title or role…",
+    "groups": {
+      "executive": "Executive Branch",
+      "senate": "U.S. Senate",
+      "house": "U.S. House",
+      "state": "State Department",
+      "other": "Other"
+    },
+    "briefing": "Briefing card",
+    "generatePdf": "Generate briefing PDF",
+    "party": "Party",
+    "position": "Position",
+    "uzHistory": "History with Uzbekistan",
+    "keyVotes": "Key votes",
+    "quotes": "Quotes"
+  },
+  "compliance": {
+    "title": "U.S. compliance posture",
+    "subtitle": "Sanctions · export controls · trade preferences — sources verified",
+    "sections": {
+      "status": "Status matrix",
+      "eccn": "ECCN controls",
+      "calculator": "Export calculator",
+      "federal": "Federal Register"
+    },
+    "fetchedAt": "Fetched",
+    "source": "Source"
+  },
+  "staff": {
+    "title": "Staff KPI",
+    "subtitle": "Monthly performance of the Situational Center's analysts and coordinators",
+    "columns": {
+      "name": "Analyst",
+      "role": "Role",
+      "briefs": "Briefs",
+      "visits": "Visits",
+      "commitments": "Commitments",
+      "score": "Score"
+    },
+    "month": "Month"
+  },
+  "news": {
+    "title": "Curated news",
+    "subtitle": "Tagged feed with manual tonality scoring",
+    "filters": {
+      "all": "All",
+      "positive": "Positive",
+      "neutral": "Neutral",
+      "critical": "Critical"
+    },
+    "read": "Read source"
+  },
+  "assistant": {
+    "title": "AI assistant",
+    "subtitle": "Ask the assistant anything about the portfolio — RAG over all data files",
+    "disabled": "Assistant disabled. Activate it in Admin → AI settings.",
+    "placeholder": "Ask about a project, visit, commitment, partner…",
+    "send": "Send",
+    "thinking": "Thinking…",
+    "model": "Model"
+  },
   "map": {
     "title": "Interactive map",
     "subtitle": "Investments, trade flows, live delegations",

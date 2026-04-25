@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { CommitmentsTable } from "@/components/commitments/CommitmentsTable";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { commitments } from "@/data/commitments";
+import { PrintButton } from "@/components/exports/PrintButton";
 
 export default async function CommitmentsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -22,12 +23,15 @@ export default async function CommitmentsPage({ params }: { params: Promise<{ lo
           <h1 className="section-title">{t("title")}</h1>
           <p className="section-sub">{t("subtitle")}</p>
         </div>
-        <div className="hidden gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
-          <Stat label="Total" value={total} />
-          <Stat label="In progress" value={progress} tone="primary" />
-          <Stat label="Completed" value={done} tone="pos" />
-          <Stat label="On watch" value={watch} tone="warn" />
-          <Stat label="Overdue" value={overdue} tone="neg" />
+        <div className="flex items-center gap-3">
+          <div className="hidden gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
+            <Stat label="Total" value={total} />
+            <Stat label="In progress" value={progress} tone="primary" />
+            <Stat label="Completed" value={done} tone="pos" />
+            <Stat label="On watch" value={watch} tone="warn" />
+            <Stat label="Overdue" value={overdue} tone="neg" />
+          </div>
+          <PrintButton />
         </div>
       </div>
 
