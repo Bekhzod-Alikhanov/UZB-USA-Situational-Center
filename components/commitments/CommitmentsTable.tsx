@@ -10,7 +10,8 @@ import {
   type SortingState,
 } from "@tanstack/react-table";
 import { commitments, type Commitment, type CommitmentStatus } from "@/data/commitments";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -22,12 +23,33 @@ const STATUS_COLOR: Record<CommitmentStatus, string> = {
   overdue: "border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
 };
 
+const VALID_STATUSES: ReadonlyArray<CommitmentStatus | "all"> = ["all", "done", "progress", "watch", "overdue"];
+
 export function CommitmentsTable() {
   const ts = useTranslations("commitments.statuses");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const initialStatus = (() => {
+    const q = searchParams.get("status");
+    return (VALID_STATUSES.includes(q as CommitmentStatus | "all") ? q : "all") as CommitmentStatus | "all";
+  })();
 
   const [sorting, setSorting] = useState<SortingState>([{ id: "dueDate", desc: false }]);
-  const [statusFilter, setStatusFilter] = useState<CommitmentStatus | "all">("all");
-  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<CommitmentStatus | "all">(initialStatus);
+  const [search, setSearch] = useState(searchParams.get("q") ?? "");
+
+  // Sync URL <-> state
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (statusFilter === "all") params.delete("status");
+    else params.set("status", statusFilter);
+    if (!search) params.delete("q");
+    else params.set("q", search);
+    const qs = params.toString();
+    router.replace(qs ? `?${qs}` : "?", { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusFilter, search]);
 
   const data = useMemo(
     () =>

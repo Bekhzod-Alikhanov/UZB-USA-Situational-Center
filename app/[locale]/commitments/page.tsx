@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { CommitmentsTable } from "@/components/commitments/CommitmentsTable";
@@ -40,7 +41,9 @@ export default async function CommitmentsPage({ params }: { params: Promise<{ lo
       <Card>
         <CardHeader title="Registry" sub={`${total} commitments · linked to real visits and agreements`} />
         <CardBody>
-          <CommitmentsTable />
+          <Suspense fallback={<div className="h-64 animate-pulse rounded-md bg-[var(--color-surface-2)]" />}>
+            <CommitmentsTable />
+          </Suspense>
         </CardBody>
       </Card>
     </div>

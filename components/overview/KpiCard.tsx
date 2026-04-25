@@ -1,6 +1,7 @@
 "use client";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, ArrowRight, Minus } from "lucide-react";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import type { ReactNode } from "react";
 
@@ -14,9 +15,11 @@ interface KpiCardProps {
   is_demo?: boolean;
   source?: string;
   className?: string;
+  /** When provided, the card becomes a clickable drill-down link. */
+  href?: string;
 }
 
-export function KpiCard({ label, value, sub, deltaPct, deltaLabel, tone, is_demo, source, className }: KpiCardProps) {
+export function KpiCard({ label, value, sub, deltaPct, deltaLabel, tone, is_demo, source, className, href }: KpiCardProps) {
   const t = tone ?? (deltaPct == null ? "neu" : deltaPct > 0 ? "pos" : deltaPct < 0 ? "neg" : "neu");
   const DeltaIcon = t === "pos" ? ArrowUpRight : t === "neg" ? ArrowDownRight : Minus;
   const deltaColor =
@@ -26,11 +29,16 @@ export function KpiCard({ label, value, sub, deltaPct, deltaLabel, tone, is_demo
         ? "text-[var(--color-neg)]"
         : "text-[var(--color-ink-muted)]";
 
-  return (
-    <div className={cn("kpi-card", className)}>
+  const inner = (
+    <>
       <div className="flex items-start justify-between gap-2">
         <div className="stat-label">{label}</div>
-        {is_demo ? <DemoBadge source={source} /> : null}
+        <div className="flex items-center gap-1.5">
+          {is_demo ? <DemoBadge source={source} /> : null}
+          {href ? (
+            <ArrowRight className="size-3.5 shrink-0 text-[var(--color-ink-faint)] opacity-0 transition group-hover:opacity-100" />
+          ) : null}
+        </div>
       </div>
       <div className="mt-3 stat-value">{value}</div>
       <div className="mt-2 flex items-center justify-between gap-2">
@@ -43,6 +51,22 @@ export function KpiCard({ label, value, sub, deltaPct, deltaLabel, tone, is_demo
           </span>
         ) : null}
       </div>
-    </div>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={cn(
+          "kpi-card group block transition hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-hover)]",
+          className,
+        )}
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return <div className={cn("kpi-card", className)}>{inner}</div>;
 }

@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import dynamic from "next/dynamic";
 import { tradeAnnual, tradeJan2026 } from "@/data/trade";
 import { agreementsAggregate } from "@/data/agreements";
 import { investments, investmentsTotals } from "@/data/investments";
@@ -7,10 +8,19 @@ import { nextAnchorVisit } from "@/data/visits";
 import { KpiCard } from "@/components/overview/KpiCard";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
-import { Globe3D } from "@/components/overview/Globe3D";
 import { ActivityTimeline } from "@/components/overview/ActivityTimeline";
 import { UpcomingEvents } from "@/components/overview/UpcomingEvents";
 import { AlertsPanel } from "@/components/overview/AlertsPanel";
+
+// Globe3D pulls three.js + globe.gl (~250 kB). Load only on the client to keep
+// Overview's First-Load JS lean.
+const Globe3D = dynamic(() => import("@/components/overview/Globe3D").then((m) => m.Globe3D), {
+  loading: () => (
+    <div className="flex h-[300px] items-center justify-center rounded-md bg-[var(--color-surface-2)] text-[12px] text-[var(--color-ink-muted)]">
+      Loading globe…
+    </div>
+  ),
+});
 
 export default async function OverviewPage({
   params,
@@ -43,6 +53,7 @@ export default async function OverviewPage({
           sub="2025 full year"
           deltaPct={turnoverDelta}
           deltaLabel="vs 2024"
+          href={`/${locale}/trade`}
         />
         <KpiCard
           label={t("kpi.exports2025")}
@@ -50,6 +61,7 @@ export default async function OverviewPage({
           sub="Jan 2026 exports: $32K"
           deltaPct={exportsDelta}
           deltaLabel="vs 2024"
+          href={`/${locale}/trade?direction=exports`}
         />
         <KpiCard
           label={t("kpi.imports2025")}
@@ -57,17 +69,20 @@ export default async function OverviewPage({
           sub={`Jan 2026 imports: +${tradeJan2026.importsGrowthPct}%`}
           deltaPct={importsDelta}
           deltaLabel="vs 2024"
+          href={`/${locale}/trade?direction=imports`}
         />
         <KpiCard
           label={t("kpi.balance2025")}
           value={<>−${Math.abs(y2025.balance).toLocaleString("en-US")}<span className="ml-0.5 text-[var(--color-ink-muted)]">M</span></>}
           sub="deficit widened"
           tone="neg"
+          href={`/${locale}/trade`}
         />
         <KpiCard
           label={t("kpi.agreements")}
           value={agreementsAggregate.totalDocuments}
           sub={`+${agreementsAggregate.totalInvestAgreements} investment agreements`}
+          href={`/${locale}/agreements`}
         />
         <KpiCard
           label={t("kpi.projects")}
@@ -75,11 +90,13 @@ export default async function OverviewPage({
           sub={`$${(investmentsTotals.totalValueUsdM / 1000).toFixed(1)}B in pipeline`}
           is_demo
           source="MIIT + UzInvest"
+          href={`/${locale}/investments`}
         />
         <KpiCard
           label={t("kpi.relations")}
           value="34"
           sub="years, since 1992-02-19"
+          href={`/${locale}/visits`}
         />
         <KpiCard
           label={t("kpi.delegations")}
@@ -91,6 +108,7 @@ export default async function OverviewPage({
           }
           is_demo
           source="Situational Center internal"
+          href={`/${locale}/visits`}
         />
       </div>
 
