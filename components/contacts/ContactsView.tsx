@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import { Mail, MapPin, Phone, ExternalLink, Users, Search } from "lucide-react";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const TYPE_LABEL: Record<Contact["type"], string> = {
   hq: "Situational Center",
@@ -107,19 +108,39 @@ export function ContactsView() {
               <div className="mt-1 border-t border-[var(--color-border)] pt-2">
                 <div className="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
                   <Users className="size-3" />
-                  Staff · {c.people.length}
+                  {c.type === "council" ? "Council members" : "Staff"} · {c.people.length}
                 </div>
                 <ul className="flex flex-col gap-0.5 text-[11.5px]">
-                  {c.people.slice(0, 4).map((p) => (
+                  {c.people.slice(0, c.type === "council" ? 13 : 4).map((p) => (
                     <li key={p.name} className="flex items-center justify-between gap-2">
-                      <span className={cn("text-[var(--color-ink)]", p.is_demo && "demo-underline")}>{p.name}</span>
+                      <span className="flex items-center gap-1.5">
+                        {p.side ? (
+                          <span
+                            className={cn(
+                              "mono inline-flex h-4 items-center rounded px-1 text-[9px] font-semibold uppercase tracking-wider",
+                              p.side === "uz"
+                                ? "bg-[var(--color-primary-soft)] text-[var(--color-primary)]"
+                                : "bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
+                            )}
+                          >
+                            {p.side}
+                          </span>
+                        ) : null}
+                        <span className={cn("text-[var(--color-ink)]", p.is_demo && "demo-underline")}>{p.name}</span>
+                      </span>
                       <span className="truncate text-right text-[var(--color-ink-muted)]">{p.role}</span>
                     </li>
                   ))}
-                  {c.people.length > 4 ? (
+                  {c.type !== "council" && c.people.length > 4 ? (
                     <li className="text-[10.5px] text-[var(--color-ink-faint)]">+ {c.people.length - 4} more</li>
                   ) : null}
                 </ul>
+              </div>
+            ) : null}
+
+            {c.sourceId ? (
+              <div className="border-t border-[var(--color-border)] pt-2">
+                <SourceBadge sourceId={c.sourceId} />
               </div>
             ) : null}
           </article>

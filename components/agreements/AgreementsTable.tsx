@@ -3,6 +3,7 @@ import { agreements, type Agreement, type AgreementCategory, type AgreementSpher
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const CATEGORY_LABEL: Record<AgreementCategory, string> = {
   interstate: "Interstate",
@@ -15,6 +16,7 @@ const CATEGORY_LABEL: Record<AgreementCategory, string> = {
 const STATUS_TONE: Record<Agreement["status"], string> = {
   "in-force": "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
   signed: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
+  "signed-not-in-force": "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
   pending: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
   expired: "border-[var(--color-ink-muted)]/30 bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
 };
@@ -108,6 +110,7 @@ export function AgreementsTable() {
               <th className="w-[140px]">Category</th>
               <th className="w-[120px]">Sphere</th>
               <th className="w-[92px]">Status</th>
+              <th className="w-[120px]">Source</th>
             </tr>
           </thead>
           <tbody>
@@ -119,6 +122,9 @@ export function AgreementsTable() {
                   <div className="mt-0.5 text-[11px] text-[var(--color-ink-muted)]">
                     {a.signedBy.uz} ↔ {a.signedBy.us}
                   </div>
+                  {a.note ? (
+                    <div className="mt-0.5 text-[10.5px] italic text-[var(--color-ink-faint)]">{a.note}</div>
+                  ) : null}
                 </td>
                 <td className="text-[11.5px] text-[var(--color-ink-muted)]">{CATEGORY_LABEL[a.category]}</td>
                 <td className="text-[11.5px] uppercase tracking-wider text-[var(--color-ink-muted)]">
@@ -134,6 +140,7 @@ export function AgreementsTable() {
                     {a.status}
                   </span>
                 </td>
+                <td>{a.sourceId ? <SourceBadge sourceId={a.sourceId} /> : null}</td>
               </tr>
             ))}
           </tbody>

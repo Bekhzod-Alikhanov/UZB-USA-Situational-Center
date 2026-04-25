@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import { Search, X, Briefcase, Factory, Plane, Wheat, Zap, Pill, Cpu, Shirt, FlaskConical, Banknote, Gem } from "lucide-react";
 import dynamic from "next/dynamic";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const FlatMap = dynamic(() => import("@/components/map/FlatMap").then((m) => m.FlatMap), { ssr: false });
 
@@ -249,6 +250,13 @@ export function InvestmentsView() {
                   <div className="stat-label">UZ partner</div>
                   <div className="mt-1 text-[14px] text-[var(--color-ink)]">{selected.partnerUz}</div>
                 </div>
+
+                {selected.sourceId ? (
+                  <div className="mt-5">
+                    <div className="stat-label mb-1.5">Source</div>
+                    <SourceBadge sourceId={selected.sourceId} variant="chip" />
+                  </div>
+                ) : null}
 
                 {selected.source_note ? (
                   <div className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-demo-bg)] p-3 text-[12px] text-[var(--color-demo-ink)]">

@@ -3,6 +3,7 @@ import { grants, type Grant } from "@/data/grants";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import { Heart, GraduationCap, Shield, Droplet, Wheat, FlaskConical, MapPin } from "lucide-react";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const SECTOR_ICON: Record<Grant["sector"], React.ComponentType<{ className?: string }>> = {
   health: Heart,
@@ -129,6 +130,11 @@ export function GrantsView() {
                   <span className="mono text-[11px] tabular text-[var(--color-ink-muted)]">Since {g.startYear}</span>
                 ) : null}
               </div>
+              {g.sourceId ? (
+                <div className="pt-1">
+                  <SourceBadge sourceId={g.sourceId} />
+                </div>
+              ) : null}
             </article>
           );
         })}

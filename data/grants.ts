@@ -8,6 +8,8 @@ export interface Grant {
   region?: string;
   is_demo: boolean;
   source_url?: string;
+  /** Reference into `data/sources.ts`. */
+  sourceId?: string;
   status: "active" | "completed" | "planned";
   startYear?: number;
 }
@@ -22,6 +24,7 @@ export const grants: Grant[] = [
     sector: "health",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2025,
   },
   {
@@ -33,6 +36,7 @@ export const grants: Grant[] = [
     sector: "health",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2024,
   },
   {
@@ -45,6 +49,7 @@ export const grants: Grant[] = [
     region: "Bukhara",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2024,
   },
   {
@@ -57,6 +62,7 @@ export const grants: Grant[] = [
     region: "Karakalpakstan",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2024,
   },
   {
@@ -69,6 +75,7 @@ export const grants: Grant[] = [
     region: "Karakalpakstan",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2024,
   },
   {
@@ -81,6 +88,7 @@ export const grants: Grant[] = [
     region: "Samarkand",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2024,
   },
   {
@@ -92,6 +100,7 @@ export const grants: Grant[] = [
     sector: "military",
     status: "active",
     is_demo: false,
+    sourceId: "input_grants_xlsx",
     startYear: 2024,
   },
 ];
@@ -99,5 +108,6 @@ export const grants: Grant[] = [
 export const grantsMeta = {
   total: grants.reduce((a, g) => a + g.valueMusd, 0),
   source: "Internal report — Grants to the Republic of Uzbekistan as of 07.01.2026",
+  sourceId: "input_grants_xlsx",
   is_demo: false,
 };

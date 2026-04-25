@@ -12,6 +12,8 @@ export interface DiplomaticEvent {
   description: string;
   is_demo: boolean;
   source_url?: string;
+  /** Reference into `data/sources.ts`. */
+  sourceId?: string;
 }
 
 export const events: DiplomaticEvent[] = [
@@ -24,6 +26,95 @@ export const events: DiplomaticEvent[] = [
     participants: ["5 Central Asian states", "U.S. Secretary of State"],
     description: "Inaugural C5+1 Foreign Ministers meeting; established format.",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
+  },
+  {
+    id: "e-business-forum-tashkent-2025",
+    title: "Uzbekistan-U.S. Business Forum — Tashkent",
+    type: "forum",
+    date: "2025-06-09",
+    location: "Tashkent",
+    participants: ["UZ Government", "~100 U.S. companies", "Embassy commercial team"],
+    description: "Forum reported 2024 U.S. direct investment of $612.6M, 314 U.S.-capital enterprises, ~100 participating U.S. companies.",
+    is_demo: false,
+    sourceId: "govuz_business_forum_2025",
+  },
+  {
+    id: "e-spd4-washington-2024",
+    title: "Fourth Strategic Partnership Dialogue (SPD)",
+    type: "dialogue",
+    date: "2024-11-13",
+    location: "Washington, D.C.",
+    participants: ["MFA of Uzbekistan", "U.S. Department of State"],
+    description: "Fourth SPD; format agreed to be raised to Enhanced Strategic Partnership Dialogue.",
+    is_demo: false,
+    sourceId: "input_diplomatic_docx",
+  },
+  {
+    id: "e-ustr-tai-2024",
+    title: "USTR Katherine Tai visit to Uzbekistan",
+    type: "dialogue",
+    date: "2024-06-12",
+    location: "Tashkent",
+    participants: ["USTR", "MIIT", "MFA"],
+    description: "Covered WTO accession, GSP, IP, trade facilitation, and U.S. meat & poultry market access.",
+    is_demo: false,
+    sourceId: "ustr_visit_2024",
+  },
+  {
+    id: "e-exim-buy-american-2025",
+    title: "EXIM signed \"Buy American, Build the Future\" framework",
+    type: "business",
+    date: "2025-11-10",
+    location: "Washington, D.C.",
+    participants: ["Government of Uzbekistan", "EXIM"],
+    description: "Framework focused on infrastructure, energy, aviation, minerals, and advanced technologies.",
+    is_demo: false,
+    sourceId: "exim_buy_american",
+  },
+  {
+    id: "e-dfc-framework-2026",
+    title: "DFC announced Heads of Terms / Joint Investment Framework intent",
+    type: "business",
+    date: "2026-02-18",
+    location: "Washington, D.C.",
+    participants: ["Government of Uzbekistan", "DFC"],
+    description: "Collaboration to expand private investment in critical minerals, infrastructure, and energy.",
+    is_demo: false,
+    sourceId: "dfc_joint_framework",
+  },
+  {
+    id: "e-council-launch-washington-2026",
+    title: "American-Uzbek Business and Investment Council — official launch in Washington",
+    type: "council",
+    date: "2026-04-06",
+    location: "Washington, D.C.",
+    participants: ["UZ delegation", "U.S. delegation"],
+    description: "Delegations convened in Washington for the official launch of the Council.",
+    is_demo: false,
+    sourceId: "us_uz_gateway",
+  },
+  {
+    id: "e-ustr-council-2026",
+    title: "Council and USTR investment-profile discussion",
+    type: "dialogue",
+    date: "2026-04-08",
+    location: "Washington, D.C.",
+    participants: ["Council leadership", "USTR"],
+    description: "Council leadership met with the U.S. Trade Representative on Uzbekistan's investor positioning.",
+    is_demo: false,
+    sourceId: "us_uz_gateway",
+  },
+  {
+    id: "e-tiif-2026",
+    title: "TIIF 2026 — Tashkent International Investment Forum (U.S.-Uzbekistan business forum)",
+    type: "forum",
+    date: "2026-06-01",
+    location: "Tashkent",
+    participants: ["UZ Government", "U.S. delegation (TBC)"],
+    description: "Confirmed upcoming venue with a U.S.-Uzbekistan business forum; delegation composition pending.",
+    is_demo: false,
+    sourceId: "input_deep_review_docx",
   },
   {
     id: "e-c51-ny-2023",
@@ -35,6 +126,7 @@ export const events: DiplomaticEvent[] = [
     linkedVisitId: "v-2023-09-unga-biden",
     description: "Historic first leaders-level C5+1.",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "e-c51-wash-2025",
@@ -46,6 +138,7 @@ export const events: DiplomaticEvent[] = [
     linkedVisitId: "v-2025-11-c5-1",
     description: "Second-ever leaders summit; Kennedy Center business conference.",
     is_demo: false,
+    sourceId: "us_uz_gateway",
   },
   {
     id: "e-c51-kc-bus",
@@ -56,6 +149,7 @@ export const events: DiplomaticEvent[] = [
     participants: ["U.S. and Central Asia business leaders"],
     description: "Two Statements of Intent on economy and cultural heritage.",
     is_demo: false,
+    sourceId: "us_uz_gateway",
   },
   {
     id: "e-davos-cp-2026",
@@ -67,6 +161,7 @@ export const events: DiplomaticEvent[] = [
     linkedVisitId: "v-2026-01-davos",
     description: "Uzbekistan among founding members.",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "e-minerals-feb-2026",
@@ -78,6 +173,7 @@ export const events: DiplomaticEvent[] = [
     linkedVisitId: "v-2026-02-04-minerals",
     description: "MoU on supply-chain resilience signed.",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "e-b51-bishkek-2026",
@@ -89,6 +185,7 @@ export const events: DiplomaticEvent[] = [
     participants: ["U.S. and Central Asian business delegations"],
     description: "Regional economic cooperation agenda.",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "e-council-peace-feb-2026",
@@ -101,6 +198,7 @@ export const events: DiplomaticEvent[] = [
     linkedVisitId: "v-2026-02-17-state",
     description: "Inaugural working session.",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "e-us-uz-bc-april-2026",
@@ -112,6 +210,7 @@ export const events: DiplomaticEvent[] = [
     linkedVisitId: "v-2026-04-upcoming-council",
     description: "Working sessions and bilateral signing round.",
     is_demo: false,
+    sourceId: "us_uz_gateway",
   },
   {
     id: "e-sd5-2026",

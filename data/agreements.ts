@@ -22,9 +22,13 @@ export interface Agreement {
   sphere: AgreementSphere;
   signedOn: string;
   signedBy: { uz: string; us: string };
-  status: "in-force" | "signed" | "pending" | "expired";
+  status: "in-force" | "signed" | "pending" | "expired" | "signed-not-in-force";
   textRefBy?: "MFA of Uzbekistan";
   is_demo: boolean;
+  /** Reference into `data/sources.ts`. */
+  sourceId?: string;
+  /** Optional descriptive note. */
+  note?: string;
 }
 
 export const agreementsAggregate = {
@@ -32,6 +36,7 @@ export const agreementsAggregate = {
   totalInvestAgreements: 16,
   byCategory: { interstate: 1, intergov: 71, interagency: 44, other: 22 } as Record<AgreementCategory, number>,
   source: "MFA of the Republic of Uzbekistan",
+  sourceId: "input_agreements_docx",
   is_demo: false,
 };
 
@@ -47,6 +52,43 @@ export const agreements: Agreement[] = [
     signedBy: sign("President of Uzbekistan", "U.S. Secretary of State"),
     status: "in-force",
     is_demo: false,
+    sourceId: "state_history_uz",
+  },
+  {
+    id: "a-1994-bit",
+    title: "U.S.-Uzbekistan Bilateral Investment Treaty (BIT)",
+    category: "interstate",
+    sphere: "investment",
+    signedOn: "1994-12-16",
+    signedBy: sign("Government of Uzbekistan", "Government of the United States"),
+    status: "signed-not-in-force",
+    is_demo: false,
+    sourceId: "input_deep_review_docx",
+    note: "BIT signed but did not enter into force.",
+  },
+  {
+    id: "a-2002-strategic-framework",
+    title: "Declaration on Strategic Partnership and Cooperation Framework",
+    category: "intergov",
+    sphere: "political",
+    signedOn: "2002-03-12",
+    signedBy: sign("Government of Uzbekistan", "U.S. Department of State"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "input_deep_review_docx",
+    note: "Core political-economic framework document in the bilateral legal base.",
+  },
+  {
+    id: "a-2004-tifa",
+    title: "U.S.-Central Asian Trade and Investment Framework Agreement (TIFA)",
+    category: "intergov",
+    sphere: "economy-trade",
+    signedOn: "2004-06-01",
+    signedBy: sign("Central Asia signatories", "USTR"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "tradegov_agreements",
+    note: "Regional TIFA covering the United States and Central Asian countries, including Uzbekistan.",
   },
   {
     id: "a-2018-strategic-partnership",
@@ -57,6 +99,7 @@ export const agreements: Agreement[] = [
     signedBy: sign("President Mirziyoyev", "President Trump"),
     status: "in-force",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "a-2021-strategic-dialogue",
@@ -67,6 +110,31 @@ export const agreements: Agreement[] = [
     signedBy: sign("MFA of Uzbekistan", "U.S. Department of State"),
     status: "in-force",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
+  },
+  {
+    id: "a-2024-customs-maa",
+    title: "Customs Mutual Assistance Agreement",
+    category: "interagency",
+    sphere: "economy-trade",
+    signedOn: "2024-09-01",
+    signedBy: sign("State Customs Committee", "U.S. Customs and Border Protection"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "input_deep_review_docx",
+    note: "Major step forward in the 2024 Strategic Partnership Dialogue.",
+  },
+  {
+    id: "a-2024-critical-minerals-mou",
+    title: "Critical Minerals MOU",
+    category: "intergov",
+    sphere: "minerals",
+    signedOn: "2024-09-01",
+    signedBy: sign("MFA of Uzbekistan", "U.S. Department of State"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "input_deep_review_docx",
+    note: "Part of the 2024-2026 critical-minerals cooperation agenda.",
   },
   {
     id: "a-2024-minerals-dialogue",
@@ -77,6 +145,55 @@ export const agreements: Agreement[] = [
     signedBy: sign("MFA of Uzbekistan", "U.S. Department of State"),
     status: "in-force",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
+  },
+  {
+    id: "a-2024-wto-market-access",
+    title: "Completion of bilateral WTO market-access negotiations",
+    category: "intergov",
+    sphere: "economy-trade",
+    signedOn: "2024-12-19",
+    signedBy: sign("Government of Uzbekistan", "USTR"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "ustr_wto_2024",
+    note: "USTR announced completion of bilateral market-access negotiations on goods and services.",
+  },
+  {
+    id: "a-2025-exim-buy-american",
+    title: "EXIM \"Buy American, Build the Future\" framework",
+    category: "intergov",
+    sphere: "finance",
+    signedOn: "2025-11-10",
+    signedBy: sign("Government of Uzbekistan", "Export-Import Bank of the United States"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "exim_buy_american",
+    note: "Framework focused on infrastructure, energy, aviation, minerals, and advanced technologies.",
+  },
+  {
+    id: "a-2026-investment-platform",
+    title: "Agreement on the Establishment of an Investment Platform",
+    category: "intergov",
+    sphere: "investment",
+    signedOn: "2026-02-18",
+    signedBy: sign("Government of Uzbekistan", "Government of the United States"),
+    status: "in-force",
+    is_demo: false,
+    sourceId: "input_deep_review_docx",
+    note: "Exchanged during the February 2026 Washington visit.",
+  },
+  {
+    id: "a-2026-dfc-framework",
+    title: "Heads of Terms / Joint Investment Framework intent (DFC)",
+    category: "intergov",
+    sphere: "investment",
+    signedOn: "2026-02-18",
+    signedBy: sign("Government of Uzbekistan", "U.S. International Development Finance Corporation"),
+    status: "signed",
+    is_demo: false,
+    sourceId: "dfc_joint_framework",
+    note: "Intent to establish a Joint Investment Framework, with possible joint holding company.",
   },
   {
     id: "a-2026-minerals-mou",
@@ -87,6 +204,7 @@ export const agreements: Agreement[] = [
     signedBy: sign("FM Saidov", "U.S. Department of State"),
     status: "in-force",
     is_demo: false,
+    sourceId: "input_diplomatic_docx",
   },
   {
     id: "a-demo-tax-dta",

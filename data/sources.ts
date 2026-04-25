@@ -1,0 +1,282 @@
+/**
+ * Source registry — every value rendered in the dashboard should carry a
+ * `sourceId` that points back to one of these entries. Level A = user-supplied
+ * input file (DOCX/XLSX/PDF/MD); Level B = official open URL.
+ *
+ * Cross-reference: docs `SOURCE_REGISTRY.md`, `DEMO_DATA_REGISTRY.md`,
+ * `DATA_INVENTORY.md` at repo root.
+ */
+export type SourceLevel = "A" | "B";
+
+export interface Source {
+  id: string;
+  name: string;
+  level: SourceLevel;
+  /** External URL when the source is publicly published (Level B). */
+  url?: string;
+  /** Local input file when the source was attached by the principal (Level A). */
+  sourceFile?: string;
+  fetched_at: string;
+  data_type: string;
+  note?: string;
+}
+
+export const sources: Source[] = [
+  {
+    id: "census_goods_uz",
+    level: "B",
+    name: "U.S. Census Bureau — Trade in Goods with Uzbekistan",
+    url: "https://www.census.gov/foreign-trade/balance/c4644.html",
+    fetched_at: "2026-04-24",
+    data_type: "Monthly and yearly goods trade, USD millions",
+    note: "Official Census balance table. Details may not equal totals due to rounding.",
+  },
+  {
+    id: "ustr_uzbekistan",
+    level: "B",
+    name: "Office of the U.S. Trade Representative — Uzbekistan",
+    url: "https://ustr.gov/Uzbekistan",
+    fetched_at: "2026-04-24",
+    data_type: "Goods and services trade summary",
+    note: "Official USTR country summary.",
+  },
+  {
+    id: "state_history_uz",
+    level: "B",
+    name: "U.S. Department of State — Office of the Historian",
+    url: "https://history.state.gov/countries/uzbekistan/1000",
+    fetched_at: "2026-04-24",
+    data_type: "Diplomatic recognition and relations dates",
+  },
+  {
+    id: "exim_buy_american",
+    level: "B",
+    name: "EXIM — Buy American, Build the Future agreement with Uzbekistan",
+    url: "https://www.exim.gov/news/exim-signs-buy-american-build-future-agreement-uzbekistan-boost-exports-and-support-american",
+    fetched_at: "2026-04-24",
+    data_type: "Export finance framework press release",
+    note: "EXIM release dated 2025-11-10.",
+  },
+  {
+    id: "dfc_joint_framework",
+    level: "B",
+    name: "U.S. DFC — Investment partnership with Uzbekistan",
+    url: "https://www.dfc.gov/media/press-releases/dfc-leadership-lays-foundation-investment-partnership-uzbekistan",
+    fetched_at: "2026-04-24",
+    data_type: "Heads of Terms and Joint Investment Framework press release",
+    note: "DFC release dated 2026-02-18.",
+  },
+  {
+    id: "us_uz_gateway",
+    level: "B",
+    name: "U.S.-Uzbekistan Business Gateway",
+    url: "https://us-uz.gov.uz/en",
+    fetched_at: "2026-04-24",
+    data_type: "Council launch, news, gateway context",
+  },
+  {
+    id: "us_uz_council",
+    level: "B",
+    name: "American-Uzbek Business and Investment Council — Members",
+    url: "https://us-uz.gov.uz/en/about/council",
+    fetched_at: "2026-04-24",
+    data_type: "Council member names and roles",
+  },
+  {
+    id: "input_deep_review_docx",
+    level: "A",
+    name: "Deep review: trade, investments, projects, legal base, visits, contacts",
+    sourceFile: "input/us_uz_deep_review.docx",
+    fetched_at: "2026-04-24",
+    data_type: "Compiled analytical review with embedded official links",
+    note: "User-attached deep-review document with cross-source citations.",
+  },
+  {
+    id: "input_trade_stat_docx",
+    level: "A",
+    name: "National Statistics Committee — UZ-US trade indicators 2017–2025",
+    sourceFile: "input/Данные к US_SC/ВЭД/Показатели_внешней_торговли_Узбекистана_с_США_2017_2025.docx",
+    fetched_at: "2026-04-24",
+    data_type: "Uzbekistan-side trade series and 2025 export/import structure",
+    note: "Source line in document: National Statistics Committee.",
+  },
+  {
+    id: "input_grants_xlsx",
+    level: "A",
+    name: "Grant project workbook (status 07.01.2026)",
+    sourceFile: "input/Данные к US_SC/Грант 2025/Грант_по_проектно.xlsx",
+    fetched_at: "2026-04-24",
+    data_type: "Seven grant project rows totaling $15.381M",
+    note: "Workbook title: Grant mablag'larini jalb qilish to'g'risida ma'lumot.",
+  },
+  {
+    id: "input_agreements_docx",
+    level: "A",
+    name: "Bilateral agreements summary (MFA)",
+    sourceFile: "input/Данные к US_SC/Двухсторонние соглашения/Документ Microsoft Word.docx",
+    fetched_at: "2026-04-24",
+    data_type: "Agreement count by legal type",
+    note: "States 138 signed documents: 1 interstate, 71 intergovernmental, 44 interagency, 22 other.",
+  },
+  {
+    id: "input_diplomatic_docx",
+    level: "A",
+    name: "Diplomatic links and visits document (MFA)",
+    sourceFile: "input/Данные к US_SC/Дипломатические связи/Документ Microsoft Word.docx",
+    fetched_at: "2026-04-24",
+    data_type: "Diplomatic chronology, visits, consultations, C5+1, congressional links",
+  },
+  {
+    id: "input_figma_pdf",
+    level: "A",
+    name: "Figma dashboard concept: O'zbekiston-AQSH Situatsion Markaz",
+    sourceFile: "input/Данные к US_SC/Страница (FIGMA)/O'ZBЕKISTON – AQSH SITUATSION MARKAZ.pdf",
+    fetched_at: "2026-04-24",
+    data_type: "Prototype metrics, project portfolio status, visual targets",
+    note: "Used for portfolio-level figures pending the underlying project register.",
+  },
+  {
+    id: "president_uz_8197",
+    level: "B",
+    name: "President.uz — Uzbekistan-U.S. Business Forum (June 2025)",
+    url: "https://president.uz/ru/lists/view/8197",
+    fetched_at: "2026-04-24",
+    data_type: "Business forum, companies, investment and trade figures",
+  },
+  {
+    id: "govuz_business_forum_2025",
+    level: "B",
+    name: "GOV.UZ — Uzbekistan-U.S. Business Forum (June 2025)",
+    url: "https://gov.uz/en/news/view/59822",
+    fetched_at: "2026-04-24",
+    data_type: "Forum metrics: trade, US FDI, enterprises, FEZs, sector priorities",
+    note: "Used to cross-check the June 2025 forum metrics.",
+  },
+  {
+    id: "ustr_visit_2024",
+    level: "B",
+    name: "USTR — Joint Statement on visit to Uzbekistan (June 2024)",
+    url: "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/june/joint-statement-visit-united-states-trade-representative-uzbekistan",
+    fetched_at: "2026-04-24",
+    data_type: "WTO, GSP, IP, meat and poultry market access context",
+  },
+  {
+    id: "tradegov_market_opportunities",
+    level: "B",
+    name: "ITA — Uzbekistan market opportunities",
+    url: "https://www.trade.gov/country-commercial-guides/uzbekistan-market-opportunities",
+    fetched_at: "2026-04-24",
+    data_type: "Priority sectors for trade and investment",
+  },
+  {
+    id: "tradegov_mining_2025",
+    level: "B",
+    name: "ITA — Uzbekistan mining and quarrying sectors",
+    url: "https://www.trade.gov/country-commercial-guides/uzbekistan-mining-and-quarrying-sectors",
+    fetched_at: "2026-04-24",
+    data_type: "Mining, critical minerals, U.S.-linked projects",
+  },
+  {
+    id: "tradegov_agreements",
+    level: "B",
+    name: "ITA — Uzbekistan trade agreements",
+    url: "https://www.trade.gov/country-commercial-guides/uzbekistan-trade-agreements",
+    fetched_at: "2026-04-24",
+    data_type: "TIFA and investment treaty context",
+  },
+  {
+    id: "ustr_wto_2024",
+    level: "B",
+    name: "USTR — Uzbekistan WTO accession market-access statement",
+    url: "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/december/statement-ambassador-katherine-tai-uzbekistans-work-toward-accession-world-trade-organization",
+    fetched_at: "2026-04-24",
+    data_type: "WTO accession milestone and bilateral market-access negotiations",
+    note: "Statement dated 2024-12-19.",
+  },
+  {
+    id: "usaid_wave",
+    level: "B",
+    name: "USAID — Regional Water and Vulnerable Environment Activity",
+    url: "https://pdf.usaid.gov/pdf_docs/PA00ZQVJ.pdf",
+    fetched_at: "2026-04-24",
+    data_type: "Regional water and environment activity fact sheet",
+    note: "Five-year, $21.5M USAID activity covering Central Asia.",
+  },
+  {
+    id: "usaid_eras_ii",
+    level: "B",
+    name: "USAID — Environment Restoration of the Aral Sea II fact sheet",
+    url: "https://www.usaid.gov/sites/default/files/2022-10/ERAS_II_-_USAID_Environment_Restoration_of_the_Aral_Sea_II_-_ENG_factsheet.docx.pdf",
+    fetched_at: "2026-04-24",
+    data_type: "Aral Sea restoration project fact sheet",
+    note: "$1.65M USAID activity in Muynak district, Karakalpakstan.",
+  },
+  {
+    id: "govuz_us_visa_free_2026",
+    level: "B",
+    name: "GOV.UZ Tourism Committee — visa-free regime for U.S. citizens",
+    url: "https://gov.uz/en/uzbektourism/news/view/99187",
+    fetched_at: "2026-04-24",
+    data_type: "30-day visa-free travel for U.S. citizens from 2026",
+  },
+  {
+    id: "govuz_us_tourism_2025",
+    level: "B",
+    name: "GOV.UZ Tourism Committee — U.S. visitor signal",
+    url: "https://gov.uz/en/uzbektourism/news/view/124526",
+    fetched_at: "2026-04-24",
+    data_type: "More than 37,000 U.S. visitors in 2025",
+  },
+  {
+    id: "uzbek_embassy_dc",
+    level: "B",
+    name: "Embassy of Uzbekistan in Washington — Contact",
+    url: "https://uzbekistan.org/contact-us/",
+    fetched_at: "2026-04-24",
+    data_type: "Embassy address, phone, key staff",
+  },
+  {
+    id: "us_embassy_tashkent",
+    level: "B",
+    name: "U.S. Embassy in Tashkent — Contact",
+    url: "https://uz.usembassy.gov/contact/",
+    fetched_at: "2026-04-24",
+    data_type: "Embassy address, phone, key staff",
+  },
+  {
+    id: "aucc_online",
+    level: "B",
+    name: "American–Uzbekistan Chamber of Commerce",
+    url: "https://aucconline.com/",
+    fetched_at: "2026-04-24",
+    data_type: "Business association membership and contact",
+  },
+  {
+    id: "invest_uzbekistan",
+    level: "B",
+    name: "Invest Uzbekistan / Investment Promotion Agency",
+    url: "https://invest.gov.uz",
+    fetched_at: "2026-04-24",
+    data_type: "Investment single-window project intake",
+  },
+  {
+    id: "f4_ordinance_2026",
+    level: "A",
+    name: "Presidential Ordinance Ф-4 (17.02.2026) — Situational Center mandate",
+    sourceFile: "(internal — Office of the President)",
+    fetched_at: "2026-02-17",
+    data_type: "Center facts: location, staffing, scope, aggregate counts",
+    note: "Production should attach the original signed order.",
+  },
+];
+
+export function findSource(id: string): Source | undefined {
+  return sources.find((s) => s.id === id);
+}
+
+export const sourcesMeta = {
+  total: sources.length,
+  levelA: sources.filter((s) => s.level === "A").length,
+  levelB: sources.filter((s) => s.level === "B").length,
+  fetched_at: "2026-04-24",
+};
