@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -72,10 +72,8 @@ export function BenchmarkView() {
   const [metric, setMetric] = useState<MetricKey>("tradeWithUsUsdBn");
   const active = METRICS.find((m) => m.key === metric)!;
 
-  const sorted = useMemo(
-    () => [...benchmark].sort((a, b) => b[metric] - a[metric]),
-    [metric],
-  );
+  // React 19.2 + React Compiler auto-memoizes this; no explicit useMemo needed.
+  const sorted = [...benchmark].sort((a, b) => b[metric] - a[metric]);
 
   const uz = benchmark.find((b) => b.country === "UZ")!;
   const uzRank = rankOf(benchmark, metric, "UZ");
