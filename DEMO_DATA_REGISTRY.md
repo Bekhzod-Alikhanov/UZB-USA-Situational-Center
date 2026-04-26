@@ -2,7 +2,7 @@
 
 Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry must specify the responsible agency expected to supply the production-grade replacement.
 
-**Last refresh:** 2026-04-24 · **Demo records:** ~150 across 13 modules (down from 166 after Codex source ingestion)
+**Last refresh:** 2026-04-26 · **Demo records:** ~80 across 9 modules (down from ~150 after the demo cleanup pass)
 
 ## Status legend
 
@@ -14,23 +14,27 @@ Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry m
 
 | Where | What | File | Responsible agency | Status |
 |---|---|---|---|---|
-| Trade — rankings | Top UZ exporters to USA (10 rows) | `data/trade.ts:topExportersUZ` | MIIT + State Customs Committee | requested |
-| Trade — rankings | Top US importers to Uzbekistan (10 rows) | `data/trade.ts:topImportersUS` | MIIT + State Customs Committee | requested |
-| Investments — portfolio | 35 USD-UZ project portfolio entries | `data/investments.ts` (`is_demo:true` rows) | MIIT + UzInvest + Invest Uzbekistan | requested |
-| Commitments — registry | 32 commitments tied to visits | `data/commitments.ts` | Situational Center internal + responsible agencies | pending |
+| Investments — portfolio | 35 illustrative pipeline entries | `data/investments.ts` (`is_demo:true` rows) | MIIT + UzInvest + Invest Uzbekistan | requested |
+| Commitments — registry | 17 source-anchored workflow records (every entry carries a `sourceId` for the originating event) | `data/commitments.ts` | Situational Center internal + responsible agencies | pending |
 | Agreements — detail | 9 agreement-level rows beyond aggregate | `data/agreements.ts` (`is_demo:true` rows) | MFA Department of Americas | requested |
-| Regions — twinning | 14 UZ regions × 3 US-state pairings (ПП-314) | `data/regions.ts` | MFA + Khokimiyats | pending |
 | Map — delegations | 3 live delegations | `data/delegations.ts` | Situational Center internal | pending |
 | Benchmark | Non-UZ CA-5 + Caucasus regional metrics | `data/benchmark.ts` | World Bank, UN Comtrade (validation) | pending |
-| Staff KPI | 10 staff placeholders | `data/staff-kpi.ts` | Situational Center HR | pending |
-| News | 22 curated posts with external sources | `data/news.ts` | Situational Center comms | pending |
+| Staff KPI | 10 role-slot templates per F-4 headcount (no person names; carries `sourceId: "f4_ordinance_2026"`) | `data/staff-kpi.ts` | Situational Center HR | pending |
 | Contacts — staff | 10 HQ staff placeholders ("Staff Member 1–10") | `data/contacts.ts:k-hq.people` | Situational Center HR | pending |
 | Events — future | Upcoming SD-5 entry | `data/events.ts:e-sd5-2026` | MFA | pending |
 | Compliance | CAATSA exposure rating | `data/compliance.ts:ofac-caatsa` | MFA + Treasury (open source) | pending |
+| Visit prep — pipelines | 3 upcoming visits with readiness scores | `data/visit-prep.ts:visitPipelines` | Situational Center internal | pending |
+| Visit prep — roadmaps | 3 cross-visit cooperation roadmaps | `data/visit-prep.ts:visitRoadmaps` | Situational Center internal | pending |
+
+## No longer demo after the cleanup pass (2026-04-26)
+
+The following datasets were upgraded from demo to source-traced or removed:
+
+- **News feed** — 22 fabricated posts replaced with 16 real curated press entries; every URL points to an officially published page (USTR / EXIM / DFC / GOV.UZ / State / ITA / USAID / Census / Gateway / Council).
+- **Trade — top exporter/importer rankings** — fabricated company names replaced with real commodity-category rankings derived from the State Statistics Committee 2025 structure.
+- **Region twinnings** — fabricated ПП-314 state-pairings dropped entirely from `data/regions.ts`; will be re-introduced when MFA + Khokimiyats publish the official matrix. Population, geocoords, and capitals remain real.
 
 ## No longer demo after Codex source ingestion (2026-04-24)
-
-The following datasets were upgraded from demo to source-traced after the Codex feature pass:
 
 - **Grants — project rows** (7) → `input_grants_xlsx`
 - **Trade — UZ-side product/services structure** (12 categories) → `input_trade_stat_docx`

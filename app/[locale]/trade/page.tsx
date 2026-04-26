@@ -5,7 +5,6 @@ import { TradeTable } from "@/components/trade/TradeTable";
 import { StructureTreemap } from "@/components/trade/StructureTreemap";
 import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
-import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { exportStructure2025, importStructure2025, topExportersUZ, topImportersUS, tradeMeta } from "@/data/trade";
 
@@ -85,9 +84,9 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader
-            title={t("ranking.exporters")}
-            sub="USD millions, 2025"
-            right={<DemoBadge source="MIIT + State Customs Committee" />}
+            title="Top UZ export categories to U.S."
+            sub="USD millions · 2025 · State Statistics Committee structure"
+            right={<SourceBadge sourceId="input_trade_stat_docx" />}
           />
           <CardBody className="p-0">
             <div className="overflow-x-auto">
@@ -95,8 +94,8 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
                 <thead>
                   <tr>
                     <th className="w-10 text-right">#</th>
-                    <th>Company</th>
-                    <th>Sector</th>
+                    <th>Category</th>
+                    <th>Share</th>
                     <th className="text-right">Value, $M</th>
                   </tr>
                 </thead>
@@ -117,9 +116,9 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
 
         <Card>
           <CardHeader
-            title={t("ranking.importers")}
-            sub="USD millions, 2025"
-            right={<DemoBadge source="MIIT + State Customs Committee" />}
+            title="Top UZ import categories from U.S."
+            sub="USD millions · 2025 · State Statistics Committee structure"
+            right={<SourceBadge sourceId="input_trade_stat_docx" />}
           />
           <CardBody className="p-0">
             <div className="overflow-x-auto">
@@ -127,8 +126,8 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
                 <thead>
                   <tr>
                     <th className="w-10 text-right">#</th>
-                    <th>Company</th>
-                    <th>Sector</th>
+                    <th>Category</th>
+                    <th>Share</th>
                     <th className="text-right">Value, $M</th>
                   </tr>
                 </thead>

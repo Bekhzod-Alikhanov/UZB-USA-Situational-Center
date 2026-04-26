@@ -165,31 +165,41 @@ export const importStructure2025: CommodityItem[] = [
   { name: "Services", value: 146.3, sharePct: 20.5 },
 ];
 
-export const topExportersUZ: CompanyRanking[] = [
-  { rank: 1, name: "UzAuto Motors", sector: "Automotive parts", value: 48.2, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 2, name: "Almalyk MMC", sector: "Non-ferrous metals (copper, zinc)", value: 32.5, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 3, name: "Uzbekneftegaz", sector: "Petroleum derivatives", value: 21.4, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 4, name: "Navoi MMC", sector: "Non-ferrous metals", value: 17.8, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 5, name: "Uztextileprom", sector: "Textiles & apparel", value: 12.6, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 6, name: "UzbekChimProm", sector: "Chemicals", value: 9.3, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 7, name: "Agroexport MCHJ", sector: "Food / dried fruit", value: 7.6, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 8, name: "Uzelectroapparat", sector: "Electrical equipment", value: 5.1, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 9, name: "Bukhara Silk", sector: "Textile specialty", value: 4.0, is_demo: true, source_note: "to be supplied by MIIT" },
-  { rank: 10, name: "Uz-IT Park Exporters", sector: "IT services export", value: 3.2, is_demo: true, source_note: "to be supplied by MIIT" },
-];
+/**
+ * Commodity rankings derived from the State Statistics Committee 2025
+ * structure tables. Company-level rankings would require MIIT + State
+ * Customs Committee data and are intentionally not fabricated here —
+ * the closest defensible view is by commodity category.
+ */
+export const topExportCategoriesUZ: CompanyRanking[] = exportStructure2025
+  .filter((c) => c.name !== "Services" && c.name !== "Other goods" && c.name !== "Finished goods (misc.)")
+  .sort((a, b) => b.value - a.value)
+  .slice(0, 10)
+  .map((c, idx) => ({
+    rank: idx + 1,
+    name: c.name,
+    sector: `Share ${c.sharePct.toFixed(1)}%`,
+    value: c.value,
+    is_demo: false,
+    source_note: "State Statistics Committee · 2025 structure",
+  }));
 
-export const topImportersUS: CompanyRanking[] = [
-  { rank: 1, name: "Boeing", sector: "Aerospace / parts", value: 185.4, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 2, name: "Caterpillar", sector: "Heavy equipment", value: 84.2, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 3, name: "John Deere", sector: "Agricultural machinery", value: 62.7, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 4, name: "Pfizer", sector: "Pharmaceuticals", value: 33.1, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 5, name: "General Electric", sector: "Power / turbines", value: 28.6, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 6, name: "Honeywell", sector: "Industrial automation", value: 24.3, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 7, name: "Ford", sector: "Automotive", value: 21.0, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 8, name: "Merck", sector: "Pharmaceuticals", value: 18.4, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 9, name: "Emerson Electric", sector: "Electrical equipment", value: 16.0, is_demo: true, source_note: "to be supplied by MIIT customs" },
-  { rank: 10, name: "Johnson Controls", sector: "Building automation", value: 12.8, is_demo: true, source_note: "to be supplied by MIIT customs" },
-];
+export const topImportCategoriesUS: CompanyRanking[] = importStructure2025
+  .filter((c) => c.name !== "Services" && c.name !== "Finished goods (misc.)")
+  .sort((a, b) => b.value - a.value)
+  .slice(0, 10)
+  .map((c, idx) => ({
+    rank: idx + 1,
+    name: c.name,
+    sector: `Share ${c.sharePct.toFixed(1)}%`,
+    value: c.value,
+    is_demo: false,
+    source_note: "State Statistics Committee · 2025 structure",
+  }));
+
+/** Backward-compat aliases — page imports now resolve to the category lists. */
+export const topExportersUZ = topExportCategoriesUZ;
+export const topImportersUS = topImportCategoriesUS;
 
 export const tradeMeta = {
   source: "State Statistics Committee of the Republic of Uzbekistan",

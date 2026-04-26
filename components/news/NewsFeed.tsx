@@ -3,6 +3,7 @@ import { news, type NewsTonality, type NewsTag } from "@/data/news";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import { ExternalLink, Search } from "lucide-react";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const TONALITY_TONE: Record<NewsTonality, string> = {
   positive: "bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -118,7 +119,7 @@ export function NewsFeed() {
               </div>
               <h3 className="text-[14px] font-medium leading-snug text-[var(--color-ink)]">{n.title}</h3>
               <p className="mt-1 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{n.summary}</p>
-              <div className="mt-1.5 flex items-center gap-3 text-[11px] text-[var(--color-ink-muted)]">
+              <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-[var(--color-ink-muted)]">
                 <span className="italic">{n.source}</span>
                 <a
                   href={n.url}
@@ -129,6 +130,7 @@ export function NewsFeed() {
                   <ExternalLink className="size-3" />
                   Read
                 </a>
+                {n.sourceId ? <SourceBadge sourceId={n.sourceId} /> : null}
               </div>
             </div>
           </li>

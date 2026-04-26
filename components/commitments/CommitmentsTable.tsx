@@ -15,6 +15,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const STATUS_COLOR: Record<CommitmentStatus, string> = {
   done: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -122,6 +123,12 @@ export function CommitmentsTable() {
             {ts(row.original.status)}
           </span>
         ),
+      },
+      {
+        id: "source",
+        header: "Source",
+        cell: ({ row }) =>
+          row.original.sourceId ? <SourceBadge sourceId={row.original.sourceId} /> : null,
       },
     ],
     [ts],

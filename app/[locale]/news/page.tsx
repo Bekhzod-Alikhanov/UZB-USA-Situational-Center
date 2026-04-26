@@ -1,6 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { NewsFeed } from "@/components/news/NewsFeed";
 import { news } from "@/data/news";
 
@@ -14,6 +13,7 @@ export default async function NewsPage({
   const t = await getTranslations("news");
 
   const positive = news.filter((n) => n.tonality === "positive").length;
+  const neutral = news.filter((n) => n.tonality === "neutral").length;
   const critical = news.filter((n) => n.tonality === "critical").length;
 
   return (
@@ -25,15 +25,17 @@ export default async function NewsPage({
         </div>
         <div className="hidden gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
           <Stat label="Positive" value={positive.toString()} tone="pos" />
+          <Stat label="Neutral" value={neutral.toString()} />
           <Stat label="Critical" value={critical.toString()} tone="neg" />
           <Stat label="Total" value={news.length.toString()} />
         </div>
       </div>
 
-      <DemoBanner agency="Situational Center press monitoring" />
-
       <Card>
-        <CardHeader title="Curated feed" sub="Manual tonality scoring · hyperlinked sources" />
+        <CardHeader
+          title="Curated press feed"
+          sub="Every entry links to an officially published page · USTR · EXIM · DFC · GOV.UZ · State · ITA · USAID"
+        />
         <CardBody>
           <NewsFeed />
         </CardBody>
