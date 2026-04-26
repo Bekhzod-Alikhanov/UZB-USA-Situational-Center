@@ -3,7 +3,10 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 import { TradeTable } from "@/components/trade/TradeTable";
 import { StructureTreemap } from "@/components/trade/StructureTreemap";
+import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
+import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { exportStructure2025, importStructure2025, topExportersUZ, topImportersUS, tradeMeta } from "@/data/trade";
 
 export default async function TradePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -25,14 +28,40 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       </div>
 
       <Card>
-        <CardHeader title="Annual summary" sub="All figures USD millions · State Statistics Committee of Uzbekistan" />
+        <CardHeader
+          title="Annual summary"
+          sub="All figures USD millions · State Statistics Committee of Uzbekistan"
+          right={<SourceBadge sourceId="input_trade_stat_docx" />}
+        />
         <CardBody>
           <TradeTable />
         </CardBody>
       </Card>
 
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <Card className="lg:col-span-2">
+          <CardHeader
+            title="Dual methodology · UZ Stat ↔ U.S. Census"
+            sub="Same flow, different rules — mirror discrepancy is real and useful"
+          />
+          <CardBody>
+            <DualMethodologyChart />
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader title="Methodology notes" sub="Which series to quote when" />
+          <CardBody>
+            <MethodologyNotesCard />
+          </CardBody>
+        </Card>
+      </div>
+
       <Card>
-        <CardHeader title="Trade flow 2017–2025" sub="Turnover, exports, imports" />
+        <CardHeader
+          title="Trade flow 2017–2025"
+          sub="Turnover, exports, imports — UZ-side methodology"
+          right={<SourceBadge sourceId="input_trade_stat_docx" />}
+        />
         <CardBody>
           <TradeFlowChart height={340} />
         </CardBody>

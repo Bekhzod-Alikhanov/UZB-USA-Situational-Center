@@ -3,8 +3,11 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { KanbanBoard } from "@/components/visit-prep/KanbanBoard";
 import { OptimizationPanel } from "@/components/visit-prep/OptimizationPanel";
 import { ChecklistBlock } from "@/components/visit-prep/ChecklistBlock";
+import { PipelinePanel } from "@/components/visit-prep/PipelinePanel";
+import { OutcomesTable } from "@/components/visit-prep/OutcomesTable";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { nextAnchorVisit } from "@/data/visits";
+import { visitPipelines, visitOutcomes } from "@/data/visit-prep";
 
 export default async function PreparePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -52,9 +55,29 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
       ) : null}
 
       <Card>
+        <CardHeader
+          title="Pipeline"
+          sub={`${visitPipelines.length} upcoming visits with readiness scores · linked roadmaps below`}
+        />
+        <CardBody>
+          <PipelinePanel />
+        </CardBody>
+      </Card>
+
+      <Card>
         <CardHeader title="Workflow" sub="Drag cards between stages — plan → coordination → briefing → execution → follow-up" />
         <CardBody>
           <KanbanBoard />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Outcomes · plan vs actual"
+          sub={`${visitOutcomes.length} verified or pending readouts — closes the loop on every visit`}
+        />
+        <CardBody className="p-0">
+          <OutcomesTable />
         </CardBody>
       </Card>
 

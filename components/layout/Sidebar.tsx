@@ -13,6 +13,7 @@ import {
   Gift,
   Globe2,
   Landmark,
+  Lightbulb,
   MapPin,
   Newspaper,
   Settings,
@@ -61,6 +62,7 @@ const NAV_GROUPS: NavGroup[] = [
     key: "knowledge",
     items: [
       { key: "agreements", href: "/agreements", icon: FileText },
+      { key: "sectors", href: "/sectors", icon: Lightbulb },
       { key: "compliance", href: "/compliance", icon: ShieldCheck },
       { key: "counterparts", href: "/counterparts", icon: UserSquare },
       { key: "contacts", href: "/contacts", icon: Users },
