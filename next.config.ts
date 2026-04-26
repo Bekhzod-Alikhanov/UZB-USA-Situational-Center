@@ -7,8 +7,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  // Next.js 16: typedRoutes promoted out of experimental.
+  typedRoutes: false,
   experimental: {
-    typedRoutes: false,
     // Tree-shake icon barrels + heavy ESM packages so Lighthouse First-Load JS
     // doesn't drag in the whole library when only a handful of imports are used.
     optimizePackageImports: [
