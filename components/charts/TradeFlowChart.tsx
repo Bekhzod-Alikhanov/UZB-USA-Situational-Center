@@ -57,7 +57,7 @@ export function TradeFlowChart({ height = 300 }: { height?: number }) {
               fontSize: 12,
             }}
             labelStyle={{ color: "var(--color-ink-muted)", fontSize: 11 }}
-            formatter={(v: number) => [`$${v.toLocaleString("en-US")}M`, ""]}
+            formatter={(v) => [`$${Number(v).toLocaleString("en-US")}M`, ""]}
           />
           <Legend iconType="plainline" wrapperStyle={{ fontSize: 11, paddingTop: 6 }} />
           <Area type="monotone" dataKey="Imports" fill="url(#gImp)" stroke="var(--color-primary)" strokeWidth={1.5} />

@@ -183,7 +183,7 @@ export function BenchmarkView() {
                   borderRadius: 6,
                   fontSize: 12,
                 }}
-                formatter={(v: number) => [active.format(v), active.label]}
+                formatter={(v) => [active.format(Number(v)), active.label]}
               />
               <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                 {chartData.map((d) => (
@@ -195,7 +195,7 @@ export function BenchmarkView() {
                 <LabelList
                   dataKey="value"
                   position="top"
-                  formatter={(v: number) => active.format(v)}
+                  formatter={(v) => active.format(Number(v))}
                   style={{ fill: "var(--color-ink-muted)", fontSize: 10 }}
                 />
               </Bar>

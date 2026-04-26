@@ -115,7 +115,7 @@ export function DualMethodologyChart() {
                 borderRadius: 6,
                 fontSize: 12,
               }}
-              formatter={(v: number, name: string) => [`$${v?.toLocaleString("en-US")}M`, name]}
+              formatter={(v, name) => [`$${Number(v).toLocaleString("en-US")}M`, name]}
             />
             <Legend iconType="plainline" wrapperStyle={{ fontSize: 11, paddingTop: 6 }} />
             <Line
