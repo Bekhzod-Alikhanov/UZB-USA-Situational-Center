@@ -4,7 +4,8 @@ import { SettingsPanel } from "@/components/admin/SettingsPanel";
 import { DemoRegistryTable } from "@/components/admin/DemoRegistryTable";
 import { DelegationLocationForm } from "@/components/admin/DelegationLocationForm";
 import { AuditLogPreview } from "@/components/admin/AuditLogPreview";
-import { Upload, Users as UsersIcon } from "lucide-react";
+import { LogOut, Upload, Users as UsersIcon } from "lucide-react";
+import { logout } from "./login/actions";
 
 export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -13,9 +14,21 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="section-title">{t("title")}</h1>
-        <p className="section-sub">Toggles, data registry, delegation location, audit log</p>
+      <div className="flex items-end justify-between gap-3">
+        <div>
+          <h1 className="section-title">{t("title")}</h1>
+          <p className="section-sub">Toggles, data registry, delegation location, audit log</p>
+        </div>
+        <form action={logout}>
+          <input type="hidden" name="locale" value={locale} />
+          <button
+            type="submit"
+            className="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[12px] font-medium text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
+          >
+            <LogOut className="size-3.5" />
+            Sign out
+          </button>
+        </form>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">

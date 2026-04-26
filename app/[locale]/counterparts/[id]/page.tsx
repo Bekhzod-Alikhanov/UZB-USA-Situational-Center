@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarClock, MessageSquare, Check } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { counterparts } from "@/data/counterparts";
 import { PrintButton } from "@/components/exports/PrintButton";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 
 const PARTY_TONE: Record<string, string> = {
@@ -61,7 +62,8 @@ export default async function CounterpartPage({
             <span className={cn("rounded-full border px-2 py-0.5 font-medium uppercase tracking-wider", STANCE_TONE[c.stanceOnUz])}>
               {c.stanceOnUz}
             </span>
-            {c.source_url ? (
+            {c.sourceId ? <SourceBadge sourceId={c.sourceId} variant="chip" /> : null}
+            {c.source_url && !c.sourceId ? (
               <a
                 href={c.source_url}
                 target="_blank"

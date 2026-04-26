@@ -12,6 +12,7 @@ const ROLE_LABEL: Record<CounterpartRole, string> = {
   "congress-house": "U.S. House",
   business: "Business",
   diplomat: "Diplomat",
+  council: "Council",
 };
 
 const PARTY_TONE: Record<string, string> = {
@@ -32,7 +33,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
   const [search, setSearch] = useState("");
 
   const ROLES: (CounterpartRole | "all")[] = [
-    "all", "executive", "state", "congress-senate", "congress-house",
+    "all", "executive", "council", "state", "congress-senate", "congress-house", "diplomat",
   ];
 
   const filtered = useMemo(

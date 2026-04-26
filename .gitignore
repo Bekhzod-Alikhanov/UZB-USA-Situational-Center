@@ -41,3 +41,5 @@ next-env.d.ts
 /_find*.py
 /_extract_text.js
 /Данные к US_SC.rar
+/input/
+/.claude/settings.local.json
