@@ -6,12 +6,16 @@ export const runtime = "nodejs";
 
 /**
  * Friendly model IDs surfaced in the Admin UI ("Sonnet 4.6" / "Opus 4.7")
- * mapped to actual Anthropic model strings. Update this map if the Center
- * upgrades to newer Claude releases.
+ * mapped to current Anthropic model aliases. The keys are stable so the
+ * client-side selector doesn't need updating when Anthropic ships newer
+ * releases — only swap the values.
+ *
+ * Use bare aliases without date suffixes (per the Anthropic migration
+ * guide); appending a date string returns 404.
  */
 const MODEL_MAP: Record<string, string> = {
-  "claude-sonnet-4-6": "claude-sonnet-4-5-20250929",
-  "claude-opus-4-7": "claude-opus-4-5-20250929",
+  "claude-sonnet-4-6": "claude-sonnet-4-6",
+  "claude-opus-4-7": "claude-opus-4-7",
 };
 
 const DEFAULT_MODEL = "claude-sonnet-4-6";
@@ -34,6 +38,13 @@ interface ChatBody {
  *   repeated turns since the RAG-style context is large but stable.
  * - Returns the new v6 UI message stream (SSE-based, structured chunks)
  *   compatible with the client-side useChat hook.
+ *
+ * Note on temperature: Opus 4.7 fully removes `temperature` / `top_p` /
+ * `top_k` (any of them returns 400). Sonnet 4.6 still accepts them, but
+ * for parity across both friendly models we omit them and let the model
+ * self-calibrate. Anthropic's migration guide explicitly notes that
+ * `temperature: 0` never guaranteed identical outputs even on prior
+ * models — determinism is best controlled via prompting.
  */
 export async function POST(req: Request) {
   if (!process.env.ANTHROPIC_API_KEY) {
@@ -69,7 +80,6 @@ export async function POST(req: Request) {
       model: anthropic(modelId),
       system: buildSystemPrompt(),
       messages: modelMessages,
-      temperature: 0.3,
       providerOptions: {
         anthropic: {
           // Cache the system prompt across turns — the RAG context is
