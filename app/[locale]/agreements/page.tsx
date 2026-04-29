@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { AgreementsTable } from "@/components/agreements/AgreementsTable";
 import { AgreementsStats } from "@/components/agreements/AgreementsStats";
 import { AgreementsTimeline } from "@/components/agreements/AgreementsTimeline";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 export default async function AgreementsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -36,6 +37,14 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
           <AgreementsTable />
         </CardBody>
       </Card>
+
+      <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
+        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">UZ-side legal anchors:</span>
+        <SourceBadge sourceId="lex_uz" />
+        <SourceBadge sourceId="lex_uz_visa_free_2025" />
+        <SourceBadge sourceId="lex_uz_embassy_us_1993" />
+        <SourceBadge sourceId="lex_uz_diplomatic_missions_1992" />
+      </div>
     </div>
   );
 }

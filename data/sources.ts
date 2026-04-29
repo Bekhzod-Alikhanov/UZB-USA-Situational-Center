@@ -331,6 +331,45 @@ export const sources: Source[] = [
     fetched_at: "2026-04-26",
     data_type: "Cross-country macro and trade indicators for benchmark comparisons",
   },
+
+  // -------------------------------------------------------------------
+  // lex.uz — official UZ legal-acts database. Anchors UZ-side legal
+  // base for bilateral instruments with the United States.
+  // -------------------------------------------------------------------
+  {
+    id: "lex_uz",
+    level: "B",
+    name: "lex.uz — National Database of Legislation of the Republic of Uzbekistan",
+    url: "https://lex.uz/ru/",
+    fetched_at: "2026-04-29",
+    data_type: "Canonical UZ legal-acts database (decrees, ordinances, ratifications)",
+    note: "Used as the primary anchor for UZ-side legal instruments referenced in bilateral agreements and visits.",
+  },
+  {
+    id: "lex_uz_visa_free_2025",
+    level: "B",
+    name: "Decree УП-203 (03.11.2025) — 30-day visa-free regime for U.S. citizens",
+    url: "https://lex.uz/ru/docs/7807760",
+    fetched_at: "2026-04-29",
+    data_type: "Presidential decree introducing 30-day visa-free entry for U.S. citizens, effective 1 January 2026",
+    note: "Signed by President Mirziyoyev. Counterpart UZ-side legal anchor for the visa-free regime.",
+  },
+  {
+    id: "lex_uz_embassy_us_1993",
+    level: "B",
+    name: "Resolution №212 (10.05.1993) — Opening of the Embassy of Uzbekistan in the United States",
+    url: "https://lex.uz/docs/521494",
+    fetched_at: "2026-04-29",
+    data_type: "Cabinet of Ministers resolution establishing the UZ Embassy in Washington",
+  },
+  {
+    id: "lex_uz_diplomatic_missions_1992",
+    level: "B",
+    name: "Resolution №649-XII (03.07.1992) — Heads of UZ diplomatic missions abroad",
+    url: "https://lex.uz/ru/docs/19509",
+    fetched_at: "2026-04-29",
+    data_type: "Framework resolution for appointing heads of UZ diplomatic missions, including in the United States",
+  },
 ];
 
 export function findSource(id: string): Source | undefined {

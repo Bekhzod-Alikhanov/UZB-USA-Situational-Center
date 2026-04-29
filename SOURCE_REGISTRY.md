@@ -2,7 +2,7 @@
 
 Master list of every source backing values in this dashboard. Every datum in `data/*.ts` should carry a `sourceId` referencing this registry. Authoritative copy lives in `data/sources.ts`.
 
-**Last refresh:** 2026-04-26 · **Sources:** 36 (10 Level A inputs · 26 Level B open URLs)
+**Last refresh:** 2026-04-29 · **Sources:** 40 (10 Level A inputs · 30 Level B open URLs)
 
 ## Levels
 
@@ -49,6 +49,10 @@ Master list of every source backing values in this dashboard. Every datum in `da
 | `foreign_assistance_gov` | B | ForeignAssistance.gov | https://foreignassistance.gov/ | U.S. foreign-assistance disbursements to Uzbekistan |
 | `worldbank_data` | B | World Bank Open Data | https://data.worldbank.org/ | GDP, FDI, population — benchmark inputs |
 | `oecd_data_api` | B | OECD Data API | https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html | Cross-country macro / trade indicators |
+| `lex_uz` | B | lex.uz — National Database of Legislation of Uzbekistan | https://lex.uz/ru/ | Canonical UZ legal-acts database |
+| `lex_uz_visa_free_2025` | B | Decree УП-203 (03.11.2025) — visa-free regime for U.S. citizens | https://lex.uz/ru/docs/7807760 | 30-day visa-free entry, effective 2026-01-01 |
+| `lex_uz_embassy_us_1993` | B | Resolution №212 (10.05.1993) — Opening of UZ Embassy in the U.S. | https://lex.uz/docs/521494 | Cabinet resolution establishing the embassy in DC |
+| `lex_uz_diplomatic_missions_1992` | B | Resolution №649-XII (03.07.1992) — Heads of UZ diplomatic missions abroad | https://lex.uz/ru/docs/19509 | Framework for appointing UZ heads of mission |
 
 ## Notes
 
