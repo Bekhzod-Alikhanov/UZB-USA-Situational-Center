@@ -397,6 +397,15 @@ export const sources: Source[] = [
     data_type: "GDP, FDI inflows, population, ease-of-business — Central Asia & Caucasus benchmark inputs",
   },
   {
+    id: "comtrade_hs6",
+    level: "B",
+    name: "UN Comtrade — bilateral trade at HS-6 (preview API)",
+    url: "https://comtradeapi.un.org/public/v1/preview/C/A/HS",
+    fetched_at: "2026-04-29",
+    data_type: "Annual UZ↔US bilateral merchandise trade by HS-6 commodity code, both reporters, 2021–2025",
+    note: "Public preview endpoint, no API key. UZ has not yet reported 2025 (typical lag). Source identical to ITC Trade Map's underlying database.",
+  },
+  {
     id: "oecd_data_api",
     level: "B",
     name: "OECD Data API",

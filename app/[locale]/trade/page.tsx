@@ -5,6 +5,8 @@ import { TradeTable } from "@/components/trade/TradeTable";
 import { StructureTreemap } from "@/components/trade/StructureTreemap";
 import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
 import { MonthlyTradeChart } from "@/components/trade/MonthlyTradeChart";
+import { ComtradeHs6Top } from "@/components/trade/ComtradeHs6";
+import { ComtradeMirror } from "@/components/trade/ComtradeMirror";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import {
@@ -165,11 +167,34 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </Card>
       </div>
 
+      <Card>
+        <CardHeader
+          title="HS-6 commodity structure · UN Comtrade"
+          sub="Top-25 product codes for UZ↔US bilateral trade — granular detail beyond StatCom HS-2"
+          right={<SourceBadge sourceId="comtrade_hs6" />}
+        />
+        <CardBody>
+          <ComtradeHs6Top />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Mirror discrepancy · UZ-reporter vs US-reporter"
+          sub="2024 · same flow seen from both sides at HS-6 level — top-20 by absolute gap"
+          right={<SourceBadge sourceId="comtrade_hs6" />}
+        />
+        <CardBody>
+          <ComtradeMirror />
+        </CardBody>
+      </Card>
+
       <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
         <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Supplementary sources:</span>
         <SourceBadge sourceId="census_intl_trade_api" />
         <SourceBadge sourceId="cbu_statistics" />
         <SourceBadge sourceId="bea_developers" />
+        <SourceBadge sourceId="comtrade_hs6" />
       </div>
     </div>
   );
