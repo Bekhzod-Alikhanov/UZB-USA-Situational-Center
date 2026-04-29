@@ -1,6 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { BenchmarkView } from "@/components/benchmark/BenchmarkView";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
@@ -26,15 +25,11 @@ export default async function BenchmarkPage({
         <PrintButton label="Export benchmark report" />
       </div>
 
-      <DemoBanner
-        agency="World Bank · UN Comtrade · OECD"
-        note={`${benchmarkMeta.note} · last refreshed ${benchmarkMeta.fetched_at}`}
-      />
-
       <Card>
         <CardHeader
           title="Comparative posture"
-          sub={`Source: ${benchmarkMeta.source}`}
+          sub={`${benchmarkMeta.source} · refreshed ${benchmarkMeta.fetched_at}`}
+          right={<SourceBadge sourceId="worldbank_data" />}
         />
         <CardBody>
           <BenchmarkView />
@@ -45,6 +40,7 @@ export default async function BenchmarkPage({
         <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Supplementary sources:</span>
         <SourceBadge sourceId="worldbank_data" />
         <SourceBadge sourceId="oecd_data_api" />
+        <SourceBadge sourceId="census_intl_trade_api" />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 import { grants, type Grant } from "@/data/grants";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
-import { Heart, GraduationCap, Shield, Droplet, Wheat, FlaskConical, MapPin } from "lucide-react";
+import { Heart, GraduationCap, Shield, Droplet, Wheat, FlaskConical, MapPin, TrendingUp } from "lucide-react";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const SECTOR_ICON: Record<Grant["sector"], React.ComponentType<{ className?: string }>> = {
@@ -12,6 +12,7 @@ const SECTOR_ICON: Record<Grant["sector"], React.ComponentType<{ className?: str
   water: Droplet,
   agriculture: Wheat,
   research: FlaskConical,
+  economy: TrendingUp,
 };
 
 const SECTOR_TONE: Record<Grant["sector"], string> = {
@@ -21,6 +22,7 @@ const SECTOR_TONE: Record<Grant["sector"], string> = {
   water: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
   agriculture: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
   research: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
+  economy: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
 };
 
 const STATUS_TONE: Record<Grant["status"], string> = {
@@ -48,7 +50,7 @@ export function GrantsView() {
   );
 
   const SECTORS: (Grant["sector"] | "all")[] = [
-    "all", "health", "education", "research", "water", "agriculture", "military",
+    "all", "health", "education", "research", "water", "agriculture", "economy", "military",
   ];
 
   return (

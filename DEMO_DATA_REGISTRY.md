@@ -2,7 +2,7 @@
 
 Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry must specify the responsible agency expected to supply the production-grade replacement.
 
-**Last refresh:** 2026-04-26 · **Demo records:** ~80 across 9 modules (down from ~150 after the demo cleanup pass)
+**Last refresh:** 2026-04-26 · **Demo records:** ~75 across 8 modules (down from ~150)
 
 ## Status legend
 
@@ -18,13 +18,17 @@ Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry m
 | Commitments — registry | 17 source-anchored workflow records (every entry carries a `sourceId` for the originating event) | `data/commitments.ts` | Situational Center internal + responsible agencies | pending |
 | Agreements — detail | 9 agreement-level rows beyond aggregate | `data/agreements.ts` (`is_demo:true` rows) | MFA Department of Americas | requested |
 | Map — delegations | 3 live delegations | `data/delegations.ts` | Situational Center internal | pending |
-| Benchmark | Non-UZ CA-5 + Caucasus regional metrics | `data/benchmark.ts` | World Bank, UN Comtrade (validation) | pending |
 | Staff KPI | 10 role-slot templates per F-4 headcount (no person names; carries `sourceId: "f4_ordinance_2026"`) | `data/staff-kpi.ts` | Situational Center HR | pending |
 | Contacts — staff | 10 HQ staff placeholders ("Staff Member 1–10") | `data/contacts.ts:k-hq.people` | Situational Center HR | pending |
 | Events — future | Upcoming SD-5 entry | `data/events.ts:e-sd5-2026` | MFA | pending |
 | Compliance | CAATSA exposure rating | `data/compliance.ts:ofac-caatsa` | MFA + Treasury (open source) | pending |
 | Visit prep — pipelines | 3 upcoming visits with readiness scores | `data/visit-prep.ts:visitPipelines` | Situational Center internal | pending |
 | Visit prep — roadmaps | 3 cross-visit cooperation roadmaps | `data/visit-prep.ts:visitRoadmaps` | Situational Center internal | pending |
+
+## No longer demo after the Tier-B pass (2026-04-26)
+
+- **Benchmark — CA-5 + South Caucasus** — GDP and population for KZ/KG/TJ/TM/AZ/GE replaced with **real World Bank Open Data** (2024 figures, indicators NY.GDP.MKTP.CD + SP.POP.TOTL via the public WB JSON API). Bilateral US-trade values come from US Census; UZ row aligned with `tradeAnnualUs` 2025. `is_demo: true` cleared on every row; the `<DemoBanner>` was removed from `/benchmark`.
+- **Grants — 4 new US-side program rows** — added USAID DOAG education partnership ($47M cumulative), WAVE ($21.5M 2020-2025), Business Support Project ($17.7M 2024-2029), and ERAS II ($1.65M 2022-2025). All sourced from USAID / U.S. Embassy press releases and ForeignAssistance.gov.
 
 ## No longer demo after the cleanup pass (2026-04-26)
 
