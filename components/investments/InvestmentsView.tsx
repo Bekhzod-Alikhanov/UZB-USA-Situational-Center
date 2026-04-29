@@ -128,9 +128,9 @@ export function InvestmentsView() {
         </label>
 
         <div className="ml-auto flex items-center gap-4 text-[11px] text-[var(--color-ink-muted)]">
-          <Stat label="Projects" value={filtered.length.toString()} />
-          <Stat label="Total" value={`$${(totalValue / 1000).toFixed(2)}B`} />
-          <Stat label="Jobs" value={totalJobs.toLocaleString("en-US")} />
+          <ToolbarStat label="Projects" value={filtered.length.toString()} />
+          <ToolbarStat label="Total" value={`$${(totalValue / 1000).toFixed(2)}B`} />
+          <ToolbarStat label="Jobs" value={totalJobs.toLocaleString("en-US")} />
         </div>
       </div>
 
@@ -272,7 +272,8 @@ export function InvestmentsView() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+/** Compact in-toolbar stat — smaller than the section-header `<Stat>`. */
+function ToolbarStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-end">
       <span className="text-[10px] uppercase tracking-wider opacity-70">{label}</span>

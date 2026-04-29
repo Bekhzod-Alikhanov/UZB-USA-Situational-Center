@@ -15,7 +15,7 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Framework | Next.js 15.1.6, App Router, Turbopack | React 19. TypeScript strict. |
 | Styling | Tailwind CSS v4 (`@theme`, `@utility`) | All design tokens in `app/globals.css`. No tailwind.config.ts. |
 | State | Zustand v5 + persist | `lib/store/settings.ts` is the global UI store (theme, locale, hideDemo, presentationMode, AI flags). |
-| i18n | next-intl v3, subpath routing `/[locale]/...` | 4 locales: `en`, `uz-latn`, `ru`, `uz-cyrl`. Messages in `messages/*.json`. |
+| i18n | next-intl v3, subpath routing `/[locale]/...` | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`. |
 | Tables | TanStack Table v8 | Server-shaped data, client filter/sort/page. |
 | Charts | Recharts (line/bar/area), Visx (sankey/chord/treemap) | All chart components are `"use client"` and consume CSS vars. |
 | Maps | maplibre-gl + react-map-gl with OpenFreeMap style | No API keys. Globe.gl for the 3D globe (lazy). |
@@ -96,7 +96,7 @@ lib/
   ai/system-prompt.ts   Compiled RAG-style prompt over /data/*
   utils.ts              cn() helper
 
-messages/               en.json, uz-latn.json, ru.json, uz-cyrl.json
+messages/               en.json, uz-latn.json, ru.json
 middleware.ts           next-intl locale routing
 DEMO_DATA_REGISTRY.md   Master log of every is_demo entry + responsible agency
 ```
@@ -132,4 +132,4 @@ DEMO_DATA_REGISTRY.md   Master log of every is_demo entry + responsible agency
 - **No backend.** All data is in-process from `data/*.ts`. Admin "CRUD" is stubbed; persistence will require a future migration to a real DB or CMS.
 - **Map basemap is light-only.** OpenFreeMap raster style does not have a dark variant; map labels stay readable on the light tiles regardless of UI theme.
 - **AI is BYOK.** Set `ANTHROPIC_API_KEY` in `.env.local` to enable the assistant; without it the route 503s gracefully.
-- **Russian/Uzbek-Cyrillic content** is shipped but may need professional review before production publication — current strings come from compact translation passes, not native-speaker review.
+- **Russian content** is shipped but may need professional review before production publication — current strings come from compact translation passes, not native-speaker review.

@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
+import { Stat } from "@/components/ui/Stat";
 import { GrantsView } from "@/components/grants/GrantsView";
 import { grants, grantsMeta } from "@/data/grants";
 
@@ -37,29 +38,6 @@ export default async function GrantsPage({
           <GrantsView />
         </CardBody>
       </Card>
-    </div>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  tone = "ink",
-}: {
-  label: string;
-  value: string;
-  tone?: "ink" | "primary" | "pos";
-}) {
-  const color =
-    tone === "primary"
-      ? "text-[var(--color-primary)]"
-      : tone === "pos"
-        ? "text-[var(--color-pos)]"
-        : "text-[var(--color-ink)]";
-  return (
-    <div className="flex flex-col items-end">
-      <span className="mono text-[10px] uppercase tracking-wider opacity-70">{label}</span>
-      <span className={`mono text-[15px] font-medium tabular ${color}`}>{value}</span>
     </div>
   );
 }

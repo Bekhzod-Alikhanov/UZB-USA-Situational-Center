@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
+import { Stat } from "@/components/ui/Stat";
 import { CounterpartsGrid } from "@/components/counterparts/CounterpartsGrid";
 import { counterparts } from "@/data/counterparts";
 
@@ -35,16 +36,6 @@ export default async function CounterpartsPage({
           <CounterpartsGrid locale={locale} />
         </CardBody>
       </Card>
-    </div>
-  );
-}
-
-function Stat({ label, value, tone = "ink" }: { label: string; value: string; tone?: "ink" | "primary" }) {
-  const color = tone === "primary" ? "text-[var(--color-primary)]" : "text-[var(--color-ink)]";
-  return (
-    <div className="flex flex-col items-end">
-      <span className="mono text-[10px] uppercase tracking-wider opacity-70">{label}</span>
-      <span className={`mono text-[15px] font-medium tabular ${color}`}>{value}</span>
     </div>
   );
 }

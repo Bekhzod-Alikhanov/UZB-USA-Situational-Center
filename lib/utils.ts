@@ -45,7 +45,7 @@ export function daysBetween(a: Date | string, b: Date | string = new Date()): nu
 
 export function pluralizeDays(n: number, locale: string): string {
   if (locale.startsWith("en")) return `${n.toLocaleString("en-US")} day${n === 1 ? "" : "s"}`;
-  if (locale.startsWith("ru") || locale.startsWith("uz-cyrl")) {
+  if (locale.startsWith("ru")) {
     const mod10 = n % 10;
     const mod100 = n % 100;
     if (mod10 === 1 && mod100 !== 11) return `${n.toLocaleString("ru-RU")} день`;

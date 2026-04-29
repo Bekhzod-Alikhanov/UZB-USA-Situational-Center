@@ -6,6 +6,7 @@
  */
 export type CounterpartRole = "executive" | "state" | "congress-senate" | "congress-house" | "business" | "diplomat" | "council";
 export type Party = "R" | "D" | "I" | "N/A";
+export type Stance = "supportive" | "neutral" | "cautious";
 
 export interface Counterpart {
   id: string;
@@ -17,13 +18,46 @@ export interface Counterpart {
   committees?: string[];
   photo?: string;
   priorEngagements: string[];
-  stanceOnUz: "supportive" | "neutral" | "cautious";
+  stanceOnUz: Stance;
   keyTopics: string[];
   is_demo: boolean;
   source_url?: string;
   /** Reference into `data/sources.ts`. */
   sourceId?: string;
 }
+
+/** Human-readable role label used in grid filter chips and detail headers. */
+export const ROLE_LABEL: Record<CounterpartRole, string> = {
+  executive: "Executive",
+  state: "State & local",
+  "congress-senate": "U.S. Senate",
+  "congress-house": "U.S. House",
+  business: "Business",
+  diplomat: "Diplomat",
+  council: "Council",
+};
+
+/** Party-affiliation chip background + text colors. */
+export const PARTY_TONE: Record<string, string> = {
+  R: "bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
+  D: "bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
+  I: "bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
+  "N/A": "bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
+};
+
+/** Stance-on-UZ — plain colored text variant (used in compact grid cards). */
+export const STANCE_TEXT: Record<Stance, string> = {
+  supportive: "text-[var(--color-pos)]",
+  neutral: "text-[var(--color-ink-muted)]",
+  cautious: "text-[var(--color-warn)]",
+};
+
+/** Stance-on-UZ — full bordered chip variant (used in detail headers). */
+export const STANCE_CHIP: Record<Stance, string> = {
+  supportive: "text-[var(--color-pos)] bg-[var(--color-pos-soft)] border-[var(--color-pos)]/30",
+  neutral: "text-[var(--color-ink-muted)] bg-[var(--color-surface-2)] border-[var(--color-border)]",
+  cautious: "text-[var(--color-warn)] bg-[var(--color-warn-soft)] border-[var(--color-warn)]/30",
+};
 
 export const counterparts: Counterpart[] = [
   // -- Executive ----------------------------------------------------------

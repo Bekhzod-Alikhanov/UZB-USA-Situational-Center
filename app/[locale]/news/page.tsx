@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
+import { Stat } from "@/components/ui/Stat";
 import { NewsFeed } from "@/components/news/NewsFeed";
 import { news } from "@/data/news";
 
@@ -40,29 +41,6 @@ export default async function NewsPage({
           <NewsFeed />
         </CardBody>
       </Card>
-    </div>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  tone = "ink",
-}: {
-  label: string;
-  value: string;
-  tone?: "ink" | "pos" | "neg";
-}) {
-  const color =
-    tone === "pos"
-      ? "text-[var(--color-pos)]"
-      : tone === "neg"
-        ? "text-[var(--color-neg)]"
-        : "text-[var(--color-ink)]";
-  return (
-    <div className="flex flex-col items-end">
-      <span className="mono text-[10px] uppercase tracking-wider opacity-70">{label}</span>
-      <span className={`mono text-[15px] font-medium tabular ${color}`}>{value}</span>
     </div>
   );
 }

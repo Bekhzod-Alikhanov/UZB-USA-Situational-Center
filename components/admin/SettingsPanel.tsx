@@ -1,5 +1,5 @@
 "use client";
-import { useSettings, type AiModel, type Theme } from "@/lib/store/settings";
+import { useSettings, type Theme } from "@/lib/store/settings";
 import * as Switch from "@radix-ui/react-switch";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -15,8 +15,6 @@ export function SettingsPanel() {
     setTheme,
     aiEnabled,
     setAiEnabled,
-    aiModel,
-    setAiModel,
   } = useSettings();
 
   return (
@@ -47,18 +45,6 @@ export function SettingsPanel() {
             <div className="text-[11px] text-[var(--color-ink-muted)]">Light / dark color scheme</div>
           </div>
           <SegmentedTheme value={theme} onChange={setTheme} />
-        </div>
-      </div>
-
-      <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <div className="text-[13px] font-medium text-[var(--color-ink)]">{t("model")}</div>
-            <div className="text-[11px] text-[var(--color-ink-muted)]">
-              Default Sonnet 4.6 · Opus 4.7 for extended reasoning
-            </div>
-          </div>
-          <SegmentedModel value={aiModel} onChange={setAiModel} disabled={!aiEnabled} />
         </div>
       </div>
     </div>
@@ -115,44 +101,6 @@ function SegmentedTheme({ value, onChange }: { value: Theme; onChange: (v: Theme
           )}
         >
           {v}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function SegmentedModel({
-  value,
-  onChange,
-  disabled,
-}: {
-  value: AiModel;
-  onChange: (v: AiModel) => void;
-  disabled?: boolean;
-}) {
-  return (
-    <div
-      className={cn(
-        "flex items-center gap-0.5 rounded-md border border-[var(--color-border)] p-0.5",
-        disabled ? "opacity-50" : "",
-      )}
-    >
-      {(
-        [
-          { v: "claude-sonnet-4-6", l: "Sonnet 4.6" },
-          { v: "claude-opus-4-7", l: "Opus 4.7" },
-        ] as const
-      ).map((opt) => (
-        <button
-          key={opt.v}
-          type="button"
-          onClick={() => !disabled && onChange(opt.v)}
-          className={cn(
-            "rounded px-2.5 py-1 text-[11.5px] font-medium transition",
-            value === opt.v ? "bg-[var(--color-primary)] text-white" : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
-          )}
-        >
-          {opt.l}
         </button>
       ))}
     </div>

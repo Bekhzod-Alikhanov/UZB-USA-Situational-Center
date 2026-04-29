@@ -3,23 +3,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CalendarClock, MessageSquare, Check } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { counterparts } from "@/data/counterparts";
+import { counterparts, PARTY_TONE, STANCE_CHIP } from "@/data/counterparts";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
-
-const PARTY_TONE: Record<string, string> = {
-  R: "bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
-  D: "bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
-  I: "bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
-  "N/A": "bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
-};
-
-const STANCE_TONE: Record<string, string> = {
-  supportive: "text-[var(--color-pos)] bg-[var(--color-pos-soft)] border-[var(--color-pos)]/30",
-  neutral: "text-[var(--color-ink-muted)] bg-[var(--color-surface-2)] border-[var(--color-border)]",
-  cautious: "text-[var(--color-warn)] bg-[var(--color-warn-soft)] border-[var(--color-warn)]/30",
-};
 
 export function generateStaticParams() {
   return counterparts.map((c) => ({ id: c.id }));
@@ -59,7 +46,7 @@ export default async function CounterpartPage({
                 {c.party}{c.state ? ` · ${c.state}` : ""}
               </span>
             ) : null}
-            <span className={cn("rounded-full border px-2 py-0.5 font-medium uppercase tracking-wider", STANCE_TONE[c.stanceOnUz])}>
+            <span className={cn("rounded-full border px-2 py-0.5 font-medium uppercase tracking-wider", STANCE_CHIP[c.stanceOnUz])}>
               {c.stanceOnUz}
             </span>
             {c.sourceId ? <SourceBadge sourceId={c.sourceId} variant="chip" /> : null}

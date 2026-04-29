@@ -197,10 +197,6 @@ export const topImportCategoriesUS: CompanyRanking[] = importStructure2025
     source_note: "State Statistics Committee · 2025 structure",
   }));
 
-/** Backward-compat aliases — page imports now resolve to the category lists. */
-export const topExportersUZ = topExportCategoriesUZ;
-export const topImportersUS = topImportCategoriesUS;
-
 export const tradeMeta = {
   source: "State Statistics Committee of the Republic of Uzbekistan",
   source_url: "https://stat.uz",

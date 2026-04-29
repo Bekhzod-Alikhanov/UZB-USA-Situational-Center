@@ -2,7 +2,7 @@
 import { useSearch } from "@/lib/store/search";
 import { Command } from "cmdk";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Search, ArrowRight, FileText, Users, Target, BarChart3, Briefcase, Globe2 } from "lucide-react";
+import { Search, ArrowRight, FileText, Users, Target, Briefcase, Globe2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";

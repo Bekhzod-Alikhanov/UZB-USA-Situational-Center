@@ -3,20 +3,17 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type Theme = "light" | "dark";
-export type AiModel = "claude-sonnet-4-6" | "claude-opus-4-7";
 
 interface SettingsState {
   hideDemo: boolean;
   presentationMode: boolean;
   theme: Theme;
   aiEnabled: boolean;
-  aiModel: AiModel;
 
   setHideDemo: (v: boolean) => void;
   setPresentationMode: (v: boolean) => void;
   setTheme: (v: Theme) => void;
   setAiEnabled: (v: boolean) => void;
-  setAiModel: (v: AiModel) => void;
 }
 
 export const useSettings = create<SettingsState>()(
@@ -26,7 +23,6 @@ export const useSettings = create<SettingsState>()(
       presentationMode: false,
       theme: "light",
       aiEnabled: false,
-      aiModel: "claude-sonnet-4-6",
       setHideDemo: (v) => set({ hideDemo: v }),
       setPresentationMode: (v) => set({ presentationMode: v }),
       setTheme: (v) => {
@@ -36,8 +32,19 @@ export const useSettings = create<SettingsState>()(
         }
       },
       setAiEnabled: (v) => set({ aiEnabled: v }),
-      setAiModel: (v) => set({ aiModel: v }),
     }),
-    { name: "uzus-settings" }
-  )
+    {
+      name: "uzus-settings",
+      // v2: dropped `aiModel` field. Strip it from any stale persisted state
+      // so users with older localStorage entries don't keep ghost data around.
+      version: 2,
+      migrate: (persisted: unknown) => {
+        if (persisted && typeof persisted === "object" && "aiModel" in persisted) {
+          const { aiModel: _aiModel, ...rest } = persisted as Record<string, unknown>;
+          return rest as unknown as SettingsState;
+        }
+        return persisted as SettingsState;
+      },
+    },
+  ),
 );

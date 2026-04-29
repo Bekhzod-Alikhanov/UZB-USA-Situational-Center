@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export function TradeTable() {
-  const t = useTranslations("trade");
   const ti = useTranslations("trade.indicators");
   const tc = useTranslations("trade.columns");
 

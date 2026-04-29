@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
+import { Stat } from "@/components/ui/Stat";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { InvestmentsView } from "@/components/investments/InvestmentsView";
 import { investments, investmentsTotals } from "@/data/investments";
@@ -48,33 +49,6 @@ export default async function InvestmentsPage({
           <InvestmentsView />
         </CardBody>
       </Card>
-    </div>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  tone = "ink",
-}: {
-  label: string;
-  value: string;
-  tone?: "ink" | "primary" | "pos" | "warn" | "neg";
-}) {
-  const color =
-    tone === "primary"
-      ? "text-[var(--color-primary)]"
-      : tone === "pos"
-        ? "text-[var(--color-pos)]"
-        : tone === "warn"
-          ? "text-[var(--color-warn)]"
-          : tone === "neg"
-            ? "text-[var(--color-neg)]"
-            : "text-[var(--color-ink)]";
-  return (
-    <div className="flex flex-col items-end">
-      <span className="mono text-[10px] uppercase tracking-wider opacity-70">{label}</span>
-      <span className={`mono text-[15px] font-medium tabular ${color}`}>{value}</span>
     </div>
   );
 }

@@ -1,32 +1,15 @@
 "use client";
-import { counterparts, type Counterpart, type CounterpartRole } from "@/data/counterparts";
+import {
+  counterparts,
+  PARTY_TONE,
+  ROLE_LABEL,
+  STANCE_TEXT,
+  type CounterpartRole,
+} from "@/data/counterparts";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-
-const ROLE_LABEL: Record<CounterpartRole, string> = {
-  executive: "Executive",
-  state: "State & local",
-  "congress-senate": "U.S. Senate",
-  "congress-house": "U.S. House",
-  business: "Business",
-  diplomat: "Diplomat",
-  council: "Council",
-};
-
-const PARTY_TONE: Record<string, string> = {
-  R: "bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
-  D: "bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
-  I: "bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
-  "N/A": "bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
-};
-
-const STANCE_TONE: Record<Counterpart["stanceOnUz"], string> = {
-  supportive: "text-[var(--color-pos)]",
-  neutral: "text-[var(--color-ink-muted)]",
-  cautious: "text-[var(--color-warn)]",
-};
 
 export function CounterpartsGrid({ locale }: { locale: string }) {
   const [role, setRole] = useState<CounterpartRole | "all">("all");
@@ -109,7 +92,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
             <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{c.name}</h3>
             <p className="text-[12px] text-[var(--color-ink-muted)]">{c.position}</p>
             <div className="mt-auto flex items-center justify-between gap-2 border-t border-[var(--color-border)] pt-2 text-[11px]">
-              <span className={cn("font-medium", STANCE_TONE[c.stanceOnUz])}>{c.stanceOnUz}</span>
+              <span className={cn("font-medium", STANCE_TEXT[c.stanceOnUz])}>{c.stanceOnUz}</span>
               <span className="mono tabular text-[var(--color-ink-muted)]">
                 {c.priorEngagements.length} engagement{c.priorEngagements.length === 1 ? "" : "s"}
               </span>

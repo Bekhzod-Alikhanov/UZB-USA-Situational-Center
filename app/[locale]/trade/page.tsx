@@ -6,7 +6,13 @@ import { StructureTreemap } from "@/components/trade/StructureTreemap";
 import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
-import { exportStructure2025, importStructure2025, topExportersUZ, topImportersUS, tradeMeta } from "@/data/trade";
+import {
+  exportStructure2025,
+  importStructure2025,
+  topExportCategoriesUZ,
+  topImportCategoriesUS,
+  tradeMeta,
+} from "@/data/trade";
 
 export default async function TradePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -100,7 +106,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
                   </tr>
                 </thead>
                 <tbody>
-                  {topExportersUZ.map((r) => (
+                  {topExportCategoriesUZ.map((r) => (
                     <tr key={r.rank}>
                       <td className="mono text-right text-[var(--color-ink-muted)]">{r.rank}</td>
                       <td className="font-medium">{r.name}</td>
@@ -132,7 +138,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
                   </tr>
                 </thead>
                 <tbody>
-                  {topImportersUS.map((r) => (
+                  {topImportCategoriesUS.map((r) => (
                     <tr key={r.rank}>
                       <td className="mono text-right text-[var(--color-ink-muted)]">{r.rank}</td>
                       <td className="font-medium">{r.name}</td>

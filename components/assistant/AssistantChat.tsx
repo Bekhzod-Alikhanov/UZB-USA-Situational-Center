@@ -27,15 +27,10 @@ const SUGGESTIONS = [
  */
 export function AssistantChat() {
   const aiEnabled = useSettings((s) => s.aiEnabled);
-  const aiModel = useSettings((s) => s.aiModel);
 
-  // useChat owns the messages array and streaming lifecycle. We pass `body`
-  // through the transport so the server sees our model selection.
+  // useChat owns the messages array and streaming lifecycle.
   const { messages, sendMessage, status, error, stop } = useChat({
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-      body: () => ({ model: aiModel }),
-    }),
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
   });
 
   const [input, setInput] = useState("");
@@ -64,8 +59,7 @@ export function AssistantChat() {
         <Sparkles className="size-8 text-[var(--color-ink-faint)]" />
         <h3 className="serif text-[18px] font-medium text-[var(--color-ink)]">AI assistant is disabled</h3>
         <p className="max-w-md text-[13px] text-[var(--color-ink-muted)]">
-          Enable it in Admin → AI assistant toggle. The Head of the Center can also pick between Sonnet 4.6 (default)
-          and Opus 4.7.
+          Enable it in Admin → AI assistant toggle.
         </p>
       </div>
     );
@@ -79,7 +73,7 @@ export function AssistantChat() {
           <span className="text-[13px] font-semibold text-[var(--color-ink)]">Claude — Center Assistant</span>
         </div>
         <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">
-          {aiModel === "claude-opus-4-7" ? "opus-4-7" : "sonnet-4-6"}
+          sonnet-4-6
         </span>
       </div>
 

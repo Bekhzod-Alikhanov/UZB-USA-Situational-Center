@@ -11,12 +11,12 @@ Production-grade Next.js 15 dashboard for the **Situational Center on Uzbekistan
 | Framework | Next.js 15.1.6 · App Router · Turbopack · React 19 |
 | Styling | Tailwind CSS v4 · CSS-var design tokens |
 | State | Zustand v5 + persist |
-| i18n | next-intl v3 · 4 locales: `en`, `uz-latn`, `ru`, `uz-cyrl` |
+| i18n | next-intl v3 · 3 locales: `en`, `uz-latn`, `ru` |
 | Tables | TanStack Table v8 |
 | Charts | Recharts (line/bar/area) · Visx (sankey/chord/treemap) |
 | Maps | maplibre-gl + react-map-gl (OpenFreeMap) · Globe.gl (lazy-loaded) |
 | Drag-and-drop | @dnd-kit (Visit Prep Kanban) |
-| AI | Vercel AI SDK + `@ai-sdk/anthropic` (Sonnet 4.5 default) |
+| AI | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Sonnet 4.6) |
 | Auth | Cookie-based password gate on `/admin` (server action + middleware) |
 | Package manager | **pnpm** |
 
@@ -42,7 +42,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 
 > **Cache note:** running `pnpm build` while `pnpm dev` is alive will clobber the Turbopack cache and cause "missing required error components" errors in the running dev server. Stop dev before running build, or use `pnpm typecheck` for fast verification during development.
 
-## Routes (19 sections × 4 locales = 76 base + 60 SSG = 140 static pages)
+## Routes (19 sections × 3 locales + admin/login + counterpart SSG)
 
 ```
 /[locale]/                       Overview (KPIs + globe + timeline + alerts)
@@ -59,7 +59,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 /[locale]/grants                 7 real grants ($15.381M)
 /[locale]/contacts               Org directory · 13-member Council roster
 /[locale]/counterparts           Grid w/ role/party/stance filters
-/[locale]/counterparts/[id]      SSG briefing card (21 × 4 locales = 84 paths)
+/[locale]/counterparts/[id]      SSG briefing card (21 × 3 locales = 63 paths)
 /[locale]/sectors                8 sector-opportunity briefing cards
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
 /[locale]/staff                  KPI table w/ composite-score ranking

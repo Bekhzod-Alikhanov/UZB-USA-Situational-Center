@@ -5,46 +5,33 @@ import { buildSystemPrompt } from "@/lib/ai/system-prompt";
 export const runtime = "nodejs";
 
 /**
- * Friendly model IDs surfaced in the Admin UI ("Sonnet 4.6" / "Opus 4.7")
- * mapped to current Anthropic model aliases. The keys are stable so the
- * client-side selector doesn't need updating when Anthropic ships newer
- * releases — only swap the values.
- *
- * Use bare aliases without date suffixes (per the Anthropic migration
- * guide); appending a date string returns 404.
+ * Active Anthropic model — Sonnet 4.6 covers the assistant's Q&A workload
+ * comfortably. Use the bare alias without a date suffix; per Anthropic's
+ * migration guide, appending a dated variant returns 404.
  */
-const MODEL_MAP: Record<string, string> = {
-  "claude-sonnet-4-6": "claude-sonnet-4-6",
-  "claude-opus-4-7": "claude-opus-4-7",
-};
-
-const DEFAULT_MODEL = "claude-sonnet-4-6";
+const MODEL_ID = "claude-sonnet-4-6";
 
 interface ChatBody {
   /** UIMessage[] from `useChat` on the client. */
   messages: UIMessage[];
-  /** Friendly model ID — must match a key of MODEL_MAP. */
-  model?: string;
 }
 
 /**
  * Anthropic stream proxy for the /assistant page.
  *
- * - Validates `ANTHROPIC_API_KEY`; returns 503 with a JSON error if unset
- *   so the client can render the disabled-state UI gracefully.
+ * - Returns 503 if `ANTHROPIC_API_KEY` is unset so the client can render
+ *   the disabled-state UI gracefully.
  * - Converts UIMessage[] (client-side @ai-sdk/react representation) to
- *   ModelMessage[] (LLM-facing representation) via convertToModelMessages.
- * - Uses ephemeral prompt caching on the system prompt — saves tokens on
- *   repeated turns since the RAG-style context is large but stable.
- * - Returns the new v6 UI message stream (SSE-based, structured chunks)
+ *   ModelMessage[] via convertToModelMessages.
+ * - Caches the system prompt ephemerally — the RAG context is ~5–10k
+ *   tokens but rarely changes within a session.
+ * - Returns the v6 UI message stream (SSE-based, structured chunks)
  *   compatible with the client-side useChat hook.
  *
- * Note on temperature: Opus 4.7 fully removes `temperature` / `top_p` /
- * `top_k` (any of them returns 400). Sonnet 4.6 still accepts them, but
- * for parity across both friendly models we omit them and let the model
- * self-calibrate. Anthropic's migration guide explicitly notes that
- * `temperature: 0` never guaranteed identical outputs even on prior
- * models — determinism is best controlled via prompting.
+ * No `temperature` / `top_p` / `top_k` — Sonnet 4.6 accepts them but we
+ * let the model self-calibrate. Anthropic's migration guide notes that
+ * `temperature: 0` never guaranteed identical outputs anyway; determinism
+ * is best controlled via prompting.
  */
 export async function POST(req: Request) {
   if (!process.env.ANTHROPIC_API_KEY) {
@@ -64,26 +51,21 @@ export async function POST(req: Request) {
     });
   }
 
-  const { messages, model } = body;
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return new Response(JSON.stringify({ error: "messages must be a non-empty UIMessage array." }), {
-      status: 400,
-      headers: { "content-type": "application/json" },
-    });
+  if (!Array.isArray(body.messages) || body.messages.length === 0) {
+    return new Response(
+      JSON.stringify({ error: "messages must be a non-empty UIMessage array." }),
+      { status: 400, headers: { "content-type": "application/json" } },
+    );
   }
 
-  const modelId = MODEL_MAP[model ?? DEFAULT_MODEL] ?? MODEL_MAP[DEFAULT_MODEL];
-
   try {
-    const modelMessages = await convertToModelMessages(messages);
+    const modelMessages = await convertToModelMessages(body.messages);
     const result = streamText({
-      model: anthropic(modelId),
+      model: anthropic(MODEL_ID),
       system: buildSystemPrompt(),
       messages: modelMessages,
       providerOptions: {
         anthropic: {
-          // Cache the system prompt across turns — the RAG context is
-          // ~5–10k tokens but rarely changes within a session.
           cacheControl: { type: "ephemeral" },
         },
       },
