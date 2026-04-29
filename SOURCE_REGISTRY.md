@@ -2,7 +2,7 @@
 
 Master list of every source backing values in this dashboard. Every datum in `data/*.ts` should carry a `sourceId` referencing this registry. Authoritative copy lives in `data/sources.ts`.
 
-**Last refresh:** 2026-04-29 · **Sources:** 50 (11 Level A inputs · 39 Level B open URLs)
+**Last refresh:** 2026-04-29 · **Sources:** 51 (11 Level A inputs · 40 Level B open URLs)
 
 ## Levels
 
@@ -63,6 +63,7 @@ Master list of every source backing values in this dashboard. Every datum in `da
 | `usaid_power_visit_2023` | B | USAID — Administrator Power travel to Central Asia (Oct 2023) | https://www.usaid.gov/news-information/press-releases/oct-23-2023-administrator-samantha-power-travel-uzbekistan-and-kazakhstan | Power Tashkent + Samarkand visit |
 | `gpd_protocol_2026` | A | Civil-law contract Annex 1 — Protocol on stages and deadlines (15.04.2026) | (internal — Agency for Strategic Development and Reforms) | 12 monthly Center deliverables |
 | `comtrade_hs6` | B | UN Comtrade — HS-6 bilateral preview API | https://comtradeapi.un.org/public/v1/preview/C/A/HS | UZ↔US HS-6 commodity flows 2021–2025, both reporters |
+| `trademap_itc` | B | ITC Trade Map — bilateral products + EBOPS services + analytical exhibits | https://www.trademap.org/ | 2024 deep view (Share %, 5Y growth), EBOPS 2010 services, EPI/Diversification charts |
 
 ## Notes
 

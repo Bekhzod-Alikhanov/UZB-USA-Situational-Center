@@ -7,6 +7,9 @@ import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
 import { MonthlyTradeChart } from "@/components/trade/MonthlyTradeChart";
 import { ComtradeHs6Top } from "@/components/trade/ComtradeHs6";
 import { ComtradeMirror } from "@/components/trade/ComtradeMirror";
+import { TrademapProducts } from "@/components/trade/TrademapProducts";
+import { ServicesEbops } from "@/components/trade/ServicesEbops";
+import { TrademapExhibits } from "@/components/trade/TrademapExhibits";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import {
@@ -186,6 +189,39 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         />
         <CardBody>
           <ComtradeMirror />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="ITC Trade Map · 2024 deep view with momentum"
+          sub="HS-6 with pre-computed Share % and 5-year compound growth — sortable by value, share, or growth"
+          right={<SourceBadge sourceId="trademap_itc" />}
+        />
+        <CardBody>
+          <TrademapProducts />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Services trade · EBOPS 2010 / BPM6"
+          sub="UZ-reported services exports to the U.S. — what Comtrade cannot show"
+          right={<SourceBadge sourceId="trademap_itc" />}
+        />
+        <CardBody>
+          <ServicesEbops />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="ITC analytical exhibits · export potential & diversification"
+          sub="Trade Map's EPI and Diversification Indicator outputs — strategic prioritization views"
+          right={<SourceBadge sourceId="trademap_itc" />}
+        />
+        <CardBody>
+          <TrademapExhibits />
         </CardBody>
       </Card>
 

@@ -397,6 +397,15 @@ export const sources: Source[] = [
     data_type: "GDP, FDI inflows, population, ease-of-business — Central Asia & Caucasus benchmark inputs",
   },
   {
+    id: "trademap_itc",
+    level: "B",
+    name: "ITC Trade Map — UZ↔US bilateral trade with EBOPS services + analytical exhibits",
+    url: "https://www.trademap.org/",
+    fetched_at: "2026-04-29",
+    data_type: "Bilateral product trade (HS-6 with Share % and 5Y growth), services (EBOPS 2010), and ITC analytical charts (export potential, diversification)",
+    note: "User-exported XLSX from logged-in ITC Trade Map session. Same underlying database as UN Comtrade plus ITC's analytical layers. Services data is UZ-reported, only 2021 has full EBOPS detail.",
+  },
+  {
     id: "comtrade_hs6",
     level: "B",
     name: "UN Comtrade — bilateral trade at HS-6 (preview API)",
