@@ -268,6 +268,69 @@ export const sources: Source[] = [
     data_type: "Center facts: location, staffing, scope, aggregate counts",
     note: "Production should attach the original signed order.",
   },
+
+  // -------------------------------------------------------------------
+  // Additional Tier A citations — open URLs, no API key required.
+  // -------------------------------------------------------------------
+  {
+    id: "cbu_statistics",
+    level: "B",
+    name: "Central Bank of the Republic of Uzbekistan — Statistics",
+    url: "https://cbu.uz/en/statistics/",
+    fetched_at: "2026-04-26",
+    data_type: "FX rates, reserves, balance of payments, IIP, external debt",
+    note: "XLSX / PDF / XML / CSV / JSON. Daily FX, monthly/quarterly statistics.",
+  },
+  {
+    id: "census_intl_trade_api",
+    level: "B",
+    name: "U.S. Census Bureau — International Trade developer datasets",
+    url: "https://www.census.gov/data/developers/data-sets/international-trade.html",
+    fetched_at: "2026-04-26",
+    data_type: "Developer-facing entry point for monthly merchandise trade by country and HS code",
+    note: "Companion to the static c4644 balance table; provides programmatic CSV/JSON access.",
+  },
+  {
+    id: "bea_developers",
+    level: "B",
+    name: "U.S. Bureau of Economic Analysis — Developer resources",
+    url: "https://www.bea.gov/resources/for-developers",
+    fetched_at: "2026-04-26",
+    data_type: "Services trade and ITA datasets — anchors USTR's $603M services-trade figure",
+  },
+  {
+    id: "state_spd_3_joint",
+    level: "B",
+    name: "U.S. Department of State — Joint Statement on the U.S.-Uzbekistan Strategic Partnership Dialogue (SPD-3)",
+    url: "https://2021-2025.state.gov/joint-statement-on-the-united-states-uzbekistan-strategic-partnership-dialogue-3/",
+    fetched_at: "2026-04-26",
+    data_type: "SPD chronology and joint statements anchoring agreements + visits",
+  },
+  {
+    id: "foreign_assistance_gov",
+    level: "B",
+    name: "ForeignAssistance.gov — U.S. foreign assistance disbursements",
+    url: "https://foreignassistance.gov/",
+    fetched_at: "2026-04-26",
+    data_type: "U.S. government grants and obligations to Uzbekistan by agency / sector / year",
+    note: "Authoritative complement to the locally-attached grant workbook.",
+  },
+  {
+    id: "worldbank_data",
+    level: "B",
+    name: "World Bank Open Data",
+    url: "https://data.worldbank.org/",
+    fetched_at: "2026-04-26",
+    data_type: "GDP, FDI inflows, population, ease-of-business — Central Asia & Caucasus benchmark inputs",
+  },
+  {
+    id: "oecd_data_api",
+    level: "B",
+    name: "OECD Data API",
+    url: "https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html",
+    fetched_at: "2026-04-26",
+    data_type: "Cross-country macro and trade indicators for benchmark comparisons",
+  },
 ];
 
 export function findSource(id: string): Source | undefined {

@@ -2,7 +2,7 @@
 
 Master list of every source backing values in this dashboard. Every datum in `data/*.ts` should carry a `sourceId` referencing this registry. Authoritative copy lives in `data/sources.ts`.
 
-**Last refresh:** 2026-04-24 · **Sources:** 29 (10 Level A inputs · 19 Level B open URLs)
+**Last refresh:** 2026-04-26 · **Sources:** 36 (10 Level A inputs · 26 Level B open URLs)
 
 ## Levels
 
@@ -42,6 +42,13 @@ Master list of every source backing values in this dashboard. Every datum in `da
 | `aucc_online` | B | American–Uzbekistan Chamber of Commerce | https://aucconline.com/ | Business association directory |
 | `invest_uzbekistan` | B | Invest Uzbekistan / Investment Promotion Agency | https://invest.gov.uz | Investment single-window |
 | `f4_ordinance_2026` | A | Presidential Ordinance Ф-4 (17.02.2026) | (Office of the President) | Center mandate, location, staffing, aggregate counts |
+| `cbu_statistics` | B | Central Bank of the Republic of Uzbekistan — Statistics | https://cbu.uz/en/statistics/ | FX, reserves, balance of payments, IIP, external debt |
+| `census_intl_trade_api` | B | U.S. Census Bureau — International Trade developer datasets | https://www.census.gov/data/developers/data-sets/international-trade.html | Programmatic monthly merchandise trade by country / HS code |
+| `bea_developers` | B | U.S. Bureau of Economic Analysis — Developer resources | https://www.bea.gov/resources/for-developers | Services-trade datasets; anchors USTR's $603M services figure |
+| `state_spd_3_joint` | B | U.S. State Department — SPD-3 Joint Statement | https://2021-2025.state.gov/joint-statement-on-the-united-states-uzbekistan-strategic-partnership-dialogue-3/ | SPD chronology and joint statements |
+| `foreign_assistance_gov` | B | ForeignAssistance.gov | https://foreignassistance.gov/ | U.S. foreign-assistance disbursements to Uzbekistan |
+| `worldbank_data` | B | World Bank Open Data | https://data.worldbank.org/ | GDP, FDI, population — benchmark inputs |
+| `oecd_data_api` | B | OECD Data API | https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html | Cross-country macro / trade indicators |
 
 ## Notes
 

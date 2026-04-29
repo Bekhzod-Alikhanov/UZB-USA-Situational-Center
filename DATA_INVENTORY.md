@@ -47,6 +47,18 @@ Map of input files in `input/` and the `data/*.ts` modules each one feeds.
 - GOV.UZ tourism committee announcements (37K U.S. visitors, 30-day visa-free)
 - Embassy contact pages (UZ-DC, US-Tashkent), AUCC, Invest Uzbekistan
 
+## Tier A citations added (2026-04-26)
+
+Additional public, machine-readable sources surfaced as `<SourceBadge>` chips on the relevant pages:
+
+- **CBU statistics** (`cbu_statistics`) — FX, reserves, balance of payments, IIP, external debt → `/trade` supplementary footer
+- **U.S. Census Bureau international trade developer entry** (`census_intl_trade_api`) → `/trade` supplementary footer
+- **U.S. BEA developer resources** (`bea_developers`) — anchor for the USTR services-trade figure → added as a fifth methodology note on `/trade`
+- **U.S. State Department SPD-3 joint statement** (`state_spd_3_joint`) → `data/visits.ts:v-2023-11-sd-3.source_url`
+- **ForeignAssistance.gov** (`foreign_assistance_gov`) — authoritative US foreign-assistance ledger for UZ → `/grants` supplementary footer
+- **World Bank Open Data** (`worldbank_data`) → `/benchmark` supplementary footer
+- **OECD Data API** (`oecd_data_api`) → `/benchmark` supplementary footer
+
 ## Data gaps
 
 Items where no real source has been ingested yet:

@@ -119,6 +119,14 @@ export const methodologyNotes: MethodologyNote[] = [
     caveat: "Forum turnover figure is not the same series as either the U.S. Census or the National Statistics series.",
     sourceId: "govuz_business_forum_2025",
   },
+  {
+    id: "bea-services",
+    title: "BEA — services trade with Uzbekistan",
+    basis: "U.S. Bureau of Economic Analysis services-trade tables; underlying source for the USTR $603M 2024 services figure.",
+    useFor: "Authoritative anchor for U.S.–UZ services exports/imports when quoting beyond goods-only data.",
+    caveat: "Annual cadence only; revisions can land 6–12 months after the reference year.",
+    sourceId: "bea_developers",
+  },
 ];
 
 export const tradeJan2026 = {

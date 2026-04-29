@@ -244,6 +244,7 @@ export const visits: Visit[] = [
     participantsUs: ["U.S. Department of State"],
     outcomes: ["Annual review of cooperation"],
     is_demo: false,
+    source_url: "https://2021-2025.state.gov/joint-statement-on-the-united-states-uzbekistan-strategic-partnership-dialogue-3/",
   },
   {
     id: "v-2023-blinken",

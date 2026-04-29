@@ -152,6 +152,13 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           </CardBody>
         </Card>
       </div>
+
+      <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
+        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Supplementary sources:</span>
+        <SourceBadge sourceId="census_intl_trade_api" />
+        <SourceBadge sourceId="cbu_statistics" />
+        <SourceBadge sourceId="bea_developers" />
+      </div>
     </div>
   );
 }

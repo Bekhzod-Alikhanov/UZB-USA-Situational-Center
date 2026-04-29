@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { BenchmarkView } from "@/components/benchmark/BenchmarkView";
 import { PrintButton } from "@/components/exports/PrintButton";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { benchmarkMeta } from "@/data/benchmark";
 
 export default async function BenchmarkPage({
@@ -39,6 +40,12 @@ export default async function BenchmarkPage({
           <BenchmarkView />
         </CardBody>
       </Card>
+
+      <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
+        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Supplementary sources:</span>
+        <SourceBadge sourceId="worldbank_data" />
+        <SourceBadge sourceId="oecd_data_api" />
+      </div>
     </div>
   );
 }
