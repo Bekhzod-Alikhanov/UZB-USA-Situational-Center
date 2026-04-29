@@ -268,6 +268,15 @@ export const sources: Source[] = [
     data_type: "Center facts: location, staffing, scope, aggregate counts",
     note: "Production should attach the original signed order.",
   },
+  {
+    id: "gpd_protocol_2026",
+    level: "A",
+    name: "Civil-law contract Annex 1 — Protocol on stages and deadlines (15.04.2026)",
+    sourceFile: "(internal — Agency for Strategic Development and Reforms)",
+    fetched_at: "2026-04-15",
+    data_type: "12 monthly deliverables of the Situational Center Project Office, deadlines 15.05.2026 → 15.04.2027",
+    note: "Annex 1 to the civil-law contract under Presidential Ordinance Ф-4.",
+  },
 
   // -------------------------------------------------------------------
   // Additional Tier A citations — open URLs, no API key required.

@@ -3,8 +3,11 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Stat } from "@/components/ui/Stat";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { StaffTable } from "@/components/staff/StaffTable";
+import { CenterMilestones } from "@/components/staff/CenterMilestones";
 import { staff } from "@/data/staff-kpi";
+import { centerMilestonesMeta } from "@/data/center-milestones";
 import { PrintButton } from "@/components/exports/PrintButton";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 export default async function StaffPage({
   params,
@@ -39,6 +42,17 @@ export default async function StaffPage({
           <PrintButton label="Export monthly report" />
         </div>
       </div>
+
+      <Card>
+        <CardHeader
+          title="Center milestones — 12-month KPI schedule"
+          sub={`${centerMilestonesMeta.total} contractual deliverables · ${centerMilestonesMeta.firstDeadline} → ${centerMilestonesMeta.finalDeadline}`}
+          right={<SourceBadge sourceId={centerMilestonesMeta.sourceId} />}
+        />
+        <CardBody>
+          <CenterMilestones />
+        </CardBody>
+      </Card>
 
       <DemoBanner agency="Internal — Situational Center HR dashboard" />
 
