@@ -4,6 +4,7 @@ import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 import { TradeTable } from "@/components/trade/TradeTable";
 import { StructureTreemap } from "@/components/trade/StructureTreemap";
 import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
+import { MonthlyTradeChart } from "@/components/trade/MonthlyTradeChart";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import {
@@ -69,6 +70,17 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         />
         <CardBody>
           <TradeFlowChart height={340} />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Monthly merchandise trade · U.S. Census"
+          sub="Bars: U.S. exports / imports · Line: net balance — last 26 months"
+          right={<SourceBadge sourceId="census_goods_uz" />}
+        />
+        <CardBody>
+          <MonthlyTradeChart />
         </CardBody>
       </Card>
 

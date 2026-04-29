@@ -17,6 +17,8 @@ export interface Visit {
   agreementsSigned?: string[];
   is_demo: boolean;
   source_url?: string;
+  /** Reference into `data/sources.ts` — preferred over inline `source_url`. */
+  sourceId?: string;
 }
 
 export const visits: Visit[] = [
@@ -32,7 +34,7 @@ export const visits: Visit[] = [
     participantsUs: ["U.S. Department of State"],
     outcomes: ["Diplomatic relations established between Uzbekistan and the USA"],
     is_demo: false,
-    source_url: "https://www.state.gov/",
+    sourceId: "state_history_uz",
   },
   {
     id: "v-1992-us-sec-baker",
@@ -46,6 +48,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State James A. Baker III"],
     outcomes: ["First Secretary of State visit since independence"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2000-albright",
@@ -59,6 +62,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State Madeleine Albright"],
     outcomes: ["Regional security dialogue"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2001-powell",
@@ -72,6 +76,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State Colin Powell"],
     outcomes: ["Post-9/11 counter-terrorism coordination"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2010-clinton-1",
@@ -85,6 +90,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State Hillary Clinton"],
     outcomes: ["Strategic dialogue reaffirmed"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2011-clinton-2",
@@ -98,6 +104,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State Hillary Clinton"],
     outcomes: ["Launch of Annual Bilateral Consultations"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2015-kerry",
@@ -111,6 +118,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State John Kerry"],
     outcomes: ["C5+1 format launched (Nov 2015)"],
     is_demo: false,
+    sourceId: "state_c5_1_2015",
   },
   {
     id: "v-2017-riyadh",
@@ -165,6 +173,7 @@ export const visits: Visit[] = [
     outcomes: ["Joint Declaration on Strategic Partnership", "21 commercial contracts signed for ~$4.8B"],
     agreementsSigned: ["Joint Statement on Strategic Partnership"],
     is_demo: false,
+    sourceId: "whitehouse_us_uz_2018",
   },
   {
     id: "v-2020-pompeo",
@@ -178,6 +187,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State Mike Pompeo"],
     outcomes: ["C5+1 Foreign Ministers meeting", "Regional connectivity emphasized"],
     is_demo: false,
+    sourceId: "state_pompeo_c5_2020",
   },
   {
     id: "v-2021-strategic-dialogue-1",
@@ -191,6 +201,7 @@ export const visits: Visit[] = [
     participantsUs: ["U.S. Department of State"],
     outcomes: ["Political consultations upgraded to Strategic Partnership Dialogue"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2022-12-sd-2",
@@ -204,6 +215,7 @@ export const visits: Visit[] = [
     participantsUs: ["U.S. Department of State"],
     outcomes: ["Broadened agenda: energy, education, trade"],
     is_demo: false,
+    sourceId: "state_spd_2_joint",
   },
   {
     id: "v-2023-09-unga-biden",
@@ -217,6 +229,7 @@ export const visits: Visit[] = [
     participantsUs: ["President Biden"],
     outcomes: ["First-ever C5+1 Summit at leaders level", "Bilateral meeting between Presidents"],
     is_demo: false,
+    sourceId: "state_c5_summit_2023",
   },
   {
     id: "v-2023-10-power",
@@ -231,6 +244,7 @@ export const visits: Visit[] = [
     participantsUs: ["USAID Administrator Samantha Power"],
     outcomes: ["First USAID Administrator visit since 2001", "C5+1 development meeting in Samarkand"],
     is_demo: false,
+    sourceId: "usaid_power_visit_2023",
   },
   {
     id: "v-2023-11-sd-3",
@@ -244,7 +258,7 @@ export const visits: Visit[] = [
     participantsUs: ["U.S. Department of State"],
     outcomes: ["Annual review of cooperation"],
     is_demo: false,
-    source_url: "https://2021-2025.state.gov/joint-statement-on-the-united-states-uzbekistan-strategic-partnership-dialogue-3/",
+    sourceId: "state_spd_3_joint",
   },
   {
     id: "v-2023-blinken",
@@ -258,6 +272,7 @@ export const visits: Visit[] = [
     participantsUs: ["Secretary of State Antony Blinken"],
     outcomes: ["C5+1 Foreign Ministers meeting"],
     is_demo: false,
+    sourceId: "state_blinken_c5_2023",
   },
   {
     id: "v-2024-03-daines",
@@ -285,6 +300,7 @@ export const visits: Visit[] = [
     participantsUs: ["U.S. Department of State"],
     outcomes: ["Agreement to upgrade to Enhanced Strategic Partnership Dialogue"],
     is_demo: false,
+    sourceId: "state_history_uz",
   },
   {
     id: "v-2025-03-miller",
@@ -368,6 +384,7 @@ export const visits: Visit[] = [
     participantsUs: ["President Trump", "White House senior staff", "U.S. Congress members"],
     outcomes: ["Second-ever C5+1 Summit at leaders level", "Bilateral meeting with President Trump"],
     is_demo: false,
+    sourceId: "whitehouse_c5_2025",
   },
   {
     id: "v-2025-11-adams",

@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Stat } from "@/components/ui/Stat";
 import { GrantsView } from "@/components/grants/GrantsView";
+import { ForeignAssistanceView } from "@/components/grants/ForeignAssistanceView";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { grants, grantsMeta } from "@/data/grants";
 
@@ -41,10 +42,16 @@ export default async function GrantsPage({
         </CardBody>
       </Card>
 
-      <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
-        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Supplementary sources:</span>
-        <SourceBadge sourceId="foreign_assistance_gov" />
-      </div>
+      <Card>
+        <CardHeader
+          title="U.S. foreign assistance · ForeignAssistance.gov accounting"
+          sub="Country-level obligations by fiscal year, agency, and category — independent of the UZ-side internal grants register"
+          right={<SourceBadge sourceId="foreign_assistance_gov" />}
+        />
+        <CardBody>
+          <ForeignAssistanceView />
+        </CardBody>
+      </Card>
     </div>
   );
 }

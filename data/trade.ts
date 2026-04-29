@@ -76,6 +76,59 @@ export const tradeAnnualUs: TradeYear[] = [
 /** Alias preserved for components built around the UZ-side series. */
 export const tradeAnnual = tradeAnnualUz;
 
+export interface TradeMonth {
+  /** ISO month string YYYY-MM. */
+  month: string;
+  /** US exports to UZ, $ millions (Census). */
+  exports: number;
+  /** US imports from UZ, $ millions (Census). */
+  imports: number;
+  /** Net balance (exports − imports), $ millions. */
+  balance: number;
+}
+
+/**
+ * U.S. Census Bureau monthly merchandise trade with Uzbekistan.
+ * Source: c4644 balance table — `census_goods_uz`. Refreshed 2026-04-29.
+ * `exports` = US exports to UZ, `imports` = US imports from UZ.
+ */
+export const tradeMonthlyUs: TradeMonth[] = [
+  { month: "2024-01", exports: 49.2, imports: 1.3, balance: 47.8 },
+  { month: "2024-02", exports: 13.8, imports: 3.1, balance: 10.7 },
+  { month: "2024-03", exports: 52.1, imports: 1.3, balance: 50.8 },
+  { month: "2024-04", exports: 15.8, imports: 2.1, balance: 13.7 },
+  { month: "2024-05", exports: 31.1, imports: 3.6, balance: 27.5 },
+  { month: "2024-06", exports: 17.2, imports: 3.0, balance: 14.1 },
+  { month: "2024-07", exports: 53.3, imports: 9.2, balance: 44.1 },
+  { month: "2024-08", exports: 18.6, imports: 2.7, balance: 15.9 },
+  { month: "2024-09", exports: 21.7, imports: 7.3, balance: 14.4 },
+  { month: "2024-10", exports: 22.5, imports: 2.5, balance: 20.0 },
+  { month: "2024-11", exports: 25.8, imports: 3.0, balance: 22.8 },
+  { month: "2024-12", exports: 59.7, imports: 3.3, balance: 56.4 },
+  { month: "2025-01", exports: 18.9, imports: 224.0, balance: -205.1 },
+  { month: "2025-02", exports: 27.1, imports: 178.9, balance: -151.8 },
+  { month: "2025-03", exports: 38.0, imports: 113.8, balance: -75.8 },
+  { month: "2025-04", exports: 30.6, imports: 14.9, balance: 15.7 },
+  { month: "2025-05", exports: 89.1, imports: 6.0, balance: 83.2 },
+  { month: "2025-06", exports: 24.7, imports: 4.1, balance: 20.6 },
+  { month: "2025-07", exports: 38.9, imports: 4.8, balance: 34.2 },
+  { month: "2025-08", exports: 24.9, imports: 8.5, balance: 16.4 },
+  { month: "2025-09", exports: 46.6, imports: 6.8, balance: 39.8 },
+  { month: "2025-10", exports: 70.4, imports: 4.4, balance: 66.0 },
+  { month: "2025-11", exports: 26.1, imports: 2.2, balance: 23.9 },
+  { month: "2025-12", exports: 38.7, imports: 6.2, balance: 32.5 },
+  { month: "2026-01", exports: 17.9, imports: 5.5, balance: 12.5 },
+  { month: "2026-02", exports: 19.0, imports: 7.1, balance: 11.9 },
+];
+
+export const tradeMonthlyMeta = {
+  source: "U.S. Census Bureau — c4644 balance table",
+  sourceId: "census_goods_uz" as const,
+  fetched_at: "2026-04-29",
+  unit: "USD millions",
+  is_demo: false,
+};
+
 export interface MethodologyNote {
   id: string;
   title: string;

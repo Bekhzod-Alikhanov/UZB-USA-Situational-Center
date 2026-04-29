@@ -2,7 +2,7 @@
 
 Master list of every source backing values in this dashboard. Every datum in `data/*.ts` should carry a `sourceId` referencing this registry. Authoritative copy lives in `data/sources.ts`.
 
-**Last refresh:** 2026-04-29 · **Sources:** 40 (10 Level A inputs · 30 Level B open URLs)
+**Last refresh:** 2026-04-29 · **Sources:** 49 (11 Level A inputs · 38 Level B open URLs)
 
 ## Levels
 
@@ -53,6 +53,15 @@ Master list of every source backing values in this dashboard. Every datum in `da
 | `lex_uz_visa_free_2025` | B | Decree УП-203 (03.11.2025) — visa-free regime for U.S. citizens | https://lex.uz/ru/docs/7807760 | 30-day visa-free entry, effective 2026-01-01 |
 | `lex_uz_embassy_us_1993` | B | Resolution №212 (10.05.1993) — Opening of UZ Embassy in the U.S. | https://lex.uz/docs/521494 | Cabinet resolution establishing the embassy in DC |
 | `lex_uz_diplomatic_missions_1992` | B | Resolution №649-XII (03.07.1992) — Heads of UZ diplomatic missions abroad | https://lex.uz/ru/docs/19509 | Framework for appointing UZ heads of mission |
+| `state_spd_2_joint` | B | State Dept — SPD-2 Joint Statement (Dec 2022) | https://2021-2025.state.gov/joint-statement-on-the-second-united-states-uzbekistan-strategic-partnership-dialogue/ | SPD-2 joint statement |
+| `state_c5_1_2015` | B | State Dept — Launch of C5+1 (Samarkand, Nov 2015) | https://2009-2017.state.gov/secretary/remarks/2015/11/249260.htm | Kerry remarks launching C5+1 |
+| `state_blinken_c5_2023` | B | State Dept — Blinken Tashkent / C5+1 (Feb-Mar 2023) | https://2021-2025.state.gov/secretary-antony-j-blinken-travel-to-kazakhstan-uzbekistan-and-india/ | Blinken Tashkent / C5+1 ministerial |
+| `state_c5_summit_2023` | B | White House — First C5+1 Presidential Summit (Sep 2023) | https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2023/09/19/joint-statement-of-the-c51-presidential-summit/ | Heads of State C5+1 summit joint statement |
+| `state_pompeo_c5_2020` | B | State Dept — Pompeo Tashkent / C5+1 (Feb 2020) | https://2017-2021.state.gov/secretary-michael-r-pompeos-travel-to-the-united-kingdom-ukraine-belarus-kazakhstan-uzbekistan/ | Pompeo Tashkent visit + C5+1 FM |
+| `whitehouse_us_uz_2018` | B | White House — Joint Statement on Strategic Partnership (May 2018) | https://trumpwhitehouse.archives.gov/briefings-statements/joint-statement-united-states-uzbekistan-launching-new-era-strategic-partnership/ | Trump-Mirziyoyev joint statement |
+| `whitehouse_c5_2025` | B | White House — C5+1 Summit (Washington, Nov 2025) | https://www.whitehouse.gov/briefings-statements/2025/11/joint-statement-of-the-c5-1-summit/ | Second C5+1 Heads of State summit |
+| `usaid_power_visit_2023` | B | USAID — Administrator Power travel to Central Asia (Oct 2023) | https://www.usaid.gov/news-information/press-releases/oct-23-2023-administrator-samantha-power-travel-uzbekistan-and-kazakhstan | Power Tashkent + Samarkand visit |
+| `gpd_protocol_2026` | A | Civil-law contract Annex 1 — Protocol on stages and deadlines (15.04.2026) | (internal — Agency for Strategic Development and Reforms) | 12 monthly Center deliverables |
 
 ## Notes
 

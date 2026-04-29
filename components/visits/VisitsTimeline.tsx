@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const LEVEL_COLOR: Record<string, string> = {
   president: "bg-[var(--color-primary)] text-white",
@@ -163,6 +164,15 @@ export function VisitsTimeline({ filterDirection = "all" }: { filterDirection?: 
                         <li key={a}>{a}</li>
                       ))}
                     </ul>
+                  </div>
+                ) : null}
+
+                {selected.sourceId ? (
+                  <div className="mt-4 flex items-center gap-2 border-t border-[var(--color-border)] pt-3 text-[11px] text-[var(--color-ink-muted)]">
+                    <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
+                      Source:
+                    </span>
+                    <SourceBadge sourceId={selected.sourceId} />
                   </div>
                 ) : null}
               </>
