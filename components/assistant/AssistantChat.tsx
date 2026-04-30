@@ -128,10 +128,27 @@ export function AssistantChat() {
           </ul>
         )}
         {error ? (
-          <div className="mt-3 flex items-start gap-2 rounded-md border border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] px-3 py-2 text-[12px] text-[var(--color-neg)]">
-            <AlertCircle className="mt-0.5 size-3.5 shrink-0" />
-            <span>{error.message}</span>
-          </div>
+          (() => {
+            const raw = error.message ?? "";
+            // Detect the server-side 503 "key missing" signal so we can show
+            // a friendly explanation instead of a raw stack message.
+            const isKeyMissing = /ANTHROPIC_API_KEY/i.test(raw) || /\b503\b/.test(raw);
+            return (
+              <div className="mt-3 flex items-start gap-2 rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2 text-[12px] text-[var(--color-ink)]">
+                <AlertCircle className="mt-0.5 size-3.5 shrink-0 text-[var(--color-warn)]" />
+                {isKeyMissing ? (
+                  <span>
+                    AI assistant unavailable — server key not configured. Set{" "}
+                    <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> in
+                    Vercel → Project Settings → Environment Variables, then redeploy. Demo and analytics modules
+                    work without the assistant.
+                  </span>
+                ) : (
+                  <span>{raw || "Request failed."}</span>
+                )}
+              </div>
+            );
+          })()
         ) : null}
       </div>
 

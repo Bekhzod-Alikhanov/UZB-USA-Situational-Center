@@ -23,8 +23,18 @@ export const useSettings = create<SettingsState>()(
       presentationMode: false,
       theme: "light",
       aiEnabled: false,
-      setHideDemo: (v) => set({ hideDemo: v }),
-      setPresentationMode: (v) => set({ presentationMode: v }),
+      setHideDemo: (v) => {
+        set({ hideDemo: v });
+        if (typeof document !== "undefined") {
+          document.documentElement.toggleAttribute("data-hide-demo", v);
+        }
+      },
+      setPresentationMode: (v) => {
+        set({ presentationMode: v });
+        if (typeof document !== "undefined") {
+          document.documentElement.toggleAttribute("data-presentation", v);
+        }
+      },
       setTheme: (v) => {
         set({ theme: v });
         if (typeof document !== "undefined") {

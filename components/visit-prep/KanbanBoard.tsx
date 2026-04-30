@@ -9,7 +9,7 @@ import {
   useDraggable,
 } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GripVertical } from "lucide-react";
 
 type Stage = "plan" | "coord" | "brief" | "exec" | "follow";
@@ -68,6 +68,14 @@ const SEED: Task[] = [
 export function KanbanBoard() {
   const [tasks, setTasks] = useState<Task[]>(SEED);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+  // Mount gate — @dnd-kit emits server/client mismatched aria-describedby IDs
+  // (DndDescribedBy-0 vs DndDescribedBy-1) under React 19 strict hydration.
+  // Render a static skeleton on SSR and the live DndContext only after mount.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const byStage = useMemo(() => {
     const m = {
@@ -90,6 +98,20 @@ export function KanbanBoard() {
     );
   }
 
+  if (!mounted) {
+    return (
+      <div
+        className="grid grid-cols-1 gap-3 md:grid-cols-3 xl:grid-cols-5"
+        aria-busy="true"
+        suppressHydrationWarning
+      >
+        {(Object.keys(STAGE_LABEL) as Stage[]).map((s) => (
+          <ColumnSkeleton key={s} stage={s} tasks={byStage[s]} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <DndContext sensors={sensors} onDragEnd={onDragEnd}>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3 xl:grid-cols-5">
@@ -98,6 +120,55 @@ export function KanbanBoard() {
         ))}
       </div>
     </DndContext>
+  );
+}
+
+function ColumnSkeleton({ stage, tasks }: { stage: Stage; tasks: Task[] }) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-2 rounded-md border bg-[var(--color-surface)] p-2.5",
+        STAGE_ACCENT[stage],
+      )}
+    >
+      <div className="flex items-center justify-between px-1 pb-1">
+        <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
+          {STAGE_LABEL[stage]}
+        </span>
+        <span className="mono text-[10.5px] text-[var(--color-ink-muted)]">{tasks.length}</span>
+      </div>
+      <div className="flex flex-col gap-1.5">
+        {tasks.map((t) => (
+          <div
+            key={t.id}
+            className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2.5"
+          >
+            <div className="flex items-start gap-1.5">
+              <GripVertical className="mt-0.5 size-3 shrink-0 text-[var(--color-ink-faint)]" />
+              <div className="min-w-0 flex-1">
+                <div className="text-[12.5px] font-medium leading-snug text-[var(--color-ink)]">{t.title}</div>
+                <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[10px]">
+                  <span className="rounded-sm bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[var(--color-ink-muted)]">
+                    {t.owner}
+                  </span>
+                  {t.due ? <span className="mono text-[var(--color-ink-muted)]">{t.due}</span> : null}
+                  {t.priority === "high" ? (
+                    <span className="rounded-sm bg-[var(--color-neg-soft)] px-1.5 py-0.5 font-medium uppercase tracking-wider text-[var(--color-neg)]">
+                      priority
+                    </span>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        {tasks.length === 0 ? (
+          <div className="rounded-md border border-dashed border-[var(--color-border)] p-3 text-center text-[11px] text-[var(--color-ink-faint)]">
+            Drop here
+          </div>
+        ) : null}
+      </div>
+    </div>
   );
 }
 

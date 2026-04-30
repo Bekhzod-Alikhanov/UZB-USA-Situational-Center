@@ -293,6 +293,16 @@
     text-decoration-thickness: 1.5px;
     cursor: help;
   }
+  /* Presentation mode — hide the dotted "demo" hint, keep the data visible.
+     Hide-demo mode actually hides the wrapped value entirely (mirrors the
+     <DemoUnderline> component's behaviour for inline usages). */
+  html[data-presentation] .demo-underline {
+    text-decoration: none;
+    cursor: default;
+  }
+  html[data-hide-demo] .demo-underline {
+    visibility: hidden;
+  }
   /* Recharts ResponsiveContainer requires its parent to have an explicit
      min-width: 0 in flex/grid layouts, otherwise ResizeObserver returns -1
      and the chart never paints. Wrapping the container in this class gives

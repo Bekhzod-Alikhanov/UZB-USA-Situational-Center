@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import { Search, X, Briefcase, Factory, Plane, Wheat, Zap, Pill, Cpu, Shirt, FlaskConical, Banknote, Gem } from "lucide-react";
 import dynamic from "next/dynamic";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { useSettings } from "@/lib/store/settings";
 
 const FlatMap = dynamic(() => import("@/components/map/FlatMap").then((m) => m.FlatMap), { ssr: false });
 
@@ -45,6 +46,8 @@ export function InvestmentsView() {
   const [minValue, setMinValue] = useState<number>(0);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Investment | null>(null);
+  const hideDemo = useSettings((s) => s.hideDemo);
+  const presentation = useSettings((s) => s.presentationMode);
 
   const filtered = useMemo(() => {
     return investments.filter((i) => {
@@ -258,7 +261,7 @@ export function InvestmentsView() {
                   </div>
                 ) : null}
 
-                {selected.source_note ? (
+                {selected.source_note && !hideDemo && !presentation ? (
                   <div className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-demo-bg)] p-3 text-[12px] text-[var(--color-demo-ink)]">
                     <span className="font-semibold">DEMO.</span> {selected.source_note}
                   </div>

@@ -5,6 +5,7 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
 import { SearchCommand } from "@/components/layout/SearchCommand";
+import { SettingsSync } from "@/components/layout/SettingsSync";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -32,6 +33,7 @@ export default async function LocaleLayout({
         </div>
       </div>
       <SearchCommand />
+      <SettingsSync />
     </NextIntlClientProvider>
   );
 }

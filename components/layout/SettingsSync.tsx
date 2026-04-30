@@ -1,0 +1,24 @@
+"use client";
+import { useEffect } from "react";
+import { useSettings } from "@/lib/store/settings";
+
+/**
+ * Mirrors `hideDemo` / `presentationMode` from the persisted Zustand store
+ * onto `<html>` data attributes so global CSS rules can suppress demo
+ * markers (e.g. .demo-underline) without each consumer threading the flags
+ * through props. Mount once in the locale-shell layout. The setters in
+ * `lib/store/settings.ts` apply the attributes synchronously on toggle;
+ * this effect handles the initial-hydration case after `persist` rehydrate.
+ */
+export function SettingsSync() {
+  const hideDemo = useSettings((s) => s.hideDemo);
+  const presentation = useSettings((s) => s.presentationMode);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.toggleAttribute("data-hide-demo", hideDemo);
+    document.documentElement.toggleAttribute("data-presentation", presentation);
+  }, [hideDemo, presentation]);
+
+  return null;
+}
