@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { MapClient } from "@/components/map/MapClient";
+import { UsStatesChoropleth } from "@/components/map/UsStatesChoropleth";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { investments } from "@/data/investments";
 import { liveDelegations } from "@/data/delegations";
@@ -35,6 +36,16 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
         <CardHeader title="Interactive layers" sub="Investments · trade arcs · delegations — click bubbles for details" />
         <CardBody>
           <MapClient />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Карта США по штатам"
+          sub="Choropleth heat-map — переключайте режим: визиты / инвестиции / Council members"
+        />
+        <CardBody>
+          <UsStatesChoropleth />
         </CardBody>
       </Card>
     </div>

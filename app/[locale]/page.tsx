@@ -11,6 +11,7 @@ import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 import { ActivityTimeline } from "@/components/overview/ActivityTimeline";
 import { UpcomingEvents } from "@/components/overview/UpcomingEvents";
 import { AlertsPanel } from "@/components/overview/AlertsPanel";
+import { RiskRadar } from "@/components/overview/RiskRadar";
 
 // Globe3D pulls three.js + globe.gl (~250 kB). Load only on the client to keep
 // Overview's First-Load JS lean.
@@ -129,6 +130,16 @@ export default async function OverviewPage({
           </CardBody>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader
+          title="Сигналы и риски"
+          sub="Live-агрегатор: просроченные поручения · застрявшие соглашения · этапы Штаба · готовность ближайших визитов"
+        />
+        <CardBody>
+          <RiskRadar limit={8} />
+        </CardBody>
+      </Card>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">

@@ -25,6 +25,7 @@ import {
   UserSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { TimezoneClocks } from "./TimezoneClocks";
 
 interface NavItem {
   key: string;
@@ -143,7 +144,11 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="border-t border-[var(--color-border)] px-4 py-3">
+      <div className="border-t border-[var(--color-border)] px-3 py-2">
+        <TimezoneClocks />
+      </div>
+
+      <div className="border-t border-[var(--color-border)] px-4 py-2.5">
         <div className="flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
           <MapPin className="size-3" />
           <span>Tashkent · Presidential Administration</span>

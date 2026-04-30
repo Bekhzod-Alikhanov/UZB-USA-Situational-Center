@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { FreshnessPill } from "./FreshnessPill";
 import { Search } from "lucide-react";
 import { useSearch } from "@/lib/store/search";
 import { useEffect } from "react";
@@ -47,6 +48,7 @@ export function Topbar() {
           <span className="size-1.5 rounded-full bg-[var(--color-pos)]" />
           {t("online")}
         </span>
+        <FreshnessPill />
         <LocaleSwitch />
         <ThemeSwitch />
       </div>

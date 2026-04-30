@@ -6,6 +6,7 @@ import { ChecklistBlock } from "@/components/visit-prep/ChecklistBlock";
 import { PipelinePanel } from "@/components/visit-prep/PipelinePanel";
 import { OutcomesTable } from "@/components/visit-prep/OutcomesTable";
 import { VisitReadinessScorecard } from "@/components/visit-prep/VisitReadinessScorecard";
+import { TMinusTimeline } from "@/components/visit-prep/TMinusTimeline";
 import { VisitDocumentRegistry } from "@/components/visit-prep/VisitDocumentRegistry";
 import { VisitLogisticsMatrix } from "@/components/visit-prep/VisitLogisticsMatrix";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
@@ -64,6 +65,16 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         />
         <CardBody>
           <PipelinePanel />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="T-minus visit timeline"
+          sub="Are we on schedule? — checkpoints derived from visit date and 7-block readiness"
+        />
+        <CardBody>
+          <TMinusTimeline />
         </CardBody>
       </Card>
 
