@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Activity,
   BarChart3,
@@ -114,10 +114,18 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
   const tBrand = useTranslations("brand");
   const tGroups = useTranslations("navGroups");
   const [open, setOpen] = useState(false);
-
-  // Close drawer on route change so the user lands on the new page cleanly.
+  // Track the previous pathname so the drawer closes only when the route
+  // actually changes (not on initial mount). This is "syncing UI to an
+  // external system" (the router) — the canonical use of useEffect.
+  // The lint rule complains because setState-in-effect is a code smell in
+  // most cases, but here it's the correct pattern: we want to react to a
+  // route change owned by the router, not a piece of our own state.
+  const prevPathnameRef = useRef(pathname);
   useEffect(() => {
-    setOpen(false);
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      setOpen(false);
+    }
   }, [pathname]);
 
   const base = `/${locale}`;

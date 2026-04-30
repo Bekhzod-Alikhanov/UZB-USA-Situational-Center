@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import { useLocale } from "next-intl";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { trendTopUsImports, trendTopUsExports, comtradeMeta, type Hs6Trend } from "@/data/comtrade";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
@@ -8,6 +9,60 @@ import { cn } from "@/lib/utils";
 type Direction = "uz-exports" | "us-exports";
 
 const RESIDUAL = new Set(["999999"]);
+
+interface Strings {
+  flow: string;
+  uzToUs: string;
+  usToUz: string;
+  hs6: string;
+  commodity: string;
+  trend: string;
+  cagr: string;
+  latest: string;
+  note: string;
+}
+
+const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
+  en: {
+    flow: "Flow",
+    uzToUs: "UZ exports → US",
+    usToUz: "US exports → UZ",
+    hs6: "HS-6",
+    commodity: "Commodity",
+    trend: "5Y trend",
+    cagr: "CAGR",
+    latest: "Latest",
+    note: "Sparklines cover the years shown. The right-most marker is the latest available year. CAGR is computed from the first non-zero year to the latest; “new” = previously zero shipments. Source: UN Comtrade preview API, US-reporter.",
+  },
+  ru: {
+    flow: "Поток",
+    uzToUs: "Экспорт UZ → US",
+    usToUz: "Экспорт US → UZ",
+    hs6: "HS-6",
+    commodity: "Товар",
+    trend: "5-летняя динамика",
+    cagr: "CAGR",
+    latest: "Последний",
+    note: "Спарклайны охватывают указанные годы. Крайняя правая точка — последний доступный год. CAGR считается от первого ненулевого года; «new» — ранее нулевые отгрузки. Источник: UN Comtrade preview API, US-репортёр.",
+  },
+  "uz-latn": {
+    flow: "Oqim",
+    uzToUs: "UZ eksporti → US",
+    usToUz: "US eksporti → UZ",
+    hs6: "HS-6",
+    commodity: "Tovar",
+    trend: "5-yillik dinamika",
+    cagr: "CAGR",
+    latest: "Oxirgi",
+    note: "Sparkline-lar ko'rsatilgan yillarni qamraydi. O'ng tomondagi nuqta — oxirgi mavjud yil. CAGR birinchi nolga teng bo'lmagan yildan boshlab hisoblanadi; «new» = avval nolinchi yetkazib berishlar.",
+  },
+};
+
+function pickStr(locale: string): Strings {
+  if (locale === "ru") return STR.ru;
+  if (locale === "uz-latn") return STR["uz-latn"];
+  return STR.en;
+}
 
 function shortDesc(s: string, max = 50): string {
   return s.length <= max ? s : s.slice(0, max - 1) + "…";
@@ -66,9 +121,7 @@ function Sparkline({ data, width = 110, height = 28 }: { data: SparklineDatum[];
           stroke={stroke}
           strokeWidth={1}
         >
-          <title>
-            {p.year}: {formatValue(p.value)}
-          </title>
+          <title>{`${p.year}: ${formatValue(p.value)}`}</title>
         </circle>
       ))}
     </svg>
@@ -103,6 +156,8 @@ function Cagr({ trend }: { trend: Hs6Trend }) {
 }
 
 export function ComtradeTrendSparklines() {
+  const locale = useLocale();
+  const T = pickStr(locale);
   const [direction, setDirection] = useState<Direction>("uz-exports");
   const trends = useMemo(() => {
     const src = direction === "uz-exports" ? trendTopUsImports : trendTopUsExports;
@@ -112,11 +167,13 @@ export function ComtradeTrendSparklines() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">Поток:</span>
+        <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+          {T.flow}:
+        </span>
         {(
           [
-            ["uz-exports", "UZ exports → US"],
-            ["us-exports", "US exports → UZ"],
+            ["uz-exports", T.uzToUs],
+            ["us-exports", T.usToUz],
           ] as [Direction, string][]
         ).map(([d, label]) => (
           <button
@@ -143,11 +200,11 @@ export function ComtradeTrendSparklines() {
         <table className="table">
           <thead>
             <tr>
-              <th className="w-20">HS-6</th>
-              <th>Commodity</th>
-              <th className="w-32 text-center">5Y trend</th>
-              <th className="w-20 text-right">CAGR</th>
-              <th className="w-24 text-right">Latest</th>
+              <th className="w-20">{T.hs6}</th>
+              <th>{T.commodity}</th>
+              <th className="w-32 text-center">{T.trend}</th>
+              <th className="w-20 text-right">{T.cagr}</th>
+              <th className="w-24 text-right">{T.latest}</th>
             </tr>
           </thead>
           <tbody>
@@ -178,9 +235,7 @@ export function ComtradeTrendSparklines() {
       </div>
 
       <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-        Sparklines охватывают {comtradeMeta.yearsCovered.join(", ")}. Точки на правом краю — последний доступный год. CAGR
-        считается от первого ненулевого года до последнего; «new» = ранее нулевые отгрузки. Источник: UN Comtrade
-        preview API, US-репортер.
+        {T.note} {comtradeMeta.yearsCovered.join(", ")}.
       </p>
     </div>
   );

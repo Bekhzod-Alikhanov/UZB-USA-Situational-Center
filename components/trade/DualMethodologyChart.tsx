@@ -1,7 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
 import {
-  ResponsiveContainer,
   LineChart,
   Line,
   XAxis,
@@ -12,6 +11,7 @@ import {
 } from "recharts";
 import { tradeAnnualUz, tradeAnnualUs } from "@/data/trade";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { ChartFrame } from "@/components/charts/ChartFrame";
 import { cn } from "@/lib/utils";
 
 type Series = "turnover" | "exports" | "imports" | "balance";
@@ -90,9 +90,9 @@ export function DualMethodologyChart() {
         </div>
       </div>
 
-      <div style={{ width: "100%", height: 320 }}>
-        <ResponsiveContainer>
-          <LineChart data={data} margin={{ top: 8, right: 16, bottom: 4, left: -8 }}>
+      <ChartFrame height={320} className="h-[300px] sm:h-[320px]">
+        {({ width, height }) => (
+          <LineChart width={width} height={height} data={data} margin={{ top: 8, right: 16, bottom: 4, left: -8 }}>
             <CartesianGrid stroke="var(--color-border)" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="year"
@@ -136,8 +136,8 @@ export function DualMethodologyChart() {
               dot={{ r: 2.5, fill: "var(--color-warn)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
             />
           </LineChart>
-        </ResponsiveContainer>
-      </div>
+        )}
+      </ChartFrame>
     </div>
   );
 }

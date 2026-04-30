@@ -1,7 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
 import {
-  ResponsiveContainer,
   ComposedChart,
   Bar,
   Line,
@@ -14,6 +13,7 @@ import {
 } from "recharts";
 import { tradeMonthlyUs, tradeMonthlyMeta } from "@/data/trade";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { ChartFrame } from "@/components/charts/ChartFrame";
 import { cn } from "@/lib/utils";
 
 type Window = "12m" | "24m" | "all";
@@ -106,9 +106,9 @@ export function MonthlyTradeChart() {
         </div>
       </div>
 
-      <div style={{ width: "100%", height: 320 }}>
-        <ResponsiveContainer>
-          <ComposedChart data={data} margin={{ top: 8, right: 16, bottom: 4, left: -8 }}>
+      <ChartFrame height={320} className="h-[300px] sm:h-[320px]">
+        {({ width, height }) => (
+          <ComposedChart width={width} height={height} data={data} margin={{ top: 8, right: 16, bottom: 4, left: -8 }}>
             <CartesianGrid stroke="var(--color-border)" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="label"
@@ -146,8 +146,8 @@ export function MonthlyTradeChart() {
               dot={{ r: 2.5, fill: "var(--color-primary)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
             />
           </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+        )}
+      </ChartFrame>
     </div>
   );
 }

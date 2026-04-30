@@ -1,6 +1,5 @@
 "use client";
 import {
-  ResponsiveContainer,
   BarChart,
   Bar,
   XAxis,
@@ -9,6 +8,7 @@ import {
   Tooltip,
   Cell,
 } from "recharts";
+import { ChartFrame } from "@/components/charts/ChartFrame";
 import {
   foreignAssistanceYears,
   foreignAssistanceFy2024Agencies,
@@ -52,9 +52,9 @@ export function ForeignAssistanceView() {
           <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">
             Total obligations by fiscal year
           </h4>
-          <div style={{ width: "100%", height: 220 }}>
-            <ResponsiveContainer>
-              <BarChart data={yearsData} margin={{ top: 8, right: 8, bottom: 4, left: -8 }}>
+          <ChartFrame height={220} className="h-[200px] sm:h-[220px]">
+            {({ width, height }) => (
+              <BarChart width={width} height={height} data={yearsData} margin={{ top: 8, right: 8, bottom: 4, left: -8 }}>
                 <CartesianGrid stroke="var(--color-border)" strokeDasharray="3 3" vertical={false} />
                 <XAxis
                   dataKey="label"
@@ -88,8 +88,8 @@ export function ForeignAssistanceView() {
                   ))}
                 </Bar>
               </BarChart>
-            </ResponsiveContainer>
-          </div>
+            )}
+          </ChartFrame>
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
             FY2025 bar is preliminary (partial reporting per ForeignAssistance.gov).
           </p>

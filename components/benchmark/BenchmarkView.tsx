@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import {
-  ResponsiveContainer,
   BarChart,
   Bar,
   XAxis,
@@ -15,6 +14,7 @@ import { ArrowDown, ArrowUp, Minus } from "lucide-react";
 import { benchmark, type RegionalMetric } from "@/data/benchmark";
 import { cn } from "@/lib/utils";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
+import { ChartFrame } from "@/components/charts/ChartFrame";
 
 type MetricKey =
   | "gdpUsdBn"
@@ -157,9 +157,9 @@ export function BenchmarkView() {
             </div>
           </div>
         </div>
-        <div style={{ width: "100%", height: 280 }}>
-          <ResponsiveContainer>
-            <BarChart data={chartData} margin={{ top: 22, right: 16, bottom: 4, left: -8 }}>
+        <ChartFrame height={280} className="h-[260px] sm:h-[280px]">
+          {({ width, height }) => (
+            <BarChart width={width} height={height} data={chartData} margin={{ top: 22, right: 16, bottom: 4, left: -8 }}>
               <CartesianGrid stroke="var(--color-border)" strokeDasharray="3 3" vertical={false} />
               <XAxis
                 dataKey="label"
@@ -198,8 +198,8 @@ export function BenchmarkView() {
                 />
               </Bar>
             </BarChart>
-          </ResponsiveContainer>
-        </div>
+          )}
+        </ChartFrame>
       </div>
 
       <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">

@@ -9,6 +9,91 @@ import { agreements, type Agreement } from "@/data/agreements";
 import { visitOutcomes, type VisitOutcome } from "@/data/visit-prep";
 import { cn } from "@/lib/utils";
 
+interface Strings {
+  visit: string;
+  completion: string;
+  outcomes: string;
+  plan: string;
+  actual: string;
+  signedAgreements: string;
+  actionPlan: string;
+  commitment: string;
+  owner: string;
+  progress: string;
+  deadline: string;
+  statusCol: string;
+  noLinks: string;
+  noLinkedRecords: string;
+  verification: string;
+  status: string;
+}
+
+const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
+  en: {
+    visit: "Visit",
+    completion: "Commitment delivery",
+    outcomes: "Outcomes (plan / actual)",
+    plan: "Plan",
+    actual: "Actual",
+    signedAgreements: "Signed agreements",
+    actionPlan: "Action plan · commitments",
+    commitment: "Commitment",
+    owner: "Owner",
+    progress: "Progress",
+    deadline: "Deadline",
+    statusCol: "Status",
+    noLinks: "No visits with linked outcomes / commitments / agreements.",
+    noLinkedRecords:
+      "No linked records. After the visit, the Project Office should add the outcome, action plan and signed-document registry.",
+    verification: "Verification",
+    status: "status",
+  },
+  ru: {
+    visit: "Визит",
+    completion: "Реализация обязательств",
+    outcomes: "Outcomes (план / факт)",
+    plan: "План",
+    actual: "Факт",
+    signedAgreements: "Подписанные соглашения",
+    actionPlan: "Action plan · обязательства",
+    commitment: "Обязательство",
+    owner: "Owner",
+    progress: "Прогресс",
+    deadline: "Срок",
+    statusCol: "Статус",
+    noLinks: "Нет визитов с привязанными outcomes / commitments / agreements.",
+    noLinkedRecords:
+      "Нет связанных записей. После визита Project Office должен внести outcome, action plan и реестр подписанных документов.",
+    verification: "Verification",
+    status: "статус",
+  },
+  "uz-latn": {
+    visit: "Tashrif",
+    completion: "Majburiyatlarni amalga oshirish",
+    outcomes: "Natijalar (reja / haqiqat)",
+    plan: "Reja",
+    actual: "Haqiqat",
+    signedAgreements: "Imzolangan bitimlar",
+    actionPlan: "Action plan · majburiyatlar",
+    commitment: "Majburiyat",
+    owner: "Mas'ul",
+    progress: "Progress",
+    deadline: "Muddat",
+    statusCol: "Holat",
+    noLinks: "Bog'langan outcomes / commitments / agreements bilan tashriflar yo'q.",
+    noLinkedRecords:
+      "Bog'langan yozuvlar yo'q. Tashrifdan keyin Project Office natija va action plan'ni kiritishi kerak.",
+    verification: "Verification",
+    status: "holat",
+  },
+};
+
+function pickStr(locale: string): Strings {
+  if (locale === "ru") return STR.ru;
+  if (locale === "uz-latn") return STR["uz-latn"];
+  return STR.en;
+}
+
 const COMMITMENT_TONE: Record<Commitment["status"], string> = {
   done: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
   progress: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
@@ -84,10 +169,11 @@ export function PostVisitReconciliation() {
     [reconciliations, activeId],
   );
 
+  const T = pickStr(locale);
   if (reconciliations.length === 0) {
     return (
       <div className="rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 text-[12px] text-[var(--color-ink-muted)]">
-        Нет визитов с привязанными outcomes / commitments / agreements.
+        {T.noLinks}
       </div>
     );
   }
@@ -125,6 +211,7 @@ export function PostVisitReconciliation() {
 }
 
 function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: string }) {
+  const T = pickStr(locale);
   const doneCount = r.commitments.filter((c) => c.status === "done").length;
   const overdueCount = r.commitments.filter((c) => c.status === "overdue").length;
   const watchCount = r.commitments.filter((c) => c.status === "watch").length;
@@ -137,7 +224,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <div>
-            <div className="text-[10.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">Визит</div>
+            <div className="text-[10.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.visit}</div>
             <div className="serif text-[15px] font-medium text-[var(--color-ink)]">{r.visit.title}</div>
             <div className="mt-0.5 mono text-[11px] tabular text-[var(--color-ink-muted)]">
               {DATE_FMT.format(new Date(r.visit.date))} · {r.visit.location} ·{" "}
@@ -145,7 +232,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
             </div>
           </div>
           <div className="text-right text-[11px]">
-            <div className="text-[var(--color-ink-muted)]">Реализация обязательств</div>
+            <div className="text-[var(--color-ink-muted)]">{T.completion}</div>
             <div className="mono text-[20px] font-semibold tabular text-[var(--color-pos)]">{completionPct}%</div>
             <div className="text-[10.5px] text-[var(--color-ink-muted)]">
               {doneCount} done · {progressCount} progress · {watchCount} watch · {overdueCount} overdue
@@ -159,7 +246,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
         <div>
           <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
             <Target className="size-3.5" />
-            Outcomes (план / факт)
+            {T.outcomes}
           </div>
           <div className="flex flex-col gap-2">
             {r.outcomes.map((o) => (
@@ -172,13 +259,13 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
                     <div className="grid grid-cols-1 gap-2 text-[12px] sm:grid-cols-2">
                       <div>
                         <div className="text-[10.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-                          План
+                          {T.plan}
                         </div>
                         <div className="text-[var(--color-ink)]">{o.plan}</div>
                       </div>
                       <div>
                         <div className="text-[10.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-                          Факт
+                          {T.actual}
                         </div>
                         <div className="text-[var(--color-ink)]">{o.actual}</div>
                       </div>
@@ -207,7 +294,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
         <div>
           <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
             <FileSignature className="size-3.5" />
-            Подписанные соглашения · {r.signedAgreements.length}
+            {T.signedAgreements} · {r.signedAgreements.length}
           </div>
           <div className="flex flex-col gap-1.5">
             {r.signedAgreements.map((a) => (
@@ -237,17 +324,17 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
         <div>
           <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
             <ListChecks className="size-3.5" />
-            Action plan · обязательства · {r.commitments.length}
+            {T.actionPlan} · {r.commitments.length}
           </div>
           <div className="overflow-x-auto rounded-md border border-[var(--color-border)]">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Обязательство</th>
-                  <th className="w-44">Owner</th>
-                  <th className="w-24 text-right">Прогресс</th>
-                  <th className="w-28">Срок</th>
-                  <th className="w-28">Статус</th>
+                  <th>{T.commitment}</th>
+                  <th className="w-44">{T.owner}</th>
+                  <th className="w-24 text-right">{T.progress}</th>
+                  <th className="w-28">{T.deadline}</th>
+                  <th className="w-28">{T.statusCol}</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,8 +395,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
 
       {r.outcomes.length === 0 && r.signedAgreements.length === 0 && r.commitments.length === 0 ? (
         <div className="rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-3 text-[11.5px] text-[var(--color-ink-muted)]">
-          Нет связанных записей. После визита Project Office должен внести outcome, action plan и реестр
-          подписанных документов.
+          {T.noLinkedRecords}
         </div>
       ) : null}
     </div>

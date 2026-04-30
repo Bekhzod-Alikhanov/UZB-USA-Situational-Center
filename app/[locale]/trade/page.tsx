@@ -231,7 +231,13 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           icon={<Activity className="size-3.5" />}
           tone="invest"
           title="HS-6 5-year sparklines · Comtrade"
-          sub="Динамика топ-10 кодов 2021–2025 + CAGR — выявляет выскакивающие позиции"
+          sub={
+            locale === "ru"
+              ? "Динамика топ-10 кодов 2021–2025 + CAGR — выявляет выскакивающие позиции"
+              : locale === "uz-latn"
+                ? "Top-10 kodlarning 2021–2025 dinamikasi + CAGR — o'sib chiqayotganlarni aniqlaydi"
+                : "Top-10 HS-6 codes 2021–2025 with CAGR — surfaces breakout positions"
+          }
           right={<SourceBadge sourceId="comtrade_hs6" />}
         />
         <CardBody>
@@ -243,8 +249,20 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         <CardHeader
           icon={<Layers className="size-3.5" />}
           tone="visits"
-          title="Структура по главам ТНВЭД · HS-2 treemap"
-          sub="Главы Harmonized System — крупная разбивка торговли по укрупнённым категориям"
+          title={
+            locale === "ru"
+              ? "Структура по главам ТНВЭД · HS-2 treemap"
+              : locale === "uz-latn"
+                ? "HS-2 boblari bo'yicha tuzilma · treemap"
+                : "Trade structure by HS-2 chapters · treemap"
+          }
+          sub={
+            locale === "ru"
+              ? "Главы Harmonized System — крупная разбивка торговли по укрупнённым категориям"
+              : locale === "uz-latn"
+                ? "Harmonized System boblari — savdoning yiriklashtirilgan kategoriyalar bo'yicha taqsimoti"
+                : "Harmonized System chapters — coarse trade decomposition by aggregated categories"
+          }
           right={<SourceBadge sourceId="comtrade_hs6" />}
         />
         <CardBody>

@@ -93,10 +93,17 @@ export function Horizon() {
   const items = useMemo(() => buildHorizon(today), [today]);
   const max = 90;
 
+  const empty =
+    locale === "ru"
+      ? "Нет визитов и событий в горизонте 90 дней."
+      : locale === "uz-latn"
+        ? "90 kunlik gorizontda tashriflar va tadbirlar yo'q."
+        : "No visits or events in the 90-day horizon.";
+
   if (items.length === 0) {
     return (
       <div className="rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-3 text-[12px] text-[var(--color-ink-muted)]">
-        Нет визитов и событий в горизонте 90 дней.
+        {empty}
       </div>
     );
   }

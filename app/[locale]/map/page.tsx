@@ -44,8 +44,20 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
 
       <Card tone="trade">
         <CardHeader
-          title="Карта США по штатам"
-          sub="Choropleth heat-map — переключайте режим: визиты / инвестиции / Council members"
+          title={
+            locale === "ru"
+              ? "Карта США по штатам"
+              : locale === "uz-latn"
+                ? "AQSh shtatlar xaritasi"
+                : "United States by state"
+          }
+          sub={
+            locale === "ru"
+              ? "Choropleth heat-map — переключайте режим: визиты / инвестиции / Council members"
+              : locale === "uz-latn"
+                ? "Choropleth — rejimlarni almashtiring: tashriflar / investitsiyalar / Council a'zolari"
+                : "Choropleth heat-map — switch between modes: visits / investments / Council members"
+          }
         />
         <CardBody>
           <UsStatesChoropleth />

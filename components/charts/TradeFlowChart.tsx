@@ -1,6 +1,5 @@
 "use client";
 import {
-  ResponsiveContainer,
   ComposedChart,
   Area,
   Line,
@@ -11,6 +10,7 @@ import {
   Legend,
 } from "recharts";
 import { tradeAnnual } from "@/data/trade";
+import { ChartFrame } from "./ChartFrame";
 
 export function TradeFlowChart({ height = 300 }: { height?: number }) {
   const data = tradeAnnual.map((y) => ({
@@ -21,9 +21,9 @@ export function TradeFlowChart({ height = 300 }: { height?: number }) {
   }));
 
   return (
-    <div style={{ width: "100%", height }}>
-      <ResponsiveContainer>
-        <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 6, left: -10 }}>
+    <ChartFrame height={height}>
+      {({ width, height: h }) => (
+        <ComposedChart width={width} height={h} data={data} margin={{ top: 10, right: 20, bottom: 6, left: -10 }}>
           <defs>
             <linearGradient id="gExp" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="var(--color-pos)" stopOpacity={0.25} />
@@ -70,7 +70,7 @@ export function TradeFlowChart({ height = 300 }: { height?: number }) {
             dot={{ r: 2.5, fill: "var(--color-ink)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
           />
         </ComposedChart>
-      </ResponsiveContainer>
-    </div>
+      )}
+    </ChartFrame>
   );
 }
