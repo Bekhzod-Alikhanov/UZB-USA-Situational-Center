@@ -27,6 +27,7 @@ const config = [
       "node_modules/**",
       "input/**",
       "_extracted/**",
+      "_design_ref/**",
       "_*.js",
       "_*.ts",
     ],

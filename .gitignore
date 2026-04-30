@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Raw Comtrade JSON pulls (keep processed data/comtrade.ts only)
 input/comtrade/*.json
+
+# Design reference (not deployed)
+_design_ref/

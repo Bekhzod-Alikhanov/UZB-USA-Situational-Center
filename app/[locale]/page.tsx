@@ -4,27 +4,35 @@ import {
   ArrowUpFromLine,
   ArrowDownToLine,
   Scale,
-  FileText,
-  Briefcase,
-  Calendar,
-  Users2,
-  Activity,
   AlertTriangle,
+  Activity,
   CalendarDays,
   Bell,
+  Layers,
+  Trophy,
+  Gift,
+  ShieldCheck,
+  Users2,
 } from "lucide-react";
 import { tradeAnnual, tradeJan2026 } from "@/data/trade";
 import { agreementsAggregate } from "@/data/agreements";
 import { investments, investmentsTotals } from "@/data/investments";
 import { liveDelegations } from "@/data/delegations";
 import { nextAnchorVisit } from "@/data/visits";
+import { grants } from "@/data/grants";
 import { KpiCard } from "@/components/overview/KpiCard";
+import { MicroKpi } from "@/components/overview/MicroKpi";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
+import { TradeFlowEditorial } from "@/components/overview/TradeFlowEditorial";
+import { MonthlyBars } from "@/components/overview/MonthlyBars";
+import { SectorsGrid } from "@/components/overview/SectorsGrid";
+import { CounterpartsRank } from "@/components/overview/CounterpartsRank";
+import { GrantsDonut } from "@/components/overview/GrantsDonut";
+import { Horizon } from "@/components/overview/Horizon";
+import { CompliancePosture } from "@/components/overview/CompliancePosture";
 import { ActivityTimeline } from "@/components/overview/ActivityTimeline";
-import { UpcomingEvents } from "@/components/overview/UpcomingEvents";
-import { AlertsPanel } from "@/components/overview/AlertsPanel";
 import { RiskRadar } from "@/components/overview/RiskRadar";
+import { PrintButton } from "@/components/exports/PrintButton";
 
 export default async function OverviewPage({
   params,
@@ -42,16 +50,50 @@ export default async function OverviewPage({
   const importsDelta = ((y2025.imports - y2024.imports) / y2024.imports) * 100;
 
   const anchor = nextAnchorVisit();
+  const grantsTotal = grants.reduce((a, g) => a + g.valueMusd, 0);
+
+  const dateLabel = new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
 
   return (
-    <div className="flex flex-col gap-7">
-      <div>
-        <h1 className="section-title">{t("title")}</h1>
-        <p className="section-sub">{t("subtitle")}</p>
-      </div>
+    <div className="flex flex-col gap-6">
+      {/* HERO HEADER — daily brief chip + serif title + actions */}
+      <header className="flex items-end justify-between gap-6 pb-1">
+        <div className="min-w-0">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">
+              <span className="size-1 rounded-full bg-[var(--color-primary)]" />
+              {locale === "ru" ? "Ежедневная сводка · " : "Daily brief · "}
+              {dateLabel}
+            </span>
+          </div>
+          <h1 className="serif text-[32px] font-medium leading-[1.05] tracking-tight text-[var(--color-ink)] lg:text-[40px]">
+            {locale === "ru" ? (
+              <>
+                Сотрудничество <span className="text-[var(--color-ink-muted)]">Узбекистан · США</span>
+              </>
+            ) : (
+              <>
+                Cooperation brief · <span className="text-[var(--color-ink-muted)]">UZ · US</span>
+              </>
+            )}
+          </h1>
+          <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-[var(--color-ink-muted)]">
+            {locale === "ru"
+              ? "Утверждено постановлением Президента Ф-4 (17.02.2026). Источники свежие; помеченные значения подлежат уточнению."
+              : "Authorized by Presidential Ordinance Ф-4 (17.02.2026). Sources fresh; flagged values pending replacement."}
+          </p>
+        </div>
+        <div className="hidden shrink-0 flex-col items-end gap-1.5 lg:flex">
+          <PrintButton label={locale === "ru" ? "Экспорт PDF" : "Export PDF"} />
+        </div>
+      </header>
 
-      {/* Hero KPIs — trade flow + balance, big and tone-coded */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      {/* HERO KPI ROW — 4 large tone-coded KPIs */}
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
         <KpiCard
           tone="trade"
           icon={<TrendingUp className="size-4" />}
@@ -62,9 +104,9 @@ export default async function OverviewPage({
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub="2025 full year · UZ Stat"
+          sub="UZ Stat · 2025"
           deltaPct={turnoverDelta}
-          deltaLabel="vs 2024"
+          deltaLabel="vs '24"
           href={`/${locale}/trade`}
         />
         <KpiCard
@@ -77,9 +119,9 @@ export default async function OverviewPage({
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub="Jan 2026: $32K"
+          sub="Jan '26: $32K"
           deltaPct={exportsDelta}
-          deltaLabel="vs 2024"
+          deltaLabel="vs '24"
           href={`/${locale}/trade?direction=exports`}
         />
         <KpiCard
@@ -92,9 +134,9 @@ export default async function OverviewPage({
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub={`Jan 2026: +${tradeJan2026.importsGrowthPct}%`}
+          sub={`Jan '26: +${tradeJan2026.importsGrowthPct}%`}
           deltaPct={importsDelta}
-          deltaLabel="vs 2024"
+          deltaLabel="vs '24"
           href={`/${locale}/trade?direction=imports`}
         />
         <KpiCard
@@ -107,92 +149,193 @@ export default async function OverviewPage({
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub="дефицит расширился"
+          sub={locale === "ru" ? "дефицит расширился" : "deficit widened"}
           delta="neg"
           href={`/${locale}/trade`}
         />
       </div>
 
-      {/* Secondary KPIs — agreements / projects / relations / delegations */}
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <KpiCard
+      {/* MICRO KPI STRIP — 5 secondary metrics */}
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5">
+        <MicroKpi
           tone="agree"
-          icon={<FileText className="size-4" />}
           label={t("kpi.agreements")}
           value={agreementsAggregate.totalDocuments}
           sub={`+${agreementsAggregate.totalInvestAgreements} invest-agreements`}
           href={`/${locale}/agreements`}
         />
-        <KpiCard
+        <MicroKpi
           tone="invest"
-          icon={<Briefcase className="size-4" />}
           label={t("kpi.projects")}
           value={investments.length}
-          sub={`$${(investmentsTotals.totalValueUsdM / 1000).toFixed(1)}B in pipeline`}
-          is_demo
-          source="MIIT + UzInvest"
+          sub={`$${(investmentsTotals.totalValueUsdM / 1000).toFixed(1)}B pipeline`}
           href={`/${locale}/investments`}
         />
-        <KpiCard
+        <MicroKpi
           tone="visits"
-          icon={<Calendar className="size-4" />}
           label={t("kpi.relations")}
-          value="34"
-          sub="years · since 1992-02-19"
+          value="34 yrs"
+          sub="since 1992-02-19"
           href={`/${locale}/visits`}
         />
-        <KpiCard
+        <MicroKpi
           tone="people"
-          icon={<Users2 className="size-4" />}
           label={t("kpi.delegations")}
           value={liveDelegations.length}
-          sub={anchor ? `${t("kpi.nextVisit")}: ${anchor.date}` : undefined}
-          is_demo
-          source="Situational Center internal"
+          sub={anchor ? `next: ${anchor.date}` : undefined}
           href={`/${locale}/visits`}
+        />
+        <MicroKpi
+          tone="rose"
+          label={locale === "ru" ? "Гранты" : "Grants"}
+          value={`$${grantsTotal.toFixed(1)}M`}
+          sub={`${grants.length} programs`}
+          href={`/${locale}/grants`}
         />
       </div>
 
-      {/* Trade flow chart — big single card */}
-      <Card tone="trade">
-        <CardHeader icon={<TrendingUp className="size-3.5" />} tone="trade" title={t("flow")} sub="USD millions · 2017–2025 · UZ State Statistics" />
-        <CardBody>
-          <TradeFlowChart height={320} />
-        </CardBody>
-      </Card>
-
-      {/* Risk radar — full width with rose accent */}
-      <Card tone="rose">
-        <CardHeader
-          icon={<AlertTriangle className="size-3.5" />}
-          tone="rose"
-          title="Сигналы и риски"
-          sub="Live-агрегатор: просроченные поручения · застрявшие соглашения · этапы Штаба · готовность визитов"
-        />
-        <CardBody>
-          <RiskRadar limit={8} />
-        </CardBody>
-      </Card>
-
-      {/* Bottom row — timeline + upcoming + alerts */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <Card tone="visits" className="lg:col-span-2">
-          <CardHeader icon={<Activity className="size-3.5" />} tone="visits" title={t("timeline")} sub="Свежие визиты, события и подписания" />
-          <CardBody>
-            <ActivityTimeline limit={6} />
-          </CardBody>
-        </Card>
-        <div className="flex flex-col gap-6">
-          <Card tone="invest">
-            <CardHeader icon={<CalendarDays className="size-3.5" />} tone="invest" title={t("upcoming")} sub="ближайшие 30 дней" />
+      {/* MAIN GRID — left 1.55fr, right 1fr */}
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.55fr_1fr]">
+        {/* LEFT COLUMN */}
+        <div className="flex min-w-0 flex-col gap-4">
+          <Card tone="trade">
+            <CardHeader
+              icon={<TrendingUp className="size-3.5" />}
+              tone="trade"
+              title={t("flow")}
+              sub="USD M · 2017–2025 · UZ Stat (turnover dashed)"
+            />
             <CardBody>
-              <UpcomingEvents limit={3} />
+              <TradeFlowEditorial height={250} />
             </CardBody>
           </Card>
-          <Card tone="rose">
-            <CardHeader icon={<Bell className="size-3.5" />} tone="rose" title={t("alerts")} sub="Только просрочки и наблюдение" />
+
+          <Card tone="invest">
+            <CardHeader
+              icon={<Layers className="size-3.5" />}
+              tone="invest"
+              title={locale === "ru" ? "Сектора" : "Sectors"}
+              sub={
+                locale === "ru"
+                  ? "8 направлений · агрегировано из investments.ts"
+                  : "8 lanes · aggregated from investments.ts"
+              }
+            />
             <CardBody>
-              <AlertsPanel limit={4} />
+              <SectorsGrid />
+            </CardBody>
+          </Card>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <Card tone="trade">
+              <CardHeader
+                icon={<CalendarDays className="size-3.5" />}
+                tone="trade"
+                title={locale === "ru" ? "Месячные" : "Monthly"}
+                sub={locale === "ru" ? "последние 6 мес. · Census" : "last 6 mo · Census"}
+              />
+              <CardBody>
+                <MonthlyBars height={180} />
+                <div className="mt-3 grid grid-cols-2 gap-2 text-[11px]">
+                  <div className="rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
+                    <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                      Exp Jan &apos;26
+                    </div>
+                    <div className="mono mt-0.5 flex items-baseline gap-1.5 text-[13.5px] font-semibold tabular text-[var(--color-ink)]">
+                      $19.0M
+                      <span className="mono text-[10px] text-[var(--color-pos)]">+19%</span>
+                    </div>
+                  </div>
+                  <div className="rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
+                    <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                      Imp Jan &apos;26
+                    </div>
+                    <div className="mono mt-0.5 flex items-baseline gap-1.5 text-[13.5px] font-semibold tabular text-[var(--color-ink)]">
+                      $7.1M
+                      <span className="mono text-[10px] text-[var(--color-pos)]">+21%</span>
+                    </div>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+
+            <Card tone="people">
+              <CardHeader
+                icon={<Users2 className="size-3.5" />}
+                tone="people"
+                title={locale === "ru" ? "Топ-партнёры США" : "Top US partners"}
+                sub={locale === "ru" ? "по объёму инвестиций" : "by invested volume"}
+              />
+              <CardBody>
+                <CounterpartsRank />
+              </CardBody>
+            </Card>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div className="flex min-w-0 flex-col gap-4">
+          <Card tone="rose">
+            <CardHeader
+              icon={<AlertTriangle className="size-3.5" />}
+              tone="rose"
+              title={locale === "ru" ? "Сигналы и риски" : "Signals & risks"}
+              sub={
+                locale === "ru"
+                  ? "live-агрегатор по 4 реестрам"
+                  : "live aggregator across 4 registries"
+              }
+            />
+            <CardBody>
+              <RiskRadar limit={6} />
+            </CardBody>
+          </Card>
+
+          <Card tone="visits">
+            <CardHeader
+              icon={<CalendarDays className="size-3.5" />}
+              tone="visits"
+              title={locale === "ru" ? "Горизонт 90 дней" : "90-day horizon"}
+              sub={locale === "ru" ? "визиты, события, дедлайны" : "visits, events, deadlines"}
+            />
+            <CardBody>
+              <Horizon />
+            </CardBody>
+          </Card>
+
+          <Card tone="slate">
+            <CardHeader
+              icon={<ShieldCheck className="size-3.5" />}
+              tone="slate"
+              title={locale === "ru" ? "Compliance posture" : "Compliance posture"}
+              sub="OFAC · BIS-EAR · ITAR · GSP · MFN · ECCN"
+            />
+            <CardBody>
+              <CompliancePosture locale={locale} />
+            </CardBody>
+          </Card>
+
+          <Card tone="invest">
+            <CardHeader
+              icon={<Gift className="size-3.5" />}
+              tone="invest"
+              title={locale === "ru" ? "Гранты" : "Grants"}
+              sub={`$${grantsTotal.toFixed(2)}M · ${grants.length} programs`}
+            />
+            <CardBody>
+              <GrantsDonut size={132} />
+            </CardBody>
+          </Card>
+
+          <Card tone="agree">
+            <CardHeader
+              icon={<Activity className="size-3.5" />}
+              tone="agree"
+              title={t("timeline")}
+              sub={locale === "ru" ? "свежие визиты, события, подписания" : "recent visits, events, signings"}
+            />
+            <CardBody>
+              <ActivityTimeline limit={6} />
             </CardBody>
           </Card>
         </div>
