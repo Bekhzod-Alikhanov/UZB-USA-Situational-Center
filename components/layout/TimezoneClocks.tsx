@@ -13,16 +13,11 @@ interface TzCity {
 
 const CITIES: TzCity[] = [
   { label: "Ташкент", tz: "Asia/Tashkent", workStart: 9, workEnd: 18 },
-  // Continental US (5)
+  // Continental US (4 zones)
   { label: "Восточное США (NY/DC)", tz: "America/New_York", workStart: 9, workEnd: 18 },
   { label: "Центральное США (TX/IL)", tz: "America/Chicago", workStart: 9, workEnd: 18 },
   { label: "Горное США (CO/AZ)", tz: "America/Denver", workStart: 9, workEnd: 18 },
   { label: "Тихоокеанское США (CA/WA)", tz: "America/Los_Angeles", workStart: 9, workEnd: 18 },
-  // Non-continental US territories
-  { label: "Аляска", tz: "America/Anchorage", workStart: 9, workEnd: 18 },
-  { label: "Гавайи", tz: "Pacific/Honolulu", workStart: 9, workEnd: 18 },
-  { label: "Самоа США", tz: "Pacific/Pago_Pago", workStart: 9, workEnd: 18 },
-  { label: "Гуам", tz: "Pacific/Guam", workStart: 9, workEnd: 18 },
 ];
 
 function getLocalParts(tz: string, now: Date): { hh: number; mm: number; weekday: number } {
