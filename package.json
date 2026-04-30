@@ -10,8 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.71",
-    "@ai-sdk/react": "^3.0.170",
+    "@ai-sdk/anthropic": "^3.0.73",
+    "@ai-sdk/react": "^3.0.173",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
@@ -38,7 +38,7 @@
     "@visx/sankey": "^3.12.0",
     "@visx/scale": "^3.12.0",
     "@visx/shape": "^3.12.0",
-    "ai": "^6.0.168",
+    "ai": "^6.0.171",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
@@ -46,16 +46,16 @@
     "date-fns": "^4.1.0",
     "fuse.js": "^7.0.0",
     "globe.gl": "^2.33.1",
-    "lucide-react": "^1.11.0",
+    "lucide-react": "^1.14.0",
     "maplibre-gl": "^5.24.0",
     "next": "16.2.4",
-    "next-intl": "^4.9.1",
+    "next-intl": "^4.11.0",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "react-hook-form": "^7.74.0",
     "recharts": "^3.8.1",
     "tailwind-merge": "^3.5.0",
-    "zod": "^4.3.6",
+    "zod": "^4.4.1",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
@@ -68,9 +68,14 @@
     "postcss": "^8.5.12",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "engines": {
     "node": ">=22.0.0 <25.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss@<8.5.10": ">=8.5.10"
+    }
   }
 }
