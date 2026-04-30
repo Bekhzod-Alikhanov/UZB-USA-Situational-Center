@@ -74,8 +74,8 @@ export function UsStatesChoropleth() {
     };
   }, []);
 
-  const projection = useMemo(() => geoAlbersUsa().fitSize([WIDTH, HEIGHT], { type: "Sphere" } as never), []);
-  // Re-fit with actual features once loaded
+  // Build the d3-geo path generator once features are available — AlbersUSA
+  // is fit-to-size against the actual feature collection, not a sphere stub.
   const path = useMemo(() => {
     if (!features || features.length === 0) return null;
     const proj = geoAlbersUsa().fitSize([WIDTH, HEIGHT], {

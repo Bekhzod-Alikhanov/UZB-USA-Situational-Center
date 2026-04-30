@@ -6,7 +6,6 @@ import {
   visitPipelines,
   blockReadinessPct,
   type ScorecardBlock,
-  type VisitScorecard,
 } from "@/data/visit-prep";
 import { cn } from "@/lib/utils";
 

@@ -73,7 +73,7 @@ export function TrademapExhibits() {
   return (
     <>
       <p className="text-[11.5px] text-[var(--color-ink-muted)]">
-        Trade Map's analytical layer goes beyond raw flows. The charts below — exported from the ITC UI — show
+        Trade Map&apos;s analytical layer goes beyond raw flows. The charts below — exported from the ITC UI — show
         the <strong>Export Potential Indicator</strong> (which products have realistic upside) and{" "}
         <strong>Product Diversification</strong> (which entirely new products could be added to the basket).
         Click any thumbnail to open full-size.

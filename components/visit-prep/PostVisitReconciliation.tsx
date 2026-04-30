@@ -76,7 +76,7 @@ function buildReconciliations(): ReconciledVisit[] {
 
 export function PostVisitReconciliation() {
   const locale = useLocale();
-  const reconciliations = useMemo(buildReconciliations, []);
+  const reconciliations = useMemo(() => buildReconciliations(), []);
   const [activeId, setActiveId] = useState<string>(reconciliations[0]?.visit.id ?? "");
 
   const active = useMemo(

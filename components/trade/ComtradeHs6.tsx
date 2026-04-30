@@ -148,7 +148,7 @@ export function ComtradeHs6Top() {
       <p className="text-[10.5px] text-[var(--color-ink-faint)]">
         Source: UN Comtrade preview API · classification {comtradeMeta.classificationCode} · refreshed{" "}
         {comtradeMeta.fetched_at}. US-reporter view used because UZ has not yet published 2025 (typical lag in UZ
-        Comtrade reporting). Residual code 999999 ("not specified") filtered.
+        Comtrade reporting). Residual code 999999 (&ldquo;not specified&rdquo;) filtered.
       </p>
     </div>
   );

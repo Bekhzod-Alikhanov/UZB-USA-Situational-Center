@@ -101,9 +101,8 @@ console.log("Wrote data/trade-services.ts");
 // =====================================================================
 // 2. 2024 deep-view for products (Share %, Growth 5Y %)
 // =====================================================================
-function read2024Deep(filename, reporterCode, partnerCode) {
+function read2024Deep(filename) {
   const rows = readSheet(filename);
-  const header = rows[0];
   // Column layout:
   // ["reporterCd","reporterLabel","partnerCd","partnerLabel","productCd","productLabel","Value","Quantity","Unit Value","Share (%)","Growth Value 5Y (%)","Growth Quantity 5Y (%)"]
   const out = [];
@@ -138,13 +137,9 @@ function read2024Deep(filename, reporterCode, partnerCode) {
 
 const uzExports2024 = read2024Deep(
   "uzbekistans-exports-to-united-states-of-america-in-2024-by-product_all.xlsx",
-  860,
-  842,
 );
 const usExports2024 = read2024Deep(
   "united-states-of-americas-exports-to-uzbekistan-in-2024-by-product_all.xlsx",
-  842,
-  860,
 );
 
 // Filter residual + take top 40 each

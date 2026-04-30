@@ -33,8 +33,8 @@ export function Globe3D({ height = 380 }: { height?: number }) {
       if (cancelled || !ref.current) return;
       const g = new Globe(ref.current)
         .backgroundColor("rgba(0,0,0,0)")
-        .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
-        .bumpImageUrl("//unpkg.com/three-globe/example/img/earth-topology.png")
+        .globeImageUrl("/textures/earth-night.jpg")
+        .bumpImageUrl("/textures/earth-topology.png")
         .showAtmosphere(true)
         .atmosphereColor("#88A9D8")
         .atmosphereAltitude(0.15)

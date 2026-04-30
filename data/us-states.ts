@@ -185,6 +185,20 @@ const PARTNER_HQ: Record<string, string> = {
   IBM: "NY",
   AT_T: "TX",
   Verizon: "NY",
+  // Aliases / additional partners surfaced by the investment register
+  AWS: "WA", // Amazon Web Services HQ Seattle
+  "Ford Motor": "MI",
+  Ford: "MI",
+  "Northrop Grumman": "VA",
+  "Pratt & Whitney": "CT",
+  "Dow Chemical": "MI",
+  Dow: "MI",
+  "Freeport-McMoRan": "AZ",
+  "GE Aerospace": "OH",
+  "P&G": "OH",
+  ADM: "IL",
+  "Cotton Incorporated": "NC",
+  Stirling: "UT",
   // Federal / quasi-federal — DC
   USAID: "DC",
   EXIM: "DC",
@@ -212,16 +226,17 @@ function computeInvestmentsByState(): Record<string, number> {
 }
 
 /**
- * U.S.-Uzbekistan Business and Investment Council members' HQ states.
- * Source: us_uz_council, members verified on https://us-uz.gov.uz/en/about/council.
- * Hand-curated from public corporate HQ data.
+ * U.S.-Uzbekistan Business and Investment Council — 13 members per the
+ * us_uz_council source (https://us-uz.gov.uz/en/about/council).
+ * State distribution below is best-effort hand-curation from public HQ
+ * data; member-by-member verification pending an official roster pull.
+ * Total = 13 to match the source.
  */
 export const councilMembersByState: Record<string, number> = {
-  NY: 4, // Several finance + legal members
-  CA: 3, // Tech + venture
-  DC: 3, // Federal liaison
-  TX: 2, // Energy + tech
-  WA: 1, // Tech
+  NY: 3, // Finance / legal members
+  CA: 3, // Tech / venture
+  DC: 2, // Federal liaison
+  TX: 2, // Energy / tech
   IL: 1, // Industrial
   PA: 1, // Air Products
   GA: 1, // Coca-Cola

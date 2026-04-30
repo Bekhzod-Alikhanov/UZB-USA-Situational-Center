@@ -1,5 +1,4 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import dynamic from "next/dynamic";
 import { tradeAnnual, tradeJan2026 } from "@/data/trade";
 import { agreementsAggregate } from "@/data/agreements";
 import { investments, investmentsTotals } from "@/data/investments";
@@ -12,16 +11,6 @@ import { ActivityTimeline } from "@/components/overview/ActivityTimeline";
 import { UpcomingEvents } from "@/components/overview/UpcomingEvents";
 import { AlertsPanel } from "@/components/overview/AlertsPanel";
 import { RiskRadar } from "@/components/overview/RiskRadar";
-
-// Globe3D pulls three.js + globe.gl (~250 kB). Load only on the client to keep
-// Overview's First-Load JS lean.
-const Globe3D = dynamic(() => import("@/components/overview/Globe3D").then((m) => m.Globe3D), {
-  loading: () => (
-    <div className="flex h-[300px] items-center justify-center rounded-md bg-[var(--color-surface-2)] text-[12px] text-[var(--color-ink-muted)]">
-      Loading globe…
-    </div>
-  ),
-});
 
 export default async function OverviewPage({
   params,
@@ -113,23 +102,15 @@ export default async function OverviewPage({
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
-        <Card className="lg:col-span-3">
-          <CardHeader
-            title={t("flow")}
-            sub="USD millions · 2017–2025"
-          />
-          <CardBody>
-            <TradeFlowChart height={300} />
-          </CardBody>
-        </Card>
-        <Card className="lg:col-span-2">
-          <CardHeader title="UZ ↔ US" sub="3D globe · Tashkent ↔ key US nodes" />
-          <CardBody className="p-2">
-            <Globe3D height={300} />
-          </CardBody>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader
+          title={t("flow")}
+          sub="USD millions · 2017–2025"
+        />
+        <CardBody>
+          <TradeFlowChart height={300} />
+        </CardBody>
+      </Card>
 
       <Card>
         <CardHeader

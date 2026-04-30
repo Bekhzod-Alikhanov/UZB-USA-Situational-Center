@@ -62,10 +62,14 @@ function format(now: Date, tz: string): string {
 }
 
 export function TimezoneClocks() {
-  // Render placeholder server-side; hydrate client-side once mounted
+  // Render placeholder server-side; hydrate client-side once mounted.
+  // We deliberately bootstrap state inside the effect (not in the initializer)
+  // so SSR sees `null` and the client picks up the real time post-hydration —
+  // this is the SSR-safe pattern for live clocks and lint should allow it.
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 30_000);
     return () => clearInterval(id);

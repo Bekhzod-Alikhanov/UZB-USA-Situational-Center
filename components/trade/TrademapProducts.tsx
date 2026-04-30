@@ -180,7 +180,7 @@ export function TrademapProducts() {
       </div>
 
       <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-        Source: ITC Trade Map · 2024 deep-view export. Russian product labels are Trade Map's defaults.
+        Source: ITC Trade Map · 2024 deep-view export. Russian product labels are Trade Map&apos;s defaults.
         5-year growth is compound, calculated by ITC. UZ→US shows top-40 codes (~99% coverage); US→UZ shows
         top-60 codes from a longer tail of diversified flows. Residual code 999999 filtered.
       </p>

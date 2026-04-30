@@ -66,14 +66,20 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
           <Card>
             <CardHeader title={t("import")} sub="Bulk upload updated data" />
             <CardBody>
-              <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-[var(--color-border-strong)] bg-[var(--color-surface)] p-6 text-center transition hover:bg-[var(--color-surface-2)]">
-                <Upload className="size-5 text-[var(--color-ink-muted)]" />
-                <span className="text-[12.5px] font-medium text-[var(--color-ink)]">Drop CSV or XLSX</span>
-                <span className="text-[11px] text-[var(--color-ink-muted)]">or click to select</span>
-                <input type="file" accept=".csv,.xlsx" className="hidden" />
-              </label>
+              <div
+                title="Backend pending — public dashboard reads bundled data/*.ts; live ingest requires the operational system"
+                aria-disabled
+                className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-6 text-center opacity-60"
+              >
+                <Upload className="size-5 text-[var(--color-ink-faint)]" />
+                <span className="text-[12.5px] font-medium text-[var(--color-ink-muted)]">Drop CSV or XLSX</span>
+                <span className="rounded-full border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--color-warn)]">
+                  Backend pending
+                </span>
+              </div>
               <div className="mt-2 text-[10.5px] text-[var(--color-ink-muted)]">
-                Validates against the target schema · preview before applying
+                Public dashboard reads bundled <code className="mono">data/*.ts</code> at build time. Live data
+                ingest will live in the operational system with auth + audit, not this repo.
               </div>
             </CardBody>
           </Card>
@@ -82,8 +88,8 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
             <CardHeader title={t("users")} sub="Situational Center staff roster" />
             <CardBody>
               <ul className="flex flex-col gap-1.5 text-[12.5px]">
-                <UserRow name="B. Umurzakov" role="Head, Situational Center" active />
-                <UserRow name="K. Abdukodirov" role="Deputy" active />
+                <UserRow name="E. Umurzakov" role="Head, Situational Center" active />
+                <UserRow name="A. Abdukodirov" role="Deputy" active />
                 <UserRow name="Analyst 1" role="Trade + investments" active />
                 <UserRow name="Analyst 2" role="Visits + commitments" active />
                 <UserRow name="Analyst 3" role="Compliance + counterparts" />
@@ -91,10 +97,12 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
               </ul>
               <button
                 type="button"
-                className="mt-3 flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[11.5px] text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
+                disabled
+                title="Backend pending — user management will live in the operational system, not the public dashboard"
+                className="mt-3 flex items-center gap-1.5 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-2.5 py-1 text-[11.5px] text-[var(--color-ink-faint)] cursor-not-allowed"
               >
                 <UsersIcon className="size-3" />
-                Manage users
+                Manage users · backend pending
               </button>
             </CardBody>
           </Card>
