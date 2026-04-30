@@ -5,6 +5,9 @@ import { OptimizationPanel } from "@/components/visit-prep/OptimizationPanel";
 import { ChecklistBlock } from "@/components/visit-prep/ChecklistBlock";
 import { PipelinePanel } from "@/components/visit-prep/PipelinePanel";
 import { OutcomesTable } from "@/components/visit-prep/OutcomesTable";
+import { VisitReadinessScorecard } from "@/components/visit-prep/VisitReadinessScorecard";
+import { VisitDocumentRegistry } from "@/components/visit-prep/VisitDocumentRegistry";
+import { VisitLogisticsMatrix } from "@/components/visit-prep/VisitLogisticsMatrix";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { nextAnchorVisit } from "@/data/visits";
 import { visitPipelines, visitOutcomes } from "@/data/visit-prep";
@@ -61,6 +64,36 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         />
         <CardBody>
           <PipelinePanel />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="7-block readiness scorecard"
+          sub="Status tracking only — content lives in the operational system, not here"
+        />
+        <CardBody>
+          <VisitReadinessScorecard />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Document registry"
+          sub="Titles, owners, statuses, due dates — never the document body"
+        />
+        <CardBody>
+          <VisitDocumentRegistry />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Logistics readiness matrix"
+          sub="Booking statuses and coverage counts — no PNRs, no PII, no booking codes"
+        />
+        <CardBody>
+          <VisitLogisticsMatrix />
         </CardBody>
       </Card>
 

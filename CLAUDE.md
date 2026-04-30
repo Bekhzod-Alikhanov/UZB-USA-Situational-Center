@@ -59,6 +59,7 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 6. **Suspense around `useSearchParams`.** Any client component using `useSearchParams` must be wrapped in `<Suspense>` at the page level, otherwise SSG bails out at build (`/commitments` is the canonical example).
 7. **Print exports.** Use `<PrintButton />` + `@media print` CSS in `globals.css`. The print block force-overrides dark-mode tokens to light values so PDFs are always clean. Do not introduce a separate PDF library — `window.print()` covers all current cases.
 8. **AI gating.** `/api/chat` returns 503 if `ANTHROPIC_API_KEY` is unset. The client (`AssistantChat.tsx`) also checks `useSettings.aiEnabled` and shows a disabled state. Never call the AI route without both gates passing.
+9. **PII / operational-content boundary (visit-prep).** The dashboard tracks **status only** for visit preparation: percentage complete, owner role-slots, due dates, document titles, booking statuses, coverage counts. It NEVER contains: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, financial estimates, individual delegate names, personal contact details. That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, that's a security regression — reject the PR.
 
 ## Common operations
 

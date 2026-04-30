@@ -24,6 +24,9 @@ Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry m
 | Compliance | CAATSA exposure rating | `data/compliance.ts:ofac-caatsa` | MFA + Treasury (open source) | pending |
 | Visit prep — pipelines | 3 upcoming visits with readiness scores | `data/visit-prep.ts:visitPipelines` | Situational Center internal | pending |
 | Visit prep — roadmaps | 3 cross-visit cooperation roadmaps | `data/visit-prep.ts:visitRoadmaps` | Situational Center internal | pending |
+| Visit prep — 7-block scorecards | 3 visits × 7 blocks of status-only readiness items | `data/visit-prep.ts:visitScorecards` | Situational Center Project Office | pending |
+| Visit prep — document registries | 3 visits × document titles + status (no content) | `data/visit-prep.ts:visitDocumentRegistries` | Situational Center Strategic Analysis | pending |
+| Visit prep — logistics matrices | 3 visits × 6 logistics rows × booking-status only | `data/visit-prep.ts:visitLogistics` | Situational Center Protocol Office | pending |
 
 ## No longer demo after the Tier-B pass (2026-04-26)
 
