@@ -7,6 +7,7 @@ import { PipelinePanel } from "@/components/visit-prep/PipelinePanel";
 import { OutcomesTable } from "@/components/visit-prep/OutcomesTable";
 import { VisitReadinessScorecard } from "@/components/visit-prep/VisitReadinessScorecard";
 import { TMinusTimeline } from "@/components/visit-prep/TMinusTimeline";
+import { PostVisitReconciliation } from "@/components/visit-prep/PostVisitReconciliation";
 import { VisitDocumentRegistry } from "@/components/visit-prep/VisitDocumentRegistry";
 import { VisitLogisticsMatrix } from "@/components/visit-prep/VisitLogisticsMatrix";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
@@ -122,6 +123,16 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         />
         <CardBody className="p-0">
           <OutcomesTable />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Post-visit reconciliation"
+          sub="По каждому визиту — связанные outcomes, подписанные соглашения, action plan и его реализация"
+        />
+        <CardBody>
+          <PostVisitReconciliation />
         </CardBody>
       </Card>
 

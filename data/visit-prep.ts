@@ -49,6 +49,8 @@ export interface VisitPipeline {
 export interface VisitOutcome {
   id: string;
   visit: string;
+  /** Reference into `data/visits.ts` (Visit.id) when the outcome maps to a tracked visit. */
+  visitId?: string;
   date: string;
   plan: string;
   actual: string;
@@ -176,6 +178,7 @@ export const visitOutcomes: VisitOutcome[] = [
   {
     id: "outcome-washington-2026-04",
     visit: "Washington, April 2026",
+    visitId: "v-2026-04-upcoming-council",
     date: "2026-04-06",
     plan: "Council launch · 4 B2G meetings · 1 signed framework",
     actual: "Council launched · 5 meetings · DFC framework intent received",
@@ -188,6 +191,7 @@ export const visitOutcomes: VisitOutcome[] = [
   {
     id: "outcome-washington-2026-02",
     visit: "Washington, February 2026 (Critical Minerals)",
+    visitId: "v-2026-02-04-minerals",
     date: "2026-02-04",
     plan: "Critical Minerals MOU signed · supply-chain framework agreed",
     actual: "MOU signed; investment-platform agreement exchanged at SPD",
@@ -200,6 +204,7 @@ export const visitOutcomes: VisitOutcome[] = [
   {
     id: "outcome-washington-2025-11",
     visit: "Washington C5+1, November 2025",
+    visitId: "v-2025-11-c5-1",
     date: "2025-11-06",
     plan: "Bilateral with President Trump · Council agreement · Kennedy Center business conference",
     actual: "Bilateral held · Council agreement reached · 2 statements of intent",
@@ -224,6 +229,7 @@ export const visitOutcomes: VisitOutcome[] = [
   {
     id: "outcome-saidov-us-2025",
     visit: "FM Saidov — Washington, April 2025",
+    visitId: "v-2025-04-saidov",
     date: "2025-04-08",
     plan: "Meetings with Secretary Rubio and NSA Waltz",
     actual: "Both meetings held · diplomatic coordination calendar set",

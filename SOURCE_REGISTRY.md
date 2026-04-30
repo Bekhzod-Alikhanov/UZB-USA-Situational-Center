@@ -2,7 +2,7 @@
 
 Master list of every source backing values in this dashboard. Every datum in `data/*.ts` should carry a `sourceId` referencing this registry. Authoritative copy lives in `data/sources.ts`.
 
-**Last refresh:** 2026-04-29 · **Sources:** 51 (11 Level A inputs · 40 Level B open URLs)
+**Last refresh:** 2026-04-29 · **Sources:** 54 (11 Level A inputs · 43 Level B open URLs)
 
 ## Levels
 
@@ -64,6 +64,9 @@ Master list of every source backing values in this dashboard. Every datum in `da
 | `gpd_protocol_2026` | A | Civil-law contract Annex 1 — Protocol on stages and deadlines (15.04.2026) | (internal — Agency for Strategic Development and Reforms) | 12 monthly Center deliverables |
 | `comtrade_hs6` | B | UN Comtrade — HS-6 bilateral preview API | https://comtradeapi.un.org/public/v1/preview/C/A/HS | UZ↔US HS-6 commodity flows 2021–2025, both reporters |
 | `trademap_itc` | B | ITC Trade Map — bilateral products + EBOPS services + analytical exhibits | https://www.trademap.org/ | 2024 deep view (Share %, 5Y growth), EBOPS 2010 services, EPI/Diversification charts |
+| `lex_uz_treaties_law_2019` | B | Law ЗРУ-518 (06.02.2019) — On International Treaties | https://lex.uz/ru/docs/4193763 | Procedural base for ratifying US-UZ MOUs and agreements |
+| `lex_uz_investment_law_2019` | B | Law ЗРУ-598 (25.12.2019) — On Investments | https://lex.uz/ru/docs/4664144 | Domestic legal base for U.S. investors operating in Uzbekistan |
+| `lex_uz_strategy_2030` | B | Decree УП-158 (11.09.2023) — Strategy «Uzbekistan — 2030» | https://lex.uz/ru/docs/6600404 | National strategy naming the U.S. as priority partner |
 
 ## Notes
 

@@ -7,6 +7,8 @@ import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
 import { MonthlyTradeChart } from "@/components/trade/MonthlyTradeChart";
 import { ComtradeHs6Top } from "@/components/trade/ComtradeHs6";
 import { ComtradeMirror } from "@/components/trade/ComtradeMirror";
+import { ComtradeTrendSparklines } from "@/components/trade/ComtradeTrendSparklines";
+import { Hs2ChapterTreemap } from "@/components/trade/Hs2ChapterTreemap";
 import { TrademapProducts } from "@/components/trade/TrademapProducts";
 import { ServicesEbops } from "@/components/trade/ServicesEbops";
 import { TrademapExhibits } from "@/components/trade/TrademapExhibits";
@@ -189,6 +191,28 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         />
         <CardBody>
           <ComtradeMirror />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="HS-6 5-year sparklines · Comtrade"
+          sub="Динамика топ-10 кодов 2021–2025 + CAGR — выявляет выскакивающие позиции"
+          right={<SourceBadge sourceId="comtrade_hs6" />}
+        />
+        <CardBody>
+          <ComtradeTrendSparklines />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Структура по главам ТНВЭД · HS-2 treemap"
+          sub="Главы Harmonized System — крупная разбивка торговли по укрупнённым категориям"
+          right={<SourceBadge sourceId="comtrade_hs6" />}
+        />
+        <CardBody>
+          <Hs2ChapterTreemap />
         </CardBody>
       </Card>
 
