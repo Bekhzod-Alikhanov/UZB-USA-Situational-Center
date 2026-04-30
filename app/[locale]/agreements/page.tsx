@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { BarChart3, Library } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { AgreementsTable } from "@/components/agreements/AgreementsTable";
 import { AgreementsStats } from "@/components/agreements/AgreementsStats";
@@ -23,16 +24,16 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
         </div>
       </div>
 
-      <Card>
-        <CardHeader title="Aggregate" sub="By category and year" />
+      <Card tone="agree">
+        <CardHeader icon={<BarChart3 className="size-3.5" />} tone="agree" title="Aggregate" sub="By category and year" />
         <CardBody className="flex flex-col gap-8">
           <AgreementsStats />
           <AgreementsTimeline />
         </CardBody>
       </Card>
 
-      <Card>
-        <CardHeader title="Registry" sub="Filter by category, sphere, search by title" />
+      <Card tone="agree">
+        <CardHeader icon={<Library className="size-3.5" />} tone="agree" title="Registry" sub="Filter by category, sphere, search by title" />
         <CardBody>
           <AgreementsTable />
         </CardBody>

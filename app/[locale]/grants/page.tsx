@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Gift, Banknote } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Stat } from "@/components/ui/Stat";
 import { GrantsView } from "@/components/grants/GrantsView";
@@ -31,8 +32,10 @@ export default async function GrantsPage({
         </div>
       </div>
 
-      <Card>
+      <Card tone="invest">
         <CardHeader
+          icon={<Gift className="size-3.5" />}
+          tone="invest"
           title="Active grants"
           sub="Source: Internal report — Grants to the Republic of Uzbekistan as of 07.01.2026"
           right={<SourceBadge sourceId="input_grants_xlsx" />}
@@ -42,8 +45,10 @@ export default async function GrantsPage({
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="trade">
         <CardHeader
+          icon={<Banknote className="size-3.5" />}
+          tone="trade"
           title="U.S. foreign assistance · ForeignAssistance.gov accounting"
           sub="Country-level obligations by fiscal year, agency, and category — independent of the UZ-side internal grants register"
           right={<SourceBadge sourceId="foreign_assistance_gov" />}

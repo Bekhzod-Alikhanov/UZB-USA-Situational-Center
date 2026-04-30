@@ -23,9 +23,9 @@ export function Topbar() {
   }, [setSearchOpen]);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-[var(--color-border)] bg-[var(--color-surface)]/90 px-6 backdrop-blur">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_88%,transparent)] px-6 backdrop-blur-md">
       <div className="min-w-0 flex-1">
-        <div className="truncate serif text-[15px] font-medium text-[var(--color-ink)]">
+        <div className="truncate serif text-[16px] font-semibold tracking-tight text-[var(--color-ink)]">
           {t("title")}
         </div>
         <div className="truncate text-[11px] text-[var(--color-ink-muted)]">{t("sub")}</div>

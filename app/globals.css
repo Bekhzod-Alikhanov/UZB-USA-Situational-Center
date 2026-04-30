@@ -29,6 +29,23 @@
   --color-demo-bg: #eeeeee;
   --color-demo-ink: #555555;
 
+  /* Domain accents — used for sector-coded badges, KPI icon chips,
+     and gradient strips on cards. Each has a base + a soft tint. */
+  --color-trade: #2563eb;        /* sapphire — trade & finance */
+  --color-trade-soft: #dde7fb;
+  --color-visits: #7c3aed;       /* violet — visits & diplomacy */
+  --color-visits-soft: #ece1fc;
+  --color-invest: #059669;       /* emerald — investments */
+  --color-invest-soft: #dcf3ea;
+  --color-agree: #d97706;        /* amber — agreements & legal */
+  --color-agree-soft: #fbe9d3;
+  --color-people: #0891b2;       /* cyan — people / contacts / staff */
+  --color-people-soft: #d6edf2;
+  --color-rose: #e11d48;         /* rose — alerts / risks */
+  --color-rose-soft: #fbdfe5;
+  --color-slate: #475569;        /* slate — compliance / governance */
+  --color-slate-soft: #e3e8ef;
+
   --color-dark-bg: #0f1115;
   --color-dark-surface: #161a22;
   --color-dark-border: #272b34;
@@ -41,7 +58,9 @@
   --radius-xl: 16px;
 
   --shadow-card: 0 1px 2px rgba(26, 26, 26, 0.04), 0 1px 0 rgba(26, 26, 26, 0.02);
-  --shadow-hover: 0 2px 6px rgba(26, 26, 26, 0.08), 0 1px 2px rgba(26, 26, 26, 0.04);
+  --shadow-hover: 0 8px 24px rgba(26, 26, 26, 0.08), 0 2px 6px rgba(26, 26, 26, 0.04);
+  --shadow-glow-primary: 0 0 0 4px color-mix(in oklab, var(--color-primary) 14%, transparent);
+  --shadow-card-elevated: 0 4px 12px rgba(26, 26, 26, 0.06), 0 1px 3px rgba(26, 26, 26, 0.04);
 }
 
 @layer base {
@@ -77,8 +96,25 @@
     --color-demo-bg: #23262e;
     --color-demo-ink: #bcbcbc;
 
+    /* Domain accents — slightly desaturated for dark mode */
+    --color-trade: #5b89ec;
+    --color-trade-soft: #1a2440;
+    --color-visits: #a78bfa;
+    --color-visits-soft: #2a1f44;
+    --color-invest: #34d399;
+    --color-invest-soft: #0e2c24;
+    --color-agree: #f59e0b;
+    --color-agree-soft: #3a2c12;
+    --color-people: #22d3ee;
+    --color-people-soft: #0f2d34;
+    --color-rose: #f472b6;
+    --color-rose-soft: #3a1d28;
+    --color-slate: #94a3b8;
+    --color-slate-soft: #1e242e;
+
     --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(0, 0, 0, 0.2);
-    --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.4);
+    --shadow-card-elevated: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
   /* Lower noise opacity on dark — full 0.03 muddies already-dark surfaces */
@@ -123,25 +159,106 @@
 
 @layer components {
   .kpi-card {
-    @apply relative overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5;
+    @apply relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      border-color 0.18s ease;
   }
+  .kpi-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+  }
+  /* The colored top strip on every KPI card. Tone is set via inline
+     style with --kpi-tone (a base color) so consumers can pass any
+     domain accent without hard-coding new classes. */
+  .kpi-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--kpi-tone, var(--color-primary)),
+      color-mix(in oklab, var(--kpi-tone, var(--color-primary)) 60%, white)
+    );
+    opacity: 0.95;
+  }
+  /* Soft ambient gradient in the corner — adds depth without noise */
+  .kpi-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 180px;
+    height: 180px;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at top right,
+      color-mix(in oklab, var(--kpi-tone, var(--color-primary)) 10%, transparent),
+      transparent 70%
+    );
+  }
+  .kpi-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .card {
-    @apply rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)];
+    @apply rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)];
+    box-shadow: var(--shadow-card);
   }
   .card-header {
-    @apply flex items-center justify-between gap-3 border-b border-[var(--color-border)] px-5 py-3;
+    @apply flex items-center justify-between gap-3 border-b border-[var(--color-border)] px-5 py-3.5;
   }
   .card-body {
     @apply p-5;
   }
   .stat-label {
-    @apply text-[11px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)];
+    @apply text-[10.5px] font-semibold uppercase tracking-[0.08em] text-[var(--color-ink-muted)];
   }
   .stat-value {
-    @apply serif tabular text-[32px] font-semibold leading-none tracking-tight text-[var(--color-ink)];
+    @apply serif tabular text-[40px] font-semibold leading-[1.05] tracking-tight text-[var(--color-ink)];
   }
   .stat-sub {
-    @apply text-xs text-[var(--color-ink-muted)];
+    @apply text-[11.5px] text-[var(--color-ink-muted)];
+  }
+  /* Tone-coloured icon chip used in KPI cards and section headers.
+     Set --chip-tone inline (a domain accent like var(--color-trade)). */
+  .icon-chip {
+    @apply inline-flex size-9 items-center justify-center rounded-lg;
+    background: color-mix(in oklab, var(--chip-tone, var(--color-primary)) 14%, transparent);
+    color: var(--chip-tone, var(--color-primary));
+    border: 1px solid color-mix(in oklab, var(--chip-tone, var(--color-primary)) 22%, transparent);
+  }
+  .icon-chip-sm {
+    @apply inline-flex size-7 items-center justify-center rounded-md;
+    background: color-mix(in oklab, var(--chip-tone, var(--color-primary)) 14%, transparent);
+    color: var(--chip-tone, var(--color-primary));
+    border: 1px solid color-mix(in oklab, var(--chip-tone, var(--color-primary)) 22%, transparent);
+  }
+  .icon-chip-lg {
+    @apply inline-flex size-11 items-center justify-center rounded-xl;
+    background: color-mix(in oklab, var(--chip-tone, var(--color-primary)) 16%, transparent);
+    color: var(--chip-tone, var(--color-primary));
+    border: 1px solid color-mix(in oklab, var(--chip-tone, var(--color-primary)) 24%, transparent);
+  }
+  /* Stronger delta pill used on KPIs */
+  .delta-pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11.5px] font-semibold tabular;
+  }
+  .delta-pill-pos {
+    background: color-mix(in oklab, var(--color-pos) 16%, transparent);
+    color: var(--color-pos);
+  }
+  .delta-pill-neg {
+    background: color-mix(in oklab, var(--color-neg) 16%, transparent);
+    color: var(--color-neg);
+  }
+  .delta-pill-neu {
+    background: var(--color-surface-2);
+    color: var(--color-ink-muted);
   }
   .pill {
     @apply inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-xs font-medium text-[var(--color-ink-muted)];

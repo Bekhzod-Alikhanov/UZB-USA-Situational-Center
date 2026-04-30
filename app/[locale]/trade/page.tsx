@@ -1,4 +1,20 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  Table2,
+  GitCompareArrows,
+  TrendingUp,
+  CalendarRange,
+  ArrowUpFromLine,
+  ArrowDownToLine,
+  ListOrdered,
+  Layers,
+  GitFork,
+  Rocket,
+  Headphones,
+  ImageIcon,
+  Activity,
+  ScrollText,
+} from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 import { TradeTable } from "@/components/trade/TradeTable";
@@ -40,8 +56,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </div>
       </div>
 
-      <Card>
+      <Card tone="trade">
         <CardHeader
+          icon={<Table2 className="size-3.5" />}
+          tone="trade"
           title="Annual summary"
           sub="All figures USD millions · State Statistics Committee of Uzbekistan"
           right={<SourceBadge sourceId="input_trade_stat_docx" />}
@@ -52,8 +70,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       </Card>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+        <Card tone="slate" className="lg:col-span-2">
           <CardHeader
+            icon={<GitCompareArrows className="size-3.5" />}
+            tone="slate"
             title="Dual methodology · UZ Stat ↔ U.S. Census"
             sub="Same flow, different rules — mirror discrepancy is real and useful"
           />
@@ -61,16 +81,18 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
             <DualMethodologyChart />
           </CardBody>
         </Card>
-        <Card>
-          <CardHeader title="Methodology notes" sub="Which series to quote when" />
+        <Card tone="agree">
+          <CardHeader icon={<ScrollText className="size-3.5" />} tone="agree" title="Methodology notes" sub="Which series to quote when" />
           <CardBody>
             <MethodologyNotesCard />
           </CardBody>
         </Card>
       </div>
 
-      <Card>
+      <Card tone="trade">
         <CardHeader
+          icon={<TrendingUp className="size-3.5" />}
+          tone="trade"
           title="Trade flow 2017–2025"
           sub="Turnover, exports, imports — UZ-side methodology"
           right={<SourceBadge sourceId="input_trade_stat_docx" />}
@@ -80,8 +102,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="trade">
         <CardHeader
+          icon={<CalendarRange className="size-3.5" />}
+          tone="trade"
           title="Monthly merchandise trade · U.S. Census"
           sub="Bars: U.S. exports / imports · Line: net balance — last 26 months"
           right={<SourceBadge sourceId="census_goods_uz" />}
@@ -92,14 +116,14 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       </Card>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader title={t("structure.export")} sub="USD millions, 2025" />
+        <Card tone="invest">
+          <CardHeader icon={<ArrowUpFromLine className="size-3.5" />} tone="invest" title={t("structure.export")} sub="USD millions, 2025" />
           <CardBody>
             <StructureTreemap items={exportStructure2025} height={300} />
           </CardBody>
         </Card>
-        <Card>
-          <CardHeader title={t("structure.import")} sub="USD millions, 2025" />
+        <Card tone="agree">
+          <CardHeader icon={<ArrowDownToLine className="size-3.5" />} tone="agree" title={t("structure.import")} sub="USD millions, 2025" />
           <CardBody>
             <StructureTreemap items={importStructure2025} height={300} />
           </CardBody>
@@ -107,8 +131,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <Card>
+        <Card tone="invest">
           <CardHeader
+            icon={<ListOrdered className="size-3.5" />}
+            tone="invest"
             title="Top UZ export categories to U.S."
             sub="USD millions · 2025 · State Statistics Committee structure"
             right={<SourceBadge sourceId="input_trade_stat_docx" />}
@@ -139,8 +165,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           </CardBody>
         </Card>
 
-        <Card>
+        <Card tone="agree">
           <CardHeader
+            icon={<ListOrdered className="size-3.5" />}
+            tone="agree"
             title="Top UZ import categories from U.S."
             sub="USD millions · 2025 · State Statistics Committee structure"
             right={<SourceBadge sourceId="input_trade_stat_docx" />}
@@ -172,8 +200,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </Card>
       </div>
 
-      <Card>
+      <Card tone="people">
         <CardHeader
+          icon={<Layers className="size-3.5" />}
+          tone="people"
           title="HS-6 commodity structure · UN Comtrade"
           sub="Top-25 product codes for UZ↔US bilateral trade — granular detail beyond StatCom HS-2"
           right={<SourceBadge sourceId="comtrade_hs6" />}
@@ -183,8 +213,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="rose">
         <CardHeader
+          icon={<GitFork className="size-3.5" />}
+          tone="rose"
           title="Mirror discrepancy · UZ-reporter vs US-reporter"
           sub="2024 · same flow seen from both sides at HS-6 level — top-20 by absolute gap"
           right={<SourceBadge sourceId="comtrade_hs6" />}
@@ -194,8 +226,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="invest">
         <CardHeader
+          icon={<Activity className="size-3.5" />}
+          tone="invest"
           title="HS-6 5-year sparklines · Comtrade"
           sub="Динамика топ-10 кодов 2021–2025 + CAGR — выявляет выскакивающие позиции"
           right={<SourceBadge sourceId="comtrade_hs6" />}
@@ -205,8 +239,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="visits">
         <CardHeader
+          icon={<Layers className="size-3.5" />}
+          tone="visits"
           title="Структура по главам ТНВЭД · HS-2 treemap"
           sub="Главы Harmonized System — крупная разбивка торговли по укрупнённым категориям"
           right={<SourceBadge sourceId="comtrade_hs6" />}
@@ -216,8 +252,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="invest">
         <CardHeader
+          icon={<Rocket className="size-3.5" />}
+          tone="invest"
           title="ITC Trade Map · 2024 deep view with momentum"
           sub="HS-6 with pre-computed Share % and 5-year compound growth — sortable by value, share, or growth"
           right={<SourceBadge sourceId="trademap_itc" />}
@@ -227,8 +265,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="people">
         <CardHeader
+          icon={<Headphones className="size-3.5" />}
+          tone="people"
           title="Services trade · EBOPS 2010 / BPM6"
           sub="UZ-reported services exports to the U.S. — what Comtrade cannot show"
           right={<SourceBadge sourceId="trademap_itc" />}
@@ -238,8 +278,10 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="agree">
         <CardHeader
+          icon={<ImageIcon className="size-3.5" />}
+          tone="agree"
           title="ITC analytical exhibits · export potential & diversification"
           sub="Trade Map's EPI and Diversification Indicator outputs — strategic prioritization views"
           right={<SourceBadge sourceId="trademap_itc" />}

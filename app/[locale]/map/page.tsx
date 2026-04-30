@@ -32,14 +32,17 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
         <MiniStat label="Delegations in transit" value={`${activeDeleg}`} sub={`${liveDelegations.length} total live`} />
       </div>
 
-      <Card>
-        <CardHeader title="Interactive layers" sub="Investments · trade arcs · delegations — click bubbles for details" />
+      <Card tone="people">
+        <CardHeader
+          title="Interactive layers"
+          sub="Investments · trade arcs · delegations — click bubbles for details"
+        />
         <CardBody>
           <MapClient />
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="trade">
         <CardHeader
           title="Карта США по штатам"
           sub="Choropleth heat-map — переключайте режим: визиты / инвестиции / Council members"

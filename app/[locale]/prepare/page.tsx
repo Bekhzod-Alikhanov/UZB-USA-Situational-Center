@@ -1,4 +1,16 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  Plane,
+  Layout,
+  Workflow,
+  Target,
+  Lightbulb,
+  CheckSquare,
+  Hourglass,
+  FileText,
+  Truck,
+  Repeat,
+} from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { KanbanBoard } from "@/components/visit-prep/KanbanBoard";
 import { OptimizationPanel } from "@/components/visit-prep/OptimizationPanel";
@@ -59,8 +71,10 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </Card>
       ) : null}
 
-      <Card>
+      <Card tone="visits">
         <CardHeader
+          icon={<Plane className="size-3.5" />}
+          tone="visits"
           title="Pipeline"
           sub={`${visitPipelines.length} upcoming visits with readiness scores · linked roadmaps below`}
         />
@@ -69,8 +83,10 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="rose">
         <CardHeader
+          icon={<Hourglass className="size-3.5" />}
+          tone="rose"
           title="T-minus visit timeline"
           sub="Are we on schedule? — checkpoints derived from visit date and 7-block readiness"
         />
@@ -79,8 +95,10 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="primary">
         <CardHeader
+          icon={<Layout className="size-3.5" />}
+          tone="primary"
           title="7-block readiness scorecard"
           sub="Status tracking only — content lives in the operational system, not here"
         />
@@ -89,8 +107,10 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="agree">
         <CardHeader
+          icon={<FileText className="size-3.5" />}
+          tone="agree"
           title="Document registry"
           sub="Titles, owners, statuses, due dates — never the document body"
         />
@@ -99,8 +119,10 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="people">
         <CardHeader
+          icon={<Truck className="size-3.5" />}
+          tone="people"
           title="Logistics readiness matrix"
           sub="Booking statuses and coverage counts — no PNRs, no PII, no booking codes"
         />
@@ -109,15 +131,22 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card>
-        <CardHeader title="Workflow" sub="Drag cards between stages — plan → coordination → briefing → execution → follow-up" />
+      <Card tone="invest">
+        <CardHeader
+          icon={<Workflow className="size-3.5" />}
+          tone="invest"
+          title="Workflow"
+          sub="Drag cards between stages — plan → coordination → briefing → execution → follow-up"
+        />
         <CardBody>
           <KanbanBoard />
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="visits">
         <CardHeader
+          icon={<Target className="size-3.5" />}
+          tone="visits"
           title="Outcomes · plan vs actual"
           sub={`${visitOutcomes.length} verified or pending readouts — closes the loop on every visit`}
         />
@@ -126,8 +155,10 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card>
+      <Card tone="invest">
         <CardHeader
+          icon={<Repeat className="size-3.5" />}
+          tone="invest"
           title="Post-visit reconciliation"
           sub="По каждому визиту — связанные outcomes, подписанные соглашения, action plan и его реализация"
         />
@@ -137,15 +168,15 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
       </Card>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <Card>
-          <CardHeader title={t("optimize.title")} sub={t("optimize.sub")} />
+        <Card tone="agree">
+          <CardHeader icon={<Lightbulb className="size-3.5" />} tone="agree" title={t("optimize.title")} sub={t("optimize.sub")} />
           <CardBody>
             <OptimizationPanel />
           </CardBody>
         </Card>
 
-        <Card>
-          <CardHeader title="Checklist" sub="Pre-visit status tracking" />
+        <Card tone="people">
+          <CardHeader icon={<CheckSquare className="size-3.5" />} tone="people" title="Checklist" sub="Pre-visit status tracking" />
           <CardBody>
             <ChecklistBlock />
           </CardBody>

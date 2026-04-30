@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { CalendarCheck2, Trophy } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Stat } from "@/components/ui/Stat";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
@@ -43,8 +44,10 @@ export default async function StaffPage({
         </div>
       </div>
 
-      <Card>
+      <Card tone="visits">
         <CardHeader
+          icon={<CalendarCheck2 className="size-3.5" />}
+          tone="visits"
           title="Center milestones — 12-month KPI schedule"
           sub={`${centerMilestonesMeta.total} contractual deliverables · ${centerMilestonesMeta.firstDeadline} → ${centerMilestonesMeta.finalDeadline}`}
           right={<SourceBadge sourceId={centerMilestonesMeta.sourceId} />}
@@ -56,8 +59,13 @@ export default async function StaffPage({
 
       <DemoBanner agency="Internal — Situational Center HR dashboard" />
 
-      <Card>
-        <CardHeader title="April 2026 performance" sub="Ranked by composite completion + response + overdue score" />
+      <Card tone="people">
+        <CardHeader
+          icon={<Trophy className="size-3.5" />}
+          tone="people"
+          title="April 2026 performance"
+          sub="Ranked by composite completion + response + overdue score"
+        />
         <CardBody>
           <StaffTable />
         </CardBody>
