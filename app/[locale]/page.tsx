@@ -61,7 +61,7 @@ export default async function OverviewPage({
   return (
     <div className="flex flex-col gap-6">
       {/* HERO HEADER — daily brief chip + serif title + actions */}
-      <header className="flex items-end justify-between gap-6 pb-1">
+      <header className="flex flex-col gap-3 pb-1 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
         <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">
@@ -70,7 +70,7 @@ export default async function OverviewPage({
               {dateLabel}
             </span>
           </div>
-          <h1 className="serif text-[32px] font-medium leading-[1.05] tracking-tight text-[var(--color-ink)] lg:text-[40px]">
+          <h1 className="serif text-[24px] font-medium leading-[1.05] tracking-tight text-[var(--color-ink)] sm:text-[32px] lg:text-[40px]">
             {locale === "ru" ? (
               <>
                 Сотрудничество <span className="text-[var(--color-ink-muted)]">Узбекистан · США</span>
@@ -81,13 +81,13 @@ export default async function OverviewPage({
               </>
             )}
           </h1>
-          <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-[var(--color-ink-muted)]">
+          <p className="mt-1.5 max-w-2xl text-[12px] leading-relaxed text-[var(--color-ink-muted)] sm:text-[13px]">
             {locale === "ru"
               ? "Утверждено постановлением Президента Ф-4 (17.02.2026). Источники свежие; помеченные значения подлежат уточнению."
               : "Authorized by Presidential Ordinance Ф-4 (17.02.2026). Sources fresh; flagged values pending replacement."}
           </p>
         </div>
-        <div className="hidden shrink-0 flex-col items-end gap-1.5 lg:flex">
+        <div className="shrink-0 self-start sm:self-end">
           <PrintButton label={locale === "ru" ? "Экспорт PDF" : "Export PDF"} />
         </div>
       </header>

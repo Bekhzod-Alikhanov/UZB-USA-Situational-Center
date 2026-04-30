@@ -57,7 +57,7 @@ export function FreshnessPill() {
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-full z-40 mt-2 w-80 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-[12px] shadow-lg">
+        <div className="absolute right-0 top-full z-40 mt-2 w-[calc(100vw-32px)] max-w-80 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-[12px] shadow-lg sm:w-80">
           <div className="mb-2 flex items-center justify-between">
             <span className="serif font-semibold text-[var(--color-ink)]">Актуальность данных</span>
             <span

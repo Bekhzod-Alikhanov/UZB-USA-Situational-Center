@@ -28,7 +28,7 @@ export default async function LocaleLayout({
         <Sidebar />
         <div className="flex min-w-0 flex-1 flex-col">
           <Topbar />
-          <main className="relative z-[1] flex-1 px-8 py-6">{children}</main>
+          <main className="relative z-[1] flex-1 px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-6">{children}</main>
         </div>
       </div>
       <SearchCommand />

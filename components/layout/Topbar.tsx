@@ -3,7 +3,8 @@ import { useTranslations } from "next-intl";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { ThemeSwitch } from "./ThemeSwitch";
 import { FreshnessPill } from "./FreshnessPill";
-import { Search } from "lucide-react";
+import { MobileSidebar } from "./MobileSidebar";
+import { Search, Menu } from "lucide-react";
 import { useSearch } from "@/lib/store/search";
 import { useEffect } from "react";
 
@@ -23,18 +24,32 @@ export function Topbar() {
   }, [setSearchOpen]);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_88%,transparent)] px-6 backdrop-blur-md">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_88%,transparent)] px-3 backdrop-blur-md sm:gap-3 sm:px-4 lg:gap-4 lg:px-6">
+      {/* Mobile menu trigger — hidden on lg+ where the persistent sidebar is shown */}
+      <MobileSidebar
+        trigger={
+          <button
+            type="button"
+            aria-label="Open menu"
+            className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] lg:hidden"
+          >
+            <Menu className="size-4" />
+          </button>
+        }
+      />
+
       <div className="min-w-0 flex-1">
-        <div className="truncate serif text-[16px] font-semibold tracking-tight text-[var(--color-ink)]">
+        <div className="serif truncate text-[14px] font-semibold tracking-tight text-[var(--color-ink)] sm:text-[16px]">
           {t("title")}
         </div>
-        <div className="truncate text-[11px] text-[var(--color-ink-muted)]">{t("sub")}</div>
+        <div className="hidden truncate text-[11px] text-[var(--color-ink-muted)] sm:block">{t("sub")}</div>
       </div>
 
+      {/* Desktop full search — hidden below md */}
       <button
         type="button"
         onClick={() => setSearchOpen(true)}
-        className="hidden w-[340px] items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-[12.5px] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface)] md:flex"
+        className="hidden w-[280px] items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-[12.5px] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface)] xl:flex"
       >
         <Search className="size-3.5 shrink-0" />
         <span className="flex-1 truncate text-left">{t("search")}</span>
@@ -43,12 +58,26 @@ export function Topbar() {
         </kbd>
       </button>
 
-      <div className="flex items-center gap-2">
-        <span className="hidden items-center gap-1.5 rounded-full border border-[color-mix(in_oklab,var(--color-pos)_30%,transparent)] bg-[var(--color-pos-soft)] px-2.5 py-1 text-[10.5px] font-medium text-[var(--color-pos)] md:inline-flex">
+      {/* Compact search button below xl */}
+      <button
+        type="button"
+        onClick={() => setSearchOpen(true)}
+        aria-label="Search"
+        className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] xl:hidden"
+      >
+        <Search className="size-4" />
+      </button>
+
+      <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* Online dot — md+ only */}
+        <span className="hidden items-center gap-1.5 rounded-full border border-[color-mix(in_oklab,var(--color-pos)_30%,transparent)] bg-[var(--color-pos-soft)] px-2.5 py-1 text-[10.5px] font-medium text-[var(--color-pos)] xl:inline-flex">
           <span className="size-1.5 rounded-full bg-[var(--color-pos)]" />
           {t("online")}
         </span>
-        <FreshnessPill />
+        {/* Freshness pill — sm+ */}
+        <span className="hidden sm:block">
+          <FreshnessPill />
+        </span>
         <LocaleSwitch />
         <ThemeSwitch />
       </div>

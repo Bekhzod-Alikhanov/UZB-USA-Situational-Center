@@ -112,7 +112,7 @@ export function Sidebar() {
   const base = `/${locale}`;
 
   return (
-    <aside className="sticky top-0 flex h-screen w-[260px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)]">
+    <aside className="sticky top-0 hidden h-screen w-[260px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] lg:flex">
       {/* Brand */}
       <div className="border-b border-[var(--color-border)] px-4 py-4">
         <div className="flex items-center gap-2.5">
