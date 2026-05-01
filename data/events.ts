@@ -123,7 +123,7 @@ export const events: DiplomaticEvent[] = [
     date: "2023-09-19",
     location: "New York",
     participants: ["President Biden", "5 Central Asian Presidents"],
-    linkedVisitId: "v-2023-09-unga-biden",
+    // linkedVisitId removed: pre-2025 visit entries were dropped from data/visits.ts.
     description: "Historic first leaders-level C5+1.",
     is_demo: false,
     sourceId: "input_diplomatic_docx",

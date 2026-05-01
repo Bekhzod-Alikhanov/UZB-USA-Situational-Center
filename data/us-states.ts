@@ -135,6 +135,19 @@ function computeVisitsByState(): Record<string, number> {
 /**
  * U.S. partners' HQ states for the named-investment list.
  * Curated from public corporate filings.
+ *
+ * Coverage audit (April 2026): 30/35 entries in `data/investments.ts` are
+ * mapped to a U.S. state through this dictionary (~89%). The 5 unmatched
+ * are intentionally excluded:
+ *   - `real-mining-metallurgy-850` / `real-mining-metallurgy-200` —
+ *     partner labelled "(under registration)"; pending MIIT confirmation.
+ *   - `real-ai-digital-fund` — "(US fund partner — under registration)";
+ *     pending IT Park / fund GP disclosure.
+ *   - `real-gf6-css-prime` — automotive sub-tier supplier ("GF-6 / CSS
+ *     Prime"); not a U.S.-headquartered firm per public filings.
+ *   - `inv-23` Kinross Gold — corporate HQ Toronto, Canada (Round Mountain
+ *     mine in Nevada is operations only; not counted as a U.S. partner).
+ * These appear in the table view but are not pinned on the choropleth.
  */
 const PARTNER_HQ: Record<string, string> = {
   "Air Products": "PA",

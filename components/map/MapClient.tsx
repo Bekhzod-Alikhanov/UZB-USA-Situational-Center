@@ -4,9 +4,22 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Globe2, Map as MapIcon, Briefcase, TrendingUp, Users2 } from "lucide-react";
 
-const FlatMap = dynamic(() => import("./FlatMap").then((m) => m.FlatMap), { ssr: false });
+// Reserve the same 560 px height while the chunk + tiles load — otherwise
+// the basemap snaps in late and Lighthouse measures a CLS of ~0.2.
+const MapPlaceholder = () => (
+  <div
+    className="h-[560px] w-full rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)]"
+    aria-busy="true"
+  />
+);
+
+const FlatMap = dynamic(() => import("./FlatMap").then((m) => m.FlatMap), {
+  ssr: false,
+  loading: MapPlaceholder,
+});
 const Globe3D = dynamic(() => import("@/components/overview/Globe3D").then((m) => m.Globe3D), {
   ssr: false,
+  loading: MapPlaceholder,
 });
 
 type Layer = "invest" | "trade" | "delegations";
