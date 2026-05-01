@@ -1,14 +1,7 @@
-"use client";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Cell,
-} from "recharts";
-import { ChartFrame } from "@/components/charts/ChartFrame";
+// Server component — the FY-by-year bars used to be a Recharts BarChart;
+// replaced with a zero-dep SVG <MiniBars /> to remove ~80 KB of Recharts
+// from this page's bundle (per Wave 2.2 of the perf plan).
+import { MiniBars, type MiniBarItem } from "@/components/charts/MiniBars";
 import {
   foreignAssistanceYears,
   foreignAssistanceFy2024Agencies,
@@ -26,10 +19,11 @@ const AGENCY_COLOR: Record<string, string> = {
 };
 
 export function ForeignAssistanceView() {
-  const yearsData = foreignAssistanceYears.map((y) => ({
+  const yearsData: MiniBarItem[] = foreignAssistanceYears.map((y) => ({
     label: `FY${y.fiscalYear}`,
     value: y.totalUsdM,
-    preliminary: y.preliminary ?? false,
+    color: y.preliminary ? "var(--color-ink-faint)" : "var(--color-primary)",
+    tooltip: `FY${y.fiscalYear}: $${y.totalUsdM.toFixed(2)}M${y.preliminary ? " (preliminary)" : ""}`,
   }));
 
   return (
@@ -52,44 +46,8 @@ export function ForeignAssistanceView() {
           <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">
             Total obligations by fiscal year
           </h4>
-          <ChartFrame height={220} className="h-[200px] sm:h-[220px]">
-            {({ width, height }) => (
-              <BarChart width={width} height={height} data={yearsData} margin={{ top: 8, right: 8, bottom: 4, left: -8 }}>
-                <CartesianGrid stroke="var(--color-border)" strokeDasharray="3 3" vertical={false} />
-                <XAxis
-                  dataKey="label"
-                  tickLine={false}
-                  axisLine={{ stroke: "var(--color-border)" }}
-                  tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }}
-                />
-                <YAxis
-                  tickLine={false}
-                  axisLine={false}
-                  tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }}
-                  tickFormatter={(v) => `$${v}M`}
-                  width={56}
-                />
-                <Tooltip
-                  cursor={{ fill: "var(--color-surface-2)" }}
-                  contentStyle={{
-                    background: "var(--color-surface)",
-                    border: "1px solid var(--color-border)",
-                    borderRadius: 6,
-                    fontSize: 12,
-                  }}
-                  formatter={(v) => [`$${Number(v).toFixed(2)}M`, "Obligations"]}
-                />
-                <Bar dataKey="value" radius={[3, 3, 0, 0]}>
-                  {yearsData.map((d) => (
-                    <Cell
-                      key={d.label}
-                      fill={d.preliminary ? "var(--color-ink-faint)" : "var(--color-primary)"}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            )}
-          </ChartFrame>
+          <MiniBars data={yearsData} height={220} format={(v) => `$${v}M`} />
+
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
             FY2025 bar is preliminary (partial reporting per ForeignAssistance.gov).
           </p>

@@ -18,21 +18,24 @@ import {
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 import { TradeTable } from "@/components/trade/TradeTable";
-import { StructureTreemap } from "@/components/trade/StructureTreemap";
 import { DualMethodologyChart } from "@/components/trade/DualMethodologyChart";
-import { MonthlyTradeChart } from "@/components/trade/MonthlyTradeChart";
-import { ComtradeHs6Top } from "@/components/trade/ComtradeHs6";
-import { ComtradeMirror } from "@/components/trade/ComtradeMirror";
-import { ComtradeTrendSparklines } from "@/components/trade/ComtradeTrendSparklines";
-import { Hs2ChapterTreemap } from "@/components/trade/Hs2ChapterTreemap";
-import { TrademapProducts } from "@/components/trade/TrademapProducts";
-import { ServicesEbops } from "@/components/trade/ServicesEbops";
-import { TrademapExhibits } from "@/components/trade/TrademapExhibits";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+// Below-the-fold charts are dynamic-loaded + IntersectionObserver-gated to
+// drop the route's initial TBT/transfer. See components/trade/LazyCharts.tsx.
 import {
-  exportStructure2025,
-  importStructure2025,
+  LazyMonthlyTrade,
+  LazyExportStructure,
+  LazyImportStructure,
+  LazyComtradeHs6,
+  LazyComtradeMirror,
+  LazyComtradeTrendSparklines,
+  LazyHs2ChapterTreemap,
+  LazyTrademapProducts,
+  LazyServicesEbops,
+  LazyTrademapExhibits,
+} from "@/components/trade/LazyCharts";
+import {
   topExportCategoriesUZ,
   topImportCategoriesUS,
   tradeMeta,
@@ -111,7 +114,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="census_goods_uz" />}
         />
         <CardBody>
-          <MonthlyTradeChart />
+          <LazyMonthlyTrade />
         </CardBody>
       </Card>
 
@@ -119,13 +122,13 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         <Card tone="invest">
           <CardHeader icon={<ArrowUpFromLine className="size-3.5" />} tone="invest" title={t("structure.export")} sub="USD millions, 2025" />
           <CardBody>
-            <StructureTreemap items={exportStructure2025} height={300} />
+            <LazyExportStructure />
           </CardBody>
         </Card>
         <Card tone="agree">
           <CardHeader icon={<ArrowDownToLine className="size-3.5" />} tone="agree" title={t("structure.import")} sub="USD millions, 2025" />
           <CardBody>
-            <StructureTreemap items={importStructure2025} height={300} />
+            <LazyImportStructure />
           </CardBody>
         </Card>
       </div>
@@ -209,7 +212,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="comtrade_hs6" />}
         />
         <CardBody>
-          <ComtradeHs6Top />
+          <LazyComtradeHs6 />
         </CardBody>
       </Card>
 
@@ -222,7 +225,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="comtrade_hs6" />}
         />
         <CardBody>
-          <ComtradeMirror />
+          <LazyComtradeMirror />
         </CardBody>
       </Card>
 
@@ -241,7 +244,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="comtrade_hs6" />}
         />
         <CardBody>
-          <ComtradeTrendSparklines />
+          <LazyComtradeTrendSparklines />
         </CardBody>
       </Card>
 
@@ -266,7 +269,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="comtrade_hs6" />}
         />
         <CardBody>
-          <Hs2ChapterTreemap />
+          <LazyHs2ChapterTreemap />
         </CardBody>
       </Card>
 
@@ -279,7 +282,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="trademap_itc" />}
         />
         <CardBody>
-          <TrademapProducts />
+          <LazyTrademapProducts />
         </CardBody>
       </Card>
 
@@ -292,7 +295,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="trademap_itc" />}
         />
         <CardBody>
-          <ServicesEbops />
+          <LazyServicesEbops />
         </CardBody>
       </Card>
 
@@ -305,7 +308,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="trademap_itc" />}
         />
         <CardBody>
-          <TrademapExhibits />
+          <LazyTrademapExhibits />
         </CardBody>
       </Card>
 

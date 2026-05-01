@@ -26,28 +26,20 @@ export function AssistantChat() {
   const [armed, setArmed] = useState(false);
 
   useEffect(() => {
-    // Arm on the first user interaction with the document.
+    // Arm strictly on first real user interaction with the document. The
+    // earlier requestIdleCallback prewarm regressed /assistant Lighthouse
+    // by 5 pts because the SDK chunk fetched mid-LCP-measurement window.
+    // Cost of removing the prewarm: ~150 ms latency on the first user
+    // interaction (chunk fetch starts when they hover/click).
     const arm = () => setArmed(true);
     const opts = { once: true } as AddEventListenerOptions;
     window.addEventListener("pointerdown", arm, opts);
     window.addEventListener("keydown", arm, opts);
     window.addEventListener("focusin", arm, opts);
-
-    // Background pre-warm — fetch the chunk during browser idle time so it's
-    // already cached when the user actually interacts. ~2 s after page load
-    // on slow connections.
-    type RIC = (cb: () => void, opts?: { timeout: number }) => number;
-    const ric = (window as unknown as { requestIdleCallback?: RIC }).requestIdleCallback;
-    const idleId = ric ? ric(() => setArmed(true), { timeout: 4000 }) : window.setTimeout(arm, 2500);
-
     return () => {
       window.removeEventListener("pointerdown", arm);
       window.removeEventListener("keydown", arm);
       window.removeEventListener("focusin", arm);
-      type CIC = (id: number) => void;
-      const cic = (window as unknown as { cancelIdleCallback?: CIC }).cancelIdleCallback;
-      if (cic && ric) cic(idleId);
-      else window.clearTimeout(idleId);
     };
   }, []);
 

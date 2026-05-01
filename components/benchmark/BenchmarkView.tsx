@@ -1,20 +1,24 @@
 "use client";
 import { useState } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Cell,
-  LabelList,
-} from "recharts";
+import dynamic from "next/dynamic";
 import { ArrowDown, ArrowUp, Minus } from "lucide-react";
 import { benchmark, type RegionalMetric } from "@/data/benchmark";
 import { cn } from "@/lib/utils";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
-import { ChartFrame } from "@/components/charts/ChartFrame";
+import { LazyMount } from "@/components/util/LazyMount";
+
+// Recharts BarChart is dynamic-loaded + IntersectionObserver-gated. The
+// Benchmark route's KPIs and metric switcher render immediately; the chart
+// chunk only fetches when the user scrolls toward it.
+const BenchmarkChart = dynamic(
+  () => import("./BenchmarkChart").then((m) => ({ default: m.BenchmarkChart })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[260px] w-full animate-pulse rounded-md bg-[var(--color-surface-2)] sm:h-[280px]" />
+    ),
+  },
+);
 
 type MetricKey =
   | "gdpUsdBn"
@@ -157,49 +161,9 @@ export function BenchmarkView() {
             </div>
           </div>
         </div>
-        <ChartFrame height={280} className="h-[260px] sm:h-[280px]">
-          {({ width, height }) => (
-            <BarChart width={width} height={height} data={chartData} margin={{ top: 22, right: 16, bottom: 4, left: -8 }}>
-              <CartesianGrid stroke="var(--color-border)" strokeDasharray="3 3" vertical={false} />
-              <XAxis
-                dataKey="label"
-                tickLine={false}
-                axisLine={{ stroke: "var(--color-border)" }}
-                tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }}
-              />
-              <YAxis
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }}
-                width={56}
-              />
-              <Tooltip
-                cursor={{ fill: "var(--color-surface-2)" }}
-                contentStyle={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: 6,
-                  fontSize: 12,
-                }}
-                formatter={(v) => [active.format(Number(v)), active.label]}
-              />
-              <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                {chartData.map((d) => (
-                  <Cell
-                    key={d.name}
-                    fill={d.name === "UZ" ? "var(--color-primary)" : "var(--color-border-strong)"}
-                  />
-                ))}
-                <LabelList
-                  dataKey="value"
-                  position="top"
-                  formatter={(v) => active.format(Number(v))}
-                  style={{ fill: "var(--color-ink-muted)", fontSize: 10 }}
-                />
-              </Bar>
-            </BarChart>
-          )}
-        </ChartFrame>
+        <LazyMount minHeight={280}>
+          <BenchmarkChart data={chartData} format={active.format} metricLabel={active.label} />
+        </LazyMount>
       </div>
 
       <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">

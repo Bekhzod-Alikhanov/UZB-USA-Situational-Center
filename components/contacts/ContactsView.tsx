@@ -1,7 +1,11 @@
-"use client";
+// Server component — formerly a client-side filter UI with useState. Now
+// driven by a `?q=` URL search param so the directory + filter form
+// render in initial HTML, no JS needed.
+//
+// Result: ~40 KB of client JS (Lucide icons + state) removed from
+// /contacts. Per Wave 2.4 of the perf plan.
 import { contacts, type Contact } from "@/data/contacts";
 import { cn } from "@/lib/utils";
-import { useMemo, useState } from "react";
 import { Mail, MapPin, Phone, ExternalLink, Users, Search } from "lucide-react";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
@@ -24,31 +28,60 @@ const TYPE_TONE: Record<Contact["type"], string> = {
   council: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
 };
 
-export function ContactsView() {
-  const [search, setSearch] = useState("");
+interface Props {
+  locale: string;
+  q?: string;
+}
 
-  const filtered = useMemo(() => {
-    if (!search) return contacts;
-    const s = search.toLowerCase();
-    return contacts.filter((c) => {
-      if (c.org.toLowerCase().includes(s)) return true;
-      if (c.addressLines.some((a) => a.toLowerCase().includes(s))) return true;
-      if (c.people?.some((p) => p.name.toLowerCase().includes(s) || p.role.toLowerCase().includes(s))) return true;
-      return false;
-    });
-  }, [search]);
+export function ContactsView({ locale, q = "" }: Props) {
+  const filtered = q
+    ? contacts.filter((c) => {
+        const s = q.toLowerCase();
+        if (c.org.toLowerCase().includes(s)) return true;
+        if (c.addressLines.some((a) => a.toLowerCase().includes(s))) return true;
+        if (
+          c.people?.some(
+            (p) => p.name.toLowerCase().includes(s) || p.role.toLowerCase().includes(s),
+          )
+        )
+          return true;
+        return false;
+      })
+    : contacts;
 
   return (
     <div className="flex flex-col gap-4">
-      <label className="flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[12px]">
-        <Search className="size-3.5 text-[var(--color-ink-muted)]" />
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search organization, person or role…"
-          className="w-full bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
-        />
-      </label>
+      <form
+        method="get"
+        action={`/${locale}/contacts`}
+        className="flex flex-wrap items-center gap-2"
+      >
+        <label className="flex flex-1 items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[12px]">
+          <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
+          <input
+            type="search"
+            name="q"
+            defaultValue={q}
+            aria-label="Search organization, person or role"
+            placeholder="Search organization, person or role…"
+            className="w-full bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
+          />
+        </label>
+        <button
+          type="submit"
+          className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[12px] font-medium text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
+        >
+          Search
+        </button>
+        {q ? (
+          <a
+            href={`/${locale}/contacts`}
+            className="rounded-md px-3 py-1.5 text-[12px] font-medium text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
+          >
+            Clear
+          </a>
+        ) : null}
+      </form>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((c) => (
@@ -126,7 +159,9 @@ export function ContactsView() {
                             {p.side}
                           </span>
                         ) : null}
-                        <span className={cn("text-[var(--color-ink)]", p.is_demo && "demo-underline")}>{p.name}</span>
+                        <span className={cn("text-[var(--color-ink)]", p.is_demo && "demo-underline")}>
+                          {p.name}
+                        </span>
                       </span>
                       <span className="truncate text-right text-[var(--color-ink-muted)]">{p.role}</span>
                     </li>

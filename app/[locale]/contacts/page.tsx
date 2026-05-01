@@ -5,10 +5,14 @@ import { contacts } from "@/data/contacts";
 
 export default async function ContactsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
+  const sp = await searchParams;
+  const q = String(sp.q ?? "");
   setRequestLocale(locale);
   const t = await getTranslations("contacts");
 
@@ -36,7 +40,7 @@ export default async function ContactsPage({
       <Card>
         <CardHeader title="Directory" sub="Situational Center · embassies · AUCC · coordination bodies" />
         <CardBody>
-          <ContactsView />
+          <ContactsView locale={locale} q={q} />
         </CardBody>
       </Card>
     </div>
