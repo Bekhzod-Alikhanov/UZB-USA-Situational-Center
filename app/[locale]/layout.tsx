@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
-import { SearchCommand } from "@/components/layout/SearchCommand";
+import { SearchCommandLazy } from "@/components/layout/SearchCommandLazy";
 import { SettingsSync } from "@/components/layout/SettingsSync";
 
 export function generateStaticParams() {
@@ -32,7 +32,7 @@ export default async function LocaleLayout({
           <main className="relative z-[1] flex-1 px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-6">{children}</main>
         </div>
       </div>
-      <SearchCommand />
+      <SearchCommandLazy />
       <SettingsSync />
     </NextIntlClientProvider>
   );

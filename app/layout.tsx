@@ -11,13 +11,21 @@ const geist = Geist({
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
+  // Italic dropped from the load list (Apr 2026 perf pass) — `.italic` body
+  // text falls back to synthesised italic from Geist Sans, saving ~30 KB
+  // of woff2 transfer. The serif headings on the dashboard are not italic.
+  style: ["normal"],
   variable: "--font-instrument-serif",
   display: "swap",
+  // The serif is for headings only — defer it; let the body Geist render
+  // first and let the heading swap in. Cuts ~150 ms off first paint.
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"] as ("latin" | "latin-ext" | "cyrillic" | "cyrillic-ext")[],
+  // Drop cyrillic-ext (rare diacritics) — basic `cyrillic` covers Russian
+  // and Uzbek-Cyrillic. Saves ~25 KB woff2 transfer per route.
+  subsets: ["latin", "cyrillic"] as ("latin" | "cyrillic")[],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });

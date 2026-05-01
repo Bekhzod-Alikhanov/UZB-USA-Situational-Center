@@ -18,11 +18,33 @@ const nextConfig: NextConfig = {
       "date-fns",
       "@dnd-kit/core",
       "@dnd-kit/sortable",
+      "@dnd-kit/utilities",
+      // Visx — full surface, not just treemap.
       "@visx/hierarchy",
       "@visx/scale",
       "@visx/shape",
       "@visx/group",
       "@visx/treemap",
+      "@visx/sankey",
+      "@visx/chord",
+      "@visx/responsive",
+      // Radix — without these the full barrel ships on every page that
+      // mounts a single primitive (Sidebar uses Dialog + Dropdown, Topbar
+      // uses Popover + Tooltip).
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-select",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-tooltip",
+      "@radix-ui/react-scroll-area",
+      "@radix-ui/react-checkbox",
+      "@radix-ui/react-switch",
+      "@radix-ui/react-progress",
+      "@radix-ui/react-separator",
+      "@radix-ui/react-avatar",
+      "@radix-ui/react-label",
+      "@radix-ui/react-slot",
     ],
   },
   images: {

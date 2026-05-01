@@ -1,191 +1,83 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import { useSettings } from "@/lib/store/settings";
-import { AlertCircle, Loader2, Send, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const SUGGESTIONS = [
-  "What is the 2025 U.S.–Uzbekistan trade turnover?",
-  "Which U.S. companies have investment projects in Navoi region?",
-  "Summarize the upcoming visits in the next 90 days.",
-  "What is Uzbekistan's OFAC status as of today?",
-  "Who co-chairs the Uzbekistan Caucus in Congress?",
-];
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { Sparkles } from "lucide-react";
 
 /**
- * AI assistant chat surface.
+ * Deferred wrapper for the AI chat surface.
  *
- * Uses @ai-sdk/react v3 useChat hook with the Vercel AI SDK v6 UI message
- * stream protocol. Manages input state locally; useChat handles the
- * messages, status, and streaming automatically.
+ * Why: AssistantChatCore pulls in @ai-sdk/react + ai (~117 KB chunk, ~84 %
+ * unused on first load per Lighthouse). Most users open /assistant just to
+ * peek; only a fraction actually type. Loading the SDK eagerly on every
+ * navigation is wasteful.
  *
- * Gated by `useSettings.aiEnabled` — when disabled, renders a friendly
- * empty-state instead of the chat surface. The /api/chat route additionally
- * gates on `ANTHROPIC_API_KEY` server-side and returns 503 if unset.
+ * How: render a static skeleton (header + sample suggestions + input shell)
+ * server-side-friendly. The real AssistantChatCore is dynamically imported
+ * on first user interaction with the page (pointerdown / keydown / focus on
+ * the input) AND scheduled via requestIdleCallback as a background pre-warm
+ * so the SDK is ready before the user finishes typing their first prompt.
  */
+const HeavyCore = dynamic(
+  () => import("./AssistantChatCore").then((m) => ({ default: m.AssistantChatCore })),
+  { ssr: false, loading: () => <Skeleton armed /> },
+);
+
 export function AssistantChat() {
-  const aiEnabled = useSettings((s) => s.aiEnabled);
+  const [armed, setArmed] = useState(false);
 
-  // useChat owns the messages array and streaming lifecycle.
-  const { messages, sendMessage, status, error, stop } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
-  });
-
-  const [input, setInput] = useState("");
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-
-  // Auto-scroll on new messages or while streaming
   useEffect(() => {
-    scrollRef.current?.scrollTo({
-      top: scrollRef.current.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [messages, status]);
+    // Arm on the first user interaction with the document.
+    const arm = () => setArmed(true);
+    const opts = { once: true } as AddEventListenerOptions;
+    window.addEventListener("pointerdown", arm, opts);
+    window.addEventListener("keydown", arm, opts);
+    window.addEventListener("focusin", arm, opts);
 
-  const isStreaming = status === "submitted" || status === "streaming";
+    // Background pre-warm — fetch the chunk during browser idle time so it's
+    // already cached when the user actually interacts. ~2 s after page load
+    // on slow connections.
+    type RIC = (cb: () => void, opts?: { timeout: number }) => number;
+    const ric = (window as unknown as { requestIdleCallback?: RIC }).requestIdleCallback;
+    const idleId = ric ? ric(() => setArmed(true), { timeout: 4000 }) : window.setTimeout(arm, 2500);
 
-  function handleSend(text: string) {
-    const trimmed = text.trim();
-    if (!trimmed || isStreaming) return;
-    void sendMessage({ text: trimmed });
-    setInput("");
-  }
+    return () => {
+      window.removeEventListener("pointerdown", arm);
+      window.removeEventListener("keydown", arm);
+      window.removeEventListener("focusin", arm);
+      type CIC = (id: number) => void;
+      const cic = (window as unknown as { cancelIdleCallback?: CIC }).cancelIdleCallback;
+      if (cic && ric) cic(idleId);
+      else window.clearTimeout(idleId);
+    };
+  }, []);
 
-  if (!aiEnabled) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-10 text-center">
-        <Sparkles className="size-8 text-[var(--color-ink-faint)]" />
-        <h3 className="serif text-[18px] font-medium text-[var(--color-ink)]">AI assistant is disabled</h3>
-        <p className="max-w-md text-[13px] text-[var(--color-ink-muted)]">
-          Enable it in Admin → AI assistant toggle.
-        </p>
-      </div>
-    );
-  }
+  if (armed) return <HeavyCore />;
+  return <Skeleton />;
+}
 
+function Skeleton({ armed }: { armed?: boolean } = {}) {
   return (
     <div className="flex h-[640px] flex-col rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
       <div className="flex items-center justify-between border-b border-[var(--color-border)] px-4 py-2.5">
         <div className="flex items-center gap-2">
           <Sparkles className="size-4 text-[var(--color-primary)]" />
-          <span className="text-[13px] font-semibold text-[var(--color-ink)]">Claude — Center Assistant</span>
+          <span className="text-[13px] font-semibold text-[var(--color-ink)]">
+            Claude — Center Assistant
+          </span>
         </div>
         <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">
-          sonnet-4-6
+          {armed ? "warming up…" : "ready"}
         </span>
       </div>
-
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
-        {messages.length === 0 ? (
-          <div className="flex flex-col gap-3">
-            <p className="text-[13px] text-[var(--color-ink-muted)]">
-              Ask me anything about the bilateral portfolio. I have up-to-date context on trade, investments, visits,
-              agreements, commitments, grants, counterparts, compliance, and news.
-            </p>
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                Suggestions
-              </span>
-              {SUGGESTIONS.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => handleSend(s)}
-                  className="w-full rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-left text-[12.5px] text-[var(--color-ink)] transition hover:border-[var(--color-border-strong)]"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <ul className="flex flex-col gap-3">
-            {messages.map((m) => {
-              // UIMessage stores content in `parts` (text, tool calls, etc.).
-              // For a plain chat we only render the concatenated text parts.
-              const text = m.parts
-                .filter((p): p is { type: "text"; text: string } => p.type === "text")
-                .map((p) => p.text)
-                .join("");
-              return (
-                <li
-                  key={m.id}
-                  className={cn(
-                    "max-w-[85%] rounded-lg px-3 py-2 text-[13px] leading-relaxed",
-                    m.role === "user"
-                      ? "ml-auto bg-[var(--color-primary)] text-white"
-                      : "mr-auto bg-[var(--color-bg)] text-[var(--color-ink)]",
-                  )}
-                >
-                  <pre className="whitespace-pre-wrap font-sans">
-                    {text || (isStreaming && m.role === "assistant" ? "…" : "")}
-                  </pre>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-        {error ? (
-          (() => {
-            const raw = error.message ?? "";
-            // Detect the server-side 503 "key missing" signal so we can show
-            // a friendly explanation instead of a raw stack message.
-            const isKeyMissing = /ANTHROPIC_API_KEY/i.test(raw) || /\b503\b/.test(raw);
-            return (
-              <div className="mt-3 flex items-start gap-2 rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2 text-[12px] text-[var(--color-ink)]">
-                <AlertCircle className="mt-0.5 size-3.5 shrink-0 text-[var(--color-warn)]" />
-                {isKeyMissing ? (
-                  <span>
-                    AI assistant unavailable — server key not configured. Set{" "}
-                    <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> in
-                    Vercel → Project Settings → Environment Variables, then redeploy. Demo and analytics modules
-                    work without the assistant.
-                  </span>
-                ) : (
-                  <span>{raw || "Request failed."}</span>
-                )}
-              </div>
-            );
-          })()
-        ) : null}
+      <div className="flex-1 px-4 py-4">
+        <p className="text-[13px] text-[var(--color-ink-muted)]">
+          Ask me anything about the bilateral portfolio. I have up-to-date context on trade,
+          investments, visits, agreements, commitments, grants, counterparts, compliance, and news.
+        </p>
       </div>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSend(input);
-        }}
-        className="flex items-center gap-2 border-t border-[var(--color-border)] p-3"
-      >
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask about a project, visit, commitment, partner…"
-          className="flex-1 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[13px] outline-none focus:border-[var(--color-primary)]"
-          disabled={isStreaming}
-        />
-        {isStreaming ? (
-          <button
-            type="button"
-            onClick={() => stop()}
-            className="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[12px] font-medium text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
-          >
-            <Loader2 className="size-3.5 animate-spin" />
-            Stop
-          </button>
-        ) : (
-          <button
-            type="submit"
-            disabled={!input.trim()}
-            className="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-2 text-[12px] font-medium text-white disabled:opacity-50"
-          >
-            <Send className="size-3.5" />
-            Send
-          </button>
-        )}
-      </form>
+      <div className="border-t border-[var(--color-border)] p-3">
+        <div className="h-9 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-bg)]" />
+      </div>
     </div>
   );
 }

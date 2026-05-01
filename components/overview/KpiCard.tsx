@@ -1,4 +1,7 @@
-"use client";
+// Server-component KPI card (no "use client") — renders entirely in HTML,
+// no hydration cost. The optional <DemoBadge> child is still a client
+// component; Next serialises that correctly when is_demo is true. The hero
+// KPIs on /overview do not pass is_demo, so the rendered tree is pure SSR.
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ArrowDownRight, ArrowUpRight, ArrowRight, Minus } from "lucide-react";
