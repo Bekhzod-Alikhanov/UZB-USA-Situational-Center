@@ -367,10 +367,11 @@ export function UsCenteredMap() {
         {METRIC_DESC[metric]} · <span className="text-[var(--color-ink-faint)]">{T.hint}</span>
       </div>
 
-      {/* Map container */}
+      {/* Map container — overflow:visible so the hover tooltip can extend
+          beyond the SVG bounds without being clipped (was a regression). */}
       <div
         ref={containerRef}
-        className="relative overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-bg)]"
+        className="relative rounded-md border border-[var(--color-border)] bg-[var(--color-bg)]"
       >
         {!features ? (
           <div className="flex h-[420px] items-center justify-center text-[12px] text-[var(--color-ink-muted)] sm:h-[560px]">
@@ -420,6 +421,9 @@ export function UsCenteredMap() {
                     onClick={() => {
                       if (!meta) return;
                       setSelection({ kind: "state", abbr: meta.abbr });
+                      // Dismiss the floating hover tooltip so it doesn't
+                      // overlay the freshly-opened detail panel.
+                      setTip(null);
                     }}
                   >
                     <title>{`${pickStateLabel(meta, stateName, locale)}${
@@ -619,18 +623,27 @@ function StateHoverTooltip({
   const label = pickStateLabel(meta, tip.name, locale);
   const rec = getMetric(tip.abbr);
   const rect = containerRef.current?.getBoundingClientRect();
-  // Position relative to the container so the tooltip travels with the SVG,
-  // not the page scroll. Offset above-left of the cursor.
-  const left = rect ? tip.px - rect.left : 0;
-  const top = rect ? tip.py - rect.top : 0;
+  // Position relative to the container so the tooltip travels with the SVG.
+  // If the cursor is past the right half of the container, flip the tooltip
+  // to the left side of the cursor so it doesn't get clipped.
+  const cw = rect?.width ?? 0;
+  const ch = rect?.height ?? 0;
+  const cx = rect ? tip.px - rect.left : 0;
+  const cy = rect ? tip.py - rect.top : 0;
+  const flipX = cx > cw * 0.6;
+  const flipY = cy > ch - 140;
+  const TOOLTIP_W = 200;
+  const left = flipX ? cx - TOOLTIP_W - 14 : cx + 14;
+  const top = flipY ? cy - 110 : cy + 14;
   return (
     <div
       role="status"
       aria-live="polite"
-      className="pointer-events-none absolute z-20 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[11px] shadow-lg"
+      className="pointer-events-none absolute z-30 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[11px] shadow-lg"
       style={{
-        left: Math.max(8, left + 14),
-        top: Math.max(8, top + 14),
+        left: Math.max(8, left),
+        top: Math.max(8, top),
+        width: TOOLTIP_W,
       }}
     >
       <div className="text-[12px] font-semibold text-[var(--color-ink)]">{label}</div>
@@ -671,16 +684,17 @@ function SelectionPanel({
   if (selection.kind === "state") {
     const meta = findStateByAbbr(selection.abbr);
     const rec = getMetric(selection.abbr);
-    if (!rec) return null;
     const label = pickStateLabel(meta, selection.abbr, locale);
     const missionsHere = uzMissionsUs.filter((m) => m.state === selection.abbr);
     const visitsHere = uzPlannedVisitsUs.filter((v) => v.state === selection.abbr);
     return (
-      <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+      <div className="rounded-md border-2 border-[var(--color-primary)]/40 bg-[var(--color-surface)] p-4 shadow-sm">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <div className="text-[15px] font-semibold text-[var(--color-ink)]">{label}</div>
-            <div className="mono text-[11px] text-[var(--color-ink-muted)]">
+            <div className="serif text-[18px] font-semibold leading-tight text-[var(--color-ink)]">
+              {label}
+            </div>
+            <div className="mono mt-0.5 text-[11px] text-[var(--color-ink-muted)]">
               {selection.abbr}
               {meta?.capital ? ` · ${meta.capital}` : ""}
             </div>
@@ -695,32 +709,24 @@ function SelectionPanel({
           </button>
         </div>
 
-        <dl className="mt-3 grid grid-cols-3 gap-3 text-[12px]">
-          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2.5">
-            <dt className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-              {T.gdp}
-            </dt>
-            <dd className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
-              ${rec.gdpBusd.toFixed(1)}B
-            </dd>
-          </div>
-          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2.5">
-            <dt className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-              {T.pop}
-            </dt>
-            <dd className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
-              {rec.popMillions.toFixed(2)}M
-            </dd>
-          </div>
-          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2.5">
-            <dt className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-              {T.students}
-            </dt>
-            <dd className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
-              {rec.uzStudents}
-            </dd>
-          </div>
-        </dl>
+        {/* Defensive: if rec is missing for some reason, render dashes instead
+            of returning null — the user always sees feedback that the click
+            registered. */}
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <MetricCard
+            label={T.gdp}
+            value={rec ? `$${rec.gdpBusd.toFixed(1)}B` : "—"}
+          />
+          <MetricCard
+            label={T.pop}
+            value={rec ? `${rec.popMillions.toFixed(2)}M` : "—"}
+          />
+          <MetricCard
+            label={T.students}
+            value={rec ? rec.uzStudents.toLocaleString(locale === "ru" ? "ru-RU" : "en-US") : "—"}
+            highlight
+          />
+        </div>
 
         {missionsHere.length > 0 ? (
           <div className="mt-3">
@@ -848,6 +854,44 @@ function SelectionPanel({
         >
           <X className="size-4" />
         </button>
+      </div>
+    </div>
+  );
+}
+
+function MetricCard({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "rounded-md border p-3",
+        highlight
+          ? "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)]"
+          : "border-[var(--color-border)] bg-[var(--color-surface-2)]",
+      )}
+    >
+      <div
+        className={cn(
+          "text-[10px] font-semibold uppercase tracking-wider",
+          highlight ? "text-[var(--color-primary)]" : "text-[var(--color-ink-faint)]",
+        )}
+      >
+        {label}
+      </div>
+      <div
+        className={cn(
+          "mono mt-1.5 text-[20px] font-semibold leading-none tabular",
+          highlight ? "text-[var(--color-primary)]" : "text-[var(--color-ink)]",
+        )}
+      >
+        {value}
       </div>
     </div>
   );
