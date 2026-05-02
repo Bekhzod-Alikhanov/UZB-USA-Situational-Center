@@ -5,11 +5,9 @@ import {
   ArrowDownToLine,
   Scale,
   AlertTriangle,
-  Activity,
   CalendarDays,
   Layers,
   Gift,
-  ShieldCheck,
   Users2,
 } from "lucide-react";
 import { tradeAnnual, tradeJan2026 } from "@/data/trade";
@@ -27,8 +25,6 @@ import { SectorsGrid } from "@/components/overview/SectorsGrid";
 import { CounterpartsRank } from "@/components/overview/CounterpartsRank";
 import { GrantsDonut } from "@/components/overview/GrantsDonut";
 import { Horizon } from "@/components/overview/Horizon";
-import { CompliancePosture } from "@/components/overview/CompliancePosture";
-import { ActivityTimeline } from "@/components/overview/ActivityTimeline";
 import { RiskRadar } from "@/components/overview/RiskRadar";
 import { PrintButton } from "@/components/exports/PrintButton";
 
@@ -301,18 +297,6 @@ export default async function OverviewPage({
             </CardBody>
           </Card>
 
-          <Card tone="slate">
-            <CardHeader
-              icon={<ShieldCheck className="size-3.5" />}
-              tone="slate"
-              title={locale === "ru" ? "Compliance posture" : "Compliance posture"}
-              sub="OFAC · BIS-EAR · ITAR · GSP · MFN · ECCN"
-            />
-            <CardBody>
-              <CompliancePosture locale={locale} />
-            </CardBody>
-          </Card>
-
           <Card tone="invest">
             <CardHeader
               icon={<Gift className="size-3.5" />}
@@ -322,18 +306,6 @@ export default async function OverviewPage({
             />
             <CardBody>
               <GrantsDonut size={132} />
-            </CardBody>
-          </Card>
-
-          <Card tone="agree">
-            <CardHeader
-              icon={<Activity className="size-3.5" />}
-              tone="agree"
-              title={t("timeline")}
-              sub={locale === "ru" ? "свежие визиты, события, подписания" : "recent visits, events, signings"}
-            />
-            <CardBody>
-              <ActivityTimeline limit={6} />
             </CardBody>
           </Card>
         </div>
