@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { geoAlbersUsa, geoPath, type GeoProjection } from "d3-geo";
 import {
   usStateMetrics,
   usStateMetricsMeta,
   metricValue,
+  getMetric,
   maxFor,
   totalFor,
   type UsStatesMetric,
@@ -14,10 +15,10 @@ import { findStateByName, findStateByAbbr, type UsState } from "@/data/us-states
 import { uzMissionsUs, type UzMission, type UzMissionStatus } from "@/data/uz-missions-us";
 import { uzPlannedVisitsUs, type UzPlannedVisit } from "@/data/uz-planned-visits-us";
 import { cn } from "@/lib/utils";
-import { Building2, Globe2, Landmark, MapPin, CalendarClock } from "lucide-react";
+import { Building2, Globe2, Landmark, MapPin, CalendarClock, X } from "lucide-react";
 
-const WIDTH = 960;
-const HEIGHT = 560;
+const VBW = 960;
+const VBH = 560;
 
 interface Feature {
   type: "Feature";
@@ -29,17 +30,15 @@ interface FeatureCollection {
   features: Feature[];
 }
 
-// ---------------------------------------------------------------------------
-// i18n strings
-// ---------------------------------------------------------------------------
+// ----- i18n strings ----------------------------------------------------------
 interface Strings {
   metric: string;
   gdp: string;
   pop: string;
-  diaspora: string;
+  students: string;
   gdpDesc: string;
   popDesc: string;
-  diasporaDesc: string;
+  studentsDesc: string;
   pinsTitle: string;
   showMissions: string;
   showVisits: string;
@@ -63,21 +62,21 @@ interface Strings {
   state: string;
   scale: string;
   legend: string;
+  hint: string;
   noteGdp: string;
   notePop: string;
-  noteDiaspora: string;
-  diasporaEstimate: string;
+  noteStudents: string;
 }
 
 const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
   en: {
     metric: "Metric",
-    gdp: "GDP 2024",
-    pop: "Population",
-    diaspora: "UZ diaspora",
-    gdpDesc: "Gross Domestic Product, 2024 — BEA SAGDP1, USD billions",
-    popDesc: "Population estimate (Census Vintage 2024, July 1, 2024) — thousands",
-    diasporaDesc: "Estimated Uzbek-American population, 2025 — ACS 2022 + community estimates",
+    gdp: "GDP 2025",
+    pop: "Population 2025",
+    students: "UZ students",
+    gdpDesc: "Gross Domestic Product, 2025 — BEA SAGDP1, USD billions",
+    popDesc: "Population, 2025 — U.S. Census, millions",
+    studentsDesc: "Students from Uzbekistan in this state, 2024-25 — Open Doors / IIE",
     pinsTitle: "Pins",
     showMissions: "UZ missions",
     showVisits: "Planned visits",
@@ -101,19 +100,19 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     state: "State",
     scale: "Scale",
     legend: "Legend",
-    noteGdp: `Source: ${usStateMetricsMeta.gdp.sourceShort}, year ${usStateMetricsMeta.gdp.year}.`,
-    notePop: `Source: ${usStateMetricsMeta.population.sourceShort}, ${usStateMetricsMeta.population.note}`,
-    noteDiaspora: `Source: ${usStateMetricsMeta.diaspora.sourceShort}. ${usStateMetricsMeta.diaspora.note}`,
-    diasporaEstimate: "Estimate",
+    hint: "Hover a state to see details · click a pin for mission or visit info",
+    noteGdp: `Source: ${usStateMetricsMeta.gdp.sourceShort}.`,
+    notePop: `Source: ${usStateMetricsMeta.population.sourceShort}.`,
+    noteStudents: `Source: ${usStateMetricsMeta.students.sourceShort}.`,
   },
   ru: {
     metric: "Показатель",
-    gdp: "ВВП 2024",
-    pop: "Население",
-    diaspora: "Диаспора УЗ",
-    gdpDesc: "Валовой внутренний продукт, 2024 — BEA SAGDP1, млрд $",
-    popDesc: "Оценка населения (Census Vintage 2024, 1 июля 2024) — в тыс. человек",
-    diasporaDesc: "Оценка узбекской диаспоры, 2025 — ACS 2022 + общинные оценки",
+    gdp: "ВВП 2025",
+    pop: "Население 2025",
+    students: "Студенты из УЗ",
+    gdpDesc: "Валовой внутренний продукт, 2025 — BEA SAGDP1, млрд $",
+    popDesc: "Население, 2025 — U.S. Census, млн человек",
+    studentsDesc: "Студенты из Узбекистана в штате, 2024-25 — Open Doors / IIE",
     pinsTitle: "Метки",
     showMissions: "Диппредставительства",
     showVisits: "Плановые визиты",
@@ -137,22 +136,22 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     state: "Штат",
     scale: "Шкала",
     legend: "Легенда",
-    noteGdp: `Источник: ${usStateMetricsMeta.gdp.sourceShort}, ${usStateMetricsMeta.gdp.year}.`,
-    notePop: `Источник: ${usStateMetricsMeta.population.sourceShort}. ${usStateMetricsMeta.population.note}`,
-    noteDiaspora: `Источник: ${usStateMetricsMeta.diaspora.sourceShort}. ${usStateMetricsMeta.diaspora.note}`,
-    diasporaEstimate: "Оценка",
+    hint: "Наведите курсор на штат для данных · нажмите на метку для деталей",
+    noteGdp: `Источник: ${usStateMetricsMeta.gdp.sourceShort}.`,
+    notePop: `Источник: ${usStateMetricsMeta.population.sourceShort}.`,
+    noteStudents: `Источник: ${usStateMetricsMeta.students.sourceShort}.`,
   },
   "uz-latn": {
     metric: "Ko'rsatkich",
-    gdp: "YaIM 2024",
-    pop: "Aholi",
-    diaspora: "UZ diasporasi",
-    gdpDesc: "Yalpi ichki mahsulot, 2024 — BEA SAGDP1, mlrd $",
-    popDesc: "Aholi soni (Census V2024, 1-iyul 2024) — ming kishi",
-    diasporaDesc: "O'zbek diasporasi taxminiy soni, 2025 — ACS 2022 + jamoatchilik baholashlari",
+    gdp: "YaIM 2025",
+    pop: "Aholi 2025",
+    students: "UZ talabalari",
+    gdpDesc: "Yalpi ichki mahsulot, 2025 — BEA SAGDP1, mlrd $",
+    popDesc: "Aholi soni, 2025 — U.S. Census, mln",
+    studentsDesc: "Shtatdagi O'zbekistondan kelgan talabalar, 2024-25 — Open Doors / IIE",
     pinsTitle: "Belgilar",
-    showMissions: "Diplomatik vakolatxonalar",
-    showVisits: "Rejalashtirilgan tashriflar",
+    showMissions: "Vakolatxonalar",
+    showVisits: "Tashriflar",
     embassy: "Elchixona",
     consulateGeneral: "Bosh konsullik",
     consulate: "Konsullik",
@@ -173,10 +172,10 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     state: "Shtat",
     scale: "Shkala",
     legend: "Belgilar",
-    noteGdp: `Manba: ${usStateMetricsMeta.gdp.sourceShort}, ${usStateMetricsMeta.gdp.year}.`,
+    hint: "Ma'lumot uchun shtatga kursor olib boring · belgini bosing",
+    noteGdp: `Manba: ${usStateMetricsMeta.gdp.sourceShort}.`,
     notePop: `Manba: ${usStateMetricsMeta.population.sourceShort}.`,
-    noteDiaspora: `Manba: ${usStateMetricsMeta.diaspora.sourceShort}. ${usStateMetricsMeta.diaspora.note}`,
-    diasporaEstimate: "Taxmin",
+    noteStudents: `Manba: ${usStateMetricsMeta.students.sourceShort}.`,
   },
 };
 
@@ -192,54 +191,55 @@ function pickStateLabel(state: UsState | undefined, fallback: string, locale: st
   return state.name;
 }
 
-// ---------------------------------------------------------------------------
-// Color scale
-// ---------------------------------------------------------------------------
+// ----- Color scale -----------------------------------------------------------
 function colorScale(value: number, max: number): string {
   if (max === 0 || value === 0) return "var(--color-surface-2)";
   const t = Math.min(1, value / max);
-  if (t > 0.75) return "color-mix(in oklab, var(--color-primary) 95%, transparent)";
+  // 5-step quantile-ish ramp using color-mix on the primary tone
+  if (t > 0.75) return "color-mix(in oklab, var(--color-primary) 92%, transparent)";
   if (t > 0.5) return "color-mix(in oklab, var(--color-primary) 70%, transparent)";
   if (t > 0.25) return "color-mix(in oklab, var(--color-primary) 45%, transparent)";
-  if (t > 0) return "color-mix(in oklab, var(--color-primary) 22%, transparent)";
+  if (t > 0.1) return "color-mix(in oklab, var(--color-primary) 25%, transparent)";
+  if (t > 0) return "color-mix(in oklab, var(--color-primary) 12%, transparent)";
   return "var(--color-surface-2)";
 }
 
-// ---------------------------------------------------------------------------
-// Mission / visit styling
-// ---------------------------------------------------------------------------
+// ----- Mission pin styling ---------------------------------------------------
 const MISSION_STATUS_COLOR: Record<UzMissionStatus, string> = {
-  active: "var(--color-pos)",
-  "opened-2026": "var(--color-primary)",
-  "planned-2026": "var(--color-warn)",
-  "planned-2027": "var(--color-warn)",
+  active: "#0A7C5A", // pos green
+  "opened-2026": "#1A3A6C", // primary navy
+  "planned-2026": "#C88A12", // warn amber
+  "planned-2027": "#C88A12",
 };
 
-function formatNumber(v: number, metric: UsStatesMetric, locale: string): string {
-  const nf = new Intl.NumberFormat(locale === "ru" ? "ru-RU" : "en-US");
-  if (metric === "gdp") return `$${nf.format(v)} bn`;
-  if (metric === "population") return `${nf.format(v)} k`;
-  return nf.format(v);
+// ----- Number formatting -----------------------------------------------------
+function formatMetric(metric: UsStatesMetric, value: number, locale: string): string {
+  const nf = new Intl.NumberFormat(locale === "ru" ? "ru-RU" : "en-US", {
+    maximumFractionDigits: metric === "students" ? 0 : 1,
+  });
+  if (metric === "gdp") return `$${nf.format(value)}B`;
+  if (metric === "population") return `${nf.format(value)}M`;
+  return nf.format(value);
 }
 
-interface PinSelection {
-  kind: "mission" | "visit";
-  mission?: UzMission;
-  visit?: UzPlannedVisit;
-  x: number;
-  y: number;
-}
-
-interface StateHover {
+// ----- Tooltip / selection state --------------------------------------------
+interface StateTip {
   abbr: string;
   name: string;
-  x: number;
-  y: number;
+  /** Viewport pixel position of the cursor. */
+  px: number;
+  py: number;
 }
 
-// ---------------------------------------------------------------------------
+type Selection =
+  | { kind: "state"; abbr: string }
+  | { kind: "mission"; mission: UzMission }
+  | { kind: "visit"; visit: UzPlannedVisit }
+  | null;
+
+// =============================================================================
 // Component
-// ---------------------------------------------------------------------------
+// =============================================================================
 export function UsCenteredMap() {
   const locale = useLocale();
   const T = pickStr(locale);
@@ -248,9 +248,12 @@ export function UsCenteredMap() {
   const [showMissions, setShowMissions] = useState(true);
   const [showVisits, setShowVisits] = useState(true);
   const [features, setFeatures] = useState<Feature[] | null>(null);
-  const [hover, setHover] = useState<StateHover | null>(null);
-  const [pin, setPin] = useState<PinSelection | null>(null);
+  const [tip, setTip] = useState<StateTip | null>(null);
+  const [selection, setSelection] = useState<Selection>(null);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Load geojson
   useEffect(() => {
     let cancelled = false;
     fetch("/us-states.geojson")
@@ -269,7 +272,7 @@ export function UsCenteredMap() {
   // Single shared projection — used for both choropleth paths and pin coords.
   const projection = useMemo<GeoProjection | null>(() => {
     if (!features || features.length === 0) return null;
-    return geoAlbersUsa().fitSize([WIDTH, HEIGHT], {
+    return geoAlbersUsa().fitSize([VBW, VBH], {
       type: "FeatureCollection",
       features,
     } as never);
@@ -280,27 +283,29 @@ export function UsCenteredMap() {
   const max = maxFor(metric);
   const total = totalFor(metric);
 
-  const top5 = useMemo(() => {
-    return [...usStateMetrics]
-      .map((s) => ({ abbr: s.abbr, v: metricValue(s.abbr, metric) }))
-      .sort((a, b) => b.v - a.v)
-      .slice(0, 5);
-  }, [metric]);
+  const top5 = useMemo(
+    () =>
+      [...usStateMetrics]
+        .map((s) => ({ abbr: s.abbr, v: metricValue(s.abbr, metric) }))
+        .sort((a, b) => b.v - a.v)
+        .slice(0, 5),
+    [metric],
+  );
 
   const METRIC_LABEL: Record<UsStatesMetric, string> = {
     gdp: T.gdp,
     population: T.pop,
-    diaspora: T.diaspora,
+    students: T.students,
   };
   const METRIC_DESC: Record<UsStatesMetric, string> = {
     gdp: T.gdpDesc,
     population: T.popDesc,
-    diaspora: T.diasporaDesc,
+    students: T.studentsDesc,
   };
   const METRIC_NOTE: Record<UsStatesMetric, string> = {
     gdp: T.noteGdp,
     population: T.notePop,
-    diaspora: T.noteDiaspora,
+    students: T.noteStudents,
   };
   const STATUS_LABEL: Record<UzMissionStatus, string> = {
     active: T.active,
@@ -315,7 +320,7 @@ export function UsCenteredMap() {
     "un-mission": T.unMission,
   };
 
-  function project(lng: number, lat: number): [number, number] | null {
+  function projectPin(lng: number, lat: number): [number, number] | null {
     if (!projection) return null;
     return projection([lng, lat]) as [number, number] | null;
   }
@@ -328,7 +333,7 @@ export function UsCenteredMap() {
           <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
             {T.metric}:
           </span>
-          {(["gdp", "population", "diaspora"] as UsStatesMetric[]).map((m) => (
+          {(["gdp", "population", "students"] as UsStatesMetric[]).map((m) => (
             <button
               key={m}
               type="button"
@@ -349,31 +354,24 @@ export function UsCenteredMap() {
           <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
             {T.pinsTitle}:
           </span>
-          <PinToggle
-            active={showMissions}
-            onClick={() => setShowMissions((v) => !v)}
-            tone="pos"
-            icon={<Building2 className="size-3" />}
-          >
+          <PinToggle active={showMissions} onClick={() => setShowMissions((v) => !v)} tone="pos" icon={<Building2 className="size-3" />}>
             {T.showMissions}
           </PinToggle>
-          <PinToggle
-            active={showVisits}
-            onClick={() => setShowVisits((v) => !v)}
-            tone="warn"
-            icon={<CalendarClock className="size-3" />}
-          >
+          <PinToggle active={showVisits} onClick={() => setShowVisits((v) => !v)} tone="warn" icon={<CalendarClock className="size-3" />}>
             {T.showVisits}
           </PinToggle>
         </div>
       </div>
 
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[11.5px] text-[var(--color-ink-muted)]">
-        {METRIC_DESC[metric]}
+        {METRIC_DESC[metric]} · <span className="text-[var(--color-ink-faint)]">{T.hint}</span>
       </div>
 
-      {/* Map */}
-      <div className="relative overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)]">
+      {/* Map container */}
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-bg)]"
+      >
         {!features ? (
           <div className="flex h-[420px] items-center justify-center text-[12px] text-[var(--color-ink-muted)] sm:h-[560px]">
             {T.loading}
@@ -384,13 +382,14 @@ export function UsCenteredMap() {
           </div>
         ) : (
           <svg
-            viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+            viewBox={`0 0 ${VBW} ${VBH}`}
+            preserveAspectRatio="xMidYMid meet"
             className="block h-auto w-full"
             role="img"
             aria-label="United States map — UZ engagement footprint"
-            onMouseLeave={() => setHover(null)}
+            onMouseLeave={() => setTip(null)}
           >
-            {/* Choropleth */}
+            {/* States */}
             <g>
               {features.map((f, i) => {
                 const stateName = String(f.properties.name);
@@ -399,30 +398,33 @@ export function UsCenteredMap() {
                 const fill = colorScale(value, max);
                 const d = path(f as never);
                 if (!d) return null;
+                const isSelected =
+                  selection?.kind === "state" && meta && selection.abbr === meta.abbr;
                 return (
                   <path
                     key={i}
                     d={d}
                     fill={fill}
-                    stroke="var(--color-border-strong)"
-                    strokeWidth={0.6}
+                    stroke={isSelected ? "#1A3A6C" : "rgba(0,0,0,0.35)"}
+                    strokeWidth={isSelected ? 2 : 0.7}
+                    style={{ cursor: meta ? "pointer" : "default", transition: "stroke 120ms" }}
                     onMouseMove={(e) => {
                       if (!meta) return;
-                      const rect = (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect();
-                      const scaleX = WIDTH / rect.width;
-                      const scaleY = HEIGHT / rect.height;
-                      setHover({
+                      setTip({
                         abbr: meta.abbr,
                         name: stateName,
-                        x: (e.clientX - rect.left) * scaleX,
-                        y: (e.clientY - rect.top) * scaleY,
+                        px: e.clientX,
+                        py: e.clientY,
                       });
                     }}
-                    style={{ cursor: meta ? "pointer" : "default" }}
+                    onClick={() => {
+                      if (!meta) return;
+                      setSelection({ kind: "state", abbr: meta.abbr });
+                    }}
                   >
-                    <title>
-                      {`${pickStateLabel(meta, stateName, locale)} — ${formatNumber(value, metric, locale)}`}
-                    </title>
+                    <title>{`${pickStateLabel(meta, stateName, locale)}${
+                      meta ? ` — ${formatMetric(metric, value, locale)}` : ""
+                    }`}</title>
                   </path>
                 );
               })}
@@ -432,7 +434,7 @@ export function UsCenteredMap() {
             {showMissions ? (
               <g>
                 {uzMissionsUs.map((m) => {
-                  const p = project(m.lng, m.lat);
+                  const p = projectPin(m.lng, m.lat);
                   if (!p) return null;
                   const [cx, cy] = p;
                   const color = MISSION_STATUS_COLOR[m.status];
@@ -443,15 +445,12 @@ export function UsCenteredMap() {
                       transform={`translate(${cx},${cy})`}
                       style={{ cursor: "pointer" }}
                       onClick={(e) => {
-                        const rect = (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect();
-                        setPin({
-                          kind: "mission",
-                          mission: m,
-                          x: rect.left + (cx / WIDTH) * rect.width,
-                          y: rect.top + (cy / HEIGHT) * rect.height,
-                        });
+                        e.stopPropagation();
+                        setSelection({ kind: "mission", mission: m });
                       }}
                     >
+                      {/* outer halo */}
+                      <circle r={9} fill={color} fillOpacity={0.18} />
                       <circle
                         r={6}
                         fill={color}
@@ -459,10 +458,7 @@ export function UsCenteredMap() {
                         strokeWidth={2}
                         strokeDasharray={isPlanned ? "2 2" : undefined}
                       />
-                      {/* Inner dot signals UN-mission specifically */}
-                      {m.type === "un-mission" ? (
-                        <circle r={2} fill="white" />
-                      ) : null}
+                      {m.type === "un-mission" ? <circle r={2} fill="white" /> : null}
                       <title>{`${m.name} — ${TYPE_LABEL[m.type]} · ${STATUS_LABEL[m.status]}`}</title>
                     </g>
                   );
@@ -474,35 +470,32 @@ export function UsCenteredMap() {
             {showVisits ? (
               <g>
                 {uzPlannedVisitsUs.map((v) => {
-                  const p = project(v.lng, v.lat);
+                  const p = projectPin(v.lng, v.lat);
                   if (!p) return null;
                   const [cx, cy] = p;
                   return (
                     <g
                       key={v.id}
-                      transform={`translate(${cx},${cy}) rotate(45)`}
+                      transform={`translate(${cx},${cy})`}
                       style={{ cursor: "pointer" }}
                       onClick={(e) => {
-                        const rect = (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect();
-                        setPin({
-                          kind: "visit",
-                          visit: v,
-                          x: rect.left + (cx / WIDTH) * rect.width,
-                          y: rect.top + (cy / HEIGHT) * rect.height,
-                        });
+                        e.stopPropagation();
+                        setSelection({ kind: "visit", visit: v });
                       }}
                     >
-                      <rect
-                        x={-5}
-                        y={-5}
-                        width={10}
-                        height={10}
-                        fill="var(--color-warn)"
-                        stroke="white"
-                        strokeWidth={1.5}
-                        opacity={v.is_demo ? 0.7 : 1}
-                      />
-                      <title>{`${v.organization} — ${v.date}`}</title>
+                      <g transform="rotate(45)">
+                        <rect
+                          x={-5}
+                          y={-5}
+                          width={10}
+                          height={10}
+                          fill="#C88A12"
+                          stroke="white"
+                          strokeWidth={1.5}
+                          opacity={v.is_demo ? 0.78 : 1}
+                        />
+                      </g>
+                      <title>{`${v.organization} — ${v.date} (${v.city})`}</title>
                     </g>
                   );
                 })}
@@ -511,26 +504,15 @@ export function UsCenteredMap() {
           </svg>
         )}
 
-        {/* State hover tooltip (positioned in viewport-coords) */}
-        {hover ? (
-          <div
-            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[11px] shadow-md"
-            style={{
-              // The SVG uses viewBox; convert SVG coords back to container ratio.
-              left: `${(hover.x / WIDTH) * 100}%`,
-              top: `${(hover.y / HEIGHT) * 100}%`,
-            }}
-          >
-            <StateTooltip abbr={hover.abbr} name={hover.name} locale={locale} T={T} />
-          </div>
-        ) : null}
+        {/* Hover tooltip — anchored to viewport coords (clientX/clientY) */}
+        {tip ? <StateHoverTooltip tip={tip} locale={locale} T={T} containerRef={containerRef} /> : null}
       </div>
 
-      {/* Pin detail card */}
-      {pin ? (
-        <PinDetail
-          pin={pin}
-          onClose={() => setPin(null)}
+      {/* Selection details panel */}
+      {selection ? (
+        <SelectionPanel
+          selection={selection}
+          onClose={() => setSelection(null)}
           T={T}
           STATUS_LABEL={STATUS_LABEL}
           TYPE_LABEL={TYPE_LABEL}
@@ -540,18 +522,17 @@ export function UsCenteredMap() {
 
       {/* Legend + Top-5 */}
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-        {/* Choropleth scale */}
         <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2">
           <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
             {T.scale} · {METRIC_LABEL[metric]}
           </div>
           <div className="mt-1.5 flex items-center gap-1.5">
-            {[0.05, 0.25, 0.5, 0.75, 1].map((t) => (
+            {[0.12, 0.25, 0.45, 0.7, 0.92].map((t) => (
               <span
                 key={t}
                 className="h-3 flex-1 rounded-sm"
                 style={{
-                  background: `color-mix(in oklab, var(--color-primary) ${t * 95}%, transparent)`,
+                  background: `color-mix(in oklab, var(--color-primary) ${t * 100}%, transparent)`,
                 }}
                 aria-hidden
               />
@@ -559,37 +540,35 @@ export function UsCenteredMap() {
           </div>
           <div className="mt-1 flex justify-between text-[10px] text-[var(--color-ink-muted)]">
             <span>0</span>
-            <span className="mono tabular">{formatNumber(max, metric, locale)}</span>
+            <span className="mono tabular">{formatMetric(metric, max, locale)}</span>
           </div>
           <div className="mt-1.5 text-[10.5px] text-[var(--color-ink-muted)]">
             {T.total}:{" "}
             <span className="mono font-semibold tabular text-[var(--color-ink)]">
-              {formatNumber(total, metric, locale)}
+              {formatMetric(metric, total, locale)}
             </span>
           </div>
         </div>
 
-        {/* Pin legend */}
         <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2">
           <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
             {T.legend}
           </div>
           <div className="mt-1.5 flex flex-col gap-1 text-[11px] text-[var(--color-ink)]">
-            <LegendDot color="var(--color-pos)">
+            <LegendDot color="#0A7C5A">
               {T.embassy} / {T.consulateGeneral} — {T.active}
             </LegendDot>
-            <LegendDot color="var(--color-pos)" inner="white">
+            <LegendDot color="#0A7C5A" inner="white">
               {T.unMission}
             </LegendDot>
-            <LegendDot color="var(--color-primary)">{T.opened2026}</LegendDot>
-            <LegendDot color="var(--color-warn)" dashed>
+            <LegendDot color="#1A3A6C">{T.opened2026}</LegendDot>
+            <LegendDot color="#C88A12" dashed>
               {T.planned2026} / {T.planned2027}
             </LegendDot>
             <LegendDiamond>{T.visit}</LegendDiamond>
           </div>
         </div>
 
-        {/* Top-5 */}
         <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2">
           <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
             {T.top5} · {METRIC_LABEL[metric]}
@@ -608,7 +587,7 @@ export function UsCenteredMap() {
                     </span>
                   </span>
                   <span className="mono shrink-0 tabular text-[var(--color-ink)]">
-                    {formatNumber(s.v, metric, locale)}
+                    {formatMetric(metric, s.v, locale)}
                   </span>
                 </li>
               );
@@ -622,95 +601,201 @@ export function UsCenteredMap() {
   );
 }
 
-// ---------------------------------------------------------------------------
+// =============================================================================
 // Sub-components
-// ---------------------------------------------------------------------------
-function StateTooltip({
-  abbr,
-  name,
+// =============================================================================
+function StateHoverTooltip({
+  tip,
   locale,
   T,
+  containerRef,
 }: {
-  abbr: string;
-  name: string;
+  tip: StateTip;
   locale: string;
   T: Strings;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
-  const meta = findStateByAbbr(abbr);
-  const label = pickStateLabel(meta, name, locale);
-  const gdp = metricValue(abbr, "gdp");
-  const pop = metricValue(abbr, "population");
-  const dia = metricValue(abbr, "diaspora");
+  const meta = findStateByAbbr(tip.abbr);
+  const label = pickStateLabel(meta, tip.name, locale);
+  const rec = getMetric(tip.abbr);
+  const rect = containerRef.current?.getBoundingClientRect();
+  // Position relative to the container so the tooltip travels with the SVG,
+  // not the page scroll. Offset above-left of the cursor.
+  const left = rect ? tip.px - rect.left : 0;
+  const top = rect ? tip.py - rect.top : 0;
   return (
-    <div className="flex flex-col gap-0.5 whitespace-nowrap">
-      <div className="font-medium text-[var(--color-ink)]">{label}</div>
-      <div className="mono tabular text-[var(--color-ink-muted)]">
-        {T.gdp}: <span className="text-[var(--color-ink)]">${gdp.toLocaleString(locale === "ru" ? "ru-RU" : "en-US")} bn</span>
+    <div
+      role="status"
+      aria-live="polite"
+      className="pointer-events-none absolute z-20 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[11px] shadow-lg"
+      style={{
+        left: Math.max(8, left + 14),
+        top: Math.max(8, top + 14),
+      }}
+    >
+      <div className="text-[12px] font-semibold text-[var(--color-ink)]">{label}</div>
+      <div className="mono mt-0.5 text-[10.5px] tabular text-[var(--color-ink-muted)]">
+        {tip.abbr}
       </div>
-      <div className="mono tabular text-[var(--color-ink-muted)]">
-        {T.pop}:{" "}
-        <span className="text-[var(--color-ink)]">{pop.toLocaleString(locale === "ru" ? "ru-RU" : "en-US")} k</span>
-      </div>
-      <div className="mono tabular text-[var(--color-ink-muted)]">
-        {T.diaspora}:{" "}
-        <span className="text-[var(--color-ink)]">{dia.toLocaleString(locale === "ru" ? "ru-RU" : "en-US")}</span>
-      </div>
+      <dl className="mt-1.5 grid grid-cols-[auto_auto] gap-x-3 gap-y-0.5 text-[11px] tabular">
+        <dt className="text-[var(--color-ink-muted)]">{T.gdp}:</dt>
+        <dd className="mono text-right text-[var(--color-ink)]">
+          {rec ? `$${rec.gdpBusd.toFixed(1)}B` : "—"}
+        </dd>
+        <dt className="text-[var(--color-ink-muted)]">{T.pop}:</dt>
+        <dd className="mono text-right text-[var(--color-ink)]">
+          {rec ? `${rec.popMillions.toFixed(2)}M` : "—"}
+        </dd>
+        <dt className="text-[var(--color-ink-muted)]">{T.students}:</dt>
+        <dd className="mono text-right text-[var(--color-ink)]">{rec ? rec.uzStudents : "—"}</dd>
+      </dl>
     </div>
   );
 }
 
-function PinDetail({
-  pin,
+function SelectionPanel({
+  selection,
   onClose,
   T,
   STATUS_LABEL,
   TYPE_LABEL,
   locale,
 }: {
-  pin: PinSelection;
+  selection: Exclude<Selection, null>;
   onClose: () => void;
   T: Strings;
   STATUS_LABEL: Record<UzMissionStatus, string>;
   TYPE_LABEL: Record<UzMission["type"], string>;
   locale: string;
 }) {
-  return (
-    <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-      {pin.kind === "mission" && pin.mission ? (
+  if (selection.kind === "state") {
+    const meta = findStateByAbbr(selection.abbr);
+    const rec = getMetric(selection.abbr);
+    if (!rec) return null;
+    const label = pickStateLabel(meta, selection.abbr, locale);
+    const missionsHere = uzMissionsUs.filter((m) => m.state === selection.abbr);
+    const visitsHere = uzPlannedVisitsUs.filter((v) => v.state === selection.abbr);
+    return (
+      <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="text-[15px] font-semibold text-[var(--color-ink)]">{label}</div>
+            <div className="mono text-[11px] text-[var(--color-ink-muted)]">
+              {selection.abbr}
+              {meta?.capital ? ` · ${meta.capital}` : ""}
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
+          >
+            <X className="size-4" />
+          </button>
+        </div>
+
+        <dl className="mt-3 grid grid-cols-3 gap-3 text-[12px]">
+          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2.5">
+            <dt className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+              {T.gdp}
+            </dt>
+            <dd className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
+              ${rec.gdpBusd.toFixed(1)}B
+            </dd>
+          </div>
+          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2.5">
+            <dt className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+              {T.pop}
+            </dt>
+            <dd className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
+              {rec.popMillions.toFixed(2)}M
+            </dd>
+          </div>
+          <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2.5">
+            <dt className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+              {T.students}
+            </dt>
+            <dd className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
+              {rec.uzStudents}
+            </dd>
+          </div>
+        </dl>
+
+        {missionsHere.length > 0 ? (
+          <div className="mt-3">
+            <div className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+              {T.showMissions}
+            </div>
+            <ul className="mt-1.5 flex flex-col gap-1 text-[12px]">
+              {missionsHere.map((m) => (
+                <li key={m.id} className="flex items-center justify-between gap-2">
+                  <span className="text-[var(--color-ink)]">{m.name}</span>
+                  <span className="mono text-[10.5px] text-[var(--color-ink-muted)]">
+                    {STATUS_LABEL[m.status]}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        {visitsHere.length > 0 ? (
+          <div className="mt-3">
+            <div className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+              {T.showVisits}
+            </div>
+            <ul className="mt-1.5 flex flex-col gap-1 text-[12px]">
+              {visitsHere.map((v) => (
+                <li key={v.id} className="flex items-center justify-between gap-2">
+                  <span className="truncate text-[var(--color-ink)]">{v.organization}</span>
+                  <span className="mono shrink-0 text-[10.5px] text-[var(--color-ink-muted)]">
+                    {v.date}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+
+  if (selection.kind === "mission") {
+    const m = selection.mission;
+    return (
+      <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-[var(--color-pos-soft)] text-[var(--color-pos)]">
-            {pin.mission.type === "embassy" ? (
+          <div className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-md bg-[var(--color-pos-soft)] text-[var(--color-pos)]">
+            {m.type === "embassy" ? (
               <Landmark className="size-4" />
-            ) : pin.mission.type === "un-mission" ? (
+            ) : m.type === "un-mission" ? (
               <Globe2 className="size-4" />
             ) : (
               <Building2 className="size-4" />
             )}
           </div>
           <div className="min-w-0 flex-1">
-            <div className="text-[13px] font-semibold text-[var(--color-ink)]">{pin.mission.name}</div>
+            <div className="text-[14px] font-semibold text-[var(--color-ink)]">{m.name}</div>
             <div className="mt-0.5 text-[11.5px] text-[var(--color-ink-muted)]">
-              <span className="mono">{TYPE_LABEL[pin.mission.type]}</span> ·{" "}
-              <span>{pin.mission.city}</span> · {T.status}:{" "}
-              <span className="font-medium text-[var(--color-ink)]">
-                {STATUS_LABEL[pin.mission.status]}
-              </span>
+              {TYPE_LABEL[m.type]} · {m.city} ·{" "}
+              <span className="font-medium text-[var(--color-ink)]">{STATUS_LABEL[m.status]}</span>
             </div>
-            {pin.mission.address ? (
-              <div className="mt-1 flex items-start gap-1 text-[11px] text-[var(--color-ink-muted)]">
+            {m.address ? (
+              <div className="mt-1 flex items-start gap-1 text-[11.5px] text-[var(--color-ink-muted)]">
                 <MapPin className="mt-0.5 size-3 shrink-0" />
-                <span>{pin.mission.address}</span>
+                <span>{m.address}</span>
               </div>
             ) : null}
-            {pin.mission.web ? (
-              <div className="mt-1 text-[11px]">
+            {m.web ? (
+              <div className="mt-1 text-[11.5px]">
                 <a
-                  href={pin.mission.web}
+                  href={m.web}
                   target="_blank"
                   rel="noreferrer"
                   className="text-[var(--color-primary)] underline-offset-2 hover:underline"
                 >
-                  {pin.mission.web.replace(/^https?:\/\//, "")}
+                  {m.web.replace(/^https?:\/\//, "")}
                 </a>
               </div>
             ) : null}
@@ -718,53 +803,52 @@ function PinDetail({
           <button
             type="button"
             onClick={onClose}
-            className="ml-2 text-[11px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
-          >
-            ✕
-          </button>
-        </div>
-      ) : null}
-
-      {pin.kind === "visit" && pin.visit ? (
-        <div className="flex items-start gap-3">
-          <div className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-[var(--color-warn-soft)] text-[var(--color-warn)]">
-            <CalendarClock className="size-4" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-[13px] font-semibold text-[var(--color-ink)]">
-              {pin.visit.organization}
-            </div>
-            <div className="mt-0.5 text-[11.5px] text-[var(--color-ink-muted)]">
-              <span>{T.visit}</span> · {T.date}:{" "}
-              <span className="mono font-medium tabular text-[var(--color-ink)]">
-                {pin.visit.date}
-                {pin.visit.dateEnd ? ` – ${pin.visit.dateEnd}` : ""}
-              </span>{" "}
-              · {pin.visit.city}
-            </div>
-            <div className="mt-1 text-[11.5px] text-[var(--color-ink)]">
-              <span className="text-[var(--color-ink-muted)]">{T.purpose}:</span> {pin.visit.purpose}
-            </div>
-            {pin.visit.is_demo && pin.visit.source_note ? (
-              <div className="mt-1.5 rounded-sm bg-[var(--color-demo-bg)] px-2 py-1 text-[10.5px] text-[var(--color-demo-ink)]">
-                {pin.visit.source_note}
-              </div>
-            ) : null}
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="ml-2 text-[11px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
             aria-label="Close"
+            className="text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
           >
-            ✕
+            <X className="size-4" />
           </button>
         </div>
-      ) : null}
-      {/* locale used to satisfy unused-var lint when no number formatting reaches here */}
-      <span hidden aria-hidden>
-        {locale}
-      </span>
+      </div>
+    );
+  }
+
+  // visit
+  const v = selection.visit;
+  return (
+    <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+      <div className="flex items-start gap-3">
+        <div className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-md bg-[var(--color-warn-soft)] text-[var(--color-warn)]">
+          <CalendarClock className="size-4" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[14px] font-semibold text-[var(--color-ink)]">{v.organization}</div>
+          <div className="mt-0.5 text-[11.5px] text-[var(--color-ink-muted)]">
+            {T.visit} · {T.date}:{" "}
+            <span className="mono font-medium tabular text-[var(--color-ink)]">
+              {v.date}
+              {v.dateEnd ? ` – ${v.dateEnd}` : ""}
+            </span>{" "}
+            · {v.city}
+          </div>
+          <div className="mt-1.5 text-[12px] text-[var(--color-ink)]">
+            <span className="text-[var(--color-ink-muted)]">{T.purpose}:</span> {v.purpose}
+          </div>
+          {v.is_demo && v.source_note ? (
+            <div className="mt-1.5 rounded-sm bg-[var(--color-demo-bg)] px-2 py-1 text-[10.5px] text-[var(--color-demo-ink)]">
+              {v.source_note}
+            </div>
+          ) : null}
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
+        >
+          <X className="size-4" />
+        </button>
+      </div>
     </div>
   );
 }
@@ -835,7 +919,7 @@ function LegendDiamond({ children }: { children: React.ReactNode }) {
     <span className="inline-flex items-center gap-2">
       <svg width={14} height={14} aria-hidden viewBox="-7 -7 14 14">
         <g transform="rotate(45)">
-          <rect x={-4.5} y={-4.5} width={9} height={9} fill="var(--color-warn)" stroke="white" strokeWidth={1.2} />
+          <rect x={-4.5} y={-4.5} width={9} height={9} fill="#C88A12" stroke="white" strokeWidth={1.2} />
         </g>
       </svg>
       <span>{children}</span>

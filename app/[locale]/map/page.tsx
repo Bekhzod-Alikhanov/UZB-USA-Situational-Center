@@ -9,10 +9,12 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const totalGdp = totalFor("gdp");
-  const totalPop = totalFor("population");
-  const totalDiaspora = totalFor("diaspora");
-  const activeMissions = uzMissionsUs.filter((m) => m.status === "active" || m.status === "opened-2026").length;
+  const totalGdp = totalFor("gdp"); // $B
+  const totalPop = totalFor("population"); // millions
+  const totalStudents = totalFor("students");
+  const activeMissions = uzMissionsUs.filter(
+    (m) => m.status === "active" || m.status === "opened-2026",
+  ).length;
   const plannedMissions = uzMissionsUs.filter((m) => m.status.startsWith("planned")).length;
   const plannedVisits = uzPlannedVisitsUs.length;
 
@@ -24,20 +26,20 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
         : "United States — Uzbekistan footprint";
   const subtitle =
     locale === "ru"
-      ? "ВВП штата (BEA 2024), население (Census V2024), диаспора УЗ, диппредставительства и плановые визиты"
+      ? "ВВП штата 2025 (BEA), население 2025 (Census), студенты из УЗ, диппредставительства и плановые визиты"
       : locale === "uz-latn"
-        ? "Shtat YaIM (BEA 2024), aholi (Census V2024), UZ diasporasi, vakolatxonalar va rejalashtirilgan tashriflar"
-        : "State GDP (BEA 2024), population (Census V2024), UZ diaspora, missions, and planned visits";
+        ? "Shtat YaIM 2025 (BEA), aholi 2025 (Census), UZ talabalari, vakolatxonalar va rejalashtirilgan tashriflar"
+        : "State GDP 2025 (BEA), population 2025 (Census), UZ students, missions, and planned visits";
 
   const labels =
     locale === "ru"
       ? {
-          gdp: "Совокупный ВВП 50 штатов",
+          gdp: "Совокупный ВВП США",
           gdpSub: `BEA SAGDP1 ${usStateMetricsMeta.gdp.year}`,
           pop: "Население США",
-          popSub: `Census V${usStateMetricsMeta.population.year}`,
-          dia: "Диаспора Узбекистана",
-          diaSub: `Оценка ${usStateMetricsMeta.diaspora.year}`,
+          popSub: `Census ${usStateMetricsMeta.population.year}`,
+          stu: "Студенты из УЗ",
+          stuSub: `Open Doors / IIE ${usStateMetricsMeta.students.year}`,
           missions: "Диппредставительства",
           missionsSub: `${activeMissions} действующих · ${plannedMissions} планируется`,
           visits: "Плановые визиты УЗ",
@@ -45,24 +47,24 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
         }
       : locale === "uz-latn"
         ? {
-            gdp: "AQSh shtatlar YaIMi",
+            gdp: "AQSh YaIMi",
             gdpSub: `BEA SAGDP1 ${usStateMetricsMeta.gdp.year}`,
             pop: "AQSh aholisi",
-            popSub: `Census V${usStateMetricsMeta.population.year}`,
-            dia: "O'zbek diasporasi",
-            diaSub: `${usStateMetricsMeta.diaspora.year} taxmin`,
+            popSub: `Census ${usStateMetricsMeta.population.year}`,
+            stu: "UZ talabalari",
+            stuSub: `Open Doors / IIE ${usStateMetricsMeta.students.year}`,
             missions: "Vakolatxonalar",
             missionsSub: `${activeMissions} faol · ${plannedMissions} rejalashtirilgan`,
             visits: "Rejalashtirilgan tashriflar",
             visitsSub: `2026-yilga ${plannedVisits} ta`,
           }
         : {
-            gdp: "Total US state GDP",
+            gdp: "Total US GDP",
             gdpSub: `BEA SAGDP1 ${usStateMetricsMeta.gdp.year}`,
             pop: "Total US population",
-            popSub: `Census V${usStateMetricsMeta.population.year}`,
-            dia: "UZ diaspora total",
-            diaSub: `${usStateMetricsMeta.diaspora.year} estimate`,
+            popSub: `Census ${usStateMetricsMeta.population.year}`,
+            stu: "Students from UZ",
+            stuSub: `Open Doors / IIE ${usStateMetricsMeta.students.year}`,
             missions: "UZ missions",
             missionsSub: `${activeMissions} active · ${plannedMissions} planned`,
             visits: "Planned UZ visits",
@@ -80,15 +82,11 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
         <MiniStat label={labels.gdp} value={`$${(totalGdp / 1000).toFixed(1)}T`} sub={labels.gdpSub} />
+        <MiniStat label={labels.pop} value={`${totalPop.toFixed(1)}M`} sub={labels.popSub} />
         <MiniStat
-          label={labels.pop}
-          value={`${(totalPop / 1000).toFixed(1)}M`}
-          sub={labels.popSub}
-        />
-        <MiniStat
-          label={labels.dia}
-          value={`~${(totalDiaspora / 1000).toFixed(0)}k`}
-          sub={labels.diaSub}
+          label={labels.stu}
+          value={totalStudents.toLocaleString(locale === "ru" ? "ru-RU" : "en-US")}
+          sub={labels.stuSub}
         />
         <MiniStat
           label={labels.missions}
