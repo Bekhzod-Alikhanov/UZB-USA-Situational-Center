@@ -7,7 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate:data": "node scripts/validate-data.mjs",
+    "smoke:routes": "node scripts/smoke-routes.mjs",
+    "check:package": "node scripts/check-package-hygiene.mjs",
+    "probe:live": "node scripts/probe-live-data.mjs",
+    "test:governance": "node scripts/check-governance.mjs",
+    "verify": "pnpm lint && pnpm typecheck && pnpm validate:data && pnpm test:governance"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.73",

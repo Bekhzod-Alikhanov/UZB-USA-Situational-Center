@@ -1,6 +1,6 @@
 # UZ–US Situational Center · dashboard
 
-Production-grade Next.js 15 dashboard for the **Situational Center on Uzbekistan–USA cooperation**, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
+Production-grade Next.js 16 dashboard for the **Situational Center on Uzbekistan–USA cooperation**, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
 > **Demo-ready and production-quality.** Every synthetic value carries `is_demo: true` and is visually flagged so reputation is protected when real data is later swapped in. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the full provenance map.
 
@@ -8,27 +8,27 @@ Production-grade Next.js 15 dashboard for the **Situational Center on Uzbekistan
 
 | Layer | Choice |
 |---|---|
-| Framework | Next.js 15.1.6 · App Router · Turbopack · React 19 |
+| Framework | Next.js 16.2.4 · App Router · Turbopack · React 19.2 |
 | Styling | Tailwind CSS v4 · CSS-var design tokens |
 | State | Zustand v5 + persist |
-| i18n | next-intl v3 · 3 locales: `en`, `uz-latn`, `ru` |
+| i18n | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru` |
 | Tables | TanStack Table v8 |
 | Charts | Recharts (line/bar/area) · Visx (sankey/chord/treemap) |
-| Maps | maplibre-gl + react-map-gl (OpenFreeMap) · Globe.gl (lazy-loaded) |
+| Maps | maplibre-gl (OpenFreeMap) · Globe.gl (lazy-loaded) |
 | Drag-and-drop | @dnd-kit (Visit Prep Kanban) |
 | AI | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Sonnet 4.6) |
-| Auth | Cookie-based password gate on `/admin` (server action + middleware) |
+| Auth | Signed, short-lived cookie password gate on `/admin` (server action + middleware) |
 | Package manager | **pnpm** |
 
 ## Quick start
 
 ```bash
 pnpm install
-cp .env.example .env.local       # set ADMIN_PASSWORD and (optional) ANTHROPIC_API_KEY
+cp .env.example .env.local       # set ADMIN_PASSWORD; optionally enable the assistant
 pnpm dev                         # → http://localhost:3000
 ```
 
-Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists all 19 routes.
+Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 19 public dashboard sections plus the gated admin area and counterpart detail pages.
 
 ### Common scripts
 
@@ -37,12 +37,18 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 | `pnpm dev` | Dev server with Turbopack hot reload |
 | `pnpm build` | Production build (must pass before commit) |
 | `pnpm typecheck` | Strict TypeScript check (zero errors required) |
-| `pnpm lint` | next lint |
+| `pnpm lint` | ESLint over the full project |
+| `pnpm validate:data` | Source-id, locale, route-manifest, and env-doc validation |
+| `pnpm smoke:routes` | Fetches all localized routes from a running local server |
+| `pnpm check:package` | Checks tracked files for forbidden build/local artifacts |
+| `pnpm probe:live` | Probes optional public live-data connectors via a running server |
+| `pnpm test:governance` | Verifies no-downgrade policy, RLS tables, cron auth, and static fallback |
+| `pnpm verify` | Lint + typecheck + data validation + governance checks |
 | `pnpm start` | Serve the production build locally |
 
 > **Cache note:** running `pnpm build` while `pnpm dev` is alive will clobber the Turbopack cache and cause "missing required error components" errors in the running dev server. Stop dev before running build, or use `pnpm typecheck` for fast verification during development.
 
-## Routes (19 sections × 3 locales + admin/login + counterpart SSG)
+## Routes (19 public sidebar sections × 3 locales + admin/login + counterpart SSG)
 
 ```
 /[locale]/                       Overview (KPIs + globe + timeline + alerts)
@@ -56,7 +62,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 /[locale]/admin/login            Password gate (no auth needed)
 /[locale]/investments            Portfolio cards + sector/region/status filters
 /[locale]/events                 Unified calendar + iCal export
-/[locale]/grants                 7 real grants ($15.381M)
+/[locale]/grants                 7 UZ-side grant rows + 4 U.S.-side program records + ForeignAssistance.gov obligations
 /[locale]/contacts               Org directory · 13-member Council roster
 /[locale]/counterparts           Grid w/ role/party/stance filters
 /[locale]/counterparts/[id]      SSG briefing card (21 × 3 locales = 63 paths)
@@ -67,7 +73,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 /[locale]/assistant              AI chat (BYOK Anthropic key)
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
 
-/api/chat                        Dynamic — Anthropic stream proxy (503 if key missing)
+/api/chat                        Dynamic — Anthropic stream proxy (503 unless ASSISTANT_ENABLED=true and key is set)
 ```
 
 ## Deploy to Vercel
@@ -76,11 +82,52 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 2. **Import** the repo in Vercel; framework auto-detects as Next.js.
 3. **Set environment variables** in *Project Settings → Environment Variables* (Production + Preview):
    - `ADMIN_PASSWORD` — required for the admin gate
-   - `ANTHROPIC_API_KEY` — optional; enables the `/assistant` page
+   - `ADMIN_SESSION_SECRET` — strongly recommended; signs the admin session cookie independently of the password
+   - `ASSISTANT_ENABLED=true` — optional; explicitly enables the `/assistant` server route
+   - `ANTHROPIC_API_KEY` — optional; required together with `ASSISTANT_ENABLED=true`
+   - `DATA_BACKEND=static` — default; keep this until a private operational database is provisioned
+   - `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` — optional; server-only operational database adapter
+   - `CRON_SECRET` — required before Vercel scheduled ingestion can call `/api/cron/ingest`
+   - `CENSUS_API_KEY` — optional; improves U.S. Census International Trade API limits
+   - `BEA_API_KEY` — optional; required before BEA services/ITA metadata can be ingested
+   - `CENSUS_INGEST_MONTH` — optional `YYYY-MM`; defaults to the latest vetted static month until changed
 4. **Deploy.** First build takes ~3 minutes.
 5. **Custom domain** (optional): add via *Project Settings → Domains*.
 
 The `/api/chat` route is a dynamic Node route; everything else is fully static and cached at the edge.
+
+## Production operations
+
+The overview now includes an executive command center, relationship pillars, source quality, and live-data readiness. The admin area includes a production-readiness panel covering security, CI, live-data, database, and workflow gaps.
+
+Optional live public-data and governed-ingestion routes:
+
+```
+/api/live-data/health              Connector registry and environment readiness
+/api/live-data/health?probe=1      Active public endpoint probe
+/api/live-data/snapshot            Best-effort Census, World Bank, ForeignAssistance.gov, and EXIM pull
+/api/data/trade/latest             Approved/current trade metrics, DB first with static fallback
+/api/data/macro/latest             Approved/current macro metrics, DB first with static fallback
+/api/data/assistance/latest        Approved/current assistance metrics, DB first with static fallback
+/api/data/finance/latest           Approved/current finance metrics, DB first with static fallback
+/api/admin/ingest/status           Admin-only connector/policy/database status
+/api/admin/ingest/run              Admin-only dry-run; add ?write=1 only after DB/RLS approval
+/api/cron/ingest                   Vercel cron endpoint; requires CRON_SECRET
+```
+
+The operational database schema lives at `database/schema.sql`. It is designed for Postgres/Supabase and covers users, sources, commitments, decisions, comments, audit logs, source-version policies, raw source snapshots, normalized observations, a review queue, and approved published metrics. Do not switch `DATA_BACKEND` away from `static` until auth, RLS, backups, and data-owner approval are in place.
+
+Live ingestion follows a no-downgrade rule: if an official pull returns a period older than the currently approved metric, it is stored/reviewed but cannot replace the dashboard value. Same-period revisions require review. Newer values are publication candidates, not automatic replacements, unless a future source policy explicitly allows auto-publication.
+
+## Repository and package hygiene
+
+Do not include local/runtime artifacts in a deployment archive or handoff package. Keep `.git`, `.next`, `.vercel`, `node_modules`, `tsconfig.tsbuildinfo`, `lh-*.json`, local server logs, and `.claude/settings.local.json` out of shipped bundles. They are ignored for the repository, but the original zip handoff included several of them, so run:
+
+```bash
+pnpm check:package
+```
+
+before handoff, and run `node scripts/check-package-hygiene.mjs <extracted-package-directory>` against any archive you plan to share.
 
 ## Hard rules for contributors
 
@@ -90,13 +137,13 @@ The `/api/chat` route is a dynamic Node route; everything else is fully static a
 4. **Tokens, not literals.** Reference CSS vars (`var(--color-primary)`) defined in `app/globals.css`. Avoid raw hex except inside maplibre paint specs.
 5. **`"use client"` discipline.** Server components by default. Wrap `useSearchParams` in `<Suspense>` at the page level.
 6. **Print exports.** Use `<PrintButton />`; the `@media print` block in `globals.css` force-overrides dark-mode tokens for clean PDFs.
-7. **AI gating.** `/api/chat` returns 503 if `ANTHROPIC_API_KEY` is unset. The client (`AssistantChat.tsx`) also checks `useSettings.aiEnabled`.
+7. **AI gating.** `/api/chat` returns 503 unless `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` are both configured. The client (`AssistantChat.tsx`) also checks server availability and `useSettings.aiEnabled`.
 
 See [`CLAUDE.md`](./CLAUDE.md) for the full style and architectural guide future Claude Code sessions will follow.
 
 ## Source provenance
 
-The single source of truth for every external citation is `data/sources.ts` (29 entries, level A = attached input, level B = official URL). Render any record with `<SourceBadge sourceId="…" />` to expose its provenance.
+The single source of truth for every external citation is `data/sources.ts` (63 entries, level A = attached input, level B = official URL). Render any record with `<SourceBadge sourceId="…" />` to expose its provenance.
 
 Most-used sources:
 - **U.S. Census Bureau** trade-in-goods balance — [www.census.gov/foreign-trade/balance/c4644.html](https://www.census.gov/foreign-trade/balance/c4644.html)

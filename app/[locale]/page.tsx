@@ -27,6 +27,9 @@ import { GrantsDonut } from "@/components/overview/GrantsDonut";
 import { Horizon } from "@/components/overview/Horizon";
 import { RiskRadar } from "@/components/overview/RiskRadar";
 import { PrintButton } from "@/components/exports/PrintButton";
+import { ExecutiveCommandCenter } from "@/components/overview/ExecutiveCommandCenter";
+import { RelationshipPillars } from "@/components/overview/RelationshipPillars";
+import { SourceQualityPanel } from "@/components/overview/SourceQualityPanel";
 
 export default async function OverviewPage({
   params,
@@ -187,6 +190,22 @@ export default async function OverviewPage({
           href={`/${locale}/grants`}
         />
       </div>
+
+      <ExecutiveCommandCenter locale={locale} />
+
+      <Card tone="primary">
+        <CardHeader
+          icon={<Layers className="size-3.5" />}
+          tone="primary"
+          title="Relationship pillars"
+          sub="Diplomacy, trade, investment, security, education, mobility, and regional strategy - each with a next move"
+        />
+        <CardBody>
+          <RelationshipPillars locale={locale} />
+        </CardBody>
+      </Card>
+
+      <SourceQualityPanel />
 
       {/* MAIN GRID — left 1.55fr, right 1fr */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.55fr_1fr]">

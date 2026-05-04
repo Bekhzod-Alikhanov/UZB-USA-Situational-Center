@@ -10,6 +10,7 @@ export const runtime = "nodejs";
  * migration guide, appending a dated variant returns 404.
  */
 const MODEL_ID = "claude-sonnet-4-6";
+const MAX_CHAT_BODY_BYTES = 64 * 1024;
 
 interface ChatBody {
   /** UIMessage[] from `useChat` on the client. */
@@ -34,6 +35,13 @@ interface ChatBody {
  * is best controlled via prompting.
  */
 export async function POST(req: Request) {
+  if (process.env.ASSISTANT_ENABLED !== "true") {
+    return new Response(
+      JSON.stringify({ error: "AI assistant is disabled on the server." }),
+      { status: 503, headers: { "content-type": "application/json" } },
+    );
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     return new Response(
       JSON.stringify({ error: "ANTHROPIC_API_KEY not configured on the server." }),
@@ -43,7 +51,14 @@ export async function POST(req: Request) {
 
   let body: ChatBody;
   try {
-    body = (await req.json()) as ChatBody;
+    const raw = await req.text();
+    if (raw.length > MAX_CHAT_BODY_BYTES) {
+      return new Response(JSON.stringify({ error: "Request body too large." }), {
+        status: 413,
+        headers: { "content-type": "application/json" },
+      });
+    }
+    body = JSON.parse(raw) as ChatBody;
   } catch {
     return new Response(JSON.stringify({ error: "Invalid JSON body." }), {
       status: 400,
@@ -51,9 +66,9 @@ export async function POST(req: Request) {
     });
   }
 
-  if (!Array.isArray(body.messages) || body.messages.length === 0) {
+  if (!Array.isArray(body.messages) || body.messages.length === 0 || body.messages.length > 24) {
     return new Response(
-      JSON.stringify({ error: "messages must be a non-empty UIMessage array." }),
+      JSON.stringify({ error: "messages must be a non-empty UIMessage array with at most 24 items." }),
       { status: 400, headers: { "content-type": "application/json" } },
     );
   }
@@ -73,8 +88,8 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    return new Response(JSON.stringify({ error: message }), {
+    console.error("Assistant request failed", error);
+    return new Response(JSON.stringify({ error: "Assistant request failed." }), {
       status: 500,
       headers: { "content-type": "application/json" },
     });

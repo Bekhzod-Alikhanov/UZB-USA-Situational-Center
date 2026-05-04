@@ -122,9 +122,10 @@ export function SearchCommand() {
           <Dialog.Title className="sr-only">Search</Dialog.Title>
           <Command shouldFilter={false} className="flex flex-col">
             <div className="flex items-center gap-2 border-b border-[var(--color-border)] px-4 py-3">
-              <Search className="size-4 text-[var(--color-ink-muted)]" />
+              <Search className="size-4 text-[var(--color-ink-muted)]" aria-hidden />
               <Command.Input
                 autoFocus
+                aria-label="Search dashboard"
                 value={query}
                 onValueChange={setQuery}
                 placeholder={tTop("search")}
@@ -150,7 +151,7 @@ export function SearchCommand() {
                     }}
                     className="group flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm data-[selected=true]:bg-[var(--color-primary-soft)]"
                   >
-                    <Icon className="size-4 text-[var(--color-ink-faint)] group-data-[selected=true]:text-[var(--color-primary)]" />
+                    <Icon className="size-4 text-[var(--color-ink-faint)] group-data-[selected=true]:text-[var(--color-primary)]" aria-hidden />
                     <div className="min-w-0 flex-1">
                       <div className="truncate font-medium text-[var(--color-ink)]">{it.title}</div>
                       <div className="truncate text-[11px] text-[var(--color-ink-muted)]">{it.subtitle}</div>
@@ -158,7 +159,7 @@ export function SearchCommand() {
                     <span className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-[var(--color-ink-muted)]">
                       {it.type}
                     </span>
-                    <ArrowRight className="size-3 text-[var(--color-ink-faint)] opacity-0 transition group-data-[selected=true]:opacity-100" />
+                    <ArrowRight className="size-3 text-[var(--color-ink-faint)] opacity-0 transition group-data-[selected=true]:opacity-100" aria-hidden />
                   </Command.Item>
                 );
               })}

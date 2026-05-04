@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 const STATUS_COLOR: Record<CommitmentStatus, string> = {
   done: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -134,6 +135,8 @@ export function CommitmentsTable() {
     [ts],
   );
 
+  // TanStack Table intentionally returns function helpers that React Compiler cannot memoize.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
@@ -177,9 +180,10 @@ export function CommitmentsTable() {
           ))}
         </div>
         <label className="flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px]">
-          <Search className="size-3.5 text-[var(--color-ink-muted)]" />
+          <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
-            type="text"
+            type="search"
+            aria-label="Filter commitments by title or owner"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Filter by title or owner"
@@ -220,13 +224,25 @@ export function CommitmentsTable() {
                 ))}
               </tr>
             ))}
+            {table.getRowModel().rows.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length}>
+                  <EmptyState
+                    title="No commitments match these filters"
+                    description="Clear the search field or select another status to return to the registry."
+                  />
+                </td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
       </div>
 
       <div className="flex items-center justify-between text-[12px] text-[var(--color-ink-muted)]">
         <div>
-          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+          {table.getRowModel().rows.length === 0
+            ? "No filtered results"
+            : `Page ${table.getState().pagination.pageIndex + 1} of ${table.getPageCount()}`}
         </div>
         <div className="flex items-center gap-1">
           <button

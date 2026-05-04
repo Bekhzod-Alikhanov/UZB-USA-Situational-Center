@@ -53,3 +53,7 @@ _design_ref/
 # Lighthouse run artefacts (kept locally, summarised in LIGHTHOUSE_AUDIT.md)
 lh-*.json
 lh-*.html
+
+# Local server test logs
+dev-server.*.log
+route-test-server.*.log

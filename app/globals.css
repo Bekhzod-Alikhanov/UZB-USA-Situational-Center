@@ -12,7 +12,7 @@
   --color-border-strong: #cfcbbf;
   --color-ink: #1a1a1a;
   --color-ink-muted: #5a5a5a;
-  --color-ink-faint: #8a8a8a;
+  --color-ink-faint: #707070;
 
   --color-primary: #1a3a6c;
   --color-primary-2: #2a4f8a;
@@ -20,7 +20,7 @@
 
   --color-pos: #0a7c5a;
   --color-pos-soft: #e1f3ed;
-  --color-warn: #c88a12;
+  --color-warn: #8a5d00;
   --color-warn-soft: #fbf0d9;
   --color-neg: #a5342a;
   --color-neg-soft: #f8e4e2;
@@ -76,7 +76,7 @@
     --color-border-strong: #353a47;
     --color-ink: #e8e9ec;
     --color-ink-muted: #9aa0ac;
-    --color-ink-faint: #6c7280;
+    --color-ink-faint: #a9afba;
 
     /* Brand — slightly brighter than light-mode primary so it pops on dark-bg
        cards, but dark enough that white text stays AA-legible on it. */
@@ -87,7 +87,7 @@
     /* Semantic — desaturated to avoid neon glow */
     --color-pos: #4ec59a;
     --color-pos-soft: #11342a;
-    --color-warn: #e6b450;
+    --color-warn: #f3c461;
     --color-warn-soft: #3a2c12;
     --color-neg: #e07a72;
     --color-neg-soft: #3a1f1d;
@@ -130,6 +130,11 @@
     font-feature-settings: "cv11", "ss01", "ss03";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  :where(a, button, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   /* Subtle paper noise */

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 import { Heart, GraduationCap, Shield, Droplet, Wheat, FlaskConical, MapPin, TrendingUp } from "lucide-react";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 const SECTOR_ICON: Record<Grant["sector"], React.ComponentType<{ className?: string }>> = {
   health: Heart,
@@ -31,13 +32,23 @@ const STATUS_TONE: Record<Grant["status"], string> = {
   planned: "bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
 };
 
-export function GrantsView() {
+interface GrantsViewProps {
+  records?: Grant[];
+  emptyTitle?: string;
+  emptyDescription?: string;
+}
+
+export function GrantsView({
+  records = grants,
+  emptyTitle = "No grants match these filters",
+  emptyDescription = "Clear the search field or choose another sector to return to the full grants register.",
+}: GrantsViewProps) {
   const [sector, setSector] = useState<Grant["sector"] | "all">("all");
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(
     () =>
-      grants
+      records
         .filter((g) => (sector === "all" ? true : g.sector === sector))
         .filter((g) =>
           search
@@ -46,7 +57,7 @@ export function GrantsView() {
             : true,
         )
         .sort((a, b) => b.valueMusd - a.valueMusd),
-    [sector, search],
+    [records, sector, search],
   );
 
   const SECTORS: (Grant["sector"] | "all")[] = [
@@ -72,6 +83,8 @@ export function GrantsView() {
           </button>
         ))}
         <input
+          type="search"
+          aria-label="Search grants by title or donor"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search title or donor…"
@@ -80,7 +93,13 @@ export function GrantsView() {
       </div>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {filtered.map((g) => {
+        {filtered.length === 0 ? (
+          <EmptyState
+            className="md:col-span-2 xl:col-span-3"
+            title={emptyTitle}
+            description={emptyDescription}
+          />
+        ) : filtered.map((g) => {
           const Icon = SECTOR_ICON[g.sector];
           return (
             <article

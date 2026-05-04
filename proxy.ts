@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "./lib/i18n/config";
+import { ADMIN_COOKIE, verifyAdminSessionToken } from "./lib/auth/admin";
 
 const intlMiddleware = createMiddleware({
   locales,
@@ -8,12 +9,10 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
-const ADMIN_COOKIE = "uzus_admin_auth";
-
 /**
  * Admin gate: any request to `/[locale]/admin*` (other than the login page)
- * must carry a valid auth cookie. The cookie is set by the login server
- * action after the supplied password matches `ADMIN_PASSWORD`.
+ * must carry a valid signed auth cookie. The cookie is set by the login
+ * server action after the supplied password matches `ADMIN_PASSWORD`.
  */
 function isAdminPath(pathname: string): boolean {
   // Match /<locale>/admin or /<locale>/admin/<anything>, but not the login page.
@@ -25,11 +24,11 @@ function isAdminPath(pathname: string): boolean {
   return true;
 }
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (isAdminPath(pathname)) {
-    const authed = req.cookies.get(ADMIN_COOKIE)?.value === "1";
+    const authed = await verifyAdminSessionToken(req.cookies.get(ADMIN_COOKIE)?.value);
     if (!authed) {
       const segments = pathname.split("/").filter(Boolean);
       const locale = locales.includes(segments[0] as (typeof locales)[number])

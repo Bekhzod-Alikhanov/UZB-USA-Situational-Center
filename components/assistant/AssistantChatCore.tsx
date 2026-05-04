@@ -22,8 +22,9 @@ const SUGGESTIONS = [
  * messages, status, and streaming automatically.
  *
  * Gated by `useSettings.aiEnabled` — when disabled, renders a friendly
- * empty-state instead of the chat surface. The /api/chat route additionally
- * gates on `ANTHROPIC_API_KEY` server-side and returns 503 if unset.
+ * empty-state instead of the chat surface. The wrapper also checks
+ * `ASSISTANT_ENABLED` + `ANTHROPIC_API_KEY` server-side before loading this
+ * SDK-heavy component.
  */
 export function AssistantChatCore() {
   const aiEnabled = useSettings((s) => s.aiEnabled);
@@ -130,15 +131,16 @@ export function AssistantChatCore() {
         {error ? (
           (() => {
             const raw = error.message ?? "";
-            // Detect the server-side 503 "key missing" signal so we can show
+            // Detect the server-side 503 "assistant unavailable" signal so we can show
             // a friendly explanation instead of a raw stack message.
-            const isKeyMissing = /ANTHROPIC_API_KEY/i.test(raw) || /\b503\b/.test(raw);
+            const isKeyMissing = /ANTHROPIC_API_KEY|ASSISTANT_ENABLED|disabled/i.test(raw) || /\b503\b/.test(raw);
             return (
               <div className="mt-3 flex items-start gap-2 rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2 text-[12px] text-[var(--color-ink)]">
                 <AlertCircle className="mt-0.5 size-3.5 shrink-0 text-[var(--color-warn)]" />
                 {isKeyMissing ? (
                   <span>
-                    AI assistant unavailable — server key not configured. Set{" "}
+                    AI assistant unavailable — server toggle or key not configured. Set{" "}
+                    <code className="mono rounded bg-[var(--color-surface-2)] px-1">ASSISTANT_ENABLED=true</code> and{" "}
                     <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> in
                     Vercel → Project Settings → Environment Variables, then redeploy. Demo and analytics modules
                     work without the assistant.

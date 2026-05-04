@@ -16,7 +16,7 @@ export default async function AssistantPage({
         <h1 className="section-title">{t("title")}</h1>
         <p className="section-sub">{t("subtitle")}</p>
       </div>
-      <AssistantChat />
+      <AssistantChat serverEnabled={process.env.ASSISTANT_ENABLED === "true" && Boolean(process.env.ANTHROPIC_API_KEY)} />
     </div>
   );
 }

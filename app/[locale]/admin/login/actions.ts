@@ -1,40 +1,49 @@
 "use server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
-const ADMIN_COOKIE = "uzus_admin_auth";
-const COOKIE_MAX_AGE = 60 * 60 * 8; // 8 hours
+import {
+  ADMIN_COOKIE,
+  adminSessionMaxAge,
+  createAdminSessionToken,
+  isSafeAdminRedirect,
+  requireAdminPassword,
+} from "@/lib/auth/admin";
 
 /**
  * Verify the supplied password against `ADMIN_PASSWORD`. If correct, set a
- * short-lived httpOnly cookie and redirect back to wherever the user came
- * from (or /[locale]/admin by default). If wrong, redirect back to the
- * login page with an error flag.
+ * signed, short-lived httpOnly cookie and redirect to the requested admin path.
+ * If wrong or not configured, redirect back to the login page with an error flag.
  */
 export async function login(formData: FormData): Promise<void> {
   const password = String(formData.get("password") ?? "");
   const from = String(formData.get("from") ?? "");
   const locale = String(formData.get("locale") ?? "en");
 
-  const expected = process.env.ADMIN_PASSWORD ?? "uzus2026";
+  let expected: string;
+  try {
+    expected = requireAdminPassword();
+  } catch {
+    redirect(`/${locale}/admin/login?error=config${from ? `&from=${encodeURIComponent(from)}` : ""}`);
+  }
 
   if (password !== expected) {
     redirect(`/${locale}/admin/login?error=1${from ? `&from=${encodeURIComponent(from)}` : ""}`);
   }
 
   const cookieStore = await cookies();
+  const token = await createAdminSessionToken();
   cookieStore.set({
     name: ADMIN_COOKIE,
-    value: "1",
+    value: token,
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    maxAge: COOKIE_MAX_AGE,
+    maxAge: adminSessionMaxAge,
     path: "/",
   });
 
   // Redirect to the originally-requested admin path, or default admin home.
-  const target = from && from.startsWith("/") ? from : `/${locale}/admin`;
+  const target = from && isSafeAdminRedirect(from, locale) ? from : `/${locale}/admin`;
   redirect(target);
 }
 

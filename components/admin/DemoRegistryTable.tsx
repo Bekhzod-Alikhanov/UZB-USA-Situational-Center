@@ -28,8 +28,10 @@ export function DemoRegistryTable() {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between gap-3">
         <label className="flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px]">
-          <Search className="size-3.5 text-[var(--color-ink-muted)]" />
+          <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
+            type="search"
+            aria-label="Search demo registry"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search where / what / agency"

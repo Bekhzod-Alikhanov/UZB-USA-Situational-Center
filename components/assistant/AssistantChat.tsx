@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { AlertCircle, Sparkles } from "lucide-react";
 
 /**
  * Deferred wrapper for the AI chat surface.
@@ -22,7 +22,7 @@ const HeavyCore = dynamic(
   { ssr: false, loading: () => <Skeleton armed /> },
 );
 
-export function AssistantChat() {
+export function AssistantChat({ serverEnabled }: { serverEnabled: boolean }) {
   const [armed, setArmed] = useState(false);
 
   useEffect(() => {
@@ -43,8 +43,23 @@ export function AssistantChat() {
     };
   }, []);
 
+  if (!serverEnabled) return <UnavailableState />;
   if (armed) return <HeavyCore />;
   return <Skeleton />;
+}
+
+function UnavailableState() {
+  return (
+    <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-10 text-center">
+      <AlertCircle className="size-8 text-[var(--color-warn)]" />
+      <h3 className="serif text-[18px] font-medium text-[var(--color-ink)]">AI assistant is unavailable</h3>
+      <p className="max-w-lg text-[13px] text-[var(--color-ink-muted)]">
+        Set <code className="mono rounded bg-[var(--color-surface-2)] px-1">ASSISTANT_ENABLED=true</code> and{" "}
+        <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> on the server to enable
+        this page. The dashboard, exports, maps, charts, and data modules continue to work without AI.
+      </p>
+    </div>
+  );
 }
 
 function Skeleton({ armed }: { armed?: boolean } = {}) {

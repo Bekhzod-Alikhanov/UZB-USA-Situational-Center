@@ -226,9 +226,11 @@ function formatMetric(metric: UsStatesMetric, value: number, locale: string): st
 interface StateTip {
   abbr: string;
   name: string;
-  /** Viewport pixel position of the cursor. */
-  px: number;
-  py: number;
+  /** Cursor position relative to the map container. */
+  x: number;
+  y: number;
+  containerHeight: number;
+  containerWidth: number;
 }
 
 type Selection =
@@ -411,11 +413,15 @@ export function UsCenteredMap() {
                     style={{ cursor: meta ? "pointer" : "default", transition: "stroke 120ms" }}
                     onMouseMove={(e) => {
                       if (!meta) return;
+                      const rect = containerRef.current?.getBoundingClientRect();
+                      if (!rect) return;
                       setTip({
                         abbr: meta.abbr,
                         name: stateName,
-                        px: e.clientX,
-                        py: e.clientY,
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top,
+                        containerHeight: rect.height,
+                        containerWidth: rect.width,
                       });
                     }}
                     onClick={() => {
@@ -508,8 +514,8 @@ export function UsCenteredMap() {
           </svg>
         )}
 
-        {/* Hover tooltip — anchored to viewport coords (clientX/clientY) */}
-        {tip ? <StateHoverTooltip tip={tip} locale={locale} T={T} containerRef={containerRef} /> : null}
+        {/* Hover tooltip — anchored to cursor coords relative to the map container. */}
+        {tip ? <StateHoverTooltip tip={tip} locale={locale} T={T} /> : null}
       </div>
 
       {/* Selection details panel */}
@@ -612,29 +618,22 @@ function StateHoverTooltip({
   tip,
   locale,
   T,
-  containerRef,
 }: {
   tip: StateTip;
   locale: string;
   T: Strings;
-  containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const meta = findStateByAbbr(tip.abbr);
   const label = pickStateLabel(meta, tip.name, locale);
   const rec = getMetric(tip.abbr);
-  const rect = containerRef.current?.getBoundingClientRect();
   // Position relative to the container so the tooltip travels with the SVG.
   // If the cursor is past the right half of the container, flip the tooltip
   // to the left side of the cursor so it doesn't get clipped.
-  const cw = rect?.width ?? 0;
-  const ch = rect?.height ?? 0;
-  const cx = rect ? tip.px - rect.left : 0;
-  const cy = rect ? tip.py - rect.top : 0;
-  const flipX = cx > cw * 0.6;
-  const flipY = cy > ch - 140;
+  const flipX = tip.x > tip.containerWidth * 0.6;
+  const flipY = tip.y > tip.containerHeight - 140;
   const TOOLTIP_W = 200;
-  const left = flipX ? cx - TOOLTIP_W - 14 : cx + 14;
-  const top = flipY ? cy - 110 : cy + 14;
+  const left = flipX ? tip.x - TOOLTIP_W - 14 : tip.x + 14;
+  const top = flipY ? tip.y - 110 : tip.y + 14;
   return (
     <div
       role="status"

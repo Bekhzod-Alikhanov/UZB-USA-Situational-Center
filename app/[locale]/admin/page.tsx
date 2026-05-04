@@ -6,6 +6,8 @@ import { DelegationLocationForm } from "@/components/admin/DelegationLocationFor
 import { AuditLogPreview } from "@/components/admin/AuditLogPreview";
 import { LogOut, Upload, Users as UsersIcon } from "lucide-react";
 import { logout } from "./login/actions";
+import { ProductionReadinessPanel } from "@/components/admin/ProductionReadinessPanel";
+import { DataOperationsPanel } from "@/components/admin/DataOperationsPanel";
 
 export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -46,6 +48,26 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
           </CardBody>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader
+          title="Production readiness and data operations"
+          sub="Security, live-data, database, CI, and deployment gates for full operational use"
+        />
+        <CardBody>
+          <ProductionReadinessPanel />
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Official data ingestion"
+          sub="Dry-run official connectors, review relevance, and protect approved metrics from older source pulls"
+        />
+        <CardBody>
+          <DataOperationsPanel />
+        </CardBody>
+      </Card>
 
       <Card>
         <CardHeader title={t("registry")} sub={t("registryDesc")} />

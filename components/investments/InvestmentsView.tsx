@@ -8,6 +8,7 @@ import { Search, X, Briefcase, Factory, Plane, Wheat, Zap, Pill, Cpu, Shirt, Fla
 import dynamic from "next/dynamic";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { useSettings } from "@/lib/store/settings";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 const FlatMap = dynamic(() => import("@/components/map/FlatMap").then((m) => m.FlatMap), { ssr: false });
 
@@ -97,6 +98,7 @@ export function InvestmentsView() {
         </Tabs.List>
 
         <select
+          aria-label="Filter investments by sector"
           value={sector}
           onChange={(e) => setSector(e.target.value as InvestmentSector | "all")}
           className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
@@ -113,6 +115,7 @@ export function InvestmentsView() {
           <span className="text-[var(--color-ink-muted)]">Min $M</span>
           <input
             type="number"
+            aria-label="Minimum investment value in millions of dollars"
             min={0}
             value={minValue}
             onChange={(e) => setMinValue(Number(e.target.value) || 0)}
@@ -121,8 +124,10 @@ export function InvestmentsView() {
         </div>
 
         <label className="flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px]">
-          <Search className="size-3.5 text-[var(--color-ink-muted)]" />
+          <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
+            type="search"
+            aria-label="Search investments by title or partner"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search title or partner"
@@ -334,7 +339,11 @@ function Column({
           );
         })}
         {items.length === 0 ? (
-          <div className="py-4 text-center text-[10.5px] text-[var(--color-ink-faint)]">—</div>
+          <EmptyState
+            className="px-3 py-5"
+            title="No projects"
+            description="No records match the active filters in this status."
+          />
         ) : null}
       </div>
     </div>

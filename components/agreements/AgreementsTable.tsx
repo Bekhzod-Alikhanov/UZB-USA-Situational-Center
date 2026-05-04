@@ -78,6 +78,7 @@ export function AgreementsTable() {
           ))}
         </div>
         <select
+          aria-label="Filter agreements by sphere"
           value={sphere}
           onChange={(e) => setSphere(e.target.value as AgreementSphere | "all")}
           className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
@@ -90,9 +91,10 @@ export function AgreementsTable() {
           ))}
         </select>
         <label className="ml-auto flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px]">
-          <Search className="size-3.5 text-[var(--color-ink-muted)]" />
+          <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
-            type="text"
+            type="search"
+            aria-label="Filter agreements by title"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Filter by title"

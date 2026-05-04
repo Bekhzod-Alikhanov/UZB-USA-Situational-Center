@@ -47,7 +47,11 @@ export default async function AdminLoginPage({
             {error ? (
               <div className="flex items-start gap-2 rounded-md border border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] px-3 py-2 text-[12px] text-[var(--color-neg)]">
                 <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
-                <span>Incorrect password. Try again.</span>
+                <span>
+                  {error === "config"
+                    ? "Admin access is not configured. Set ADMIN_PASSWORD before signing in."
+                    : "Incorrect password. Try again."}
+                </span>
               </div>
             ) : null}
 
@@ -59,9 +63,10 @@ export default async function AdminLoginPage({
             </button>
 
             <p className="text-[11px] leading-relaxed text-[var(--color-ink-muted)]">
-              Default development password is set via the{" "}
+              Admin access requires the{" "}
               <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_PASSWORD</code>{" "}
-              environment variable. Production deployments should rotate this on first use.
+              environment variable. Production deployments should also set{" "}
+              <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_SESSION_SECRET</code>.
             </p>
           </form>
         </CardBody>
