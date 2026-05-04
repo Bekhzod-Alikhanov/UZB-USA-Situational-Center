@@ -28,11 +28,12 @@ A production digital monitoring platform for the Center on Uzbekistan–USA
 cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Primary
 user is the Advisor to the President.
 
-- **~30,000 lines of TypeScript** · 86+ React components · 21 trilingual routes (EN / RU / UZ-Latn)
-- **55+ official data sources** from ~30 organisations: BEA, U.S. Census, USTR, EXIM, DFC, USAID, ForeignAssistance.gov, State Department, UN Comtrade, World Bank, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, and others
-- **Governed live-data layer** with daily Vercel cron ingestion + no-downgrade policy
+- **~32,600 lines of hand-written TypeScript** · 93 React components · 21 trilingual routes (EN / RU / UZ-Latn)
+- **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12 tables) + 5 live API connectors (BEA, Census, EXIM, World Bank, ForeignAssistance.gov) + 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, State Department, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, and others)
+- **Governed live-data layer** with daily Vercel cron ingestion + no-downgrade policy + audit trail
 - **AI assistant** powered by Claude Sonnet 4.6 with prompt caching over a compiled RAG context
 - **Lighthouse Performance ≥ 87, Accessibility ≥ 94** across all routes
+- **48 production commits**, full Vitest + Playwright + Lighthouse-CI test stack
 
 → [**🌐 Live demo**](https://uz-us-center.vercel.app/en) · [**📦 Code**](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
 

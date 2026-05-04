@@ -1,6 +1,6 @@
 # UZ–US Situational Center · dashboard
 
-> **[🌐 Live demo](https://uz-us-center.vercel.app/en)**  ·  trilingual (EN / RU / UZ-Latn)  ·  21 routes  ·  55+ official sources  ·  AI assistant on Claude Sonnet 4.6
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)**  ·  trilingual (EN / RU / UZ-Latn)  ·  21 routes  ·  56 data integrations  ·  AI assistant on Claude Sonnet 4.6
 >
 > Production digital monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
@@ -20,12 +20,13 @@
 ## What's inside
 
 - **21 trilingual routes** (English, Russian, Uzbek-Latin) — overview, trade, investments, visits, agreements, commitments, grants, counterparts, sanctions and export-control compliance, regional benchmarking, an interactive U.S. states map, and an AI assistant.
-- **~30,000 lines of TypeScript** across 86+ React components and 34 source-of-truth data modules, all built on Next.js 16.2 (App Router · Turbopack · React 19).
-- **55+ primary data sources** from ~30 organisations: BEA, U.S. Census, USTR, EXIM, DFC, USAID, ForeignAssistance.gov, U.S. State Department, White House, UN Comtrade, World Bank, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others.
-- **Governed live-data layer** — daily Vercel cron ingests fresh figures from BEA, Census, EXIM, World Bank, ForeignAssistance.gov; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
-- **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 34 modules.
-- **Verification gate** — Vercel build runs `pnpm verify` (lint + typecheck + 63 source / 204 reference / 21 route validation + governance checks + unit tests) before any deploy.
+- **~32,600 lines of hand-written TypeScript** across 93 React components, 34 source-of-truth data modules, 11 API routes, and 24 server-side library modules — all on Next.js 16.2 (App Router · Turbopack · React 19).
+- **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
+- **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
+- **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 34 data modules.
+- **Verification gate** — Vercel build runs `pnpm verify` (lint + typecheck + 63 source / 204 reference / 21 route validation + governance checks + Vitest unit tests + Playwright e2e + a11y) before any deploy.
 - **Lighthouse Performance ≥ 87 across all routes; Accessibility ≥ 94** — fonts trimmed, charts lazy-loaded with IntersectionObserver, server-rendered filters where possible.
+- **48 production commits** over ~3 weeks — full git history of architectural decisions, perf waves, and data-governance evolution.
 
 > **Demo-ready and production-quality.** Every synthetic value carries `is_demo: true` and is visually flagged so reputation is protected when real data is later swapped in. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the full provenance map.
 
