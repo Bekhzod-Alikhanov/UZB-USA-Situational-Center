@@ -12,8 +12,8 @@
     <td width="50%"><img src="docs/screenshots/trade.png" alt="Trade analysis — UN Comtrade, BEA, Census" /></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/screenshots/assistant.png" alt="AI assistant powered by Claude" /></td>
-    <td width="50%"><img src="docs/screenshots/admin.png" alt="Admin operations + production readiness" /></td>
+    <td width="50%"><img src="docs/screenshots/sectors.png" alt="Sector opportunities — strategic investment lanes" /></td>
+    <td width="50%"><img src="docs/screenshots/benchmark.png" alt="Regional benchmark — UZ vs Central Asia + South Caucasus" /></td>
   </tr>
 </table>
 
