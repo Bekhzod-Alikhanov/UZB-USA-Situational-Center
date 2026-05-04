@@ -100,8 +100,8 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                 </span>
               </div>
               <div className="mt-2 text-[10.5px] text-[var(--color-ink-muted)]">
-                Public dashboard reads bundled <code className="mono">data/*.ts</code> at build time. Live data
-                ingest will live in the operational system with auth + audit, not this repo.
+                Public dashboard reads bundled <code className="mono">data/*.ts</code> at build time. Live data ingest
+                will live in the operational system with auth + audit, not this repo.
               </div>
             </CardBody>
           </Card>

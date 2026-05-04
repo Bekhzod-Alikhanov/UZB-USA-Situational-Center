@@ -18,7 +18,8 @@ export function databaseHealth(): DatabaseHealth {
       mode,
       configured: true,
       writable: false,
-      message: "Static TypeScript data mode. Safe for demos and static deployment; not suitable for multi-user operations.",
+      message:
+        "Static TypeScript data mode. Safe for demos and static deployment; not suitable for multi-user operations.",
     };
   }
 

@@ -134,11 +134,18 @@ export function LiveConnectorMonitor() {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
                 Database
               </span>
-              <span className={cn("rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider", payload.database.writable ? STATUS_CLASS.ok : STATUS_CLASS.neutral)}>
+              <span
+                className={cn(
+                  "rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider",
+                  payload.database.writable ? STATUS_CLASS.ok : STATUS_CLASS.neutral,
+                )}
+              >
                 {payload.database.writable ? "writable" : "read-only"}
               </span>
             </div>
-            <div className="mt-1 text-[10.5px] leading-relaxed text-[var(--color-ink-muted)]">{payload.database.message}</div>
+            <div className="mt-1 text-[10.5px] leading-relaxed text-[var(--color-ink-muted)]">
+              {payload.database.message}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-1">
@@ -146,9 +153,17 @@ export function LiveConnectorMonitor() {
               const probe = probesById.get(connector.id);
               const tone = probeTone(probe);
               return (
-                <div key={connector.id} className="flex min-w-0 items-center justify-between gap-2 rounded-md bg-[var(--color-surface-2)] px-3 py-2">
+                <div
+                  key={connector.id}
+                  className="flex min-w-0 items-center justify-between gap-2 rounded-md bg-[var(--color-surface-2)] px-3 py-2"
+                >
                   <span className="truncate text-[10.5px] font-medium text-[var(--color-ink)]">{connector.name}</span>
-                  <span className={cn("inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider", STATUS_CLASS[tone])}>
+                  <span
+                    className={cn(
+                      "inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider",
+                      STATUS_CLASS[tone],
+                    )}
+                  >
                     {tone === "ok" ? <CheckCircle2 className="size-3" /> : null}
                     {probe?.status ?? connector.status}
                   </span>

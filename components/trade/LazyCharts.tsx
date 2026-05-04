@@ -13,17 +13,10 @@
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import { LazyMount } from "@/components/util/LazyMount";
-import {
-  exportStructure2025,
-  importStructure2025,
-} from "@/data/trade";
+import { exportStructure2025, importStructure2025 } from "@/data/trade";
 
 const Skeleton = ({ h }: { h: number }) => (
-  <div
-    className="w-full animate-pulse rounded-md bg-[var(--color-surface-2)]"
-    style={{ height: h }}
-    aria-busy
-  />
+  <div className="w-full animate-pulse rounded-md bg-[var(--color-surface-2)]" style={{ height: h }} aria-busy />
 );
 
 // --- Dynamic-loaded chart components ----------------------------------------
@@ -41,15 +34,15 @@ const StructureTreemapImpl = dynamic(
   height?: number;
 }>;
 
-const ComtradeHs6TopImpl = dynamic(
-  () => import("./ComtradeHs6").then((m) => ({ default: m.ComtradeHs6Top })),
-  { ssr: false, loading: () => <Skeleton h={400} /> },
-);
+const ComtradeHs6TopImpl = dynamic(() => import("./ComtradeHs6").then((m) => ({ default: m.ComtradeHs6Top })), {
+  ssr: false,
+  loading: () => <Skeleton h={400} />,
+});
 
-const ComtradeMirrorImpl = dynamic(
-  () => import("./ComtradeMirror").then((m) => ({ default: m.ComtradeMirror })),
-  { ssr: false, loading: () => <Skeleton h={400} /> },
-);
+const ComtradeMirrorImpl = dynamic(() => import("./ComtradeMirror").then((m) => ({ default: m.ComtradeMirror })), {
+  ssr: false,
+  loading: () => <Skeleton h={400} />,
+});
 
 const ComtradeTrendSparklinesImpl = dynamic(
   () => import("./ComtradeTrendSparklines").then((m) => ({ default: m.ComtradeTrendSparklines })),
@@ -66,10 +59,10 @@ const TrademapProductsImpl = dynamic(
   { ssr: false, loading: () => <Skeleton h={380} /> },
 );
 
-const ServicesEbopsImpl = dynamic(
-  () => import("./ServicesEbops").then((m) => ({ default: m.ServicesEbops })),
-  { ssr: false, loading: () => <Skeleton h={300} /> },
-);
+const ServicesEbopsImpl = dynamic(() => import("./ServicesEbops").then((m) => ({ default: m.ServicesEbops })), {
+  ssr: false,
+  loading: () => <Skeleton h={300} />,
+});
 
 const TrademapExhibitsImpl = dynamic(
   () => import("./TrademapExhibits").then((m) => ({ default: m.TrademapExhibits })),

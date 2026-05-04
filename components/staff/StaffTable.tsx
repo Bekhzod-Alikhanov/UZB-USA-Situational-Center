@@ -11,9 +11,7 @@ function scoreOf(s: (typeof staff)[number]) {
 }
 
 export function StaffTable() {
-  const withScore = staff
-    .map((s) => ({ ...s, score: scoreOf(s) }))
-    .sort((a, b) => b.score - a.score);
+  const withScore = staff.map((s) => ({ ...s, score: scoreOf(s) })).sort((a, b) => b.score - a.score);
 
   return (
     <div className="overflow-x-auto">
@@ -67,10 +65,7 @@ export function StaffTable() {
                 <td>
                   <div className="flex items-center gap-2">
                     <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[var(--color-surface-2)]">
-                      <div
-                        className={cn("h-full rounded-full", scoreTone)}
-                        style={{ width: `${s.score}%` }}
-                      />
+                      <div className={cn("h-full rounded-full", scoreTone)} style={{ width: `${s.score}%` }} />
                     </div>
                     <span className="mono w-8 text-right tabular text-[12px] font-semibold text-[var(--color-ink)]">
                       {s.score}

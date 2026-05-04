@@ -59,9 +59,7 @@ export function AssistantChatCore() {
       <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-10 text-center">
         <Sparkles className="size-8 text-[var(--color-ink-faint)]" />
         <h3 className="serif text-[18px] font-medium text-[var(--color-ink)]">AI assistant is disabled</h3>
-        <p className="max-w-md text-[13px] text-[var(--color-ink-muted)]">
-          Enable it in Admin → AI assistant toggle.
-        </p>
+        <p className="max-w-md text-[13px] text-[var(--color-ink-muted)]">Enable it in Admin → AI assistant toggle.</p>
       </div>
     );
   }
@@ -73,9 +71,7 @@ export function AssistantChatCore() {
           <Sparkles className="size-4 text-[var(--color-primary)]" />
           <span className="text-[13px] font-semibold text-[var(--color-ink)]">Claude — Center Assistant</span>
         </div>
-        <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">
-          sonnet-4-6
-        </span>
+        <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">sonnet-4-6</span>
       </div>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
@@ -128,30 +124,30 @@ export function AssistantChatCore() {
             })}
           </ul>
         )}
-        {error ? (
-          (() => {
-            const raw = error.message ?? "";
-            // Detect the server-side 503 "assistant unavailable" signal so we can show
-            // a friendly explanation instead of a raw stack message.
-            const isKeyMissing = /ANTHROPIC_API_KEY|ASSISTANT_ENABLED|disabled/i.test(raw) || /\b503\b/.test(raw);
-            return (
-              <div className="mt-3 flex items-start gap-2 rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2 text-[12px] text-[var(--color-ink)]">
-                <AlertCircle className="mt-0.5 size-3.5 shrink-0 text-[var(--color-warn)]" />
-                {isKeyMissing ? (
-                  <span>
-                    AI assistant unavailable — server toggle or key not configured. Set{" "}
-                    <code className="mono rounded bg-[var(--color-surface-2)] px-1">ASSISTANT_ENABLED=true</code> and{" "}
-                    <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> in
-                    Vercel → Project Settings → Environment Variables, then redeploy. Demo and analytics modules
-                    work without the assistant.
-                  </span>
-                ) : (
-                  <span>{raw || "Request failed."}</span>
-                )}
-              </div>
-            );
-          })()
-        ) : null}
+        {error
+          ? (() => {
+              const raw = error.message ?? "";
+              // Detect the server-side 503 "assistant unavailable" signal so we can show
+              // a friendly explanation instead of a raw stack message.
+              const isKeyMissing = /ANTHROPIC_API_KEY|ASSISTANT_ENABLED|disabled/i.test(raw) || /\b503\b/.test(raw);
+              return (
+                <div className="mt-3 flex items-start gap-2 rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2 text-[12px] text-[var(--color-ink)]">
+                  <AlertCircle className="mt-0.5 size-3.5 shrink-0 text-[var(--color-warn)]" />
+                  {isKeyMissing ? (
+                    <span>
+                      AI assistant unavailable — server toggle or key not configured. Set{" "}
+                      <code className="mono rounded bg-[var(--color-surface-2)] px-1">ASSISTANT_ENABLED=true</code> and{" "}
+                      <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> in Vercel
+                      → Project Settings → Environment Variables, then redeploy. Demo and analytics modules work without
+                      the assistant.
+                    </span>
+                  ) : (
+                    <span>{raw || "Request failed."}</span>
+                  )}
+                </div>
+              );
+            })()
+          : null}
       </div>
 
       <form

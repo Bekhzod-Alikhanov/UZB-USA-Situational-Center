@@ -27,14 +27,7 @@ export function MonthlyBars({ height = 200 }: { height?: number }) {
             stroke="var(--color-border)"
             strokeDasharray={i === 0 ? "" : "2 4"}
           />
-          <text
-            x={P.l - 6}
-            y={y(t) + 3}
-            textAnchor="end"
-            fontSize="9"
-            className="mono"
-            fill="var(--color-ink-faint)"
-          >
+          <text x={P.l - 6} y={y(t) + 3} textAnchor="end" fontSize="9" className="mono" fill="var(--color-ink-faint)">
             {Math.round(t)}
           </text>
         </g>
@@ -53,32 +46,11 @@ export function MonthlyBars({ height = 200 }: { height?: number }) {
               fill="var(--color-invest)"
               rx="1.5"
             />
-            <rect
-              x={cx + 1}
-              y={y(d.imp)}
-              width={bw}
-              height={H - P.b - y(d.imp)}
-              fill="var(--color-agree)"
-              rx="1.5"
-            />
-            <text
-              x={cx}
-              y={H - 14}
-              textAnchor="middle"
-              fontSize="9"
-              className="mono"
-              fill="var(--color-ink-faint)"
-            >
+            <rect x={cx + 1} y={y(d.imp)} width={bw} height={H - P.b - y(d.imp)} fill="var(--color-agree)" rx="1.5" />
+            <text x={cx} y={H - 14} textAnchor="middle" fontSize="9" className="mono" fill="var(--color-ink-faint)">
               {MONTH[monthIdx]}
             </text>
-            <text
-              x={cx}
-              y={H - 4}
-              textAnchor="middle"
-              fontSize="8.5"
-              className="mono"
-              fill="var(--color-ink-faint)"
-            >
+            <text x={cx} y={H - 4} textAnchor="middle" fontSize="8.5" className="mono" fill="var(--color-ink-faint)">
               &apos;{d.m.slice(2, 4)}
             </text>
           </g>

@@ -36,13 +36,7 @@ function fmt(v: number): string {
  * accompanied by a list-style legend that doubles as a fallback on very
  * narrow viewports where the tiles can't carry text.
  */
-export function StructureTreemap({
-  items,
-  height = 320,
-}: {
-  items: CommodityItem[];
-  height?: number;
-}) {
+export function StructureTreemap({ items, height = 320 }: { items: CommodityItem[]; height?: number }) {
   const sorted = useMemo(() => [...items].sort((a, b) => b.value - a.value), [items]);
   const total = useMemo(() => sorted.reduce((acc, i) => acc + i.value, 0), [sorted]);
 
@@ -52,7 +46,7 @@ export function StructureTreemap({
         name: "root",
         children: sorted.map((i, idx) => ({ ...i, size: i.value, idx })),
       } as Record<string, unknown>)
-        .sum((d) => ((d as unknown as { size?: number }).size ?? 0))
+        .sum((d) => (d as unknown as { size?: number }).size ?? 0)
         .sort((a, b) => (b.value ?? 0) - (a.value ?? 0)),
     [sorted],
   );
@@ -65,14 +59,7 @@ export function StructureTreemap({
             if (width < 1 || h < 1) return null;
             return (
               <svg width={width} height={h} role="img" aria-label="Trade structure treemap">
-                <Treemap
-                  top={0}
-                  root={root}
-                  size={[width, h]}
-                  tile={treemapSquarify}
-                  round
-                  paddingInner={2}
-                >
+                <Treemap top={0} root={root} size={[width, h]} tile={treemapSquarify} round paddingInner={2}>
                   {(treemap) => (
                     <Group>
                       {treemap.descendants().map((node, i) => {
@@ -125,20 +112,14 @@ export function StructureTreemap({
               key={item.name}
               className="flex items-center gap-2 rounded-md px-1.5 py-1 hover:bg-[var(--color-surface-2)]"
             >
-              <span
-                className="size-2.5 shrink-0 rounded-sm"
-                style={{ background: swatch }}
-                aria-hidden
-              />
+              <span className="size-2.5 shrink-0 rounded-sm" style={{ background: swatch }} aria-hidden />
               <span
                 className="flex-1 truncate text-[var(--color-ink)]"
                 title={`${item.name} · $${fmt(item.value)} · ${sharePct.toFixed(1)}%`}
               >
                 {item.name}
               </span>
-              <span className="mono shrink-0 tabular text-[var(--color-ink-muted)]">
-                ${fmt(item.value)}
-              </span>
+              <span className="mono shrink-0 tabular text-[var(--color-ink-muted)]">${fmt(item.value)}</span>
               <span className="mono w-9 shrink-0 text-right tabular text-[var(--color-ink-faint)]">
                 {sharePct.toFixed(1)}%
               </span>
@@ -184,14 +165,7 @@ function TreemapTile({
   const tooltip = `${name} · $${fmt(value)} · ${sharePct.toFixed(1)}%`;
   return (
     <Group left={x} top={y}>
-      <rect
-        width={w}
-        height={h}
-        fill={fill}
-        stroke="var(--color-surface)"
-        strokeWidth={1}
-        rx={2}
-      >
+      <rect width={w} height={h} fill={fill} stroke="var(--color-surface)" strokeWidth={1} rx={2}>
         <title>{tooltip}</title>
       </rect>
       {showName ? (

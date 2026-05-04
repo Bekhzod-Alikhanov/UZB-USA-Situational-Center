@@ -8,9 +8,7 @@ export default function NotFound() {
         <div className="mb-3 inline-flex size-10 items-center justify-center rounded-full bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
           <Compass className="size-5" />
         </div>
-        <div className="serif text-[22px] font-medium tracking-tight text-[var(--color-ink)]">
-          Page not found
-        </div>
+        <div className="serif text-[22px] font-medium tracking-tight text-[var(--color-ink)]">Page not found</div>
         <div className="mt-1 text-[13px] text-[var(--color-ink-muted)]">
           The route you requested isn&apos;t part of this dashboard. Try the overview page.
         </div>

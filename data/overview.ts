@@ -74,9 +74,7 @@ export function buildSectorTiles(): SectorTile[] {
 
   const tiles: SectorTile[] = [];
   for (const [sector, data] of map) {
-    const dominantStatus = [...data.statuses].sort(
-      (a, b) => (STATUS_RANK[b] ?? 0) - (STATUS_RANK[a] ?? 0),
-    )[0];
+    const dominantStatus = [...data.statuses].sort((a, b) => (STATUS_RANK[b] ?? 0) - (STATUS_RANK[a] ?? 0))[0];
     tiles.push({
       id: sector,
       label: SECTOR_LABEL[sector] ?? sector,
@@ -108,7 +106,7 @@ export interface CounterpartRow {
 const KNOWN_TRENDS: Record<string, number> = {
   "Air Products": 2.1,
   Boeing: 6.0,
-  "USAID": -1.4,
+  USAID: -1.4,
   EXIM: 18.0,
   DFC: 12.0,
   "John Deere": 9.0,

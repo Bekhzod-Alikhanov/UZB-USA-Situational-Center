@@ -119,7 +119,8 @@ export function Sidebar() {
           <div
             className="flex size-9 items-center justify-center rounded-lg text-[11px] font-bold tracking-tight text-white"
             style={{
-              background: "linear-gradient(135deg, var(--color-primary), color-mix(in oklab, var(--color-visits) 70%, var(--color-primary)))",
+              background:
+                "linear-gradient(135deg, var(--color-primary), color-mix(in oklab, var(--color-visits) 70%, var(--color-primary)))",
               boxShadow: "0 4px 10px color-mix(in oklab, var(--color-primary) 30%, transparent)",
             }}
           >

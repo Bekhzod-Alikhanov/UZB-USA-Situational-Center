@@ -17,16 +17,7 @@ export interface Commitment {
   dueDate: string;
   agreedOn: string;
   valueMusd?: number;
-  sphere:
-    | "investment"
-    | "trade"
-    | "education"
-    | "health"
-    | "defense"
-    | "diplomacy"
-    | "minerals"
-    | "energy"
-    | "culture";
+  sphere: "investment" | "trade" | "education" | "health" | "defense" | "diplomacy" | "minerals" | "energy" | "culture";
   progressPct: number;
   lastUpdate: string;
   is_demo: boolean;

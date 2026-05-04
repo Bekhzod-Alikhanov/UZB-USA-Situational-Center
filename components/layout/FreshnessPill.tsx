@@ -122,9 +122,7 @@ export function FreshnessPill() {
       >
         <Icon className="size-3" />
         <span className="hidden sm:inline">{LEVEL_LABEL[REPORT.level]}</span>
-        <span className="mono tabular opacity-70">
-          {DATE_FMT.format(new Date(REPORT.asOf + "T00:00:00Z"))}
-        </span>
+        <span className="mono tabular opacity-70">{DATE_FMT.format(new Date(REPORT.asOf + "T00:00:00Z"))}</span>
       </button>
 
       {open ? (
@@ -159,12 +157,8 @@ export function FreshnessPill() {
           </dl>
 
           <div className="mt-3 rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] p-2">
-            <div className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-              {T.oldestSource}
-            </div>
-            <div className="mt-0.5 text-[11.5px] font-medium text-[var(--color-ink)]">
-              {REPORT.oldestSourceName}
-            </div>
+            <div className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.oldestSource}</div>
+            <div className="mt-0.5 text-[11.5px] font-medium text-[var(--color-ink)]">{REPORT.oldestSourceName}</div>
             <div className="mono mt-0.5 text-[10px] tabular text-[var(--color-ink-muted)]">
               ID: {REPORT.oldestSourceId}
             </div>

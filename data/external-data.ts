@@ -43,7 +43,8 @@ export const externalDataConnectors: ExternalDataConnector[] = [
     owner: "U.S. Bureau of Economic Analysis",
     status: "key-required",
     cadence: "Annual / quarterly depending dataset",
-    dashboardUse: "Services trade, international transactions, investment position, and USTR services-figure validation.",
+    dashboardUse:
+      "Services trade, international transactions, investment position, and USTR services-figure validation.",
     sourceId: "bea_developers",
     apiUrl: "https://apps.bea.gov/api/data",
     setup: "Register for BEA_API_KEY, then approve the IntlServTrade/ITA table mapping before publication.",
@@ -184,7 +185,8 @@ export const externalDataConnectors: ExternalDataConnector[] = [
     cadence: "Live",
     dashboardUse: "Commitments, owners, visit prep, comments, approvals, source files, audit logs.",
     sourceId: "f4_ordinance_2026",
-    setup: "Set DATA_BACKEND=supabase with SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, or wire DATABASE_URL in a server-only adapter.",
+    setup:
+      "Set DATA_BACKEND=supabase with SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, or wire DATABASE_URL in a server-only adapter.",
     risk: "Requires auth, role-based access, audit logs, backups, and data-owner sign-off.",
   },
 ];

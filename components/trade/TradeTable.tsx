@@ -48,14 +48,28 @@ export function TradeTable() {
                   const v = r.get(tradeAnnual.find((a) => a.year === y)!);
                   return (
                     <td key={y} className="mono text-right">
-                      {r.negative ? (v < 0 ? `−${Math.abs(v).toLocaleString("en-US")}` : v.toLocaleString("en-US")) : v.toLocaleString("en-US")}
+                      {r.negative
+                        ? v < 0
+                          ? `−${Math.abs(v).toLocaleString("en-US")}`
+                          : v.toLocaleString("en-US")
+                        : v.toLocaleString("en-US")}
                     </td>
                   );
                 })}
-                <td className={cn("mono text-right font-medium", growth2017 >= 1 ? "text-[var(--color-pos)]" : "text-[var(--color-ink)]")}>
+                <td
+                  className={cn(
+                    "mono text-right font-medium",
+                    growth2017 >= 1 ? "text-[var(--color-pos)]" : "text-[var(--color-ink)]",
+                  )}
+                >
                   {r.negative ? `${growth2017.toFixed(1)}×` : `${growth2017.toFixed(1)}×`}
                 </td>
-                <td className={cn("mono text-right font-medium", growth2024 > 0 ? "text-[var(--color-pos)]" : "text-[var(--color-neg)]")}>
+                <td
+                  className={cn(
+                    "mono text-right font-medium",
+                    growth2024 > 0 ? "text-[var(--color-pos)]" : "text-[var(--color-neg)]",
+                  )}
+                >
                   {(growth2024 > 0 ? "+" : "") + growth2024.toFixed(1)}%
                 </td>
               </tr>

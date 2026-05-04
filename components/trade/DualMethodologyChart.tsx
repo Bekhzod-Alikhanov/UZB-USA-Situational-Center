@@ -1,14 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { tradeAnnualUz, tradeAnnualUs } from "@/data/trade";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { ChartFrame } from "@/components/charts/ChartFrame";

@@ -1,12 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import { Plane, Hotel, Bus, FileBadge, ShieldCheck, Headphones } from "lucide-react";
-import {
-  visitLogistics,
-  visitPipelines,
-  type LogisticsRow,
-  type ItemStatus,
-} from "@/data/visit-prep";
+import { visitLogistics, visitPipelines, type LogisticsRow, type ItemStatus } from "@/data/visit-prep";
 import { cn } from "@/lib/utils";
 
 const ROW_LABEL: Record<LogisticsRow, string> = {
@@ -175,9 +170,9 @@ export function VisitLogisticsMatrix() {
           </div>
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-            Booking <strong>statuses and counts only</strong>. PNR codes, hotel reservation numbers, individual
-            passport / visa numbers, flight times, and per-person itineraries are never stored here. Operational
-            details belong to the protocol system with restricted access.
+            Booking <strong>statuses and counts only</strong>. PNR codes, hotel reservation numbers, individual passport
+            / visa numbers, flight times, and per-person itineraries are never stored here. Operational details belong
+            to the protocol system with restricted access.
           </p>
         </>
       ) : null}

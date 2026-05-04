@@ -48,7 +48,9 @@ function metric(
 export function staticPublishedMetrics(): PublishedMetric[] {
   const latestMonth = tradeMonthlyUs[tradeMonthlyUs.length - 1];
   const latestAnnual = tradeAnnualUs[tradeAnnualUs.length - 1];
-  const latestAssistance = foreignAssistanceYears.find((year) => year.fiscalYear === foreignAssistanceMeta.fyMostRecent);
+  const latestAssistance = foreignAssistanceYears.find(
+    (year) => year.fiscalYear === foreignAssistanceMeta.fyMostRecent,
+  );
   const uzBenchmark = benchmark.find((row) => row.country === "UZ");
   const metrics: PublishedMetric[] = [];
 

@@ -4,16 +4,7 @@
  * Saves ~80 KB of Recharts bundle from the initial /benchmark route until
  * the user actually scrolls the chart into view.
  */
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Cell,
-  LabelList,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from "recharts";
 import { ChartFrame } from "@/components/charts/ChartFrame";
 
 interface ChartRow {
@@ -41,12 +32,7 @@ export function BenchmarkChart({ data, format, metricLabel }: Props) {
             axisLine={{ stroke: "var(--color-border)" }}
             tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }}
           />
-          <YAxis
-            tickLine={false}
-            axisLine={false}
-            tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }}
-            width={56}
-          />
+          <YAxis tickLine={false} axisLine={false} tick={{ fill: "var(--color-ink-muted)", fontSize: 11 }} width={56} />
           <Tooltip
             cursor={{ fill: "var(--color-surface-2)" }}
             contentStyle={{
@@ -59,10 +45,7 @@ export function BenchmarkChart({ data, format, metricLabel }: Props) {
           />
           <Bar dataKey="value" radius={[4, 4, 0, 0]}>
             {data.map((d) => (
-              <Cell
-                key={d.name}
-                fill={d.name === "UZ" ? "var(--color-primary)" : "var(--color-border-strong)"}
-              />
+              <Cell key={d.name} fill={d.name === "UZ" ? "var(--color-primary)" : "var(--color-border-strong)"} />
             ))}
             <LabelList
               dataKey="value"

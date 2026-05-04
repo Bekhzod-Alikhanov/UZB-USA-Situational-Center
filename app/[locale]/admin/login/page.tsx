@@ -64,8 +64,8 @@ export default async function AdminLoginPage({
 
             <p className="text-[11px] leading-relaxed text-[var(--color-ink-muted)]">
               Admin access requires the{" "}
-              <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_PASSWORD</code>{" "}
-              environment variable. Production deployments should also set{" "}
+              <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_PASSWORD</code> environment
+              variable. Production deployments should also set{" "}
               <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_SESSION_SECRET</code>.
             </p>
           </form>

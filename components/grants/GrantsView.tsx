@@ -61,7 +61,14 @@ export function GrantsView({
   );
 
   const SECTORS: (Grant["sector"] | "all")[] = [
-    "all", "health", "education", "research", "water", "agriculture", "economy", "military",
+    "all",
+    "health",
+    "education",
+    "research",
+    "water",
+    "agriculture",
+    "economy",
+    "military",
   ];
 
   return (
@@ -94,71 +101,69 @@ export function GrantsView({
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.length === 0 ? (
-          <EmptyState
-            className="md:col-span-2 xl:col-span-3"
-            title={emptyTitle}
-            description={emptyDescription}
-          />
-        ) : filtered.map((g) => {
-          const Icon = SECTOR_ICON[g.sector];
-          return (
-            <article
-              key={g.id}
-              className="flex flex-col gap-2.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
-                    SECTOR_TONE[g.sector],
-                  )}
-                >
-                  <Icon className="size-3" />
-                  {g.sector}
-                </span>
-                <span
-                  className={cn(
-                    "rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
-                    STATUS_TONE[g.status],
-                  )}
-                >
-                  {g.status}
-                </span>
-              </div>
-              <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{g.title}</h3>
-              <div className="text-[11.5px] text-[var(--color-ink-muted)]">
-                <div>
-                  <span className="font-medium text-[var(--color-ink)]">Donor:</span> {g.donor}
+          <EmptyState className="md:col-span-2 xl:col-span-3" title={emptyTitle} description={emptyDescription} />
+        ) : (
+          filtered.map((g) => {
+            const Icon = SECTOR_ICON[g.sector];
+            return (
+              <article
+                key={g.id}
+                className="flex flex-col gap-2.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={cn(
+                      "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
+                      SECTOR_TONE[g.sector],
+                    )}
+                  >
+                    <Icon className="size-3" />
+                    {g.sector}
+                  </span>
+                  <span
+                    className={cn(
+                      "rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
+                      STATUS_TONE[g.status],
+                    )}
+                  >
+                    {g.status}
+                  </span>
                 </div>
-                <div>
-                  <span className="font-medium text-[var(--color-ink)]">Initiator:</span> {g.initiator}
-                </div>
-              </div>
-              <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--color-border)] pt-2.5">
-                <div>
-                  <div className="stat-label">Value</div>
-                  <div className="mono text-[18px] font-semibold tabular text-[var(--color-ink)]">
-                    ${g.valueMusd < 1 ? g.valueMusd.toFixed(3) : g.valueMusd.toFixed(1)}M
+                <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{g.title}</h3>
+                <div className="text-[11.5px] text-[var(--color-ink-muted)]">
+                  <div>
+                    <span className="font-medium text-[var(--color-ink)]">Donor:</span> {g.donor}
+                  </div>
+                  <div>
+                    <span className="font-medium text-[var(--color-ink)]">Initiator:</span> {g.initiator}
                   </div>
                 </div>
-                {g.region ? (
-                  <span className="inline-flex items-center gap-1 text-[11px] text-[var(--color-ink-muted)]">
-                    <MapPin className="size-3" />
-                    {g.region}
-                  </span>
-                ) : null}
-                {g.startYear ? (
-                  <span className="mono text-[11px] tabular text-[var(--color-ink-muted)]">Since {g.startYear}</span>
-                ) : null}
-              </div>
-              {g.sourceId ? (
-                <div className="pt-1">
-                  <SourceBadge sourceId={g.sourceId} />
+                <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--color-border)] pt-2.5">
+                  <div>
+                    <div className="stat-label">Value</div>
+                    <div className="mono text-[18px] font-semibold tabular text-[var(--color-ink)]">
+                      ${g.valueMusd < 1 ? g.valueMusd.toFixed(3) : g.valueMusd.toFixed(1)}M
+                    </div>
+                  </div>
+                  {g.region ? (
+                    <span className="inline-flex items-center gap-1 text-[11px] text-[var(--color-ink-muted)]">
+                      <MapPin className="size-3" />
+                      {g.region}
+                    </span>
+                  ) : null}
+                  {g.startYear ? (
+                    <span className="mono text-[11px] tabular text-[var(--color-ink-muted)]">Since {g.startYear}</span>
+                  ) : null}
                 </div>
-              ) : null}
-            </article>
-          );
-        })}
+                {g.sourceId ? (
+                  <div className="pt-1">
+                    <SourceBadge sourceId={g.sourceId} />
+                  </div>
+                ) : null}
+              </article>
+            );
+          })
+        )}
       </div>
     </div>
   );

@@ -340,7 +340,8 @@ export const sources: Source[] = [
     name: "IMF Data APIs",
     url: "https://data.imf.org/en/Resource-Pages/IMF-API",
     fetched_at: "2026-05-04",
-    data_type: "SDMX APIs for macroeconomic and financial datasets; used for future FX, BOP, reserves, and macro context after mapping review",
+    data_type:
+      "SDMX APIs for macroeconomic and financial datasets; used for future FX, BOP, reserves, and macro context after mapping review",
     note: "Connector is registry-ready; dataset-specific mapping should be approved before dashboard publication.",
   },
   {
@@ -483,7 +484,8 @@ export const sources: Source[] = [
     name: "ITC Trade Map — UZ↔US bilateral trade with EBOPS services + analytical exhibits",
     url: "https://www.trademap.org/",
     fetched_at: "2026-04-29",
-    data_type: "Bilateral product trade (HS-6 with Share % and 5Y growth), services (EBOPS 2010), and ITC analytical charts (export potential, diversification)",
+    data_type:
+      "Bilateral product trade (HS-6 with Share % and 5Y growth), services (EBOPS 2010), and ITC analytical charts (export potential, diversification)",
     note: "User-exported XLSX from logged-in ITC Trade Map session. Same underlying database as UN Comtrade plus ITC's analytical layers. Services data is UZ-reported, only 2021 has full EBOPS detail.",
   },
   {
@@ -548,7 +550,8 @@ export const sources: Source[] = [
     name: "Law ЗРУ-518 (06.02.2019) — On International Treaties of Uzbekistan",
     url: "https://lex.uz/ru/docs/4193763",
     fetched_at: "2026-04-29",
-    data_type: "Legal framework governing how Uzbekistan signs, ratifies and gives effect to international agreements (incl. those with the U.S.)",
+    data_type:
+      "Legal framework governing how Uzbekistan signs, ratifies and gives effect to international agreements (incl. those with the U.S.)",
     note: "Supersedes 172-I (22.12.1995). Defines the procedural base under which the BIT, MoUs, and the Investment Platform Agreement become binding on UZ side.",
   },
   {
@@ -557,7 +560,8 @@ export const sources: Source[] = [
     name: "Law ЗРУ-598 (25.12.2019) — On Investments and Investment Activity",
     url: "https://lex.uz/ru/docs/4664144",
     fetched_at: "2026-04-29",
-    data_type: "Domestic investment legal base — protections, dispute resolution, and incentives applicable to U.S. investors operating in Uzbekistan",
+    data_type:
+      "Domestic investment legal base — protections, dispute resolution, and incentives applicable to U.S. investors operating in Uzbekistan",
   },
   {
     id: "lex_uz_strategy_2030",
@@ -565,7 +569,8 @@ export const sources: Source[] = [
     name: "Decree УП-158 (11.09.2023) — Strategy «Uzbekistan — 2030»",
     url: "https://lex.uz/ru/docs/6600404",
     fetched_at: "2026-04-29",
-    data_type: "Umbrella national strategy naming the United States among priority partners for investment, technology and education cooperation",
+    data_type:
+      "Umbrella national strategy naming the United States among priority partners for investment, technology and education cooperation",
   },
 ];
 

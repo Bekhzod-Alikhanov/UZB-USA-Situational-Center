@@ -4,7 +4,21 @@ import * as Tabs from "@radix-ui/react-tabs";
 import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
-import { Search, X, Briefcase, Factory, Plane, Wheat, Zap, Pill, Cpu, Shirt, FlaskConical, Banknote, Gem } from "lucide-react";
+import {
+  Search,
+  X,
+  Briefcase,
+  Factory,
+  Plane,
+  Wheat,
+  Zap,
+  Pill,
+  Cpu,
+  Shirt,
+  FlaskConical,
+  Banknote,
+  Gem,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { useSettings } from "@/lib/store/settings";
@@ -14,15 +28,15 @@ const FlatMap = dynamic(() => import("@/components/map/FlatMap").then((m) => m.F
 
 const SECTOR_ICON: Record<InvestmentSector, React.ComponentType<{ className?: string }>> = {
   "mining-metals": Factory,
-  "automotive": Briefcase,
-  "aviation": Plane,
+  automotive: Briefcase,
+  aviation: Plane,
   "agri-food": Wheat,
-  "energy": Zap,
-  "pharma": Pill,
+  energy: Zap,
+  pharma: Pill,
   "it-digital": Cpu,
-  "textile": Shirt,
-  "chemicals": FlaskConical,
-  "finance": Banknote,
+  textile: Shirt,
+  chemicals: FlaskConical,
+  finance: Banknote,
   "minerals-rare-earth": Gem,
 };
 
@@ -38,8 +52,17 @@ const STATUS_TONE: Record<InvestmentStatus, string> = {
 const STATUS_ORDER: InvestmentStatus[] = ["mou", "negotiation", "agreed", "construction", "operating", "paused"];
 
 const SECTORS: InvestmentSector[] = [
-  "mining-metals", "automotive", "aviation", "agri-food", "energy",
-  "pharma", "it-digital", "textile", "chemicals", "finance", "minerals-rare-earth",
+  "mining-metals",
+  "automotive",
+  "aviation",
+  "agri-food",
+  "energy",
+  "pharma",
+  "it-digital",
+  "textile",
+  "chemicals",
+  "finance",
+  "minerals-rare-earth",
 ];
 
 export function InvestmentsView() {
@@ -69,7 +92,12 @@ export function InvestmentsView() {
 
   const grouped = useMemo(() => {
     const m: Record<InvestmentStatus, Investment[]> = {
-      mou: [], negotiation: [], agreed: [], construction: [], operating: [], paused: [],
+      mou: [],
+      negotiation: [],
+      agreed: [],
+      construction: [],
+      operating: [],
+      paused: [],
     };
     for (const i of filtered) m[i.status].push(i);
     return m;

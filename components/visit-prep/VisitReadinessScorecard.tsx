@@ -59,7 +59,10 @@ function ProgressBar({ pct, tone = "primary" }: { pct: number; tone?: "primary" 
   const colorVar = tone === "pos" ? "--color-pos" : tone === "warn" ? "--color-warn" : "--color-primary";
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-surface-2)]">
-      <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: `var(${colorVar})` }} />
+      <div
+        className="h-full rounded-full transition-all"
+        style={{ width: `${pct}%`, background: `var(${colorVar})` }}
+      />
     </div>
   );
 }
@@ -109,15 +112,19 @@ export function VisitReadinessScorecard() {
         <>
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-[2fr_3fr]">
             <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
-              <div className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">Composite readiness</div>
+              <div className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+                Composite readiness
+              </div>
               <div className="mt-1 flex items-baseline gap-2">
                 <span className="mono text-[34px] font-semibold tabular text-[var(--color-ink)]">{compositePct}</span>
                 <span className="text-[var(--color-ink-muted)]">%</span>
               </div>
-              <ProgressBar pct={compositePct} tone={compositePct > 75 ? "pos" : compositePct > 50 ? "primary" : "warn"} />
+              <ProgressBar
+                pct={compositePct}
+                tone={compositePct > 75 ? "pos" : compositePct > 50 ? "primary" : "warn"}
+              />
               <p className="mt-2 text-[11px] text-[var(--color-ink-muted)]">
-                Weighted by status: approved 100% · review 70% · in-progress 40% · not-started 0%. N/A items
-                excluded.
+                Weighted by status: approved 100% · review 70% · in-progress 40% · not-started 0%. N/A items excluded.
               </p>
             </div>
 
@@ -166,9 +173,9 @@ export function VisitReadinessScorecard() {
           </div>
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-            Status tracking only. Document content, talking-point text, draft agreement bodies, passport / visa
-            numbers, and booking codes do not live in this dashboard — they belong to a separate operational
-            system with auth and audit.
+            Status tracking only. Document content, talking-point text, draft agreement bodies, passport / visa numbers,
+            and booking codes do not live in this dashboard — they belong to a separate operational system with auth and
+            audit.
           </p>
         </>
       ) : null}

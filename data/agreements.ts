@@ -186,7 +186,7 @@ export const agreements: Agreement[] = [
   },
   {
     id: "a-2025-exim-buy-american",
-    title: "EXIM \"Buy American, Build the Future\" framework",
+    title: 'EXIM "Buy American, Build the Future" framework',
     category: "intergov",
     sphere: "finance",
     signedOn: "2025-11-10",

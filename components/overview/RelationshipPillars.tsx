@@ -1,6 +1,16 @@
 import Link from "next/link";
 import type { ComponentType } from "react";
-import { ArrowRight, BookOpen, BriefcaseBusiness, GraduationCap, Handshake, Landmark, Plane, Shield, TrendingUp } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  BriefcaseBusiness,
+  GraduationCap,
+  Handshake,
+  Landmark,
+  Plane,
+  Shield,
+  TrendingUp,
+} from "lucide-react";
 import { relationshipPillars, type RelationshipPillarTone } from "@/data/relationship-pillars";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
@@ -53,7 +63,9 @@ export function RelationshipPillars({ locale }: { locale: string }) {
             <div className="mt-3 text-[19px] font-semibold tracking-tight text-[var(--color-ink)]">{pillar.metric}</div>
             <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">{pillar.narrative}</p>
             <div className="mt-auto border-t border-[var(--color-border)] pt-3">
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">Next move</div>
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                Next move
+              </div>
               <p className="mt-1 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{pillar.action}</p>
               <Link
                 href={`/${locale}${pillar.href}`}

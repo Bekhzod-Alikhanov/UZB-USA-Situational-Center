@@ -25,7 +25,12 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
       </div>
 
       <Card tone="agree">
-        <CardHeader icon={<BarChart3 className="size-3.5" />} tone="agree" title="Aggregate" sub="By category and year" />
+        <CardHeader
+          icon={<BarChart3 className="size-3.5" />}
+          tone="agree"
+          title="Aggregate"
+          sub="By category and year"
+        />
         <CardBody className="flex flex-col gap-8">
           <AgreementsStats />
           <AgreementsTimeline />
@@ -33,14 +38,21 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
       </Card>
 
       <Card tone="agree">
-        <CardHeader icon={<Library className="size-3.5" />} tone="agree" title="Registry" sub="Filter by category, sphere, search by title" />
+        <CardHeader
+          icon={<Library className="size-3.5" />}
+          tone="agree"
+          title="Registry"
+          sub="Filter by category, sphere, search by title"
+        />
         <CardBody>
           <AgreementsTable />
         </CardBody>
       </Card>
 
       <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
-        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">UZ-side legal anchors:</span>
+        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
+          UZ-side legal anchors:
+        </span>
         <SourceBadge sourceId="lex_uz" />
         <SourceBadge sourceId="lex_uz_visa_free_2025" />
         <SourceBadge sourceId="lex_uz_embassy_us_1993" />

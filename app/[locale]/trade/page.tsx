@@ -35,11 +35,7 @@ import {
   LazyServicesEbops,
   LazyTrademapExhibits,
 } from "@/components/trade/LazyCharts";
-import {
-  topExportCategoriesUZ,
-  topImportCategoriesUS,
-  tradeMeta,
-} from "@/data/trade";
+import { topExportCategoriesUZ, topImportCategoriesUS, tradeMeta } from "@/data/trade";
 
 export default async function TradePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -85,7 +81,12 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           </CardBody>
         </Card>
         <Card tone="agree">
-          <CardHeader icon={<ScrollText className="size-3.5" />} tone="agree" title="Methodology notes" sub="Which series to quote when" />
+          <CardHeader
+            icon={<ScrollText className="size-3.5" />}
+            tone="agree"
+            title="Methodology notes"
+            sub="Which series to quote when"
+          />
           <CardBody>
             <MethodologyNotesCard />
           </CardBody>
@@ -120,13 +121,23 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card tone="invest">
-          <CardHeader icon={<ArrowUpFromLine className="size-3.5" />} tone="invest" title={t("structure.export")} sub="USD millions, 2025" />
+          <CardHeader
+            icon={<ArrowUpFromLine className="size-3.5" />}
+            tone="invest"
+            title={t("structure.export")}
+            sub="USD millions, 2025"
+          />
           <CardBody>
             <LazyExportStructure />
           </CardBody>
         </Card>
         <Card tone="agree">
-          <CardHeader icon={<ArrowDownToLine className="size-3.5" />} tone="agree" title={t("structure.import")} sub="USD millions, 2025" />
+          <CardHeader
+            icon={<ArrowDownToLine className="size-3.5" />}
+            tone="agree"
+            title={t("structure.import")}
+            sub="USD millions, 2025"
+          />
           <CardBody>
             <LazyImportStructure />
           </CardBody>
@@ -313,7 +324,9 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       </Card>
 
       <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
-        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Supplementary sources:</span>
+        <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
+          Supplementary sources:
+        </span>
         <SourceBadge sourceId="census_intl_trade_api" />
         <SourceBadge sourceId="cbu_statistics" />
         <SourceBadge sourceId="bea_developers" />

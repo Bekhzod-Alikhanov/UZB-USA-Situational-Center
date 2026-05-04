@@ -46,9 +46,7 @@ export function MicroKpi({ tone, label, value, sub, href, className }: MicroKpiP
         <div className="serif tabular mt-0.5 text-[19px] font-medium leading-tight text-[var(--color-ink)]">
           {value}
         </div>
-        {sub ? (
-          <div className="mono mt-0.5 truncate text-[10px] text-[var(--color-ink-muted)]">{sub}</div>
-        ) : null}
+        {sub ? <div className="mono mt-0.5 truncate text-[10px] text-[var(--color-ink-muted)]">{sub}</div> : null}
       </div>
     </>
   );

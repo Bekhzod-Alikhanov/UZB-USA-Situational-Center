@@ -10,18 +10,18 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 
 ## Stack
 
-| Layer | Choice | Notes |
-|---|---|---|
-| Framework | Next.js 16.2.4, App Router, Turbopack | React 19.2. TypeScript strict. |
-| Styling | Tailwind CSS v4 (`@theme`, `@utility`) | All design tokens in `app/globals.css`. No tailwind.config.ts. |
-| State | Zustand v5 + persist | `lib/store/settings.ts` is the global UI store (theme, locale, hideDemo, presentationMode, AI flags). |
-| i18n | next-intl v4, subpath routing `/[locale]/...` | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`. |
-| Tables | TanStack Table v8 | Server-shaped data, client filter/sort/page. |
-| Charts | Recharts (line/bar/area), Visx (sankey/chord/treemap) | All chart components are `"use client"` and consume CSS vars. |
-| Maps | maplibre-gl with OpenFreeMap style | No API keys. Globe.gl for the 3D globe (lazy). |
-| Drag-and-drop | @dnd-kit | Used in Visit Prepare Kanban. |
-| AI | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 | Sonnet 4.6. Gated by `ASSISTANT_ENABLED` and `ANTHROPIC_API_KEY`. |
-| Package manager | **pnpm** | Lockfile at `pnpm-lock.yaml`. |
+| Layer           | Choice                                                | Notes                                                                                                 |
+| --------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Framework       | Next.js 16.2.4, App Router, Turbopack                 | React 19.2. TypeScript strict.                                                                        |
+| Styling         | Tailwind CSS v4 (`@theme`, `@utility`)                | All design tokens in `app/globals.css`. No tailwind.config.ts.                                        |
+| State           | Zustand v5 + persist                                  | `lib/store/settings.ts` is the global UI store (theme, locale, hideDemo, presentationMode, AI flags). |
+| i18n            | next-intl v4, subpath routing `/[locale]/...`         | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                                      |
+| Tables          | TanStack Table v8                                     | Server-shaped data, client filter/sort/page.                                                          |
+| Charts          | Recharts (line/bar/area), Visx (sankey/chord/treemap) | All chart components are `"use client"` and consume CSS vars.                                         |
+| Maps            | maplibre-gl with OpenFreeMap style                    | No API keys. Globe.gl for the 3D globe (lazy).                                                        |
+| Drag-and-drop   | @dnd-kit                                              | Used in Visit Prepare Kanban.                                                                         |
+| AI              | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3             | Sonnet 4.6. Gated by `ASSISTANT_ENABLED` and `ANTHROPIC_API_KEY`.                                     |
+| Package manager | **pnpm**                                              | Lockfile at `pnpm-lock.yaml`.                                                                         |
 
 ## Routes (19 public sidebar sections × 3 locales + admin/login + counterpart SSG)
 
@@ -75,7 +75,13 @@ pnpm validate:data       # source-id, locale, route, and env-doc validation
 pnpm smoke:routes        # route smoke test against a running server
 pnpm check:package       # tracked-file/package artifact hygiene
 pnpm test:governance     # no-downgrade/RLS/cron/static-fallback checks
-pnpm verify              # lint + typecheck + data validation + governance checks
+pnpm test:unit           # Vitest unit tests
+pnpm test:e2e            # Playwright browser route/API tests (requires build)
+pnpm test:a11y           # Playwright + axe accessibility tests (requires build)
+pnpm knip                # unused dependency/file/export check
+pnpm format:check        # Prettier formatting check
+pnpm lhci                # Lighthouse CI against key pages (requires build)
+pnpm verify              # lint + typecheck + data validation + governance checks + unit tests
 ```
 
 When changing styling or design tokens, run `pnpm build` and inspect the route table — bundle bloat shows up there first.

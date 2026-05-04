@@ -22,9 +22,13 @@ export interface RelationshipPillar {
 
 const investmentValue = investments.reduce((sum, item) => sum + item.valueMusd, 0);
 const grantValue = grants.reduce((sum, item) => sum + item.valueMusd, 0);
-const criticalMinerals = investments.filter((item) => item.sector === "minerals-rare-earth" || item.sector === "mining-metals");
+const criticalMinerals = investments.filter(
+  (item) => item.sector === "minerals-rare-earth" || item.sector === "mining-metals",
+);
 const tradeCommitments = commitments.filter((item) => item.sphere === "trade");
-const diplomaticEvents = events.filter((item) => item.type === "dialogue" || item.type === "summit" || item.type === "council");
+const diplomaticEvents = events.filter(
+  (item) => item.type === "dialogue" || item.type === "summit" || item.type === "council",
+);
 
 export const relationshipPillars: RelationshipPillar[] = [
   {
@@ -32,7 +36,8 @@ export const relationshipPillars: RelationshipPillar[] = [
     title: "Diplomacy",
     signal: `${visits.length} active-window visits`,
     metric: `${agreementsAggregate.totalDocuments} legal instruments`,
-    narrative: "The relationship has enough high-level cadence to support an operating rhythm, but agreement-level metadata still needs owner validation.",
+    narrative:
+      "The relationship has enough high-level cadence to support an operating rhythm, but agreement-level metadata still needs owner validation.",
     href: "/visits",
     tone: "visits",
     sourceId: "input_diplomatic_docx",
@@ -43,7 +48,8 @@ export const relationshipPillars: RelationshipPillar[] = [
     title: "Trade",
     signal: `${tradeCommitments.length} trade commitments`,
     metric: "Dual UZ/US methodology",
-    narrative: "Trade analysis is strongest when UZ Stat and U.S. Census are shown side by side with explicit methodology boundaries.",
+    narrative:
+      "Trade analysis is strongest when UZ Stat and U.S. Census are shown side by side with explicit methodology boundaries.",
     href: "/trade",
     tone: "trade",
     sourceId: "census_goods_uz",
@@ -54,7 +60,8 @@ export const relationshipPillars: RelationshipPillar[] = [
     title: "Investment",
     signal: `$${(investmentValue / 1000).toFixed(1)}B pipeline`,
     metric: `${investments.length} projects`,
-    narrative: "The investment portfolio is the dashboard's strongest executive story, but demo pipeline rows must be replaced before external use.",
+    narrative:
+      "The investment portfolio is the dashboard's strongest executive story, but demo pipeline rows must be replaced before external use.",
     href: "/investments",
     tone: "invest",
     sourceId: "dfc_joint_framework",
@@ -65,18 +72,21 @@ export const relationshipPillars: RelationshipPillar[] = [
     title: "Security and minerals",
     signal: `${criticalMinerals.length} critical-minerals records`,
     metric: "C5+1 supply-chain lane",
-    narrative: "Critical minerals connect economic, security, and regional strategy; this should be treated as a standing watchlist.",
+    narrative:
+      "Critical minerals connect economic, security, and regional strategy; this should be treated as a standing watchlist.",
     href: "/sectors",
     tone: "slate",
     sourceId: "tradegov_mining_2025",
-    action: "Create a minerals tracker with counterpart, concession, financing, export-control, and infrastructure dependencies.",
+    action:
+      "Create a minerals tracker with counterpart, concession, financing, export-control, and infrastructure dependencies.",
   },
   {
     id: "education-aid",
     title: "Education and aid",
     signal: `$${grantValue.toFixed(1)}M grants/programs`,
     metric: "UZ-side plus U.S.-side accounting",
-    narrative: "Development assistance and education are useful soft-power indicators, but their accounting systems must stay separate.",
+    narrative:
+      "Development assistance and education are useful soft-power indicators, but their accounting systems must stay separate.",
     href: "/grants",
     tone: "people",
     sourceId: "foreign_assistance_gov",
@@ -87,7 +97,8 @@ export const relationshipPillars: RelationshipPillar[] = [
     title: "People and mobility",
     signal: `${news.filter((item) => item.tags.includes("culture")).length} culture/mobility signals`,
     metric: "Visa-free U.S. citizens from 2026",
-    narrative: "Visa-free travel and tourism growth can become a distinctive relationship metric if paired with visa/admissions data.",
+    narrative:
+      "Visa-free travel and tourism growth can become a distinctive relationship metric if paired with visa/admissions data.",
     href: "/events",
     tone: "rose",
     sourceId: "govuz_us_visa_free_2026",
@@ -98,7 +109,8 @@ export const relationshipPillars: RelationshipPillar[] = [
     title: "Regional strategy",
     signal: `${diplomaticEvents.length} diplomacy/council events`,
     metric: "C5+1 and peer benchmark",
-    narrative: "The benchmark page is valuable, but it should be connected to concrete policy implications and regional competition.",
+    narrative:
+      "The benchmark page is valuable, but it should be connected to concrete policy implications and regional competition.",
     href: "/benchmark",
     tone: "agree",
     sourceId: "worldbank_data",

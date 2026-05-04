@@ -46,9 +46,7 @@ export function CenterMilestones() {
   const enriched = centerMilestones.map((m) => ({
     ...m,
     status: deriveMilestoneStatus(m.dueDate, today),
-    daysUntil: Math.round(
-      (new Date(m.dueDate + "T00:00:00Z").getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
-    ),
+    daysUntil: Math.round((new Date(m.dueDate + "T00:00:00Z").getTime() - today.getTime()) / (1000 * 60 * 60 * 24)),
   }));
 
   const counts = enriched.reduce<Record<MilestoneStatus, number>>(

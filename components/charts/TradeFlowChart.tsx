@@ -1,14 +1,5 @@
 "use client";
-import {
-  ComposedChart,
-  Area,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import { tradeAnnual } from "@/data/trade";
 import { ChartFrame } from "./ChartFrame";
 

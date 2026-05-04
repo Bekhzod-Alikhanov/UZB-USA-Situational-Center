@@ -4,11 +4,7 @@ import { Stat } from "@/components/ui/Stat";
 import { CounterpartsGrid } from "@/components/counterparts/CounterpartsGrid";
 import { counterparts } from "@/data/counterparts";
 
-export default async function CounterpartsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function CounterpartsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("counterparts");

@@ -47,10 +47,7 @@ export function VisitDocumentRegistry() {
   const [activeRef, setActiveRef] = useState<string>(visitDocumentRegistries[0]?.pipelineRef ?? "");
   const [typeFilter, setTypeFilter] = useState<DocumentType | "all">("all");
 
-  const active = useMemo(
-    () => visitDocumentRegistries.find((d) => d.pipelineRef === activeRef),
-    [activeRef],
-  );
+  const active = useMemo(() => visitDocumentRegistries.find((d) => d.pipelineRef === activeRef), [activeRef]);
   const activePipeline = useMemo(() => visitPipelines.find((p) => p.id === activeRef), [activeRef]);
 
   const filtered: DocumentRegistryItem[] = useMemo(() => {
@@ -121,11 +118,15 @@ export function VisitDocumentRegistry() {
             </div>
             <div className="rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2">
               <div className="stat-label">In progress</div>
-              <div className="mono text-[15px] font-semibold tabular text-[var(--color-warn)]">{counts["in-progress"]}</div>
+              <div className="mono text-[15px] font-semibold tabular text-[var(--color-warn)]">
+                {counts["in-progress"]}
+              </div>
             </div>
             <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2">
               <div className="stat-label">Not started</div>
-              <div className="mono text-[15px] font-semibold tabular text-[var(--color-ink-muted)]">{counts["not-started"]}</div>
+              <div className="mono text-[15px] font-semibold tabular text-[var(--color-ink-muted)]">
+                {counts["not-started"]}
+              </div>
             </div>
           </div>
 
@@ -163,7 +164,8 @@ export function VisitDocumentRegistry() {
               );
             })}
             <span className="ml-auto text-[11px] text-[var(--color-ink-muted)]">
-              Approval rate: <span className="mono font-semibold tabular text-[var(--color-ink)]">{completionPct}%</span>
+              Approval rate:{" "}
+              <span className="mono font-semibold tabular text-[var(--color-ink)]">{completionPct}%</span>
             </span>
           </div>
 
@@ -214,8 +216,8 @@ export function VisitDocumentRegistry() {
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
             Document <strong>titles, owners, statuses, and due dates only</strong>. Document <em>content</em>
-            (talking-point text, draft MoU bodies, briefing prose) is never stored here — those live in the
-            operational document system with proper access control.
+            (talking-point text, draft MoU bodies, briefing prose) is never stored here — those live in the operational
+            document system with proper access control.
           </p>
         </>
       ) : null}

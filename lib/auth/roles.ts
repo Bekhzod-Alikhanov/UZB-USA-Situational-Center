@@ -14,7 +14,15 @@ const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
   analyst: ["dashboard:view", "source:view", "commitment:edit"],
   editor: ["dashboard:view", "source:view", "commitment:edit", "source:approve"],
   executive: ["dashboard:view", "source:view", "decision:approve"],
-  admin: ["dashboard:view", "source:view", "source:approve", "commitment:edit", "decision:approve", "admin:view", "user:manage"],
+  admin: [
+    "dashboard:view",
+    "source:view",
+    "source:approve",
+    "commitment:edit",
+    "decision:approve",
+    "admin:view",
+    "user:manage",
+  ],
 };
 
 export const routeAccessPolicy: Array<{ pattern: string; permission: Permission }> = [

@@ -68,9 +68,7 @@ export function CompliancePosture({ locale }: { locale: string }) {
             className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-2.5 transition hover:bg-[var(--color-surface-2)] hover:shadow-[var(--shadow-hover)]"
           >
             <div className="mb-1 flex items-center justify-between gap-2">
-              <span className="mono text-[10.5px] font-semibold tracking-wider text-[var(--color-ink)]">
-                {it.code}
-              </span>
+              <span className="mono text-[10.5px] font-semibold tracking-wider text-[var(--color-ink)]">{it.code}</span>
               <span
                 className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider"
                 style={{ background: s.bg, color: s.c }}

@@ -68,9 +68,7 @@ export function TrademapProducts() {
   }, [direction, sortBy]);
 
   const totalUsd =
-    direction === "uz-exports"
-      ? trademap2024Meta.uzExportsToUsTotalUsd
-      : trademap2024Meta.usExportsToUzTotalUsd;
+    direction === "uz-exports" ? trademap2024Meta.uzExportsToUsTotalUsd : trademap2024Meta.usExportsToUzTotalUsd;
   const visibleSum = rows.reduce((a, r) => a + r.valueUsd, 0);
   const coveragePct = totalUsd > 0 ? (visibleSum / totalUsd) * 100 : 0;
 
@@ -164,9 +162,7 @@ export function TrademapProducts() {
                   {shortenLabel(r.labelRu)}
                 </td>
                 <td className="mono text-right tabular">{fmtUsd(r.valueUsd)}</td>
-                <td className="mono text-right tabular text-[var(--color-ink-muted)]">
-                  {r.sharePct.toFixed(2)}%
-                </td>
+                <td className="mono text-right tabular text-[var(--color-ink-muted)]">{r.sharePct.toFixed(2)}%</td>
                 <td className="text-right">
                   <GrowthBadge pct={r.growth5yValuePct} />
                 </td>
@@ -180,9 +176,9 @@ export function TrademapProducts() {
       </div>
 
       <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-        Source: ITC Trade Map · 2024 deep-view export. Russian product labels are Trade Map&apos;s defaults.
-        5-year growth is compound, calculated by ITC. UZ→US shows top-40 codes (~99% coverage); US→UZ shows
-        top-60 codes from a longer tail of diversified flows. Residual code 999999 filtered.
+        Source: ITC Trade Map · 2024 deep-view export. Russian product labels are Trade Map&apos;s defaults. 5-year
+        growth is compound, calculated by ITC. UZ→US shows top-40 codes (~99% coverage); US→UZ shows top-60 codes from a
+        longer tail of diversified flows. Residual code 999999 filtered.
       </p>
     </div>
   );

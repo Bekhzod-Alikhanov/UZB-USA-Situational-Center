@@ -13,12 +13,7 @@ export type PipelineStatus =
   | "Final review"
   | "Completed";
 export type OutcomeScore = "High" | "Medium-high" | "Medium" | "Below plan" | "Low";
-export type OutcomeStatus =
-  | "Verified"
-  | "Needs verification"
-  | "On track"
-  | "At risk"
-  | "Pending";
+export type OutcomeStatus = "Verified" | "Needs verification" | "On track" | "At risk" | "Pending";
 
 export interface ChecklistItem {
   label: string;
@@ -155,11 +150,7 @@ export const visitPipelines: VisitPipeline[] = [
     theme: "Verification of May visit commitments",
     status: "Early preparation",
     delegation: ["Core delegation", "Project owners", "Embassy support"],
-    program: [
-      "Review meeting",
-      "Follow-up with companies and funds",
-      "Export promotion block",
-    ],
+    program: ["Review meeting", "Follow-up with companies and funds", "Export promotion block"],
     projects: ["DFC shortlist review", "Grant pipeline update", "Export package refresh"],
     checklist: [
       { label: "Baseline KPI pulled in", state: "Done" },
@@ -399,7 +390,11 @@ export const visitScorecards: VisitScorecard[] = [
         title: "Personnel (slot count only)",
         applicable: true,
         items: [
-          s("12 slots assigned (1 head, 1 deputy, 6 experts, 1 protocol, 2 translators, 1 security)", "approved", "Protocol Office"),
+          s(
+            "12 slots assigned (1 head, 1 deputy, 6 experts, 1 protocol, 2 translators, 1 security)",
+            "approved",
+            "Protocol Office",
+          ),
           s("Passport check — covers 12/12", "approved", "Protocol Office"),
           s("U.S. visa applications submitted — 12/12", "in-progress", "Embassy DC", "2026-04-30"),
           s("Medical / travel insurance — 10/12", "in-progress", "HR", "2026-05-05"),
@@ -618,7 +613,14 @@ export const visitScorecards: VisitScorecard[] = [
 // Document Registry — TITLES + STATUS, never content.
 // =====================================================================
 
-function d(title: string, type: DocumentType, owner: string, status: ItemStatus, dueDate?: string, size?: string): DocumentRegistryItem {
+function d(
+  title: string,
+  type: DocumentType,
+  owner: string,
+  status: ItemStatus,
+  dueDate?: string,
+  size?: string,
+): DocumentRegistryItem {
   return { title, type, owner, status, dueDate, size };
 }
 
@@ -626,16 +628,37 @@ export const visitDocumentRegistries: VisitDocumentRegistry[] = [
   {
     pipelineRef: "visit-pipeline-washington-2026",
     documents: [
-      d("Brief — DFC structure and Uzbekistan portfolio", "brief", "Strategic Analysis", "approved", "2026-04-25", "2 pp"),
+      d(
+        "Brief — DFC structure and Uzbekistan portfolio",
+        "brief",
+        "Strategic Analysis",
+        "approved",
+        "2026-04-25",
+        "2 pp",
+      ),
       d("Brief — USTDA pipeline status", "brief", "Strategic Analysis", "approved", "2026-04-25", "2 pp"),
       d("Brief — U.S. Department of Commerce", "brief", "Strategic Analysis", "approved", "2026-04-25", "1 p"),
       d("Brief — receiving company #1 (mining sector)", "brief", "MIIT", "approved", "2026-04-28", "2 pp"),
-      d("Talking points — delegation head (DFC track)", "talking-points", "MFA Bilateral", "review", "2026-05-08", "1 p"),
+      d(
+        "Talking points — delegation head (DFC track)",
+        "talking-points",
+        "MFA Bilateral",
+        "review",
+        "2026-05-08",
+        "1 p",
+      ),
       d("Talking points — critical minerals", "talking-points", "MFA Bilateral", "approved", "2026-05-05", "1 p"),
       d("Speech — Council session opening", "speech", "Communications", "in-progress", "2026-05-09"),
       d("Presentation — UZ project portfolio", "presentation", "MIIT", "approved", "2026-05-02", "24 slides"),
       d("Presentation — AI Hub concept", "presentation", "IT Park", "review", "2026-05-07", "18 slides"),
-      d("Analytical note — critical minerals supply chain", "analytical-note", "Strategic Analysis", "approved", "2026-04-22", "6 pp"),
+      d(
+        "Analytical note — critical minerals supply chain",
+        "analytical-note",
+        "Strategic Analysis",
+        "approved",
+        "2026-04-22",
+        "6 pp",
+      ),
       d("Service memo — visit initiation", "service-memo", "Project Office", "approved", "2026-04-10", "2 pp"),
       d("Travel order draft", "travel-order", "HR", "review", "2026-04-25", "1 p"),
       d("Day-by-day agenda", "agenda", "MFA Bilateral", "approved", "2026-04-30", "3 pp"),
@@ -664,8 +687,21 @@ export const visitDocumentRegistries: VisitDocumentRegistry[] = [
   {
     pipelineRef: "visit-pipeline-nyc-unga-2026",
     documents: [
-      d("Plan-vs-actual matrix — May 2026 visit", "analytical-note", "Strategic Analysis", "in-progress", "2026-08-10", "5 pp"),
-      d("Plan-vs-actual matrix — July 2026 visit", "analytical-note", "Strategic Analysis", "not-started", "2026-08-25"),
+      d(
+        "Plan-vs-actual matrix — May 2026 visit",
+        "analytical-note",
+        "Strategic Analysis",
+        "in-progress",
+        "2026-08-10",
+        "5 pp",
+      ),
+      d(
+        "Plan-vs-actual matrix — July 2026 visit",
+        "analytical-note",
+        "Strategic Analysis",
+        "not-started",
+        "2026-08-25",
+      ),
       d("Unresolved-items dossier", "analytical-note", "Project Office", "not-started", "2026-09-01"),
       d("Talking points — UNGA bilateral", "talking-points", "MFA Bilateral", "not-started", "2026-09-15"),
       d("Service memo — verification visit rationale", "service-memo", "Project Office", "in-progress", "2026-06-01"),

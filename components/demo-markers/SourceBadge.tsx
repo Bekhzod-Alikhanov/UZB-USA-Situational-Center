@@ -71,10 +71,7 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
   }
 
   return (
-    <span
-      className={baseClass}
-      title={`${src.name} · ${src.sourceFile ?? "internal"} · fetched ${src.fetched_at}`}
-    >
+    <span className={baseClass} title={`${src.name} · ${src.sourceFile ?? "internal"} · fetched ${src.fetched_at}`}>
       {inner}
     </span>
   );

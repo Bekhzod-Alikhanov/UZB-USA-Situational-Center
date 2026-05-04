@@ -166,7 +166,8 @@ export const grants: Grant[] = [
     status: "active",
     is_demo: false,
     sourceId: "usaid_eras_ii",
-    source_url: "https://www.usaid.gov/sites/default/files/2022-10/ERAS_II_-_USAID_Environment_Restoration_of_the_Aral_Sea_II_-_ENG_factsheet.docx.pdf",
+    source_url:
+      "https://www.usaid.gov/sites/default/files/2022-10/ERAS_II_-_USAID_Environment_Restoration_of_the_Aral_Sea_II_-_ENG_factsheet.docx.pdf",
     startYear: 2022,
     note: "Three-year activity 2022–2025 focused on Aral Sea restoration and community resilience.",
   },

@@ -5,11 +5,7 @@ import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { InvestmentsView } from "@/components/investments/InvestmentsView";
 import { investments, investmentsTotals } from "@/data/investments";
 
-export default async function InvestmentsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function InvestmentsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("investments");
@@ -27,10 +23,7 @@ export default async function InvestmentsPage({
         </div>
         <div className="hidden gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
           <Stat label={t("stats.projects")} value={investmentsTotals.totalProjects.toString()} />
-          <Stat
-            label={t("stats.value")}
-            value={`$${(investmentsTotals.totalValueUsdM / 1000).toFixed(2)}B`}
-          />
+          <Stat label={t("stats.value")} value={`$${(investmentsTotals.totalValueUsdM / 1000).toFixed(2)}B`} />
           <Stat label={t("stats.jobs")} value={investmentsTotals.totalJobs.toLocaleString("en-US")} />
           <Stat label={t("stats.operating")} value={operating.toString()} tone="pos" />
           <Stat label={t("stats.construction")} value={construction.toString()} tone="warn" />

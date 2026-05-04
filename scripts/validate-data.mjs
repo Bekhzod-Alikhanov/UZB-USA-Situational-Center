@@ -118,7 +118,9 @@ const expectedRoutes = [
 ];
 
 for (const route of expectedRoutes) {
-  const pagePath = route ? path.join(root, "app", "[locale]", route, "page.tsx") : path.join(root, "app", "[locale]", "page.tsx");
+  const pagePath = route
+    ? path.join(root, "app", "[locale]", route, "page.tsx")
+    : path.join(root, "app", "[locale]", "page.tsx");
   if (!fs.existsSync(pagePath)) fail(`README route missing page file: /[locale]/${route || ""}`);
 }
 
@@ -147,7 +149,14 @@ if (!fs.existsSync(path.join(root, "database", "schema.sql"))) {
   fail("database/schema.sql is required for production database handoff.");
 }
 const schema = read("database/schema.sql");
-for (const table of ["raw_source_snapshot", "normalized_observation", "published_metric", "data_review_queue", "source_version_policy", "ingest_run"]) {
+for (const table of [
+  "raw_source_snapshot",
+  "normalized_observation",
+  "published_metric",
+  "data_review_queue",
+  "source_version_policy",
+  "ingest_run",
+]) {
   if (!schema.includes(`create table if not exists ${table}`)) {
     fail(`database/schema.sql must include governed ingestion table: ${table}.`);
   }
@@ -171,7 +180,9 @@ for (const relPath of trackedFiles()) {
   }
 }
 
-console.log(`Validated ${sourceIds.length} sources, ${sourceRefCount} source references, ${dataFiles.length} data files, ${locales.length} locale files, and ${expectedRoutes.length} localized routes.`);
+console.log(
+  `Validated ${sourceIds.length} sources, ${sourceRefCount} source references, ${dataFiles.length} data files, ${locales.length} locale files, and ${expectedRoutes.length} localized routes.`,
+);
 for (const message of warnings) console.warn(`Warning: ${message}`);
 if (failures.length) {
   console.error("\nValidation failed:");

@@ -7,15 +7,7 @@
  * Adapted from the parallel Codex pass; sources cross-checked against the
  * deep-review document and ITA / GOV.UZ official pages.
  */
-export type SectorIcon =
-  | "banking"
-  | "privatization"
-  | "minerals"
-  | "energy"
-  | "agri"
-  | "health"
-  | "it"
-  | "tourism";
+export type SectorIcon = "banking" | "privatization" | "minerals" | "energy" | "agri" | "health" | "it" | "tourism";
 
 export interface SectorOpportunity {
   id: string;
@@ -58,8 +50,7 @@ export const sectorOpportunities: SectorOpportunity[] = [
     icon: "minerals",
     signal:
       "ITA mining guidance points to mineral extraction, processing, equipment, and U.S.-linked industrial gas/hydrogen projects.",
-    whyItMatters:
-      "Matches DFC/EXIM strategic sectors and the 2026 critical-minerals agenda.",
+    whyItMatters: "Matches DFC/EXIM strategic sectors and the 2026 critical-minerals agenda.",
     nextQuestion:
       "Which projects have reserve data, environmental studies, offtake terms, and financing need ready for review?",
     sourceId: "tradegov_mining_2025",
@@ -68,8 +59,7 @@ export const sectorOpportunities: SectorOpportunity[] = [
     id: "sector-green-energy",
     sector: "Green energy and industrial efficiency",
     icon: "energy",
-    signal:
-      "The June 2025 official forum listed green energy among priority cooperation directions.",
+    signal: "The June 2025 official forum listed green energy among priority cooperation directions.",
     whyItMatters:
       "Pairs U.S. technology, finance, and equipment opportunities with energy-security and decarbonization goals.",
     nextQuestion:
@@ -84,20 +74,17 @@ export const sectorOpportunities: SectorOpportunity[] = [
       "The official forum listed food/agriculture as a priority; Coca-Cola expansion provides a regional manufacturing anchor.",
     whyItMatters:
       "Turns consumer and agricultural activity into regional jobs, supply-chain, and export-quality workstreams.",
-    nextQuestion:
-      "Which regional industrial zones and suppliers can support U.S. food-processing investors?",
+    nextQuestion: "Which regional industrial zones and suppliers can support U.S. food-processing investors?",
     sourceId: "govuz_business_forum_2025",
   },
   {
     id: "sector-health-pharma",
     sector: "Healthcare and pharmaceuticals",
     icon: "health",
-    signal:
-      "The official forum listed healthcare and pharmaceuticals among priority cooperation directions.",
+    signal: "The official forum listed healthcare and pharmaceuticals among priority cooperation directions.",
     whyItMatters:
       "Links grant medical-equipment projects with commercial health-tech and pharmaceutical opportunities.",
-    nextQuestion:
-      "Which hospital systems, tenders, and regulatory approvals need U.S. counterpart mapping?",
+    nextQuestion: "Which hospital systems, tenders, and regulatory approvals need U.S. counterpart mapping?",
     sourceId: "govuz_business_forum_2025",
   },
   {
@@ -106,8 +93,7 @@ export const sectorOpportunities: SectorOpportunity[] = [
     icon: "it",
     signal:
       "The official forum listed IT/digital as a priority and the 2026 dashboard concept includes a $250M AI/digital fund.",
-    whyItMatters:
-      "Creates a bridge between venture capital, workforce, e-government, and commercial service exports.",
+    whyItMatters: "Creates a bridge between venture capital, workforce, e-government, and commercial service exports.",
     nextQuestion:
       "Which startup, AI, and digital-infrastructure projects have U.S. investor or university counterpart matches?",
     sourceId: "govuz_business_forum_2025",

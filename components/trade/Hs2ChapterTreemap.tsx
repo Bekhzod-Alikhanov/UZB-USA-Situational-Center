@@ -20,9 +20,7 @@ type Year = 2024 | 2025;
 const RESIDUAL_HS2 = new Set(["99"]);
 
 // 12-step palette over the primary tone (token-driven, no hex literals)
-const PALETTE = Array.from({ length: 12 }, (_, i) =>
-  `color-mix(in oklab, var(--color-primary) ${90 - i * 7}%, white)`,
-);
+const PALETTE = Array.from({ length: 12 }, (_, i) => `color-mix(in oklab, var(--color-primary) ${90 - i * 7}%, white)`);
 
 interface NodeData {
   hs2: string;
@@ -120,9 +118,7 @@ export function Hs2ChapterTreemap() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-          {T.flow}:
-        </span>
+        <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.flow}:</span>
         {(
           [
             ["uz-exports", T.flowUz],
@@ -143,9 +139,7 @@ export function Hs2ChapterTreemap() {
             {label}
           </button>
         ))}
-        <span className="ml-2 text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-          {T.year}:
-        </span>
+        <span className="ml-2 text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.year}:</span>
         {([2024, 2025] as Year[]).map((y) => (
           <button
             key={y}
@@ -192,16 +186,7 @@ export function Hs2ChapterTreemap() {
                           const h = node.y1 - node.y0;
                           if (w < 1 || h < 1) return null;
                           const data = node.data as unknown as NodeData;
-                          return (
-                            <ChapterTile
-                              key={i}
-                              x={node.x0}
-                              y={node.y0}
-                              w={w}
-                              h={h}
-                              data={data}
-                            />
-                          );
+                          return <ChapterTile key={i} x={node.x0} y={node.y0} w={w} h={h} data={data} />;
                         })}
                       </g>
                     )}
@@ -220,24 +205,13 @@ export function Hs2ChapterTreemap() {
             className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2"
           >
             <div className="flex items-center gap-2">
-              <span
-                className="size-2.5 shrink-0 rounded-sm"
-                style={{ background: PALETTE[i] }}
-                aria-hidden
-              />
-              <span className="mono font-semibold tabular text-[var(--color-ink)]">
-                HS-{r.hs2}
-              </span>
+              <span className="size-2.5 shrink-0 rounded-sm" style={{ background: PALETTE[i] }} aria-hidden />
+              <span className="mono font-semibold tabular text-[var(--color-ink)]">HS-{r.hs2}</span>
             </div>
-            <div
-              className="mt-1 line-clamp-2 text-[var(--color-ink-muted)]"
-              title={r.desc}
-            >
+            <div className="mt-1 line-clamp-2 text-[var(--color-ink-muted)]" title={r.desc}>
               {r.desc}
             </div>
-            <div className="mono mt-1 text-[13px] font-semibold tabular text-[var(--color-ink)]">
-              {fmt(r.valueUsd)}
-            </div>
+            <div className="mono mt-1 text-[13px] font-semibold tabular text-[var(--color-ink)]">{fmt(r.valueUsd)}</div>
             <div className="text-[10.5px] text-[var(--color-ink-muted)]">
               {total > 0 ? ((r.valueUsd / total) * 100).toFixed(1) : 0}%
             </div>
@@ -250,19 +224,7 @@ export function Hs2ChapterTreemap() {
   );
 }
 
-function ChapterTile({
-  x,
-  y,
-  w,
-  h,
-  data,
-}: {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  data: NodeData;
-}) {
+function ChapterTile({ x, y, w, h, data }: { x: number; y: number; w: number; h: number; data: NodeData }) {
   const clipId = useId();
   const showLabel = w > 50 && h > 30;
   const showSubLabel = w > 100 && h > 56;

@@ -12,11 +12,7 @@ export function generateStaticParams() {
   return counterparts.map((c) => ({ id: c.id }));
 }
 
-export default async function CounterpartPage({
-  params,
-}: {
-  params: Promise<{ locale: string; id: string }>;
-}) {
+export default async function CounterpartPage({ params }: { params: Promise<{ locale: string; id: string }> }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("counterparts");
@@ -35,7 +31,12 @@ export default async function CounterpartPage({
 
       <div className="flex flex-col gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 md:flex-row md:items-center">
         <div className="flex size-20 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[24px] font-bold text-white">
-          {c.name.split(/\s+/).slice(0, 2).map((p) => p[0]).join("").toUpperCase()}
+          {c.name
+            .split(/\s+/)
+            .slice(0, 2)
+            .map((p) => p[0])
+            .join("")
+            .toUpperCase()}
         </div>
         <div className="flex flex-1 flex-col gap-1.5">
           <h1 className="serif text-[26px] font-medium tracking-tight text-[var(--color-ink)]">{c.name}</h1>
@@ -43,10 +44,16 @@ export default async function CounterpartPage({
           <div className="flex flex-wrap items-center gap-2 pt-1 text-[11.5px]">
             {c.party ? (
               <span className={cn("mono rounded px-2 py-0.5 font-semibold tabular", PARTY_TONE[c.party])}>
-                {c.party}{c.state ? ` · ${c.state}` : ""}
+                {c.party}
+                {c.state ? ` · ${c.state}` : ""}
               </span>
             ) : null}
-            <span className={cn("rounded-full border px-2 py-0.5 font-medium uppercase tracking-wider", STANCE_CHIP[c.stanceOnUz])}>
+            <span
+              className={cn(
+                "rounded-full border px-2 py-0.5 font-medium uppercase tracking-wider",
+                STANCE_CHIP[c.stanceOnUz],
+              )}
+            >
               {c.stanceOnUz}
             </span>
             {c.sourceId ? <SourceBadge sourceId={c.sourceId} variant="chip" /> : null}
@@ -75,10 +82,7 @@ export default async function CounterpartPage({
           <CardBody>
             <ol className="flex flex-col gap-2.5">
               {c.priorEngagements.map((e, idx) => (
-                <li
-                  key={idx}
-                  className="flex gap-3 border-b border-[var(--color-border)] pb-2 last:border-0 last:pb-0"
-                >
+                <li key={idx} className="flex gap-3 border-b border-[var(--color-border)] pb-2 last:border-0 last:pb-0">
                   <span className="mono mt-0.5 size-5 shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] text-center text-[10px] font-semibold leading-5 tabular text-[var(--color-ink-muted)]">
                     {idx + 1}
                   </span>

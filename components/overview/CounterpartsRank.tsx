@@ -33,33 +33,21 @@ export function CounterpartsRank() {
           className="-mx-1.5 grid grid-cols-[24px_1fr_64px_64px] items-center gap-2 rounded border-b border-[var(--color-border)] px-1.5 py-1.5 transition last:border-0 hover:bg-[var(--color-surface-2)]"
         >
           <span className="mono text-[10px] text-[var(--color-ink-faint)]">{String(i + 1).padStart(2, "0")}</span>
-          <Link
-            href={`/${locale}/investments`}
-            className="min-w-0 hover:text-[var(--color-primary)]"
-          >
+          <Link href={`/${locale}/investments`} className="min-w-0 hover:text-[var(--color-primary)]">
             <div className="flex items-center gap-1.5 truncate text-[12.5px] text-[var(--color-ink)]">
               {c.name}
               {c.pending ? (
-                <span
-                  className="size-1 rounded-full bg-[var(--color-warn)]"
-                  title="Volume pending verification"
-                />
+                <span className="size-1 rounded-full bg-[var(--color-warn)]" title="Volume pending verification" />
               ) : null}
             </div>
-            <div className="mono text-[9.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-              {c.sector}
-            </div>
+            <div className="mono text-[9.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">{c.sector}</div>
           </Link>
           <span className="mono text-right tabular text-[11.5px] text-[var(--color-ink)]">{c.vol}</span>
           <span
             className={cn("mono text-right tabular text-[10.5px] font-semibold")}
             style={{
               color:
-                c.trendPct > 0
-                  ? "var(--color-pos)"
-                  : c.trendPct < 0
-                    ? "var(--color-neg)"
-                    : "var(--color-ink-faint)",
+                c.trendPct > 0 ? "var(--color-pos)" : c.trendPct < 0 ? "var(--color-neg)" : "var(--color-ink-faint)",
             }}
           >
             {signedPct(c.trendPct)}

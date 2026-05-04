@@ -169,14 +169,24 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         <Card tone="agree">
-          <CardHeader icon={<Lightbulb className="size-3.5" />} tone="agree" title={t("optimize.title")} sub={t("optimize.sub")} />
+          <CardHeader
+            icon={<Lightbulb className="size-3.5" />}
+            tone="agree"
+            title={t("optimize.title")}
+            sub={t("optimize.sub")}
+          />
           <CardBody>
             <OptimizationPanel />
           </CardBody>
         </Card>
 
         <Card tone="people">
-          <CardHeader icon={<CheckSquare className="size-3.5" />} tone="people" title="Checklist" sub="Pre-visit status tracking" />
+          <CardHeader
+            icon={<CheckSquare className="size-3.5" />}
+            tone="people"
+            title="Checklist"
+            sub="Pre-visit status tracking"
+          />
           <CardBody>
             <ChecklistBlock />
           </CardBody>

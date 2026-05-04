@@ -12,9 +12,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
   const totalGdp = totalFor("gdp"); // $B
   const totalPop = totalFor("population"); // millions
   const totalStudents = totalFor("students");
-  const activeMissions = uzMissionsUs.filter(
-    (m) => m.status === "active" || m.status === "opened-2026",
-  ).length;
+  const activeMissions = uzMissionsUs.filter((m) => m.status === "active" || m.status === "opened-2026").length;
   const plannedMissions = uzMissionsUs.filter((m) => m.status.startsWith("planned")).length;
   const plannedVisits = uzPlannedVisitsUs.length;
 
@@ -88,11 +86,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
           value={totalStudents.toLocaleString(locale === "ru" ? "ru-RU" : "en-US")}
           sub={labels.stuSub}
         />
-        <MiniStat
-          label={labels.missions}
-          value={`${uzMissionsUs.length}`}
-          sub={labels.missionsSub}
-        />
+        <MiniStat label={labels.missions} value={`${uzMissionsUs.length}`} sub={labels.missionsSub} />
         <MiniStat label={labels.visits} value={`${plannedVisits}`} sub={labels.visitsSub} />
       </div>
 
@@ -109,9 +103,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
 function MiniStat({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
     <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-      <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-muted)]">
-        {label}
-      </div>
+      <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-muted)]">{label}</div>
       <div className="mt-1 mono text-[20px] font-semibold tabular text-[var(--color-ink)]">{value}</div>
       <div className="mt-0.5 text-[11px] text-[var(--color-ink-muted)]">{sub}</div>
     </div>

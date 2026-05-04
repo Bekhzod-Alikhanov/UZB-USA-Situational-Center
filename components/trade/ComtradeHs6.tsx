@@ -44,8 +44,8 @@ export function ComtradeHs6Top() {
 
   const annualTotal =
     direction === "uz-exports"
-      ? comtradeAnnualUsReporter[year]?.importsFromUz ?? 0
-      : comtradeAnnualUsReporter[year]?.exportsToUz ?? 0;
+      ? (comtradeAnnualUsReporter[year]?.importsFromUz ?? 0)
+      : (comtradeAnnualUsReporter[year]?.exportsToUz ?? 0);
   const visibleSum = rows.reduce((a, r) => a + r.valueUsd, 0);
   const visibleSharePct = annualTotal > 0 ? (visibleSum / annualTotal) * 100 : 0;
 

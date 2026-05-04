@@ -128,11 +128,7 @@ export function Horizon() {
           if (pct < 0 || pct > 100) return null;
           const c = TYPE_COLOR[it.type];
           return (
-            <div
-              key={it.id}
-              className="group absolute top-1/2 -translate-y-1/2"
-              style={{ left: `${pct}%` }}
-            >
+            <div key={it.id} className="group absolute top-1/2 -translate-y-1/2" style={{ left: `${pct}%` }}>
               <div
                 className="size-2.5 -translate-x-1/2 cursor-pointer rounded-full ring-2 ring-[var(--color-surface)] transition group-hover:scale-150"
                 style={{ background: c }}

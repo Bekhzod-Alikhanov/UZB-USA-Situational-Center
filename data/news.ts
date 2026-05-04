@@ -52,8 +52,7 @@ export const news: NewsItem[] = [
     url: "https://gov.uz/en/uzbektourism/news/view/99187",
     tags: ["culture", "diplomatic"],
     tonality: "positive",
-    summary:
-      "30-day visa-free travel for U.S. citizens travelling to Uzbekistan, effective from 2026.",
+    summary: "30-day visa-free travel for U.S. citizens travelling to Uzbekistan, effective from 2026.",
     is_demo: false,
     sourceId: "govuz_us_visa_free_2026",
   },
@@ -65,8 +64,7 @@ export const news: NewsItem[] = [
     url: "https://gov.uz/en/uzbektourism/news/view/124526",
     tags: ["culture", "economy"],
     tonality: "positive",
-    summary:
-      "Tourism Committee reports more than 37,000 U.S. tourist arrivals in 2025.",
+    summary: "Tourism Committee reports more than 37,000 U.S. tourist arrivals in 2025.",
     is_demo: false,
     sourceId: "govuz_us_tourism_2025",
   },

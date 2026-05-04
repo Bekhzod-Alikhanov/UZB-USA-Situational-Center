@@ -17,27 +17,22 @@ export function MethodologyNotesCard() {
       <div className="flex items-start gap-2 rounded-md border border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] px-3 py-2 leading-snug text-[var(--color-warn)]">
         <Info className="mt-0.5 size-3.5 shrink-0" />
         <p>
-          <span className="font-semibold">Methodology matters.</span> UZ-side and US-side trade
-          figures describe the same flows but use different valuation, timing, and partner-country
-          rules. Always label which series you&apos;re quoting in a briefing.
+          <span className="font-semibold">Methodology matters.</span> UZ-side and US-side trade figures describe the
+          same flows but use different valuation, timing, and partner-country rules. Always label which series
+          you&apos;re quoting in a briefing.
         </p>
       </div>
 
       <details className="group rounded-md border border-[var(--color-border)] bg-[var(--color-surface)]">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-3 py-2 text-[11.5px] font-medium text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)]">
-          <span>
-            Per-series breakdown · {methodologyNotes.length} sources
-          </span>
+          <span>Per-series breakdown · {methodologyNotes.length} sources</span>
           <span aria-hidden className="text-[var(--color-ink-faint)] transition group-open:rotate-180">
             ▾
           </span>
         </summary>
         <ul className="flex flex-col gap-2 border-t border-[var(--color-border)] p-3">
           {methodologyNotes.map((m) => (
-            <li
-              key={m.id}
-              className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2.5"
-            >
+            <li key={m.id} className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2.5">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-[12px] font-semibold text-[var(--color-ink)]">{m.title}</span>
                 <SourceBadge sourceId={m.sourceId} />

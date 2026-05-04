@@ -22,15 +22,7 @@ const config = [
     },
   },
   {
-    ignores: [
-      ".next/**",
-      "node_modules/**",
-      "input/**",
-      "_extracted/**",
-      "_design_ref/**",
-      "_*.js",
-      "_*.ts",
-    ],
+    ignores: [".next/**", "node_modules/**", "input/**", "_extracted/**", "_design_ref/**", "_*.js", "_*.ts"],
   },
 ];
 

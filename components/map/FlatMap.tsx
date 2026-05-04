@@ -62,19 +62,7 @@ export function FlatMap({ activeLayers }: Props) {
           paint: {
             "circle-color": "#1A3A6C",
             "circle-opacity": 0.55,
-            "circle-radius": [
-              "interpolate",
-              ["linear"],
-              ["get", "valueMusd"],
-              0,
-              4,
-              50,
-              7,
-              250,
-              14,
-              600,
-              22,
-            ],
+            "circle-radius": ["interpolate", ["linear"], ["get", "valueMusd"], 0, 4, 50, 7, 250, 14, 600, 22],
             "circle-stroke-color": "#1A3A6C",
             "circle-stroke-width": 1.5,
           },
@@ -252,10 +240,7 @@ export function FlatMap({ activeLayers }: Props) {
   }, [activeLayers]);
 
   return (
-    <div
-      ref={container}
-      className="h-[560px] w-full overflow-hidden rounded-md border border-[var(--color-border)]"
-    />
+    <div ref={container} className="h-[560px] w-full overflow-hidden rounded-md border border-[var(--color-border)]" />
   );
 }
 
@@ -265,10 +250,7 @@ function greatCircle(from: [number, number], to: [number, number], steps = 50): 
   const d =
     2 *
     Math.asin(
-      Math.sqrt(
-        Math.sin((lat2 - lat1) / 2) ** 2 +
-          Math.cos(lat1) * Math.cos(lat2) * Math.sin((lng2 - lng1) / 2) ** 2,
-      ),
+      Math.sqrt(Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lng2 - lng1) / 2) ** 2),
     );
   const out: [number, number][] = [];
   for (let i = 0; i <= steps; i++) {
@@ -286,5 +268,8 @@ function greatCircle(from: [number, number], to: [number, number], steps = 50): 
 }
 
 function escapeHtml(s: string): string {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c);
+  return s.replace(
+    /[&<>"']/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c,
+  );
 }

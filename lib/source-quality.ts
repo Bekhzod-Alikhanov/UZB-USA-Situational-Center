@@ -24,7 +24,11 @@ function daysSince(date: string, now: Date) {
 
 function confidenceFor(source: Source): SourceConfidence {
   if (source.level === "A") return "internal";
-  if (/world bank|census|state|dhs|homeland|open doors|iie|ustr|dfc|exim|usaid|lex\.uz|gov\.uz|president\.uz|central bank|trade\.gov/i.test(source.name)) {
+  if (
+    /world bank|census|state|dhs|homeland|open doors|iie|ustr|dfc|exim|usaid|lex\.uz|gov\.uz|president\.uz|central bank|trade\.gov/i.test(
+      source.name,
+    )
+  ) {
     return "official";
   }
   if (/gateway|council|chamber/i.test(source.name)) return "partner";

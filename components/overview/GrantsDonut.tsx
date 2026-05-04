@@ -64,28 +64,15 @@ export function GrantsDonut({ size = 132 }: { size?: number }) {
         >
           ${total.toFixed(1)}M
         </text>
-        <text
-          x={cx}
-          y={cy + 11}
-          textAnchor="middle"
-          className="mono"
-          fontSize="8.5"
-          fill="var(--color-ink-faint)"
-        >
+        <text x={cx} y={cy + 11} textAnchor="middle" className="mono" fontSize="8.5" fill="var(--color-ink-faint)">
           {count} grants
         </text>
       </svg>
 
       <div className="grid min-w-0 flex-1 grid-cols-1 gap-1">
         {byType.map((g, i) => (
-          <div
-            key={g.name}
-            className="grid grid-cols-[10px_1fr_56px] items-center gap-2 text-[11px]"
-          >
-            <span
-              className="size-2 shrink-0 rounded-sm"
-              style={{ background: COLORS[i % COLORS.length] }}
-            />
+          <div key={g.name} className="grid grid-cols-[10px_1fr_56px] items-center gap-2 text-[11px]">
+            <span className="size-2 shrink-0 rounded-sm" style={{ background: COLORS[i % COLORS.length] }} />
             <span className="truncate text-[var(--color-ink-muted)]">{g.name}</span>
             <span className="mono text-right tabular text-[var(--color-ink)]">${g.val.toFixed(2)}M</span>
           </div>

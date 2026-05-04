@@ -31,11 +31,7 @@ import { ExecutiveCommandCenter } from "@/components/overview/ExecutiveCommandCe
 import { RelationshipPillars } from "@/components/overview/RelationshipPillars";
 import { SourceQualityPanel } from "@/components/overview/SourceQualityPanel";
 
-export default async function OverviewPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function OverviewPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("overview");
@@ -293,11 +289,7 @@ export default async function OverviewPage({
               icon={<AlertTriangle className="size-3.5" />}
               tone="rose"
               title={locale === "ru" ? "Сигналы и риски" : "Signals & risks"}
-              sub={
-                locale === "ru"
-                  ? "live-агрегатор по 4 реестрам"
-                  : "live aggregator across 4 registries"
-              }
+              sub={locale === "ru" ? "live-агрегатор по 4 реестрам" : "live aggregator across 4 registries"}
             />
             <CardBody>
               <RiskRadar limit={6} />

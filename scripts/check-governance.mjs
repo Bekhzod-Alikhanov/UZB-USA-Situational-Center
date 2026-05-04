@@ -45,4 +45,6 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Governance checks passed: no-downgrade policy, static fallback, cron auth, source seeding, and RLS are present.");
+console.log(
+  "Governance checks passed: no-downgrade policy, static fallback, cron auth, source seeding, and RLS are present.",
+);

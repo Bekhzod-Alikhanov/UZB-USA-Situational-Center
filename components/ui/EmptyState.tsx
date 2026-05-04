@@ -20,9 +20,7 @@ export function EmptyState({
     >
       <SearchX className="size-6 text-[var(--color-ink-faint)]" aria-hidden />
       <div className="mt-2 text-[13px] font-semibold text-[var(--color-ink)]">{title}</div>
-      <p className="mt-1 max-w-sm text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-        {description}
-      </p>
+      <p className="mt-1 max-w-sm text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{description}</p>
     </div>
   );
 }

@@ -6,12 +6,7 @@ import { AlertTriangle, Clock, FileWarning, CalendarClock, ClipboardCheck, Arrow
 import { commitments, type Commitment } from "@/data/commitments";
 import { agreements, type Agreement } from "@/data/agreements";
 import { centerMilestones, deriveMilestoneStatus, type CenterMilestone } from "@/data/center-milestones";
-import {
-  visitScorecards,
-  visitPipelines,
-  scorecardReadinessPct,
-  type VisitScorecard,
-} from "@/data/visit-prep";
+import { visitScorecards, visitPipelines, scorecardReadinessPct, type VisitScorecard } from "@/data/visit-prep";
 import { cn } from "@/lib/utils";
 
 type Severity = "critical" | "warn" | "watch";
@@ -258,9 +253,7 @@ export function RiskRadar({ limit = 6 }: { limit?: number }) {
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] px-2 py-0.5 font-medium text-[var(--color-primary)]">
           {counts.watch} {T.countWatch}
         </span>
-        <span className="ml-auto hidden text-[10.5px] text-[var(--color-ink-faint)] lg:inline">
-          {T.aggregator}
-        </span>
+        <span className="ml-auto hidden text-[10.5px] text-[var(--color-ink-faint)] lg:inline">{T.aggregator}</span>
       </div>
 
       <ul className="flex flex-col gap-2">
@@ -309,9 +302,7 @@ export function RiskRadar({ limit = 6 }: { limit?: number }) {
       </ul>
 
       {items.length > limit ? (
-        <div className="text-[10.5px] text-[var(--color-ink-muted)]">
-          {T.showing(limit, items.length)}
-        </div>
+        <div className="text-[10.5px] text-[var(--color-ink-muted)]">{T.showing(limit, items.length)}</div>
       ) : null}
     </div>
   );

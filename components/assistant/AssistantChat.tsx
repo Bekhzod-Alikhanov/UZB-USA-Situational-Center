@@ -17,10 +17,10 @@ import { AlertCircle, Sparkles } from "lucide-react";
  * the input) AND scheduled via requestIdleCallback as a background pre-warm
  * so the SDK is ready before the user finishes typing their first prompt.
  */
-const HeavyCore = dynamic(
-  () => import("./AssistantChatCore").then((m) => ({ default: m.AssistantChatCore })),
-  { ssr: false, loading: () => <Skeleton armed /> },
-);
+const HeavyCore = dynamic(() => import("./AssistantChatCore").then((m) => ({ default: m.AssistantChatCore })), {
+  ssr: false,
+  loading: () => <Skeleton armed />,
+});
 
 export function AssistantChat({ serverEnabled }: { serverEnabled: boolean }) {
   const [armed, setArmed] = useState(false);
@@ -68,9 +68,7 @@ function Skeleton({ armed }: { armed?: boolean } = {}) {
       <div className="flex items-center justify-between border-b border-[var(--color-border)] px-4 py-2.5">
         <div className="flex items-center gap-2">
           <Sparkles className="size-4 text-[var(--color-primary)]" />
-          <span className="text-[13px] font-semibold text-[var(--color-ink)]">
-            Claude — Center Assistant
-          </span>
+          <span className="text-[13px] font-semibold text-[var(--color-ink)]">Claude — Center Assistant</span>
         </div>
         <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">
           {armed ? "warming up…" : "ready"}
@@ -78,8 +76,8 @@ function Skeleton({ armed }: { armed?: boolean } = {}) {
       </div>
       <div className="flex-1 px-4 py-4">
         <p className="text-[13px] text-[var(--color-ink-muted)]">
-          Ask me anything about the bilateral portfolio. I have up-to-date context on trade,
-          investments, visits, agreements, commitments, grants, counterparts, compliance, and news.
+          Ask me anything about the bilateral portfolio. I have up-to-date context on trade, investments, visits,
+          agreements, commitments, grants, counterparts, compliance, and news.
         </p>
       </div>
       <div className="border-t border-[var(--color-border)] p-3">

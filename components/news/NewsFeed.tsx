@@ -70,10 +70,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
     .filter((n) => (tonality === "all" ? true : n.tonality === tonality))
     .filter((n) => (tag === "all" ? true : n.tags.includes(tag as NewsTag)))
     .filter((n) =>
-      q
-        ? n.title.toLowerCase().includes(q.toLowerCase()) ||
-          n.summary.toLowerCase().includes(q.toLowerCase())
-        : true,
+      q ? n.title.toLowerCase().includes(q.toLowerCase()) || n.summary.toLowerCase().includes(q.toLowerCase()) : true,
     )
     .sort((a, b) => b.date.localeCompare(a.date));
 
@@ -111,11 +108,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
             URL path so we don't need to ship it as a hidden input. The select
             also lives inside the form so a single submission carries all
             filters. JavaScript-free. */}
-        <form
-          method="get"
-          action={`/${locale}/news`}
-          className="flex flex-wrap items-center gap-2"
-        >
+        <form method="get" action={`/${locale}/news`} className="flex flex-wrap items-center gap-2">
           <label className="sr-only" htmlFor="news-tag">
             Tag
           </label>
@@ -132,9 +125,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
               </option>
             ))}
           </select>
-          {tonality !== "all" ? (
-            <input type="hidden" name="tonality" value={tonality} />
-          ) : null}
+          {tonality !== "all" ? <input type="hidden" name="tonality" value={tonality} /> : null}
           <label className="ml-auto flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px]">
             <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
             <input
@@ -163,9 +154,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
         ) : null}
         {filtered.map((n) => (
           <li key={n.id} className="flex flex-col gap-2 py-3 md:flex-row md:gap-5">
-            <div className="mono w-[96px] shrink-0 text-[11px] tabular text-[var(--color-ink-muted)]">
-              {n.date}
-            </div>
+            <div className="mono w-[96px] shrink-0 text-[11px] tabular text-[var(--color-ink-muted)]">{n.date}</div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-1.5 pb-1.5">
                 <span

@@ -105,7 +105,9 @@ function Sparkline({ data, width = 110, height = 28 }: { data: SparklineDatum[];
   const first = points[0];
   const isUp = last.value >= first.value;
   const stroke = isUp ? "var(--color-pos)" : "var(--color-warn)";
-  const fill = isUp ? "color-mix(in oklab, var(--color-pos) 14%, transparent)" : "color-mix(in oklab, var(--color-warn) 14%, transparent)";
+  const fill = isUp
+    ? "color-mix(in oklab, var(--color-pos) 14%, transparent)"
+    : "color-mix(in oklab, var(--color-warn) 14%, transparent)";
 
   return (
     <svg width={width} height={height} role="img" aria-label="5-year sparkline" className="block">
@@ -145,7 +147,14 @@ function Cagr({ trend }: { trend: Hs6Trend }) {
   const yearsCount = years.length - 1;
   const cagr = (Math.pow(last / first, 1 / yearsCount) - 1) * 100;
   const Icon = cagr > 5 ? TrendingUp : cagr < -5 ? TrendingDown : Minus;
-  const tone = cagr > 25 ? "text-[var(--color-pos)]" : cagr > 0 ? "text-[var(--color-ink)]" : cagr < -10 ? "text-[var(--color-neg)]" : "text-[var(--color-ink-muted)]";
+  const tone =
+    cagr > 25
+      ? "text-[var(--color-pos)]"
+      : cagr > 0
+        ? "text-[var(--color-ink)]"
+        : cagr < -10
+          ? "text-[var(--color-neg)]"
+          : "text-[var(--color-ink-muted)]";
   return (
     <span className={cn("mono inline-flex items-center gap-1 text-[11px] tabular", tone)}>
       <Icon className="size-3" />
@@ -167,9 +176,7 @@ export function ComtradeTrendSparklines() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-          {T.flow}:
-        </span>
+        <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.flow}:</span>
         {(
           [
             ["uz-exports", T.uzToUs],

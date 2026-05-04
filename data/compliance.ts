@@ -16,7 +16,8 @@ export const complianceStatuses: ComplianceStatus[] = [
     value: "Not SDN-listed",
     note: "Uzbekistan is not listed as a comprehensive-sanctions jurisdiction. Individual SDN listings may apply.",
     source: "Treasury OFAC SDN / sanctions programs",
-    source_url: "https://home.treasury.gov/policy-issues/financial-sanctions/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists",
+    source_url:
+      "https://home.treasury.gov/policy-issues/financial-sanctions/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists",
     fetched_at: "2026-04-18",
     is_demo: false,
   },
@@ -93,9 +94,34 @@ export const complianceStatuses: ComplianceStatus[] = [
 ];
 
 export const eccnSamples = [
-  { code: "EAR99", category: "Low-sensitivity commercial", typicalLicense: "No license generally required", exampleItem: "Consumer electronics" },
-  { code: "1C350", category: "Chemicals precursors", typicalLicense: "License required; end-use review", exampleItem: "Specific chemical agents" },
-  { code: "3A001", category: "Electronics / semiconductors", typicalLicense: "License required above thresholds", exampleItem: "Advanced ICs" },
-  { code: "5A002", category: "Information security — cryptography", typicalLicense: "License, ENC exception", exampleItem: "Strong-encryption products" },
-  { code: "9A610", category: "Military aircraft & related parts", typicalLicense: "ITAR / USML review", exampleItem: "Mil aircraft parts" },
+  {
+    code: "EAR99",
+    category: "Low-sensitivity commercial",
+    typicalLicense: "No license generally required",
+    exampleItem: "Consumer electronics",
+  },
+  {
+    code: "1C350",
+    category: "Chemicals precursors",
+    typicalLicense: "License required; end-use review",
+    exampleItem: "Specific chemical agents",
+  },
+  {
+    code: "3A001",
+    category: "Electronics / semiconductors",
+    typicalLicense: "License required above thresholds",
+    exampleItem: "Advanced ICs",
+  },
+  {
+    code: "5A002",
+    category: "Information security — cryptography",
+    typicalLicense: "License, ENC exception",
+    exampleItem: "Strong-encryption products",
+  },
+  {
+    code: "9A610",
+    category: "Military aircraft & related parts",
+    typicalLicense: "ITAR / USML review",
+    exampleItem: "Mil aircraft parts",
+  },
 ];

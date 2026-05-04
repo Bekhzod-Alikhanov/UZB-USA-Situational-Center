@@ -17,9 +17,7 @@ export function UpcomingEvents({ limit = 4 }: { limit?: number }) {
   return (
     <ul className="flex flex-col gap-3">
       {upcoming.map((e) => {
-        const daysLeft = Math.ceil(
-          (new Date(e.date).getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
-        );
+        const daysLeft = Math.ceil((new Date(e.date).getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
         return (
           <li
             key={e.id}

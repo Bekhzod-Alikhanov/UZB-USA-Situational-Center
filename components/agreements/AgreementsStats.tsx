@@ -18,18 +18,8 @@ export function AgreementsStats() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <HeadStat label="Base documents" value={totalDocuments} hint="MFA registry" />
         <HeadStat label="Investment agreements" value={totalInvestAgreements} hint="MIIT registry" />
-        <HeadStat
-          label="Oldest in force"
-          value="1992"
-          hint="Establishment of relations"
-          mono={false}
-        />
-        <HeadStat
-          label="Most recent"
-          value="2026-02-04"
-          hint="Critical Minerals MoU"
-          mono={false}
-        />
+        <HeadStat label="Oldest in force" value="1992" hint="Establishment of relations" mono={false} />
+        <HeadStat label="Most recent" value="2026-02-04" hint="Critical Minerals MoU" mono={false} />
       </div>
 
       <div>
@@ -46,9 +36,7 @@ export function AgreementsStats() {
                   style={{ width: `${(v / max) * 100}%` }}
                 />
               </div>
-              <span className="mono w-12 text-right text-[12px] tabular text-[var(--color-ink-muted)]">
-                {v}
-              </span>
+              <span className="mono w-12 text-right text-[12px] tabular text-[var(--color-ink-muted)]">{v}</span>
             </div>
           ))}
         </div>
@@ -70,9 +58,7 @@ function HeadStat({
 }) {
   return (
     <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-      <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-muted)]">
-        {label}
-      </div>
+      <div className="text-[10.5px] font-medium uppercase tracking-wider text-[var(--color-ink-muted)]">{label}</div>
       <div className={`mt-1 text-[22px] font-semibold text-[var(--color-ink)] ${mono ? "mono tabular" : "serif"}`}>
         {value}
       </div>

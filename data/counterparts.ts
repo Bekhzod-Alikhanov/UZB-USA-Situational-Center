@@ -4,7 +4,14 @@
  * to publicly verifiable facts (visit dates, position titles, committee
  * assignments) — speculative quotes or unsourced opinions are excluded.
  */
-export type CounterpartRole = "executive" | "state" | "congress-senate" | "congress-house" | "business" | "diplomat" | "council";
+export type CounterpartRole =
+  | "executive"
+  | "state"
+  | "congress-senate"
+  | "congress-house"
+  | "business"
+  | "diplomat"
+  | "council";
 export type Party = "R" | "D" | "I" | "N/A";
 export type Stance = "supportive" | "neutral" | "cautious";
 
@@ -171,7 +178,9 @@ export const counterparts: Counterpart[] = [
     position: "Former USAID Administrator (2021–2025)",
     role: "executive",
     party: "D",
-    priorEngagements: ["2023-10-23 to 2023-10-25 first USAID Administrator visit since 2001 — received by the President"],
+    priorEngagements: [
+      "2023-10-23 to 2023-10-25 first USAID Administrator visit since 2001 — received by the President",
+    ],
     stanceOnUz: "supportive",
     keyTopics: ["Development cooperation", "Governance reform"],
     is_demo: false,
@@ -202,7 +211,7 @@ export const counterparts: Counterpart[] = [
     role: "council",
     party: "N/A",
     priorEngagements: [
-      "2025-11-10 EXIM \"Buy American, Build the Future\" framework signing",
+      '2025-11-10 EXIM "Buy American, Build the Future" framework signing',
       "Member, American-Uzbek Business and Investment Council (U.S. side)",
     ],
     stanceOnUz: "supportive",
@@ -280,10 +289,7 @@ export const counterparts: Counterpart[] = [
     role: "state",
     party: "R",
     state: "UT",
-    priorEngagements: [
-      "2024-04-22 first delegation visit to Uzbekistan",
-      "2025-05-14 second delegation visit",
-    ],
+    priorEngagements: ["2024-04-22 first delegation visit to Uzbekistan", "2025-05-14 second delegation visit"],
     stanceOnUz: "supportive",
     keyTopics: ["State-level cooperation", "Education", "Humanitarian ties"],
     is_demo: false,

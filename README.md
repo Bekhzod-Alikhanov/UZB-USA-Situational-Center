@@ -6,19 +6,19 @@ Production-grade Next.js 16 dashboard for the **Situational Center on Uzbekistan
 
 ## Stack
 
-| Layer | Choice |
-|---|---|
-| Framework | Next.js 16.2.4 · App Router · Turbopack · React 19.2 |
-| Styling | Tailwind CSS v4 · CSS-var design tokens |
-| State | Zustand v5 + persist |
-| i18n | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru` |
-| Tables | TanStack Table v8 |
-| Charts | Recharts (line/bar/area) · Visx (sankey/chord/treemap) |
-| Maps | maplibre-gl (OpenFreeMap) · Globe.gl (lazy-loaded) |
-| Drag-and-drop | @dnd-kit (Visit Prep Kanban) |
-| AI | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Sonnet 4.6) |
-| Auth | Signed, short-lived cookie password gate on `/admin` (server action + middleware) |
-| Package manager | **pnpm** |
+| Layer           | Choice                                                                            |
+| --------------- | --------------------------------------------------------------------------------- |
+| Framework       | Next.js 16.2.4 · App Router · Turbopack · React 19.2                              |
+| Styling         | Tailwind CSS v4 · CSS-var design tokens                                           |
+| State           | Zustand v5 + persist                                                              |
+| i18n            | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru`                                   |
+| Tables          | TanStack Table v8                                                                 |
+| Charts          | Recharts (line/bar/area) · Visx (sankey/chord/treemap)                            |
+| Maps            | maplibre-gl (OpenFreeMap) · Globe.gl (lazy-loaded)                                |
+| Drag-and-drop   | @dnd-kit (Visit Prep Kanban)                                                      |
+| AI              | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Sonnet 4.6)                            |
+| Auth            | Signed, short-lived cookie password gate on `/admin` (server action + middleware) |
+| Package manager | **pnpm**                                                                          |
 
 ## Quick start
 
@@ -32,19 +32,25 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 
 ### Common scripts
 
-| Command | What it does |
-|---|---|
-| `pnpm dev` | Dev server with Turbopack hot reload |
-| `pnpm build` | Production build (must pass before commit) |
-| `pnpm typecheck` | Strict TypeScript check (zero errors required) |
-| `pnpm lint` | ESLint over the full project |
-| `pnpm validate:data` | Source-id, locale, route-manifest, and env-doc validation |
-| `pnpm smoke:routes` | Fetches all localized routes from a running local server |
-| `pnpm check:package` | Checks tracked files for forbidden build/local artifacts |
-| `pnpm probe:live` | Probes optional public live-data connectors via a running server |
+| Command                | What it does                                                             |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `pnpm dev`             | Dev server with Turbopack hot reload                                     |
+| `pnpm build`           | Production build (must pass before commit)                               |
+| `pnpm typecheck`       | Strict TypeScript check (zero errors required)                           |
+| `pnpm lint`            | ESLint over the full project                                             |
+| `pnpm validate:data`   | Source-id, locale, route-manifest, and env-doc validation                |
+| `pnpm smoke:routes`    | Fetches all localized routes from a running local server                 |
+| `pnpm check:package`   | Checks tracked files for forbidden build/local artifacts                 |
+| `pnpm probe:live`      | Probes optional public live-data connectors via a running server         |
 | `pnpm test:governance` | Verifies no-downgrade policy, RLS tables, cron auth, and static fallback |
-| `pnpm verify` | Lint + typecheck + data validation + governance checks |
-| `pnpm start` | Serve the production build locally |
+| `pnpm test:unit`       | Vitest unit tests for governance and parser logic                        |
+| `pnpm test:e2e`        | Playwright browser route/API tests against a built local app             |
+| `pnpm test:a11y`       | Playwright + axe accessibility checks for critical violations            |
+| `pnpm knip`            | Finds unused dependencies, files, and exports                            |
+| `pnpm format:check`    | Prettier formatting check                                                |
+| `pnpm lhci`            | Lighthouse CI run against key dashboard pages                            |
+| `pnpm verify`          | Lint + typecheck + data validation + governance checks + unit tests      |
+| `pnpm start`           | Serve the production build locally                                       |
 
 > **Cache note:** running `pnpm build` while `pnpm dev` is alive will clobber the Turbopack cache and cause "missing required error components" errors in the running dev server. Stop dev before running build, or use `pnpm typecheck` for fast verification during development.
 
@@ -80,7 +86,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 
 1. **Push to GitHub** (private repo recommended).
 2. **Import** the repo in Vercel; framework auto-detects as Next.js.
-3. **Set environment variables** in *Project Settings → Environment Variables* (Production + Preview):
+3. **Set environment variables** in _Project Settings → Environment Variables_ (Production + Preview):
    - `ADMIN_PASSWORD` — required for the admin gate
    - `ADMIN_SESSION_SECRET` — strongly recommended; signs the admin session cookie independently of the password
    - `ASSISTANT_ENABLED=true` — optional; explicitly enables the `/assistant` server route
@@ -92,9 +98,22 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
    - `BEA_API_KEY` — optional; required before BEA services/ITA metadata can be ingested
    - `CENSUS_INGEST_MONTH` — optional `YYYY-MM`; defaults to the latest vetted static month until changed
 4. **Deploy.** First build takes ~3 minutes.
-5. **Custom domain** (optional): add via *Project Settings → Domains*.
+5. **Custom domain** (optional): add via _Project Settings → Domains_.
 
 The `/api/chat` route is a dynamic Node route; everything else is fully static and cached at the edge.
+
+## QA tooling
+
+The repo includes dev-only quality tools that do not ship runtime code to users:
+
+- **Vitest** for fast unit coverage of source-governance rules.
+- **Playwright** for real browser route, redirect, API, desktop, and mobile checks.
+- **axe-core/playwright** for accessibility checks.
+- **Lighthouse CI** for performance/accessibility regression snapshots.
+- **Knip** for unused code/dependency discovery.
+- **Prettier** for optional formatting normalization.
+
+Run `pnpm build` before `pnpm test:e2e`, `pnpm test:a11y`, or `pnpm lhci`. For local browser checks, run `pnpm exec playwright install chromium` once. The GitHub workflow `Dashboard QA` is manual (`workflow_dispatch`) so heavy browser and Lighthouse runs do not slow every push unless you request them.
 
 ## Production operations
 
@@ -146,6 +165,7 @@ See [`CLAUDE.md`](./CLAUDE.md) for the full style and architectural guide future
 The single source of truth for every external citation is `data/sources.ts` (63 entries, level A = attached input, level B = official URL). Render any record with `<SourceBadge sourceId="…" />` to expose its provenance.
 
 Most-used sources:
+
 - **U.S. Census Bureau** trade-in-goods balance — [www.census.gov/foreign-trade/balance/c4644.html](https://www.census.gov/foreign-trade/balance/c4644.html)
 - **USTR** Uzbekistan country page — [ustr.gov/Uzbekistan](https://ustr.gov/Uzbekistan)
 - **EXIM** "Buy American, Build the Future" framework — [exim.gov press release](https://www.exim.gov/news/exim-signs-buy-american-build-future-agreement-uzbekistan-boost-exports-and-support-american)

@@ -36,17 +36,17 @@ interface ChatBody {
  */
 export async function POST(req: Request) {
   if (process.env.ASSISTANT_ENABLED !== "true") {
-    return new Response(
-      JSON.stringify({ error: "AI assistant is disabled on the server." }),
-      { status: 503, headers: { "content-type": "application/json" } },
-    );
+    return new Response(JSON.stringify({ error: "AI assistant is disabled on the server." }), {
+      status: 503,
+      headers: { "content-type": "application/json" },
+    });
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
-    return new Response(
-      JSON.stringify({ error: "ANTHROPIC_API_KEY not configured on the server." }),
-      { status: 503, headers: { "content-type": "application/json" } },
-    );
+    return new Response(JSON.stringify({ error: "ANTHROPIC_API_KEY not configured on the server." }), {
+      status: 503,
+      headers: { "content-type": "application/json" },
+    });
   }
 
   let body: ChatBody;

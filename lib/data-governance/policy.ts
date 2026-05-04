@@ -87,7 +87,12 @@ export function evaluateObservation(
   }
 
   if (!current) {
-    return reviewItem(observation, "manual-review", "watch", "No approved baseline exists yet; route to a data owner before publication.");
+    return reviewItem(
+      observation,
+      "manual-review",
+      "watch",
+      "No approved baseline exists yet; route to a data owner before publication.",
+    );
   }
 
   const candidatePeriod = parseDate(observation.periodEnd);
@@ -104,7 +109,13 @@ export function evaluateObservation(
   }
 
   if (candidatePeriod === currentPeriod && valuesMatch(observation, current)) {
-    return reviewItem(observation, "duplicate-current", "info", "Candidate matches the currently approved value for the same period.", current);
+    return reviewItem(
+      observation,
+      "duplicate-current",
+      "info",
+      "Candidate matches the currently approved value for the same period.",
+      current,
+    );
   }
 
   if (candidatePeriod === currentPeriod) {
@@ -118,10 +129,22 @@ export function evaluateObservation(
   }
 
   if (policy?.replaceRule === "manual-only" || policy?.allowAutoPublish === false) {
-    return reviewItem(observation, "manual-review", "watch", "Candidate is newer, but this source requires manual approval before publication.", current);
+    return reviewItem(
+      observation,
+      "manual-review",
+      "watch",
+      "Candidate is newer, but this source requires manual approval before publication.",
+      current,
+    );
   }
 
-  return reviewItem(observation, "publish-candidate", "watch", "Candidate is newer than the approved period and passes relevance/validity gates.", current);
+  return reviewItem(
+    observation,
+    "publish-candidate",
+    "watch",
+    "Candidate is newer than the approved period and passes relevance/validity gates.",
+    current,
+  );
 }
 
 export function summarizeReview(items: ReviewQueueItem[]) {

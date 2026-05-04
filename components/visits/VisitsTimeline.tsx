@@ -28,7 +28,12 @@ export function VisitsTimeline({ filterDirection = "all" }: { filterDirection?: 
   const sorted = useMemo(
     () =>
       [...visits]
-        .filter((v) => filterDirection === "all" || v.direction === filterDirection || (filterDirection === "uz-us" && v.direction === "bilateral-3p"))
+        .filter(
+          (v) =>
+            filterDirection === "all" ||
+            v.direction === filterDirection ||
+            (filterDirection === "uz-us" && v.direction === "bilateral-3p"),
+        )
         .sort((a, b) => b.date.localeCompare(a.date)),
     [filterDirection],
   );
@@ -118,7 +123,12 @@ export function VisitsTimeline({ filterDirection = "all" }: { filterDirection?: 
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2 text-[10px]">
-                  <span className={cn("rounded-full px-2 py-0.5 font-medium uppercase tracking-wider", LEVEL_COLOR[selected.level])}>
+                  <span
+                    className={cn(
+                      "rounded-full px-2 py-0.5 font-medium uppercase tracking-wider",
+                      LEVEL_COLOR[selected.level],
+                    )}
+                  >
                     {selected.level}
                   </span>
                   <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-0.5 font-medium uppercase tracking-wider text-[var(--color-ink-muted)]">
@@ -169,9 +179,7 @@ export function VisitsTimeline({ filterDirection = "all" }: { filterDirection?: 
 
                 {selected.sourceId ? (
                   <div className="mt-4 flex items-center gap-2 border-t border-[var(--color-border)] pt-3 text-[11px] text-[var(--color-ink-muted)]">
-                    <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
-                      Source:
-                    </span>
+                    <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">Source:</span>
                     <SourceBadge sourceId={selected.sourceId} />
                   </div>
                 ) : null}

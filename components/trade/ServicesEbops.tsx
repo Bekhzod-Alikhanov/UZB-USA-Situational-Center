@@ -18,9 +18,12 @@ function fmt(usd: number): string {
 
 // EBOPS family colors: transport (blue), travel (orange), other business / IT (green), other (muted)
 function familyTone(code: string): string {
-  if (code.startsWith("S03")) return "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]";
-  if (code.startsWith("S04")) return "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]";
-  if (code.startsWith("S09") || code.startsWith("S10")) return "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]";
+  if (code.startsWith("S03"))
+    return "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]";
+  if (code.startsWith("S04"))
+    return "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]";
+  if (code.startsWith("S09") || code.startsWith("S10"))
+    return "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]";
   return "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]";
 }
 
@@ -72,10 +75,9 @@ export function ServicesEbops() {
       </div>
 
       <div className="rounded-md border border-dashed border-[var(--color-warn)]/40 bg-[var(--color-warn-soft)] px-3 py-2 text-[11px] text-[var(--color-ink)]">
-        <strong>Coverage limitation.</strong> UZ reported full EBOPS detail to ITC only for 2021. Years
-        2022-2024 are zeros in UZ partner-level reporting (visible in the raw export). For aggregate annual
-        services trade (incl. US-side), quote BEA / USTR (~$603M for 2024) — those use BEA methodology, not UZ
-        partner reporting.
+        <strong>Coverage limitation.</strong> UZ reported full EBOPS detail to ITC only for 2021. Years 2022-2024 are
+        zeros in UZ partner-level reporting (visible in the raw export). For aggregate annual services trade (incl.
+        US-side), quote BEA / USTR (~$603M for 2024) — those use BEA methodology, not UZ partner reporting.
       </div>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">

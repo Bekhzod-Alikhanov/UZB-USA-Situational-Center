@@ -78,10 +78,18 @@ for (const y of YEARS) {
 // Mirror comparison for the most recent year both sides reported (2024)
 function buildMirror(year) {
   // UZ exports to US (UZ-reported) vs US imports from UZ (US-reported)
-  const uzX = new Map(rows.filter((r) => r.year === year && r.reporter === 860 && r.flow === "X").map((r) => [r.hs6, r.valueUsd]));
-  const usM = new Map(rows.filter((r) => r.year === year && r.reporter === 842 && r.flow === "M").map((r) => [r.hs6, r.valueUsd]));
-  const uzM = new Map(rows.filter((r) => r.year === year && r.reporter === 860 && r.flow === "M").map((r) => [r.hs6, r.valueUsd]));
-  const usX = new Map(rows.filter((r) => r.year === year && r.reporter === 842 && r.flow === "X").map((r) => [r.hs6, r.valueUsd]));
+  const uzX = new Map(
+    rows.filter((r) => r.year === year && r.reporter === 860 && r.flow === "X").map((r) => [r.hs6, r.valueUsd]),
+  );
+  const usM = new Map(
+    rows.filter((r) => r.year === year && r.reporter === 842 && r.flow === "M").map((r) => [r.hs6, r.valueUsd]),
+  );
+  const uzM = new Map(
+    rows.filter((r) => r.year === year && r.reporter === 860 && r.flow === "M").map((r) => [r.hs6, r.valueUsd]),
+  );
+  const usX = new Map(
+    rows.filter((r) => r.year === year && r.reporter === 842 && r.flow === "X").map((r) => [r.hs6, r.valueUsd]),
+  );
 
   const allCodes = new Set([...uzX.keys(), ...usM.keys(), ...uzM.keys(), ...usX.keys()]);
   const out = [];
@@ -161,10 +169,18 @@ const trend_usExports = top10codes_usExports.map((hs6) => {
 const annualUzReporter = {};
 const annualUsReporter = {};
 for (const y of YEARS) {
-  const uzX = rows.filter((r) => r.year === y && r.reporter === 860 && r.flow === "X").reduce((a, r) => a + r.valueUsd, 0);
-  const uzM = rows.filter((r) => r.year === y && r.reporter === 860 && r.flow === "M").reduce((a, r) => a + r.valueUsd, 0);
-  const usX = rows.filter((r) => r.year === y && r.reporter === 842 && r.flow === "X").reduce((a, r) => a + r.valueUsd, 0);
-  const usM = rows.filter((r) => r.year === y && r.reporter === 842 && r.flow === "M").reduce((a, r) => a + r.valueUsd, 0);
+  const uzX = rows
+    .filter((r) => r.year === y && r.reporter === 860 && r.flow === "X")
+    .reduce((a, r) => a + r.valueUsd, 0);
+  const uzM = rows
+    .filter((r) => r.year === y && r.reporter === 860 && r.flow === "M")
+    .reduce((a, r) => a + r.valueUsd, 0);
+  const usX = rows
+    .filter((r) => r.year === y && r.reporter === 842 && r.flow === "X")
+    .reduce((a, r) => a + r.valueUsd, 0);
+  const usM = rows
+    .filter((r) => r.year === y && r.reporter === 842 && r.flow === "M")
+    .reduce((a, r) => a + r.valueUsd, 0);
   annualUzReporter[y] = { exportsToUs: uzX, importsFromUs: uzM };
   annualUsReporter[y] = { exportsToUz: usX, importsFromUz: usM };
 }

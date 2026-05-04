@@ -46,7 +46,12 @@ export function SourceQualityPanel() {
                 <div className="truncate text-[12px] font-medium text-[var(--color-ink)]">{source.name}</div>
                 <div className="mt-0.5 text-[10.5px] text-[var(--color-ink-muted)]">{source.reason}</div>
               </div>
-              <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider", STATUS_CLASS[source.freshness])}>
+              <span
+                className={cn(
+                  "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+                  STATUS_CLASS[source.freshness],
+                )}
+              >
                 {source.freshness}
               </span>
             </li>
@@ -67,7 +72,12 @@ export function SourceQualityPanel() {
         <div className="grid grid-cols-1 divide-y divide-[var(--color-border)]">
           {externalDataConnectors.slice(0, 5).map((connector) => (
             <div key={connector.id} className="flex items-start gap-3 px-4 py-3">
-              <span className={cn("mt-0.5 shrink-0 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider", CONNECTOR_CLASS[connector.status])}>
+              <span
+                className={cn(
+                  "mt-0.5 shrink-0 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider",
+                  CONNECTOR_CLASS[connector.status],
+                )}
+              >
                 {connector.status}
               </span>
               <div className="min-w-0 flex-1">
@@ -76,7 +86,9 @@ export function SourceQualityPanel() {
                   {connector.dashboardUse}
                 </div>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                  <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">{connector.cadence}</span>
+                  <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+                    {connector.cadence}
+                  </span>
                   <SourceBadge sourceId={connector.sourceId} />
                 </div>
               </div>

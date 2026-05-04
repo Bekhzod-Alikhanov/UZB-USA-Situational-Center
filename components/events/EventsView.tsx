@@ -40,11 +40,7 @@ function icsDate(iso: string) {
 }
 
 function buildIcs(evs: DiplomaticEvent[]): string {
-  const lines = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//US-UZ Situational Center//EN",
-  ];
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//US-UZ Situational Center//EN"];
   for (const e of evs) {
     const end = e.dateEnd ?? e.date;
     const endPlusOne = new Date(end);

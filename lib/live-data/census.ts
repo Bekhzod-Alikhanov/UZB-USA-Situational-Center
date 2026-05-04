@@ -97,7 +97,8 @@ export async function fetchCensusTradeObservations(time = "2025-12"): Promise<No
       sourcePublishedAt: lastUpdate,
       fetchedAt,
       relevanceScore: 0.98,
-      recommendedUse: "Official monthly U.S.-side goods exports; use for trade monitoring and do not combine with services.",
+      recommendedUse:
+        "Official monthly U.S.-side goods exports; use for trade monitoring and do not combine with services.",
       qualityFlags: lastUpdate ? [] : ["missing-source-last-update"],
     });
   }
@@ -118,7 +119,8 @@ export async function fetchCensusTradeObservations(time = "2025-12"): Promise<No
       sourcePublishedAt: lastUpdate,
       fetchedAt,
       relevanceScore: 0.98,
-      recommendedUse: "Official monthly U.S.-side goods imports; use for trade monitoring and do not combine with services.",
+      recommendedUse:
+        "Official monthly U.S.-side goods imports; use for trade monitoring and do not combine with services.",
       qualityFlags: lastUpdate ? [] : ["missing-source-last-update"],
     });
   }

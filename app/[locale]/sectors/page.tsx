@@ -4,11 +4,7 @@ import { SectorsView } from "@/components/sectors/SectorsView";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { sectorsMeta } from "@/data/sectors";
 
-export default async function SectorsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function SectorsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 

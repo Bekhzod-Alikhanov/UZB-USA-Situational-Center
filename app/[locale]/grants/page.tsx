@@ -7,11 +7,7 @@ import { ForeignAssistanceView } from "@/components/grants/ForeignAssistanceView
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { grants, grantsMeta } from "@/data/grants";
 
-export default async function GrantsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function GrantsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("grants");

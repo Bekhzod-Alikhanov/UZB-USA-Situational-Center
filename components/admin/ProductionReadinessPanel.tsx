@@ -43,16 +43,34 @@ export function ProductionReadinessPanel() {
           </div>
           <EnvRow label="ADMIN_PASSWORD" ok={env.adminPassword} detail="Required for admin login" />
           <EnvRow label="ADMIN_SESSION_SECRET" ok={env.adminSessionSecret} detail="Recommended for signed cookies" />
-          <EnvRow label="AI assistant" ok={env.assistantEnabled} detail="ASSISTANT_ENABLED=true and ANTHROPIC_API_KEY" optional />
-          <EnvRow label="DATA_BACKEND" ok={env.dataBackend !== "static"} detail={`Current mode: ${env.dataBackend}`} optional />
-          <EnvRow label="Supabase REST adapter" ok={env.supabase} detail="SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY" optional />
+          <EnvRow
+            label="AI assistant"
+            ok={env.assistantEnabled}
+            detail="ASSISTANT_ENABLED=true and ANTHROPIC_API_KEY"
+            optional
+          />
+          <EnvRow
+            label="DATA_BACKEND"
+            ok={env.dataBackend !== "static"}
+            detail={`Current mode: ${env.dataBackend}`}
+            optional
+          />
+          <EnvRow
+            label="Supabase REST adapter"
+            ok={env.supabase}
+            detail="SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY"
+            optional
+          />
         </section>
 
         <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
           <div className="mb-2 text-[13px] font-semibold text-[var(--color-ink)]">Connector state</div>
           <div className="grid grid-cols-1 gap-1.5">
             {externalDataConnectors.map((connector) => (
-              <div key={connector.id} className="flex items-center justify-between gap-2 rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
+              <div
+                key={connector.id}
+                className="flex items-center justify-between gap-2 rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5"
+              >
                 <span className="truncate text-[11.5px] text-[var(--color-ink)]">{connector.name}</span>
                 <span className="shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
                   {connector.status}
@@ -67,14 +85,24 @@ export function ProductionReadinessPanel() {
         {productionReadinessItems.map((item) => {
           const Icon = STATUS_ICON[item.status];
           return (
-            <article key={item.id} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
+            <article
+              key={item.id}
+              className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3"
+            >
               <div className="flex items-start gap-2">
-                <span className={cn("inline-flex size-7 shrink-0 items-center justify-center rounded-full border", STATUS_CLASS[item.status])}>
+                <span
+                  className={cn(
+                    "inline-flex size-7 shrink-0 items-center justify-center rounded-full border",
+                    STATUS_CLASS[item.status],
+                  )}
+                >
                   <Icon className="size-4" />
                 </span>
                 <div className="min-w-0">
                   <div className="text-[12.5px] font-semibold text-[var(--color-ink)]">{item.title}</div>
-                  <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">{item.area}</div>
+                  <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                    {item.area}
+                  </div>
                 </div>
               </div>
               <p className="mt-2 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{item.why}</p>
@@ -89,16 +117,11 @@ export function ProductionReadinessPanel() {
   );
 }
 
-function ReadinessStat({
-  label,
-  value,
-  tone,
-}: {
-  label: string;
-  value: number;
-  tone: ReadinessStatus | "neutral";
-}) {
-  const className = tone === "neutral" ? "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]" : STATUS_CLASS[tone];
+function ReadinessStat({ label, value, tone }: { label: string; value: number; tone: ReadinessStatus | "neutral" }) {
+  const className =
+    tone === "neutral"
+      ? "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]"
+      : STATUS_CLASS[tone];
   return (
     <div className={cn("rounded-md border px-3 py-2", className)}>
       <div className="text-[10px] font-semibold uppercase tracking-wider opacity-80">{label}</div>

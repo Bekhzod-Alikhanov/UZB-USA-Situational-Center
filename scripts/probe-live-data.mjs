@@ -17,7 +17,9 @@ if (!response.ok) {
 
 const payload = await response.json();
 const probes = Array.isArray(payload.probes) ? payload.probes : [];
-const failed = probes.filter((probe) => probe.status !== "not-probed" && probe.status !== "not-configured" && !probe.ok);
+const failed = probes.filter(
+  (probe) => probe.status !== "not-probed" && probe.status !== "not-configured" && !probe.ok,
+);
 
 for (const probe of probes) {
   console.log(`${probe.ok ? "OK" : "WARN"} ${probe.id}: ${probe.message}`);

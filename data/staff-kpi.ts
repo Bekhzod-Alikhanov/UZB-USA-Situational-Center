@@ -10,15 +10,7 @@ export interface StaffMember {
   /** Role-slot identifier (e.g. "Slot 01 · Investments"), not a person name. */
   name: string;
   role: string;
-  directionality:
-    | "visits"
-    | "commitments"
-    | "investments"
-    | "trade"
-    | "legal"
-    | "protocol"
-    | "analytics"
-    | "comms";
+  directionality: "visits" | "commitments" | "investments" | "trade" | "legal" | "protocol" | "analytics" | "comms";
   tasksAssigned: number;
   tasksCompleted: number;
   avgResponseHrs: number;

@@ -332,9 +332,7 @@ export function UsCenteredMap() {
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-            {T.metric}:
-          </span>
+          <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.metric}:</span>
           {(["gdp", "population", "students"] as UsStatesMetric[]).map((m) => (
             <button
               key={m}
@@ -353,13 +351,21 @@ export function UsCenteredMap() {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-            {T.pinsTitle}:
-          </span>
-          <PinToggle active={showMissions} onClick={() => setShowMissions((v) => !v)} tone="pos" icon={<Building2 className="size-3" />}>
+          <span className="text-[11px] uppercase tracking-wider text-[var(--color-ink-faint)]">{T.pinsTitle}:</span>
+          <PinToggle
+            active={showMissions}
+            onClick={() => setShowMissions((v) => !v)}
+            tone="pos"
+            icon={<Building2 className="size-3" />}
+          >
             {T.showMissions}
           </PinToggle>
-          <PinToggle active={showVisits} onClick={() => setShowVisits((v) => !v)} tone="warn" icon={<CalendarClock className="size-3" />}>
+          <PinToggle
+            active={showVisits}
+            onClick={() => setShowVisits((v) => !v)}
+            tone="warn"
+            icon={<CalendarClock className="size-3" />}
+          >
             {T.showVisits}
           </PinToggle>
         </div>
@@ -371,10 +377,7 @@ export function UsCenteredMap() {
 
       {/* Map container — overflow:visible so the hover tooltip can extend
           beyond the SVG bounds without being clipped (was a regression). */}
-      <div
-        ref={containerRef}
-        className="relative rounded-md border border-[var(--color-border)] bg-[var(--color-bg)]"
-      >
+      <div ref={containerRef} className="relative rounded-md border border-[var(--color-border)] bg-[var(--color-bg)]">
         {!features ? (
           <div className="flex h-[420px] items-center justify-center text-[12px] text-[var(--color-ink-muted)] sm:h-[560px]">
             {T.loading}
@@ -401,8 +404,7 @@ export function UsCenteredMap() {
                 const fill = colorScale(value, max);
                 const d = path(f as never);
                 if (!d) return null;
-                const isSelected =
-                  selection?.kind === "state" && meta && selection.abbr === meta.abbr;
+                const isSelected = selection?.kind === "state" && meta && selection.abbr === meta.abbr;
                 return (
                   <path
                     key={i}
@@ -592,9 +594,7 @@ export function UsCenteredMap() {
                     <span className="mono inline-flex size-4 shrink-0 items-center justify-center rounded-sm bg-[var(--color-surface-2)] text-[9px] font-semibold tabular text-[var(--color-ink-muted)]">
                       {i + 1}
                     </span>
-                    <span className="truncate text-[var(--color-ink)]">
-                      {pickStateLabel(meta, s.abbr, locale)}
-                    </span>
+                    <span className="truncate text-[var(--color-ink)]">{pickStateLabel(meta, s.abbr, locale)}</span>
                   </span>
                   <span className="mono shrink-0 tabular text-[var(--color-ink)]">
                     {formatMetric(metric, s.v, locale)}
@@ -614,15 +614,7 @@ export function UsCenteredMap() {
 // =============================================================================
 // Sub-components
 // =============================================================================
-function StateHoverTooltip({
-  tip,
-  locale,
-  T,
-}: {
-  tip: StateTip;
-  locale: string;
-  T: Strings;
-}) {
+function StateHoverTooltip({ tip, locale, T }: { tip: StateTip; locale: string; T: Strings }) {
   const meta = findStateByAbbr(tip.abbr);
   const label = pickStateLabel(meta, tip.name, locale);
   const rec = getMetric(tip.abbr);
@@ -646,18 +638,12 @@ function StateHoverTooltip({
       }}
     >
       <div className="text-[12px] font-semibold text-[var(--color-ink)]">{label}</div>
-      <div className="mono mt-0.5 text-[10.5px] tabular text-[var(--color-ink-muted)]">
-        {tip.abbr}
-      </div>
+      <div className="mono mt-0.5 text-[10.5px] tabular text-[var(--color-ink-muted)]">{tip.abbr}</div>
       <dl className="mt-1.5 grid grid-cols-[auto_auto] gap-x-3 gap-y-0.5 text-[11px] tabular">
         <dt className="text-[var(--color-ink-muted)]">{T.gdp}:</dt>
-        <dd className="mono text-right text-[var(--color-ink)]">
-          {rec ? `$${rec.gdpBusd.toFixed(1)}B` : "—"}
-        </dd>
+        <dd className="mono text-right text-[var(--color-ink)]">{rec ? `$${rec.gdpBusd.toFixed(1)}B` : "—"}</dd>
         <dt className="text-[var(--color-ink-muted)]">{T.pop}:</dt>
-        <dd className="mono text-right text-[var(--color-ink)]">
-          {rec ? `${rec.popMillions.toFixed(2)}M` : "—"}
-        </dd>
+        <dd className="mono text-right text-[var(--color-ink)]">{rec ? `${rec.popMillions.toFixed(2)}M` : "—"}</dd>
         <dt className="text-[var(--color-ink-muted)]">{T.students}:</dt>
         <dd className="mono text-right text-[var(--color-ink)]">{rec ? rec.uzStudents : "—"}</dd>
       </dl>
@@ -690,9 +676,7 @@ function SelectionPanel({
       <div className="rounded-md border-2 border-[var(--color-primary)]/40 bg-[var(--color-surface)] p-4 shadow-sm">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <div className="serif text-[18px] font-semibold leading-tight text-[var(--color-ink)]">
-              {label}
-            </div>
+            <div className="serif text-[18px] font-semibold leading-tight text-[var(--color-ink)]">{label}</div>
             <div className="mono mt-0.5 text-[11px] text-[var(--color-ink-muted)]">
               {selection.abbr}
               {meta?.capital ? ` · ${meta.capital}` : ""}
@@ -712,14 +696,8 @@ function SelectionPanel({
             of returning null — the user always sees feedback that the click
             registered. */}
         <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <MetricCard
-            label={T.gdp}
-            value={rec ? `$${rec.gdpBusd.toFixed(1)}B` : "—"}
-          />
-          <MetricCard
-            label={T.pop}
-            value={rec ? `${rec.popMillions.toFixed(2)}M` : "—"}
-          />
+          <MetricCard label={T.gdp} value={rec ? `$${rec.gdpBusd.toFixed(1)}B` : "—"} />
+          <MetricCard label={T.pop} value={rec ? `${rec.popMillions.toFixed(2)}M` : "—"} />
           <MetricCard
             label={T.students}
             value={rec ? rec.uzStudents.toLocaleString(locale === "ru" ? "ru-RU" : "en-US") : "—"}
@@ -736,9 +714,7 @@ function SelectionPanel({
               {missionsHere.map((m) => (
                 <li key={m.id} className="flex items-center justify-between gap-2">
                   <span className="text-[var(--color-ink)]">{m.name}</span>
-                  <span className="mono text-[10.5px] text-[var(--color-ink-muted)]">
-                    {STATUS_LABEL[m.status]}
-                  </span>
+                  <span className="mono text-[10.5px] text-[var(--color-ink-muted)]">{STATUS_LABEL[m.status]}</span>
                 </li>
               ))}
             </ul>
@@ -754,9 +730,7 @@ function SelectionPanel({
               {visitsHere.map((v) => (
                 <li key={v.id} className="flex items-center justify-between gap-2">
                   <span className="truncate text-[var(--color-ink)]">{v.organization}</span>
-                  <span className="mono shrink-0 text-[10.5px] text-[var(--color-ink-muted)]">
-                    {v.date}
-                  </span>
+                  <span className="mono shrink-0 text-[10.5px] text-[var(--color-ink-muted)]">{v.date}</span>
                 </li>
               ))}
             </ul>
@@ -858,15 +832,7 @@ function SelectionPanel({
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  highlight,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
+function MetricCard({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div
       className={cn(
@@ -943,13 +909,7 @@ function LegendDot({
   return (
     <span className="inline-flex items-center gap-2">
       <svg width={14} height={14} aria-hidden viewBox="-7 -7 14 14">
-        <circle
-          r={5}
-          fill={color}
-          stroke="white"
-          strokeWidth={1.5}
-          strokeDasharray={dashed ? "2 2" : undefined}
-        />
+        <circle r={5} fill={color} stroke="white" strokeWidth={1.5} strokeDasharray={dashed ? "2 2" : undefined} />
         {inner ? <circle r={1.6} fill={inner} /> : null}
       </svg>
       <span>{children}</span>

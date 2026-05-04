@@ -108,7 +108,9 @@ export async function verifyAdminSessionToken(token: string | undefined, now = D
 
   try {
     const payload = JSON.parse(decodeBase64UrlText(body)) as Partial<AdminSessionPayload>;
-    return payload.v === 1 && payload.purpose === SESSION_PURPOSE && typeof payload.exp === "number" && payload.exp > now;
+    return (
+      payload.v === 1 && payload.purpose === SESSION_PURPOSE && typeof payload.exp === "number" && payload.exp > now
+    );
   } catch {
     return false;
   }

@@ -68,7 +68,9 @@ for (const r of routes) {
       unused_js_kb: Math.round((a["unused-javascript"]?.details?.overallSavingsBytes ?? 0) / 1024),
     };
     out.push(row);
-    console.log(`Perf ${row.perf} | A11y ${row.a11y} | LCP ${(row.lcp_ms / 1000).toFixed(1)}s | TBT ${row.tbt_ms}ms | ${row.transfer_kb} KB`);
+    console.log(
+      `Perf ${row.perf} | A11y ${row.a11y} | LCP ${(row.lcp_ms / 1000).toFixed(1)}s | TBT ${row.tbt_ms}ms | ${row.transfer_kb} KB`,
+    );
   } catch (e) {
     console.log("PARSE FAIL", e.message);
     out.push({ route: r || "/", error: true });

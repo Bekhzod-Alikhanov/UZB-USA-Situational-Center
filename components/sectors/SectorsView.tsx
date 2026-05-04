@@ -1,14 +1,4 @@
-import {
-  Banknote,
-  Building2,
-  Gem,
-  Zap,
-  Wheat,
-  HeartPulse,
-  Cpu,
-  Plane,
-  Lightbulb,
-} from "lucide-react";
+import { Banknote, Building2, Gem, Zap, Wheat, HeartPulse, Cpu, Plane, Lightbulb } from "lucide-react";
 import { sectorOpportunities, type SectorIcon } from "@/data/sectors";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
@@ -50,9 +40,7 @@ export function SectorsView() {
             className="flex flex-col gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition hover:border-[var(--color-border-strong)]"
           >
             <header className="flex items-start gap-3">
-              <div
-                className={`flex size-10 shrink-0 items-center justify-center rounded-md ${TONE_MAP[s.icon]}`}
-              >
+              <div className={`flex size-10 shrink-0 items-center justify-center rounded-md ${TONE_MAP[s.icon]}`}>
                 <Icon className="size-5" />
               </div>
               <div className="min-w-0 flex-1">

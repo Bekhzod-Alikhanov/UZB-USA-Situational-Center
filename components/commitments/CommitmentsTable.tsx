@@ -68,7 +68,9 @@ export function CommitmentsTable() {
       {
         accessorKey: "id",
         header: "ID",
-        cell: ({ getValue }) => <span className="mono text-[11px] text-[var(--color-ink-muted)]">{String(getValue())}</span>,
+        cell: ({ getValue }) => (
+          <span className="mono text-[11px] text-[var(--color-ink-muted)]">{String(getValue())}</span>
+        ),
       },
       {
         accessorKey: "title",
@@ -105,9 +107,7 @@ export function CommitmentsTable() {
                 style={{ width: `${row.original.progressPct}%` }}
               />
             </div>
-            <span className="mono text-[11px] text-[var(--color-ink-muted)] tabular">
-              {row.original.progressPct}%
-            </span>
+            <span className="mono text-[11px] text-[var(--color-ink-muted)] tabular">{row.original.progressPct}%</span>
           </div>
         ),
       },
@@ -128,8 +128,7 @@ export function CommitmentsTable() {
       {
         id: "source",
         header: "Source",
-        cell: ({ row }) =>
-          row.original.sourceId ? <SourceBadge sourceId={row.original.sourceId} /> : null,
+        cell: ({ row }) => (row.original.sourceId ? <SourceBadge sourceId={row.original.sourceId} /> : null),
       },
     ],
     [ts],

@@ -2,12 +2,7 @@
 import { useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import { Check, Clock, Eye, Circle, AlertTriangle } from "lucide-react";
-import {
-  visitScorecards,
-  visitPipelines,
-  blockReadinessPct,
-  type ScorecardBlock,
-} from "@/data/visit-prep";
+import { visitScorecards, visitPipelines, blockReadinessPct, type ScorecardBlock } from "@/data/visit-prep";
 import { cn } from "@/lib/utils";
 
 interface TMinusCheckpoint {
@@ -46,8 +41,7 @@ const CP_DESC: Record<"en" | "ru" | "uz-latn", CheckpointDescriptions> = {
 };
 
 function buildCheckpoints(locale: string): ReadonlyArray<TMinusCheckpoint> {
-  const desc =
-    locale === "ru" ? CP_DESC.ru : locale === "uz-latn" ? CP_DESC["uz-latn"] : CP_DESC.en;
+  const desc = locale === "ru" ? CP_DESC.ru : locale === "uz-latn" ? CP_DESC["uz-latn"] : CP_DESC.en;
   return [
     { tMinusDays: 30, label: "T-30", description: desc.t30, blockNumbers: [1, 2] },
     { tMinusDays: 14, label: "T-14", description: desc.t14, blockNumbers: [3, 5] },
@@ -60,10 +54,8 @@ type CheckpointStatus = "completed" | "on-track" | "at-risk" | "due" | "missed" 
 
 const STATUS_TONE: Record<CheckpointStatus, string> = {
   completed: "bg-[var(--color-pos)] text-white border-[var(--color-pos)]",
-  "on-track":
-    "bg-[var(--color-primary-soft)] text-[var(--color-primary)] border-[var(--color-primary)]/40",
-  "at-risk":
-    "bg-[var(--color-warn-soft)] text-[var(--color-warn)] border-[var(--color-warn)]/40",
+  "on-track": "bg-[var(--color-primary-soft)] text-[var(--color-primary)] border-[var(--color-primary)]/40",
+  "at-risk": "bg-[var(--color-warn-soft)] text-[var(--color-warn)] border-[var(--color-warn)]/40",
   due: "bg-[var(--color-neg-soft)] text-[var(--color-neg)] border-[var(--color-neg)]/40",
   missed: "bg-[var(--color-neg)] text-white border-[var(--color-neg)]",
   future: "bg-[var(--color-surface-2)] text-[var(--color-ink-muted)] border-[var(--color-border)]",
@@ -153,9 +145,7 @@ function classifyCheckpoint(
 ): { status: CheckpointStatus; pct: number } {
   const applicable = blocksCovered.filter((b) => b.applicable);
   if (applicable.length === 0) return { status: "future", pct: 0 };
-  const pct = Math.round(
-    applicable.reduce((sum, b) => sum + blockReadinessPct(b), 0) / applicable.length,
-  );
+  const pct = Math.round(applicable.reduce((sum, b) => sum + blockReadinessPct(b), 0) / applicable.length);
   const checkpointInPast = daysToVisit <= tMinusDays;
   const checkpointInFuture = daysToVisit > tMinusDays;
   if (pct >= 90) return { status: "completed", pct };
@@ -178,9 +168,7 @@ export function TMinusTimeline() {
   const locale = useLocale();
   const T = pickStr(locale);
   const STATUS_LABEL =
-    STATUS_LABEL_BY_LOCALE[
-      (locale === "ru" || locale === "uz-latn" ? locale : "en") as "en" | "ru" | "uz-latn"
-    ];
+    STATUS_LABEL_BY_LOCALE[(locale === "ru" || locale === "uz-latn" ? locale : "en") as "en" | "ru" | "uz-latn"];
   const CHECKPOINTS = useMemo(() => buildCheckpoints(locale), [locale]);
   const dateLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
   const DATE_FMT = new Intl.DateTimeFormat(dateLocale, { day: "2-digit", month: "short" });
@@ -297,11 +285,7 @@ export function TMinusTimeline() {
                           style={{
                             width: `${pct}%`,
                             background:
-                              pct >= 70
-                                ? "var(--color-pos)"
-                                : pct >= 40
-                                  ? "var(--color-primary)"
-                                  : "var(--color-warn)",
+                              pct >= 70 ? "var(--color-pos)" : pct >= 40 ? "var(--color-primary)" : "var(--color-warn)",
                           }}
                         />
                       </div>

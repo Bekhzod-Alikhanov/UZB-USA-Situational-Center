@@ -60,7 +60,9 @@ export async function loadPublishedMetrics(domain?: MetricDomain) {
   const db = databaseHealth();
   if (db.writable) {
     try {
-      const query = domain ? `select=*&is_current=eq.true&domain=eq.${domain}&order=period_end.desc` : "select=*&is_current=eq.true&order=period_end.desc";
+      const query = domain
+        ? `select=*&is_current=eq.true&domain=eq.${domain}&order=period_end.desc`
+        : "select=*&is_current=eq.true&order=period_end.desc";
       const rows = await fetchSupabaseTable<PublishedMetricRow>("published_metric", query);
       if (rows.length) return { mode: "database" as const, metrics: rows.map(rowToMetric) };
     } catch {

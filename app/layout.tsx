@@ -35,8 +35,7 @@ export const metadata: Metadata = {
     default: "Uzbekistan – USA · Situational Center",
     template: "%s · UZ–US SC",
   },
-  description:
-    "Situational Center on cooperation between the Republic of Uzbekistan and the United States of America.",
+  description: "Situational Center on cooperation between the Republic of Uzbekistan and the United States of America.",
   applicationName: "UZ–US Situational Center",
   robots: { index: false, follow: false },
 };
@@ -53,9 +52,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}
-      >
+      <body className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>
     </html>

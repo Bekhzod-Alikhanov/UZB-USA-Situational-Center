@@ -10,15 +10,10 @@ import { LazyMount } from "@/components/util/LazyMount";
 // Recharts BarChart is dynamic-loaded + IntersectionObserver-gated. The
 // Benchmark route's KPIs and metric switcher render immediately; the chart
 // chunk only fetches when the user scrolls toward it.
-const BenchmarkChart = dynamic(
-  () => import("./BenchmarkChart").then((m) => ({ default: m.BenchmarkChart })),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="h-[260px] w-full animate-pulse rounded-md bg-[var(--color-surface-2)] sm:h-[280px]" />
-    ),
-  },
-);
+const BenchmarkChart = dynamic(() => import("./BenchmarkChart").then((m) => ({ default: m.BenchmarkChart })), {
+  ssr: false,
+  loading: () => <div className="h-[260px] w-full animate-pulse rounded-md bg-[var(--color-surface-2)] sm:h-[280px]" />,
+});
 
 type MetricKey =
   | "gdpUsdBn"
@@ -82,8 +77,7 @@ export function BenchmarkView() {
   const uz = benchmark.find((b) => b.country === "UZ")!;
   const uzRank = rankOf(benchmark, metric, "UZ");
   const peerAvg =
-    benchmark.filter((b) => b.country !== "UZ").reduce((s, b) => s + b[metric], 0) /
-    (benchmark.length - 1);
+    benchmark.filter((b) => b.country !== "UZ").reduce((s, b) => s + b[metric], 0) / (benchmark.length - 1);
   const uzVsPeer = ((uz[metric] - peerAvg) / peerAvg) * 100;
 
   const chartData = sorted.map((r) => ({
@@ -101,9 +95,7 @@ export function BenchmarkView() {
           <div className="serif mt-1 text-[28px] font-semibold leading-none tracking-tight text-[var(--color-ink)]">
             #{uzRank} <span className="text-[15px] text-[var(--color-ink-muted)]">of {benchmark.length}</span>
           </div>
-          <div className="mt-1 text-[11px] text-[var(--color-ink-muted)]">
-            among Central Asia + South Caucasus
-          </div>
+          <div className="mt-1 text-[11px] text-[var(--color-ink-muted)]">among Central Asia + South Caucasus</div>
         </div>
         <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
           <div className="stat-label">UZ value</div>
@@ -124,12 +116,16 @@ export function BenchmarkView() {
                   : "text-[var(--color-ink-muted)]",
             )}
           >
-            {uzVsPeer > 0 ? <ArrowUp className="size-5" /> : uzVsPeer < 0 ? <ArrowDown className="size-5" /> : <Minus className="size-5" />}
+            {uzVsPeer > 0 ? (
+              <ArrowUp className="size-5" />
+            ) : uzVsPeer < 0 ? (
+              <ArrowDown className="size-5" />
+            ) : (
+              <Minus className="size-5" />
+            )}
             {Math.abs(uzVsPeer).toFixed(1)}%
           </div>
-          <div className="mt-1 text-[11px] text-[var(--color-ink-muted)]">
-            peer mean {active.format(peerAvg)}
-          </div>
+          <div className="mt-1 text-[11px] text-[var(--color-ink-muted)]">peer mean {active.format(peerAvg)}</div>
         </div>
       </div>
 
@@ -185,9 +181,7 @@ export function BenchmarkView() {
                     key={c.country}
                     className={cn(
                       "border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-center text-[10.5px] font-semibold uppercase tracking-wider",
-                      c.country === "UZ"
-                        ? "text-[var(--color-primary)]"
-                        : "text-[var(--color-ink-muted)]",
+                      c.country === "UZ" ? "text-[var(--color-primary)]" : "text-[var(--color-ink-muted)]",
                     )}
                   >
                     <div className="text-[14px]">{c.flagEmoji}</div>
@@ -219,10 +213,7 @@ export function BenchmarkView() {
                           )}
                           style={{
                             background: `color-mix(in oklab, var(--color-primary) ${(intensity * 100).toFixed(0)}%, transparent)`,
-                            color:
-                              norm > 0.55
-                                ? "var(--color-primary)"
-                                : "var(--color-ink)",
+                            color: norm > 0.55 ? "var(--color-primary)" : "var(--color-ink)",
                           }}
                         >
                           {m.format(v)}
@@ -240,9 +231,7 @@ export function BenchmarkView() {
       <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="border-b border-[var(--color-border)] px-4 py-3">
           <div className="text-[13px] font-semibold text-[var(--color-ink)]">Diplomatic & trade posture</div>
-          <div className="text-[11px] text-[var(--color-ink-muted)]">
-            Ease-of-business · visa regime · GSP standing
-          </div>
+          <div className="text-[11px] text-[var(--color-ink-muted)]">Ease-of-business · visa regime · GSP standing</div>
         </div>
         <div className="overflow-x-auto">
           <table className="table">
@@ -259,10 +248,7 @@ export function BenchmarkView() {
             </thead>
             <tbody>
               {sorted.map((c) => (
-                <tr
-                  key={c.country}
-                  className={cn(c.country === "UZ" && "bg-[var(--color-primary-soft)]/40")}
-                >
+                <tr key={c.country} className={cn(c.country === "UZ" && "bg-[var(--color-primary-soft)]/40")}>
                   <td>
                     <div className="flex items-center gap-2">
                       <span className="text-[14px]">{c.flagEmoji}</span>
@@ -276,12 +262,22 @@ export function BenchmarkView() {
                   </td>
                   <td className="text-right tabular mono">{c.wbDoingBusinessRank ?? "—"}</td>
                   <td>
-                    <span className={cn("rounded px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-wider", VISA_TONE[c.visaBilateral])}>
+                    <span
+                      className={cn(
+                        "rounded px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-wider",
+                        VISA_TONE[c.visaBilateral],
+                      )}
+                    >
                       {c.visaBilateral}
                     </span>
                   </td>
                   <td>
-                    <span className={cn("rounded px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-wider", GSP_TONE[c.gspStatus])}>
+                    <span
+                      className={cn(
+                        "rounded px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-wider",
+                        GSP_TONE[c.gspStatus],
+                      )}
+                    >
                       {c.gspStatus}
                     </span>
                   </td>
@@ -299,16 +295,22 @@ export function BenchmarkView() {
         <div className="text-[13px] font-semibold text-[var(--color-ink)]">Strategic read</div>
         <ul className="mt-2 flex flex-col gap-1.5 text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">
           <li>
-            • <span className="text-[var(--color-ink)]">Trade headroom:</span> UZ–US turnover at $1.0B trails KZ ($3.1B) and GE ($1.8B); peer-average gap of {uzVsPeer < 0 ? `${Math.abs(uzVsPeer).toFixed(0)}% below` : "n/a"} indicates substantial expansion potential, especially in critical-minerals exports.
+            • <span className="text-[var(--color-ink)]">Trade headroom:</span> UZ–US turnover at $1.0B trails KZ ($3.1B)
+            and GE ($1.8B); peer-average gap of {uzVsPeer < 0 ? `${Math.abs(uzVsPeer).toFixed(0)}% below` : "n/a"}{" "}
+            indicates substantial expansion potential, especially in critical-minerals exports.
           </li>
           <li>
-            • <span className="text-[var(--color-ink)]">FDI runway:</span> US cumulative FDI ($1.8B) is mid-pack; doubling to KZ-tier would require sustained C5+1 plus bilateral commitments through 2030.
+            • <span className="text-[var(--color-ink)]">FDI runway:</span> US cumulative FDI ($1.8B) is mid-pack;
+            doubling to KZ-tier would require sustained C5+1 plus bilateral commitments through 2030.
           </li>
           <li>
-            • <span className="text-[var(--color-ink)]">GSP positioning:</span> &quot;eligible-pending&quot; status is the single highest-leverage policy lever — graduation to beneficiary unlocks duty-free access for ~5,000 HS lines.
+            • <span className="text-[var(--color-ink)]">GSP positioning:</span> &quot;eligible-pending&quot; status is
+            the single highest-leverage policy lever — graduation to beneficiary unlocks duty-free access for ~5,000 HS
+            lines.
           </li>
           <li>
-            • <span className="text-[var(--color-ink)]">Visa regime:</span> e-visa is a competitive disadvantage vs. KZ/KG/GE visa-free; bilateral simplification would compound business-travel growth.
+            • <span className="text-[var(--color-ink)]">Visa regime:</span> e-visa is a competitive disadvantage vs.
+            KZ/KG/GE visa-free; bilateral simplification would compound business-travel growth.
           </li>
         </ul>
       </div>

@@ -52,10 +52,7 @@ export function AgreementsTable() {
     });
   }, [category, sphere, search]);
 
-  const sortedDesc = useMemo(
-    () => [...filtered].sort((a, b) => b.signedOn.localeCompare(a.signedOn)),
-    [filtered],
-  );
+  const sortedDesc = useMemo(() => [...filtered].sort((a, b) => b.signedOn.localeCompare(a.signedOn)), [filtered]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -129,9 +126,7 @@ export function AgreementsTable() {
                   ) : null}
                 </td>
                 <td className="text-[11.5px] text-[var(--color-ink-muted)]">{CATEGORY_LABEL[a.category]}</td>
-                <td className="text-[11.5px] uppercase tracking-wider text-[var(--color-ink-muted)]">
-                  {a.sphere}
-                </td>
+                <td className="text-[11.5px] uppercase tracking-wider text-[var(--color-ink-muted)]">{a.sphere}</td>
                 <td>
                   <span
                     className={cn(
@@ -148,7 +143,9 @@ export function AgreementsTable() {
           </tbody>
         </table>
         {sortedDesc.length === 0 ? (
-          <div className="py-12 text-center text-[13px] text-[var(--color-ink-muted)]">No agreements match your filters.</div>
+          <div className="py-12 text-center text-[13px] text-[var(--color-ink-muted)]">
+            No agreements match your filters.
+          </div>
         ) : null}
       </div>
     </div>

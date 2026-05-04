@@ -56,10 +56,11 @@ export function computeFreshness(referenceDate?: Date): FreshnessReport {
 
   // Determine "as-of" — caller can pass a date for testing; otherwise
   // use the newest fetched_at from all sources (build-time stamp).
-  const newest = decaying
-    .map((s) => s.fetched_at)
-    .sort()
-    .at(-1) ?? new Date().toISOString().slice(0, 10);
+  const newest =
+    decaying
+      .map((s) => s.fetched_at)
+      .sort()
+      .at(-1) ?? new Date().toISOString().slice(0, 10);
   const asOf = referenceDate ? referenceDate.toISOString().slice(0, 10) : newest;
   const asOfMs = new Date(asOf + "T00:00:00Z").getTime();
 

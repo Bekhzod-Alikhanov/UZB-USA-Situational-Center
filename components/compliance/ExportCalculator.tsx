@@ -7,7 +7,10 @@ type Eccn = "EAR99" | "1C350" | "3A001" | "5A002" | "9A610";
 type EndUse = "civilian" | "dual" | "military";
 type Sanctioned = "no" | "possibly" | "yes";
 
-const LICENSE_MATRIX: Record<Eccn, Record<EndUse, Record<Sanctioned, { verdict: "ok" | "review" | "denied"; note: string }>>> = {
+const LICENSE_MATRIX: Record<
+  Eccn,
+  Record<EndUse, Record<Sanctioned, { verdict: "ok" | "review" | "denied"; note: string }>>
+> = {
   EAR99: {
     civilian: {
       no: { verdict: "ok", note: "No license generally required. Routine screening against SDN list." },
@@ -184,7 +187,8 @@ export function ExportCalculator() {
         </div>
         <p className="text-[13px] leading-relaxed">{result.note}</p>
         <p className="mt-2 text-[10.5px] italic opacity-80">
-          Simplified illustrative calculator. Actual licensing is determined by BIS / DDTC / OFAC — confirm with counsel.
+          Simplified illustrative calculator. Actual licensing is determined by BIS / DDTC / OFAC — confirm with
+          counsel.
         </p>
       </div>
     </div>
@@ -194,7 +198,9 @@ export function ExportCalculator() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">{label}</span>
+      <span className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
+        {label}
+      </span>
       {children}
     </label>
   );

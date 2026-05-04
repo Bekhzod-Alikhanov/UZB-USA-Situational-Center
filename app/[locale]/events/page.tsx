@@ -3,11 +3,7 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { EventsView } from "@/components/events/EventsView";
 import { events } from "@/data/events";
 
-export default async function EventsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function EventsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("events");

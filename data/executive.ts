@@ -80,7 +80,8 @@ export function buildExecutiveBriefing(): ExecutiveBriefing {
 
   return {
     asOf: AS_OF,
-    headline: "Relationship is opportunity-rich, but production readiness depends on replacing demo pipeline data and closing overdue legal-register work.",
+    headline:
+      "Relationship is opportunity-rich, but production readiness depends on replacing demo pipeline data and closing overdue legal-register work.",
     readout:
       "The strongest immediate lanes are investment finance, critical minerals, Council operating cadence, and visa/tourism mobility. The main executive risk is not technical: it is source ownership, methodology separation, and action accountability.",
     metrics: [
@@ -88,33 +89,44 @@ export function buildExecutiveBriefing(): ExecutiveBriefing {
       { label: "Overdue", value: overdue.length.toString(), tone: overdue.length ? "critical" : "positive" },
       { label: "Watchlist", value: watch.length.toString(), tone: watch.length ? "watch" : "positive" },
       { label: "Investment pipeline", value: `$${(totalInvestmentValue / 1000).toFixed(1)}B`, tone: "positive" },
-      { label: "Demo investment rows", value: demoInvestments.toString(), tone: demoInvestments ? "watch" : "positive" },
-      { label: "Live-ready connectors", value: `${externalDataSummary.liveReady}/${externalDataSummary.total}`, tone: "positive" },
+      {
+        label: "Demo investment rows",
+        value: demoInvestments.toString(),
+        tone: demoInvestments ? "watch" : "positive",
+      },
+      {
+        label: "Live-ready connectors",
+        value: `${externalDataSummary.liveReady}/${externalDataSummary.total}`,
+        tone: "positive",
+      },
       { label: "Fresh sources", value: `${sourceSummary.fresh}/${sourceSummary.total}`, tone: "positive" },
       { label: "Relationship pillars", value: relationshipPillars.length.toString(), tone: "neutral" },
     ],
     priorityActions: dueSoon.map(actionFromCommitment),
-    risks: ([
-      ...overdue.map(actionFromCommitment),
-      {
-        id: "risk-demo-investments",
-        title: "Demo investment rows remain visible in strategic pipeline",
-        detail: `${demoInvestments} investment records still require MIIT/UzInvest source-owner replacement before external publication.`,
-        owner: "MIIT / UzInvest / Situational Center",
-        href: "/investments",
-        tone: demoInvestments ? ("watch" as const) : ("positive" as const),
-        sourceId: "input_figma_pdf",
-      },
-      {
-        id: "risk-methodology-mix",
-        title: "Grants and assistance use separate accounting systems",
-        detail: "UZ-side internal grants, USAID program records, and ForeignAssistance.gov annual obligations should never be summed without reconciliation.",
-        owner: "Situational Center data lead",
-        href: "/grants",
-        tone: "watch",
-        sourceId: "foreign_assistance_gov",
-      },
-    ] satisfies ExecutiveItem[]).slice(0, 5),
+    risks: (
+      [
+        ...overdue.map(actionFromCommitment),
+        {
+          id: "risk-demo-investments",
+          title: "Demo investment rows remain visible in strategic pipeline",
+          detail: `${demoInvestments} investment records still require MIIT/UzInvest source-owner replacement before external publication.`,
+          owner: "MIIT / UzInvest / Situational Center",
+          href: "/investments",
+          tone: demoInvestments ? ("watch" as const) : ("positive" as const),
+          sourceId: "input_figma_pdf",
+        },
+        {
+          id: "risk-methodology-mix",
+          title: "Grants and assistance use separate accounting systems",
+          detail:
+            "UZ-side internal grants, USAID program records, and ForeignAssistance.gov annual obligations should never be summed without reconciliation.",
+          owner: "Situational Center data lead",
+          href: "/grants",
+          tone: "watch",
+          sourceId: "foreign_assistance_gov",
+        },
+      ] satisfies ExecutiveItem[]
+    ).slice(0, 5),
     opportunities: [
       {
         id: "opp-dfc",
@@ -154,26 +166,30 @@ export function buildExecutiveBriefing(): ExecutiveBriefing {
       },
     ],
     changes: [
-      ...latestNews.map((item): ExecutiveItem => ({
-        id: item.id,
-        title: item.title,
-        detail: item.summary,
-        owner: item.source,
-        due: item.date,
-        href: "/news",
-        tone: item.tonality === "positive" ? "positive" : "neutral",
-        sourceId: item.sourceId,
-      })),
-      ...upcomingEvents.map((item): ExecutiveItem => ({
-        id: item.id,
-        title: item.title,
-        detail: item.description,
-        owner: item.location,
-        due: item.date,
-        href: "/events",
-        tone: "neutral" as const,
-        sourceId: item.sourceId,
-      })),
+      ...latestNews.map(
+        (item): ExecutiveItem => ({
+          id: item.id,
+          title: item.title,
+          detail: item.summary,
+          owner: item.source,
+          due: item.date,
+          href: "/news",
+          tone: item.tonality === "positive" ? "positive" : "neutral",
+          sourceId: item.sourceId,
+        }),
+      ),
+      ...upcomingEvents.map(
+        (item): ExecutiveItem => ({
+          id: item.id,
+          title: item.title,
+          detail: item.description,
+          owner: item.location,
+          due: item.date,
+          href: "/events",
+          tone: "neutral" as const,
+          sourceId: item.sourceId,
+        }),
+      ),
       ...(anchor
         ? [
             {

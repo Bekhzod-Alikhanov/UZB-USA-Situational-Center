@@ -142,8 +142,7 @@ function buildReconciliations(): ReconciledVisit[] {
       if (!v.agreementsSigned?.length) return false;
       const titleMatch = v.agreementsSigned.some(
         (signed) =>
-          a.title.toLowerCase().includes(signed.toLowerCase()) ||
-          signed.toLowerCase().includes(a.title.toLowerCase()),
+          a.title.toLowerCase().includes(signed.toLowerCase()) || signed.toLowerCase().includes(a.title.toLowerCase()),
       );
       if (!titleMatch) return false;
       // Sanity: agreement signedOn within ±60 days of visit
@@ -151,7 +150,12 @@ function buildReconciliations(): ReconciledVisit[] {
       const diffDays = Math.abs((signedDate.getTime() - visitDate.getTime()) / (1000 * 60 * 60 * 24));
       return diffDays <= 60;
     });
-    out.push({ visit: v, outcomes: linkedOutcomes, commitments: linkedCommitments, signedAgreements: linkedAgreements });
+    out.push({
+      visit: v,
+      outcomes: linkedOutcomes,
+      commitments: linkedCommitments,
+      signedAgreements: linkedAgreements,
+    });
   }
 
   // Sort by visit date desc (most recent first)
@@ -164,10 +168,7 @@ export function PostVisitReconciliation() {
   const reconciliations = useMemo(() => buildReconciliations(), []);
   const [activeId, setActiveId] = useState<string>(reconciliations[0]?.visit.id ?? "");
 
-  const active = useMemo(
-    () => reconciliations.find((r) => r.visit.id === activeId),
-    [reconciliations, activeId],
-  );
+  const active = useMemo(() => reconciliations.find((r) => r.visit.id === activeId), [reconciliations, activeId]);
 
   const T = pickStr(locale);
   if (reconciliations.length === 0) {
@@ -198,7 +199,9 @@ export function PostVisitReconciliation() {
               <div className="serif font-medium">{r.visit.title}</div>
               <div className="mt-0.5 flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
                 <span className="mono tabular">{DATE_FMT.format(new Date(r.visit.date))}</span>
-                <span>· {r.outcomes.length}+{r.commitments.length}+{r.signedAgreements.length}</span>
+                <span>
+                  · {r.outcomes.length}+{r.commitments.length}+{r.signedAgreements.length}
+                </span>
               </div>
             </button>
           );
@@ -216,8 +219,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
   const overdueCount = r.commitments.filter((c) => c.status === "overdue").length;
   const watchCount = r.commitments.filter((c) => c.status === "watch").length;
   const progressCount = r.commitments.filter((c) => c.status === "progress").length;
-  const completionPct =
-    r.commitments.length > 0 ? Math.round((doneCount / r.commitments.length) * 100) : 0;
+  const completionPct = r.commitments.length > 0 ? Math.round((doneCount / r.commitments.length) * 100) : 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -250,10 +252,7 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
           </div>
           <div className="flex flex-col gap-2">
             {r.outcomes.map((o) => (
-              <div
-                key={o.id}
-                className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3"
-              >
+              <div key={o.id} className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1">
                     <div className="grid grid-cols-1 gap-2 text-[12px] sm:grid-cols-2">

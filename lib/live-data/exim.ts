@@ -73,7 +73,10 @@ export function eximCountryLimitationScheduleUrl() {
   return EXIM_CLS_URL;
 }
 
-export async function fetchEximAuthorizationsObservations(): Promise<{ observations: NormalizedObservation[]; snapshot: SourceSnapshot }> {
+export async function fetchEximAuthorizationsObservations(): Promise<{
+  observations: NormalizedObservation[];
+  snapshot: SourceSnapshot;
+}> {
   const fetchedAt = new Date().toISOString();
   const pkg = await fetchJsonWithTimeout<DataGovPackage>(EXIM_PACKAGE_URL, {}, 12000);
   const ckanUrl = pkg.result?.resources?.find((resource) => {
@@ -84,12 +87,15 @@ export async function fetchEximAuthorizationsObservations(): Promise<{ observati
     const descriptor = `${resource.mediaType ?? ""} ${resource.format ?? ""} ${resource.title ?? ""}`.toLowerCase();
     return descriptor.includes("csv") && resource.downloadURL;
   })?.downloadURL;
-  const catalogUrl = pkg.dataset?.flatMap((dataset) => dataset.distribution ?? []).find((resource) => {
-    const descriptor = `${resource.mediaType ?? ""} ${resource.format ?? ""} ${resource.title ?? ""}`.toLowerCase();
-    return descriptor.includes("csv") && resource.downloadURL;
-  })?.downloadURL;
+  const catalogUrl = pkg.dataset
+    ?.flatMap((dataset) => dataset.distribution ?? [])
+    .find((resource) => {
+      const descriptor = `${resource.mediaType ?? ""} ${resource.format ?? ""} ${resource.title ?? ""}`.toLowerCase();
+      return descriptor.includes("csv") && resource.downloadURL;
+    })?.downloadURL;
   const csvUrl = ckanUrl ?? podUrl ?? catalogUrl;
-  const modified = pkg.result?.metadata_modified ?? pkg.modified ?? pkg.dataset?.find((dataset) => dataset.modified)?.modified;
+  const modified =
+    pkg.result?.metadata_modified ?? pkg.modified ?? pkg.dataset?.find((dataset) => dataset.modified)?.modified;
   if (!csvUrl) throw new Error("EXIM authorizations CSV resource was not found in Data.gov package metadata.");
 
   const csvResponse = await fetch(csvUrl, { headers: { accept: "text/csv,*/*" }, next: { revalidate: 60 * 60 * 24 } });
@@ -101,7 +107,11 @@ export async function fetchEximAuthorizationsObservations(): Promise<{ observati
   const amountIndex = columnIndex(header, ["authorization amount", "authorized amount", "authorization"]);
   const exportValueIndex = columnIndex(header, ["export value"]);
   const dateIndex = columnIndex(header, ["authorization date", "approved date", "date"]);
-  const filtered = rows.slice(1).filter((row) => String(row[countryIndex] ?? "").toLowerCase().includes("uzbekistan"));
+  const filtered = rows.slice(1).filter((row) =>
+    String(row[countryIndex] ?? "")
+      .toLowerCase()
+      .includes("uzbekistan"),
+  );
   const totalAuthorization = filtered.reduce((sum, row) => sum + money(row[amountIndex]), 0);
   const totalExportValue = filtered.reduce((sum, row) => sum + money(row[exportValueIndex]), 0);
   const latestDate = filtered

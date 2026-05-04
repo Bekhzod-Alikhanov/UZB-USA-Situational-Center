@@ -14,19 +14,61 @@ interface Member {
 const INITIAL: Member[] = [
   { id: "m-01", name: "President (head of delegation)", role: "Leadership", keep: true, reason: "anchor" },
   { id: "m-02", name: "Minister of Foreign Affairs", role: "Foreign policy", keep: true, reason: "signing MoU" },
-  { id: "m-03", name: "Minister of Investments & Foreign Trade", role: "Economic track", keep: true, reason: "AUCC + Business Council" },
+  {
+    id: "m-03",
+    name: "Minister of Investments & Foreign Trade",
+    role: "Economic track",
+    keep: true,
+    reason: "AUCC + Business Council",
+  },
   { id: "m-04", name: "Minister of Energy", role: "Minerals track", keep: true, reason: "critical minerals MoU lead" },
-  { id: "m-05", name: "Chief of Staff, Presidential Administration", role: "Coordination", keep: true, reason: "anchor" },
-  { id: "m-06", name: "Head, Situational Center (US-UZ)", role: "Monitoring + follow-up", keep: true, reason: "commitment registry" },
+  {
+    id: "m-05",
+    name: "Chief of Staff, Presidential Administration",
+    role: "Coordination",
+    keep: true,
+    reason: "anchor",
+  },
+  {
+    id: "m-06",
+    name: "Head, Situational Center (US-UZ)",
+    role: "Monitoring + follow-up",
+    keep: true,
+    reason: "commitment registry",
+  },
   { id: "m-07", name: "Ambassador to the USA", role: "Host delegation", keep: true },
   { id: "m-08", name: "Head, AUCC Tashkent office", role: "Business", keep: true, reason: "round-table" },
   { id: "m-09", name: "Deputy Minister of Defense", role: "Defense", keep: true, reason: "Mississippi NG follow-up" },
   { id: "m-10", name: "Deputy Minister of Finance", role: "EXIM / DFC / DTA", keep: true },
   { id: "m-11", name: "Spokesperson / Press Secretary", role: "Press", keep: true },
-  { id: "m-12", name: "Deputy Minister of Digital Development", role: "IT / AWS track", keep: false, reason: "digital track can be handled by Ambassador for this visit" },
-  { id: "m-13", name: "Deputy Minister of Higher Education", role: "Education", keep: false, reason: "no education outcome slated — next visit" },
-  { id: "m-14", name: "Deputy Minister of Health", role: "Health / C.U.R.E.", keep: false, reason: "already covered by earlier Samarkand ceremony" },
-  { id: "m-15", name: "Assistant — protocol support (duplicate)", role: "Protocol", keep: false, reason: "protocol already staffed" },
+  {
+    id: "m-12",
+    name: "Deputy Minister of Digital Development",
+    role: "IT / AWS track",
+    keep: false,
+    reason: "digital track can be handled by Ambassador for this visit",
+  },
+  {
+    id: "m-13",
+    name: "Deputy Minister of Higher Education",
+    role: "Education",
+    keep: false,
+    reason: "no education outcome slated — next visit",
+  },
+  {
+    id: "m-14",
+    name: "Deputy Minister of Health",
+    role: "Health / C.U.R.E.",
+    keep: false,
+    reason: "already covered by earlier Samarkand ceremony",
+  },
+  {
+    id: "m-15",
+    name: "Assistant — protocol support (duplicate)",
+    role: "Protocol",
+    keep: false,
+    reason: "protocol already staffed",
+  },
 ];
 
 export function OptimizationPanel() {
@@ -68,7 +110,9 @@ export function OptimizationPanel() {
               <span
                 className={cn(
                   "flex size-5 shrink-0 items-center justify-center rounded-full",
-                  m.keep ? "bg-[var(--color-pos)] text-white" : "bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
+                  m.keep
+                    ? "bg-[var(--color-pos)] text-white"
+                    : "bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
                 )}
               >
                 {m.keep ? <Check className="size-3" /> : <X className="size-3" />}
@@ -86,9 +130,7 @@ export function OptimizationPanel() {
               ) : null}
               <button
                 type="button"
-                onClick={() =>
-                  setMembers((list) => list.map((x) => (x.id === m.id ? { ...x, keep: !x.keep } : x)))
-                }
+                onClick={() => setMembers((list) => list.map((x) => (x.id === m.id ? { ...x, keep: !x.keep } : x)))}
                 className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[10.5px] text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
               >
                 {m.keep ? "Drop" : "Restore"}

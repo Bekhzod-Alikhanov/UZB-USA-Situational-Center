@@ -18,7 +18,10 @@ type WorldBankResponse = [
   }>,
 ];
 
-const INDICATOR_META: Record<string, { metricKey: string; label: string; unit: string; scale: number; relevanceScore: number }> = {
+const INDICATOR_META: Record<
+  string,
+  { metricKey: string; label: string; unit: string; scale: number; relevanceScore: number }
+> = {
   [WORLD_BANK_INDICATORS.gdp]: {
     metricKey: "macro.uz.gdp.current_usd",
     label: "Uzbekistan GDP",
@@ -42,7 +45,11 @@ const INDICATOR_META: Record<string, { metricKey: string; label: string; unit: s
   },
 };
 
-export function worldBankIndicatorUrl(country = "UZB", indicator: string = WORLD_BANK_INDICATORS.gdp, date = "2020:2026") {
+export function worldBankIndicatorUrl(
+  country = "UZB",
+  indicator: string = WORLD_BANK_INDICATORS.gdp,
+  date = "2020:2026",
+) {
   return `https://api.worldbank.org/v2/country/${country}/indicator/${indicator}?format=json&per_page=80&date=${date}`;
 }
 

@@ -67,8 +67,8 @@ export const uzMissionsUs: UzMission[] = [
     name: "Permanent Mission of Uzbekistan to the United Nations",
     status: "active",
     address: "801 Second Avenue, 20th Floor, New York, NY 10017",
-    lng: -73.9700,
-    lat: 40.7480,
+    lng: -73.97,
+    lat: 40.748,
     is_demo: false,
   },
   {

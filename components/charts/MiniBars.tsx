@@ -34,13 +34,7 @@ interface Props {
 
 const MARGIN = { top: 14, right: 4, bottom: 22, left: 36 };
 
-export function MiniBars({
-  data,
-  height = 200,
-  format = (v) => v.toString(),
-  showValue = false,
-  className,
-}: Props) {
+export function MiniBars({ data, height = 200, format = (v) => v.toString(), showValue = false, className }: Props) {
   const inner = {
     w: 0,
     h: height - MARGIN.top - MARGIN.bottom,

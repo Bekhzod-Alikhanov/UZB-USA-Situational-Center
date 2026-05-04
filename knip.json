@@ -1,0 +1,41 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "data/**/*.ts",
+    "lib/**/*.ts",
+    "lhci.config.cjs",
+    "scripts/*.mjs",
+    "tests/**/*.ts"
+  ],
+  "project": ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
+  "ignoreDependencies": [
+    "@lhci/cli",
+    "@dnd-kit/sortable",
+    "@dnd-kit/utilities",
+    "@radix-ui/react-avatar",
+    "@radix-ui/react-checkbox",
+    "@radix-ui/react-label",
+    "@radix-ui/react-popover",
+    "@radix-ui/react-progress",
+    "@radix-ui/react-scroll-area",
+    "@radix-ui/react-select",
+    "@radix-ui/react-separator",
+    "@radix-ui/react-slot",
+    "@radix-ui/react-tooltip",
+    "@visx/chord",
+    "@visx/sankey",
+    "@visx/scale",
+    "@visx/shape",
+    "class-variance-authority",
+    "date-fns",
+    "lighthouse",
+    "react-hook-form",
+    "tailwindcss"
+  ],
+  "ignoreIssues": {
+    "data/trade.ts": ["duplicates"]
+  },
+  "ignoreExportsUsedInFile": true
+}

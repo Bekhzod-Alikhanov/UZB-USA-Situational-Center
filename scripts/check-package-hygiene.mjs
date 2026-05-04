@@ -14,7 +14,10 @@ const forbidden = [
   { label: "TypeScript build cache", test: (p) => p === "tsconfig.tsbuildinfo" },
   { label: "local Claude settings", test: (p) => p === ".claude/settings.local.json" },
   { label: "Lighthouse JSON output", test: (p) => /^lh-.*\.json$/i.test(path.basename(p)) },
-  { label: "local server log", test: (p) => /^(dev-server|route-test-server).*\.(out|err)\.log$/i.test(path.basename(p)) },
+  {
+    label: "local server log",
+    test: (p) => /^(dev-server|route-test-server).*\.(out|err)\.log$/i.test(path.basename(p)),
+  },
 ];
 
 function normalize(relPath) {
@@ -58,7 +61,9 @@ if (target) {
     process.exit(1);
   }
   if (target.toLowerCase().endsWith(".zip")) {
-    console.error("Zip inspection is intentionally not done in-place. Extract the archive to a temporary directory and pass that directory to this script.");
+    console.error(
+      "Zip inspection is intentionally not done in-place. Extract the archive to a temporary directory and pass that directory to this script.",
+    );
     process.exit(1);
   }
   const stats = fs.statSync(target);
@@ -85,11 +90,25 @@ if (target) {
   }
 
   const lighthouseArtifacts = fs.readdirSync(root).filter((name) => /^lh-.*\.json$/i.test(name));
-  const localSignals = [".next", ".vercel", "node_modules", "tsconfig.tsbuildinfo", ".claude/settings.local.json", "dev-server.out.log", "dev-server.err.log", "route-test-server.out.log", "route-test-server.err.log", ...lighthouseArtifacts]
-    .filter((relPath) => fs.existsSync(path.join(root, relPath)));
+  const localSignals = [
+    ".next",
+    ".vercel",
+    "node_modules",
+    "tsconfig.tsbuildinfo",
+    ".claude/settings.local.json",
+    "dev-server.out.log",
+    "dev-server.err.log",
+    "route-test-server.out.log",
+    "route-test-server.err.log",
+    ...lighthouseArtifacts,
+  ].filter((relPath) => fs.existsSync(path.join(root, relPath)));
   if (localSignals.length) {
     console.warn("Local/runtime artifacts are present. Keep them out of deployment packages:");
     for (const relPath of localSignals) console.warn(`- ${relPath}`);
   }
-  console.log(tracked ? "Repository hygiene passed for tracked files." : "Package hygiene check completed with tracked-file scan skipped.");
+  console.log(
+    tracked
+      ? "Repository hygiene passed for tracked files."
+      : "Package hygiene check completed with tracked-file scan skipped.",
+  );
 }

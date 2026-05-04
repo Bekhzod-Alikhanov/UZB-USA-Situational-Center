@@ -34,11 +34,13 @@ export function VisitsTabs() {
         </Tabs.List>
 
         <div className="flex items-center gap-2 pb-2 pr-2 text-[11px]">
-          {([
-            { v: "all", l: "All" },
-            { v: "uz-us", l: "UZ → US" },
-            { v: "us-uz", l: "US → UZ" },
-          ] as const).map((opt) => (
+          {(
+            [
+              { v: "all", l: "All" },
+              { v: "uz-us", l: "UZ → US" },
+              { v: "us-uz", l: "US → UZ" },
+            ] as const
+          ).map((opt) => (
             <button
               key={opt.v}
               type="button"
@@ -63,10 +65,7 @@ export function VisitsTabs() {
       <Tabs.Content value="grid" className="mt-5">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filtered.slice(0, 30).map((v) => (
-            <div
-              key={v.id}
-              className="card p-4 transition hover:shadow-[var(--shadow-hover)]"
-            >
+            <div key={v.id} className="card p-4 transition hover:shadow-[var(--shadow-hover)]">
               <div className="mono text-[11px] text-[var(--color-ink-muted)]">{v.date}</div>
               <div className="mt-1 text-[14px] font-medium text-[var(--color-ink)]">{v.title}</div>
               <div className="mt-1 text-[11.5px] text-[var(--color-ink-muted)]">{v.location}</div>

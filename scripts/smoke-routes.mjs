@@ -53,7 +53,13 @@ if (liveHealth.status !== 200) {
   failures.push(`/api/live-data/health: expected 200 but received ${liveHealth.status}`);
 }
 
-for (const endpoint of ["/api/data/trade/latest", "/api/data/macro/latest", "/api/data/assistance/latest", "/api/data/mobility/latest", "/api/data/finance/latest"]) {
+for (const endpoint of [
+  "/api/data/trade/latest",
+  "/api/data/macro/latest",
+  "/api/data/assistance/latest",
+  "/api/data/mobility/latest",
+  "/api/data/finance/latest",
+]) {
   const response = await fetch(`${baseUrl}${endpoint}`, { redirect: "manual" });
   if (response.status !== 200) {
     failures.push(`${endpoint}: expected 200 but received ${response.status}`);
@@ -71,4 +77,6 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Route smoke test passed for ${locales.length * (routes.length + 1)} localized route checks plus API health/data/cron checks against ${baseUrl}.`);
+console.log(
+  `Route smoke test passed for ${locales.length * (routes.length + 1)} localized route checks plus API health/data/cron checks against ${baseUrl}.`,
+);

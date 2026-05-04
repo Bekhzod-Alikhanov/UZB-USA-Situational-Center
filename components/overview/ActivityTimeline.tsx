@@ -17,10 +17,7 @@ export function ActivityTimeline({ limit = 6 }: { limit?: number }) {
         return (
           <li key={v.id} className="relative pl-7 pb-4">
             {!last ? (
-              <span
-                className="absolute left-[11px] top-5 bottom-0 w-px bg-[var(--color-border)]"
-                aria-hidden
-              />
+              <span className="absolute left-[11px] top-5 bottom-0 w-px bg-[var(--color-border)]" aria-hidden />
             ) : null}
             <span
               className={cn(

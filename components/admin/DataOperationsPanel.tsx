@@ -12,7 +12,13 @@ interface StatusPayload {
     message: string;
   };
   connectors: Array<{ id: string; name: string; status: string; cadence: string; dashboardUse: string }>;
-  policies: Array<{ connectorId: string; owner: string; replaceRule: string; minRelevanceScore: number; allowAutoPublish: boolean }>;
+  policies: Array<{
+    connectorId: string;
+    owner: string;
+    replaceRule: string;
+    minRelevanceScore: number;
+    allowAutoPublish: boolean;
+  }>;
   staticBaselineCount: number;
   recentRuns: Array<{ id: string; scope: string; mode: string; started_at: string; summary: unknown }>;
   guardrails: string[];
@@ -31,7 +37,14 @@ interface RunPayload {
     failedConnectors: number;
     writtenRows: number;
   };
-  connectors: Array<{ connectorId: string; ok: boolean; error?: string; observations: unknown[]; reviewItems: unknown[]; rejected: unknown[] }>;
+  connectors: Array<{
+    connectorId: string;
+    ok: boolean;
+    error?: string;
+    observations: unknown[];
+    reviewItems: unknown[];
+    rejected: unknown[];
+  }>;
 }
 
 const STATUS_CLASS: Record<string, string> = {
@@ -159,12 +172,22 @@ export function DataOperationsPanel() {
 
             <div className="grid grid-cols-1 gap-1.5">
               {status.connectors.map((connector) => (
-                <div key={connector.id} className="flex min-w-0 items-start justify-between gap-3 rounded-md bg-[var(--color-surface-2)] px-3 py-2">
+                <div
+                  key={connector.id}
+                  className="flex min-w-0 items-start justify-between gap-3 rounded-md bg-[var(--color-surface-2)] px-3 py-2"
+                >
                   <div className="min-w-0">
                     <div className="truncate text-[11.5px] font-semibold text-[var(--color-ink)]">{connector.name}</div>
-                    <div className="mt-0.5 line-clamp-2 text-[10.5px] text-[var(--color-ink-muted)]">{connector.dashboardUse}</div>
+                    <div className="mt-0.5 line-clamp-2 text-[10.5px] text-[var(--color-ink-muted)]">
+                      {connector.dashboardUse}
+                    </div>
                   </div>
-                  <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider", STATUS_CLASS[connector.status] ?? STATUS_CLASS.planned)}>
+                  <span
+                    className={cn(
+                      "shrink-0 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider",
+                      STATUS_CLASS[connector.status] ?? STATUS_CLASS.planned,
+                    )}
+                  >
                     {connector.status}
                   </span>
                 </div>
@@ -177,13 +200,22 @@ export function DataOperationsPanel() {
       {run ? (
         <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
           <div className="mb-3 text-[13px] font-semibold text-[var(--color-ink)]">
-            Dry-run result: {run.summary.observations} observations, {run.summary.publishCandidates + run.summary.manualReview} review items
+            Dry-run result: {run.summary.observations} observations,{" "}
+            {run.summary.publishCandidates + run.summary.manualReview} review items
           </div>
           <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
             <Stat label="Snapshots" value={run.summary.snapshots} />
-            <Stat label="Rejected older" value={run.summary.rejectedOlder} tone={run.summary.rejectedOlder ? "warn" : "pos"} />
+            <Stat
+              label="Rejected older"
+              value={run.summary.rejectedOlder}
+              tone={run.summary.rejectedOlder ? "warn" : "pos"}
+            />
             <Stat label="Ignored" value={run.summary.ignoredIrrelevant} />
-            <Stat label="Failed" value={run.summary.failedConnectors} tone={run.summary.failedConnectors ? "neg" : "pos"} />
+            <Stat
+              label="Failed"
+              value={run.summary.failedConnectors}
+              tone={run.summary.failedConnectors ? "neg" : "pos"}
+            />
           </div>
         </section>
       ) : null}
@@ -191,7 +223,15 @@ export function DataOperationsPanel() {
   );
 }
 
-function Stat({ label, value, tone = "neutral" }: { label: string; value: number; tone?: "neutral" | "pos" | "warn" | "neg" }) {
+function Stat({
+  label,
+  value,
+  tone = "neutral",
+}: {
+  label: string;
+  value: number;
+  tone?: "neutral" | "pos" | "warn" | "neg";
+}) {
   const toneClass =
     tone === "pos"
       ? "bg-[var(--color-pos-soft)] text-[var(--color-pos)]"

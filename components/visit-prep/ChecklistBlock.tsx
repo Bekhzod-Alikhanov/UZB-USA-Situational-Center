@@ -69,9 +69,7 @@ export function ChecklistBlock() {
               >
                 {i.text}
               </span>
-              {i.agency ? (
-                <span className="text-[10.5px] text-[var(--color-ink-muted)]">{i.agency}</span>
-              ) : null}
+              {i.agency ? <span className="text-[10.5px] text-[var(--color-ink-muted)]">{i.agency}</span> : null}
             </button>
           </li>
         ))}

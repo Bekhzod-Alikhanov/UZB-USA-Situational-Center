@@ -10,11 +10,7 @@ import { centerMilestonesMeta } from "@/data/center-milestones";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
-export default async function StaffPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function StaffPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("staff");
@@ -22,8 +18,7 @@ export default async function StaffPage({
   const totalAssigned = staff.reduce((a, s) => a + s.tasksAssigned, 0);
   const totalCompleted = staff.reduce((a, s) => a + s.tasksCompleted, 0);
   const totalOverdue = staff.reduce((a, s) => a + s.overdueTasks, 0);
-  const avgResponse =
-    staff.reduce((a, s) => a + s.avgResponseHrs, 0) / Math.max(1, staff.length);
+  const avgResponse = staff.reduce((a, s) => a + s.avgResponseHrs, 0) / Math.max(1, staff.length);
   const completionRate = totalAssigned ? (totalCompleted / totalAssigned) * 100 : 0;
 
   return (

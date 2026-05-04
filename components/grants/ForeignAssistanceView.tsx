@@ -43,9 +43,7 @@ export function ForeignAssistanceView() {
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-3">
-          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">
-            Total obligations by fiscal year
-          </h4>
+          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">Total obligations by fiscal year</h4>
           <MiniBars data={yearsData} height={220} format={(v) => `$${v}M`} />
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
@@ -77,16 +75,16 @@ export function ForeignAssistanceView() {
                       </span>
                     </td>
                     <td className="mono text-right tabular">{a.amountUsdM.toFixed(2)}</td>
-                    <td className="mono text-right tabular text-[var(--color-ink-muted)]">
-                      {a.sharePct.toFixed(1)}%
-                    </td>
+                    <td className="mono text-right tabular text-[var(--color-ink-muted)]">{a.sharePct.toFixed(1)}%</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <h4 className="serif mt-2 text-[13px] font-medium text-[var(--color-ink)]">FY2024 economic / military split</h4>
+          <h4 className="serif mt-2 text-[13px] font-medium text-[var(--color-ink)]">
+            FY2024 economic / military split
+          </h4>
           <div className="grid grid-cols-2 gap-2">
             {foreignAssistanceFy2024Categories.map((c) => (
               <div

@@ -128,10 +128,10 @@ export function ComtradeMirror() {
       </div>
 
       <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-        Mirror discrepancy = same flow reported by both sides. UZ-side numbers come from UZ as reporter (Comtrade
-        code 860); US-side from US as reporter (842). Common drivers: re-exports through third countries (UAE,
-        Türkiye, KZ), valuation differences (CIF vs FOB), classification disagreements. Filtered to gaps ≥
-        $500K. Residual code 999999 omitted.
+        Mirror discrepancy = same flow reported by both sides. UZ-side numbers come from UZ as reporter (Comtrade code
+        860); US-side from US as reporter (842). Common drivers: re-exports through third countries (UAE, Türkiye, KZ),
+        valuation differences (CIF vs FOB), classification disagreements. Filtered to gaps ≥ $500K. Residual code 999999
+        omitted.
       </p>
     </div>
   );

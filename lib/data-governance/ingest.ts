@@ -113,7 +113,10 @@ function reviewRow(item: ReviewQueueItem, runId: string) {
     reason: item.reason,
     observation: item.observation,
     current_metric_id: item.current?.id ?? null,
-    status: item.action === "reject-older-period" || item.action === "ignore-irrelevant" || item.action === "reject-invalid" ? "closed" : "open",
+    status:
+      item.action === "reject-older-period" || item.action === "ignore-irrelevant" || item.action === "reject-invalid"
+        ? "closed"
+        : "open",
     created_at: item.createdAt,
   };
 }
@@ -196,7 +199,8 @@ function currentMap(metrics: PublishedMetric[]) {
 
 function scopeIncludes(scope: Scope, domain: MetricDomain, connectorId?: string) {
   if (scope === "all") return true;
-  if (scope === "scheduled") return connectorId ? !["state-visa", "dhs-ohss", "iie-open-doors"].includes(connectorId) : true;
+  if (scope === "scheduled")
+    return connectorId ? !["state-visa", "dhs-ohss", "iie-open-doors"].includes(connectorId) : true;
   return scope === domain;
 }
 
@@ -236,7 +240,10 @@ function emptyConnectorResult(connectorId: string, message: string): ConnectorIn
   };
 }
 
-async function runConnector(connectorId: string, scope: Scope): Promise<Omit<ConnectorIngestResult, "reviewItems" | "rejected">> {
+async function runConnector(
+  connectorId: string,
+  scope: Scope,
+): Promise<Omit<ConnectorIngestResult, "reviewItems" | "rejected">> {
   const connector = externalDataConnectors.find((item) => item.id === connectorId);
   const sourceId = findSourcePolicy(connectorId)?.sourceId ?? connector?.sourceId;
   const fetchedAt = new Date().toISOString();
@@ -314,12 +321,28 @@ async function runConnector(connectorId: string, scope: Scope): Promise<Omit<Con
 
     if (connectorId === "bea-services" && scopeIncludes(scope, "trade", connectorId)) {
       const snapshot = await fetchBeaMetadataSnapshot();
-      return { connectorId, ok: true, fetchedAt, sourceId, sourceUrl: snapshot.sourceUrl, observations: [], snapshots: [snapshot] };
+      return {
+        connectorId,
+        ok: true,
+        fetchedAt,
+        sourceId,
+        sourceUrl: snapshot.sourceUrl,
+        observations: [],
+        snapshots: [snapshot],
+      };
     }
 
     if (connectorId === "exim-authorizations" && scopeIncludes(scope, "finance", connectorId)) {
       const { observations, snapshot } = await fetchEximAuthorizationsObservations();
-      return { connectorId, ok: true, fetchedAt, sourceId, sourceUrl: snapshot.sourceUrl, observations, snapshots: [snapshot] };
+      return {
+        connectorId,
+        ok: true,
+        fetchedAt,
+        sourceId,
+        sourceUrl: snapshot.sourceUrl,
+        observations,
+        snapshots: [snapshot],
+      };
     }
 
     return { connectorId, ok: true, fetchedAt, sourceId, observations: [], snapshots: [] };
@@ -355,22 +378,38 @@ export async function runGovernedIngestion(options: RunOptions = {}): Promise<Go
       continue;
     }
     if (!base.observations.length && !base.snapshots.length) {
-      connectors.push(emptyConnectorResult(connectorId, policy?.dashboardUse ?? "Manual review required before ingestion."));
+      connectors.push(
+        emptyConnectorResult(connectorId, policy?.dashboardUse ?? "Manual review required before ingestion."),
+      );
       continue;
     }
-    const evaluated = base.observations.map((observation) => evaluateObservation(observation, current.get(metricIdentity(observation)), policy));
+    const evaluated = base.observations.map((observation) =>
+      evaluateObservation(observation, current.get(metricIdentity(observation)), policy),
+    );
     connectors.push({
       ...base,
-      reviewItems: evaluated.filter((item) => item.action === "publish-candidate" || item.action === "manual-review" || item.action === "duplicate-current"),
-      rejected: evaluated.filter((item) => item.action === "reject-older-period" || item.action === "reject-invalid" || item.action === "ignore-irrelevant"),
+      reviewItems: evaluated.filter(
+        (item) =>
+          item.action === "publish-candidate" || item.action === "manual-review" || item.action === "duplicate-current",
+      ),
+      rejected: evaluated.filter(
+        (item) =>
+          item.action === "reject-older-period" ||
+          item.action === "reject-invalid" ||
+          item.action === "ignore-irrelevant",
+      ),
     });
   }
 
   let writtenRows = 0;
   if (write) {
-    const snapshots = connectors.flatMap((connector) => connector.snapshots.map((snapshot) => snapshotRow(snapshot, runId)));
+    const snapshots = connectors.flatMap((connector) =>
+      connector.snapshots.map((snapshot) => snapshotRow(snapshot, runId)),
+    );
     const observations = connectors.flatMap((connector) => connector.observations.map(observationRow));
-    const reviews = connectors.flatMap((connector) => [...connector.reviewItems, ...connector.rejected].map((item) => reviewRow(item, runId)));
+    const reviews = connectors.flatMap((connector) =>
+      [...connector.reviewItems, ...connector.rejected].map((item) => reviewRow(item, runId)),
+    );
     await insertSupabaseRows("source_record", sourceRecordRows(), { upsert: true, onConflict: "id" });
     await insertSupabaseRows("source_version_policy", sourcePolicyRows(), { upsert: true, onConflict: "connector_id" });
     await insertSupabaseRows("ingest_run", [

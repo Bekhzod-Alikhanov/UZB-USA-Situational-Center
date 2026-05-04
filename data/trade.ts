@@ -45,15 +45,78 @@ export interface CompanyRanking {
  * Aliased as `tradeAnnual` for backward compat with existing components.
  */
 export const tradeAnnualUz: TradeYear[] = [
-  { year: 2017, turnover: 395.8, exports: 78.1, imports: 317.7, balance: -239.6, sharePct: { turnover: 1.5, exports: 0.6, imports: 2.3 } },
-  { year: 2018, turnover: 701.5, exports: 132.4, imports: 569.0, balance: -436.6, sharePct: { turnover: 2.1, exports: 0.9, imports: 2.9 } },
-  { year: 2019, turnover: 603.9, exports: 36.6, imports: 567.2, balance: -530.6, sharePct: { turnover: 1.4, exports: 0.2, imports: 2.3 } },
-  { year: 2020, turnover: 275.0, exports: 26.7, imports: 248.3, balance: -221.6, sharePct: { turnover: 0.8, exports: 0.2, imports: 1.2 } },
-  { year: 2021, turnover: 426.3, exports: 60.8, imports: 365.5, balance: -304.7, sharePct: { turnover: 1.0, exports: 0.4, imports: 1.4 } },
-  { year: 2022, turnover: 436.8, exports: 68.5, imports: 368.7, balance: -299.7, sharePct: { turnover: 0.9, exports: 0.4, imports: 1.2 } },
-  { year: 2023, turnover: 765.1, exports: 253.1, imports: 512.0, balance: -258.9, sharePct: { turnover: 1.2, exports: 1.0, imports: 1.3 } },
-  { year: 2024, turnover: 1024.9, exports: 430.7, imports: 594.1, balance: -163.3, sharePct: { turnover: 1.5, exports: 1.6, imports: 1.5 } },
-  { year: 2025, turnover: 1004.0, exports: 291.7, imports: 712.2, balance: -420.5, sharePct: { turnover: 1.2, exports: 0.9, imports: 1.5 } },
+  {
+    year: 2017,
+    turnover: 395.8,
+    exports: 78.1,
+    imports: 317.7,
+    balance: -239.6,
+    sharePct: { turnover: 1.5, exports: 0.6, imports: 2.3 },
+  },
+  {
+    year: 2018,
+    turnover: 701.5,
+    exports: 132.4,
+    imports: 569.0,
+    balance: -436.6,
+    sharePct: { turnover: 2.1, exports: 0.9, imports: 2.9 },
+  },
+  {
+    year: 2019,
+    turnover: 603.9,
+    exports: 36.6,
+    imports: 567.2,
+    balance: -530.6,
+    sharePct: { turnover: 1.4, exports: 0.2, imports: 2.3 },
+  },
+  {
+    year: 2020,
+    turnover: 275.0,
+    exports: 26.7,
+    imports: 248.3,
+    balance: -221.6,
+    sharePct: { turnover: 0.8, exports: 0.2, imports: 1.2 },
+  },
+  {
+    year: 2021,
+    turnover: 426.3,
+    exports: 60.8,
+    imports: 365.5,
+    balance: -304.7,
+    sharePct: { turnover: 1.0, exports: 0.4, imports: 1.4 },
+  },
+  {
+    year: 2022,
+    turnover: 436.8,
+    exports: 68.5,
+    imports: 368.7,
+    balance: -299.7,
+    sharePct: { turnover: 0.9, exports: 0.4, imports: 1.2 },
+  },
+  {
+    year: 2023,
+    turnover: 765.1,
+    exports: 253.1,
+    imports: 512.0,
+    balance: -258.9,
+    sharePct: { turnover: 1.2, exports: 1.0, imports: 1.3 },
+  },
+  {
+    year: 2024,
+    turnover: 1024.9,
+    exports: 430.7,
+    imports: 594.1,
+    balance: -163.3,
+    sharePct: { turnover: 1.5, exports: 1.6, imports: 1.5 },
+  },
+  {
+    year: 2025,
+    turnover: 1004.0,
+    exports: 291.7,
+    imports: 712.2,
+    balance: -420.5,
+    sharePct: { turnover: 1.2, exports: 0.9, imports: 1.5 },
+  },
 ];
 
 /**
@@ -144,7 +207,8 @@ export const methodologyNotes: MethodologyNote[] = [
     id: "uz-stat",
     title: "Uzbekistan National Statistics",
     basis: "State Statistics Committee — UZ-reported exports, imports, turnover, balance, and partner share.",
-    useFor: "Briefings to UZ leadership; comparison against the national foreign-trade base; product/services structure.",
+    useFor:
+      "Briefings to UZ leadership; comparison against the national foreign-trade base; product/services structure.",
     caveat: "Partner-country totals should be labeled separately from the U.S. Census goods-only totals.",
     sourceId: "input_trade_stat_docx",
   },
@@ -153,7 +217,8 @@ export const methodologyNotes: MethodologyNote[] = [
     title: "U.S. Census goods-only totals",
     basis: "Official U.S. merchandise trade balance table.",
     useFor: "U.S. goods exports, imports, balance, and 2026 monthly monitoring.",
-    caveat: "Excludes services. Can differ from Uzbekistan-reported turnover because of valuation, timing, and partner-country methodology.",
+    caveat:
+      "Excludes services. Can differ from Uzbekistan-reported turnover because of valuation, timing, and partner-country methodology.",
     sourceId: "census_goods_uz",
   },
   {
@@ -175,7 +240,8 @@ export const methodologyNotes: MethodologyNote[] = [
   {
     id: "bea-services",
     title: "BEA — services trade with Uzbekistan",
-    basis: "U.S. Bureau of Economic Analysis services-trade tables; underlying source for the USTR $603M 2024 services figure.",
+    basis:
+      "U.S. Bureau of Economic Analysis services-trade tables; underlying source for the USTR $603M 2024 services figure.",
     useFor: "Authoritative anchor for U.S.–UZ services exports/imports when quoting beyond goods-only data.",
     caveat: "Annual cadence only; revisions can land 6–12 months after the reference year.",
     sourceId: "bea_developers",

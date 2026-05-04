@@ -23,21 +23,63 @@ type SearchEntity = {
 const PAGE_ENTITIES = (locale: string, tNav: (k: string) => string): SearchEntity[] => [
   { id: "p-overview", title: tNav("overview"), subtitle: tNav("overview"), type: "page", href: `/${locale}` },
   { id: "p-trade", title: tNav("trade"), subtitle: tNav("trade"), type: "page", href: `/${locale}/trade` },
-  { id: "p-investments", title: tNav("investments"), subtitle: tNav("investments"), type: "page", href: `/${locale}/investments` },
+  {
+    id: "p-investments",
+    title: tNav("investments"),
+    subtitle: tNav("investments"),
+    type: "page",
+    href: `/${locale}/investments`,
+  },
   { id: "p-visits", title: tNav("visits"), subtitle: tNav("visits"), type: "page", href: `/${locale}/visits` },
   { id: "p-prepare", title: tNav("prepare"), subtitle: tNav("prepare"), type: "page", href: `/${locale}/prepare` },
-  { id: "p-commitments", title: tNav("commitments"), subtitle: tNav("commitments"), type: "page", href: `/${locale}/commitments` },
-  { id: "p-agreements", title: tNav("agreements"), subtitle: tNav("agreements"), type: "page", href: `/${locale}/agreements` },
+  {
+    id: "p-commitments",
+    title: tNav("commitments"),
+    subtitle: tNav("commitments"),
+    type: "page",
+    href: `/${locale}/commitments`,
+  },
+  {
+    id: "p-agreements",
+    title: tNav("agreements"),
+    subtitle: tNav("agreements"),
+    type: "page",
+    href: `/${locale}/agreements`,
+  },
   { id: "p-events", title: tNav("events"), subtitle: tNav("events"), type: "page", href: `/${locale}/events` },
   { id: "p-grants", title: tNav("grants"), subtitle: tNav("grants"), type: "page", href: `/${locale}/grants` },
   { id: "p-map", title: tNav("map"), subtitle: tNav("map"), type: "page", href: `/${locale}/map` },
-  { id: "p-compliance", title: tNav("compliance"), subtitle: tNav("compliance"), type: "page", href: `/${locale}/compliance` },
-  { id: "p-counterparts", title: tNav("counterparts"), subtitle: tNav("counterparts"), type: "page", href: `/${locale}/counterparts` },
-  { id: "p-benchmark", title: tNav("benchmark"), subtitle: tNav("benchmark"), type: "page", href: `/${locale}/benchmark` },
+  {
+    id: "p-compliance",
+    title: tNav("compliance"),
+    subtitle: tNav("compliance"),
+    type: "page",
+    href: `/${locale}/compliance`,
+  },
+  {
+    id: "p-counterparts",
+    title: tNav("counterparts"),
+    subtitle: tNav("counterparts"),
+    type: "page",
+    href: `/${locale}/counterparts`,
+  },
+  {
+    id: "p-benchmark",
+    title: tNav("benchmark"),
+    subtitle: tNav("benchmark"),
+    type: "page",
+    href: `/${locale}/benchmark`,
+  },
   { id: "p-staff", title: tNav("staff"), subtitle: tNav("staff"), type: "page", href: `/${locale}/staff` },
   { id: "p-contacts", title: tNav("contacts"), subtitle: tNav("contacts"), type: "page", href: `/${locale}/contacts` },
   { id: "p-news", title: tNav("news"), subtitle: tNav("news"), type: "page", href: `/${locale}/news` },
-  { id: "p-assistant", title: tNav("assistant"), subtitle: tNav("assistant"), type: "page", href: `/${locale}/assistant` },
+  {
+    id: "p-assistant",
+    title: tNav("assistant"),
+    subtitle: tNav("assistant"),
+    type: "page",
+    href: `/${locale}/assistant`,
+  },
   { id: "p-admin", title: tNav("admin"), subtitle: tNav("admin"), type: "page", href: `/${locale}/admin` },
 ];
 
@@ -104,7 +146,10 @@ export function SearchCommand() {
 
   const results = useMemo(() => {
     if (!query) return items.slice(0, 8);
-    return fuse.search(query).slice(0, 12).map((r) => r.item);
+    return fuse
+      .search(query)
+      .slice(0, 12)
+      .map((r) => r.item);
   }, [query, fuse, items]);
 
   useEffect(() => {
@@ -151,7 +196,10 @@ export function SearchCommand() {
                     }}
                     className="group flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm data-[selected=true]:bg-[var(--color-primary-soft)]"
                   >
-                    <Icon className="size-4 text-[var(--color-ink-faint)] group-data-[selected=true]:text-[var(--color-primary)]" aria-hidden />
+                    <Icon
+                      className="size-4 text-[var(--color-ink-faint)] group-data-[selected=true]:text-[var(--color-primary)]"
+                      aria-hidden
+                    />
                     <div className="min-w-0 flex-1">
                       <div className="truncate font-medium text-[var(--color-ink)]">{it.title}</div>
                       <div className="truncate text-[11px] text-[var(--color-ink-muted)]">{it.subtitle}</div>
@@ -159,7 +207,10 @@ export function SearchCommand() {
                     <span className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-[var(--color-ink-muted)]">
                       {it.type}
                     </span>
-                    <ArrowRight className="size-3 text-[var(--color-ink-faint)] opacity-0 transition group-data-[selected=true]:opacity-100" aria-hidden />
+                    <ArrowRight
+                      className="size-3 text-[var(--color-ink-faint)] opacity-0 transition group-data-[selected=true]:opacity-100"
+                      aria-hidden
+                    />
                   </Command.Item>
                 );
               })}

@@ -1,10 +1,5 @@
 import { ArrowRight, CalendarClock, Target } from "lucide-react";
-import {
-  visitPipelines,
-  visitRoadmaps,
-  type ReadinessState,
-  type VisitPipeline,
-} from "@/data/visit-prep";
+import { visitPipelines, visitRoadmaps, type ReadinessState, type VisitPipeline } from "@/data/visit-prep";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 
@@ -41,16 +36,11 @@ export function PipelinePanel() {
         {visitPipelines.map((p) => {
           const color = readinessColor(p.readiness);
           return (
-            <li
-              key={p.id}
-              className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
-            >
+            <li key={p.id} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">
-                      {p.title}
-                    </h3>
+                    <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{p.title}</h3>
                     <span
                       className={cn(
                         "rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
@@ -75,14 +65,7 @@ export function PipelinePanel() {
                   {/* Readiness donut */}
                   <div className="relative size-[52px]">
                     <svg viewBox="0 0 36 36" className="size-full -rotate-90">
-                      <circle
-                        cx="18"
-                        cy="18"
-                        r="15.5"
-                        fill="none"
-                        stroke="var(--color-border)"
-                        strokeWidth="3"
-                      />
+                      <circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--color-border)" strokeWidth="3" />
                       <circle
                         cx="18"
                         cy="18"
@@ -183,23 +166,21 @@ export function PipelinePanel() {
         </div>
         <ul className="flex flex-col gap-2">
           {visitRoadmaps.map((r) => (
-            <li
-              key={r.id}
-              className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3"
-            >
+            <li key={r.id} className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="text-[12.5px] font-medium text-[var(--color-ink)]">{r.title}</span>
                 <span className="mono text-[11px] tabular text-[var(--color-ink-muted)]">{r.progress}%</span>
               </div>
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-surface-2)]">
-                <div
-                  className="h-full rounded-full bg-[var(--color-primary)]"
-                  style={{ width: `${r.progress}%` }}
-                />
+                <div className="h-full rounded-full bg-[var(--color-primary)]" style={{ width: `${r.progress}%` }} />
               </div>
               <div className="mt-1.5 flex flex-wrap gap-3 text-[10.5px] text-[var(--color-ink-muted)]">
-                <span><span className="font-semibold text-[var(--color-ink)]">Stages:</span> {r.stages}</span>
-                <span><span className="font-semibold text-[var(--color-ink)]">Linked:</span> {r.linkedVisit}</span>
+                <span>
+                  <span className="font-semibold text-[var(--color-ink)]">Stages:</span> {r.stages}
+                </span>
+                <span>
+                  <span className="font-semibold text-[var(--color-ink)]">Linked:</span> {r.linkedVisit}
+                </span>
               </div>
             </li>
           ))}

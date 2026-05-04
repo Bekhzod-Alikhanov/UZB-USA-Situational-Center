@@ -17,10 +17,7 @@ export function DemoUnderline({ children, source, className }: DemoUnderlineProp
   if (hideDemo) return null;
   if (presentation) return <>{children}</>;
   return (
-    <span
-      className={cn("demo-underline", className)}
-      title={source ? t("tooltip", { source }) : t("badge")}
-    >
+    <span className={cn("demo-underline", className)} title={source ? t("tooltip", { source }) : t("badge")}>
       {children}
     </span>
   );

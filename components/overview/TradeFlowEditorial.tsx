@@ -18,8 +18,7 @@ export function TradeFlowEditorial({ height = 250 }: { height?: number }) {
   const y = (v: number) => P.t + (1 - v / yMax) * (H - P.t - P.b);
   const path = (k: "exports" | "imports" | "turnover") =>
     data.map((d, i) => `${i === 0 ? "M" : "L"} ${x(i)} ${y(d[k])}`).join(" ");
-  const area = (k: "exports" | "imports") =>
-    `${path(k)} L ${x(data.length - 1)} ${y(0)} L ${x(0)} ${y(0)} Z`;
+  const area = (k: "exports" | "imports") => `${path(k)} L ${x(data.length - 1)} ${y(0)} L ${x(0)} ${y(0)} Z`;
   const ticks = [0, yMax / 4, yMax / 2, (3 * yMax) / 4, yMax];
 
   const [hover, setHover] = useState<number | null>(null);
@@ -87,13 +86,7 @@ export function TradeFlowEditorial({ height = 250 }: { height?: number }) {
         <path d={area("exports")} fill="url(#grad-exp)" />
         <path d={path("imports")} stroke="var(--color-agree)" strokeWidth="1.7" fill="none" />
         <path d={path("exports")} stroke="var(--color-invest)" strokeWidth="1.7" fill="none" />
-        <path
-          d={path("turnover")}
-          stroke="var(--color-primary)"
-          strokeWidth="1.5"
-          strokeDasharray="3 3"
-          fill="none"
-        />
+        <path d={path("turnover")} stroke="var(--color-primary)" strokeWidth="1.5" strokeDasharray="3 3" fill="none" />
         {data.map((d, i) => (
           <g key={`pt-${i}`}>
             <circle
@@ -143,8 +136,8 @@ export function TradeFlowEditorial({ height = 250 }: { height?: number }) {
         </div>
         {hover !== null ? (
           <span className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5">
-            {data[hover].year} · exp ${data[hover].exports.toFixed(0)}M · imp ${data[hover].imports.toFixed(0)}M ·
-            bal ${data[hover].balance.toFixed(0)}M
+            {data[hover].year} · exp ${data[hover].exports.toFixed(0)}M · imp ${data[hover].imports.toFixed(0)}M · bal $
+            {data[hover].balance.toFixed(0)}M
           </span>
         ) : null}
       </div>

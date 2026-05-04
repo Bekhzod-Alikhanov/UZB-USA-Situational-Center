@@ -6,37 +6,19 @@ import { cn } from "@/lib/utils";
 
 export function SettingsPanel() {
   const t = useTranslations("admin");
-  const {
-    hideDemo,
-    setHideDemo,
-    presentationMode,
-    setPresentationMode,
-    theme,
-    setTheme,
-    aiEnabled,
-    setAiEnabled,
-  } = useSettings();
+  const { hideDemo, setHideDemo, presentationMode, setPresentationMode, theme, setTheme, aiEnabled, setAiEnabled } =
+    useSettings();
 
   return (
     <div className="flex flex-col gap-3">
-      <SettingRow
-        title={t("hideDemo")}
-        desc={t("hideDemoDesc")}
-        checked={hideDemo}
-        onChange={setHideDemo}
-      />
+      <SettingRow title={t("hideDemo")} desc={t("hideDemoDesc")} checked={hideDemo} onChange={setHideDemo} />
       <SettingRow
         title={t("presentation")}
         desc={t("presentationDesc")}
         checked={presentationMode}
         onChange={setPresentationMode}
       />
-      <SettingRow
-        title={t("ai")}
-        desc={t("aiDesc")}
-        checked={aiEnabled}
-        onChange={setAiEnabled}
-      />
+      <SettingRow title={t("ai")} desc={t("aiDesc")} checked={aiEnabled} onChange={setAiEnabled} />
 
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
         <div className="flex items-center justify-between gap-4">
@@ -97,7 +79,9 @@ function SegmentedTheme({ value, onChange }: { value: Theme; onChange: (v: Theme
           onClick={() => onChange(v)}
           className={cn(
             "rounded px-2.5 py-1 text-[11.5px] font-medium capitalize transition",
-            value === v ? "bg-[var(--color-primary)] text-white" : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
+            value === v
+              ? "bg-[var(--color-primary)] text-white"
+              : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
           )}
         >
           {v}

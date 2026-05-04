@@ -41,7 +41,11 @@ export async function fetchForeignAssistanceUzbekistan(limit = 8): Promise<Forei
   const disbursementsIndex = columnIndex(rows, ["disbursements"]);
 
   return rows.data
-    .filter((row) => String(row[countryIndex] ?? "").toLowerCase().includes("uzbekistan"))
+    .filter((row) =>
+      String(row[countryIndex] ?? "")
+        .toLowerCase()
+        .includes("uzbekistan"),
+    )
     .map((row) => ({
       country: String(row[countryIndex] ?? "Uzbekistan"),
       fiscalYear: String(row[yearIndex] ?? ""),
@@ -70,7 +74,8 @@ export async function fetchForeignAssistanceObservations(limit = 8): Promise<Nor
       fetchedAt,
       sourcePublishedAt: fetchedAt.slice(0, 10),
       relevanceScore: 0.88,
-      recommendedUse: "U.S. assistance accounting record. Do not sum with UZ-side internal grant workbook without reconciliation.",
+      recommendedUse:
+        "U.S. assistance accounting record. Do not sum with UZ-side internal grant workbook without reconciliation.",
       qualityFlags: [] as string[],
     };
     return [
@@ -80,7 +85,12 @@ export async function fetchForeignAssistanceObservations(limit = 8): Promise<Nor
         label: "U.S. foreign assistance obligations to Uzbekistan",
         value: row.obligationsUsd / 1_000_000,
         unit: "USD millions",
-        dimensions: { country: "US", partnerCountry: "UZ", flow: "obligations", sourceMethodology: "foreign-assistance-gov" },
+        dimensions: {
+          country: "US",
+          partnerCountry: "UZ",
+          flow: "obligations",
+          sourceMethodology: "foreign-assistance-gov",
+        },
       },
       {
         ...base,
@@ -88,7 +98,12 @@ export async function fetchForeignAssistanceObservations(limit = 8): Promise<Nor
         label: "U.S. foreign assistance disbursements to Uzbekistan",
         value: row.disbursementsUsd / 1_000_000,
         unit: "USD millions",
-        dimensions: { country: "US", partnerCountry: "UZ", flow: "disbursements", sourceMethodology: "foreign-assistance-gov" },
+        dimensions: {
+          country: "US",
+          partnerCountry: "UZ",
+          flow: "disbursements",
+          sourceMethodology: "foreign-assistance-gov",
+        },
       },
     ] satisfies NormalizedObservation[];
   });

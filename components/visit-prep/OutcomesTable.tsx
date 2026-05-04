@@ -69,7 +69,9 @@ export function OutcomesTable() {
                 </td>
                 <td className="text-[11px] italic text-[var(--color-ink-muted)]">{o.verification}</td>
                 <td>
-                  <span className={cn("inline-flex items-center gap-1.5 text-[11.5px] font-medium", STATUS_TONE[o.status])}>
+                  <span
+                    className={cn("inline-flex items-center gap-1.5 text-[11.5px] font-medium", STATUS_TONE[o.status])}
+                  >
                     <Icon className="size-3.5" />
                     {o.status}
                   </span>

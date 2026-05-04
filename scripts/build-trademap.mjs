@@ -135,12 +135,8 @@ function read2024Deep(filename) {
   return out;
 }
 
-const uzExports2024 = read2024Deep(
-  "uzbekistans-exports-to-united-states-of-america-in-2024-by-product_all.xlsx",
-);
-const usExports2024 = read2024Deep(
-  "united-states-of-americas-exports-to-uzbekistan-in-2024-by-product_all.xlsx",
-);
+const uzExports2024 = read2024Deep("uzbekistans-exports-to-united-states-of-america-in-2024-by-product_all.xlsx");
+const usExports2024 = read2024Deep("united-states-of-americas-exports-to-uzbekistan-in-2024-by-product_all.xlsx");
 
 // Filter residual + take top 40 each
 const RESIDUAL = new Set(["999999", "9999"]);

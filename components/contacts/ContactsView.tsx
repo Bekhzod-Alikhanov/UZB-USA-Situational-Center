@@ -39,23 +39,14 @@ export function ContactsView({ locale, q = "" }: Props) {
         const s = q.toLowerCase();
         if (c.org.toLowerCase().includes(s)) return true;
         if (c.addressLines.some((a) => a.toLowerCase().includes(s))) return true;
-        if (
-          c.people?.some(
-            (p) => p.name.toLowerCase().includes(s) || p.role.toLowerCase().includes(s),
-          )
-        )
-          return true;
+        if (c.people?.some((p) => p.name.toLowerCase().includes(s) || p.role.toLowerCase().includes(s))) return true;
         return false;
       })
     : contacts;
 
   return (
     <div className="flex flex-col gap-4">
-      <form
-        method="get"
-        action={`/${locale}/contacts`}
-        className="flex flex-wrap items-center gap-2"
-      >
+      <form method="get" action={`/${locale}/contacts`} className="flex flex-wrap items-center gap-2">
         <label className="flex flex-1 items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[12px]">
           <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
@@ -159,9 +150,7 @@ export function ContactsView({ locale, q = "" }: Props) {
                             {p.side}
                           </span>
                         ) : null}
-                        <span className={cn("text-[var(--color-ink)]", p.is_demo && "demo-underline")}>
-                          {p.name}
-                        </span>
+                        <span className={cn("text-[var(--color-ink)]", p.is_demo && "demo-underline")}>{p.name}</span>
                       </span>
                       <span className="truncate text-right text-[var(--color-ink-muted)]">{p.role}</span>
                     </li>

@@ -5,15 +5,7 @@ import { NewsFeed } from "@/components/news/NewsFeed";
 import { news } from "@/data/news";
 
 type NewsTonality = "positive" | "neutral" | "critical";
-type NewsTag =
-  | "presidential"
-  | "trade"
-  | "investment"
-  | "minerals"
-  | "security"
-  | "diplomatic"
-  | "culture"
-  | "economy";
+type NewsTag = "presidential" | "trade" | "investment" | "minerals" | "security" | "diplomatic" | "culture" | "economy";
 
 const VALID_TONS = new Set<NewsTonality | "all">(["all", "positive", "neutral", "critical"]);
 const VALID_TAGS = new Set<NewsTag | "all">([
@@ -43,12 +35,8 @@ export default async function NewsPage({
   const tonalityRaw = String(sp.tonality ?? "all");
   const tagRaw = String(sp.tag ?? "all");
   const q = String(sp.q ?? "");
-  const tonality = (VALID_TONS.has(tonalityRaw as NewsTonality | "all")
-    ? tonalityRaw
-    : "all") as NewsTonality | "all";
-  const tag = (VALID_TAGS.has(tagRaw as NewsTag | "all") ? tagRaw : "all") as
-    | NewsTag
-    | "all";
+  const tonality = (VALID_TONS.has(tonalityRaw as NewsTonality | "all") ? tonalityRaw : "all") as NewsTonality | "all";
+  const tag = (VALID_TAGS.has(tagRaw as NewsTag | "all") ? tagRaw : "all") as NewsTag | "all";
 
   const positive = news.filter((n) => n.tonality === "positive").length;
   const neutral = news.filter((n) => n.tonality === "neutral").length;

@@ -31,9 +31,7 @@ export default async function middleware(req: NextRequest) {
     const authed = await verifyAdminSessionToken(req.cookies.get(ADMIN_COOKIE)?.value);
     if (!authed) {
       const segments = pathname.split("/").filter(Boolean);
-      const locale = locales.includes(segments[0] as (typeof locales)[number])
-        ? segments[0]
-        : defaultLocale;
+      const locale = locales.includes(segments[0] as (typeof locales)[number]) ? segments[0] : defaultLocale;
       const loginUrl = req.nextUrl.clone();
       loginUrl.pathname = `/${locale}/admin/login`;
       loginUrl.searchParams.set("from", pathname);

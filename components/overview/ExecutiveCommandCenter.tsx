@@ -48,10 +48,7 @@ export function ExecutiveCommandCenter({ locale }: { locale: string }) {
 
             <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
               {briefing.metrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className={cn("rounded-md border px-3 py-2", TONE_CLASS[metric.tone])}
-                >
+                <div key={metric.label} className={cn("rounded-md border px-3 py-2", TONE_CLASS[metric.tone])}>
                   <div className="text-[10px] font-semibold uppercase tracking-wider opacity-80">{metric.label}</div>
                   <div className="mono mt-1 text-[18px] font-semibold tabular">{metric.value}</div>
                 </div>
@@ -95,12 +92,22 @@ function BriefingList({
           return (
             <li key={item.id} className="p-3">
               <div className="flex items-start gap-2.5">
-                <span className={cn("mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border", TONE_CLASS[item.tone])}>
+                <span
+                  className={cn(
+                    "mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border",
+                    TONE_CLASS[item.tone],
+                  )}
+                >
                   <Icon className="size-3.5" />
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="text-[12.5px] font-medium leading-snug text-[var(--color-ink)]">{item.title}</div>
-                  <p className={cn("mt-1 leading-relaxed text-[var(--color-ink-muted)]", compact ? "text-[11.5px]" : "text-[12.5px]")}>
+                  <p
+                    className={cn(
+                      "mt-1 leading-relaxed text-[var(--color-ink-muted)]",
+                      compact ? "text-[11.5px]" : "text-[12.5px]",
+                    )}
+                  >
                     {item.detail}
                   </p>
                   <div className="mt-2 flex flex-wrap items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">

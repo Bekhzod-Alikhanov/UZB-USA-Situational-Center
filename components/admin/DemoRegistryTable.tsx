@@ -5,8 +5,8 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 
 const STATUS_TONE: Record<DemoEntry["status"], string> = {
-  "pending": "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
-  "requested": "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
+  pending: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
+  requested: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
   "confirmed-demo": "border-[var(--color-ink-muted)]/30 bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
 };
 

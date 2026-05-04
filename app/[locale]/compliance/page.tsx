@@ -4,11 +4,7 @@ import { ExportCalculator } from "@/components/compliance/ExportCalculator";
 import { complianceStatuses, eccnSamples } from "@/data/compliance";
 import { ExternalLink, ShieldCheck } from "lucide-react";
 
-export default async function CompliancePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function CompliancePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("compliance");
@@ -121,7 +117,12 @@ export default async function CompliancePage({
             </li>
             <li className="flex items-start gap-2 text-[var(--color-ink)]">
               <ExternalLink className="mt-0.5 size-3.5 text-[var(--color-ink-faint)]" />
-              <a href="https://www.bis.doc.gov/index.php/documents/federal-register-notices" target="_blank" rel="noreferrer" className="hover:underline">
+              <a
+                href="https://www.bis.doc.gov/index.php/documents/federal-register-notices"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
                 BIS Federal Register notices
               </a>
             </li>

@@ -82,13 +82,7 @@ export function TimezoneClocks() {
           <div
             key={city.tz}
             className="flex items-center justify-between gap-2 rounded-sm px-1.5 py-0.5 text-[10.5px]"
-            title={
-              now
-                ? working
-                  ? "Рабочие часы (Mon–Fri 9:00–18:00 локально)"
-                  : "Вне рабочих часов"
-                : ""
-            }
+            title={now ? (working ? "Рабочие часы (Mon–Fri 9:00–18:00 локально)" : "Вне рабочих часов") : ""}
           >
             <span className="flex items-center gap-1.5 truncate text-[var(--color-ink-muted)]">
               <span

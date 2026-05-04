@@ -1,11 +1,5 @@
 "use client";
-import {
-  counterparts,
-  PARTY_TONE,
-  ROLE_LABEL,
-  STANCE_TEXT,
-  type CounterpartRole,
-} from "@/data/counterparts";
+import { counterparts, PARTY_TONE, ROLE_LABEL, STANCE_TEXT, type CounterpartRole } from "@/data/counterparts";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -16,7 +10,13 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
   const [search, setSearch] = useState("");
 
   const ROLES: (CounterpartRole | "all")[] = [
-    "all", "executive", "council", "state", "congress-senate", "congress-house", "diplomat",
+    "all",
+    "executive",
+    "council",
+    "state",
+    "congress-senate",
+    "congress-house",
+    "diplomat",
   ];
 
   const filtered = useMemo(
@@ -77,10 +77,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
                 </div>
                 {c.party ? (
                   <span
-                    className={cn(
-                      "mono rounded px-1.5 py-0.5 text-[10px] font-semibold tabular",
-                      PARTY_TONE[c.party],
-                    )}
+                    className={cn("mono rounded px-1.5 py-0.5 text-[10px] font-semibold tabular", PARTY_TONE[c.party])}
                   >
                     {c.party}
                     {c.state ? `-${c.state}` : ""}
