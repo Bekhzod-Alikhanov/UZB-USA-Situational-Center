@@ -34,7 +34,7 @@ user is the Advisor to the President.
 - **AI assistant** powered by Claude Sonnet 4.6 with prompt caching over a compiled RAG context
 - **Lighthouse Performance ≥ 87, Accessibility ≥ 94** across all routes
 
-→ [**🌐 Live demo**](https://project-ukzu1.vercel.app/en) · [**📦 Code**](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
+→ [**🌐 Live demo**](https://uz-us-center.vercel.app/en) · [**📦 Code**](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
 
 ## 🛠 Tech I work with
 

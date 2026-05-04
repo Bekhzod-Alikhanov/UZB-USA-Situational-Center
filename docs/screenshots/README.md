@@ -14,7 +14,7 @@ references these filenames:
 
 ## How to capture (Windows)
 
-1. Open the live deployment: <https://project-ukzu1.vercel.app/en>
+1. Open the live deployment: <https://uz-us-center.vercel.app/en>
 2. Maximise your browser window (≥ 1400 px wide) and zoom to 100 %.
 3. **Win + Shift + S** → drag a rectangle around the area you want.
 4. The clip is in your clipboard — paste into Paint / Photos / Snipping Tool

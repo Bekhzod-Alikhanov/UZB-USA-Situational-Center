@@ -1,6 +1,6 @@
 # UZ–US Situational Center · dashboard
 
-> **[🌐 Live demo](https://project-ukzu1.vercel.app/en)**  ·  trilingual (EN / RU / UZ-Latn)  ·  21 routes  ·  55+ official sources  ·  AI assistant on Claude Sonnet 4.6
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)**  ·  trilingual (EN / RU / UZ-Latn)  ·  21 routes  ·  55+ official sources  ·  AI assistant on Claude Sonnet 4.6
 >
 > Production digital monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
