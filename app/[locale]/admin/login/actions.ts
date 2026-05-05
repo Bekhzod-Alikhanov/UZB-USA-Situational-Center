@@ -6,7 +6,7 @@ import {
   adminSessionMaxAge,
   createAdminSessionToken,
   isSafeAdminRedirect,
-  requireAdminPassword,
+  verifyAdminPassword,
 } from "@/lib/auth/admin";
 
 /**
@@ -19,19 +19,23 @@ export async function login(formData: FormData): Promise<void> {
   const from = String(formData.get("from") ?? "");
   const locale = String(formData.get("locale") ?? "en");
 
-  let expected: string;
+  let authorized = false;
   try {
-    expected = requireAdminPassword();
+    authorized = verifyAdminPassword(password);
   } catch {
     redirect(`/${locale}/admin/login?error=config${from ? `&from=${encodeURIComponent(from)}` : ""}`);
   }
-
-  if (password !== expected) {
+  if (!authorized) {
     redirect(`/${locale}/admin/login?error=1${from ? `&from=${encodeURIComponent(from)}` : ""}`);
   }
 
   const cookieStore = await cookies();
-  const token = await createAdminSessionToken();
+  let token: string;
+  try {
+    token = await createAdminSessionToken();
+  } catch {
+    redirect(`/${locale}/admin/login?error=config${from ? `&from=${encodeURIComponent(from)}` : ""}`);
+  }
   cookieStore.set({
     name: ADMIN_COOKIE,
     value: token,

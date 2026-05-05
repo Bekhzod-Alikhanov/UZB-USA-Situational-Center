@@ -2,15 +2,17 @@
 import { useSearch } from "@/lib/store/search";
 import { Command } from "cmdk";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Search, ArrowRight, FileText, Users, Target, Briefcase, Globe2 } from "lucide-react";
+import { ArrowRight, Briefcase, FileText, Search, Target, Users } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
+import type { ComponentType } from "react";
 import Fuse from "fuse.js";
 import { visits } from "@/data/visits";
 import { counterparts } from "@/data/counterparts";
 import { investments } from "@/data/investments";
 import { agreements } from "@/data/agreements";
+import { localizedHref, NAV_ITEMS } from "@/lib/navigation";
 
 type SearchEntity = {
   id: string;
@@ -18,78 +20,18 @@ type SearchEntity = {
   subtitle: string;
   type: "page" | "visit" | "person" | "investment" | "agreement";
   href: string;
+  icon: ComponentType<{ className?: string }>;
 };
 
-const PAGE_ENTITIES = (locale: string, tNav: (k: string) => string): SearchEntity[] => [
-  { id: "p-overview", title: tNav("overview"), subtitle: tNav("overview"), type: "page", href: `/${locale}` },
-  { id: "p-trade", title: tNav("trade"), subtitle: tNav("trade"), type: "page", href: `/${locale}/trade` },
-  {
-    id: "p-investments",
-    title: tNav("investments"),
-    subtitle: tNav("investments"),
+const PAGE_ENTITIES = (locale: string, tNav: (k: string) => string, tGroups: (k: string) => string): SearchEntity[] =>
+  NAV_ITEMS.map((item) => ({
+    id: `p-${item.key}`,
+    title: tNav(item.key),
+    subtitle: tGroups(item.groupKey),
     type: "page",
-    href: `/${locale}/investments`,
-  },
-  { id: "p-visits", title: tNav("visits"), subtitle: tNav("visits"), type: "page", href: `/${locale}/visits` },
-  { id: "p-prepare", title: tNav("prepare"), subtitle: tNav("prepare"), type: "page", href: `/${locale}/prepare` },
-  {
-    id: "p-commitments",
-    title: tNav("commitments"),
-    subtitle: tNav("commitments"),
-    type: "page",
-    href: `/${locale}/commitments`,
-  },
-  {
-    id: "p-agreements",
-    title: tNav("agreements"),
-    subtitle: tNav("agreements"),
-    type: "page",
-    href: `/${locale}/agreements`,
-  },
-  { id: "p-events", title: tNav("events"), subtitle: tNav("events"), type: "page", href: `/${locale}/events` },
-  { id: "p-grants", title: tNav("grants"), subtitle: tNav("grants"), type: "page", href: `/${locale}/grants` },
-  { id: "p-map", title: tNav("map"), subtitle: tNav("map"), type: "page", href: `/${locale}/map` },
-  {
-    id: "p-compliance",
-    title: tNav("compliance"),
-    subtitle: tNav("compliance"),
-    type: "page",
-    href: `/${locale}/compliance`,
-  },
-  {
-    id: "p-counterparts",
-    title: tNav("counterparts"),
-    subtitle: tNav("counterparts"),
-    type: "page",
-    href: `/${locale}/counterparts`,
-  },
-  {
-    id: "p-benchmark",
-    title: tNav("benchmark"),
-    subtitle: tNav("benchmark"),
-    type: "page",
-    href: `/${locale}/benchmark`,
-  },
-  { id: "p-staff", title: tNav("staff"), subtitle: tNav("staff"), type: "page", href: `/${locale}/staff` },
-  { id: "p-contacts", title: tNav("contacts"), subtitle: tNav("contacts"), type: "page", href: `/${locale}/contacts` },
-  { id: "p-news", title: tNav("news"), subtitle: tNav("news"), type: "page", href: `/${locale}/news` },
-  {
-    id: "p-assistant",
-    title: tNav("assistant"),
-    subtitle: tNav("assistant"),
-    type: "page",
-    href: `/${locale}/assistant`,
-  },
-  { id: "p-admin", title: tNav("admin"), subtitle: tNav("admin"), type: "page", href: `/${locale}/admin` },
-];
-
-const ICONS: Record<SearchEntity["type"], React.ComponentType<{ className?: string }>> = {
-  page: Globe2,
-  visit: Target,
-  person: Users,
-  investment: Briefcase,
-  agreement: FileText,
-};
+    href: localizedHref(locale, item.href),
+    icon: item.icon,
+  }));
 
 export function SearchCommand() {
   const open = useSearch((s) => s.open);
@@ -98,17 +40,19 @@ export function SearchCommand() {
   const setQuery = useSearch((s) => s.setQuery);
   const locale = useLocale();
   const tNav = useTranslations("nav");
+  const tGroups = useTranslations("navGroups");
   const tTop = useTranslations("top");
   const router = useRouter();
 
   const items: SearchEntity[] = useMemo(() => {
-    const pages = PAGE_ENTITIES(locale, tNav);
+    const pages = PAGE_ENTITIES(locale, tNav, tGroups);
     const vs: SearchEntity[] = visits.map((v) => ({
       id: `v-${v.id}`,
       title: v.title,
       subtitle: `${v.date} · ${v.level}`,
       type: "visit",
       href: `/${locale}/visits`,
+      icon: Target,
     }));
     const ps: SearchEntity[] = counterparts.map((p) => ({
       id: `c-${p.id}`,
@@ -116,6 +60,7 @@ export function SearchCommand() {
       subtitle: p.position,
       type: "person",
       href: `/${locale}/counterparts`,
+      icon: Users,
     }));
     const inv: SearchEntity[] = investments.map((i) => ({
       id: `i-${i.id}`,
@@ -123,6 +68,7 @@ export function SearchCommand() {
       subtitle: `${i.sector} · ${i.region}`,
       type: "investment",
       href: `/${locale}/investments`,
+      icon: Briefcase,
     }));
     const ag: SearchEntity[] = agreements.map((a) => ({
       id: `a-${a.id}`,
@@ -130,9 +76,10 @@ export function SearchCommand() {
       subtitle: `${a.category} · ${a.signedOn}`,
       type: "agreement",
       href: `/${locale}/agreements`,
+      icon: FileText,
     }));
     return [...pages, ...vs, ...ps, ...inv, ...ag];
-  }, [locale, tNav]);
+  }, [locale, tGroups, tNav]);
 
   const fuse = useMemo(
     () =>
@@ -145,10 +92,10 @@ export function SearchCommand() {
   );
 
   const results = useMemo(() => {
-    if (!query) return items.slice(0, 8);
+    if (!query) return items.slice(0, 10);
     return fuse
       .search(query)
-      .slice(0, 12)
+      .slice(0, 14)
       .map((r) => r.item);
   }, [query, fuse, items]);
 
@@ -164,13 +111,13 @@ export function SearchCommand() {
           className="fixed left-1/2 top-[15%] z-50 w-[94vw] max-w-[560px] -translate-x-1/2 overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_20px_60px_rgba(0,0,0,0.2)]"
           aria-describedby={undefined}
         >
-          <Dialog.Title className="sr-only">Search</Dialog.Title>
+          <Dialog.Title className="sr-only">Search dashboard</Dialog.Title>
           <Command shouldFilter={false} className="flex flex-col">
             <div className="flex items-center gap-2 border-b border-[var(--color-border)] px-4 py-3">
               <Search className="size-4 text-[var(--color-ink-muted)]" aria-hidden />
               <Command.Input
                 autoFocus
-                aria-label="Search dashboard"
+                aria-label="Search dashboard pages, people, visits, agreements, and projects"
                 value={query}
                 onValueChange={setQuery}
                 placeholder={tTop("search")}
@@ -185,7 +132,7 @@ export function SearchCommand() {
                 No results
               </Command.Empty>
               {results.map((it) => {
-                const Icon = ICONS[it.type];
+                const Icon = it.icon;
                 return (
                   <Command.Item
                     key={it.id}

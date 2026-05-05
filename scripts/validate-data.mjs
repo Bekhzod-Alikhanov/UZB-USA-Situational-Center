@@ -42,7 +42,8 @@ function trackedFiles() {
   try {
     return execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] })
       .split(/\r?\n/)
-      .filter(Boolean);
+      .filter(Boolean)
+      .filter((relPath) => fs.existsSync(path.join(root, relPath)));
   } catch {
     warn("Could not read git tracked files; using a source-tree fallback for unsafe admin fallback scan.");
     return walkSourceFiles();

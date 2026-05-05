@@ -1,5 +1,13 @@
 "use client";
-import { investments, type Investment, type InvestmentSector, type InvestmentStatus } from "@/data/investments";
+import {
+  investmentConfidence,
+  investments,
+  privatizationOpportunities,
+  type Investment,
+  type InvestmentSector,
+  type InvestmentSourceConfidence,
+  type InvestmentStatus,
+} from "@/data/investments";
 import * as Tabs from "@radix-ui/react-tabs";
 import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
@@ -18,6 +26,7 @@ import {
   FlaskConical,
   Banknote,
   Gem,
+  Info,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
@@ -50,6 +59,32 @@ const STATUS_TONE: Record<InvestmentStatus, string> = {
 };
 
 const STATUS_ORDER: InvestmentStatus[] = ["mou", "negotiation", "agreed", "construction", "operating", "paused"];
+const CONFIDENCE_ORDER: InvestmentSourceConfidence[] = [
+  "verified_official",
+  "company_confirmed",
+  "media_reported",
+  "internal_unverified",
+  "source_needed",
+  "illustrative_demo",
+];
+
+const CONFIDENCE_LABEL: Record<InvestmentSourceConfidence, string> = {
+  verified_official: "Verified official",
+  company_confirmed: "Company confirmed",
+  media_reported: "Media reported",
+  internal_unverified: "Internal / unverified",
+  source_needed: "Source needed",
+  illustrative_demo: "Illustrative demo",
+};
+
+const CONFIDENCE_TONE: Record<InvestmentSourceConfidence, string> = {
+  verified_official: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
+  company_confirmed: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
+  media_reported: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
+  internal_unverified: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
+  source_needed: "border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
+  illustrative_demo: "border-[var(--color-demo-border)] bg-[var(--color-demo-bg)] text-[var(--color-demo-ink)]",
+};
 
 const SECTORS: InvestmentSector[] = [
   "mining-metals",
@@ -67,6 +102,7 @@ const SECTORS: InvestmentSector[] = [
 
 export function InvestmentsView() {
   const [sector, setSector] = useState<InvestmentSector | "all">("all");
+  const [confidence, setConfidence] = useState<InvestmentSourceConfidence | "all">("all");
   const [minValue, setMinValue] = useState<number>(0);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Investment | null>(null);
@@ -76,6 +112,7 @@ export function InvestmentsView() {
   const filtered = useMemo(() => {
     return investments.filter((i) => {
       if (sector !== "all" && i.sector !== sector) return false;
+      if (confidence !== "all" && investmentConfidence(i) !== confidence) return false;
       if (i.valueMusd < minValue) return false;
       if (search) {
         const s = search.toLowerCase();
@@ -88,7 +125,7 @@ export function InvestmentsView() {
       }
       return true;
     });
-  }, [sector, minValue, search]);
+  }, [sector, confidence, minValue, search]);
 
   const grouped = useMemo(() => {
     const m: Record<InvestmentStatus, Investment[]> = {
@@ -105,15 +142,31 @@ export function InvestmentsView() {
 
   const totalValue = filtered.reduce((a, i) => a + i.valueMusd, 0);
   const totalJobs = filtered.reduce((a, i) => a + (i.jobs ?? 0), 0);
+  const verifiedFiltered = filtered.filter((i) =>
+    ["verified_official", "company_confirmed"].includes(investmentConfidence(i)),
+  );
+  const demoFiltered = filtered.filter((i) => investmentConfidence(i) === "illustrative_demo");
 
   return (
     <Tabs.Root defaultValue="board" className="flex flex-col gap-4">
+      <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
+        <div className="flex items-start gap-2">
+          <Info className="mt-0.5 size-3.5 shrink-0 text-[var(--color-primary)]" aria-hidden />
+          <p>
+            <span className="font-semibold text-[var(--color-ink)]">Credibility rule:</span> headline investment totals
+            separate verified public records, source-backed records pending owner review, and illustrative demo pipeline
+            rows. Demo values remain useful for interface testing, but they are not official pipeline totals.
+          </p>
+        </div>
+      </div>
+
       <div className="flex flex-wrap items-center gap-3">
         <Tabs.List className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-0.5">
           {[
             { v: "board", l: "Board" },
             { v: "table", l: "Table" },
             { v: "map", l: "Map" },
+            { v: "privatization", l: "Privatization" },
           ].map((t) => (
             <Tabs.Trigger
               key={t.v}
@@ -135,6 +188,20 @@ export function InvestmentsView() {
           {SECTORS.map((s) => (
             <option key={s} value={s}>
               {s.replace("-", " / ")}
+            </option>
+          ))}
+        </select>
+
+        <select
+          aria-label="Filter investments by source confidence"
+          value={confidence}
+          onChange={(e) => setConfidence(e.target.value as InvestmentSourceConfidence | "all")}
+          className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
+        >
+          <option value="all">All confidence</option>
+          {CONFIDENCE_ORDER.map((status) => (
+            <option key={status} value={status}>
+              {CONFIDENCE_LABEL[status]}
             </option>
           ))}
         </select>
@@ -166,8 +233,16 @@ export function InvestmentsView() {
         <div className="ml-auto flex items-center gap-4 text-[11px] text-[var(--color-ink-muted)]">
           <ToolbarStat label="Projects" value={filtered.length.toString()} />
           <ToolbarStat label="Total" value={`$${(totalValue / 1000).toFixed(2)}B`} />
+          <ToolbarStat label="Verified" value={verifiedFiltered.length.toString()} />
+          <ToolbarStat label="Demo" value={demoFiltered.length.toString()} />
           <ToolbarStat label="Jobs" value={totalJobs.toLocaleString("en-US")} />
         </div>
+      </div>
+
+      <div className="flex flex-wrap gap-1.5" aria-label="Source confidence legend">
+        {CONFIDENCE_ORDER.map((status) => (
+          <ConfidenceBadge key={status} confidence={status} />
+        ))}
       </div>
 
       <Tabs.Content value="board">
@@ -190,14 +265,23 @@ export function InvestmentsView() {
                 <th className="w-[84px] text-right">Value $M</th>
                 <th className="w-[72px] text-right">Jobs</th>
                 <th className="w-[108px]">Status</th>
+                <th className="w-[150px]">Confidence</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((i) => {
                 const Icon = SECTOR_ICON[i.sector];
                 return (
-                  <tr key={i.id} className="cursor-pointer" onClick={() => setSelected(i)}>
-                    <td className="font-medium text-[var(--color-ink)]">{i.title}</td>
+                  <tr key={i.id}>
+                    <td>
+                      <button
+                        type="button"
+                        onClick={() => setSelected(i)}
+                        className="text-left font-medium text-[var(--color-ink)] underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+                      >
+                        {i.title}
+                      </button>
+                    </td>
                     <td>
                       <span className="inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-ink-muted)]">
                         <Icon className="size-3.5 text-[var(--color-ink-faint)]" />
@@ -221,6 +305,9 @@ export function InvestmentsView() {
                         {i.status}
                       </span>
                     </td>
+                    <td>
+                      <ConfidenceBadge confidence={investmentConfidence(i)} />
+                    </td>
                   </tr>
                 );
               })}
@@ -231,6 +318,25 @@ export function InvestmentsView() {
 
       <Tabs.Content value="map">
         <FlatMap activeLayers={{ invest: true, trade: false, delegations: false }} />
+      </Tabs.Content>
+
+      <Tabs.Content value="privatization">
+        {privatizationOpportunities.length ? (
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            {privatizationOpportunities.map((item) => (
+              <article key={item.id} className="rounded-md border border-[var(--color-border)] p-4">
+                <h3 className="font-medium text-[var(--color-ink)]">{item.assetName}</h3>
+                <p className="mt-1 text-[12px] text-[var(--color-ink-muted)]">{item.nextStep}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            className="px-4 py-10"
+            title="Source-backed privatization data required"
+            description="The dashboard is ready for a privatization pipeline, but no verified asset-level records are loaded yet. Required fields include asset name, sector, ownership status, transaction type, stage, timeline, government counterpart, value range, U.S. investor relevance, source IDs, risk level, and next step."
+          />
+        )}
       </Tabs.Content>
 
       {/* Detail drawer */}
@@ -261,6 +367,7 @@ export function InvestmentsView() {
                       >
                         {selected.status}
                       </span>
+                      <ConfidenceBadge confidence={investmentConfidence(selected)} />
                     </div>
                   </div>
                   <Dialog.Close className="rounded p-1 text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]">
@@ -294,6 +401,15 @@ export function InvestmentsView() {
                   </div>
                 ) : null}
 
+                <div className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-3 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
+                  <span className="font-semibold text-[var(--color-ink)]">What this means: </span>
+                  {investmentConfidence(selected) === "illustrative_demo"
+                    ? "This row should be used for dashboard workflow demonstration only until the responsible agency supplies a source-backed project record."
+                    : investmentConfidence(selected) === "verified_official"
+                      ? "This row can support executive briefing, while still retaining its source badge and as-of context."
+                      : "This row is useful for internal pipeline tracking, but should not be quoted publicly until owner review and source confirmation are complete."}
+                </div>
+
                 {selected.source_note && !hideDemo && !presentation ? (
                   <div className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-demo-bg)] p-3 text-[12px] text-[var(--color-demo-ink)]">
                     <span className="font-semibold">DEMO.</span> {selected.source_note}
@@ -305,6 +421,20 @@ export function InvestmentsView() {
         </Dialog.Portal>
       </Dialog.Root>
     </Tabs.Root>
+  );
+}
+
+function ConfidenceBadge({ confidence }: { confidence: InvestmentSourceConfidence }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
+        CONFIDENCE_TONE[confidence],
+      )}
+      title={CONFIDENCE_LABEL[confidence]}
+    >
+      {CONFIDENCE_LABEL[confidence]}
+    </span>
   );
 }
 
@@ -356,6 +486,7 @@ function Column({
               className="flex flex-col gap-1 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2.5 text-left transition hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-hover)]"
             >
               <div className="text-[12.5px] font-medium leading-snug text-[var(--color-ink)]">{i.title}</div>
+              <ConfidenceBadge confidence={investmentConfidence(i)} />
               <div className="flex items-center justify-between text-[10.5px] text-[var(--color-ink-muted)]">
                 <span className="flex items-center gap-1">
                   <Icon className="size-3 text-[var(--color-ink-faint)]" />

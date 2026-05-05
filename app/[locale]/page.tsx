@@ -6,13 +6,14 @@ import {
   Scale,
   AlertTriangle,
   CalendarDays,
+  CheckCircle2,
   Layers,
   Gift,
   Users2,
 } from "lucide-react";
 import { tradeAnnual, tradeJan2026 } from "@/data/trade";
 import { agreementsAggregate } from "@/data/agreements";
-import { investments, investmentsTotals } from "@/data/investments";
+import { investmentCredibilitySummary } from "@/data/investments";
 import { liveDelegations } from "@/data/delegations";
 import { nextAnchorVisit } from "@/data/visits";
 import { grants } from "@/data/grants";
@@ -44,6 +45,31 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
 
   const anchor = nextAnchorVisit();
   const grantsTotal = grants.reduce((a, g) => a + g.valueMusd, 0);
+  const verifiedInvestmentValue = investmentCredibilitySummary.verified.totalValueUsdM;
+  const pendingInvestmentRows = investmentCredibilitySummary.pending.totalProjects;
+  const demoInvestmentRows = investmentCredibilitySummary.illustrativeDemo.totalProjects;
+  const executiveSignals = [
+    {
+      label: "Trade relationship",
+      value: `2025 turnover $${y2025.turnover.toLocaleString("en-US")}M`,
+      note: "Goods flows are growing, but the bilateral balance remains import-heavy from the Uzbekistan view.",
+    },
+    {
+      label: "Investment credibility",
+      value: `$${(verifiedInvestmentValue / 1000).toFixed(2)}B verified`,
+      note: `${pendingInvestmentRows} source-backed rows need owner review; ${demoInvestmentRows} illustrative rows are excluded from the headline.`,
+    },
+    {
+      label: "Diplomatic momentum",
+      value: `${agreementsAggregate.totalDocuments} bilateral documents`,
+      note: "Visits, agreements, and forums now need a tighter project/action conversion layer.",
+    },
+  ];
+  const executiveActions = [
+    "Prioritize source-backed investment and privatization records before external briefings.",
+    "Use Trade & Economic Flows for the quote-ready series; keep HS/ITC detail in advanced analysis.",
+    "Track bottlenecks through commitments, compliance, and sector next actions rather than isolated pages.",
+  ];
 
   const dateLabel = new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-GB", {
     day: "2-digit",
@@ -84,6 +110,49 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           <PrintButton label={locale === "ru" ? "Экспорт PDF" : "Export PDF"} />
         </div>
       </header>
+
+      <section className="grid grid-cols-1 gap-3 xl:grid-cols-[1.25fr_0.75fr]">
+        <Card tone="primary">
+          <CardHeader
+            icon={<CheckCircle2 className="size-3.5" />}
+            tone="primary"
+            title="Executive brief"
+            sub="Relationship state, opportunities, risks, and recommended actions before the full analytical workspace"
+          />
+          <CardBody>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+              {executiveSignals.map((item) => (
+                <div key={item.label} className="rounded-md border border-[var(--color-border)] p-3">
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                    {item.label}
+                  </div>
+                  <div className="mt-1 text-[15px] font-semibold text-[var(--color-ink)]">{item.value}</div>
+                  <p className="mt-1.5 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{item.note}</p>
+                </div>
+              ))}
+            </div>
+          </CardBody>
+        </Card>
+
+        <Card tone="rose">
+          <CardHeader
+            icon={<AlertTriangle className="size-3.5" />}
+            tone="rose"
+            title="Recommended next actions"
+            sub="Decision-oriented layer; detailed registries remain below"
+          />
+          <CardBody>
+            <ol className="space-y-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
+              {executiveActions.map((action, idx) => (
+                <li key={action} className="flex gap-2">
+                  <span className="mono mt-0.5 text-[10px] font-semibold text-[var(--color-rose)]">{idx + 1}</span>
+                  <span>{action}</span>
+                </li>
+              ))}
+            </ol>
+          </CardBody>
+        </Card>
+      </section>
 
       {/* HERO KPI ROW — 4 large tone-coded KPIs */}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -160,8 +229,8 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
         <MicroKpi
           tone="invest"
           label={t("kpi.projects")}
-          value={investments.length}
-          sub={`$${(investmentsTotals.totalValueUsdM / 1000).toFixed(1)}B pipeline`}
+          value={investmentCredibilitySummary.verified.totalProjects}
+          sub={`$${(verifiedInvestmentValue / 1000).toFixed(2)}B verified · ${pendingInvestmentRows} pending`}
           href={`/${locale}/investments`}
         />
         <MicroKpi

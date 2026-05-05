@@ -26,6 +26,12 @@
     "admin": "Boshqaruv"
   },
   "navGroups": {
+    "executive": "Ijro brifi",
+    "economic": "Savdo va investitsiya",
+    "diplomacy": "Diplomatiya va hamkorlar",
+    "risks": "Xatarlar, harakatlar va signallar",
+    "advanced": "Kengaytirilgan tahlil",
+    "operations": "Operatsiyalar",
     "monitoring": "Monitoring",
     "execution": "Ijro",
     "knowledge": "Bilimlar bazasi",

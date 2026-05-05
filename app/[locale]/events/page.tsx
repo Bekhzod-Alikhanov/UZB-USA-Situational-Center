@@ -8,7 +8,8 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
   setRequestLocale(locale);
   const t = await getTranslations("events");
 
-  const today = new Date("2026-04-21");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const upcomingCount = events.filter((e) => new Date(e.date) >= today).length;
 
   return (

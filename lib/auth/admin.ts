@@ -14,8 +14,29 @@ function getAdminPassword(): string | undefined {
   return process.env.ADMIN_PASSWORD?.trim() || undefined;
 }
 
+function isWeakSecret(secret: string): boolean {
+  return secret.length < 32 || /^(admin|password|changeme|change-me|secret|test)$/i.test(secret);
+}
+
 function getSigningSecret(): string | undefined {
-  return process.env.ADMIN_SESSION_SECRET?.trim() || getAdminPassword();
+  const explicit = process.env.ADMIN_SESSION_SECRET?.trim();
+  if (process.env.NODE_ENV === "production") {
+    return explicit && !isWeakSecret(explicit) ? explicit : undefined;
+  }
+  return explicit || getAdminPassword();
+}
+
+function constantTimeEqual(a: string, b: string): boolean {
+  const left = new TextEncoder().encode(a);
+  const right = new TextEncoder().encode(b);
+  const max = Math.max(left.length, right.length, 1);
+  let diff = left.length ^ right.length;
+  for (let i = 0; i < max; i += 1) {
+    const leftByte = left.length ? left[i % left.length] : 0;
+    const rightByte = right.length ? right[i % right.length] : 0;
+    diff |= leftByte ^ rightByte;
+  }
+  return diff === 0;
 }
 
 function encodeBase64Url(input: string | Uint8Array): string {
@@ -83,7 +104,7 @@ export function requireAdminPassword(): string {
 export async function createAdminSessionToken(now = Date.now()): Promise<string> {
   const secret = getSigningSecret();
   if (!secret) {
-    throw new Error("ADMIN_PASSWORD or ADMIN_SESSION_SECRET is required to sign admin sessions.");
+    throw new Error("A strong ADMIN_SESSION_SECRET is required to sign admin sessions in production.");
   }
 
   const payload: AdminSessionPayload = {
@@ -122,7 +143,11 @@ export async function verifyAdminCookieValue(cookieValue: string | undefined): P
 
 export function verifyCronSecretHeader(authHeader: string | null): boolean {
   const secret = process.env.CRON_SECRET?.trim();
-  return Boolean(secret && authHeader === `Bearer ${secret}`);
+  return Boolean(secret && authHeader && constantTimeEqual(authHeader, `Bearer ${secret}`));
+}
+
+export function verifyAdminPassword(candidate: string): boolean {
+  return constantTimeEqual(candidate, requireAdminPassword());
 }
 
 export function isSafeAdminRedirect(from: string, locale: string): boolean {

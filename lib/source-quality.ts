@@ -50,7 +50,7 @@ function reasonFor(source: Source, confidence: SourceConfidence, freshness: Sour
   return `Public partner/derived source, ${age}; keep source note visible.`;
 }
 
-export function assessSources(now = new Date("2026-05-04T00:00:00Z")): SourceQuality[] {
+export function assessSources(now = new Date()): SourceQuality[] {
   return sources.map((source) => {
     const ageDays = daysSince(source.fetched_at, now);
     const freshness = freshnessFor(ageDays);
@@ -68,7 +68,7 @@ export function assessSources(now = new Date("2026-05-04T00:00:00Z")): SourceQua
   });
 }
 
-export function sourceQualitySummary(now = new Date("2026-05-04T00:00:00Z")) {
+export function sourceQualitySummary(now = new Date()) {
   const assessed = assessSources(now);
   return {
     total: assessed.length,

@@ -27,12 +27,19 @@ export async function GET(req: NextRequest) {
       : { ok: false, error: result.reason instanceof Error ? result.reason.message : "Request failed" },
   );
 
-  return NextResponse.json({
-    fetchedAt: new Date().toISOString(),
-    time,
-    census,
-    worldBank,
-    foreignAssistance,
-    exim,
-  });
+  return NextResponse.json(
+    {
+      fetchedAt: new Date().toISOString(),
+      time,
+      census,
+      worldBank,
+      foreignAssistance,
+      exim,
+    },
+    {
+      headers: {
+        "cache-control": "public, max-age=300, stale-while-revalidate=1800",
+      },
+    },
+  );
 }

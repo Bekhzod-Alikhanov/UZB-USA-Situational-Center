@@ -42,6 +42,7 @@ next-env.d.ts
 /_extract_text.js
 /Данные к US_SC.rar
 /input/
+/.claude/
 /.claude/settings.local.json
 
 # Raw Comtrade JSON pulls (keep processed data/comtrade.ts only)

@@ -49,9 +49,16 @@ export async function GET(req: NextRequest) {
         sourceUrl: connector.apiUrl,
       }));
 
-  return NextResponse.json({
-    database: databaseHealth(),
-    connectors: externalDataConnectors,
-    probes,
-  });
+  return NextResponse.json(
+    {
+      database: databaseHealth(),
+      connectors: externalDataConnectors,
+      probes,
+    },
+    {
+      headers: {
+        "cache-control": probe ? "no-store" : "public, max-age=300, stale-while-revalidate=900",
+      },
+    },
+  );
 }

@@ -13,7 +13,12 @@ const forbidden = [
   { label: "installed dependencies", test: (p) => p === "node_modules" || p.startsWith("node_modules/") },
   { label: "TypeScript build cache", test: (p) => p === "tsconfig.tsbuildinfo" },
   { label: "local Claude settings", test: (p) => p === ".claude/settings.local.json" },
+  { label: "local Claude workspace metadata", test: (p) => p === ".claude" || p.startsWith(".claude/") },
   { label: "Lighthouse JSON output", test: (p) => /^lh-.*\.json$/i.test(path.basename(p)) },
+  { label: "Lighthouse CI output", test: (p) => p === ".lhci" || p.startsWith(".lhci/") },
+  { label: "Lighthouse CI healthcheck output", test: (p) => p === ".lighthouseci" || p.startsWith(".lighthouseci/") },
+  { label: "Playwright report", test: (p) => p === "playwright-report" || p.startsWith("playwright-report/") },
+  { label: "Playwright test results", test: (p) => p === "test-results" || p.startsWith("test-results/") },
   {
     label: "local server log",
     test: (p) => /^(dev-server|route-test-server).*\.(out|err)\.log$/i.test(path.basename(p)),
@@ -48,7 +53,8 @@ function gitTrackedFiles() {
   try {
     return execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] })
       .split(/\r?\n/)
-      .filter(Boolean);
+      .filter(Boolean)
+      .filter((relPath) => fs.existsSync(path.join(root, relPath)));
   } catch {
     console.warn("Could not read git tracked files; skipped tracked-file hygiene scan.");
     return null;
@@ -96,6 +102,11 @@ if (target) {
     "node_modules",
     "tsconfig.tsbuildinfo",
     ".claude/settings.local.json",
+    ".claude",
+    ".lhci",
+    ".lighthouseci",
+    "playwright-report",
+    "test-results",
     "dev-server.out.log",
     "dev-server.err.log",
     "route-test-server.out.log",

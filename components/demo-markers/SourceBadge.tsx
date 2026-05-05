@@ -26,6 +26,7 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
           className,
         )}
         title={`Unknown source: ${sourceId}`}
+        aria-label={`Unknown source: ${sourceId}`}
       >
         ?{sourceId}
       </span>
@@ -63,7 +64,8 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
         target="_blank"
         rel="noreferrer"
         className={baseClass}
-        title={`${src.name} · fetched ${src.fetched_at}`}
+        title={`${src.name} - fetched ${src.fetched_at}`}
+        aria-label={`Source: ${src.name}. External source fetched ${src.fetched_at}. Opens in a new tab.`}
       >
         {inner}
       </a>
@@ -71,7 +73,11 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
   }
 
   return (
-    <span className={baseClass} title={`${src.name} · ${src.sourceFile ?? "internal"} · fetched ${src.fetched_at}`}>
+    <span
+      className={baseClass}
+      title={`${src.name} - ${src.sourceFile ?? "internal"} - fetched ${src.fetched_at}`}
+      aria-label={`Source: ${src.name}. Attached or internal source fetched ${src.fetched_at}.`}
+    >
       {inner}
     </span>
   );

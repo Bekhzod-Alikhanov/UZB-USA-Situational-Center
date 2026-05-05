@@ -2,105 +2,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import {
-  Activity,
-  BarChart3,
-  Briefcase,
-  Calendar,
-  ClipboardList,
-  FileText,
-  Gauge,
-  Gift,
-  Globe2,
-  Landmark,
-  Lightbulb,
-  MapPin,
-  Newspaper,
-  Settings,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  Users,
-  UsersRound,
-  UserSquare,
-  LineChart,
-  ListChecks,
-  BookOpen,
-  Cog,
-} from "lucide-react";
+import { Landmark, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { localizedHref, NAV_GROUPS, TONE_VAR_MAP } from "@/lib/navigation";
 import { TimezoneClocks } from "./TimezoneClocks";
-
-interface NavItem {
-  key: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  /** Domain accent for active highlight + hover glow. */
-  tone?: "trade" | "visits" | "invest" | "agree" | "people" | "rose" | "slate" | "primary";
-}
-
-interface NavGroup {
-  key: string;
-  icon: React.ComponentType<{ className?: string }>;
-  items: NavItem[];
-}
-
-const NAV_GROUPS: NavGroup[] = [
-  {
-    key: "monitoring",
-    icon: LineChart,
-    items: [
-      { key: "overview", href: "", icon: Activity, tone: "primary" },
-      { key: "trade", href: "/trade", icon: BarChart3, tone: "trade" },
-      { key: "investments", href: "/investments", icon: Briefcase, tone: "invest" },
-      { key: "map", href: "/map", icon: Globe2, tone: "people" },
-      { key: "benchmark", href: "/benchmark", icon: Gauge, tone: "slate" },
-    ],
-  },
-  {
-    key: "execution",
-    icon: ListChecks,
-    items: [
-      { key: "visits", href: "/visits", icon: Target, tone: "visits" },
-      { key: "prepare", href: "/prepare", icon: ClipboardList, tone: "visits" },
-      { key: "commitments", href: "/commitments", icon: ClipboardList, tone: "rose" },
-      { key: "events", href: "/events", icon: Calendar, tone: "agree" },
-      { key: "grants", href: "/grants", icon: Gift, tone: "invest" },
-    ],
-  },
-  {
-    key: "knowledge",
-    icon: BookOpen,
-    items: [
-      { key: "agreements", href: "/agreements", icon: FileText, tone: "agree" },
-      { key: "sectors", href: "/sectors", icon: Lightbulb, tone: "agree" },
-      { key: "compliance", href: "/compliance", icon: ShieldCheck, tone: "slate" },
-      { key: "counterparts", href: "/counterparts", icon: UserSquare, tone: "visits" },
-      { key: "contacts", href: "/contacts", icon: Users, tone: "people" },
-      { key: "news", href: "/news", icon: Newspaper, tone: "rose" },
-    ],
-  },
-  {
-    key: "internal",
-    icon: Cog,
-    items: [
-      { key: "staff", href: "/staff", icon: UsersRound, tone: "people" },
-      { key: "assistant", href: "/assistant", icon: Sparkles, tone: "primary" },
-      { key: "admin", href: "/admin", icon: Settings, tone: "slate" },
-    ],
-  },
-];
-
-const TONE_VAR_MAP: Record<NonNullable<NavItem["tone"]>, string> = {
-  trade: "var(--color-trade)",
-  visits: "var(--color-visits)",
-  invest: "var(--color-invest)",
-  agree: "var(--color-agree)",
-  people: "var(--color-people)",
-  rose: "var(--color-rose)",
-  slate: "var(--color-slate)",
-  primary: "var(--color-primary)",
-};
 
 export function Sidebar() {
   const locale = useLocale();
@@ -108,8 +13,6 @@ export function Sidebar() {
   const tNav = useTranslations("nav");
   const tBrand = useTranslations("brand");
   const tGroups = useTranslations("navGroups");
-
-  const base = `/${locale}`;
 
   return (
     <aside className="sticky top-0 hidden h-screen w-[260px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] lg:flex">
@@ -147,13 +50,13 @@ export function Sidebar() {
               </div>
               <ul className="flex flex-col gap-0.5">
                 {group.items.map((item) => {
-                  const href = `${base}${item.href}`;
+                  const href = localizedHref(locale, item.href);
                   const isActive =
                     item.href === ""
-                      ? pathname === base || pathname === `${base}/`
+                      ? pathname === `/${locale}` || pathname === `/${locale}/`
                       : pathname === href || pathname.startsWith(`${href}/`);
                   const Icon = item.icon;
-                  const toneVar = item.tone ? TONE_VAR_MAP[item.tone] : "var(--color-primary)";
+                  const toneVar = TONE_VAR_MAP[item.tone];
                   return (
                     <li key={item.key}>
                       <Link

@@ -12,21 +12,21 @@ Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry m
 
 ## Entries
 
-| Where                            | What                                                                                                | File                                         | Responsible agency                                 | Status    |
-| -------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------------- | --------- |
-| Investments — portfolio          | 35 illustrative pipeline entries                                                                    | `data/investments.ts` (`is_demo:true` rows)  | MIIT + UzInvest + Invest Uzbekistan                | requested |
-| Commitments — registry           | 17 source-anchored workflow records (every entry carries a `sourceId` for the originating event)    | `data/commitments.ts`                        | Situational Center internal + responsible agencies | pending   |
-| Agreements — detail              | 9 agreement-level rows beyond aggregate                                                             | `data/agreements.ts` (`is_demo:true` rows)   | MFA Department of Americas                         | requested |
-| Map — delegations                | 3 live delegations                                                                                  | `data/delegations.ts`                        | Situational Center internal                        | pending   |
-| Staff KPI                        | 10 role-slot templates per F-4 headcount (no person names; carries `sourceId: "f4_ordinance_2026"`) | `data/staff-kpi.ts`                          | Situational Center HR                              | pending   |
-| Contacts — staff                 | 10 HQ staff placeholders ("Staff Member 1–10")                                                      | `data/contacts.ts:k-hq.people`               | Situational Center HR                              | pending   |
-| Events — future                  | Upcoming SD-5 entry                                                                                 | `data/events.ts:e-sd5-2026`                  | MFA                                                | pending   |
-| Compliance                       | CAATSA exposure rating                                                                              | `data/compliance.ts:ofac-caatsa`             | MFA + Treasury (open source)                       | pending   |
-| Visit prep — pipelines           | 3 upcoming visits with readiness scores                                                             | `data/visit-prep.ts:visitPipelines`          | Situational Center internal                        | pending   |
-| Visit prep — roadmaps            | 3 cross-visit cooperation roadmaps                                                                  | `data/visit-prep.ts:visitRoadmaps`           | Situational Center internal                        | pending   |
-| Visit prep — 7-block scorecards  | 3 visits × 7 blocks of status-only readiness items                                                  | `data/visit-prep.ts:visitScorecards`         | Situational Center Project Office                  | pending   |
-| Visit prep — document registries | 3 visits × document titles + status (no content)                                                    | `data/visit-prep.ts:visitDocumentRegistries` | Situational Center Strategic Analysis              | pending   |
-| Visit prep — logistics matrices  | 3 visits × 6 logistics rows × booking-status only                                                   | `data/visit-prep.ts:visitLogistics`          | Situational Center Protocol Office                 | pending   |
+| Where                            | What                                                                                                            | File                                         | Responsible agency                                 | Status    |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------------- | --------- |
+| Investments — portfolio          | 25 illustrative rows plus 10 source-backed/pending rows; verified, pending, and demo totals are separated in UI | `data/investments.ts` (`is_demo:true` rows)  | MIIT + UzInvest + Invest Uzbekistan                | requested |
+| Commitments — registry           | 17 source-anchored workflow records (every entry carries a `sourceId` for the originating event)                | `data/commitments.ts`                        | Situational Center internal + responsible agencies | pending   |
+| Agreements — detail              | 9 agreement-level rows beyond aggregate                                                                         | `data/agreements.ts` (`is_demo:true` rows)   | MFA Department of Americas                         | requested |
+| Map — delegations                | 3 live delegations                                                                                              | `data/delegations.ts`                        | Situational Center internal                        | pending   |
+| Staff KPI                        | 10 role-slot templates per F-4 headcount (no person names; carries `sourceId: "f4_ordinance_2026"`)             | `data/staff-kpi.ts`                          | Situational Center HR                              | pending   |
+| Contacts — staff                 | 10 HQ staff placeholders ("Staff Member 1–10")                                                                  | `data/contacts.ts:k-hq.people`               | Situational Center HR                              | pending   |
+| Events — future                  | Upcoming SD-5 entry                                                                                             | `data/events.ts:e-sd5-2026`                  | MFA                                                | pending   |
+| Compliance                       | CAATSA exposure rating                                                                                          | `data/compliance.ts:ofac-caatsa`             | MFA + Treasury (open source)                       | pending   |
+| Visit prep — pipelines           | 3 upcoming visits with readiness scores                                                                         | `data/visit-prep.ts:visitPipelines`          | Situational Center internal                        | pending   |
+| Visit prep — roadmaps            | 3 cross-visit cooperation roadmaps                                                                              | `data/visit-prep.ts:visitRoadmaps`           | Situational Center internal                        | pending   |
+| Visit prep — 7-block scorecards  | 3 visits × 7 blocks of status-only readiness items                                                              | `data/visit-prep.ts:visitScorecards`         | Situational Center Project Office                  | pending   |
+| Visit prep — document registries | 3 visits × document titles + status (no content)                                                                | `data/visit-prep.ts:visitDocumentRegistries` | Situational Center Strategic Analysis              | pending   |
+| Visit prep — logistics matrices  | 3 visits × 6 logistics rows × booking-status only                                                               | `data/visit-prep.ts:visitLogistics`          | Situational Center Protocol Office                 | pending   |
 
 ## No longer demo after the Tier-B pass (2026-04-26)
 
@@ -54,7 +54,7 @@ The following datasets were upgraded from demo to source-traced or removed:
 
 The following are sourced from attached inputs but require primary source confirmation:
 
-- **Project portfolio aggregate** (77 projects / $22.509B) — sourced from `input_figma_pdf`; underlying project register still pending from MIIT.
+- **Project portfolio aggregate** — do not quote mixed demo/source-backed totals externally. Use the verified/pending/demo split in `data/investments.ts`; the underlying MIIT/UzInvest project register is still required.
 - **Trade structure shares** (Codex extracted from `input_trade_stat_docx`) — figures retained verbatim from the document.
 
 ## How this file stays accurate

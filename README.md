@@ -1,8 +1,8 @@
 # UZ–US Situational Center · dashboard
 
-> **[🌐 Live demo](https://uz-us-center.vercel.app/en)**  ·  trilingual (EN / RU / UZ-Latn)  ·  21 routes  ·  56 data integrations  ·  AI assistant on Claude Sonnet 4.6
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 21 routes · 56 data integrations · AI assistant on Claude Sonnet 4.6
 >
-> Production digital monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
+> Deployment-candidate monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
 ![Overview](docs/screenshots/overview.png)
 
@@ -24,11 +24,13 @@
 - **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
 - **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 34 data modules.
-- **Verification gate** — Vercel build runs `pnpm verify` (lint + typecheck + 63 source / 204 reference / 21 route validation + governance checks + Vitest unit tests + Playwright e2e + a11y) before any deploy.
-- **Lighthouse Performance ≥ 87 across all routes; Accessibility ≥ 94** — fonts trimmed, charts lazy-loaded with IntersectionObserver, server-rendered filters where possible.
+- **Verification gate** — `pnpm verify` runs lint, typecheck, source/route validation, governance checks, and Vitest unit tests. Browser, accessibility, and Lighthouse checks are separate heavier commands and should be run before public release.
+- **Lighthouse and axe coverage** — Lighthouse CI and Playwright/axe are configured for key routes. Current accessibility checks gate critical violations and still log known serious contrast findings for review.
 - **48 production commits** over ~3 weeks — full git history of architectural decisions, perf waves, and data-governance evolution.
 
-> **Demo-ready and production-quality.** Every synthetic value carries `is_demo: true` and is visually flagged so reputation is protected when real data is later swapped in. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the full provenance map.
+> **Demo-ready with production-oriented guardrails.** Synthetic values should carry `is_demo: true` and be visually flagged. Investment records are split into verified, source-backed/pending, and illustrative/demo buckets so demo rows cannot be mistaken for official pipeline totals. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the provenance map.
+
+Advanced charts, maps, and analytical exhibits are preserved through hierarchy instead of deletion. See [`VISUALIZATION_PRESERVATION_LOG.md`](./VISUALIZATION_PRESERVATION_LOG.md) for the current chart/table/map preservation record.
 
 ## Stack
 

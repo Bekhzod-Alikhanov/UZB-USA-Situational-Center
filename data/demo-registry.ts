@@ -13,7 +13,7 @@ export interface DemoEntry {
 export const demoRegistry: DemoEntry[] = [
   {
     where: "Investments / portfolio",
-    what: "35 illustrative pipeline entries (10 are real, 25 demo)",
+    what: "25 illustrative rows plus 10 source-backed/pending rows; UI separates verified, pending, and demo totals",
     file: "data/investments.ts",
     agency: "MIIT + UzInvest + Invest Uzbekistan",
     status: "requested",

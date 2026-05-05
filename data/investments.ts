@@ -12,6 +12,15 @@ export type InvestmentSector =
   | "minerals-rare-earth";
 
 export type InvestmentStatus = "mou" | "negotiation" | "agreed" | "construction" | "operating" | "paused";
+export type InvestmentSourceConfidence =
+  | "verified_official"
+  | "company_confirmed"
+  | "media_reported"
+  | "internal_unverified"
+  | "illustrative_demo"
+  | "source_needed";
+export type InvestmentVisibility = "public" | "internal" | "restricted" | "demo";
+export type InvestmentRiskLevel = "low" | "medium" | "high" | "source_needed";
 
 export interface Investment {
   id: string;
@@ -29,6 +38,17 @@ export interface Investment {
   source_note?: string;
   /** Reference into `data/sources.ts`. */
   sourceId?: string;
+  sourceIds?: string[];
+  sourceConfidence?: InvestmentSourceConfidence;
+  verificationStatus?: InvestmentSourceConfidence;
+  visibility?: InvestmentVisibility;
+  investmentType?: "greenfield" | "brownfield" | "portfolio" | "fund" | "equipment" | "services" | "source_needed";
+  usCompanyRelevance?: string;
+  riskLevel?: InvestmentRiskLevel;
+  requiredApprovals?: string[];
+  nextStep?: string;
+  blockers?: string[];
+  lastUpdatedDate?: string;
 }
 
 const demo = "to be supplied by MIIT and UzInvest";
@@ -696,4 +716,63 @@ export const investmentsTotals = {
   totalValueUsdM: investments.reduce((a, i) => a + i.valueMusd, 0),
   totalJobs: investments.reduce((a, i) => a + (i.jobs ?? 0), 0),
   is_demo: true,
+};
+
+export interface PrivatizationOpportunity {
+  id: string;
+  assetName: string;
+  sector: InvestmentSector | "source_needed";
+  location?: string;
+  ownershipStatus?: string;
+  transactionType?: string;
+  valueRange?: string;
+  stage: "source_needed" | "screening" | "preparation" | "market-sounding" | "tender" | "closed";
+  timeline?: string;
+  governmentCounterpart?: string;
+  advisor?: string;
+  investorProfile?: string;
+  usCompanyRelevance?: string;
+  requiredApprovals?: string[];
+  riskLevel: InvestmentRiskLevel;
+  sourceIds: string[];
+  sourceConfidence: InvestmentSourceConfidence;
+  lastUpdatedDate?: string;
+  nextStep: string;
+  visibility: InvestmentVisibility;
+  notes?: string;
+}
+
+export const privatizationOpportunities: PrivatizationOpportunity[] = [];
+
+export function investmentConfidence(investment: Investment): InvestmentSourceConfidence {
+  if (investment.verificationStatus) return investment.verificationStatus;
+  if (investment.sourceConfidence) return investment.sourceConfidence;
+  if (investment.is_demo) return "illustrative_demo";
+  if (!investment.sourceId && !investment.sourceIds?.length) return "source_needed";
+  if (investment.sourceId === "tradegov_mining_2025") return "verified_official";
+  if (investment.sourceId?.startsWith("input_")) return "internal_unverified";
+  return "media_reported";
+}
+
+function summarizeInvestmentSet(rows: Investment[]) {
+  return {
+    totalProjects: rows.length,
+    totalValueUsdM: rows.reduce((a, i) => a + i.valueMusd, 0),
+    totalJobs: rows.reduce((a, i) => a + (i.jobs ?? 0), 0),
+  };
+}
+
+const verifiedInvestments = investments.filter((i) =>
+  ["verified_official", "company_confirmed"].includes(investmentConfidence(i)),
+);
+const pendingInvestments = investments.filter((i) =>
+  ["media_reported", "internal_unverified", "source_needed"].includes(investmentConfidence(i)),
+);
+const demoInvestments = investments.filter((i) => investmentConfidence(i) === "illustrative_demo");
+
+export const investmentCredibilitySummary = {
+  verified: summarizeInvestmentSet(verifiedInvestments),
+  pending: summarizeInvestmentSet(pendingInvestments),
+  illustrativeDemo: summarizeInvestmentSet(demoInvestments),
+  mixedPortfolio: summarizeInvestmentSet(investments),
 };
