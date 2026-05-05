@@ -32,12 +32,12 @@ user is the Advisor to the President.
 - **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12 tables) + 5 live API connectors (BEA, Census, EXIM, World Bank, ForeignAssistance.gov) + 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, State Department, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, and others)
 - **Governed live-data layer** with daily Vercel cron ingestion + no-downgrade policy + audit trail
 - **AI assistant** powered by Claude Sonnet 4.6 with prompt caching over a compiled RAG context
-- **Lighthouse Performance ≥ 87, Accessibility ≥ 94** across all routes
-- **48 production commits**, full Vitest + Playwright + Lighthouse-CI test stack
+- **Lighthouse — median Performance 91, Accessibility 98** across all 17 routes (six routes hit A11y 100); TBT 13–59 ms, CLS 0
+- **Node 24 LTS** runtime · 50+ production commits · full Vitest + Playwright + axe + Lighthouse-CI stack
 
 → [**🌐 Live demo**](https://uz-us-center.vercel.app/en) · [**📦 Code**](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
 
 ## 🛠 Tech I work with
 
-`TypeScript` · `Next.js` · `React` · `Tailwind` · `PostgreSQL` · `Supabase` · `Vercel` · `Anthropic Claude API`
+`TypeScript` · `Next.js (App Router)` · `React 19` · `Tailwind v4` · `Node.js 24` · `PostgreSQL` · `Supabase` · `Serverless API routes` · `Vercel cron` · `Data ingestion pipelines` · `Anthropic Claude API` · `Vitest` · `Playwright` · `GitHub Actions`
 ```

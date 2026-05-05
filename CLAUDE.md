@@ -10,18 +10,24 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 
 ## Stack
 
-| Layer           | Choice                                                | Notes                                                                                                 |
-| --------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Framework       | Next.js 16.2.4, App Router, Turbopack                 | React 19.2. TypeScript strict.                                                                        |
-| Styling         | Tailwind CSS v4 (`@theme`, `@utility`)                | All design tokens in `app/globals.css`. No tailwind.config.ts.                                        |
-| State           | Zustand v5 + persist                                  | `lib/store/settings.ts` is the global UI store (theme, locale, hideDemo, presentationMode, AI flags). |
-| i18n            | next-intl v4, subpath routing `/[locale]/...`         | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                                      |
-| Tables          | TanStack Table v8                                     | Server-shaped data, client filter/sort/page.                                                          |
-| Charts          | Recharts (line/bar/area), Visx (sankey/chord/treemap) | All chart components are `"use client"` and consume CSS vars.                                         |
-| Maps            | maplibre-gl with OpenFreeMap style                    | No API keys. Globe.gl for the 3D globe (lazy).                                                        |
-| Drag-and-drop   | @dnd-kit                                              | Used in Visit Prepare Kanban.                                                                         |
-| AI              | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3             | Sonnet 4.6. Gated by `ASSISTANT_ENABLED` and `ANTHROPIC_API_KEY`.                                     |
-| Package manager | **pnpm**                                              | Lockfile at `pnpm-lock.yaml`.                                                                         |
+| Layer                | Choice                                                                            | Notes                                                                                                 |
+| -------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Runtime              | Node.js 24 LTS on Vercel                                                          | `engines.node = >=24.0.0 <25.0.0`. V8 13.x, Maglev compiler enabled.                                  |
+| Framework            | Next.js 16.2.4, App Router, Turbopack                                             | React 19.2. TypeScript 6 strict.                                                                      |
+| Styling              | Tailwind CSS v4 (`@theme`, `@utility`)                                            | All design tokens in `app/globals.css`. No tailwind.config.ts.                                        |
+| State                | Zustand v5.0.13 + persist                                                         | `lib/store/settings.ts` is the global UI store (theme, locale, hideDemo, presentationMode, AI flags). |
+| i18n                 | next-intl v4, subpath routing `/[locale]/...`                                     | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                                      |
+| Tables               | TanStack Table v8                                                                 | Server-shaped data, client filter/sort/page.                                                          |
+| Charts               | Recharts (line/bar/area), Visx (sankey/chord/treemap), zero-dep `<MiniBars />`    | Heavy charts are `next/dynamic({ ssr:false })`-loaded behind `<LazyMount />`.                         |
+| Maps                 | maplibre-gl 5.x (OpenFreeMap), Globe.gl 2.45.x, d3-geo Albers USA                 | `/map` is gated behind `<MapLoadGate />` — runtime only fetched on user click.                        |
+| Drag-and-drop        | @dnd-kit                                                                          | Used in Visit Prepare Kanban with mount-gate to avoid React 19 SSR aria-describedby drift.            |
+| Operational database | PostgreSQL 17 via Supabase                                                        | 12-table schema (`database/schema.sql`). Server-only REST adapter at `lib/db/adapter.ts`.             |
+| Live ingestion       | 5 connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov)          | Daily Vercel cron at 07:00 UTC → `raw_snapshot → normalized_observation → published_metric`.          |
+| Data governance      | No-downgrade policy, pending-vs-published, static fallback (`lib/data-governance/*`) | Enforced by `pnpm test:governance` in the verify gate.                                                |
+| Auth                 | Signed, short-lived cookie password gate on `/admin`                              | Server action + middleware. Set `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET`.                            |
+| AI                   | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3.0.74                                    | Sonnet 4.6. Gated by `ASSISTANT_ENABLED` and `ANTHROPIC_API_KEY`. Lazy-loaded behind interaction.      |
+| Tests                | Vitest (unit), Playwright (e2e + axe a11y), Lighthouse CI                         | `tests/`, `lhci.config.cjs`, `playwright.config.ts`. CI on `.github/workflows/qa.yml`.                |
+| Package manager      | **pnpm**                                                                          | Lockfile at `pnpm-lock.yaml`.                                                                         |
 
 ## Routes (19 public sidebar sections × 3 locales + admin/login + counterpart SSG)
 
@@ -145,15 +151,29 @@ DEMO_DATA_REGISTRY.md   Master log of every is_demo entry + responsible agency
 
 ## Accessibility & performance targets
 
-- Lighthouse Performance ≥ 90, Accessibility ≥ 95 on Overview, Trade, Map.
+Latest local Lighthouse sweep (May 2026, all 17 routes, mobile emulation, `pnpm build && next start -p 3100`):
+
+- **Median Performance: 91.** All 17 routes ≥ 89. Best routes hit 92.
+- **Median Accessibility: 98.** Six routes hit 100 (`/`, `/trade`, `/map`, `/events`, `/benchmark`, `/counterparts`).
+- **TBT: 13–59 ms across all routes** (was 460 ms on `/trade` before Wave 2 lazy-loading).
+- **CLS: 0 everywhere.**
+- **Transfer: 365–410 KB per route** (down from 427–536 KB baseline).
+
+Targets to keep:
+
+- Lighthouse Performance ≥ 89 across every route, Accessibility ≥ 96.
 - All interactive controls keyboard-reachable (no `onClick` without semantic element).
 - All icon-only buttons carry `aria-label`.
+- Heavy charts/maps stay behind `<LazyMount />` + `next/dynamic({ ssr: false })`.
 - Images use `next/image` where remote (whitehouse.gov, state.gov, wikimedia).
 - No client-side data fetching during SSG — pages should hit `data/*.ts` directly.
 
+Reproduce: `node scripts/lh-all.mjs` writes `lh-*.json` per route + a console summary.
+
 ## Known constraints
 
-- **No backend.** All data is in-process from `data/*.ts`. Admin "CRUD" is stubbed; persistence will require a future migration to a real DB or CMS.
+- **Operational backend is opt-in.** `DATA_BACKEND=static` (default) keeps the dashboard fully deployable from bundled `data/*.ts`. To wire up live ingestion, set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` + `CRON_SECRET` and run `database/schema.sql`. The 5 live-data connectors (`lib/live-data/*`) and the daily cron (`/api/cron/ingest`) only write through the no-downgrade policy in `lib/data-governance/*`.
 - **Map basemap is light-only.** OpenFreeMap raster style does not have a dark variant; map labels stay readable on the light tiles regardless of UI theme.
-- **AI is BYOK and opt-in.** Set `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` in `.env.local` to enable the assistant; without both, the route 503s gracefully.
+- **AI is BYOK and opt-in.** Set `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` in Vercel env (or `.env.local`) to enable the assistant; without both, the route 503s gracefully.
+- **Vercel cold start.** `/api/data/*`, `/api/chat`, `/api/cron/ingest` are serverless and may take +800–1500 ms on the first request after ~5 min idle on Hobby tier. Pro tier has always-warm functions.
 - **Russian content** is shipped but may need professional review before production publication — current strings come from compact translation passes, not native-speaker review.

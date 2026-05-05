@@ -25,7 +25,7 @@
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
 - **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 34 data modules.
 - **Verification gate** — `pnpm verify` runs lint, typecheck, source/route validation, governance checks, and Vitest unit tests. Browser, accessibility, and Lighthouse checks are separate heavier commands and should be run before public release.
-- **Lighthouse and axe coverage** — Lighthouse CI and Playwright/axe are configured for key routes. Current accessibility checks gate critical violations and still log known serious contrast findings for review.
+- **Lighthouse and axe coverage** — local sweep across all 17 routes shows **median Performance 91, median Accessibility 98** (six routes hit A11y 100); TBT 13–59 ms; CLS 0 everywhere. Charts lazy-loaded with IntersectionObserver, the map runtime is gated behind a load button, news/contacts filters are server-rendered. Lighthouse CI and Playwright/axe wired into the verification stack.
 - **48 production commits** over ~3 weeks — full git history of architectural decisions, perf waves, and data-governance evolution.
 
 > **Demo-ready with production-oriented guardrails.** Synthetic values should carry `is_demo: true` and be visually flagged. Investment records are split into verified, source-backed/pending, and illustrative/demo buckets so demo rows cannot be mistaken for official pipeline totals. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the provenance map.
@@ -51,7 +51,7 @@ Advanced charts, maps, and analytical exhibits are preserved through hierarchy i
 
 | Layer                | Choice                                                                                          |
 | -------------------- | ----------------------------------------------------------------------------------------------- |
-| Runtime              | Node.js 22 LTS on Vercel · Edge middleware for locale routing                                   |
+| Runtime              | Node.js 24 LTS on Vercel · V8 13 (Maglev) · Edge middleware for locale routing                  |
 | API                  | 11 Next.js Route Handlers (`/api/admin/ingest/*`, `/api/cron/ingest`, `/api/data/*/latest`, `/api/live-data/*`, `/api/chat`) |
 | Operational database | PostgreSQL 17 via Supabase · 12-table schema (audit log, source records, commitments, decisions, comments, ingest runs, raw snapshots, normalized observations, published metrics, review queue, source-version policy) |
 | DB access            | Server-only Supabase REST adapter (`lib/db/adapter.ts`) — no JS client, ~30 KB saved on bundle |
