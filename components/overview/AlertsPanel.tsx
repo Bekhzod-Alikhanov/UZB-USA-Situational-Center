@@ -22,6 +22,7 @@ export function AlertsPanel({ limit = 5 }: { limit?: number }) {
           <li key={c.id}>
             <Link
               href={`/${locale}/commitments?status=${c.status}&q=${encodeURIComponent(c.title.slice(0, 28))}`}
+              prefetch={false}
               className="flex items-start gap-2.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 transition hover:border-[var(--color-border-strong)]"
             >
               <Icon

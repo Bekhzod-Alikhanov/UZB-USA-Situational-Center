@@ -161,6 +161,7 @@ export function Horizon() {
             <li key={it.id}>
               <Link
                 href={`/${locale}${it.href}`}
+                prefetch={false}
                 className="-mx-1.5 grid grid-cols-[68px_18px_1fr_auto] items-center gap-2 rounded px-1.5 py-1 transition hover:bg-[var(--color-surface-2)]"
               >
                 <span className="mono tabular text-[10px] text-[var(--color-ink-faint)]">

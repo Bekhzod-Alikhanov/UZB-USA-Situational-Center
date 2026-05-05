@@ -58,7 +58,7 @@ export function MicroKpi({ tone, label, value, sub, href, className }: MicroKpiP
 
   if (href) {
     return (
-      <Link href={href} style={style} className={wrapClass}>
+      <Link href={href} prefetch={false} style={style} className={wrapClass}>
         {inner}
       </Link>
     );

@@ -98,7 +98,7 @@ export function KpiCard({
 
   if (href) {
     return (
-      <Link href={href} style={style} className={cn("kpi-card group block", className)}>
+      <Link href={href} prefetch={false} style={style} className={cn("kpi-card group block", className)}>
         {inner}
       </Link>
     );

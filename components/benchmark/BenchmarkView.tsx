@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { ArrowDown, ArrowUp, Minus } from "lucide-react";
+import { ArrowDown, ArrowUp, BarChart3, ChevronDown, Minus } from "lucide-react";
 import { benchmark, type RegionalMetric } from "@/data/benchmark";
 import { cn } from "@/lib/utils";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
@@ -69,6 +69,7 @@ function rankOf(rows: RegionalMetric[], metric: MetricKey, country: RegionalMetr
 
 export function BenchmarkView() {
   const [metric, setMetric] = useState<MetricKey>("tradeWithUsUsdBn");
+  const [chartOpen, setChartOpen] = useState(false);
   const active = METRICS.find((m) => m.key === metric)!;
 
   // React 19.2 + React Compiler auto-memoizes this; no explicit useMemo needed.
@@ -157,9 +158,27 @@ export function BenchmarkView() {
             </div>
           </div>
         </div>
-        <LazyMount minHeight={280}>
-          <BenchmarkChart data={chartData} format={active.format} metricLabel={active.label} />
-        </LazyMount>
+        <div className="rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-3">
+          <p className="text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
+            The ranked bar chart is preserved for visual comparison, but it now loads only when requested so the
+            benchmark page can render its KPI and heatmap view before Recharts hydrates.
+          </p>
+          <button
+            type="button"
+            onClick={() => setChartOpen((value) => !value)}
+            aria-expanded={chartOpen}
+            className="mt-3 inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[12px] font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-primary-soft)] hover:text-[var(--color-primary)]"
+          >
+            <BarChart3 className="size-3.5" aria-hidden />
+            {chartOpen ? "Hide chart" : "Load ranked chart"}
+            <ChevronDown className={cn("size-3.5 transition", chartOpen && "rotate-180")} aria-hidden />
+          </button>
+        </div>
+        {chartOpen ? (
+          <LazyMount minHeight={280} rootMargin="0px" className="mt-4">
+            <BenchmarkChart data={chartData} format={active.format} metricLabel={active.label} />
+          </LazyMount>
+        ) : null}
       </div>
 
       <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
@@ -203,7 +222,7 @@ export function BenchmarkView() {
                     {benchmark.map((c) => {
                       const v = c[m.key];
                       const norm = localMax === localMin ? 0.5 : (v - localMin) / (localMax - localMin);
-                      const intensity = 0.08 + norm * 0.42;
+                      const intensity = 0.06 + norm * 0.3;
                       return (
                         <td
                           key={c.country}
@@ -213,7 +232,7 @@ export function BenchmarkView() {
                           )}
                           style={{
                             background: `color-mix(in oklab, var(--color-primary) ${(intensity * 100).toFixed(0)}%, transparent)`,
-                            color: norm > 0.55 ? "var(--color-primary)" : "var(--color-ink)",
+                            color: "var(--color-ink)",
                           }}
                         >
                           {m.format(v)}

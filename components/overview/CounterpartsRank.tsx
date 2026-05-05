@@ -33,7 +33,7 @@ export function CounterpartsRank() {
           className="-mx-1.5 grid grid-cols-[24px_1fr_64px_64px] items-center gap-2 rounded border-b border-[var(--color-border)] px-1.5 py-1.5 transition last:border-0 hover:bg-[var(--color-surface-2)]"
         >
           <span className="mono text-[10px] text-[var(--color-ink-faint)]">{String(i + 1).padStart(2, "0")}</span>
-          <Link href={`/${locale}/investments`} className="min-w-0 hover:text-[var(--color-primary)]">
+          <Link href={`/${locale}/investments`} prefetch={false} className="min-w-0 hover:text-[var(--color-primary)]">
             <div className="flex items-center gap-1.5 truncate text-[12.5px] text-[var(--color-ink)]">
               {c.name}
               {c.pending ? (

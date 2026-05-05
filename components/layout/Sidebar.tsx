@@ -61,6 +61,7 @@ export function Sidebar() {
                     <li key={item.key}>
                       <Link
                         href={href}
+                        prefetch={false}
                         style={isActive ? ({ "--side-tone": toneVar } as React.CSSProperties) : undefined}
                         className={cn(
                           "group relative flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition",

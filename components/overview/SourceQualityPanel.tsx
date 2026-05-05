@@ -110,7 +110,7 @@ function MiniStat({ label, value, tone }: { label: string; value: number; tone: 
         : "bg-[var(--color-neg-soft)] text-[var(--color-neg)]";
   return (
     <div className={cn("rounded-md px-3 py-2", toneClass)}>
-      <div className="text-[10px] font-semibold uppercase tracking-wider opacity-80">{label}</div>
+      <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">{label}</div>
       <div className="mono mt-1 text-[18px] font-semibold tabular">{value}</div>
     </div>
   );

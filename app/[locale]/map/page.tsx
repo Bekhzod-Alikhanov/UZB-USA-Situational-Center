@@ -1,6 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { UsCenteredMap } from "@/components/map/UsCenteredMap";
+import { MapLoadGate } from "@/components/map/MapLoadGate";
 import { uzMissionsUs } from "@/data/uz-missions-us";
 import { uzPlannedVisitsUs } from "@/data/uz-planned-visits-us";
 import { totalFor, usStateMetricsMeta } from "@/data/us-state-metrics";
@@ -93,7 +93,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
       <Card tone="people">
         <CardHeader title={title} sub={subtitle} />
         <CardBody>
-          <UsCenteredMap />
+          <MapLoadGate locale={locale} />
         </CardBody>
       </Card>
     </div>

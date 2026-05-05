@@ -263,6 +263,7 @@ export function RiskRadar({ limit = 6 }: { limit?: number }) {
             <li key={it.id}>
               <Link
                 href={it.href}
+                prefetch={false}
                 className="group flex items-start gap-3 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface)]"
               >
                 <Icon

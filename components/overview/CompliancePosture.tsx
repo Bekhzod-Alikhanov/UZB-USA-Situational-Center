@@ -65,6 +65,7 @@ export function CompliancePosture({ locale }: { locale: string }) {
           <Link
             key={it.code}
             href={`/${locale}/compliance`}
+            prefetch={false}
             className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-2.5 transition hover:bg-[var(--color-surface-2)] hover:shadow-[var(--shadow-hover)]"
           >
             <div className="mb-1 flex items-center justify-between gap-2">

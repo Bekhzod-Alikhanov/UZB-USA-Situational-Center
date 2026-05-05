@@ -53,7 +53,7 @@ export function RelationshipPillars({ locale }: { locale: string }) {
                 </span>
                 <div>
                   <h3 className="text-[13px] font-semibold text-[var(--color-ink)]">{pillar.title}</h3>
-                  <div className="mono mt-0.5 text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
+                  <div className="mono mt-0.5 text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">
                     {pillar.signal}
                   </div>
                 </div>
@@ -63,12 +63,13 @@ export function RelationshipPillars({ locale }: { locale: string }) {
             <div className="mt-3 text-[19px] font-semibold tracking-tight text-[var(--color-ink)]">{pillar.metric}</div>
             <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">{pillar.narrative}</p>
             <div className="mt-auto border-t border-[var(--color-border)] pt-3">
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
                 Next move
               </div>
               <p className="mt-1 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{pillar.action}</p>
               <Link
                 href={`/${locale}${pillar.href}`}
+                prefetch={false}
                 className="mt-2 inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--color-primary)] hover:underline"
               >
                 Open section <ArrowRight className="size-3" />

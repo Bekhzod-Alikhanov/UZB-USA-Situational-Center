@@ -48,10 +48,11 @@ export function SectorsGrid() {
           <Link
             key={s.id}
             href={`/${locale}/investments`}
+            prefetch={false}
             className="group relative overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 transition hover:-translate-y-px hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-hover)]"
           >
             <div className="mb-2 flex items-start justify-between gap-2">
-              <div className="text-[10.5px] font-semibold uppercase tracking-wider" style={{ color: c }}>
+              <div className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
                 {s.label}
               </div>
               <span className="mono shrink-0 text-[9px] uppercase tracking-wider text-[var(--color-ink-faint)]">

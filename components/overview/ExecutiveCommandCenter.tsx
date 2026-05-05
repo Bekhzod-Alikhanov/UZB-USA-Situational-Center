@@ -49,7 +49,9 @@ export function ExecutiveCommandCenter({ locale }: { locale: string }) {
             <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
               {briefing.metrics.map((metric) => (
                 <div key={metric.label} className={cn("rounded-md border px-3 py-2", TONE_CLASS[metric.tone])}>
-                  <div className="text-[10px] font-semibold uppercase tracking-wider opacity-80">{metric.label}</div>
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
+                    {metric.label}
+                  </div>
                   <div className="mono mt-1 text-[18px] font-semibold tabular">{metric.value}</div>
                 </div>
               ))}
@@ -118,6 +120,7 @@ function BriefingList({
                 </div>
                 <Link
                   href={`/${locale}${item.href}`}
+                  prefetch={false}
                   className="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
                   aria-label={`Open ${item.title}`}
                 >
