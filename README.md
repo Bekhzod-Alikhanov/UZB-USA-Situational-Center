@@ -34,19 +34,34 @@ Advanced charts, maps, and analytical exhibits are preserved through hierarchy i
 
 ## Stack
 
-| Layer           | Choice                                                                            |
-| --------------- | --------------------------------------------------------------------------------- |
-| Framework       | Next.js 16.2.4 · App Router · Turbopack · React 19.2                              |
-| Styling         | Tailwind CSS v4 · CSS-var design tokens                                           |
-| State           | Zustand v5 + persist                                                              |
-| i18n            | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru`                                   |
-| Tables          | TanStack Table v8                                                                 |
-| Charts          | Recharts (line/bar/area) · Visx (sankey/chord/treemap)                            |
-| Maps            | maplibre-gl (OpenFreeMap) · Globe.gl (lazy-loaded)                                |
-| Drag-and-drop   | @dnd-kit (Visit Prep Kanban)                                                      |
-| AI              | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Sonnet 4.6)                            |
-| Auth            | Signed, short-lived cookie password gate on `/admin` (server action + middleware) |
-| Package manager | **pnpm**                                                                          |
+### Frontend
+
+| Layer         | Choice                                                                            |
+| ------------- | --------------------------------------------------------------------------------- |
+| Framework     | Next.js 16.2.4 · App Router · Turbopack · React 19.2                              |
+| Styling       | Tailwind CSS v4 · CSS-var design tokens                                           |
+| State         | Zustand v5 + persist                                                              |
+| i18n          | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru`                                   |
+| Tables        | TanStack Table v8                                                                 |
+| Charts        | Recharts (line/bar/area) · Visx (sankey/chord/treemap) · zero-dep SVG `<MiniBars />` |
+| Maps          | maplibre-gl (OpenFreeMap) · Globe.gl · d3-geo Albers USA (lazy-loaded)            |
+| Drag-and-drop | @dnd-kit (Visit Prep Kanban)                                                      |
+
+### Backend & data layer
+
+| Layer                | Choice                                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| Runtime              | Node.js 22 LTS on Vercel · Edge middleware for locale routing                                   |
+| API                  | 11 Next.js Route Handlers (`/api/admin/ingest/*`, `/api/cron/ingest`, `/api/data/*/latest`, `/api/live-data/*`, `/api/chat`) |
+| Operational database | PostgreSQL 17 via Supabase · 12-table schema (audit log, source records, commitments, decisions, comments, ingest runs, raw snapshots, normalized observations, published metrics, review queue, source-version policy) |
+| DB access            | Server-only Supabase REST adapter (`lib/db/adapter.ts`) — no JS client, ~30 KB saved on bundle |
+| Live-data ingestion  | 5 official-source connectors (BEA · U.S. Census · EXIM · World Bank · ForeignAssistance.gov) hit by a daily Vercel cron at 07:00 UTC, lands in `raw_snapshot → normalized_observation → published_metric` pipeline |
+| Data governance      | No-downgrade policy · pending-vs-published states · static fallback · full audit trail (`lib/data-governance/*`) |
+| Auth                 | Signed, short-lived cookie password gate on `/admin` (server action + middleware) · role-aware  |
+| AI                   | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Claude Sonnet 4.6) with prompt caching + streaming   |
+| Build pipeline       | `pnpm verify` (lint + typecheck + 63-source / 204-reference / 21-route validation + governance + Vitest) gated in Vercel build command |
+| Tests                | Vitest (unit) · Playwright (e2e + axe a11y) · Lighthouse CI · GitHub Actions workflow           |
+| Package manager      | **pnpm**                                                                                        |
 
 ## Quick start
 
