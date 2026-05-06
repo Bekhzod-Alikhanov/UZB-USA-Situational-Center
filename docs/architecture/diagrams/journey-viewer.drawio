@@ -1,0 +1,295 @@
+<mxfile host="app.diagrams.net" modified="2026-05-06T11:35:00.000Z" agent="UZUS-Architecture" version="22.1.0" type="device">
+  <diagram id="journey-viewer" name="Journey Viewer">
+    <mxGraphModel dx="1400" dy="1500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Journey · Viewer открывает утренний бриф" style="text;html=1;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lU" value="Viewer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1976d2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lUL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="100" as="sourcePoint" />
+            <mxPoint x="110" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lBr" value="Browser" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1976d2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="220" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lBrL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="100" as="sourcePoint" />
+            <mxPoint x="270" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lN" value="Next.js" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#388e3c;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="380" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lNL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="100" as="sourcePoint" />
+            <mxPoint x="430" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lF" value="FastAPI" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#388e3c;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="540" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lFL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="100" as="sourcePoint" />
+            <mxPoint x="590" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lR" value="Redis" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7b1fa2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="700" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lRL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="100" as="sourcePoint" />
+            <mxPoint x="750" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lDb" value="Postgres" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7b1fa2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="860" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lDbL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="910" y="100" as="sourcePoint" />
+            <mxPoint x="910" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lW" value="Worker (PDF)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ec407a;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="60" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lWL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1080" y="100" as="sourcePoint" />
+            <mxPoint x="1080" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lM" value="MinIO" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7b1fa2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lML" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1230" y="100" as="sourcePoint" />
+            <mxPoint x="1230" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note1" value="Авторизация (см. auth-sequence) уже выполнена · session активна" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;align=center;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="1. открывает /ru" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="170" as="sourcePoint" />
+            <mxPoint x="270" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="2. GET /ru" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="210" as="sourcePoint" />
+            <mxPoint x="430" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="3. session valid" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="370" y="240" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="parTitle" value="par · 5 параллельных GET запросов в server components" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="280" width="700" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="4. GET /api/v1/data/dashboard/overview" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="320" as="sourcePoint" />
+            <mxPoint x="590" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="5. GET cache:dashboard:overview:user_domains" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="350" as="sourcePoint" />
+            <mxPoint x="750" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="altCache" value="alt: cache hit / miss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffde7;strokeColor=#f9a825;dashed=1;verticalAlign=top;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="370" width="580" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" value="6a. cached JSON (~50ms)" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="400" as="sourcePoint" />
+            <mxPoint x="590" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="6b. SELECT FROM marts.* (RLS-фильтр)" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="440" as="sourcePoint" />
+            <mxPoint x="910" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="6c. rows" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="910" y="470" as="sourcePoint" />
+            <mxPoint x="590" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="6d. SET cache TTL 300s" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="500" as="sourcePoint" />
+            <mxPoint x="750" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="7. KPIs JSON" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="550" as="sourcePoint" />
+            <mxPoint x="430" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="8. + /visits/horizon · /risks · /sectors · /sources/quality (parallel)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="380" y="580" width="500" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="m12" value="9. HTML SSR с KPI · ~700ms cold · ~150ms cached" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="620" as="sourcePoint" />
+            <mxPoint x="270" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="10. видит KPI, кликает «Trade $300M»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="670" as="sourcePoint" />
+            <mxPoint x="270" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14" value="11. GET /ru/trade?direction=imports" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="710" as="sourcePoint" />
+            <mxPoint x="430" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m15" value="12. GET /api/v1/data/trade/history" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="740" as="sourcePoint" />
+            <mxPoint x="590" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m16" value="13. SELECT FROM marts.published_metric_history" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="770" as="sourcePoint" />
+            <mxPoint x="910" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m17" value="14. timeseries" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="910" y="800" as="sourcePoint" />
+            <mxPoint x="430" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m18" value="15. trade страница" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="840" as="sourcePoint" />
+            <mxPoint x="270" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m19" value="16. жмёт «Export PDF»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="880" as="sourcePoint" />
+            <mxPoint x="270" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m20" value="17. POST /api/v1/exports/pdf {template, filters}" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="910" as="sourcePoint" />
+            <mxPoint x="430" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m21" value="18. forward + Bearer" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="940" as="sourcePoint" />
+            <mxPoint x="590" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m22" value="19. enqueue Dramatiq · INSERT export_job" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="970" as="sourcePoint" />
+            <mxPoint x="910" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m23" value="20. push job в Redis queue" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1000" as="sourcePoint" />
+            <mxPoint x="750" y="1000" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m24" value="21. 202 Accepted + job_id" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1030" as="sourcePoint" />
+            <mxPoint x="430" y="1030" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m25" value="22. «PDF готовится...»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1060" as="sourcePoint" />
+            <mxPoint x="270" y="1060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bgWorker" value="background worker · pdf_renderer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#ad1457;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1090" width="540" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="m26" value="23. dequeue job" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="1130" as="sourcePoint" />
+            <mxPoint x="1080" y="1130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m27" value="24. Playwright headless рендерит /ru/trade?print=1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="950" y="1160" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="m28" value="25. PDF + watermark + QR-verify" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="950" y="1190" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="m29" value="26. PUT exports-pdf/{job_id}.pdf" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1080" y="1230" as="sourcePoint" />
+            <mxPoint x="1230" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m30" value="27. UPDATE export_job status=done" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1080" y="1270" as="sourcePoint" />
+            <mxPoint x="910" y="1270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m31" value="28. WebSocket push «job_done»" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1330" as="sourcePoint" />
+            <mxPoint x="270" y="1330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m32" value="29. «Скачать PDF»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1370" as="sourcePoint" />
+            <mxPoint x="110" y="1370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m33" value="30. clicks download → GET /api/v1/exports/pdf/{job_id}/file" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="1410" as="sourcePoint" />
+            <mxPoint x="590" y="1410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m34" value="31. validate ownership · stream from MinIO" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1450" as="sourcePoint" />
+            <mxPoint x="1230" y="1450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m35" value="32. PDF binary stream" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1230" y="1480" as="sourcePoint" />
+            <mxPoint x="110" y="1480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

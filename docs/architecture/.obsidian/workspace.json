@@ -1,0 +1,224 @@
+{
+  "main": {
+    "id": "6ee52d9e7d624b29",
+    "type": "split",
+    "children": [
+      {
+        "id": "fef88e9f84405639",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7c7a3d3e417860ff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "diagrams/auth-sequence.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "auth-sequence"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "45fbacf5797848c4",
+    "type": "split",
+    "children": [
+      {
+        "id": "6eb912c995833e37",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa66449a42f7125a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "e4792a2b05e61e5f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "ead24b733c5f0883",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 248.5
+  },
+  "right": {
+    "id": "4815ce86f51511ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "e72dd8232666014a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "50f94900763d6321",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "diagrams/auth-sequence.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для auth-sequence"
+            }
+          },
+          {
+            "id": "0b1ce40b5693e25c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "diagrams/auth-sequence.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из auth-sequence"
+            }
+          },
+          {
+            "id": "3175911dcb6e1377",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
+            }
+          },
+          {
+            "id": "56185ba23088099f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Все свойства"
+            }
+          },
+          {
+            "id": "3d1147888b729523",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "diagrams/auth-sequence.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Структура auth-sequence"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false
+    }
+  },
+  "active": "7c7a3d3e417860ff",
+  "lastOpenFiles": [
+    "diagrams/c4-component.md",
+    "diagrams/bpmn-publication.md",
+    "diagrams/bpmn-ingestion.md",
+    "diagrams/bpmn-commitment.md",
+    "diagrams/auth-sequence.md",
+    "01-target-architecture.md",
+    "diagrams/uml-data-model.drawio",
+    "diagrams/uml-data-model.md",
+    "diagrams/bpmn-commitment.drawio",
+    "diagrams/bpmn-publication.drawio",
+    "diagrams/bpmn-ingestion.drawio",
+    "diagrams/journey-admin.drawio",
+    "diagrams/journey-admin.md",
+    "diagrams/journey-viewer.drawio",
+    "diagrams/journey-viewer.md",
+    "diagrams/rbac-matrix.drawio",
+    "diagrams/rbac-matrix.md",
+    "diagrams/auth-sequence.drawio",
+    "diagrams/data-lineage.drawio",
+    "diagrams/data-lineage.md",
+    "00-overview.md",
+    "diagrams/deployment.drawio",
+    "README.md",
+    "diagrams/deployment.md",
+    "diagrams/README.md",
+    "diagrams/c4-container.md",
+    "diagrams/c4-context.md",
+    "09-glossary.md",
+    "08-migration-roadmap.md",
+    "07-bottlenecks-and-risks.md",
+    "06-business-processes.md",
+    "05-user-journeys.md",
+    "04-data-flow.md",
+    "03-authentication-rbac.md",
+    "02-component-catalog.md"
+  ]
+}
