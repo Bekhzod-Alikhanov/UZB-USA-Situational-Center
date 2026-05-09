@@ -1,0 +1,256 @@
+<mxfile host="app.diagrams.net" modified="2026-05-06T12:00:00.000Z" agent="UZUS-Architecture" version="22.1.0" type="device">
+  <diagram id="uml-data-model" name="UML Data Model">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="UML · Class Diagram · Data Model platform" style="text;html=1;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="10" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="grpAuth" value="auth.*" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#0277bd;dashed=1;verticalAlign=top;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="380" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUser" value="&lt;&lt;table&gt;&gt;&#10;AppUser" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fontSize=12;fillColor=#bbdefb;strokeColor=#0277bd;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="100" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="cAppUser">
+          <mxGeometry y="30" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR1c1" value="«PK» id" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=11;" vertex="1" parent="cAppUserR1">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR1c2" value="UUID" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=11;" vertex="1" parent="cAppUserR1">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR2" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;fillColor=none;fontSize=12;" vertex="1" parent="cAppUser">
+          <mxGeometry y="50" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR2c1" value="email" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR2">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR2c2" value="text UNIQUE" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR2">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR3" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;fillColor=none;" vertex="1" parent="cAppUser">
+          <mxGeometry y="70" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR3c1" value="display_name" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR3">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR3c2" value="text" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR3">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR4" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;fillColor=none;" vertex="1" parent="cAppUser">
+          <mxGeometry y="90" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR4c1" value="agency" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR4">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR4c2" value="text" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR4">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR5" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;fillColor=none;" vertex="1" parent="cAppUser">
+          <mxGeometry y="110" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR5c1" value="primary_role" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR5">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR5c2" value="enum role" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR5">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR6" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;fillColor=none;" vertex="1" parent="cAppUser">
+          <mxGeometry y="130" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR6c1" value="domains[]" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR6">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR6c2" value="text[]" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR6">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR7" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;fillColor=none;" vertex="1" parent="cAppUser">
+          <mxGeometry y="150" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR7c1" value="active" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR7">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR7c2" value="bool" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR7">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR8" value="" style="shape=tableRow;horizontal=0;startSize=0;strokeColor=inherit;fillColor=none;" vertex="1" parent="cAppUser">
+          <mxGeometry y="170" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR8c1" value="last_seen_at" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR8">
+          <mxGeometry width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cAppUserR8c2" value="timestamptz" style="shape=partialRectangle;html=1;strokeColor=inherit;fillColor=none;fontSize=11;" vertex="1" parent="cAppUserR8">
+          <mxGeometry x="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cUserPref" value="&lt;&lt;table&gt;&gt;&#10;UserPreferences" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#0277bd;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="320" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cUserPrefBody" value="«PK,FK» user_id : UUID&#xa;theme : text&#xa;hide_demo : bool&#xa;presentation_mode : bool&#xa;ai_enabled : bool&#xa;default_domain : text&#xa;notification_channels : jsonb" style="text;html=1;align=left;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="65" y="350" width="190" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="grpMart" value="marts.* (governance)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;dashed=1;verticalAlign=top;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="60" width="640" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="cSourceRecord" value="&lt;&lt;table&gt;&gt;&#10;SourceRecord" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a5d6a7;strokeColor=#1b5e20;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="100" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="cSourceRecordBody" value="«PK» id : text&#xa;name : text&#xa;level : enum [A, B]&#xa;url : text&#xa;source_file : text&#xa;fetched_at : date&#xa;data_type : text&#xa;confidence : text&#xa;owner_agency : text&#xa;note : text" style="text;html=1;align=left;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="475" y="135" width="210" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cPolicy" value="&lt;&lt;table&gt;&gt;&#10;SourceVersionPolicy" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a5d6a7;strokeColor=#1b5e20;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="100" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="cPolicyBody" value="«PK» connector_id : text&#xa;«FK» source_id : text&#xa;cadence : enum&#xa;owner : text&#xa;min_relevance_score : numeric&#xa;allow_auto_publish : bool&#xa;replace_rule : enum&#xa;retention_days : int&#xa;dashboard_use : text" style="text;html=1;align=left;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="715" y="135" width="210" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cPub" value="&lt;&lt;table&gt;&gt; PublishedMetric (marts.published_metric)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a5d6a7;strokeColor=#1b5e20;align=center;verticalAlign=top;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="470" y="350" width="600" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="cPubBody" value="«PK» id : text&#xa;«FK» connector_id : text → SourceVersionPolicy&#xa;«FK» source_id : text → SourceRecord&#xa;metric_key : text&#xa;label : text&#xa;domain : enum [trade, macro, assistance, finance, mobility, education, security, operations]&#xa;value : variant (value_num | value_text | value_bool — exactly one)&#xa;unit : text&#xa;period_start : date&#xa;period_end : date&#xa;dimensions : jsonb&#xa;source_url : text&#xa;source_published_at : date&#xa;fetched_at : timestamptz&#xa;is_preliminary : bool&#xa;relevance_score : numeric&#xa;recommended_use : text&#xa;quality_flags : text[]&#xa;-- governance fields --&#xa;approved_at : timestamptz&#xa;«FK» approved_by : UUID → AppUser&#xa;revision_id : text&#xa;is_current : bool  (UNIQUE на metric_key+dimensions WHERE is_current=true)&#xa;-- derived: metric_identity = metric_key + '::' + sorted(dimensions) --" style="text;html=1;align=left;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="475" y="385" width="590" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="cQ" value="&lt;&lt;table&gt;&gt; DataReviewQueue (marts.data_review_queue)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff59d;strokeColor=#f57f17;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="670" width="600" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cQBody" value="«PK» id · «FK» run_id, connector_id, source_id · metric_identity · metric_key · action enum &#xa;severity enum [info, watch, block] · status enum [open, approved, rejected, escalated, closed] · &#xa;reason · observation jsonb · current_metric_id · «FK» reviewer_id → AppUser · reviewer_note · reviewed_at" style="text;html=1;align=left;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="475" y="700" width="590" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="grpRaw" value="raw.* (snapshots, JSONB)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ede7f6;strokeColor=#4527a0;dashed=1;verticalAlign=top;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="60" width="320" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="cRaw" value="&lt;&lt;table&gt;&gt; RawSourceSnapshot" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#9c27b0;strokeColor=#4527a0;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="100" width="280" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cRawBody" value="«PK» id : text&#xa;«FK» run_id : text → IngestRun&#xa;«FK» connector_id : text&#xa;«FK» source_id : text&#xa;source_url : text&#xa;fetched_at : timestamptz&#xa;content_hash : text&#xa;row_count : int&#xa;payload : jsonb&#xa;-- UNIQUE(connector_id, content_hash) --" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="140" width="270" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="grpStg" value="staging / intermediate (dbt transient)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#ff8f00;dashed=1;verticalAlign=top;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="350" width="320" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="cNorm" value="&lt;&lt;view&gt;&gt; NormalizedObservation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fb8c00;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="400" width="280" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="cNormBody" value="connector_id : text&#xa;source_id : text&#xa;metric_key : text&#xa;label : text&#xa;domain : enum&#xa;value : variant&#xa;unit : text&#xa;period_start : date&#xa;period_end : date&#xa;dimensions : jsonb&#xa;source_url : text&#xa;source_published_at : date&#xa;fetched_at : timestamptz&#xa;is_preliminary : bool&#xa;relevance_score : numeric&#xa;recommended_use : text&#xa;quality_flags : text[]&#xa;&#xa;Pydantic model — single source of truth&#xa;для FastAPI и dbt" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="440" width="270" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="grpOps" value="ops.* (operational)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;dashed=1;verticalAlign=top;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="1400" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="cIngestRun" value="&lt;&lt;table&gt;&gt; IngestRun (ops.ingest_run)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fb8c00;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="500" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cIngestRunBody" value="«PK» id : text&#xa;scope : text&#xa;mode : enum [dry-run, write]&#xa;started_at : timestamptz&#xa;finished_at : timestamptz&#xa;summary : jsonb" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="65" y="535" width="270" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cCommit" value="&lt;&lt;table&gt;&gt; CommitmentRecord (ops.commitment_record)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fb8c00;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="640" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="cCommitBody" value="«PK» id : text&#xa;title : text&#xa;status : enum [draft, agreed, in_progress, watch,&#xa;                overdue, done, cancelled]&#xa;owner : text · co_owners : text[]&#xa;due_date : date · agreed_on : date&#xa;sphere : enum&#xa;progress_pct : int [0..100]&#xa;linked_visit_id : text · value_musd : numeric&#xa;«FK» source_id : text → SourceRecord&#xa;is_demo : bool&#xa;«FK» created_by, updated_by : UUID → AppUser&#xa;timestamps" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="65" y="675" width="370" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cDecision" value="&lt;&lt;table&gt;&gt; DecisionRecord (ops.decision_record)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fb8c00;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="640" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="cDecisionBody" value="«PK» id : UUID&#xa;title : text · context : text · recommendation : text&#xa;status : enum [draft, ready, approved, rejected, deferred]&#xa;owner : text&#xa;due_date : date&#xa;source_ids : text[]&#xa;-- E-IMZO signature data --&#xa;signature : bytea&#xa;signed_by_cert_subject : text&#xa;signed_at : timestamptz&#xa;«FK» created_by, updated_by : UUID → AppUser" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="465" y="675" width="370" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cComment" value="&lt;&lt;table&gt;&gt; CommentRecord" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fb8c00;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="640" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cCommentBody" value="«PK» id : UUID&#xa;entity_type : text · entity_id : text&#xa;body : text&#xa;«FK» created_by : UUID → AppUser&#xa;created_at : timestamptz" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="865" y="675" width="270" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cAudit" value="&lt;&lt;table, WORM&gt;&gt; AuditLog (ops.audit_log)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d32f2f;fontColor=#ffffff;align=center;verticalAlign=top;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="900" width="1080" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cAuditBody" value="«PK» id : UUID&#xa;«FK» actor_id : UUID → AppUser    actor_role : text   actor_agency : text   actor_ip : inet&#xa;action : text   entity_type : text   entity_id : text&#xa;before_data : jsonb     after_data : jsonb     reason : text&#xa;trace_id : text (OTel)&#xa;signature : bytea (Ed25519 sign)&#xa;created_at : timestamptz&#xa;-- WORM: триггер блокирует UPDATE/DELETE; цепочка hash (Merkle) с ежедневным якорем --" style="text;html=1;align=left;fontSize=10;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="65" y="935" width="1070" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" style="endArrow=ERmandOne;startArrow=ERmany;html=1;" edge="1" parent="1" source="cAppUser" target="cUserPref">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1l" value="1 ↔ 0..1" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r1">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="r2" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cSourceRecord" target="cPolicy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cSourceRecord" target="cRaw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cSourceRecord" target="cPub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cPolicy" target="cRaw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cPolicy" target="cPub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cIngestRun" target="cRaw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8" style="endArrow=ERmany;startArrow=ERone;html=1;dashed=1;" edge="1" parent="1" source="cRaw" target="cNorm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8l" value="dbt&#10;transform" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r8">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="r9" style="endArrow=ERone;startArrow=ERone;html=1;dashed=1;" edge="1" parent="1" source="cNorm" target="cQ">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r9l" value="evaluate&#10;policy" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r9">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="r10" style="endArrow=ERone;startArrow=ERone;html=1;" edge="1" parent="1" source="cQ" target="cPub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r10l" value="if approved" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r10">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="r11" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cIngestRun" target="cQ">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r12" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cAppUser" target="cCommit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r12l" value="creates / co-owns" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r12">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="r13" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cAppUser" target="cDecision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r14" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cAppUser" target="cComment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r15" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cAppUser" target="cAudit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r16" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cSourceRecord" target="cCommit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r17" style="endArrow=ERmany;startArrow=ERone;html=1;dashed=1;" edge="1" parent="1" source="cCommit" target="cComment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r17l" value="entity_type='commitment'" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r17">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="r18" style="endArrow=ERmany;startArrow=ERone;html=1;dashed=1;" edge="1" parent="1" source="cDecision" target="cComment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r19" style="endArrow=ERmany;startArrow=ERone;html=1;" edge="1" parent="1" source="cAppUser" target="cQ">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r19l" value="reviewer_id" style="edgeLabel;html=1;" connectable="0" vertex="1" parent="r19">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;UML Class Diagram · обозначения&lt;/b&gt;&lt;br/&gt;━ — обязательная связь (FK)&lt;br/&gt;━ ━ — деривативная связь (через dbt трансформацию)&lt;br/&gt;1 ↔ 0..1 — нотация cardinality (Crow's foot)&lt;br/&gt;PK — primary key, FK — foreign key&lt;br/&gt;«PK», «FK», «view», «WORM», «table» — стереотипы UML&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Цвета&lt;/b&gt;&lt;br/&gt;🔵 auth.* (identity)&lt;br/&gt;🟢 marts.* (governance)&lt;br/&gt;🟣 raw.* (snapshots)&lt;br/&gt;🟡 staging/intermediate (transient)&lt;br/&gt;🟠 ops.* (operational)&lt;br/&gt;🔴 audit (WORM)&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Ключевой инвариант&lt;/b&gt;&lt;br/&gt;published_metric: только один is_current=true per metric_key+dimensions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;align=left;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="900" width="540" height="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

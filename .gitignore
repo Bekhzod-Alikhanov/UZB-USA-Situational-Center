@@ -18,6 +18,11 @@
 .DS_Store
 *.pem
 
+# editor / workspace
+.obsidian/
+.idea/
+.vscode/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -1,0 +1,358 @@
+<mxfile host="app.diagrams.net" modified="2026-05-06T11:40:00.000Z" agent="UZUS-Architecture" version="22.1.0" type="device">
+  <diagram id="journey-admin" name="Journey Admin">
+    <mxGraphModel dx="1500" dy="1800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="2000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Journey · Admin · health check + secret rotation + user creation" style="text;html=1;align=center;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lA" value="Admin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1976d2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lAL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="100" as="sourcePoint" />
+            <mxPoint x="110" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lN" value="Next.js" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#388e3c;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="220" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lNL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="100" as="sourcePoint" />
+            <mxPoint x="270" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lF" value="FastAPI" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#388e3c;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="380" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lFL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="100" as="sourcePoint" />
+            <mxPoint x="430" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lK" value="Keycloak" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7b1fa2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="540" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lKL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="100" as="sourcePoint" />
+            <mxPoint x="590" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lV" value="Vault" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d32f2f;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="700" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lVL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="100" as="sourcePoint" />
+            <mxPoint x="750" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lD" value="Dagster API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#388e3c;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="860" y="60" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lDL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="100" as="sourcePoint" />
+            <mxPoint x="920" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lDB" value="Postgres" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#7b1fa2;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lDBL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1070" y="100" as="sourcePoint" />
+            <mxPoint x="1070" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lG" value="Grafana" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#00897b;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lGL" style="endArrow=none;dashed=1;html=1;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="100" as="sourcePoint" />
+            <mxPoint x="1210" y="1900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="phase1" value="ФАЗА 1 · Health check (09:00)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="1240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="1. открывает Grafana Platform Overview" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="160" as="sourcePoint" />
+            <mxPoint x="1210" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="2. dashboard + alert «census_connector failing»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="200" as="sourcePoint" />
+            <mxPoint x="110" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="3. /ru/admin/ingestion" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="240" as="sourcePoint" />
+            <mxPoint x="270" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="4. GET /api/v1/admin/ingestion/runs?days=1" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="270" as="sourcePoint" />
+            <mxPoint x="430" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="5. GET /runs?status=failure" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="300" as="sourcePoint" />
+            <mxPoint x="920" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="phase2" value="ФАЗА 2 · Secret rotation (re-MFA required)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#c62828;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="1240" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" value="6. /ru/admin/secrets" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="380" as="sourcePoint" />
+            <mxPoint x="270" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="7. GET /api/v1/admin/secrets/connectors" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="410" as="sourcePoint" />
+            <mxPoint x="430" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="8. read-meta secret/data/connectors/census" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="440" as="sourcePoint" />
+            <mxPoint x="750" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="9. last_rotated=2026-02-01 (95 days ago)" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="470" as="sourcePoint" />
+            <mxPoint x="270" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="10. жмёт [Rotate] · вставляет новый ключ" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="510" as="sourcePoint" />
+            <mxPoint x="270" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="11. POST /api/v1/admin/secrets/rotate" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="540" as="sourcePoint" />
+            <mxPoint x="430" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="12. challenge re-MFA" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="570" as="sourcePoint" />
+            <mxPoint x="270" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="13. вводит TOTP" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="600" as="sourcePoint" />
+            <mxPoint x="430" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14" value="14. verify TOTP" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="630" as="sourcePoint" />
+            <mxPoint x="590" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="phase3" value="ФАЗА 3 · Vault write + pod restart + audit" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="1240" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="m15" value="15. write secret/data/connectors/census {value, rotated_at, by}" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="720" as="sourcePoint" />
+            <mxPoint x="750" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m16" value="16. ok" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="750" as="sourcePoint" />
+            <mxPoint x="430" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m17" value="17. POST /runs/restart-pod (Dagster k8s integration)" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="790" as="sourcePoint" />
+            <mxPoint x="920" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m18" value="18. pod restarting" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="820" as="sourcePoint" />
+            <mxPoint x="430" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m19" value="19. INSERT ops.audit_log {action: secret:rotate, target: census_api_key} + Ed25519 sig" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="860" as="sourcePoint" />
+            <mxPoint x="1070" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m20" value="20. «Secret rotated. Pod restarting.»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="900" as="sourcePoint" />
+            <mxPoint x="270" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m21" value="21. триггерит manual run · ✅" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="930" as="sourcePoint" />
+            <mxPoint x="920" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="phase4" value="ФАЗА 4 · Создание пользователя (re-MFA)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="980" width="1240" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="m22" value="22. /ru/admin/users" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="1020" as="sourcePoint" />
+            <mxPoint x="270" y="1020" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m23" value="23. GET /api/v1/admin/users" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1050" as="sourcePoint" />
+            <mxPoint x="430" y="1050" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m24" value="24. GET /admin/realms/uzus/users (admin client_credentials)" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1080" as="sourcePoint" />
+            <mxPoint x="590" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m25" value="25. список users" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1110" as="sourcePoint" />
+            <mxPoint x="430" y="1110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m26" value="26. enrich last_seen_at из auth.app_user" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1140" as="sourcePoint" />
+            <mxPoint x="1070" y="1140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m27" value="27. форма [Create]" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="1180" as="sourcePoint" />
+            <mxPoint x="270" y="1180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m28" value="28. POST /api/v1/admin/users {email='ikar@miip.uz', name, agency='МИИП', role='analyst', domains=['trade','finance']}" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1210" as="sourcePoint" />
+            <mxPoint x="430" y="1210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m29" value="29. challenge re-MFA + verify" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1240" as="sourcePoint" />
+            <mxPoint x="590" y="1240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m30" value="30. POST /admin/realms/uzus/users {email, name, ...}" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1280" as="sourcePoint" />
+            <mxPoint x="590" y="1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m31" value="31. created · user_id" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1310" as="sourcePoint" />
+            <mxPoint x="430" y="1310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m32" value="32. PUT role-mappings/realm + user attributes (domains, agency)" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1340" as="sourcePoint" />
+            <mxPoint x="590" y="1340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m33" value="33. trigger required actions: VERIFY_EMAIL · CONFIGURE_TOTP · UPDATE_PASSWORD" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1380" as="sourcePoint" />
+            <mxPoint x="590" y="1380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m34" value="34. INSERT auth.app_user (зеркало) + audit_log" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1420" as="sourcePoint" />
+            <mxPoint x="1070" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m35" value="35. enqueue email «Welcome…»" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1450" as="sourcePoint" />
+            <mxPoint x="270" y="1450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="phase5" value="ФАЗА 5 · Reaction на security alert · Block IP" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1500" width="1240" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="m36" value="36. Grafana alert: «10 failed logins from IP 1.2.3.4 за 5 мин»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="1540" as="sourcePoint" />
+            <mxPoint x="110" y="1540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m37" value="37. /ru/admin/security/incidents" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="1580" as="sourcePoint" />
+            <mxPoint x="270" y="1580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m38" value="38. GET /api/v1/admin/security/incidents/active" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1620" as="sourcePoint" />
+            <mxPoint x="430" y="1620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m39" value="39. query ops.audit_log + Keycloak event log" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1650" as="sourcePoint" />
+            <mxPoint x="1070" y="1650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m40" value="40. жмёт [Block IP at edge]" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="1690" as="sourcePoint" />
+            <mxPoint x="270" y="1690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m41" value="41. POST /api/v1/admin/security/block-ip {ip, duration: 24h}" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="1720" as="sourcePoint" />
+            <mxPoint x="430" y="1720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m42" value="42. CrowdSec bouncer API call + audit_log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="350" y="1750" width="320" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="m43" value="43. «IP blocked»" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="1790" as="sourcePoint" />
+            <mxPoint x="110" y="1790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;Принципы admin journey&lt;/b&gt;&lt;br/&gt;• Re-MFA для каждого critical action (rotate, create user, block, force-logout)&lt;br/&gt;• Никаких прямых SQL — только через FastAPI + audit&lt;br/&gt;• Vault → секреты не показываются в UI&lt;br/&gt;• Audit с Ed25519 signature на каждое действие&lt;br/&gt;• User создаётся через Keycloak Admin API + зеркальная запись в auth.app_user&lt;br/&gt;• CrowdSec на edge блокирует IP без рестарта Traefik" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;align=left;verticalAlign=top;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1860" width="700" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
