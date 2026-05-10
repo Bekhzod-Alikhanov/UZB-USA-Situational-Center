@@ -12,7 +12,10 @@
   --color-border-strong: #cfcbbf;
   --color-ink: #1a1a1a;
   --color-ink-muted: #5a5a5a;
-  --color-ink-faint: #707070;
+  /* Bumped from #707070 → #686868 for WCAG AA contrast (5.19:1 on
+     surface-2 vs the previous 4.64:1 borderline). Used as helper /
+     footnote color across 64 files. */
+  --color-ink-faint: #686868;
 
   --color-primary: #1a3a6c;
   --color-primary-2: #2a4f8a;
@@ -61,6 +64,25 @@
   --shadow-hover: 0 8px 24px rgba(26, 26, 26, 0.08), 0 2px 6px rgba(26, 26, 26, 0.04);
   --shadow-glow-primary: 0 0 0 4px color-mix(in oklab, var(--color-primary) 14%, transparent);
   --shadow-card-elevated: 0 4px 12px rgba(26, 26, 26, 0.06), 0 1px 3px rgba(26, 26, 26, 0.04);
+
+  /* Motion. Used by .kpi-card hover, chart entry transitions, and
+     map paint transitions. Zeroed under prefers-reduced-motion. */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 280ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Spacing scale (4px grid). Establishes a vocabulary for new code;
+     existing Tailwind utilities are not migrated. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
 }
 
 @layer base {
@@ -149,6 +171,33 @@
   }
 }
 
+/* Honor user OS-level reduced-motion preference. Zeros our motion
+   tokens, kills the body noise filter, and forces transitions /
+   animations to a near-zero duration so first paint is stable for
+   vestibular-sensitive users. */
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  :root.dark {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  body::before {
+    display: none !important;
+  }
+  .kpi-card:hover {
+    transform: none !important;
+  }
+}
+
 @utility tabular {
   font-variant-numeric: tabular-nums;
 }
@@ -166,9 +215,9 @@
     @apply relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3.5 sm:p-5;
     box-shadow: var(--shadow-card);
     transition:
-      transform 0.18s ease,
-      box-shadow 0.18s ease,
-      border-color 0.18s ease;
+      transform var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out);
   }
   .kpi-card:hover {
     transform: translateY(-1px);
@@ -356,6 +405,11 @@
   nav,
   header {
     display: none !important;
+  }
+  /* Suppress focus-visible outline in print so a page captured mid-
+     keyboard-focus doesn't render with a navy ring on the PDF. */
+  :focus-visible {
+    outline: none !important;
   }
   .card {
     box-shadow: none !important;
