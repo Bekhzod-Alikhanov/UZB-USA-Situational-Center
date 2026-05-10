@@ -36,9 +36,11 @@ function auditMessageParity() {
     "top.shortcut",
     "demo.badge",
     "compliance.sections.federal",
+    "compliance.calculator.fields.eccn",
     "admin.import",
     "shell.footer.record",
     "investments.workspace.statuses.mou",
+    "agreements.spheres.transport",
   ]);
 
   for (const locale of nonEnglishLocales) {

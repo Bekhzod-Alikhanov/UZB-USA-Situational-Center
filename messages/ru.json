@@ -616,11 +616,50 @@
     "title": "Двусторонние соглашения",
     "subtitle": "138 базовых + 16 инвест-соглашений",
     "categories": {
+      "all": "Все категории",
       "interstate": "Межгосударственные",
       "intergov": "Межправительственные",
       "interagency": "Межведомственные",
       "other": "Прочие",
       "invest": "Инвестиционные"
+    },
+    "spheres": {
+      "all": "Все сферы",
+      "political": "Политика",
+      "economy-trade": "Экономика и торговля",
+      "investment": "Инвестиции",
+      "finance": "Финансы",
+      "energy": "Энергетика",
+      "minerals": "Полезные ископаемые",
+      "agriculture": "Сельское хозяйство",
+      "education": "Образование",
+      "healthcare": "Здравоохранение",
+      "it-digital": "ИТ и цифровизация",
+      "transport": "Транспорт",
+      "defense": "Оборона",
+      "humanitarian": "Гуманитарная сфера",
+      "other": "Прочее"
+    },
+    "statuses": {
+      "in-force": "Действует",
+      "signed": "Подписано",
+      "signed-not-in-force": "Подписано (не действует)",
+      "pending": "Ожидание",
+      "expired": "Истёк срок"
+    },
+    "table": {
+      "headers": {
+        "signed": "Подписано",
+        "title": "Название",
+        "category": "Категория",
+        "sphere": "Сфера",
+        "status": "Статус",
+        "source": "Источник"
+      },
+      "filterTitlePlaceholder": "Фильтр по названию",
+      "filterTitleAria": "Фильтр соглашений по названию",
+      "filterSphereAria": "Фильтр соглашений по сфере",
+      "empty": "Нет соглашений, соответствующих фильтрам."
     }
   },
   "investments": {
@@ -987,7 +1026,30 @@
       "federal": "Federal Register"
     },
     "fetchedAt": "Обновлено",
-    "source": "Источник"
+    "source": "Источник",
+    "calculator": {
+      "fields": {
+        "eccn": "ECCN",
+        "endUse": "Конечное использование",
+        "sanctioned": "Конечный пользователь в SDN-списке"
+      },
+      "endUse": {
+        "civilian": "Гражданское",
+        "dual": "Двойное назначение",
+        "military": "Военное"
+      },
+      "sanctioned": {
+        "no": "Нет",
+        "possibly": "Возможно",
+        "yes": "Да"
+      },
+      "verdicts": {
+        "ok": "Скорее всего разрешено",
+        "review": "Требует рассмотрения",
+        "denied": "Скорее всего отказ"
+      },
+      "disclaimer": "Иллюстративный калькулятор. Реальное лицензирование определяется BIS / DDTC / OFAC — обратитесь к юристу."
+    }
   },
   "staff": {
     "title": "KPI сотрудников",

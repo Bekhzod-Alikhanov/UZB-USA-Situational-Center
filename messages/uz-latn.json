@@ -616,11 +616,50 @@
     "title": "Ikki tomonlama bitimlar",
     "subtitle": "138 asos hujjat + 16 investitsiya bitim",
     "categories": {
+      "all": "Barcha toifalar",
       "interstate": "Davlatlararo",
       "intergov": "Hukumatlararo",
       "interagency": "Idoralararo",
       "other": "Boshqa",
       "invest": "Investitsiya"
+    },
+    "spheres": {
+      "all": "Barcha sohalar",
+      "political": "Siyosat",
+      "economy-trade": "Iqtisodiyot va savdo",
+      "investment": "Investitsiya",
+      "finance": "Moliya",
+      "energy": "Energetika",
+      "minerals": "Foydali qazilmalar",
+      "agriculture": "Qishloq xojaligi",
+      "education": "Talim",
+      "healthcare": "Soglikni saqlash",
+      "it-digital": "IT va raqamli soha",
+      "transport": "Transport",
+      "defense": "Mudofaa",
+      "humanitarian": "Insonparvarlik sohasi",
+      "other": "Boshqa"
+    },
+    "statuses": {
+      "in-force": "Kuchda",
+      "signed": "Imzolangan",
+      "signed-not-in-force": "Imzolangan (kuchga kirmagan)",
+      "pending": "Kutilmoqda",
+      "expired": "Muddati tugagan"
+    },
+    "table": {
+      "headers": {
+        "signed": "Imzolangan",
+        "title": "Nomi",
+        "category": "Toifa",
+        "sphere": "Soha",
+        "status": "Holat",
+        "source": "Manba"
+      },
+      "filterTitlePlaceholder": "Nomi boyicha filtr",
+      "filterTitleAria": "Bitimlarni nomi boyicha filtrlash",
+      "filterSphereAria": "Bitimlarni soha boyicha filtrlash",
+      "empty": "Filtrlarga mos bitimlar topilmadi."
     }
   },
   "investments": {
@@ -987,7 +1026,30 @@
       "federal": "Federal Register"
     },
     "fetchedAt": "Olindi",
-    "source": "Manba"
+    "source": "Manba",
+    "calculator": {
+      "fields": {
+        "eccn": "ECCN",
+        "endUse": "Yakuniy foydalanish",
+        "sanctioned": "Yakuniy foydalanuvchi SDN royxatida"
+      },
+      "endUse": {
+        "civilian": "Fuqarolik",
+        "dual": "Ikki tomonlama foydalanish",
+        "military": "Harbiy"
+      },
+      "sanctioned": {
+        "no": "Yoq",
+        "possibly": "Ehtimol",
+        "yes": "Ha"
+      },
+      "verdicts": {
+        "ok": "Ehtimol ruxsat etiladi",
+        "review": "Korib chiqishni talab qiladi",
+        "denied": "Ehtimol rad etiladi"
+      },
+      "disclaimer": "Illyustrativ kalkulyator. Haqiqiy litsenziyalash BIS / DDTC / OFAC tomonidan belgilanadi — yuristga murojaat qiling."
+    }
   },
   "staff": {
     "title": "Shtab KPI",

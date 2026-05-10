@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { ShieldAlert, ShieldCheck, TriangleAlert } from "lucide-react";
 
@@ -102,17 +103,14 @@ const VERDICT_STYLE = {
   ok: {
     tone: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
     Icon: ShieldCheck,
-    label: "Likely permitted",
   },
   review: {
     tone: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
     Icon: TriangleAlert,
-    label: "Requires review",
   },
   denied: {
     tone: "border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
     Icon: ShieldAlert,
-    label: "Likely denied",
   },
 } as const;
 
@@ -120,15 +118,18 @@ export function ExportCalculator() {
   const [eccn, setEccn] = useState<Eccn>("EAR99");
   const [endUse, setEndUse] = useState<EndUse>("civilian");
   const [sanctioned, setSanctioned] = useState<Sanctioned>("no");
+  const t = useTranslations("compliance.calculator");
 
   const result = useMemo(() => LICENSE_MATRIX[eccn][endUse][sanctioned], [eccn, endUse, sanctioned]);
-  const { tone, Icon, label } = VERDICT_STYLE[result.verdict];
+  const { tone, Icon } = VERDICT_STYLE[result.verdict];
+  const label = t(`verdicts.${result.verdict}`);
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1.3fr]">
       <div className="flex flex-col gap-3">
-        <Field label="ECCN">
+        <Field label={t("fields.eccn")}>
           <select
+            aria-label={t("fields.eccn")}
             value={eccn}
             onChange={(e) => setEccn(e.target.value as Eccn)}
             className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1.5 text-[12.5px]"
@@ -139,12 +140,14 @@ export function ExportCalculator() {
           </select>
         </Field>
 
-        <Field label="End-use">
-          <div className="flex gap-1">
+        <Field label={t("fields.endUse")}>
+          <div className="flex gap-1" role="radiogroup" aria-label={t("fields.endUse")}>
             {(["civilian", "dual", "military"] as EndUse[]).map((v) => (
               <button
                 key={v}
                 type="button"
+                role="radio"
+                aria-checked={endUse === v}
                 onClick={() => setEndUse(v)}
                 className={cn(
                   "flex-1 rounded-md border px-2 py-1.5 text-[11.5px] font-medium transition",
@@ -153,18 +156,20 @@ export function ExportCalculator() {
                     : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)]",
                 )}
               >
-                {v}
+                {t(`endUse.${v}`)}
               </button>
             ))}
           </div>
         </Field>
 
-        <Field label="End-user on SDN list">
-          <div className="flex gap-1">
+        <Field label={t("fields.sanctioned")}>
+          <div className="flex gap-1" role="radiogroup" aria-label={t("fields.sanctioned")}>
             {(["no", "possibly", "yes"] as Sanctioned[]).map((v) => (
               <button
                 key={v}
                 type="button"
+                role="radio"
+                aria-checked={sanctioned === v}
                 onClick={() => setSanctioned(v)}
                 className={cn(
                   "flex-1 rounded-md border px-2 py-1.5 text-[11.5px] font-medium transition",
@@ -173,7 +178,7 @@ export function ExportCalculator() {
                     : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)]",
                 )}
               >
-                {v}
+                {t(`sanctioned.${v}`)}
               </button>
             ))}
           </div>
@@ -186,10 +191,7 @@ export function ExportCalculator() {
           {label}
         </div>
         <p className="text-[13px] leading-relaxed">{result.note}</p>
-        <p className="mt-2 text-[10.5px] italic opacity-80">
-          Simplified illustrative calculator. Actual licensing is determined by BIS / DDTC / OFAC — confirm with
-          counsel.
-        </p>
+        <p className="mt-2 text-[10.5px] italic opacity-80">{t("disclaimer")}</p>
       </div>
     </div>
   );

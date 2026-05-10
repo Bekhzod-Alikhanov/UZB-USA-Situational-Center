@@ -616,11 +616,50 @@
     "title": "Bilateral agreements",
     "subtitle": "138 base documents + 16 investment agreements",
     "categories": {
+      "all": "All categories",
       "interstate": "Interstate",
       "intergov": "Intergovernmental",
       "interagency": "Inter-agency",
       "other": "Other",
       "invest": "Investment"
+    },
+    "spheres": {
+      "all": "All spheres",
+      "political": "Political",
+      "economy-trade": "Economy & trade",
+      "investment": "Investment",
+      "finance": "Finance",
+      "energy": "Energy",
+      "minerals": "Minerals",
+      "agriculture": "Agriculture",
+      "education": "Education",
+      "healthcare": "Healthcare",
+      "it-digital": "IT & digital",
+      "transport": "Transport",
+      "defense": "Defense",
+      "humanitarian": "Humanitarian",
+      "other": "Other"
+    },
+    "statuses": {
+      "in-force": "In force",
+      "signed": "Signed",
+      "signed-not-in-force": "Signed (not in force)",
+      "pending": "Pending",
+      "expired": "Expired"
+    },
+    "table": {
+      "headers": {
+        "signed": "Signed",
+        "title": "Title",
+        "category": "Category",
+        "sphere": "Sphere",
+        "status": "Status",
+        "source": "Source"
+      },
+      "filterTitlePlaceholder": "Filter by title",
+      "filterTitleAria": "Filter agreements by title",
+      "filterSphereAria": "Filter agreements by sphere",
+      "empty": "No agreements match your filters."
     }
   },
   "investments": {
@@ -987,7 +1026,30 @@
       "federal": "Federal Register"
     },
     "fetchedAt": "Fetched",
-    "source": "Source"
+    "source": "Source",
+    "calculator": {
+      "fields": {
+        "eccn": "ECCN",
+        "endUse": "End-use",
+        "sanctioned": "End-user on SDN list"
+      },
+      "endUse": {
+        "civilian": "Civilian",
+        "dual": "Dual-use",
+        "military": "Military"
+      },
+      "sanctioned": {
+        "no": "No",
+        "possibly": "Possibly",
+        "yes": "Yes"
+      },
+      "verdicts": {
+        "ok": "Likely permitted",
+        "review": "Requires review",
+        "denied": "Likely denied"
+      },
+      "disclaimer": "Simplified illustrative calculator. Actual licensing is determined by BIS / DDTC / OFAC — confirm with counsel."
+    }
   },
   "staff": {
     "title": "Staff KPI",

@@ -3,15 +3,8 @@ import { agreements, type Agreement, type AgreementCategory, type AgreementSpher
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
-
-const CATEGORY_LABEL: Record<AgreementCategory, string> = {
-  interstate: "Interstate",
-  intergov: "Intergovernmental",
-  interagency: "Inter-agency",
-  other: "Other",
-  invest: "Investment",
-};
 
 const STATUS_TONE: Record<Agreement["status"], string> = {
   "in-force": "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -38,10 +31,13 @@ const SPHERES: AgreementSphere[] = [
   "other",
 ];
 
+const CATEGORIES = ["all", "interstate", "intergov", "interagency", "other", "invest"] as const;
+
 export function AgreementsTable() {
   const [category, setCategory] = useState<AgreementCategory | "all">("all");
   const [sphere, setSphere] = useState<AgreementSphere | "all">("all");
   const [search, setSearch] = useState("");
+  const t = useTranslations("agreements");
 
   const filtered = useMemo(() => {
     return agreements.filter((a) => {
@@ -58,7 +54,7 @@ export function AgreementsTable() {
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex flex-wrap items-center gap-1">
-          {(["all", "interstate", "intergov", "interagency", "other", "invest"] as const).map((c) => (
+          {CATEGORIES.map((c) => (
             <button
               key={c}
               type="button"
@@ -70,20 +66,20 @@ export function AgreementsTable() {
                   : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
               )}
             >
-              {c === "all" ? "All categories" : CATEGORY_LABEL[c]}
+              {t(`categories.${c}`)}
             </button>
           ))}
         </div>
         <select
-          aria-label="Filter agreements by sphere"
+          aria-label={t("table.filterSphereAria")}
           value={sphere}
           onChange={(e) => setSphere(e.target.value as AgreementSphere | "all")}
           className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
         >
-          <option value="all">All spheres</option>
+          <option value="all">{t("spheres.all")}</option>
           {SPHERES.map((s) => (
             <option key={s} value={s}>
-              {s.replace("-", " / ")}
+              {t(`spheres.${s}`)}
             </option>
           ))}
         </select>
@@ -91,10 +87,10 @@ export function AgreementsTable() {
           <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
             type="search"
-            aria-label="Filter agreements by title"
+            aria-label={t("table.filterTitleAria")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Filter by title"
+            placeholder={t("table.filterTitlePlaceholder")}
             className="w-56 bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
           />
         </label>
@@ -104,12 +100,12 @@ export function AgreementsTable() {
         <table className="table">
           <thead>
             <tr>
-              <th className="w-[92px]">Signed</th>
-              <th>Title</th>
-              <th className="w-[140px]">Category</th>
-              <th className="w-[120px]">Sphere</th>
-              <th className="w-[92px]">Status</th>
-              <th className="w-[120px]">Source</th>
+              <th scope="col" className="w-[92px]">{t("table.headers.signed")}</th>
+              <th scope="col">{t("table.headers.title")}</th>
+              <th scope="col" className="w-[140px]">{t("table.headers.category")}</th>
+              <th scope="col" className="w-[120px]">{t("table.headers.sphere")}</th>
+              <th scope="col" className="w-[92px]">{t("table.headers.status")}</th>
+              <th scope="col" className="w-[120px]">{t("table.headers.source")}</th>
             </tr>
           </thead>
           <tbody>
@@ -125,8 +121,10 @@ export function AgreementsTable() {
                     <div className="mt-0.5 text-[10.5px] italic text-[var(--color-ink-faint)]">{a.note}</div>
                   ) : null}
                 </td>
-                <td className="text-[11.5px] text-[var(--color-ink-muted)]">{CATEGORY_LABEL[a.category]}</td>
-                <td className="text-[11.5px] uppercase tracking-wider text-[var(--color-ink-muted)]">{a.sphere}</td>
+                <td className="text-[11.5px] text-[var(--color-ink-muted)]">{t(`categories.${a.category}`)}</td>
+                <td className="text-[11.5px] uppercase tracking-wider text-[var(--color-ink-muted)]">
+                  {t(`spheres.${a.sphere}`)}
+                </td>
                 <td>
                   <span
                     className={cn(
@@ -134,7 +132,7 @@ export function AgreementsTable() {
                       STATUS_TONE[a.status],
                     )}
                   >
-                    {a.status}
+                    {t(`statuses.${a.status}`)}
                   </span>
                 </td>
                 <td>{a.sourceId ? <SourceBadge sourceId={a.sourceId} /> : null}</td>
@@ -144,7 +142,7 @@ export function AgreementsTable() {
         </table>
         {sortedDesc.length === 0 ? (
           <div className="py-12 text-center text-[13px] text-[var(--color-ink-muted)]">
-            No agreements match your filters.
+            {t("table.empty")}
           </div>
         ) : null}
       </div>
