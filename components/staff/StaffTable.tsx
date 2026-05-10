@@ -18,15 +18,15 @@ export function StaffTable() {
       <table className="table">
         <thead>
           <tr>
-            <th className="w-[30px]">#</th>
-            <th>Analyst</th>
-            <th className="w-[160px]">Role</th>
-            <th className="w-[120px]">Direction</th>
-            <th className="w-[90px] text-right">Assigned</th>
-            <th className="w-[90px] text-right">Completed</th>
-            <th className="w-[100px] text-right">Avg response</th>
-            <th className="w-[80px] text-right">Overdue</th>
-            <th className="w-[110px]">Score</th>
+            <th scope="col" className="w-[30px]">#</th>
+            <th scope="col">Analyst</th>
+            <th scope="col" className="w-[160px]">Role</th>
+            <th scope="col" className="w-[120px]">Direction</th>
+            <th scope="col" className="w-[90px] text-right">Assigned</th>
+            <th scope="col" className="w-[90px] text-right">Completed</th>
+            <th scope="col" className="w-[100px] text-right">Avg response</th>
+            <th scope="col" className="w-[80px] text-right">Overdue</th>
+            <th scope="col" className="w-[110px]">Score</th>
           </tr>
         </thead>
         <tbody>

@@ -83,12 +83,12 @@ export function ComtradeMirror() {
         <table className="table">
           <thead>
             <tr>
-              <th className="w-20">HS-6</th>
-              <th>Commodity</th>
-              <th className="text-right">UZ-side, $</th>
-              <th className="text-right">US-side, $</th>
-              <th className="w-24 text-right">Gap, $</th>
-              <th className="w-16 text-right">Ratio</th>
+              <th scope="col" className="w-20">HS-6</th>
+              <th scope="col">Commodity</th>
+              <th scope="col" className="text-right">UZ-side, $</th>
+              <th scope="col" className="text-right">US-side, $</th>
+              <th scope="col" className="w-24 text-right">Gap, $</th>
+              <th scope="col" className="w-16 text-right">Ratio</th>
             </tr>
           </thead>
           <tbody>

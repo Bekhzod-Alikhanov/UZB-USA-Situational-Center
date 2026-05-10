@@ -62,9 +62,9 @@ export async function ForeignAssistanceView() {
             <table className="table">
               <thead>
                 <tr>
-                  <th>{t("agency")}</th>
-                  <th className="text-right">{t("amount")}</th>
-                  <th className="text-right">{t("share")}</th>
+                  <th scope="col">{t("agency")}</th>
+                  <th scope="col" className="text-right">{t("amount")}</th>
+                  <th scope="col" className="text-right">{t("share")}</th>
                 </tr>
               </thead>
               <tbody>

@@ -215,10 +215,10 @@ function BlockPanel({ block }: { block: ScorecardBlock }) {
           <table className="table">
             <thead>
               <tr>
-                <th>Item</th>
-                <th className="w-32">Status</th>
-                <th className="w-44">Owner</th>
-                <th className="w-32">Due</th>
+                <th scope="col">Item</th>
+                <th scope="col" className="w-32">Status</th>
+                <th scope="col" className="w-44">Owner</th>
+                <th scope="col" className="w-32">Due</th>
               </tr>
             </thead>
             <tbody>

@@ -192,7 +192,7 @@ export function BenchmarkView() {
           <table className="w-full">
             <thead>
               <tr>
-                <th className="sticky left-0 border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-left text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
+                <th scope="col" className="sticky left-0 border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-left text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
                   Metric
                 </th>
                 {benchmark.map((c) => (
@@ -256,13 +256,13 @@ export function BenchmarkView() {
           <table className="table">
             <thead>
               <tr>
-                <th>Country</th>
-                <th className="text-right">WB Rank</th>
-                <th>Visa</th>
-                <th>GSP</th>
-                <th className="text-right">Trade · US ($Bn)</th>
-                <th className="text-right">FDI · US ($M)</th>
-                <th></th>
+                <th scope="col">Country</th>
+                <th scope="col" className="text-right">WB Rank</th>
+                <th scope="col">Visa</th>
+                <th scope="col">GSP</th>
+                <th scope="col" className="text-right">Trade · US ($Bn)</th>
+                <th scope="col" className="text-right">FDI · US ($M)</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>

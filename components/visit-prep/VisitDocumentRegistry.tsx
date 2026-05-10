@@ -173,13 +173,13 @@ export function VisitDocumentRegistry() {
             <table className="table">
               <thead>
                 <tr>
-                  <th className="w-12"></th>
-                  <th>Document title</th>
-                  <th className="w-32">Type</th>
-                  <th className="w-40">Owner</th>
-                  <th className="w-28">Due</th>
-                  <th className="w-20">Size</th>
-                  <th className="w-28">Status</th>
+                  <th scope="col" className="w-12"></th>
+                  <th scope="col">Document title</th>
+                  <th scope="col" className="w-32">Type</th>
+                  <th scope="col" className="w-40">Owner</th>
+                  <th scope="col" className="w-28">Due</th>
+                  <th scope="col" className="w-20">Size</th>
+                  <th scope="col" className="w-28">Status</th>
                 </tr>
               </thead>
               <tbody>
