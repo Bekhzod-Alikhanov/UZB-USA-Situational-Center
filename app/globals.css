@@ -83,6 +83,23 @@
   --space-6: 24px;
   --space-7: 32px;
   --space-8: 40px;
+
+  /* Modular type scale. Canonical sizes for new code (May 2026 design
+     system pass per ui-ux-pro-max skill recommendation for the
+     Government + Analytics Dashboard product profile). Existing
+     hand-tuned sizes inside cards/tables intentionally not migrated —
+     too dense to risk one-shot. Use these tokens for new headers,
+     section titles, body copy. Numbers track Tailwind's natural scale
+     so `text-[var(--text-xl)]` ≈ Tailwind `text-xl`. */
+  --text-xs: 11px;
+  --text-sm: 12.5px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 26px;
+  --text-3xl: 32px;
+  --text-4xl: 40px;
 }
 
 @layer base {
@@ -334,11 +351,15 @@
   .divider {
     @apply h-px w-full bg-[var(--color-border)];
   }
+  /* Page-level section title. Stronger executive presence per the
+     ui-ux-pro-max "Executive Dashboard" pattern (May 2026 redesign):
+     bumped from 18/22px → 20/26px on the shared utility class so all
+     17 routes that consume `.section-title` benefit uniformly. */
   .section-title {
-    @apply serif text-[18px] font-medium tracking-tight text-[var(--color-ink)] sm:text-[22px];
+    @apply serif text-[20px] font-medium leading-[1.15] tracking-tight text-[var(--color-ink)] sm:text-[26px];
   }
   .section-sub {
-    @apply text-[12.5px] text-[var(--color-ink-muted)] sm:text-sm;
+    @apply text-[12.5px] leading-relaxed text-[var(--color-ink-muted)] sm:text-[13.5px];
   }
   .demo-underline {
     text-decoration: underline dotted var(--color-demo);
@@ -428,7 +449,7 @@
     width: 100% !important;
   }
   .section-title {
-    font-size: 22px !important;
+    font-size: 24px !important;
   }
   a {
     color: #1a3a6c !important;
