@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import type { ReactNode, CSSProperties } from "react";
 
 export type SectionTone = "trade" | "visits" | "invest" | "agree" | "people" | "rose" | "slate" | "primary";
+export type CardVariant = "default" | "muted" | "elevated";
 
 const TONE_VAR: Record<SectionTone, string> = {
   trade: "var(--color-trade)",
@@ -14,10 +15,27 @@ const TONE_VAR: Record<SectionTone, string> = {
   primary: "var(--color-primary)",
 };
 
-export function Card({ className, children, tone }: { className?: string; children: ReactNode; tone?: SectionTone }) {
+const VARIANT_CLASS: Record<CardVariant, string> = {
+  default: "",
+  muted: "bg-[var(--color-surface-2)] border-[var(--color-border)]/70 shadow-none",
+  elevated: "shadow-[var(--shadow-card-elevated)]",
+};
+
+export function Card({
+  className,
+  children,
+  tone,
+  variant = "default",
+}: {
+  className?: string;
+  children: ReactNode;
+  tone?: SectionTone;
+  /** Visual weight. `muted` for secondary/operational panels, `elevated` for hero cards. */
+  variant?: CardVariant;
+}) {
   const style = tone ? ({ "--chip-tone": TONE_VAR[tone] } as CSSProperties) : undefined;
   return (
-    <div style={style} className={cn("card", className)}>
+    <div style={style} className={cn("card", VARIANT_CLASS[variant], className)}>
       {children}
     </div>
   );

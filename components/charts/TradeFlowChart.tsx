@@ -51,14 +51,15 @@ export function TradeFlowChart({ height = 300 }: { height?: number }) {
             formatter={(v) => [`$${Number(v).toLocaleString("en-US")}M`, ""]}
           />
           <Legend iconType="plainline" wrapperStyle={{ fontSize: 11, paddingTop: 6 }} />
-          <Area type="monotone" dataKey="Imports" fill="url(#gImp)" stroke="var(--color-primary)" strokeWidth={1.5} />
-          <Area type="monotone" dataKey="Exports" fill="url(#gExp)" stroke="var(--color-pos)" strokeWidth={1.5} />
+          <Area type="monotone" dataKey="Imports" fill="url(#gImp)" stroke="var(--color-primary)" strokeWidth={1.5} isAnimationActive={false} />
+          <Area type="monotone" dataKey="Exports" fill="url(#gExp)" stroke="var(--color-pos)" strokeWidth={1.5} isAnimationActive={false} />
           <Line
             type="monotone"
             dataKey="Turnover"
             stroke="var(--color-ink)"
             strokeWidth={1.75}
             dot={{ r: 2.5, fill: "var(--color-ink)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
+            isAnimationActive={false}
           />
         </ComposedChart>
       )}

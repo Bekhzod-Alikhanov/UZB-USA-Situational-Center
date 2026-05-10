@@ -5,6 +5,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { uzRegions, usMajorCities } from "@/data/regions";
 import { investments } from "@/data/investments";
 import { liveDelegations } from "@/data/delegations";
+import { MAP_COLORS } from "./colors";
 
 type Layer = "invest" | "trade" | "delegations";
 
@@ -60,10 +61,10 @@ export function FlatMap({ activeLayers }: Props) {
           source: "invest-src",
           layout: { visibility: activeLayers.invest ? "visible" : "none" },
           paint: {
-            "circle-color": "#1A3A6C",
+            "circle-color": MAP_COLORS.primary,
             "circle-opacity": 0.55,
             "circle-radius": ["interpolate", ["linear"], ["get", "valueMusd"], 0, 4, 50, 7, 250, 14, 600, 22],
-            "circle-stroke-color": "#1A3A6C",
+            "circle-stroke-color": MAP_COLORS.primary,
             "circle-stroke-width": 1.5,
           },
         });
@@ -79,8 +80,8 @@ export function FlatMap({ activeLayers }: Props) {
             "text-anchor": "top",
           },
           paint: {
-            "text-color": "#1a1a1a",
-            "text-halo-color": "#ffffff",
+            "text-color": MAP_COLORS.ink,
+            "text-halo-color": MAP_COLORS.haloLight,
             "text-halo-width": 1.2,
           },
         });
@@ -109,7 +110,7 @@ export function FlatMap({ activeLayers }: Props) {
           source: "trade-src",
           layout: { visibility: activeLayers.trade ? "visible" : "none" },
           paint: {
-            "line-color": "#C88A12",
+            "line-color": MAP_COLORS.warn,
             "line-width": 1.5,
             "line-dasharray": [1.5, 1.5],
             "line-opacity": 0.75,
@@ -134,9 +135,9 @@ export function FlatMap({ activeLayers }: Props) {
           source: "us-src",
           layout: { visibility: activeLayers.trade ? "visible" : "none" },
           paint: {
-            "circle-color": "#0A7C5A",
+            "circle-color": MAP_COLORS.pos,
             "circle-radius": 4,
-            "circle-stroke-color": "#ffffff",
+            "circle-stroke-color": MAP_COLORS.haloLight,
             "circle-stroke-width": 1,
           },
         });
@@ -164,9 +165,9 @@ export function FlatMap({ activeLayers }: Props) {
           source: "deleg-src",
           layout: { visibility: activeLayers.delegations ? "visible" : "none" },
           paint: {
-            "circle-color": "#A5342A",
+            "circle-color": MAP_COLORS.neg,
             "circle-radius": 7,
-            "circle-stroke-color": "#ffffff",
+            "circle-stroke-color": MAP_COLORS.haloLight,
             "circle-stroke-width": 2,
           },
         });
@@ -182,8 +183,8 @@ export function FlatMap({ activeLayers }: Props) {
             "text-anchor": "top",
           },
           paint: {
-            "text-color": "#1a1a1a",
-            "text-halo-color": "#ffffff",
+            "text-color": MAP_COLORS.ink,
+            "text-halo-color": MAP_COLORS.haloLight,
             "text-halo-width": 1.2,
           },
         });
@@ -197,7 +198,7 @@ export function FlatMap({ activeLayers }: Props) {
             .setLngLat(e.lngLat)
             .setHTML(
               `<div style="font:500 12px system-ui">${escapeHtml(p.name)}</div>
-               <div style="font:400 11px system-ui;color:#555;margin-top:2px">${p.projects} projects · $${p.valueMusd}M</div>`,
+               <div style="font:400 11px system-ui;color:${MAP_COLORS.popupMuted};margin-top:2px">${p.projects} projects · $${p.valueMusd}M</div>`,
             )
             .addTo(map);
         });
@@ -210,7 +211,7 @@ export function FlatMap({ activeLayers }: Props) {
             .setLngLat(e.lngLat)
             .setHTML(
               `<div style="font:500 12px system-ui">${escapeHtml(p.title)}</div>
-               <div style="font:400 11px system-ui;color:#555;margin-top:2px">${escapeHtml(p.head)} · ${p.members} members · ${escapeHtml(p.status)}</div>`,
+               <div style="font:400 11px system-ui;color:${MAP_COLORS.popupMuted};margin-top:2px">${escapeHtml(p.head)} · ${p.members} members · ${escapeHtml(p.status)}</div>`,
             )
             .addTo(map);
         });
