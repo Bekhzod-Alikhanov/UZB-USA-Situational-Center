@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Stat } from "@/components/ui/Stat";
 import { NewsFeed } from "@/components/news/NewsFeed";
 import { news } from "@/data/news";
+import { getRouteSeo } from "@/lib/seo";
 
 type NewsTonality = "positive" | "neutral" | "critical";
 type NewsTag = "presidential" | "trade" | "investment" | "minerals" | "security" | "diplomatic" | "culture" | "economy";
@@ -19,6 +21,11 @@ const VALID_TAGS = new Set<NewsTag | "all">([
   "culture",
   "economy",
 ]);
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "news" });
+}
 
 export default async function NewsPage({
   params,
@@ -50,10 +57,10 @@ export default async function NewsPage({
           <p className="section-sub">{t("subtitle")}</p>
         </div>
         <div className="hidden gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
-          <Stat label="Positive" value={positive.toString()} tone="pos" />
-          <Stat label="Neutral" value={neutral.toString()} />
-          <Stat label="Critical" value={critical.toString()} tone="neg" />
-          <Stat label="Total" value={news.length.toString()} />
+          <Stat label={t("stats.positive")} value={positive.toString()} tone="pos" />
+          <Stat label={t("stats.neutral")} value={neutral.toString()} />
+          <Stat label={t("stats.critical")} value={critical.toString()} tone="neg" />
+          <Stat label={t("stats.total")} value={news.length.toString()} />
         </div>
       </div>
 

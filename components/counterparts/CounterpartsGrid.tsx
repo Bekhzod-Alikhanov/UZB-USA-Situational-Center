@@ -1,11 +1,13 @@
 "use client";
-import { counterparts, PARTY_TONE, ROLE_LABEL, STANCE_TEXT, type CounterpartRole } from "@/data/counterparts";
+import { useTranslations } from "next-intl";
+import { counterparts, PARTY_TONE, STANCE_TEXT, type CounterpartRole } from "@/data/counterparts";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 
 export function CounterpartsGrid({ locale }: { locale: string }) {
+  const t = useTranslations("counterparts");
   const [role, setRole] = useState<CounterpartRole | "all">("all");
   const [search, setSearch] = useState("");
 
@@ -47,17 +49,17 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
                 : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] hover:border-[var(--color-border-strong)]",
             )}
           >
-            {r === "all" ? "All" : ROLE_LABEL[r as CounterpartRole]}
+            {r === "all" ? t("grid.all") : t(`grid.roles.${r}`)}
           </button>
         ))}
         <label className="ml-auto flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px]">
           <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
             type="search"
-            aria-label="Search counterparts by name or title"
+            aria-label={t("search")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search name or title"
+            placeholder={t("search")}
             className="w-56 bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
           />
         </label>
@@ -85,7 +87,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
                 ) : null}
               </div>
               <span className="text-[10.5px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-                {ROLE_LABEL[c.role]}
+                {t(`grid.roles.${c.role}`)}
               </span>
             </div>
             <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{c.name}</h3>
@@ -93,7 +95,9 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
             <div className="mt-auto flex items-center justify-between gap-2 border-t border-[var(--color-border)] pt-2 text-[11px]">
               <span className={cn("font-medium", STANCE_TEXT[c.stanceOnUz])}>{c.stanceOnUz}</span>
               <span className="mono tabular text-[var(--color-ink-muted)]">
-                {c.priorEngagements.length} engagement{c.priorEngagements.length === 1 ? "" : "s"}
+                {t(c.priorEngagements.length === 1 ? "grid.engagement" : "grid.engagements", {
+                  count: c.priorEngagements.length,
+                })}
               </span>
             </div>
           </Link>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   TrendingUp,
@@ -20,6 +21,7 @@ import { grants } from "@/data/grants";
 import { KpiCard } from "@/components/overview/KpiCard";
 import { MicroKpi } from "@/components/overview/MicroKpi";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
+import { ChartNarration } from "@/components/ui/ChartNarration";
 import { TradeFlowEditorial } from "@/components/overview/TradeFlowEditorial";
 import { MonthlyBars } from "@/components/overview/MonthlyBars";
 import { SectorsGrid } from "@/components/overview/SectorsGrid";
@@ -31,6 +33,12 @@ import { PrintButton } from "@/components/exports/PrintButton";
 import { ExecutiveCommandCenter } from "@/components/overview/ExecutiveCommandCenter";
 import { RelationshipPillars } from "@/components/overview/RelationshipPillars";
 import { SourceQualityPanel } from "@/components/overview/SourceQualityPanel";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "overview" });
+}
 
 export default async function OverviewPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -48,30 +56,37 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
   const verifiedInvestmentValue = investmentCredibilitySummary.verified.totalValueUsdM;
   const pendingInvestmentRows = investmentCredibilitySummary.pending.totalProjects;
   const demoInvestmentRows = investmentCredibilitySummary.illustrativeDemo.totalProjects;
+  const narrationLabels = {
+    what: t("narrationLabels.what"),
+    why: t("narrationLabels.why"),
+    how: t("narrationLabels.how"),
+    source: t("narrationLabels.source"),
+  };
   const executiveSignals = [
     {
-      label: "Trade relationship",
-      value: `2025 turnover $${y2025.turnover.toLocaleString("en-US")}M`,
-      note: "Goods flows are growing, but the bilateral balance remains import-heavy from the Uzbekistan view.",
+      label: t("story.signals.trade.label"),
+      value: t("story.signals.trade.value", { turnover: y2025.turnover.toLocaleString("en-US") }),
+      note: t("story.signals.trade.note"),
     },
     {
-      label: "Investment credibility",
-      value: `$${(verifiedInvestmentValue / 1000).toFixed(2)}B verified`,
-      note: `${pendingInvestmentRows} source-backed rows need owner review; ${demoInvestmentRows} illustrative rows are excluded from the headline.`,
+      label: t("story.signals.investment.label"),
+      value: t("story.signals.investment.value", { value: (verifiedInvestmentValue / 1000).toFixed(2) }),
+      note: t("story.signals.investment.note", { pending: pendingInvestmentRows, demo: demoInvestmentRows }),
     },
     {
-      label: "Diplomatic momentum",
-      value: `${agreementsAggregate.totalDocuments} bilateral documents`,
-      note: "Visits, agreements, and forums now need a tighter project/action conversion layer.",
+      label: t("story.signals.diplomacy.label"),
+      value: t("story.signals.diplomacy.value", { count: agreementsAggregate.totalDocuments }),
+      note: t("story.signals.diplomacy.note"),
     },
   ];
   const executiveActions = [
-    "Prioritize source-backed investment and privatization records before external briefings.",
-    "Use Trade & Economic Flows for the quote-ready series; keep HS/ITC detail in advanced analysis.",
-    "Track bottlenecks through commitments, compliance, and sector next actions rather than isolated pages.",
+    t("story.actions.one"),
+    t("story.actions.two"),
+    t("story.actions.three"),
   ];
 
-  const dateLabel = new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-GB", {
+  const dateLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
+  const dateLabel = new Intl.DateTimeFormat(dateLocale, {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -85,29 +100,22 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">
               <span className="size-1 rounded-full bg-[var(--color-primary)]" />
-              {locale === "ru" ? "Ежедневная сводка · " : "Daily brief · "}
+              {t("hero.dailyBrief")} ·
               {dateLabel}
             </span>
           </div>
           <h1 className="serif text-[24px] font-medium leading-[1.05] tracking-tight text-[var(--color-ink)] sm:text-[32px] lg:text-[40px]">
-            {locale === "ru" ? (
-              <>
-                Сотрудничество <span className="text-[var(--color-ink-muted)]">Узбекистан · США</span>
-              </>
-            ) : (
-              <>
-                Cooperation brief · <span className="text-[var(--color-ink-muted)]">UZ · US</span>
-              </>
-            )}
+            {t("hero.titleLead")} · <span className="text-[var(--color-ink-muted)]">{t("hero.titleAccent")}</span>
           </h1>
           <p className="mt-1.5 max-w-2xl text-[12px] leading-relaxed text-[var(--color-ink-muted)] sm:text-[13px]">
-            {locale === "ru"
-              ? "Утверждено постановлением Президента Ф-4 (17.02.2026). Источники свежие; помеченные значения подлежат уточнению."
-              : "Authorized by Presidential Ordinance Ф-4 (17.02.2026). Sources fresh; flagged values pending replacement."}
+            {t("hero.subtitle")}
+          </p>
+          <p className="mt-1 max-w-2xl text-[11.5px] leading-relaxed text-[var(--color-ink-faint)]">
+            {t("hero.mandate")}
           </p>
         </div>
         <div className="shrink-0 self-start sm:self-end">
-          <PrintButton label={locale === "ru" ? "Экспорт PDF" : "Export PDF"} />
+          <PrintButton label={t("hero.print")} />
         </div>
       </header>
 
@@ -116,8 +124,8 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           <CardHeader
             icon={<CheckCircle2 className="size-3.5" />}
             tone="primary"
-            title="Executive brief"
-            sub="Relationship state, opportunities, risks, and recommended actions before the full analytical workspace"
+            title={t("story.executiveTitle")}
+            sub={t("story.executiveSub")}
           />
           <CardBody>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -138,8 +146,8 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           <CardHeader
             icon={<AlertTriangle className="size-3.5" />}
             tone="rose"
-            title="Recommended next actions"
-            sub="Decision-oriented layer; detailed registries remain below"
+            title={t("story.actionsTitle")}
+            sub={t("story.actionsSub")}
           />
           <CardBody>
             <ol className="space-y-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
@@ -166,9 +174,9 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub="UZ Stat · 2025"
+          sub={t("kpi.uzStat2025")}
           deltaPct={turnoverDelta}
-          deltaLabel="vs '24"
+          deltaLabel={t("kpi.versus2024")}
           href={`/${locale}/trade`}
         />
         <KpiCard
@@ -181,9 +189,9 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub="Jan '26: $32K"
+          sub={t("kpi.jan2026Exports")}
           deltaPct={exportsDelta}
-          deltaLabel="vs '24"
+          deltaLabel={t("kpi.versus2024")}
           href={`/${locale}/trade?direction=exports`}
         />
         <KpiCard
@@ -196,9 +204,9 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub={`Jan '26: +${tradeJan2026.importsGrowthPct}%`}
+          sub={t("kpi.jan2026Imports", { growth: tradeJan2026.importsGrowthPct })}
           deltaPct={importsDelta}
-          deltaLabel="vs '24"
+          deltaLabel={t("kpi.versus2024")}
           href={`/${locale}/trade?direction=imports`}
         />
         <KpiCard
@@ -211,7 +219,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
             </>
           }
-          sub={locale === "ru" ? "дефицит расширился" : "deficit widened"}
+          sub={t("kpi.deficitWidened")}
           delta="neg"
           href={`/${locale}/trade`}
         />
@@ -223,35 +231,38 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           tone="agree"
           label={t("kpi.agreements")}
           value={agreementsAggregate.totalDocuments}
-          sub={`+${agreementsAggregate.totalInvestAgreements} invest-agreements`}
+          sub={t("kpi.investAgreements", { count: agreementsAggregate.totalInvestAgreements })}
           href={`/${locale}/agreements`}
         />
         <MicroKpi
           tone="invest"
           label={t("kpi.projects")}
           value={investmentCredibilitySummary.verified.totalProjects}
-          sub={`$${(verifiedInvestmentValue / 1000).toFixed(2)}B verified · ${pendingInvestmentRows} pending`}
+          sub={t("kpi.verifiedPending", {
+            value: (verifiedInvestmentValue / 1000).toFixed(2),
+            pending: pendingInvestmentRows,
+          })}
           href={`/${locale}/investments`}
         />
         <MicroKpi
           tone="visits"
           label={t("kpi.relations")}
-          value="34 yrs"
-          sub="since 1992-02-19"
+          value={t("kpi.relationsValue")}
+          sub={t("kpi.sinceDate")}
           href={`/${locale}/visits`}
         />
         <MicroKpi
           tone="people"
           label={t("kpi.delegations")}
           value={liveDelegations.length}
-          sub={anchor ? `next: ${anchor.date}` : undefined}
+          sub={anchor ? t("kpi.nextDate", { date: anchor.date }) : undefined}
           href={`/${locale}/visits`}
         />
         <MicroKpi
           tone="rose"
-          label={locale === "ru" ? "Гранты" : "Grants"}
+          label={t("kpi.grants")}
           value={`$${grantsTotal.toFixed(1)}M`}
-          sub={`${grants.length} programs`}
+          sub={t("kpi.grantPrograms", { count: grants.length })}
           href={`/${locale}/grants`}
         />
       </div>
@@ -262,8 +273,8 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
         <CardHeader
           icon={<Layers className="size-3.5" />}
           tone="primary"
-          title="Relationship pillars"
-          sub="Diplomacy, trade, investment, security, education, mobility, and regional strategy - each with a next move"
+          title={t("cards.relationshipPillars.title")}
+          sub={t("cards.relationshipPillars.sub")}
         />
         <CardBody>
           <RelationshipPillars locale={locale} />
@@ -281,10 +292,17 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               icon={<TrendingUp className="size-3.5" />}
               tone="trade"
               title={t("flow")}
-              sub="USD M · 2017–2025 · UZ Stat (turnover dashed)"
+              sub={t("cards.flowSub")}
             />
             <CardBody>
               <TradeFlowEditorial height={250} />
+              <ChartNarration
+                labels={narrationLabels}
+                what={t("narration.flow.what")}
+                why={t("narration.flow.why")}
+                how={t("narration.flow.how")}
+                source={t("narration.flow.source")}
+              />
             </CardBody>
           </Card>
 
@@ -292,15 +310,17 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             <CardHeader
               icon={<Layers className="size-3.5" />}
               tone="invest"
-              title={locale === "ru" ? "Сектора" : "Sectors"}
-              sub={
-                locale === "ru"
-                  ? "8 направлений · агрегировано из investments.ts"
-                  : "8 lanes · aggregated from investments.ts"
-              }
+              title={t("cards.sectorsTitle")}
+              sub={t("cards.sectorsSub")}
             />
             <CardBody>
               <SectorsGrid />
+              <ChartNarration
+                labels={narrationLabels}
+                what={t("narration.sectors.what")}
+                why={t("narration.sectors.why")}
+                how={t("narration.sectors.how")}
+              />
             </CardBody>
           </Card>
 
@@ -309,15 +329,15 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               <CardHeader
                 icon={<CalendarDays className="size-3.5" />}
                 tone="trade"
-                title={locale === "ru" ? "Месячные" : "Monthly"}
-                sub={locale === "ru" ? "последние 6 мес. · Census" : "last 6 mo · Census"}
+                title={t("cards.monthlyTitle")}
+                sub={t("cards.monthlySub")}
               />
               <CardBody>
                 <MonthlyBars height={180} />
                 <div className="mt-3 grid grid-cols-2 gap-2 text-[11px]">
                   <div className="rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
                     <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                      Exp Jan &apos;26
+                      {t("cards.monthlyExportKpi")}
                     </div>
                     <div className="mono mt-0.5 flex items-baseline gap-1.5 text-[13.5px] font-semibold tabular text-[var(--color-ink)]">
                       $19.0M
@@ -326,7 +346,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
                   </div>
                   <div className="rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
                     <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                      Imp Jan &apos;26
+                      {t("cards.monthlyImportKpi")}
                     </div>
                     <div className="mono mt-0.5 flex items-baseline gap-1.5 text-[13.5px] font-semibold tabular text-[var(--color-ink)]">
                       $7.1M
@@ -334,6 +354,12 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
                     </div>
                   </div>
                 </div>
+                <ChartNarration
+                  labels={narrationLabels}
+                  what={t("narration.monthly.what")}
+                  why={t("narration.monthly.why")}
+                  how={t("narration.monthly.how")}
+                />
               </CardBody>
             </Card>
 
@@ -341,8 +367,8 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
               <CardHeader
                 icon={<Users2 className="size-3.5" />}
                 tone="people"
-                title={locale === "ru" ? "Топ-партнёры США" : "Top US partners"}
-                sub={locale === "ru" ? "по объёму инвестиций" : "by invested volume"}
+                title={t("cards.partnersTitle")}
+                sub={t("cards.partnersSub")}
               />
               <CardBody>
                 <CounterpartsRank />
@@ -357,11 +383,17 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             <CardHeader
               icon={<AlertTriangle className="size-3.5" />}
               tone="rose"
-              title={locale === "ru" ? "Сигналы и риски" : "Signals & risks"}
-              sub={locale === "ru" ? "live-агрегатор по 4 реестрам" : "live aggregator across 4 registries"}
+              title={t("cards.riskTitle")}
+              sub={t("cards.riskSub")}
             />
             <CardBody>
               <RiskRadar limit={6} />
+              <ChartNarration
+                labels={narrationLabels}
+                what={t("narration.risk.what")}
+                why={t("narration.risk.why")}
+                how={t("narration.risk.how")}
+              />
             </CardBody>
           </Card>
 
@@ -369,8 +401,8 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             <CardHeader
               icon={<CalendarDays className="size-3.5" />}
               tone="visits"
-              title={locale === "ru" ? "Горизонт 90 дней" : "90-day horizon"}
-              sub={locale === "ru" ? "визиты, события, дедлайны" : "visits, events, deadlines"}
+              title={t("cards.horizonTitle")}
+              sub={t("cards.horizonSub")}
             />
             <CardBody>
               <Horizon />
@@ -381,11 +413,17 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             <CardHeader
               icon={<Gift className="size-3.5" />}
               tone="invest"
-              title={locale === "ru" ? "Гранты" : "Grants"}
-              sub={`$${grantsTotal.toFixed(2)}M · ${grants.length} programs`}
+              title={t("kpi.grants")}
+              sub={`$${grantsTotal.toFixed(2)}M · ${t("kpi.grantPrograms", { count: grants.length })}`}
             />
             <CardBody>
               <GrantsDonut size={132} />
+              <ChartNarration
+                labels={narrationLabels}
+                what={t("narration.grants.what")}
+                why={t("narration.grants.why")}
+                how={t("narration.grants.how")}
+              />
             </CardBody>
           </Card>
         </div>

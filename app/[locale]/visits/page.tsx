@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { VisitsTabs } from "@/components/visits/VisitsTabs";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "visits" });
+}
 
 export default async function VisitsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

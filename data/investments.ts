@@ -43,9 +43,13 @@ export interface Investment {
   verificationStatus?: InvestmentSourceConfidence;
   visibility?: InvestmentVisibility;
   investmentType?: "greenfield" | "brownfield" | "portfolio" | "fund" | "equipment" | "services" | "source_needed";
+  projectOwner?: string;
+  governmentCounterpart?: string;
+  stageDetail?: string;
   usCompanyRelevance?: string;
   riskLevel?: InvestmentRiskLevel;
   requiredApprovals?: string[];
+  nextAction?: string;
   nextStep?: string;
   blockers?: string[];
   lastUpdatedDate?: string;
@@ -752,6 +756,69 @@ export function investmentConfidence(investment: Investment): InvestmentSourceCo
   if (investment.sourceId === "tradegov_mining_2025") return "verified_official";
   if (investment.sourceId?.startsWith("input_")) return "internal_unverified";
   return "media_reported";
+}
+
+export interface InvestmentActionProfile {
+  projectOwner: string;
+  counterpart: string;
+  stage: string;
+  nextAction: string;
+  blockers: string[];
+  usCompanyRelevance: string;
+  quoteSafe: boolean;
+  publicationGuidance: string;
+}
+
+function statusAction(status: InvestmentStatus) {
+  switch (status) {
+    case "operating":
+      return "Capture aftercare needs, expansion signals, and measurable outcomes.";
+    case "construction":
+      return "Confirm implementation milestone, permits, financing, and delivery risks.";
+    case "agreed":
+      return "Turn agreement into an implementation owner, timetable, and source-backed milestone.";
+    case "negotiation":
+      return "Clarify decision maker, commercial terms, bottlenecks, and next meeting.";
+    case "mou":
+      return "Convert MoU into due-diligence pack, counterpart owner, and decision deadline.";
+    case "paused":
+      return "Document blocker, reactivation condition, and whether the row should remain visible.";
+  }
+}
+
+export function investmentActionProfile(investment: Investment): InvestmentActionProfile {
+  const confidence = investmentConfidence(investment);
+  const sourceBacked = confidence === "verified_official" || confidence === "company_confirmed";
+  const needsSource = confidence === "source_needed" || confidence === "illustrative_demo";
+
+  const blockers = investment.blockers?.length
+    ? investment.blockers
+    : needsSource
+      ? ["Owner-supplied source record required", "Public briefing use not approved"]
+      : confidence === "internal_unverified"
+        ? ["Owner review required before external publication"]
+        : [];
+
+  return {
+    projectOwner:
+      investment.projectOwner ??
+      (investment.is_demo ? "MIIT / UzInvest source owner needed" : investment.partnerUz || "Owner to confirm"),
+    counterpart: investment.governmentCounterpart ?? investment.partnerUz,
+    stage: investment.stageDetail ?? investment.status,
+    nextAction: investment.nextAction ?? investment.nextStep ?? statusAction(investment.status),
+    blockers,
+    usCompanyRelevance:
+      investment.usCompanyRelevance ??
+      (investment.partnerUs.includes("under registration") || investment.partnerUs.includes("(")
+        ? "U.S. company/investor fit requires owner confirmation."
+        : `Relevant U.S. counterpart: ${investment.partnerUs}.`),
+    quoteSafe: sourceBacked && !investment.is_demo,
+    publicationGuidance: sourceBacked
+      ? "Can support executive briefing when shown with source badge and as-of context."
+      : investment.is_demo
+        ? "Illustrative workflow row only; do not cite as a real project or official pipeline value."
+        : "Useful for internal coordination; owner review and source confirmation required before publication.",
+  };
 }
 
 function summarizeInvestmentSet(rows: Investment[]) {

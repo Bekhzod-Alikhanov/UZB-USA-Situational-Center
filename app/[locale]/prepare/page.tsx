@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   Plane,
@@ -25,12 +26,20 @@ import { VisitLogisticsMatrix } from "@/components/visit-prep/VisitLogisticsMatr
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { nextAnchorVisit } from "@/data/visits";
 import { visitPipelines, visitOutcomes } from "@/data/visit-prep";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "prepare" });
+}
 
 export default async function PreparePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("prepare");
   const next = nextAnchorVisit(new Date());
+  const documentRegistryTitle =
+    locale === "ru" ? "Реестр документов" : locale === "uz-latn" ? "Hujjatlar reestri" : "Document registry";
 
   return (
     <div className="flex flex-col gap-6">
@@ -111,7 +120,7 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         <CardHeader
           icon={<FileText className="size-3.5" />}
           tone="agree"
-          title="Document registry"
+          title={documentRegistryTitle}
           sub="Titles, owners, statuses, due dates — never the document body"
         />
         <CardBody>

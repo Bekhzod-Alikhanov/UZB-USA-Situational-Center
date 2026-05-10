@@ -18,6 +18,7 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
   const tNav = useTranslations("nav");
   const tBrand = useTranslations("brand");
   const tGroups = useTranslations("navGroups");
+  const tShell = useTranslations("shell");
   const [open, setOpen] = useState(false);
   // Track the previous pathname so the drawer closes only when the route
   // actually changes (not on initial mount). This is "syncing UI to an
@@ -66,7 +67,7 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
             </div>
             <Dialog.Close
               className="rounded-md p-1.5 text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
-              aria-label="Close menu"
+              aria-label={tShell("closeMenu")}
             >
               <X className="size-4" />
             </Dialog.Close>
@@ -145,11 +146,11 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
           <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2.5">
             <div className="flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
               <MapPin className="size-3" />
-              <span>Tashkent · Presidential Administration</span>
+              <span>{tShell("footer.location")}</span>
             </div>
             <div className="mt-1 text-[10px] text-[var(--color-ink-faint)]">
               <Landmark className="mr-1 inline size-2.5" />
-              Ф-4 · 17.02.2026
+              {tShell("footer.record")}
             </div>
           </div>
         </Dialog.Content>

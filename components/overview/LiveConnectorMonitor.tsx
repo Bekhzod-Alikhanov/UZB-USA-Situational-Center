@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CheckCircle2, RefreshCw, Server, TriangleAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type ProbeStatus = number | "not-probed" | "not-configured" | "error";
 
@@ -52,6 +53,7 @@ async function fetchHealth(probe = false) {
 }
 
 export function LiveConnectorMonitor() {
+  const t = useTranslations("overview.sourceQuality.monitor");
   const [payload, setPayload] = useState<HealthPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [probing, setProbing] = useState(false);
@@ -67,7 +69,7 @@ export function LiveConnectorMonitor() {
         }
       })
       .catch((err) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : "Health check failed");
+        if (!cancelled) setError(err instanceof Error ? err.message : t("unavailable"));
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -75,7 +77,7 @@ export function LiveConnectorMonitor() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [t]);
 
   const probesById = useMemo(() => new Map(payload?.probes.map((probe) => [probe.id, probe]) ?? []), [payload]);
   const liveReady = payload?.connectors.filter((connector) => connector.status === "live-ready").length ?? 0;
@@ -86,10 +88,14 @@ export function LiveConnectorMonitor() {
     try {
       setPayload(await fetchHealth(true));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Probe failed");
+      setError(err instanceof Error ? err.message : t("unavailable"));
     } finally {
       setProbing(false);
     }
+  }
+
+  function statusLabel(status: ProbeStatus | HealthConnector["status"]) {
+    return typeof status === "number" ? String(status) : t(`probeStatus.${status}`);
   }
 
   return (
@@ -98,13 +104,17 @@ export function LiveConnectorMonitor() {
         <div className="flex min-w-0 items-center gap-2">
           <Server className="size-4 shrink-0 text-[var(--color-primary)]" />
           <div className="min-w-0">
-            <div className="text-[12px] font-semibold text-[var(--color-ink)]">Operational data monitor</div>
+            <div className="text-[12px] font-semibold text-[var(--color-ink)]">{t("title")}</div>
             <div className="truncate text-[10.5px] text-[var(--color-ink-muted)]">
               {payload
-                ? `${payload.database.mode} mode, ${liveReady}/${payload.connectors.length} live-ready connectors`
+                ? t("ready", {
+                    mode: payload.database.mode,
+                    liveReady,
+                    total: payload.connectors.length,
+                  })
                 : loading
-                  ? "Checking readiness..."
-                  : "Health check unavailable"}
+                  ? t("checking")
+                  : t("unavailable")}
             </div>
           </div>
         </div>
@@ -113,10 +123,10 @@ export function LiveConnectorMonitor() {
           onClick={runProbe}
           disabled={probing}
           className="inline-flex h-8 items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 text-[11px] font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)] disabled:cursor-wait disabled:opacity-60"
-          aria-label="Probe live data connectors"
+          aria-label={t("probeAria")}
         >
           <RefreshCw className={cn("size-3.5", probing && "animate-spin")} />
-          Probe
+          {t("probe")}
         </button>
       </div>
 
@@ -132,7 +142,7 @@ export function LiveConnectorMonitor() {
           <div className="rounded-md bg-[var(--color-surface-2)] px-3 py-2">
             <div className="flex items-center justify-between gap-2">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
-                Database
+                {t("database")}
               </span>
               <span
                 className={cn(
@@ -140,11 +150,11 @@ export function LiveConnectorMonitor() {
                   payload.database.writable ? STATUS_CLASS.ok : STATUS_CLASS.neutral,
                 )}
               >
-                {payload.database.writable ? "writable" : "read-only"}
+                {payload.database.writable ? t("writable") : t("readOnly")}
               </span>
             </div>
             <div className="mt-1 text-[10.5px] leading-relaxed text-[var(--color-ink-muted)]">
-              {payload.database.message}
+              {payload.database.configured ? t("databaseConfigured") : t("databaseStatic")}
             </div>
           </div>
 
@@ -163,9 +173,9 @@ export function LiveConnectorMonitor() {
                       "inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider",
                       STATUS_CLASS[tone],
                     )}
-                  >
+                    >
                     {tone === "ok" ? <CheckCircle2 className="size-3" /> : null}
-                    {probe?.status ?? connector.status}
+                    {statusLabel(probe?.status ?? connector.status)}
                   </span>
                 </div>
               );

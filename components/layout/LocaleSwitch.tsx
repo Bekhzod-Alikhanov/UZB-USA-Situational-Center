@@ -1,5 +1,5 @@
 "use client";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { locales, localeMeta, type Locale } from "@/lib/i18n/config";
@@ -12,13 +12,16 @@ export function LocaleSwitch() {
   const router = useRouter();
   const pathname = usePathname();
   const [pending, startTransition] = useTransition();
+  const tShell = useTranslations("shell");
 
   const current = localeMeta[locale];
 
   function switchLocale(next: Locale) {
     const segments = pathname.split("/");
     segments[1] = next;
-    const nextPath = segments.join("/") || `/${next}`;
+    const query = typeof window !== "undefined" ? window.location.search : "";
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    const nextPath = `${segments.join("/") || `/${next}`}${query}${hash}`;
     startTransition(() => router.replace(nextPath));
   }
 
@@ -27,7 +30,7 @@ export function LocaleSwitch() {
       <DropdownMenu.Trigger asChild>
         <button
           type="button"
-          aria-label="Switch language"
+          aria-label={tShell("switchLanguage")}
           className={cn(
             "inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-2)]",
             pending && "opacity-60",

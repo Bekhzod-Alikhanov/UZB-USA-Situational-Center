@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CalendarCheck2, Trophy } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
@@ -9,6 +10,12 @@ import { staff } from "@/data/staff-kpi";
 import { centerMilestonesMeta } from "@/data/center-milestones";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "staff" });
+}
 
 export default async function StaffPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

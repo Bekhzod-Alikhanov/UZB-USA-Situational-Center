@@ -1,7 +1,14 @@
-import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Lock, AlertTriangle } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { login } from "./actions";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "adminLogin" });
+}
 
 export default async function AdminLoginPage({
   params,
@@ -13,6 +20,7 @@ export default async function AdminLoginPage({
   const { locale } = await params;
   const { from, error } = await searchParams;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "admin.login" });
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center p-6">
@@ -21,10 +29,10 @@ export default async function AdminLoginPage({
           title={
             <span className="flex items-center gap-2">
               <Lock className="size-4 text-[var(--color-primary)]" />
-              Admin sign-in
+              {t("title")}
             </span>
           }
-          sub="Restricted to Situational Center personnel"
+          sub={t("subtitle")}
         />
         <CardBody>
           <form action={login} className="flex flex-col gap-4">
@@ -33,7 +41,7 @@ export default async function AdminLoginPage({
 
             <label className="flex flex-col gap-1.5">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
-                Password
+                {t("password")}
               </span>
               <input
                 type="password"
@@ -47,11 +55,7 @@ export default async function AdminLoginPage({
             {error ? (
               <div className="flex items-start gap-2 rounded-md border border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] px-3 py-2 text-[12px] text-[var(--color-neg)]">
                 <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
-                <span>
-                  {error === "config"
-                    ? "Admin access is not configured. Set ADMIN_PASSWORD before signing in."
-                    : "Incorrect password. Try again."}
-                </span>
+                <span>{error === "config" ? t("errors.config") : t("errors.password")}</span>
               </div>
             ) : null}
 
@@ -59,14 +63,11 @@ export default async function AdminLoginPage({
               type="submit"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-primary)] px-4 py-2 text-[13px] font-medium text-white transition hover:bg-[var(--color-primary-2)]"
             >
-              Sign in
+              {t("submit")}
             </button>
 
             <p className="text-[11px] leading-relaxed text-[var(--color-ink-muted)]">
-              Admin access requires the{" "}
-              <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_PASSWORD</code> environment
-              variable. Production deployments should also set{" "}
-              <code className="mono rounded bg-[var(--color-surface-2)] px-1">ADMIN_SESSION_SECRET</code>.
+              {t("environmentNote", { passwordVar: "ADMIN_PASSWORD", sessionVar: "ADMIN_SESSION_SECRET" })}
             </p>
           </form>
         </CardBody>

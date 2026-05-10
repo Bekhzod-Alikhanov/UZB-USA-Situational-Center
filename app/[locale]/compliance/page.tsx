@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { ExportCalculator } from "@/components/compliance/ExportCalculator";
 import { complianceStatuses, eccnSamples } from "@/data/compliance";
 import { ExternalLink, ShieldCheck } from "lucide-react";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "compliance" });
+}
 
 export default async function CompliancePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -1,6 +1,7 @@
 "use client";
 import {
   investmentConfidence,
+  investmentActionProfile,
   investments,
   privatizationOpportunities,
   type Investment,
@@ -32,6 +33,7 @@ import dynamic from "next/dynamic";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { useSettings } from "@/lib/store/settings";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { useLocale, useTranslations } from "next-intl";
 
 const FlatMap = dynamic(() => import("@/components/map/FlatMap").then((m) => m.FlatMap), { ssr: false });
 
@@ -68,15 +70,6 @@ const CONFIDENCE_ORDER: InvestmentSourceConfidence[] = [
   "illustrative_demo",
 ];
 
-const CONFIDENCE_LABEL: Record<InvestmentSourceConfidence, string> = {
-  verified_official: "Verified official",
-  company_confirmed: "Company confirmed",
-  media_reported: "Media reported",
-  internal_unverified: "Internal / unverified",
-  source_needed: "Source needed",
-  illustrative_demo: "Illustrative demo",
-};
-
 const CONFIDENCE_TONE: Record<InvestmentSourceConfidence, string> = {
   verified_official: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
   company_confirmed: "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -101,6 +94,9 @@ const SECTORS: InvestmentSector[] = [
 ];
 
 export function InvestmentsView() {
+  const t = useTranslations("investments.workspace");
+  const locale = useLocale();
+  const numberLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-US";
   const [sector, setSector] = useState<InvestmentSector | "all">("all");
   const [confidence, setConfidence] = useState<InvestmentSourceConfidence | "all">("all");
   const [minValue, setMinValue] = useState<number>(0);
@@ -146,6 +142,8 @@ export function InvestmentsView() {
     ["verified_official", "company_confirmed"].includes(investmentConfidence(i)),
   );
   const demoFiltered = filtered.filter((i) => investmentConfidence(i) === "illustrative_demo");
+  const actionProfileFor = (investment: Investment) => localizedActionProfile(investment, t, locale);
+  const selectedAction = selected ? actionProfileFor(selected) : null;
 
   return (
     <Tabs.Root defaultValue="board" className="flex flex-col gap-4">
@@ -153,9 +151,8 @@ export function InvestmentsView() {
         <div className="flex items-start gap-2">
           <Info className="mt-0.5 size-3.5 shrink-0 text-[var(--color-primary)]" aria-hidden />
           <p>
-            <span className="font-semibold text-[var(--color-ink)]">Credibility rule:</span> headline investment totals
-            separate verified public records, source-backed records pending owner review, and illustrative demo pipeline
-            rows. Demo values remain useful for interface testing, but they are not official pipeline totals.
+            <span className="font-semibold text-[var(--color-ink)]">{t("credibility.label")}</span>{" "}
+            {t("credibility.text")}
           </p>
         </div>
       </div>
@@ -163,10 +160,10 @@ export function InvestmentsView() {
       <div className="flex flex-wrap items-center gap-3">
         <Tabs.List className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-0.5">
           {[
-            { v: "board", l: "Board" },
-            { v: "table", l: "Table" },
-            { v: "map", l: "Map" },
-            { v: "privatization", l: "Privatization" },
+            { v: "board", l: t("tabs.board") },
+            { v: "table", l: t("tabs.table") },
+            { v: "map", l: t("tabs.map") },
+            { v: "privatization", l: t("tabs.privatization") },
           ].map((t) => (
             <Tabs.Trigger
               key={t.v}
@@ -179,38 +176,38 @@ export function InvestmentsView() {
         </Tabs.List>
 
         <select
-          aria-label="Filter investments by sector"
+          aria-label={t("filters.sectorAria")}
           value={sector}
           onChange={(e) => setSector(e.target.value as InvestmentSector | "all")}
           className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
         >
-          <option value="all">All sectors</option>
+          <option value="all">{t("filters.allSectors")}</option>
           {SECTORS.map((s) => (
             <option key={s} value={s}>
-              {s.replace("-", " / ")}
+              {t(`sectors.${s}`)}
             </option>
           ))}
         </select>
 
         <select
-          aria-label="Filter investments by source confidence"
+          aria-label={t("filters.confidenceAria")}
           value={confidence}
           onChange={(e) => setConfidence(e.target.value as InvestmentSourceConfidence | "all")}
           className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
         >
-          <option value="all">All confidence</option>
+          <option value="all">{t("filters.allConfidence")}</option>
           {CONFIDENCE_ORDER.map((status) => (
             <option key={status} value={status}>
-              {CONFIDENCE_LABEL[status]}
+              {t(`confidence.${status}`)}
             </option>
           ))}
         </select>
 
         <div className="flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[11.5px]">
-          <span className="text-[var(--color-ink-muted)]">Min $M</span>
+          <span className="text-[var(--color-ink-muted)]">{t("filters.minValue")}</span>
           <input
             type="number"
-            aria-label="Minimum investment value in millions of dollars"
+            aria-label={t("filters.minValueAria")}
             min={0}
             value={minValue}
             onChange={(e) => setMinValue(Number(e.target.value) || 0)}
@@ -222,33 +219,43 @@ export function InvestmentsView() {
           <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
             type="search"
-            aria-label="Search investments by title or partner"
+            aria-label={t("filters.searchAria")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search title or partner"
+            placeholder={t("filters.searchPlaceholder")}
             className="w-56 bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
           />
         </label>
 
         <div className="ml-auto flex items-center gap-4 text-[11px] text-[var(--color-ink-muted)]">
-          <ToolbarStat label="Projects" value={filtered.length.toString()} />
-          <ToolbarStat label="Total" value={`$${(totalValue / 1000).toFixed(2)}B`} />
-          <ToolbarStat label="Verified" value={verifiedFiltered.length.toString()} />
-          <ToolbarStat label="Demo" value={demoFiltered.length.toString()} />
-          <ToolbarStat label="Jobs" value={totalJobs.toLocaleString("en-US")} />
+          <ToolbarStat label={t("toolbar.projects")} value={filtered.length.toString()} />
+          <ToolbarStat label={t("toolbar.total")} value={`$${(totalValue / 1000).toFixed(2)}B`} />
+          <ToolbarStat label={t("toolbar.verified")} value={verifiedFiltered.length.toString()} />
+          <ToolbarStat label={t("toolbar.demo")} value={demoFiltered.length.toString()} />
+          <ToolbarStat label={t("toolbar.jobs")} value={totalJobs.toLocaleString(numberLocale)} />
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-1.5" aria-label="Source confidence legend">
+      <div className="flex flex-wrap gap-1.5" aria-label={t("table.confidence")}>
         {CONFIDENCE_ORDER.map((status) => (
-          <ConfidenceBadge key={status} confidence={status} />
+          <ConfidenceBadge key={status} confidence={status} label={t(`confidence.${status}`)} />
         ))}
       </div>
 
       <Tabs.Content value="board">
         <div className="flex gap-3 overflow-x-auto pb-2">
           {STATUS_ORDER.map((s) => (
-            <Column key={s} status={s} items={grouped[s]} onOpen={setSelected} />
+            <Column
+              key={s}
+              statusLabel={t(`statuses.${s}`)}
+              items={grouped[s]}
+              onOpen={setSelected}
+              emptyTitle={t("empty.title")}
+              emptyDescription={t("empty.description")}
+              confidenceLabel={(confidenceKey) => t(`confidence.${confidenceKey}`)}
+              nextActionLabel={t("table.nextAction")}
+              actionProfileFor={actionProfileFor}
+            />
           ))}
         </div>
       </Tabs.Content>
@@ -258,19 +265,21 @@ export function InvestmentsView() {
           <table className="table">
             <thead>
               <tr>
-                <th>Project</th>
-                <th className="w-[160px]">Sector</th>
-                <th className="w-[140px]">Region</th>
-                <th className="w-[200px]">Partners</th>
-                <th className="w-[84px] text-right">Value $M</th>
-                <th className="w-[72px] text-right">Jobs</th>
-                <th className="w-[108px]">Status</th>
-                <th className="w-[150px]">Confidence</th>
+                <th>{t("table.project")}</th>
+                <th className="w-[160px]">{t("table.sector")}</th>
+                <th className="w-[140px]">{t("table.region")}</th>
+                <th className="w-[200px]">{t("table.partners")}</th>
+                <th className="w-[84px] text-right">{t("table.value")}</th>
+                <th className="w-[72px] text-right">{t("table.jobs")}</th>
+                <th className="w-[108px]">{t("table.status")}</th>
+                <th className="w-[150px]">{t("table.confidence")}</th>
+                <th className="w-[260px]">{t("table.nextAction")}</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((i) => {
                 const Icon = SECTOR_ICON[i.sector];
+                const actionProfile = actionProfileFor(i);
                 return (
                   <tr key={i.id}>
                     <td>
@@ -285,7 +294,7 @@ export function InvestmentsView() {
                     <td>
                       <span className="inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-ink-muted)]">
                         <Icon className="size-3.5 text-[var(--color-ink-faint)]" />
-                        {i.sector.replace("-", " / ")}
+                        {t(`sectors.${i.sector}`)}
                       </span>
                     </td>
                     <td className="text-[11.5px] text-[var(--color-ink-muted)]">{i.region}</td>
@@ -302,11 +311,14 @@ export function InvestmentsView() {
                           STATUS_TONE[i.status],
                         )}
                       >
-                        {i.status}
+                        {t(`statuses.${i.status}`)}
                       </span>
                     </td>
                     <td>
-                      <ConfidenceBadge confidence={investmentConfidence(i)} />
+                      <ConfidenceBadge confidence={investmentConfidence(i)} label={t(`confidence.${investmentConfidence(i)}`)} />
+                    </td>
+                    <td className="max-w-[260px] text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">
+                      {actionProfile.nextAction}
                     </td>
                   </tr>
                 );
@@ -331,11 +343,18 @@ export function InvestmentsView() {
             ))}
           </div>
         ) : (
-          <EmptyState
-            className="px-4 py-10"
-            title="Source-backed privatization data required"
-            description="The dashboard is ready for a privatization pipeline, but no verified asset-level records are loaded yet. Required fields include asset name, sector, ownership status, transaction type, stage, timeline, government counterpart, value range, U.S. investor relevance, source IDs, risk level, and next step."
-          />
+          <div className="grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
+            <EmptyState
+              className="px-4 py-10"
+              title={t("privatization.emptyTitle")}
+              description={t("privatization.emptyDescription")}
+            />
+            <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
+              <div className="stat-label">{t("privatization.schemaTitle")}</div>
+              <p className="mt-2 text-[var(--color-ink)]">{t("privatization.schemaFields")}</p>
+              <p className="mt-3">{t("privatization.safeState")}</p>
+            </div>
+          </div>
         )}
       </Tabs.Content>
 
@@ -347,7 +366,7 @@ export function InvestmentsView() {
             className="fixed right-0 top-0 z-50 h-full w-[94vw] max-w-[520px] overflow-y-auto border-l border-[var(--color-border)] bg-[var(--color-surface)] p-6"
             aria-describedby={undefined}
           >
-            {selected ? (
+            {selected && selectedAction ? (
               <>
                 <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border)] pb-3">
                   <div className="min-w-0 flex-1">
@@ -355,7 +374,7 @@ export function InvestmentsView() {
                       {selected.title}
                     </Dialog.Title>
                     <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-[var(--color-ink-muted)]">
-                      <span className="uppercase tracking-wider">{selected.sector.replace("-", " / ")}</span>
+                      <span className="uppercase tracking-wider">{t(`sectors.${selected.sector}`)}</span>
                       <span>·</span>
                       <span>{selected.region}</span>
                       <span>·</span>
@@ -365,54 +384,102 @@ export function InvestmentsView() {
                           STATUS_TONE[selected.status],
                         )}
                       >
-                        {selected.status}
+                        {t(`statuses.${selected.status}`)}
                       </span>
-                      <ConfidenceBadge confidence={investmentConfidence(selected)} />
+                      <ConfidenceBadge
+                        confidence={investmentConfidence(selected)}
+                        label={t(`confidence.${investmentConfidence(selected)}`)}
+                      />
                     </div>
                   </div>
-                  <Dialog.Close className="rounded p-1 text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]">
+                  <Dialog.Close
+                    aria-label={t("drawer.close")}
+                    className="rounded p-1 text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
+                  >
                     <X className="size-4" />
                   </Dialog.Close>
                 </div>
 
                 <div className="mt-5 grid grid-cols-3 gap-4">
-                  <KV label="Value" value={`$${selected.valueMusd}M`} mono />
-                  <KV label="Jobs" value={selected.jobs ? selected.jobs.toLocaleString() : "—"} mono />
+                  <KV label={t("drawer.value")} value={`$${selected.valueMusd}M`} mono />
                   <KV
-                    label="Timeline"
-                    value={`${selected.startYear}${selected.expectedCompletion ? ` → ${selected.expectedCompletion}` : ""}`}
+                    label={t("drawer.jobs")}
+                    value={selected.jobs ? selected.jobs.toLocaleString(numberLocale) : "-"}
+                    mono
+                  />
+                  <KV
+                    label={t("drawer.timeline")}
+                    value={`${selected.startYear}${selected.expectedCompletion ? ` -> ${selected.expectedCompletion}` : ""}`}
                     mono
                   />
                 </div>
 
                 <div className="mt-5">
-                  <div className="stat-label">U.S. partner</div>
+                  <div className="stat-label">{t("drawer.usPartner")}</div>
                   <div className="mt-1 text-[14px] text-[var(--color-ink)]">{selected.partnerUs}</div>
                 </div>
                 <div className="mt-4">
-                  <div className="stat-label">UZ partner</div>
+                  <div className="stat-label">{t("drawer.uzPartner")}</div>
                   <div className="mt-1 text-[14px] text-[var(--color-ink)]">{selected.partnerUz}</div>
                 </div>
 
                 {selected.sourceId ? (
                   <div className="mt-5">
-                    <div className="stat-label mb-1.5">Source</div>
+                    <div className="stat-label mb-1.5">{t("drawer.source")}</div>
                     <SourceBadge sourceId={selected.sourceId} variant="chip" />
                   </div>
                 ) : null}
 
                 <div className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-3 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-                  <span className="font-semibold text-[var(--color-ink)]">What this means: </span>
+                  <span className="font-semibold text-[var(--color-ink)]">{t("drawer.whatThisMeans")} </span>
                   {investmentConfidence(selected) === "illustrative_demo"
-                    ? "This row should be used for dashboard workflow demonstration only until the responsible agency supplies a source-backed project record."
+                    ? t("drawer.meaningDemo")
                     : investmentConfidence(selected) === "verified_official"
-                      ? "This row can support executive briefing, while still retaining its source badge and as-of context."
-                      : "This row is useful for internal pipeline tracking, but should not be quoted publicly until owner review and source confirmation are complete."}
+                      ? t("drawer.meaningVerified")
+                      : t("drawer.meaningInternal")}
                 </div>
+
+                <section className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-[13px] font-semibold text-[var(--color-ink)]">{t("drawer.actionTitle")}</h3>
+                    <span
+                      className={cn(
+                        "rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+                        selectedAction.quoteSafe
+                          ? "border-[var(--color-pos)]/30 bg-[var(--color-pos-soft)] text-[var(--color-pos)]"
+                          : "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
+                      )}
+                    >
+                      {selectedAction.quoteSafe ? t("drawer.quoteSafe") : t("drawer.notQuoteSafe")}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                    <KV label={t("drawer.projectOwner")} value={selectedAction.projectOwner} />
+                    <KV label={t("drawer.counterpart")} value={selectedAction.counterpart} />
+                    <KV label={t("drawer.stage")} value={selectedAction.stage} />
+                  </div>
+
+                  <div className="mt-4 space-y-3 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
+                    <ActionBlock label={t("drawer.nextAction")} value={selectedAction.nextAction} />
+                    <ActionBlock label={t("drawer.usRelevance")} value={selectedAction.usCompanyRelevance} />
+                    <ActionBlock label={t("drawer.publication")} value={selectedAction.publicationGuidance} />
+                    <div>
+                      <div className="stat-label">{t("drawer.blockers")}</div>
+                      <ul className="mt-1.5 space-y-1">
+                        {selectedAction.blockers.map((blocker) => (
+                          <li key={blocker} className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-1">
+                            {blocker}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </section>
 
                 {selected.source_note && !hideDemo && !presentation ? (
                   <div className="mt-5 rounded-md border border-[var(--color-border)] bg-[var(--color-demo-bg)] p-3 text-[12px] text-[var(--color-demo-ink)]">
-                    <span className="font-semibold">DEMO.</span> {selected.source_note}
+                    <span className="font-semibold">{t("drawer.demoLabel")}</span> {selected.source_note}
                   </div>
                 ) : null}
               </>
@@ -424,16 +491,16 @@ export function InvestmentsView() {
   );
 }
 
-function ConfidenceBadge({ confidence }: { confidence: InvestmentSourceConfidence }) {
+function ConfidenceBadge({ confidence, label }: { confidence: InvestmentSourceConfidence; label: string }) {
   return (
     <span
       className={cn(
         "inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
         CONFIDENCE_TONE[confidence],
       )}
-      title={CONFIDENCE_LABEL[confidence]}
+      title={label}
     >
-      {CONFIDENCE_LABEL[confidence]}
+      {label}
     </span>
   );
 }
@@ -457,20 +524,39 @@ function KV({ label, value, mono }: { label: string; value: string; mono?: boole
   );
 }
 
+function ActionBlock({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="stat-label">{label}</div>
+      <p className="mt-1 text-[var(--color-ink-muted)]">{value}</p>
+    </div>
+  );
+}
+
 function Column({
-  status,
+  statusLabel,
   items,
   onOpen,
+  emptyTitle,
+  emptyDescription,
+  confidenceLabel,
+  nextActionLabel,
+  actionProfileFor,
 }: {
-  status: InvestmentStatus;
+  statusLabel: string;
   items: Investment[];
   onOpen: (i: Investment) => void;
+  emptyTitle: string;
+  emptyDescription: string;
+  confidenceLabel: (confidence: InvestmentSourceConfidence) => string;
+  nextActionLabel: string;
+  actionProfileFor: (investment: Investment) => InvestmentActionPresentation;
 }) {
   const total = items.reduce((a, i) => a + i.valueMusd, 0);
   return (
     <div className="flex min-w-[220px] shrink-0 flex-col gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-2.5 xl:min-w-[240px]">
       <div className="flex items-center justify-between px-1 pb-1">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">{status}</span>
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">{statusLabel}</span>
         <span className="mono text-[10px] tabular text-[var(--color-ink-muted)]">
           {items.length} · ${(total / 1000).toFixed(1)}B
         </span>
@@ -478,6 +564,7 @@ function Column({
       <div className="flex flex-col gap-1.5">
         {items.map((i) => {
           const Icon = SECTOR_ICON[i.sector];
+          const actionProfile = actionProfileFor(i);
           return (
             <button
               key={i.id}
@@ -486,7 +573,15 @@ function Column({
               className="flex flex-col gap-1 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] p-2.5 text-left transition hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-hover)]"
             >
               <div className="text-[12.5px] font-medium leading-snug text-[var(--color-ink)]">{i.title}</div>
-              <ConfidenceBadge confidence={investmentConfidence(i)} />
+              <ConfidenceBadge confidence={investmentConfidence(i)} label={confidenceLabel(investmentConfidence(i))} />
+              <div className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-1">
+                <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                  {nextActionLabel}
+                </div>
+                <p className="mt-0.5 text-[10.5px] leading-relaxed text-[var(--color-ink-muted)]">
+                  {actionProfile.nextAction}
+                </p>
+              </div>
               <div className="flex items-center justify-between text-[10.5px] text-[var(--color-ink-muted)]">
                 <span className="flex items-center gap-1">
                   <Icon className="size-3 text-[var(--color-ink-faint)]" />
@@ -500,11 +595,71 @@ function Column({
         {items.length === 0 ? (
           <EmptyState
             className="px-3 py-5"
-            title="No projects"
-            description="No records match the active filters in this status."
+            title={emptyTitle}
+            description={emptyDescription}
           />
         ) : null}
       </div>
     </div>
   );
+}
+
+type WorkspaceTranslator = (key: string, values?: Record<string, string | number>) => string;
+
+interface InvestmentActionPresentation {
+  projectOwner: string;
+  counterpart: string;
+  stage: string;
+  nextAction: string;
+  blockers: string[];
+  usCompanyRelevance: string;
+  quoteSafe: boolean;
+  publicationGuidance: string;
+}
+
+function localizedActionProfile(
+  investment: Investment,
+  t: WorkspaceTranslator,
+  locale: string,
+): InvestmentActionPresentation {
+  const base = investmentActionProfile(investment);
+  const confidence = investmentConfidence(investment);
+  const sourceBacked = confidence === "verified_official" || confidence === "company_confirmed";
+  const needsSource = confidence === "source_needed" || confidence === "illustrative_demo";
+  const isEnglish = locale === "en";
+  const customBlockers = isEnglish ? investment.blockers : undefined;
+
+  const blockers = customBlockers?.length
+    ? customBlockers
+    : needsSource
+      ? [t("actions.blockers.ownerSource"), t("actions.blockers.publicUse")]
+      : confidence === "internal_unverified"
+        ? [t("actions.blockers.ownerReview")]
+        : [t("actions.noBlockers")];
+
+  const customAction = investment.nextAction ?? investment.nextStep;
+  const hasNamedUsCounterpart =
+    !investment.partnerUs.includes("under registration") && !investment.partnerUs.includes("(");
+
+  return {
+    projectOwner:
+      investment.projectOwner ??
+      (investment.is_demo ? t("actions.ownerNeeded") : investment.partnerUz || t("actions.ownerToConfirm")),
+    counterpart: investment.governmentCounterpart ?? investment.partnerUz,
+    stage: isEnglish && investment.stageDetail ? investment.stageDetail : t(`statuses.${investment.status}`),
+    nextAction: isEnglish && customAction ? customAction : t(`actions.status.${investment.status}`),
+    blockers,
+    usCompanyRelevance:
+      isEnglish && investment.usCompanyRelevance
+        ? investment.usCompanyRelevance
+        : hasNamedUsCounterpart
+          ? t("actions.usRelevance.counterpart", { partner: investment.partnerUs })
+          : t("actions.usRelevance.confirm"),
+    quoteSafe: base.quoteSafe,
+    publicationGuidance: sourceBacked
+      ? t("actions.publication.verified")
+      : investment.is_demo
+        ? t("actions.publication.demo")
+        : t("actions.publication.internal"),
+  };
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ComponentType } from "react";
+import { getTranslations } from "next-intl/server";
 import {
   ArrowRight,
   BookOpen,
@@ -36,11 +37,22 @@ const ICONS: Record<string, ComponentType<{ className?: string }>> = {
   "regional-strategy": Landmark,
 };
 
-export function RelationshipPillars({ locale }: { locale: string }) {
+function leadingValue(value: string) {
+  return value.match(/^\$?[\d.]+[BM]?/)?.[0];
+}
+
+export async function RelationshipPillars({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "overview.relationshipPillars" });
+
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
       {relationshipPillars.map((pillar) => {
         const Icon = ICONS[pillar.id] ?? BookOpen;
+        const signalValue = leadingValue(pillar.signal);
+        const metricValue = leadingValue(pillar.metric);
+        const signal = signalValue ? `${signalValue} · ${t(`items.${pillar.id}.signal`)}` : t(`items.${pillar.id}.signal`);
+        const metric = metricValue ? `${metricValue} · ${t(`items.${pillar.id}.metric`)}` : t(`items.${pillar.id}.metric`);
+
         return (
           <article
             key={pillar.id}
@@ -52,27 +64,31 @@ export function RelationshipPillars({ locale }: { locale: string }) {
                   <Icon className="size-4" />
                 </span>
                 <div>
-                  <h3 className="text-[13px] font-semibold text-[var(--color-ink)]">{pillar.title}</h3>
+                  <h3 className="text-[13px] font-semibold text-[var(--color-ink)]">{t(`items.${pillar.id}.title`)}</h3>
                   <div className="mono mt-0.5 text-[10px] uppercase tracking-wider text-[var(--color-ink-muted)]">
-                    {pillar.signal}
+                    {signal}
                   </div>
                 </div>
               </div>
               <SourceBadge sourceId={pillar.sourceId} />
             </div>
-            <div className="mt-3 text-[19px] font-semibold tracking-tight text-[var(--color-ink)]">{pillar.metric}</div>
-            <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">{pillar.narrative}</p>
+            <div className="mt-3 text-[19px] font-semibold tracking-tight text-[var(--color-ink)]">{metric}</div>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">
+              {t(`items.${pillar.id}.narrative`)}
+            </p>
             <div className="mt-auto border-t border-[var(--color-border)] pt-3">
               <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
-                Next move
+                {t("nextMove")}
               </div>
-              <p className="mt-1 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{pillar.action}</p>
+              <p className="mt-1 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">
+                {t(`items.${pillar.id}.action`)}
+              </p>
               <Link
                 href={`/${locale}${pillar.href}`}
                 prefetch={false}
                 className="mt-2 inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--color-primary)] hover:underline"
               >
-                Open section <ArrowRight className="size-3" />
+                {t("openSection")} <ArrowRight className="size-3" />
               </Link>
             </div>
           </article>

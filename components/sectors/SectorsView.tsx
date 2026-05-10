@@ -88,7 +88,23 @@ const DECISION_MATRIX: Record<
  * cooperation has the most leverage. Server component; no interactivity needed
  * because the value is the curated content, not the controls.
  */
-export function SectorsView() {
+export function SectorsView({ locale = "en" }: { locale?: string }) {
+  const read =
+    locale === "ru"
+      ? {
+          label: "Что это означает: ",
+          text: "Это направляющий слой приоритизации на основе существующих секторных записей. Он не заменяет проектные данные с источниками; он помогает понять, какие сектора первыми требуют проектных записей, работы с инвесторами и проверки узких мест.",
+        }
+      : locale === "uz-latn"
+        ? {
+            label: "Bu nimani anglatadi: ",
+            text: "Bu mavjud soha yozuvlari asosidagi yo‘naltiruvchi ustuvorlik qatlami. U manbaga ega loyiha ma’lumotlarini almashtirmaydi; qaysi sohalarga birinchi navbatda loyiha yozuvlari, investorlar bilan aloqa va to‘siqlar tahlili kerakligini ko‘rsatadi.",
+          }
+        : {
+            label: "What this means: ",
+            text: "This is a directional prioritization layer built from existing sector records. It does not replace source-backed project data; it helps users decide which sectors need project records, investor outreach, and bottleneck review first.",
+          };
+
   return (
     <div className="flex flex-col gap-5">
       <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
@@ -123,10 +139,8 @@ export function SectorsView() {
       </div>
 
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-        <span className="font-semibold text-[var(--color-ink)]">What this means: </span>
-        This is a directional prioritization layer built from existing sector records. It does not replace source-backed
-        project data; it helps users decide which sectors need project records, investor outreach, and bottleneck review
-        first.
+        <span className="font-semibold text-[var(--color-ink)]">{read.label}</span>
+        {read.text}
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-2">

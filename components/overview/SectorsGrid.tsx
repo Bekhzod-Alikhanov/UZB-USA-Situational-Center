@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
 import { buildSectorTiles, type SectorTile } from "@/data/overview";
 
@@ -12,15 +12,6 @@ const TONE_VAR: Record<SectorTile["tone"], string> = {
   people: "var(--color-people)",
   rose: "var(--color-rose)",
   slate: "var(--color-slate)",
-};
-
-const STATUS_LABEL: Record<SectorTile["status"], string> = {
-  operating: "operating",
-  construction: "construction",
-  agreed: "agreed",
-  negotiation: "negotiation",
-  mou: "mou",
-  paused: "paused",
 };
 
 function fmtUsd(usdM: number): string {
@@ -37,6 +28,7 @@ export function SectorsGrid() {
   const tiles = buildSectorTiles();
   const max = Math.max(...tiles.map((t) => t.valueMusd));
   const locale = useLocale();
+  const t = useTranslations("overview.sectorTiles");
 
   return (
     <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
@@ -53,17 +45,19 @@ export function SectorsGrid() {
           >
             <div className="mb-2 flex items-start justify-between gap-2">
               <div className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
-                {s.label}
+                {t(`labels.${s.id}`)}
               </div>
               <span className="mono shrink-0 text-[9px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-                {STATUS_LABEL[s.status]}
+                {t(`statuses.${s.status}`)}
               </span>
             </div>
             <div className="serif tabular text-[22px] font-medium leading-none text-[var(--color-ink)]">
               {fmtUsd(s.valueMusd)}
             </div>
             <div className="mt-1 flex items-baseline justify-between gap-2">
-              <span className="mono text-[10px] text-[var(--color-ink-muted)]">{s.projects} proj.</span>
+              <span className="mono text-[10px] text-[var(--color-ink-muted)]">
+                {t("projectsShort", { count: s.projects })}
+              </span>
               <span
                 className="mono inline-flex items-center gap-0.5 tabular text-[10.5px] font-semibold"
                 style={{
@@ -71,7 +65,7 @@ export function SectorsGrid() {
                 }}
               >
                 <DeltaIcon className="size-3" />
-                {s.delta === 0 ? "—" : `${s.delta > 0 ? "+" : ""}${s.delta.toFixed(1)}%`}
+                {s.delta === 0 ? t("noChange") : `${s.delta > 0 ? "+" : ""}${s.delta.toFixed(1)}%`}
               </span>
             </div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-[var(--color-surface-2)]">

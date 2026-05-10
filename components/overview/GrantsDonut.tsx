@@ -1,3 +1,4 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { buildGrantsByType } from "@/data/overview";
 
 const COLORS = [
@@ -14,7 +15,9 @@ const COLORS = [
  * 6-segment donut for grants by sector + side legend with values.
  * Hand-rolled SVG arcs for the editorial look.
  */
-export function GrantsDonut({ size = 132 }: { size?: number }) {
+export async function GrantsDonut({ size = 132 }: { size?: number }) {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "overview.grantsDonut" });
   const { total, count, byType } = buildGrantsByType();
 
   const sum = byType.reduce((s, d) => s + d.val, 0);
@@ -50,7 +53,7 @@ export function GrantsDonut({ size = 132 }: { size?: number }) {
 
   return (
     <div className="flex items-center gap-3">
-      <svg width={size} height={size} className="shrink-0" role="img" aria-label="Grants by type donut">
+      <svg width={size} height={size} className="shrink-0" role="img" aria-label={t("aria")}>
         {arcs}
         <circle cx={cx} cy={cy} r={r * 0.55} fill="var(--color-surface)" />
         <text
@@ -65,7 +68,7 @@ export function GrantsDonut({ size = 132 }: { size?: number }) {
           ${total.toFixed(1)}M
         </text>
         <text x={cx} y={cy + 11} textAnchor="middle" className="mono" fontSize="8.5" fill="var(--color-ink-faint)">
-          {count} grants
+          {t("programs", { count })}
         </text>
       </svg>
 
@@ -73,7 +76,7 @@ export function GrantsDonut({ size = 132 }: { size?: number }) {
         {byType.map((g, i) => (
           <div key={g.name} className="grid grid-cols-[10px_1fr_56px] items-center gap-2 text-[11px]">
             <span className="size-2 shrink-0 rounded-sm" style={{ background: COLORS[i % COLORS.length] }} />
-            <span className="truncate text-[var(--color-ink-muted)]">{g.name}</span>
+            <span className="truncate text-[var(--color-ink-muted)]">{t(`types.${g.name}`)}</span>
             <span className="mono text-right tabular text-[var(--color-ink)]">${g.val.toFixed(2)}M</span>
           </div>
         ))}

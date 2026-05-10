@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { localeAlternates, siteDescription, siteTitle, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
 const geist = Geist({
@@ -31,13 +32,28 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Uzbekistan – USA · Situational Center",
-    template: "%s · UZ–US SC",
+    default: siteTitle,
+    template: "%s · UZ-US Intelligence",
   },
-  description: "Situational Center on cooperation between the Republic of Uzbekistan and the United States of America.",
-  applicationName: "UZ–US Situational Center",
-  robots: { index: false, follow: false },
+  description: siteDescription,
+  applicationName: "UZ-US Intelligence Platform",
+  alternates: localeAlternates("en"),
+  openGraph: {
+    type: "website",
+    url: "/en",
+    siteName: "UZ-US Intelligence Platform",
+    title: siteTitle,
+    description: siteDescription,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {

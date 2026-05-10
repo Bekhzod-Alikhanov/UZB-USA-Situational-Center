@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -7,9 +8,25 @@ import { counterparts, PARTY_TONE, STANCE_CHIP } from "@/data/counterparts";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
+import { getRouteSeo } from "@/lib/seo";
 
 export function generateStaticParams() {
   return counterparts.map((c) => ({ id: c.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; id: string }>;
+}): Promise<Metadata> {
+  const { locale, id } = await params;
+  const c = counterparts.find((item) => item.id === id);
+  return getRouteSeo({
+    locale,
+    routeKey: "counterpart",
+    path: `/counterparts/${id}`,
+    values: { name: c?.name ?? "Counterpart" },
+  });
 }
 
 export default async function CounterpartPage({ params }: { params: Promise<{ locale: string; id: string }> }) {
@@ -26,7 +43,7 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
         className="inline-flex w-fit items-center gap-1.5 text-[12px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
       >
         <ArrowLeft className="size-3.5" />
-        Back to counterparts
+        {t("back")}
       </Link>
 
       <div className="flex flex-col gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 md:flex-row md:items-center">
@@ -64,7 +81,7 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
                 rel="noreferrer"
                 className="text-[var(--color-primary)] hover:underline"
               >
-                Source
+                {t("detail.source")}
               </a>
             ) : null}
           </div>
@@ -76,7 +93,7 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
         <Card className="lg:col-span-2">
           <CardHeader
             title={t("uzHistory")}
-            sub={`${c.priorEngagements.length} recorded engagements`}
+            sub={t("detail.recordedEngagements", { count: c.priorEngagements.length })}
             right={<CalendarClock className="size-4 text-[var(--color-ink-faint)]" />}
           />
           <CardBody>
@@ -95,7 +112,10 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
 
         <div className="flex flex-col gap-5">
           <Card>
-            <CardHeader title="Key topics" right={<MessageSquare className="size-4 text-[var(--color-ink-faint)]" />} />
+            <CardHeader
+              title={t("detail.keyTopics")}
+              right={<MessageSquare className="size-4 text-[var(--color-ink-faint)]" />}
+            />
             <CardBody>
               <ul className="flex flex-col gap-1.5">
                 {c.keyTopics.map((tp) => (
@@ -110,7 +130,7 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
 
           {c.committees?.length ? (
             <Card>
-              <CardHeader title="Committees" />
+              <CardHeader title={t("detail.committees")} />
               <CardBody>
                 <ul className="flex flex-col gap-1 text-[12.5px] text-[var(--color-ink)]">
                   {c.committees.map((cm) => (
@@ -122,7 +142,7 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
           ) : null}
 
           <Card>
-            <CardHeader title="Profile summary" />
+            <CardHeader title={t("detail.profileSummary")} />
             <CardBody>
               <dl className="flex flex-col gap-1.5 text-[12.5px]">
                 <Row label="Role" value={c.role.replace("-", " · ")} />

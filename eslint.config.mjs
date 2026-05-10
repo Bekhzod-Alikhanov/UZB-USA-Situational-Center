@@ -22,7 +22,18 @@ const config = [
     },
   },
   {
-    ignores: [".next/**", "node_modules/**", "input/**", "_extracted/**", "_design_ref/**", "_*.js", "_*.ts"],
+    ignores: [
+      ".next/**",
+      "node_modules/**",
+      "input/**",
+      "_extracted/**",
+      "_design_ref/**",
+      "_*.js",
+      "_*.ts",
+      // Local Claude Code tooling worktrees + helper scripts (gitignored).
+      ".claude/**",
+      ".vercel/**",
+    ],
   },
 ];
 

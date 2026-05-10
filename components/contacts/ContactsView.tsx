@@ -9,15 +9,7 @@ import { cn } from "@/lib/utils";
 import { Mail, MapPin, Phone, ExternalLink, Users, Search } from "lucide-react";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
-
-const TYPE_LABEL: Record<Contact["type"], string> = {
-  hq: "Situational Center",
-  "embassy-uz-in-us": "UZ Embassy (USA)",
-  "embassy-us-in-uz": "US Embassy (UZ)",
-  chamber: "Chamber of Commerce",
-  "gov-agency": "Government agency",
-  council: "Coordination body",
-};
+import { getTranslations } from "next-intl/server";
 
 const TYPE_TONE: Record<Contact["type"], string> = {
   hq: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
@@ -33,7 +25,8 @@ interface Props {
   q?: string;
 }
 
-export function ContactsView({ locale, q = "" }: Props) {
+export async function ContactsView({ locale, q = "" }: Props) {
+  const t = await getTranslations({ locale, namespace: "contacts.view" });
   const filtered = q
     ? contacts.filter((c) => {
         const s = q.toLowerCase();
@@ -53,8 +46,8 @@ export function ContactsView({ locale, q = "" }: Props) {
             type="search"
             name="q"
             defaultValue={q}
-            aria-label="Search organization, person or role"
-            placeholder="Search organization, person or role…"
+            aria-label={t("searchAria")}
+            placeholder={t("searchPlaceholder")}
             className="w-full bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
           />
         </label>
@@ -62,14 +55,14 @@ export function ContactsView({ locale, q = "" }: Props) {
           type="submit"
           className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[12px] font-medium text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
         >
-          Search
+          {t("submit")}
         </button>
         {q ? (
           <a
             href={`/${locale}/contacts`}
             className="rounded-md px-3 py-1.5 text-[12px] font-medium text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
           >
-            Clear
+            {t("clear")}
           </a>
         ) : null}
       </form>
@@ -87,7 +80,7 @@ export function ContactsView({ locale, q = "" }: Props) {
                   TYPE_TONE[c.type],
                 )}
               >
-                {TYPE_LABEL[c.type]}
+                {t(`types.${c.type}`)}
               </span>
               {c.is_demo ? <DemoBadge /> : null}
             </div>
@@ -132,7 +125,7 @@ export function ContactsView({ locale, q = "" }: Props) {
               <div className="mt-1 border-t border-[var(--color-border)] pt-2">
                 <div className="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
                   <Users className="size-3" />
-                  {c.type === "council" ? "Council members" : "Staff"} · {c.people.length}
+                  {c.type === "council" ? t("councilMembers") : t("staff")} · {c.people.length}
                 </div>
                 <ul className="flex flex-col gap-0.5 text-[11.5px]">
                   {c.people.slice(0, c.type === "council" ? 13 : 4).map((p) => (
@@ -156,7 +149,9 @@ export function ContactsView({ locale, q = "" }: Props) {
                     </li>
                   ))}
                   {c.type !== "council" && c.people.length > 4 ? (
-                    <li className="text-[10.5px] text-[var(--color-ink-faint)]">+ {c.people.length - 4} more</li>
+                    <li className="text-[10.5px] text-[var(--color-ink-faint)]">
+                      {t("more", { count: c.people.length - 4 })}
+                    </li>
                   ) : null}
                 </ul>
               </div>
@@ -173,7 +168,7 @@ export function ContactsView({ locale, q = "" }: Props) {
 
       {filtered.length === 0 ? (
         <div className="rounded-md border border-dashed border-[var(--color-border)] px-4 py-10 text-center text-[12px] text-[var(--color-ink-muted)]">
-          No contacts match your search.
+          {t("empty")}
         </div>
       ) : null}
     </div>

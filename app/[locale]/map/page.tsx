@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { MapLoadGate } from "@/components/map/MapLoadGate";
 import { uzMissionsUs } from "@/data/uz-missions-us";
 import { uzPlannedVisitsUs } from "@/data/uz-planned-visits-us";
 import { totalFor, usStateMetricsMeta } from "@/data/us-state-metrics";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "map" });
+}
 
 export default async function MapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

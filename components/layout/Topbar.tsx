@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 export function Topbar() {
   const t = useTranslations("top");
+  const tShell = useTranslations("shell");
   const setSearchOpen = useSearch((s) => s.setOpen);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export function Topbar() {
         trigger={
           <button
             type="button"
-            aria-label="Open menu"
+            aria-label={tShell("openMenu")}
             className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] lg:hidden"
           >
             <Menu className="size-4" />
@@ -62,7 +63,7 @@ export function Topbar() {
       <button
         type="button"
         onClick={() => setSearchOpen(true)}
-        aria-label="Search"
+        aria-label={tShell("search")}
         className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] xl:hidden"
       >
         <Search className="size-4" />

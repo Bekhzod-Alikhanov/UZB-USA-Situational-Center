@@ -1,6 +1,7 @@
 "use client";
 import { events, type DiplomaticEvent, type EventType } from "@/data/events";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { Calendar, MapPin, Users, Download, ExternalLink, Search } from "lucide-react";
 
@@ -14,25 +15,21 @@ const TYPE_TONE: Record<EventType, string> = {
   parliamentary: "border-[var(--color-ink-muted)]/30 bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]",
 };
 
-const TYPE_LABEL: Record<EventType, string> = {
-  summit: "Summit",
-  dialogue: "Dialogue",
-  forum: "Forum",
-  business: "Business",
-  council: "Council",
-  cultural: "Cultural",
-  parliamentary: "Parliamentary",
-};
+const TYPES: (EventType | "all")[] = ["all", "summit", "dialogue", "forum", "business", "council"];
 
-const TODAY = new Date("2026-04-21");
+function dateLocale(locale: string) {
+  if (locale === "ru") return "ru-RU";
+  if (locale === "uz-latn") return "uz-Latn-UZ";
+  return "en-US";
+}
 
 function daysBetween(a: Date, b: Date) {
   return Math.round((a.getTime() - b.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-function formatDate(iso: string) {
+function formatDate(iso: string, locale: string) {
   const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString(dateLocale(locale), { month: "short", day: "numeric", year: "numeric" });
 }
 
 function icsDate(iso: string) {
@@ -74,45 +71,45 @@ function downloadIcs(evs: DiplomaticEvent[]) {
   URL.revokeObjectURL(url);
 }
 
-export function EventsView({ locale }: { locale: string }) {
+export function EventsView({ locale, todayIso }: { locale: string; todayIso: string }) {
+  const t = useTranslations("events");
   const [typeFilter, setTypeFilter] = useState<EventType | "all">("all");
   const [search, setSearch] = useState("");
+  const today = useMemo(() => new Date(`${todayIso}T00:00:00`), [todayIso]);
 
   const { upcoming, past } = useMemo(() => {
+    const normalizedSearch = search.toLowerCase();
     const list = events
       .filter((e) => (typeFilter === "all" ? true : e.type === typeFilter))
       .filter((e) =>
-        search
-          ? e.title.toLowerCase().includes(search.toLowerCase()) ||
-            e.location.toLowerCase().includes(search.toLowerCase())
+        normalizedSearch
+          ? e.title.toLowerCase().includes(normalizedSearch) || e.location.toLowerCase().includes(normalizedSearch)
           : true,
       )
       .sort((a, b) => a.date.localeCompare(b.date));
     return {
-      upcoming: list.filter((e) => new Date(e.date) >= TODAY),
-      past: list.filter((e) => new Date(e.date) < TODAY).reverse(),
+      upcoming: list.filter((e) => new Date(e.date) >= today),
+      past: list.filter((e) => new Date(e.date) < today).reverse(),
     };
-  }, [typeFilter, search]);
-
-  const TYPES: (EventType | "all")[] = ["all", "summit", "dialogue", "forum", "business", "council"];
+  }, [typeFilter, search, today]);
 
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-0.5">
-          {TYPES.map((t) => (
+          {TYPES.map((type) => (
             <button
-              key={t}
+              key={type}
               type="button"
-              onClick={() => setTypeFilter(t)}
+              onClick={() => setTypeFilter(type)}
               className={cn(
                 "rounded px-2.5 py-1 text-[11.5px] font-medium transition",
-                typeFilter === t
+                typeFilter === type
                   ? "bg-[var(--color-primary)] text-white"
                   : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
               )}
             >
-              {t === "all" ? "All" : TYPE_LABEL[t]}
+              {type === "all" ? t("filters.all") : t(`filters.${type}`)}
             </button>
           ))}
         </div>
@@ -121,10 +118,10 @@ export function EventsView({ locale }: { locale: string }) {
           <Search className="size-3.5 text-[var(--color-ink-muted)]" aria-hidden />
           <input
             type="search"
-            aria-label="Search events by title or location"
+            aria-label={t("searchLabel")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search title or location"
+            placeholder={t("searchPlaceholder")}
             className="w-56 bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
           />
         </label>
@@ -135,16 +132,18 @@ export function EventsView({ locale }: { locale: string }) {
           className="ml-auto inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px] font-medium text-[var(--color-ink)] hover:bg-[var(--color-surface-2)]"
         >
           <Download className="size-3.5" />
-          Export .ics
+          {t("ics")}
         </button>
       </div>
 
       {upcoming.length > 0 ? (
         <section>
-          <h2 className="stat-label mb-2">Upcoming · {upcoming.length}</h2>
+          <h2 className="stat-label mb-2">
+            {t("sections.upcoming")} · {upcoming.length}
+          </h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {upcoming.map((e) => (
-              <EventCard key={e.id} event={e} locale={locale} highlight />
+            {upcoming.map((event) => (
+              <EventCard key={event.id} event={event} locale={locale} today={today} highlight />
             ))}
           </div>
         </section>
@@ -152,10 +151,12 @@ export function EventsView({ locale }: { locale: string }) {
 
       {past.length > 0 ? (
         <section>
-          <h2 className="stat-label mb-2">Past · {past.length}</h2>
+          <h2 className="stat-label mb-2">
+            {t("sections.past")} · {past.length}
+          </h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {past.map((e) => (
-              <EventCard key={e.id} event={e} locale={locale} />
+            {past.map((event) => (
+              <EventCard key={event.id} event={event} locale={locale} today={today} />
             ))}
           </div>
         </section>
@@ -167,15 +168,20 @@ export function EventsView({ locale }: { locale: string }) {
 function EventCard({
   event,
   locale,
+  today,
   highlight = false,
 }: {
   event: DiplomaticEvent;
   locale: string;
+  today: Date;
   highlight?: boolean;
 }) {
+  const t = useTranslations("events");
   const date = new Date(event.date);
-  const delta = daysBetween(date, TODAY);
-  const countdown = delta >= 0 ? `in ${delta}d` : `${Math.abs(delta)}d ago`;
+  const delta = daysBetween(date, today);
+  const countdown =
+    delta >= 0 ? t("countdown.in", { days: delta }) : t("countdown.ago", { days: Math.abs(delta) });
+
   return (
     <article
       className={cn(
@@ -190,7 +196,7 @@ function EventCard({
             TYPE_TONE[event.type],
           )}
         >
-          {TYPE_LABEL[event.type]}
+          {t(`types.${event.type}`)}
         </span>
         <span
           className={cn(
@@ -205,8 +211,8 @@ function EventCard({
       <div className="flex flex-wrap items-center gap-3 text-[11.5px] text-[var(--color-ink-muted)]">
         <span className="inline-flex items-center gap-1">
           <Calendar className="size-3" />
-          {formatDate(event.date)}
-          {event.dateEnd ? ` → ${formatDate(event.dateEnd)}` : ""}
+          {formatDate(event.date, locale)}
+          {event.dateEnd ? ` -> ${formatDate(event.dateEnd, locale)}` : ""}
         </span>
         <span className="inline-flex items-center gap-1">
           <MapPin className="size-3" />
@@ -226,7 +232,7 @@ function EventCard({
           className="mt-1 inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--color-primary)] hover:underline"
         >
           <ExternalLink className="size-3" />
-          Linked visit
+          {t("linkedVisit")}
         </a>
       ) : null}
     </article>

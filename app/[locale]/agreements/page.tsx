@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BarChart3, Library } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
@@ -5,11 +6,23 @@ import { AgreementsTable } from "@/components/agreements/AgreementsTable";
 import { AgreementsStats } from "@/components/agreements/AgreementsStats";
 import { AgreementsTimeline } from "@/components/agreements/AgreementsTimeline";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "agreements" });
+}
 
 export default async function AgreementsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("agreements");
+  const registryCopy =
+    locale === "ru"
+      ? { title: "Реестр", sub: "Фильтр по категории, сфере и поиск по названию" }
+      : locale === "uz-latn"
+        ? { title: "Reestr", sub: "Kategoriya, soha bo‘yicha filtrlash va nomi bo‘yicha qidirish" }
+        : { title: "Registry", sub: "Filter by category, sphere, search by title" };
 
   return (
     <div className="flex flex-col gap-6">
@@ -41,8 +54,8 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
         <CardHeader
           icon={<Library className="size-3.5" />}
           tone="agree"
-          title="Registry"
-          sub="Filter by category, sphere, search by title"
+          title={registryCopy.title}
+          sub={registryCopy.sub}
         />
         <CardBody>
           <AgreementsTable />

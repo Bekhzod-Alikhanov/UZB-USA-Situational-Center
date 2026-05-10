@@ -1,4 +1,4 @@
-// Server component — the FY-by-year bars used to be a Recharts BarChart;
+// Server component â€” the FY-by-year bars used to be a Recharts BarChart;
 // replaced with a zero-dep SVG <MiniBars /> to remove ~80 KB of Recharts
 // from this page's bundle (per Wave 2.2 of the perf plan).
 import { MiniBars, type MiniBarItem } from "@/components/charts/MiniBars";
@@ -9,6 +9,7 @@ import {
   foreignAssistanceMeta,
 } from "@/data/foreign-assistance";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const AGENCY_COLOR: Record<string, string> = {
   USAID: "var(--color-primary)",
@@ -18,12 +19,14 @@ const AGENCY_COLOR: Record<string, string> = {
   "Department of Energy": "var(--color-neg)",
 };
 
-export function ForeignAssistanceView() {
+export async function ForeignAssistanceView() {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "grants.foreignAssistance" });
   const yearsData: MiniBarItem[] = foreignAssistanceYears.map((y) => ({
     label: `FY${y.fiscalYear}`,
     value: y.totalUsdM,
     color: y.preliminary ? "var(--color-ink-faint)" : "var(--color-primary)",
-    tooltip: `FY${y.fiscalYear}: $${y.totalUsdM.toFixed(2)}M${y.preliminary ? " (preliminary)" : ""}`,
+    tooltip: `FY${y.fiscalYear}: $${y.totalUsdM.toFixed(2)}M${y.preliminary ? ` (${t("preliminaryTooltip")})` : ""}`,
   }));
 
   return (
@@ -31,35 +34,37 @@ export function ForeignAssistanceView() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3 text-[11px]">
           <SourceBadge sourceId={foreignAssistanceMeta.sourceId} />
-          <span className="text-[var(--color-ink-faint)]">refreshed {foreignAssistanceMeta.fetched_at}</span>
+          <span className="text-[var(--color-ink-faint)]">
+            {t("refreshed", { date: foreignAssistanceMeta.fetched_at })}
+          </span>
         </div>
         <div className="text-right text-[11px] text-[var(--color-ink-muted)]">
           <div className="mono text-[18px] font-semibold tabular text-[var(--color-ink)]">
             ${foreignAssistanceMeta.fyMostRecentTotalUsdM.toFixed(1)}M
           </div>
-          <div>FY{foreignAssistanceMeta.fyMostRecent} · most recent fully reported</div>
+          <div>{t("mostRecent", { year: foreignAssistanceMeta.fyMostRecent })}</div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-3">
-          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">Total obligations by fiscal year</h4>
+          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">{t("totalTitle")}</h4>
           <MiniBars data={yearsData} height={220} format={(v) => `$${v}M`} />
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-            FY2025 bar is preliminary (partial reporting per ForeignAssistance.gov).
+            {t("preliminaryNote")}
           </p>
         </div>
 
         <div className="flex flex-col gap-3">
-          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">FY2024 by appropriating agency</h4>
+          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">{t("agencyTitle")}</h4>
           <div className="overflow-x-auto rounded-md border border-[var(--color-border)]">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Agency</th>
-                  <th className="text-right">Amount, $M</th>
-                  <th className="text-right">Share</th>
+                  <th>{t("agency")}</th>
+                  <th className="text-right">{t("amount")}</th>
+                  <th className="text-right">{t("share")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -83,7 +88,7 @@ export function ForeignAssistanceView() {
           </div>
 
           <h4 className="serif mt-2 text-[13px] font-medium text-[var(--color-ink)]">
-            FY2024 economic / military split
+            {t("splitTitle")}
           </h4>
           <div className="grid grid-cols-2 gap-2">
             {foreignAssistanceFy2024Categories.map((c) => (
@@ -95,18 +100,16 @@ export function ForeignAssistanceView() {
                 <div className="mono text-[16px] font-semibold tabular text-[var(--color-ink)]">
                   ${c.amountUsdM.toFixed(1)}M
                 </div>
-                <div className="text-[10.5px] text-[var(--color-ink-muted)]">{c.sharePct.toFixed(1)}% of FY2024</div>
+                <div className="text-[10.5px] text-[var(--color-ink-muted)]">
+                  {t("ofFy2024", { share: c.sharePct.toFixed(1) })}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <p className="text-[10.5px] text-[var(--color-ink-faint)]">
-        Methodology: total obligations basis (not net disbursements). Source: ForeignAssistance.gov country-page
-        figures, cross-checked with the USAFacts aggregation. Yearly totals can shift by 5–10% as agencies revise
-        prior-year reporting.
-      </p>
+      <p className="text-[10.5px] text-[var(--color-ink-faint)]">{t("methodology")}</p>
     </div>
   );
 }

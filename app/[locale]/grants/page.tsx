@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Banknote, Gift, Landmark } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
@@ -6,6 +7,12 @@ import { GrantsView } from "@/components/grants/GrantsView";
 import { ForeignAssistanceView } from "@/components/grants/ForeignAssistanceView";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { grants, grantsMeta } from "@/data/grants";
+import { getRouteSeo } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getRouteSeo({ locale, routeKey: "grants" });
+}
 
 export default async function GrantsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -34,15 +41,15 @@ export default async function GrantsPage({ params }: { params: Promise<{ locale:
         <CardHeader
           icon={<Gift className="size-3.5" />}
           tone="invest"
-          title="UZ-side internal grant register"
-          sub={`${internalGrants.length} workbook rows as of 07.01.2026; U.S. assistance programs are listed separately below`}
+          title={t("cards.internalTitle")}
+          sub={t("cards.internalSub", { count: internalGrants.length })}
           right={<SourceBadge sourceId="input_grants_xlsx" />}
         />
         <CardBody>
           <GrantsView
             records={internalGrants}
-            emptyTitle="No internal grants match these filters"
-            emptyDescription="Clear the search field or choose another sector to return to the internal grant register."
+            emptyTitle={t("cards.internalEmptyTitle")}
+            emptyDescription={t("cards.internalEmptyDescription")}
           />
         </CardBody>
       </Card>
@@ -51,15 +58,15 @@ export default async function GrantsPage({ params }: { params: Promise<{ locale:
         <CardHeader
           icon={<Banknote className="size-3.5" />}
           tone="primary"
-          title="Major U.S. assistance program records"
-          sub={`${usAssistancePrograms.length} source-backed multi-year program records; values use U.S.-side methodology and should not be added to the internal register without reconciliation`}
+          title={t("cards.assistanceTitle")}
+          sub={t("cards.assistanceSub", { count: usAssistancePrograms.length })}
           right={<SourceBadge sourceId="foreign_assistance_gov" />}
         />
         <CardBody>
           <GrantsView
             records={usAssistancePrograms}
-            emptyTitle="No assistance programs match these filters"
-            emptyDescription="Clear the search field or choose another sector to return to the U.S.-side program records."
+            emptyTitle={t("cards.assistanceEmptyTitle")}
+            emptyDescription={t("cards.assistanceEmptyDescription")}
           />
         </CardBody>
       </Card>
@@ -68,8 +75,8 @@ export default async function GrantsPage({ params }: { params: Promise<{ locale:
         <CardHeader
           icon={<Landmark className="size-3.5" />}
           tone="trade"
-          title="U.S. foreign assistance - annual obligations"
-          sub="ForeignAssistance.gov country-level accounting; separate from project-level grant/program cards above"
+          title={t("cards.foreignTitle")}
+          sub={t("cards.foreignSub")}
           right={<SourceBadge sourceId="foreign_assistance_gov" />}
         />
         <CardBody>

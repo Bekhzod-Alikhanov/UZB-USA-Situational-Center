@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { Heart, GraduationCap, Shield, Droplet, Wheat, FlaskConical, MapPin, TrendingUp } from "lucide-react";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { useTranslations } from "next-intl";
 
 const SECTOR_ICON: Record<Grant["sector"], React.ComponentType<{ className?: string }>> = {
   health: Heart,
@@ -40,9 +41,10 @@ interface GrantsViewProps {
 
 export function GrantsView({
   records = grants,
-  emptyTitle = "No grants match these filters",
-  emptyDescription = "Clear the search field or choose another sector to return to the full grants register.",
+  emptyTitle,
+  emptyDescription,
 }: GrantsViewProps) {
+  const t = useTranslations("grants.view");
   const [sector, setSector] = useState<Grant["sector"] | "all">("all");
   const [search, setSearch] = useState("");
 
@@ -70,6 +72,7 @@ export function GrantsView({
     "economy",
     "military",
   ];
+  const sectorLabel = (value: Grant["sector"] | "all") => t(`sectors.${value}`);
 
   return (
     <div className="flex flex-col gap-4">
@@ -86,22 +89,26 @@ export function GrantsView({
                 : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] hover:border-[var(--color-border-strong)]",
             )}
           >
-            {s === "all" ? "All sectors" : s.charAt(0).toUpperCase() + s.slice(1)}
+            {sectorLabel(s)}
           </button>
         ))}
         <input
           type="search"
-          aria-label="Search grants by title or donor"
+          aria-label={t("searchAria")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search title or donor…"
+          placeholder={t("searchPlaceholder")}
           className="ml-auto rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[12px] outline-none placeholder:text-[var(--color-ink-faint)]"
         />
       </div>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.length === 0 ? (
-          <EmptyState className="md:col-span-2 xl:col-span-3" title={emptyTitle} description={emptyDescription} />
+          <EmptyState
+            className="md:col-span-2 xl:col-span-3"
+            title={emptyTitle ?? t("emptyTitle")}
+            description={emptyDescription ?? t("emptyDescription")}
+          />
         ) : (
           filtered.map((g) => {
             const Icon = SECTOR_ICON[g.sector];
@@ -118,7 +125,7 @@ export function GrantsView({
                     )}
                   >
                     <Icon className="size-3" />
-                    {g.sector}
+                    {sectorLabel(g.sector)}
                   </span>
                   <span
                     className={cn(
@@ -126,21 +133,21 @@ export function GrantsView({
                       STATUS_TONE[g.status],
                     )}
                   >
-                    {g.status}
+                    {t(`statuses.${g.status}`)}
                   </span>
                 </div>
                 <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{g.title}</h3>
                 <div className="text-[11.5px] text-[var(--color-ink-muted)]">
                   <div>
-                    <span className="font-medium text-[var(--color-ink)]">Donor:</span> {g.donor}
+                    <span className="font-medium text-[var(--color-ink)]">{t("donor")}:</span> {g.donor}
                   </div>
                   <div>
-                    <span className="font-medium text-[var(--color-ink)]">Initiator:</span> {g.initiator}
+                    <span className="font-medium text-[var(--color-ink)]">{t("initiator")}:</span> {g.initiator}
                   </div>
                 </div>
                 <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--color-border)] pt-2.5">
                   <div>
-                    <div className="stat-label">Value</div>
+                    <div className="stat-label">{t("value")}</div>
                     <div className="mono text-[18px] font-semibold tabular text-[var(--color-ink)]">
                       ${g.valueMusd < 1 ? g.valueMusd.toFixed(3) : g.valueMusd.toFixed(1)}M
                     </div>
@@ -152,7 +159,9 @@ export function GrantsView({
                     </span>
                   ) : null}
                   {g.startYear ? (
-                    <span className="mono text-[11px] tabular text-[var(--color-ink-muted)]">Since {g.startYear}</span>
+                    <span className="mono text-[11px] tabular text-[var(--color-ink-muted)]">
+                      {t("since", { year: g.startYear })}
+                    </span>
                   ) : null}
                 </div>
                 {g.sourceId ? (

@@ -4,7 +4,7 @@ const PORT = Number(process.env.PORT ?? 3000);
 const baseURL = process.env.BASE_URL ?? `http://127.0.0.1:${PORT}`;
 
 export default defineConfig({
-  testDir: ".",
+  testDir: "./tests",
   timeout: 45_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
@@ -27,12 +27,12 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      testMatch: /tests\/(e2e|accessibility)\/.*\.spec\.ts/,
+      testMatch: /(e2e|accessibility)\/.*\.spec\.ts/,
       use: { ...devices["Desktop Chrome"] },
     },
     {
       name: "mobile-chrome",
-      testMatch: /tests\/e2e\/.*\.spec\.ts/,
+      testMatch: /e2e\/.*\.spec\.ts/,
       use: { ...devices["Pixel 7"] },
     },
   ],

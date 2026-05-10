@@ -42,6 +42,7 @@ export function SearchCommand() {
   const tNav = useTranslations("nav");
   const tGroups = useTranslations("navGroups");
   const tTop = useTranslations("top");
+  const tSearch = useTranslations("shell.searchDialog");
   const router = useRouter();
 
   const items: SearchEntity[] = useMemo(() => {
@@ -111,13 +112,13 @@ export function SearchCommand() {
           className="fixed left-1/2 top-[15%] z-50 w-[94vw] max-w-[560px] -translate-x-1/2 overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_20px_60px_rgba(0,0,0,0.2)]"
           aria-describedby={undefined}
         >
-          <Dialog.Title className="sr-only">Search dashboard</Dialog.Title>
+          <Dialog.Title className="sr-only">{tSearch("title")}</Dialog.Title>
           <Command shouldFilter={false} className="flex flex-col">
             <div className="flex items-center gap-2 border-b border-[var(--color-border)] px-4 py-3">
               <Search className="size-4 text-[var(--color-ink-muted)]" aria-hidden />
               <Command.Input
                 autoFocus
-                aria-label="Search dashboard pages, people, visits, agreements, and projects"
+                aria-label={tSearch("aria")}
                 value={query}
                 onValueChange={setQuery}
                 placeholder={tTop("search")}
@@ -129,7 +130,7 @@ export function SearchCommand() {
             </div>
             <Command.List className="max-h-[380px] overflow-y-auto p-2">
               <Command.Empty className="px-4 py-6 text-center text-sm text-[var(--color-ink-muted)]">
-                No results
+                {tSearch("empty")}
               </Command.Empty>
               {results.map((it) => {
                 const Icon = it.icon;
@@ -152,7 +153,7 @@ export function SearchCommand() {
                       <div className="truncate text-[11px] text-[var(--color-ink-muted)]">{it.subtitle}</div>
                     </div>
                     <span className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-[var(--color-ink-muted)]">
-                      {it.type}
+                      {tSearch(`types.${it.type}`)}
                     </span>
                     <ArrowRight
                       className="size-3 text-[var(--color-ink-faint)] opacity-0 transition group-data-[selected=true]:opacity-100"

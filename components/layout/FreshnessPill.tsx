@@ -22,6 +22,12 @@ const LEVEL_ICON = {
   outdated: AlertCircle,
 } as const;
 
+const MONTHS: Record<"en" | "ru" | "uz-latn", string[]> = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  ru: ["янв.", "фев.", "мар.", "апр.", "мая", "июн.", "июл.", "авг.", "сен.", "окт.", "ноя.", "дек."],
+  "uz-latn": ["yan", "fev", "mar", "apr", "may", "iyun", "iyul", "avg", "sen", "okt", "noy", "dek"],
+};
+
 interface Strings {
   upToDate: string;
   stale: string;
@@ -84,15 +90,25 @@ function pickStr(locale: string): Strings {
   return STR.en;
 }
 
+function pickLocale(locale: string): "en" | "ru" | "uz-latn" {
+  if (locale === "ru") return "ru";
+  if (locale === "uz-latn") return "uz-latn";
+  return "en";
+}
+
+function formatAsOf(asOf: string, locale: "en" | "ru" | "uz-latn") {
+  const [year, month, day] = asOf.split("-");
+  const monthLabel = MONTHS[locale][Number(month) - 1] ?? month;
+
+  if (locale === "uz-latn") return `${day}-${monthLabel}, ${year}`;
+  return `${day} ${monthLabel} ${year}`;
+}
+
 export function FreshnessPill() {
   const locale = useLocale();
+  const resolvedLocale = pickLocale(locale);
   const T = pickStr(locale);
-  const dateLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
-  const DATE_FMT = new Intl.DateTimeFormat(dateLocale, {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
+  const formattedAsOf = formatAsOf(REPORT.asOf, resolvedLocale);
 
   const LEVEL_LABEL = {
     "up-to-date": T.upToDate,
@@ -122,7 +138,7 @@ export function FreshnessPill() {
       >
         <Icon className="size-3" />
         <span className="hidden sm:inline">{LEVEL_LABEL[REPORT.level]}</span>
-        <span className="mono tabular opacity-70">{DATE_FMT.format(new Date(REPORT.asOf + "T00:00:00Z"))}</span>
+        <span className="mono tabular opacity-70">{formattedAsOf}</span>
       </button>
 
       {open ? (
@@ -141,9 +157,7 @@ export function FreshnessPill() {
 
           <dl className="grid grid-cols-2 gap-y-1.5 text-[11.5px]">
             <dt className="text-[var(--color-ink-muted)]">{T.asOf}</dt>
-            <dd className="mono tabular text-right text-[var(--color-ink)]">
-              {DATE_FMT.format(new Date(REPORT.asOf + "T00:00:00Z"))}
-            </dd>
+            <dd className="mono tabular text-right text-[var(--color-ink)]">{formattedAsOf}</dd>
             <dt className="text-[var(--color-ink-muted)]">{T.sourcesCounted}</dt>
             <dd className="mono tabular text-right text-[var(--color-ink)]">{REPORT.sourcesCounted}</dd>
             <dt className="text-[var(--color-ink-muted)]">{T.oldestAge}</dt>

@@ -9,6 +9,7 @@ import { news, type NewsTonality, type NewsTag } from "@/data/news";
 import { cn } from "@/lib/utils";
 import { ExternalLink, Search } from "lucide-react";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
+import { getTranslations } from "next-intl/server";
 
 const TONALITY_TONE: Record<NewsTonality, string> = {
   positive: "bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -65,7 +66,8 @@ function buildHref(
   return `/${locale}/news${qs ? `?${qs}` : ""}`;
 }
 
-export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Props) {
+export async function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Props) {
+  const t = await getTranslations({ locale, namespace: "news" });
   const filtered = news
     .filter((n) => (tonality === "all" ? true : n.tonality === tonality))
     .filter((n) => (tag === "all" ? true : n.tags.includes(tag as NewsTag)))
@@ -81,15 +83,15 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
       <div className="flex flex-wrap items-center gap-3">
         <div
           role="group"
-          aria-label="Filter by tonality"
+          aria-label={t("feed.tonalityAria")}
           className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-0.5"
         >
-          {TONS.map((t) => {
-            const active = tonality === t;
+          {TONS.map((item) => {
+            const active = tonality === item;
             return (
               <Link
-                key={t}
-                href={buildHref(locale, baseState, { tonality: t })}
+                key={item}
+                href={buildHref(locale, baseState, { tonality: item })}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "rounded px-2.5 py-1 text-[11.5px] font-medium capitalize transition",
@@ -98,7 +100,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
                     : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
                 )}
               >
-                {t}
+                {t(`filters.${item}`)}
               </Link>
             );
           })}
@@ -110,18 +112,18 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
             filters. JavaScript-free. */}
         <form method="get" action={`/${locale}/news`} className="flex flex-wrap items-center gap-2">
           <label className="sr-only" htmlFor="news-tag">
-            Tag
+            {t("feed.tagLabel")}
           </label>
           <select
             id="news-tag"
             name="tag"
             defaultValue={tag}
-            aria-label="Filter by tag"
+            aria-label={t("feed.tagAria")}
             className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-[12px]"
           >
-            {TAGS.map((t) => (
-              <option key={t} value={t}>
-                {t === "all" ? "All tags" : t}
+            {TAGS.map((item) => (
+              <option key={item} value={item}>
+                {item === "all" ? t("feed.tags.all") : t(`feed.tags.${item}`)}
               </option>
             ))}
           </select>
@@ -132,8 +134,8 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
               type="search"
               name="q"
               defaultValue={q}
-              aria-label="Search title or summary"
-              placeholder="Search title or summary"
+              aria-label={t("feed.searchAria")}
+              placeholder={t("feed.searchPlaceholder")}
               className="w-64 bg-transparent outline-none placeholder:text-[var(--color-ink-faint)]"
             />
           </label>
@@ -141,7 +143,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
             type="submit"
             className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-[11.5px] font-medium text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]"
           >
-            Apply
+            {t("feed.apply")}
           </button>
         </form>
       </div>
@@ -149,7 +151,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
       <ul className="flex flex-col divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
         {filtered.length === 0 ? (
           <li className="py-6 text-center text-[12px] text-[var(--color-ink-muted)]">
-            No news matches the current filters.
+            {t("feed.empty")}
           </li>
         ) : null}
         {filtered.map((n) => (
@@ -163,7 +165,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
                     TONALITY_TONE[n.tonality],
                   )}
                 >
-                  {n.tonality}
+                  {t(`filters.${n.tonality}`)}
                 </span>
                 {n.tags.map((tg) => (
                   <span
@@ -173,7 +175,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
                       TAG_TONE[tg],
                     )}
                   >
-                    {tg}
+                    {t(`feed.tags.${tg}`)}
                   </span>
                 ))}
               </div>
@@ -188,7 +190,7 @@ export function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }: Prop
                   className="inline-flex items-center gap-1 text-[var(--color-primary)] hover:underline"
                 >
                   <ExternalLink className="size-3" />
-                  Read
+                  {t("read")}
                 </a>
                 {n.sourceId ? <SourceBadge sourceId={n.sourceId} /> : null}
               </div>
