@@ -90,7 +90,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
                 {t(`grid.roles.${c.role}`)}
               </span>
             </div>
-            <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{c.name}</h3>
+            <h2 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{c.name}</h2>
             <p className="text-[12px] text-[var(--color-ink-muted)]">{c.position}</p>
             <div className="mt-auto flex items-center justify-between gap-2 border-t border-[var(--color-border)] pt-2 text-[11px]">
               <span className={cn("font-medium", STANCE_TEXT[c.stanceOnUz])}>{c.stanceOnUz}</span>

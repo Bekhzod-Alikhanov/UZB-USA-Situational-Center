@@ -660,6 +660,10 @@
       "filterTitleAria": "Фильтр соглашений по названию",
       "filterSphereAria": "Фильтр соглашений по сфере",
       "empty": "Нет соглашений, соответствующих фильтрам."
+    },
+    "timeline": {
+      "signaturesPerYear": "Подписаний в год",
+      "barLabel": "{count} подписано в {year}"
     }
   },
   "investments": {

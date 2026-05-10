@@ -52,7 +52,7 @@ export function VisitsTimeline({ filterDirection = "all" }: { filterDirection?: 
           return (
             <section key={y} className="mb-6">
               <div className="sticky top-14 z-10 mb-3 flex items-center gap-3 bg-[var(--color-bg)]/90 py-1 pl-[100px] backdrop-blur">
-                <h3 className="serif text-[20px] font-medium text-[var(--color-primary)]">{y}</h3>
+                <h2 className="serif text-[20px] font-medium text-[var(--color-primary)]">{y}</h2>
                 <div className="text-[11px] text-[var(--color-ink-muted)]">{inYear.length} events</div>
               </div>
               <ul className="flex flex-col gap-3">

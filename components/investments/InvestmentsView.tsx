@@ -509,7 +509,7 @@ function ConfidenceBadge({ confidence, label }: { confidence: InvestmentSourceCo
 function ToolbarStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-end">
-      <span className="text-[10px] uppercase tracking-wider opacity-70">{label}</span>
+      <span className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">{label}</span>
       <span className="mono text-[13px] tabular text-[var(--color-ink)]">{value}</span>
     </div>
   );

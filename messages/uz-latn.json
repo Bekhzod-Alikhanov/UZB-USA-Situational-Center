@@ -660,6 +660,10 @@
       "filterTitleAria": "Bitimlarni nomi boyicha filtrlash",
       "filterSphereAria": "Bitimlarni soha boyicha filtrlash",
       "empty": "Filtrlarga mos bitimlar topilmadi."
+    },
+    "timeline": {
+      "signaturesPerYear": "Yiliga imzolar",
+      "barLabel": "{year} yilda {count} ta imzolangan"
     }
   },
   "investments": {

@@ -20,6 +20,8 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
   // The serif is for headings only — defer it; let the body Geist render
   // first and let the heading swap in. Cuts ~150 ms off first paint.
+  // Re-tested May 2026: enabling preload added ~150 ms to LCP and 15 KB
+  // per route. Keep deferred.
   preload: false,
 });
 

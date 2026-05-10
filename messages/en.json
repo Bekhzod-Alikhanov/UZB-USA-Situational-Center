@@ -660,6 +660,10 @@
       "filterTitleAria": "Filter agreements by title",
       "filterSphereAria": "Filter agreements by sphere",
       "empty": "No agreements match your filters."
+    },
+    "timeline": {
+      "signaturesPerYear": "Signatures per year",
+      "barLabel": "{count} signed in {year}"
     }
   },
   "investments": {

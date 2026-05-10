@@ -171,9 +171,9 @@ export function CommitmentsTable() {
             >
               {s === "all" ? "All" : ts(s)}
               {s !== "all" ? (
-                <span className="ml-1 text-[10px] opacity-70">{counts[s] ?? 0}</span>
+                <span className="mono ml-1 text-[10px] tabular">{counts[s] ?? 0}</span>
               ) : (
-                <span className="ml-1 text-[10px] opacity-70">{commitments.length}</span>
+                <span className="mono ml-1 text-[10px] tabular">{commitments.length}</span>
               )}
             </button>
           ))}

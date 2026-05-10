@@ -41,7 +41,7 @@ export function AssistantChatCore() {
     return (
       <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-10 text-center">
         <Sparkles className="size-8 text-[var(--color-ink-faint)]" />
-        <h3 className="serif text-[18px] font-medium text-[var(--color-ink)]">{tChat("disabledTitle")}</h3>
+        <h2 className="serif text-[18px] font-medium text-[var(--color-ink)]">{tChat("disabledTitle")}</h2>
         <p className="max-w-md text-[13px] text-[var(--color-ink-muted)]">{tChat("disabledDescription")}</p>
       </div>
     );

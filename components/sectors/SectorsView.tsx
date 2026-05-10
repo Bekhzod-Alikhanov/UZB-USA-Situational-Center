@@ -156,9 +156,9 @@ export function SectorsView({ locale = "en" }: { locale?: string }) {
                   <Icon className="size-5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="serif text-[16px] font-medium leading-snug tracking-tight text-[var(--color-ink)]">
+                  <h2 className="serif text-[16px] font-medium leading-snug tracking-tight text-[var(--color-ink)]">
                     {s.sector}
-                  </h3>
+                  </h2>
                 </div>
                 <SourceBadge sourceId={s.sourceId} />
               </header>

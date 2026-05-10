@@ -52,7 +52,7 @@ function UnavailableState() {
   return (
     <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-10 text-center">
       <AlertCircle className="size-8 text-[var(--color-warn)]" />
-      <h3 className="serif text-[18px] font-medium text-[var(--color-ink)]">AI assistant is unavailable</h3>
+      <h2 className="serif text-[18px] font-medium text-[var(--color-ink)]">AI assistant is unavailable</h2>
       <p className="max-w-lg text-[13px] text-[var(--color-ink-muted)]">
         Set <code className="mono rounded bg-[var(--color-surface-2)] px-1">ASSISTANT_ENABLED=true</code> and{" "}
         <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> on the server to enable

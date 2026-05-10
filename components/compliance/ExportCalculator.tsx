@@ -191,7 +191,7 @@ export function ExportCalculator() {
           {label}
         </div>
         <p className="text-[13px] leading-relaxed">{result.note}</p>
-        <p className="mt-2 text-[10.5px] italic opacity-80">{t("disclaimer")}</p>
+        <p className="mt-2 text-[10.5px] italic">{t("disclaimer")}</p>
       </div>
     </div>
   );
