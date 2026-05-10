@@ -110,6 +110,7 @@ CLS = 0 on all routes, before and after.
 
 ### Stop-conditions hit
 - **Phase B perf median ceiling at 91 (target 93):** all Wave-1 items in `LIGHTHOUSE_AUDIT.md` are already shipped in main. Further gains require Wave-3 architectural work (streaming + Suspense at layout boundary, replacing Recharts with Observable Plot/Nivo, splitting Sidebar by route group). I explicitly measured re-enabling serif preload — it made things worse (Perf 91→90, +150 ms LCP, +15 KB) — and reverted with a documented commit note in [app/layout.tsx](app/layout.tsx) so a future session doesn't re-litigate.
+- **Wave-3 lazy-mount experiment on /** (post-Phase-C, 2026-05-10 ~18:00 EDT): wrapped `RiskRadar` + `Horizon` in `<LazyMount>` on `app/[locale]/page.tsx` and re-ran `scripts/lh-all.mjs` twice. Result was within Lighthouse measurement noise: first run showed `/` Perf 88→90 but 8 routes registered A11y 100→96-98 drops; second run showed A11y back to 100 everywhere but `/` Perf also back to 88. **Net effect: zero stable gain.** Reverted before commit. The conclusion: lazy-mounting individual right-column charts isn't enough — the / bottleneck is the shared chunk size (~440 KB JS regardless of mount timing) and the cumulative hydration of ~12 client islands. Real Wave-3 needs streaming + Suspense at the layout boundary or replacing the chart library, not per-component LazyMount.
 
 ---
 
