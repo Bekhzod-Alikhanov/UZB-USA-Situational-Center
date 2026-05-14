@@ -38,17 +38,46 @@ export function MapLoadGate({ locale }: { locale: string }) {
 
   if (loaded) return <UsCenteredMapImpl />;
 
+  // Pick palette based on whether we're inside a Strategic Vision dark page.
+  // The .strategic-page wrapper exposes --sv-* tokens; if absent, the
+  // CSS-var fallbacks resolve to the original light-mode tokens. This means
+  // the same component cleanly serves both /map (dark) and other consumers
+  // (light).
   return (
-    <div className="flex min-h-[420px] flex-col items-center justify-center rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-6 text-center">
-      <span className="inline-flex size-11 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-primary)]">
+    <div
+      className="flex min-h-[480px] flex-col items-center justify-center rounded-2xl border border-dashed p-6 text-center"
+      style={{
+        borderColor: "var(--sv-outline, var(--color-border))",
+        background: "var(--sv-surface-low, var(--color-surface-2))",
+      }}
+    >
+      <span
+        className="inline-flex size-11 items-center justify-center rounded-lg border"
+        style={{
+          borderColor: "var(--sv-outline, var(--color-border))",
+          background: "var(--sv-surface, var(--color-surface))",
+          color: "var(--sv-secondary, var(--color-primary))",
+        }}
+      >
         <Map className="size-5" aria-hidden />
       </span>
-      <h2 className="mt-3 text-[15px] font-semibold text-[var(--color-ink)]">{copy.title}</h2>
-      <p className="mt-2 max-w-xl text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">{copy.body}</p>
+      <h2 className="mt-3 text-[15px] font-semibold" style={{ color: "var(--sv-on-surface, var(--color-ink))" }}>
+        {copy.title}
+      </h2>
+      <p
+        className="mt-2 max-w-xl text-[12.5px] leading-relaxed"
+        style={{ color: "var(--sv-on-surface-variant, var(--color-ink-muted))" }}
+      >
+        {copy.body}
+      </p>
       <button
         type="button"
         onClick={() => setLoaded(true)}
-        className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-4 py-2 text-[12px] font-semibold text-white transition hover:bg-[var(--color-primary-2)]"
+        className="mt-4 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12px] font-semibold transition-colors"
+        style={{
+          background: "var(--sv-secondary, var(--color-primary))",
+          color: "var(--sv-primary-container, #ffffff)",
+        }}
       >
         <Map className="size-3.5" aria-hidden />
         {copy.button}

@@ -41,6 +41,12 @@ function auditMessageParity() {
     "shell.footer.record",
     "investments.workspace.statuses.mou",
     "agreements.spheres.transport",
+    // Official source identifiers — BEA program code, U.S. Census agency
+    // name, Open Doors / IIE report name. Kept in original per project
+    // exception rule for source-title strings.
+    "map.strategic.metrics.gdpSub",
+    "map.strategic.metrics.popSub",
+    "map.strategic.metrics.studentsSub",
   ]);
 
   for (const locale of nonEnglishLocales) {
