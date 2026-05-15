@@ -13,12 +13,16 @@ import { useSettings } from "@/lib/store/settings";
 export function SettingsSync() {
   const hideDemo = useSettings((s) => s.hideDemo);
   const presentation = useSettings((s) => s.presentationMode);
+  const theme = useSettings((s) => s.theme);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
-    document.documentElement.toggleAttribute("data-hide-demo", hideDemo);
-    document.documentElement.toggleAttribute("data-presentation", presentation);
-  }, [hideDemo, presentation]);
+    const html = document.documentElement;
+    html.toggleAttribute("data-hide-demo", hideDemo);
+    html.toggleAttribute("data-presentation", presentation);
+    html.classList.toggle("dark", theme === "dark");
+    html.classList.toggle("strategic", theme === "strategic");
+  }, [hideDemo, presentation, theme]);
 
   return null;
 }

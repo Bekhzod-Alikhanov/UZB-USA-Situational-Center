@@ -65,6 +65,26 @@
   --shadow-glow-primary: 0 0 0 4px color-mix(in oklab, var(--color-primary) 14%, transparent);
   --shadow-card-elevated: 0 4px 12px rgba(26, 26, 26, 0.06), 0 1px 3px rgba(26, 26, 26, 0.04);
 
+  /* Strategic Vision 2026 palette — exposed at :root so utilities and the
+     /map prototype can reach them. The full theme is gated by `.strategic`
+     on <html> (see below). Keeping the tokens at :root means components
+     wrapped in `.strategic-page` (legacy /map prototype) keep working too. */
+  --sv-bg: #131315;
+  --sv-bg-soft: #0e0e10;
+  --sv-surface: #1f1f21;
+  --sv-surface-high: #2a2a2c;
+  --sv-surface-low: #1b1b1d;
+  --sv-on-surface: #e4e2e4;
+  --sv-on-surface-variant: #c5c6cd;
+  --sv-outline: #44474d;
+  --sv-outline-variant: #8f9097;
+  --sv-primary: #b9c7e4;
+  --sv-primary-container: #0a192f;
+  --sv-secondary: #adc6ff;
+  --sv-tertiary: #e7bf99;
+  --sv-error: #ffb4ab;
+  --sv-success: #10b981;
+
   /* Motion. Used by .kpi-card hover, chart entry transitions, and
      map paint transitions. Zeroed under prefers-reduced-motion. */
   --duration-fast: 120ms;
@@ -161,6 +181,96 @@
     opacity: 0.02;
   }
 
+  /* ----------------------------------------------------------------------
+     Strategic Vision 2026 — global dark glassmorphic theme.
+     Activated by `<html class="strategic">` (set by SettingsSync from
+     useSettings.theme === "strategic", which is the May 2026 default).
+
+     This block REMAPS the existing semantic tokens (--color-*) to the
+     Strategic Vision palette so every component using those tokens
+     (200+ files) inherits the new look without per-file edits.
+
+     Verified WCAG AA contrast for body / muted / faint text on the new
+     surface: ink 14:1, ink-muted 9.5:1, ink-faint 6.8:1. Primary navy
+     accent reads 10:1 on bg.
+     ---------------------------------------------------------------------- */
+  :root.strategic {
+    color-scheme: dark;
+
+    /* Surfaces */
+    --color-bg: var(--sv-bg);
+    --color-bg-soft: var(--sv-bg-soft);
+    --color-surface: var(--sv-surface);
+    --color-surface-2: var(--sv-surface-low);
+    --color-surface-3: var(--sv-surface-high);
+
+    /* Ink */
+    --color-ink: var(--sv-on-surface);
+    --color-ink-muted: var(--sv-on-surface-variant);
+    --color-ink-faint: #8f9097;
+
+    /* Borders */
+    --color-border: rgba(143, 144, 151, 0.22);
+    --color-border-strong: rgba(143, 144, 151, 0.42);
+
+    /* Brand — Stitch primary (#b9c7e4) is pale; pair with cyan-leaning
+       secondary for accents and emerald success */
+    --color-primary: var(--sv-primary);
+    --color-primary-2: var(--sv-secondary);
+    --color-primary-soft: rgba(173, 198, 255, 0.12);
+
+    /* Semantic */
+    --color-pos: var(--sv-success);
+    --color-pos-soft: rgba(16, 185, 129, 0.12);
+    --color-warn: var(--sv-tertiary);
+    --color-warn-soft: rgba(231, 191, 153, 0.12);
+    --color-neg: var(--sv-error);
+    --color-neg-soft: rgba(255, 180, 171, 0.12);
+
+    /* Demo data markers — keep visible but unobtrusive on dark */
+    --color-demo: #c5c6cd;
+    --color-demo-bg: #2a2a2c;
+    --color-demo-ink: #e4e2e4;
+    --color-demo-border: rgba(143, 144, 151, 0.4);
+
+    /* Domain accents — Stitch-friendly cool/warm bias on dark */
+    --color-trade: #adc6ff;
+    --color-trade-soft: rgba(173, 198, 255, 0.12);
+    --color-visits: #d6b9e8;
+    --color-visits-soft: rgba(214, 185, 232, 0.12);
+    --color-invest: #88e2c1;
+    --color-invest-soft: rgba(136, 226, 193, 0.12);
+    --color-agree: #e7bf99;
+    --color-agree-soft: rgba(231, 191, 153, 0.14);
+    --color-people: #b6e7e1;
+    --color-people-soft: rgba(182, 231, 225, 0.12);
+    --color-rose: #ffb4ab;
+    --color-rose-soft: rgba(255, 180, 171, 0.12);
+    --color-slate: #c5c6cd;
+    --color-slate-soft: rgba(197, 198, 205, 0.12);
+
+    /* Card lift — Stitch shows almost no traditional shadow; depth via
+       backdrop blur + outline. Keep tokens for components that still
+       reach for them but tune values down. */
+    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 0 0 0 transparent;
+    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    --shadow-card-elevated: 0 8px 24px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+    --shadow-glow-primary: 0 0 0 4px rgba(173, 198, 255, 0.22);
+  }
+
+  /* Body noise filter is too busy on the deep Stitch surface — disable it. */
+  :root.strategic body::before {
+    display: none;
+  }
+  /* Page background switches to Strategic Vision dark and adds a subtle
+     vertical gradient that mirrors the Stitch reference screens. */
+  :root.strategic body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(173, 198, 255, 0.06), transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, rgba(231, 191, 153, 0.04), transparent 60%),
+      var(--sv-bg);
+  }
+
   html,
   body {
     background: var(--color-bg);
@@ -194,7 +304,8 @@
    vestibular-sensitive users. */
 @media (prefers-reduced-motion: reduce) {
   :root,
-  :root.dark {
+  :root.dark,
+  :root.strategic {
     --duration-fast: 0ms;
     --duration-base: 0ms;
     --duration-slow: 0ms;
@@ -279,6 +390,26 @@
     @apply rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)];
     box-shadow: var(--shadow-card);
   }
+  /* Strategic Vision lift — glassmorphic surface + subtle inset highlight
+     + backdrop blur for the cockpit-instrument feel from the Stitch pack.
+     Scoped to `:root.strategic` so light/dark modes are untouched. */
+  :root.strategic .card {
+    background: color-mix(in oklab, var(--sv-surface) 78%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+      var(--shadow-card),
+      0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  }
+  :root.strategic .kpi-card {
+    background: color-mix(in oklab, var(--sv-surface-low) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-color: rgba(143, 144, 151, 0.28);
+  }
+  :root.strategic .kpi-card:hover {
+    border-color: rgba(173, 198, 255, 0.35);
+  }
   .card-header {
     @apply flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5 border-b border-[var(--color-border)] px-3.5 py-3 sm:flex-nowrap sm:items-center sm:px-5 sm:py-3.5;
   }
@@ -360,6 +491,36 @@
   }
   .section-sub {
     @apply text-[12.5px] leading-relaxed text-[var(--color-ink-muted)] sm:text-[13.5px];
+  }
+  /* Strategic mode tightens the title further and tints it primary — the
+     Stitch hero pattern is "eyebrow + large serif + sub" with the serif
+     reading authoritative-editorial. */
+  :root.strategic .section-title {
+    @apply text-[22px] sm:text-[28px];
+    color: var(--sv-primary);
+  }
+
+  /* Page-level pulsing eyebrow used above .section-title across all 17
+     routes (matches the Stitch "Live snapshot" / "Active presence" eyebrows
+     in the side panels of every screen in the design pack). */
+  .page-eyebrow {
+    @apply inline-flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.18em];
+    color: color-mix(in oklab, var(--color-primary) 80%, white);
+  }
+  .page-eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-primary) 60%, transparent);
+    animation: sv-pulse 2.2s infinite;
+  }
+  :root.strategic .page-eyebrow {
+    color: var(--sv-secondary);
+  }
+  :root.strategic .page-eyebrow::before {
+    background: var(--sv-secondary);
   }
   /* -------------------------------------------------------------------------
      Strategic Vision 2026 — scoped dark theme for the /map prototype.

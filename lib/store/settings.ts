@@ -2,7 +2,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type Theme = "light" | "dark";
+/**
+ * Theme options:
+ * - `light`     classic light primary surface (legacy)
+ * - `dark`      classic dark mode
+ * - `strategic` Strategic Vision 2026 — dark glassmorphic, navy + cyan accents
+ *               (May 2026 redesign, default for new sessions)
+ */
+export type Theme = "light" | "dark" | "strategic";
 
 interface SettingsState {
   hideDemo: boolean;
@@ -16,12 +23,21 @@ interface SettingsState {
   setAiEnabled: (v: boolean) => void;
 }
 
+function applyThemeClass(theme: Theme) {
+  if (typeof document === "undefined") return;
+  const html = document.documentElement;
+  html.classList.toggle("dark", theme === "dark");
+  html.classList.toggle("strategic", theme === "strategic");
+}
+
 export const useSettings = create<SettingsState>()(
   persist(
     (set) => ({
       hideDemo: false,
       presentationMode: false,
-      theme: "light",
+      // Strategic Vision is the new default. Existing users with persisted
+      // "light"/"dark" values keep their preference (migrate untouched).
+      theme: "strategic",
       aiEnabled: false,
       setHideDemo: (v) => {
         set({ hideDemo: v });
@@ -37,23 +53,26 @@ export const useSettings = create<SettingsState>()(
       },
       setTheme: (v) => {
         set({ theme: v });
-        if (typeof document !== "undefined") {
-          document.documentElement.classList.toggle("dark", v === "dark");
-        }
+        applyThemeClass(v);
       },
       setAiEnabled: (v) => set({ aiEnabled: v }),
     }),
     {
       name: "uzus-settings",
-      // v2: dropped `aiModel` field. Strip it from any stale persisted state
-      // so users with older localStorage entries don't keep ghost data around.
-      version: 2,
-      migrate: (persisted: unknown) => {
-        if (persisted && typeof persisted === "object" && "aiModel" in persisted) {
-          const { aiModel: _aiModel, ...rest } = persisted as Record<string, unknown>;
-          return rest as unknown as SettingsState;
+      // v3: introduced theme = "strategic" as the default. Old v2 entries
+      // with `theme: "light"` or `"dark"` keep their preference.
+      version: 3,
+      migrate: (persisted: unknown, version: number) => {
+        let v = persisted as Record<string, unknown> | null;
+        if (v && typeof v === "object" && "aiModel" in v) {
+          const { aiModel: _aiModel, ...rest } = v;
+          v = rest as Record<string, unknown>;
         }
-        return persisted as SettingsState;
+        // v2 → v3: legacy values are kept; no field rename needed.
+        if (version < 3 && v && typeof v === "object" && !("theme" in v)) {
+          v = { ...v, theme: "strategic" };
+        }
+        return v as unknown as SettingsState;
       },
     },
   ),
