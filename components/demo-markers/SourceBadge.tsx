@@ -53,7 +53,7 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
     "inline-flex items-center gap-1 rounded border px-1.5 py-0.5 transition",
     variant === "chip" ? "text-[11px]" : "text-[9.5px] uppercase tracking-wider",
     tone,
-    isExternal && "hover:bg-[var(--color-primary)] hover:text-white",
+    isExternal && "hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-contrast)]",
     className,
   );
 

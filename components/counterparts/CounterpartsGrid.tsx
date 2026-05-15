@@ -74,7 +74,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
           >
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <div className="flex size-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-[11px] font-bold text-white">
+                <div className="flex size-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-[11px] font-bold text-[var(--color-primary-contrast)]">
                   {initials(c.name)}
                 </div>
                 {c.party ? (

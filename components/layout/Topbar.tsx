@@ -25,14 +25,14 @@ export function Topbar() {
   }, [setSearchOpen]);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_88%,transparent)] px-3 backdrop-blur-md sm:gap-3 sm:px-4 lg:gap-4 lg:px-6">
+    <header className="command-topbar sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_88%,transparent)] px-3 sm:gap-3 sm:px-4 lg:gap-4 lg:px-6">
       {/* Mobile menu trigger — hidden on lg+ where the persistent sidebar is shown */}
       <MobileSidebar
         trigger={
           <button
             type="button"
             aria-label={tShell("openMenu")}
-            className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] lg:hidden"
+            className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] lg:hidden"
           >
             <Menu className="size-4" />
           </button>
@@ -50,7 +50,7 @@ export function Topbar() {
       <button
         type="button"
         onClick={() => setSearchOpen(true)}
-        className="hidden w-[280px] items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-[12.5px] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface)] xl:flex"
+        className="hidden w-[310px] items-center gap-2 rounded-md border border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface-2)_86%,transparent)] px-3 py-1.5 text-[12.5px] text-[var(--color-ink-muted)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface)] xl:flex"
       >
         <Search className="size-3.5 shrink-0" />
         <span className="flex-1 truncate text-left">{t("search")}</span>
@@ -64,14 +64,14 @@ export function Topbar() {
         type="button"
         onClick={() => setSearchOpen(true)}
         aria-label={tShell("search")}
-        className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] xl:hidden"
+        className="inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)] xl:hidden"
       >
         <Search className="size-4" />
       </button>
 
       <div className="flex items-center gap-1.5 sm:gap-2">
         {/* Online dot — md+ only */}
-        <span className="hidden items-center gap-1.5 rounded-full border border-[color-mix(in_oklab,var(--color-pos)_30%,transparent)] bg-[var(--color-pos-soft)] px-2.5 py-1 text-[10.5px] font-medium text-[var(--color-pos)] xl:inline-flex">
+        <span className="hidden items-center gap-1.5 rounded-md border border-[color-mix(in_oklab,var(--color-pos)_30%,transparent)] bg-[var(--color-pos-soft)] px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-[var(--color-pos)] xl:inline-flex">
           <span className="size-1.5 rounded-full bg-[var(--color-pos)]" />
           {t("online")}
         </span>

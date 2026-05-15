@@ -93,7 +93,7 @@ export function AssistantChatCore() {
                   className={cn(
                     "max-w-[85%] rounded-lg px-3 py-2 text-[13px] leading-relaxed",
                     message.role === "user"
-                      ? "ml-auto bg-[var(--color-primary)] text-white"
+                      ? "ml-auto bg-[var(--color-primary)] text-[var(--color-primary-contrast)]"
                       : "mr-auto bg-[var(--color-bg)] text-[var(--color-ink)]",
                   )}
                 >
@@ -155,7 +155,7 @@ export function AssistantChatCore() {
           <button
             type="submit"
             disabled={!input.trim()}
-            className="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-2 text-[12px] font-medium text-white disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-2 text-[12px] font-medium text-[var(--color-primary-contrast)] disabled:opacity-50"
           >
             <Send className="size-3.5" />
             {t("send")}

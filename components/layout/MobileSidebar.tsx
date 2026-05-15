@@ -38,25 +38,19 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" />
+        <Dialog.Overlay className="fixed inset-0 z-40 bg-[#070b10]/70 backdrop-blur-sm" />
         <Dialog.Content
-          className="fixed inset-y-0 left-0 z-50 flex w-[270px] flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl outline-none"
+          className="command-sidebar fixed inset-y-0 left-0 z-50 flex w-[286px] flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl outline-none"
           aria-describedby={undefined}
         >
           <Dialog.Title className="sr-only">{tBrand("title")}</Dialog.Title>
 
           {/* Brand + close */}
-          <div className="flex items-center justify-between border-b border-[var(--color-border)] px-4 py-3.5">
+          <div className="relative flex items-center justify-between border-b border-[var(--color-border)] px-4 py-3.5">
+            <span aria-hidden className="command-status-line absolute inset-x-4 top-0 h-px" />
             <div className="flex items-center gap-2.5">
-              <div
-                className="flex size-9 items-center justify-center rounded-lg text-[11px] font-bold tracking-tight text-white"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--color-primary), color-mix(in oklab, var(--color-visits) 70%, var(--color-primary)))",
-                  boxShadow: "0 4px 10px color-mix(in oklab, var(--color-primary) 30%, transparent)",
-                }}
-              >
-                UZ<span className="opacity-60">·</span>US
+              <div className="command-brand-mark flex size-9 items-center justify-center rounded-md text-[10px] font-black tracking-tight text-[#071827]">
+                UZ<span className="opacity-60">/</span>US
               </div>
               <div className="leading-tight">
                 <div className="serif text-[15px] font-medium text-[var(--color-ink)]">{tBrand("title")}</div>
@@ -102,7 +96,7 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
                               "group relative flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13.5px] font-medium transition",
                               isActive
                                 ? "text-[var(--color-ink)]"
-                                : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]",
+                                : "text-[var(--color-ink-muted)] hover:bg-[color-mix(in_oklab,var(--color-primary)_6%,transparent)] hover:text-[var(--color-ink)]",
                             )}
                           >
                             {isActive ? (
@@ -143,7 +137,7 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
           </nav>
 
           {/* Footer */}
-          <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2.5">
+          <div className="border-t border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface-2)_88%,transparent)] px-4 py-2.5">
             <div className="flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
               <MapPin className="size-3" />
               <span>{tShell("footer.location")}</span>

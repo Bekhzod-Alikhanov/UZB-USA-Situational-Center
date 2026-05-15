@@ -120,7 +120,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
       </header>
 
       <section className="grid grid-cols-1 gap-3 xl:grid-cols-[1.25fr_0.75fr]">
-        <Card tone="primary">
+        <Card tone="primary" variant="panelHero">
           <CardHeader
             icon={<CheckCircle2 className="size-3.5" />}
             tone="primary"
@@ -142,7 +142,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           </CardBody>
         </Card>
 
-        <Card tone="rose">
+        <Card tone="rose" variant="danger">
           <CardHeader
             icon={<AlertTriangle className="size-3.5" />}
             tone="rose"
@@ -269,7 +269,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
 
       <ExecutiveCommandCenter locale={locale} />
 
-      <Card tone="primary">
+      <Card tone="primary" variant="panel">
         <CardHeader
           icon={<Layers className="size-3.5" />}
           tone="primary"
@@ -379,7 +379,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
 
         {/* RIGHT COLUMN */}
         <div className="flex min-w-0 flex-col gap-4">
-          <Card tone="rose">
+          <Card tone="rose" variant="danger">
             <CardHeader
               icon={<AlertTriangle className="size-3.5" />}
               tone="rose"
@@ -397,7 +397,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             </CardBody>
           </Card>
 
-          <Card tone="visits">
+          <Card tone="visits" variant="panelMuted">
             <CardHeader
               icon={<CalendarDays className="size-3.5" />}
               tone="visits"

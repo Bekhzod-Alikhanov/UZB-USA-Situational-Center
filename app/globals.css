@@ -20,6 +20,7 @@
   --color-primary: #1a3a6c;
   --color-primary-2: #2a4f8a;
   --color-primary-soft: #e6ecf5;
+  --color-primary-contrast: #ffffff;
 
   --color-pos: #0a7c5a;
   --color-pos-soft: #e1f3ed;
@@ -65,25 +66,32 @@
   --shadow-glow-primary: 0 0 0 4px color-mix(in oklab, var(--color-primary) 14%, transparent);
   --shadow-card-elevated: 0 4px 12px rgba(26, 26, 26, 0.06), 0 1px 3px rgba(26, 26, 26, 0.04);
 
-  /* Strategic Vision 2026 palette — exposed at :root so utilities and the
-     /map prototype can reach them. The full theme is gated by `.strategic`
-     on <html> (see below). Keeping the tokens at :root means components
-     wrapped in `.strategic-page` (legacy /map prototype) keep working too. */
-  --sv-bg: #131315;
-  --sv-bg-soft: #0e0e10;
-  --sv-surface: #1f1f21;
-  --sv-surface-high: #2a2a2c;
-  --sv-surface-low: #1b1b1d;
-  --sv-on-surface: #e4e2e4;
-  --sv-on-surface-variant: #c5c6cd;
-  --sv-outline: #44474d;
-  --sv-outline-variant: #8f9097;
-  --sv-primary: #b9c7e4;
-  --sv-primary-container: #0a192f;
-  --sv-secondary: #adc6ff;
-  --sv-tertiary: #e7bf99;
-  --sv-error: #ffb4ab;
-  --sv-success: #10b981;
+  /* Diplomatic Command Surface palette. The legacy --sv names are kept as
+     compatibility aliases for existing map and cockpit components. */
+  --sv-bg: #0d1117;
+  --sv-bg-soft: #080b10;
+  --sv-surface: #111820;
+  --sv-surface-high: #172231;
+  --sv-surface-low: #0f151d;
+  --sv-on-surface: #f0f4f8;
+  --sv-on-surface-variant: #aeb9c8;
+  --sv-outline: #2e3a49;
+  --sv-outline-variant: #5f7084;
+  --sv-primary: #95bfff;
+  --sv-primary-container: #071827;
+  --sv-secondary: #3fd5e6;
+  --sv-tertiary: #d6a66f;
+  --sv-error: #ff8f87;
+  --sv-success: #41d69a;
+  --command-canvas: #0d1117;
+  --command-canvas-deep: #080b10;
+  --command-panel: #111820;
+  --command-panel-raised: #172231;
+  --command-panel-muted: #0f151d;
+  --command-border: rgba(149, 191, 255, 0.18);
+  --command-border-strong: rgba(149, 191, 255, 0.34);
+  --command-focus: #3fd5e6;
+  --command-grid: rgba(149, 191, 255, 0.055);
 
   /* Motion. Used by .kpi-card hover, chart entry transitions, and
      map paint transitions. Zeroed under prefers-reduced-motion. */
@@ -142,6 +150,7 @@
     --color-primary: #3865a8;
     --color-primary-2: #5180c4;
     --color-primary-soft: #1e2a44;
+    --color-primary-contrast: #ffffff;
 
     /* Semantic — desaturated to avoid neon glow */
     --color-pos: #4ec59a;
@@ -182,27 +191,27 @@
   }
 
   /* ----------------------------------------------------------------------
-     Strategic Vision 2026 — global dark glassmorphic theme.
-     Activated by `<html class="strategic">` (set by SettingsSync from
-     useSettings.theme === "strategic", which is the May 2026 default).
+     Diplomatic Command Surface — global executive command theme.
+     Activated by `<html class="command">` and mirrored to the legacy
+     `.strategic` class for previously persisted sessions.
 
-     This block REMAPS the existing semantic tokens (--color-*) to the
-     Strategic Vision palette so every component using those tokens
-     (200+ files) inherits the new look without per-file edits.
+     This block remaps the existing semantic tokens (--color-*) so every
+     route inherits the new command surface without per-file rewrites.
 
      Verified WCAG AA contrast for body / muted / faint text on the new
      surface: ink 14:1, ink-muted 9.5:1, ink-faint 6.8:1. Primary navy
      accent reads 10:1 on bg.
      ---------------------------------------------------------------------- */
+  :root.command,
   :root.strategic {
     color-scheme: dark;
 
     /* Surfaces */
-    --color-bg: var(--sv-bg);
+    --color-bg: var(--command-canvas);
     --color-bg-soft: var(--sv-bg-soft);
-    --color-surface: var(--sv-surface);
-    --color-surface-2: var(--sv-surface-low);
-    --color-surface-3: var(--sv-surface-high);
+    --color-surface: var(--command-panel);
+    --color-surface-2: var(--command-panel-muted);
+    --color-surface-3: var(--command-panel-raised);
 
     /* Ink */
     --color-ink: var(--sv-on-surface);
@@ -210,65 +219,70 @@
     --color-ink-faint: #8f9097;
 
     /* Borders */
-    --color-border: rgba(143, 144, 151, 0.22);
-    --color-border-strong: rgba(143, 144, 151, 0.42);
+    --color-border: var(--command-border);
+    --color-border-strong: var(--command-border-strong);
 
     /* Brand — Stitch primary (#b9c7e4) is pale; pair with cyan-leaning
        secondary for accents and emerald success */
     --color-primary: var(--sv-primary);
     --color-primary-2: var(--sv-secondary);
-    --color-primary-soft: rgba(173, 198, 255, 0.12);
+    --color-primary-soft: rgba(149, 191, 255, 0.12);
+    --color-primary-contrast: #071827;
 
     /* Semantic */
     --color-pos: var(--sv-success);
-    --color-pos-soft: rgba(16, 185, 129, 0.12);
+    --color-pos-soft: rgba(65, 214, 154, 0.12);
     --color-warn: var(--sv-tertiary);
     --color-warn-soft: rgba(231, 191, 153, 0.12);
     --color-neg: var(--sv-error);
-    --color-neg-soft: rgba(255, 180, 171, 0.12);
+    --color-neg-soft: rgba(255, 143, 135, 0.12);
 
     /* Demo data markers — keep visible but unobtrusive on dark */
-    --color-demo: #c5c6cd;
-    --color-demo-bg: #2a2a2c;
-    --color-demo-ink: #e4e2e4;
-    --color-demo-border: rgba(143, 144, 151, 0.4);
+    --color-demo: #aeb9c8;
+    --color-demo-bg: #172231;
+    --color-demo-ink: #f0f4f8;
+    --color-demo-border: rgba(174, 185, 200, 0.38);
 
     /* Domain accents — Stitch-friendly cool/warm bias on dark */
-    --color-trade: #adc6ff;
-    --color-trade-soft: rgba(173, 198, 255, 0.12);
-    --color-visits: #d6b9e8;
-    --color-visits-soft: rgba(214, 185, 232, 0.12);
-    --color-invest: #88e2c1;
-    --color-invest-soft: rgba(136, 226, 193, 0.12);
-    --color-agree: #e7bf99;
-    --color-agree-soft: rgba(231, 191, 153, 0.14);
-    --color-people: #b6e7e1;
-    --color-people-soft: rgba(182, 231, 225, 0.12);
-    --color-rose: #ffb4ab;
-    --color-rose-soft: rgba(255, 180, 171, 0.12);
-    --color-slate: #c5c6cd;
-    --color-slate-soft: rgba(197, 198, 205, 0.12);
+    --color-trade: #95bfff;
+    --color-trade-soft: rgba(149, 191, 255, 0.12);
+    --color-visits: #70a7ff;
+    --color-visits-soft: rgba(112, 167, 255, 0.12);
+    --color-invest: #41d69a;
+    --color-invest-soft: rgba(65, 214, 154, 0.12);
+    --color-agree: #d6a66f;
+    --color-agree-soft: rgba(214, 166, 111, 0.14);
+    --color-people: #3fd5e6;
+    --color-people-soft: rgba(63, 213, 230, 0.12);
+    --color-rose: #ff8f87;
+    --color-rose-soft: rgba(255, 143, 135, 0.12);
+    --color-slate: #aeb9c8;
+    --color-slate-soft: rgba(174, 185, 200, 0.12);
 
     /* Card lift — Stitch shows almost no traditional shadow; depth via
        backdrop blur + outline. Keep tokens for components that still
        reach for them but tune values down. */
-    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 0 0 0 transparent;
-    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
-    --shadow-card-elevated: 0 8px 24px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
-    --shadow-glow-primary: 0 0 0 4px rgba(173, 198, 255, 0.22);
+    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.035) inset, 0 0 0 1px rgba(149, 191, 255, 0.02);
+    --shadow-hover: 0 18px 44px rgba(0, 0, 0, 0.32), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    --shadow-card-elevated: 0 16px 36px rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+    --shadow-glow-primary: 0 0 0 4px rgba(63, 213, 230, 0.22);
   }
 
   /* Body noise filter is too busy on the deep Stitch surface — disable it. */
+  :root.command body::before,
   :root.strategic body::before {
     display: none;
   }
-  /* Page background switches to Strategic Vision dark and adds a subtle
-     vertical gradient that mirrors the Stitch reference screens. */
+  /* The command background uses a fixed instrument-grid texture instead of
+     ornamental blobs, keeping the surface data-first and stable. */
+  :root.command body,
   :root.strategic body {
     background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(173, 198, 255, 0.06), transparent 60%),
-      radial-gradient(900px 500px at 10% 110%, rgba(231, 191, 153, 0.04), transparent 60%),
-      var(--sv-bg);
+      linear-gradient(180deg, rgba(149, 191, 255, 0.045), rgba(13, 17, 23, 0) 34rem),
+      linear-gradient(90deg, var(--command-grid) 1px, transparent 1px),
+      linear-gradient(180deg, var(--command-grid) 1px, transparent 1px),
+      var(--command-canvas);
+    background-size: auto, 56px 56px, 56px 56px, auto;
   }
 
   html,
@@ -305,6 +319,7 @@
 @media (prefers-reduced-motion: reduce) {
   :root,
   :root.dark,
+  :root.command,
   :root.strategic {
     --duration-fast: 0ms;
     --duration-base: 0ms;
@@ -390,25 +405,29 @@
     @apply rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)];
     box-shadow: var(--shadow-card);
   }
-  /* Strategic Vision lift — glassmorphic surface + subtle inset highlight
-     + backdrop blur for the cockpit-instrument feel from the Stitch pack.
-     Scoped to `:root.strategic` so light/dark modes are untouched. */
+  /* Diplomatic Command lift: restrained glass, crisp borders, dense radius. */
+  :root.command .card,
   :root.strategic .card {
-    background: color-mix(in oklab, var(--sv-surface) 78%, transparent);
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-radius: var(--radius-lg);
+    background: color-mix(in oklab, var(--command-panel) 86%, transparent);
+    border-color: var(--command-border);
+    backdrop-filter: blur(16px) saturate(132%);
+    -webkit-backdrop-filter: blur(16px) saturate(132%);
     box-shadow:
       var(--shadow-card),
       0 1px 0 rgba(255, 255, 255, 0.05) inset;
   }
+  :root.command .kpi-card,
   :root.strategic .kpi-card {
-    background: color-mix(in oklab, var(--sv-surface-low) 82%, transparent);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border-color: rgba(143, 144, 151, 0.28);
+    border-radius: var(--radius-lg);
+    background: color-mix(in oklab, var(--command-panel-muted) 86%, transparent);
+    backdrop-filter: blur(12px) saturate(132%);
+    -webkit-backdrop-filter: blur(12px) saturate(132%);
+    border-color: var(--command-border);
   }
+  :root.command .kpi-card:hover,
   :root.strategic .kpi-card:hover {
-    border-color: rgba(173, 198, 255, 0.35);
+    border-color: var(--command-border-strong);
   }
   .card-header {
     @apply flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5 border-b border-[var(--color-border)] px-3.5 py-3 sm:flex-nowrap sm:items-center sm:px-5 sm:py-3.5;
@@ -492,9 +511,8 @@
   .section-sub {
     @apply text-[12.5px] leading-relaxed text-[var(--color-ink-muted)] sm:text-[13.5px];
   }
-  /* Strategic mode tightens the title further and tints it primary — the
-     Stitch hero pattern is "eyebrow + large serif + sub" with the serif
-     reading authoritative-editorial. */
+  /* Command mode tightens page titles for executive scan speed. */
+  :root.command .section-title,
   :root.strategic .section-title {
     @apply text-[22px] sm:text-[28px];
     color: var(--sv-primary);
@@ -516,9 +534,11 @@
     box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-primary) 60%, transparent);
     animation: sv-pulse 2.2s infinite;
   }
+  :root.command .page-eyebrow,
   :root.strategic .page-eyebrow {
     color: var(--sv-secondary);
   }
+  :root.command .page-eyebrow::before,
   :root.strategic .page-eyebrow::before {
     background: var(--sv-secondary);
   }
@@ -529,21 +549,21 @@
      `.strategic-page` so it doesn't bleed into the rest of the dashboard.
      ------------------------------------------------------------------------- */
   .strategic-page {
-    --sv-bg: #131315;
-    --sv-bg-soft: #0e0e10;
-    --sv-surface: #1f1f21;
-    --sv-surface-high: #2a2a2c;
-    --sv-surface-low: #1b1b1d;
-    --sv-on-surface: #e4e2e4;
-    --sv-on-surface-variant: #c5c6cd;
-    --sv-outline: #44474d;
-    --sv-outline-variant: #8f9097;
-    --sv-primary: #b9c7e4;
-    --sv-primary-container: #0a192f;
-    --sv-secondary: #adc6ff;
-    --sv-tertiary: #e7bf99;
-    --sv-error: #ffb4ab;
-    --sv-success: #10b981;
+    --sv-bg: #0d1117;
+    --sv-bg-soft: #080b10;
+    --sv-surface: #111820;
+    --sv-surface-high: #172231;
+    --sv-surface-low: #0f151d;
+    --sv-on-surface: #f0f4f8;
+    --sv-on-surface-variant: #aeb9c8;
+    --sv-outline: #2e3a49;
+    --sv-outline-variant: #5f7084;
+    --sv-primary: #95bfff;
+    --sv-primary-container: #071827;
+    --sv-secondary: #3fd5e6;
+    --sv-tertiary: #d6a66f;
+    --sv-error: #ff8f87;
+    --sv-success: #41d69a;
 
     background: var(--sv-bg);
     color: var(--sv-on-surface);
@@ -685,6 +705,66 @@
   .table tbody tr:hover td {
     background: var(--color-surface-2);
   }
+
+  .command-shell {
+    background:
+      linear-gradient(180deg, color-mix(in oklab, var(--color-primary) 5%, transparent), transparent 22rem),
+      var(--color-bg);
+  }
+  .command-sidebar {
+    background: color-mix(in oklab, var(--color-surface) 92%, transparent);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+  .command-topbar {
+    background: color-mix(in oklab, var(--color-surface) 82%, transparent);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+  .command-brand-mark {
+    background:
+      linear-gradient(135deg, var(--color-primary), var(--color-people)),
+      var(--color-primary);
+    box-shadow: 0 10px 24px color-mix(in oklab, var(--color-people) 22%, transparent);
+  }
+  .command-status-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--color-primary) 38%, transparent),
+      color-mix(in oklab, var(--color-people) 34%, transparent),
+      transparent
+    );
+  }
+  .command-panel-hero {
+    background:
+      linear-gradient(135deg, color-mix(in oklab, var(--color-primary) 9%, transparent), transparent 42%),
+      color-mix(in oklab, var(--color-surface) 90%, transparent);
+    border-color: var(--color-border-strong);
+  }
+  .command-panel-muted {
+    background: color-mix(in oklab, var(--color-surface-2) 90%, transparent);
+  }
+  .command-panel-map {
+    background:
+      linear-gradient(180deg, color-mix(in oklab, var(--color-people) 8%, transparent), transparent),
+      color-mix(in oklab, var(--color-surface) 82%, transparent);
+    border-color: color-mix(in oklab, var(--color-people) 24%, var(--color-border));
+  }
+  .command-danger {
+    border-color: color-mix(in oklab, var(--color-rose) 40%, var(--color-border));
+    background: color-mix(in oklab, var(--color-rose) 10%, var(--color-surface));
+  }
+
+  :root.command .table thead th,
+  :root.strategic .table thead th {
+    background: color-mix(in oklab, var(--color-surface-2) 92%, transparent);
+    color: var(--color-ink-faint);
+  }
+  :root.command .table tbody tr:hover td,
+  :root.strategic .table tbody tr:hover td {
+    background: color-mix(in oklab, var(--color-primary) 8%, transparent);
+  }
 }
 
 @media print {
@@ -694,7 +774,9 @@
   }
   /* Force light tokens for print — dark theme should never bleed into PDFs */
   :root,
-  :root.dark {
+  :root.dark,
+  :root.command,
+  :root.strategic {
     --color-bg: #ffffff !important;
     --color-surface: #ffffff !important;
     --color-surface-2: #f5f5f0 !important;

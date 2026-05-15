@@ -168,7 +168,7 @@ export function InvestmentsView() {
             <Tabs.Trigger
               key={t.v}
               value={t.v}
-              className="rounded px-2.5 py-1 text-[12px] font-medium text-[var(--color-ink-muted)] data-[state=active]:bg-[var(--color-primary)] data-[state=active]:text-white"
+              className="rounded px-2.5 py-1 text-[12px] font-medium text-[var(--color-ink-muted)] data-[state=active]:bg-[var(--color-primary)] data-[state=active]:text-[var(--color-primary-contrast)]"
             >
               {t.l}
             </Tabs.Trigger>

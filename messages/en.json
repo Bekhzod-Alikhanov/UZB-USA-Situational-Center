@@ -1190,6 +1190,12 @@
     "presentation": "Presentation mode",
     "presentationDesc": "Removes DEMO badges and dotted underlines but keeps the data.",
     "theme": "Theme",
+    "themeDesc": "Choose the command surface or legacy light/dark modes.",
+    "themes": {
+      "command": "Command",
+      "light": "Light",
+      "dark": "Dark"
+    },
     "ai": "AI assistant",
     "aiDesc": "Toggle to enable the Claude-powered assistant. Default model: Sonnet 4.6.",
     "model": "AI model",

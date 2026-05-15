@@ -47,7 +47,7 @@ export default async function CounterpartPage({ params }: { params: Promise<{ lo
       </Link>
 
       <div className="flex flex-col gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 md:flex-row md:items-center">
-        <div className="flex size-20 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[24px] font-bold text-white">
+        <div className="flex size-20 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[24px] font-bold text-[var(--color-primary-contrast)]">
           {c.name
             .split(/\s+/)
             .slice(0, 2)

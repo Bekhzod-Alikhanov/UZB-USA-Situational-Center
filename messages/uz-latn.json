@@ -1190,6 +1190,12 @@
     "presentation": "Taqdimot rejimi",
     "presentationDesc": "DEMO belgilari va nuqtali tagchiziqlarni yashiradi, lekin ma’lumotlar qoladi.",
     "theme": "Mavzu",
+    "themeDesc": "Command yuzasini yoki eski yorug‘/qorong‘i rejimlarni tanlang.",
+    "themes": {
+      "command": "Boshqaruv",
+      "light": "Yorug‘",
+      "dark": "Qorong‘i"
+    },
     "ai": "AI-yordamchi",
     "aiDesc": "Claude asosidagi yordamchini yoqish. Standart model: Sonnet 4.6.",
     "model": "AI modeli",

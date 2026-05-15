@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 
 const LEVEL_COLOR: Record<string, string> = {
-  president: "bg-[var(--color-primary)] text-white",
+  president: "bg-[var(--color-primary)] text-[var(--color-primary-contrast)]",
   minister: "bg-[color-mix(in_oklab,var(--color-primary)_70%,white)] text-white",
   ambassador: "bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
   congress: "bg-[var(--color-neg-soft)] text-[var(--color-neg)]",

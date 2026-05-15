@@ -105,7 +105,7 @@ export function EventsView({ locale, todayIso }: { locale: string; todayIso: str
               className={cn(
                 "rounded px-2.5 py-1 text-[11.5px] font-medium transition",
                 typeFilter === type
-                  ? "bg-[var(--color-primary)] text-white"
+                  ? "bg-[var(--color-primary)] text-[var(--color-primary-contrast)]"
                   : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
               )}
             >

@@ -61,17 +61,16 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // Strategic Vision is the default surface; match the OS chrome to it so
+  // Diplomatic Command Surface is the default; match the OS chrome to it so
   // the iOS/Android status bar doesn't flash a contrasting color.
-  themeColor: "#131315",
+  themeColor: "#0d1117",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // `strategic` is the May 2026 default theme. SettingsSync swaps to
-    // `dark` or removes both classes if the persisted user preference
-    // says otherwise; `suppressHydrationWarning` covers that swap.
-    <html lang="en" className="strategic" suppressHydrationWarning>
+    // `command` is the default theme. The legacy `strategic` class remains
+    // during first paint so existing scoped map styles keep working.
+    <html lang="en" className="command strategic" suppressHydrationWarning>
       <body className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>

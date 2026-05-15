@@ -75,7 +75,7 @@ export function DelegationLocationForm() {
         </span>
         <button
           type="submit"
-          className="flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-1.5 text-[12px] font-medium text-white transition hover:bg-[var(--color-primary-2)]"
+          className="flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-1.5 text-[12px] font-medium text-[var(--color-primary-contrast)] transition hover:bg-[var(--color-primary-2)]"
         >
           <Save className="size-3.5" />
           {saved ? "Saved" : "Save location"}

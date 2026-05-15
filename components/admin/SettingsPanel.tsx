@@ -24,7 +24,7 @@ export function SettingsPanel() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <div className="text-[13px] font-medium text-[var(--color-ink)]">{t("theme")}</div>
-            <div className="text-[11px] text-[var(--color-ink-muted)]">Light / dark color scheme</div>
+            <div className="text-[11px] text-[var(--color-ink-muted)]">{t("themeDesc")}</div>
           </div>
           <SegmentedTheme value={theme} onChange={setTheme} />
         </div>
@@ -70,21 +70,22 @@ function SettingRow({
 }
 
 function SegmentedTheme({ value, onChange }: { value: Theme; onChange: (v: Theme) => void }) {
+  const t = useTranslations("admin");
   return (
     <div className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] p-0.5">
-      {(["light", "dark"] as const).map((v) => (
+      {(["command", "light", "dark"] as const).map((v) => (
         <button
           key={v}
           type="button"
           onClick={() => onChange(v)}
           className={cn(
-            "rounded px-2.5 py-1 text-[11.5px] font-medium capitalize transition",
+            "rounded px-2.5 py-1 text-[11.5px] font-medium transition",
             value === v
-              ? "bg-[var(--color-primary)] text-white"
+              ? "bg-[var(--color-primary)] text-[#071827]"
               : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
           )}
         >
-          {v}
+          {t(`themes.${v}`)}
         </button>
       ))}
     </div>

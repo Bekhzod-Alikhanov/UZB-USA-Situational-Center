@@ -2,7 +2,17 @@ import { cn } from "@/lib/utils";
 import type { ReactNode, CSSProperties } from "react";
 
 export type SectionTone = "trade" | "visits" | "invest" | "agree" | "people" | "rose" | "slate" | "primary";
-export type CardVariant = "default" | "muted" | "elevated";
+export type CardVariant =
+  | "default"
+  | "muted"
+  | "elevated"
+  | "panel"
+  | "panelMuted"
+  | "panelHero"
+  | "metric"
+  | "table"
+  | "mapOverlay"
+  | "danger";
 
 const TONE_VAR: Record<SectionTone, string> = {
   trade: "var(--color-trade)",
@@ -19,6 +29,13 @@ const VARIANT_CLASS: Record<CardVariant, string> = {
   default: "",
   muted: "bg-[var(--color-surface-2)] border-[var(--color-border)]/70 shadow-none",
   elevated: "shadow-[var(--shadow-card-elevated)]",
+  panel: "bg-[var(--color-surface)]",
+  panelMuted: "command-panel-muted shadow-none",
+  panelHero: "command-panel-hero shadow-[var(--shadow-card-elevated)]",
+  metric: "kpi-card",
+  table: "overflow-hidden",
+  mapOverlay: "command-panel-map shadow-[var(--shadow-card-elevated)]",
+  danger: "command-danger",
 };
 
 export function Card({
@@ -30,12 +47,13 @@ export function Card({
   className?: string;
   children: ReactNode;
   tone?: SectionTone;
-  /** Visual weight. `muted` for secondary/operational panels, `elevated` for hero cards. */
+  /** Visual weight and command-surface role for shared dashboard panels. */
   variant?: CardVariant;
 }) {
-  const style = tone ? ({ "--chip-tone": TONE_VAR[tone] } as CSSProperties) : undefined;
+  const style = tone ? ({ "--chip-tone": TONE_VAR[tone], "--kpi-tone": TONE_VAR[tone] } as CSSProperties) : undefined;
+  const baseClass = variant === "metric" ? "" : "card";
   return (
-    <div style={style} className={cn("card", VARIANT_CLASS[variant], className)}>
+    <div style={style} className={cn(baseClass, VARIANT_CLASS[variant], className)}>
       {children}
     </div>
   );

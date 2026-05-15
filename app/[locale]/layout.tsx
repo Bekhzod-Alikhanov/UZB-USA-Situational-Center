@@ -25,11 +25,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale as Locale} messages={messages}>
-      <div className="flex min-h-screen bg-[var(--color-bg)] text-[var(--color-ink)]">
+      <div className="command-shell flex min-h-screen bg-[var(--color-bg)] text-[var(--color-ink)]">
         <Sidebar />
         <div className="flex min-w-0 flex-1 flex-col">
           <Topbar />
-          <main className="relative z-[1] flex-1 px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-6">{children}</main>
+          <main className="relative z-[1] flex-1 px-3 py-4 sm:px-5 sm:py-5 lg:px-7 lg:py-6">{children}</main>
         </div>
       </div>
       <SearchCommandLazy />

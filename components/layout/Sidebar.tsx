@@ -16,19 +16,13 @@ export function Sidebar() {
   const tShell = useTranslations("shell");
 
   return (
-    <aside className="sticky top-0 hidden h-screen w-[260px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] lg:flex">
+    <aside className="command-sidebar sticky top-0 hidden h-screen w-[248px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] lg:flex">
       {/* Brand */}
-      <div className="border-b border-[var(--color-border)] px-4 py-4">
+      <div className="relative border-b border-[var(--color-border)] px-4 py-4">
+        <span aria-hidden className="command-status-line absolute inset-x-4 top-0 h-px" />
         <div className="flex items-center gap-2.5">
-          <div
-            className="flex size-9 items-center justify-center rounded-lg text-[11px] font-bold tracking-tight text-white"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-primary), color-mix(in oklab, var(--color-visits) 70%, var(--color-primary)))",
-              boxShadow: "0 4px 10px color-mix(in oklab, var(--color-primary) 30%, transparent)",
-            }}
-          >
-            UZ<span className="opacity-60">·</span>US
+          <div className="command-brand-mark flex size-9 items-center justify-center rounded-md text-[10px] font-black tracking-tight text-[#071827]">
+            UZ<span className="opacity-60">/</span>US
           </div>
           <div className="leading-tight">
             <div className="serif text-[15px] font-medium text-[var(--color-ink)]">{tBrand("title")}</div>
@@ -43,9 +37,27 @@ export function Sidebar() {
       <nav className="flex-1 overflow-y-auto px-3 py-3">
         {NAV_GROUPS.map((group) => {
           const GroupIcon = group.icon;
+          const groupActive = group.items.some((item) => {
+            const href = localizedHref(locale, item.href);
+            return item.href === ""
+              ? pathname === `/${locale}` || pathname === `/${locale}/`
+              : pathname === href || pathname.startsWith(`${href}/`);
+          });
           return (
-            <div key={group.key} className="mb-4 last:mb-2">
-              <div className="flex items-center gap-1.5 px-2 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-faint)]">
+            <div
+              key={group.key}
+              className={cn(
+                "relative mb-4 rounded-lg border border-transparent px-1 py-1 last:mb-2",
+                groupActive ? "border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-primary)_5%,transparent)]" : "",
+              )}
+            >
+              {groupActive ? (
+                <span
+                  aria-hidden
+                  className="absolute bottom-2 left-0 top-2 w-px rounded-full bg-[var(--color-primary)]"
+                />
+              ) : null}
+              <div className="flex items-center gap-1.5 px-2 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-ink-faint)]">
                 <GroupIcon className="size-3 opacity-60" />
                 {tGroups(group.key)}
               </div>
@@ -68,7 +80,7 @@ export function Sidebar() {
                           "group relative flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition",
                           isActive
                             ? "text-[var(--color-ink)]"
-                            : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]",
+                            : "text-[var(--color-ink-muted)] hover:bg-[color-mix(in_oklab,var(--color-primary)_6%,transparent)] hover:text-[var(--color-ink)]",
                         )}
                       >
                         {isActive ? (
@@ -114,7 +126,7 @@ export function Sidebar() {
       </div>
 
       {/* Brand footer */}
-      <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2.5">
+      <div className="border-t border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface-2)_88%,transparent)] px-4 py-2.5">
         <div className="flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
           <MapPin className="size-3" />
           <span>{tShell("footer.location")}</span>

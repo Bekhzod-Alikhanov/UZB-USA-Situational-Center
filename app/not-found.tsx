@@ -14,7 +14,7 @@ export default function NotFound() {
         </div>
         <Link
           href="/en"
-          className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-2 text-[12.5px] font-medium text-white transition hover:bg-[var(--color-primary-2)]"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-2 text-[12.5px] font-medium text-[var(--color-primary-contrast)] transition hover:bg-[var(--color-primary-2)]"
         >
           Go to overview
         </Link>

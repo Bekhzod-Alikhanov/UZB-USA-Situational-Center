@@ -21,7 +21,8 @@ export function SettingsSync() {
     html.toggleAttribute("data-hide-demo", hideDemo);
     html.toggleAttribute("data-presentation", presentation);
     html.classList.toggle("dark", theme === "dark");
-    html.classList.toggle("strategic", theme === "strategic");
+    html.classList.toggle("command", theme === "command");
+    html.classList.toggle("strategic", theme === "command");
   }, [hideDemo, presentation, theme]);
 
   return null;

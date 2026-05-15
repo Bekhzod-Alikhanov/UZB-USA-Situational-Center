@@ -4,12 +4,11 @@ import { persist } from "zustand/middleware";
 
 /**
  * Theme options:
- * - `light`     classic light primary surface (legacy)
- * - `dark`      classic dark mode
- * - `strategic` Strategic Vision 2026 — dark glassmorphic, navy + cyan accents
- *               (May 2026 redesign, default for new sessions)
+ * - `light`   classic light primary surface (legacy)
+ * - `dark`    classic dark mode
+ * - `command` Diplomatic Command Surface, the executive dark default
  */
-export type Theme = "light" | "dark" | "strategic";
+export type Theme = "light" | "dark" | "command";
 
 interface SettingsState {
   hideDemo: boolean;
@@ -27,7 +26,8 @@ function applyThemeClass(theme: Theme) {
   if (typeof document === "undefined") return;
   const html = document.documentElement;
   html.classList.toggle("dark", theme === "dark");
-  html.classList.toggle("strategic", theme === "strategic");
+  html.classList.toggle("command", theme === "command");
+  html.classList.toggle("strategic", theme === "command");
 }
 
 export const useSettings = create<SettingsState>()(
@@ -35,9 +35,8 @@ export const useSettings = create<SettingsState>()(
     (set) => ({
       hideDemo: false,
       presentationMode: false,
-      // Strategic Vision is the new default. Existing users with persisted
-      // "light"/"dark" values keep their preference (migrate untouched).
-      theme: "strategic",
+      // Command is the default. Existing light/dark users keep their preference.
+      theme: "command",
       aiEnabled: false,
       setHideDemo: (v) => {
         set({ hideDemo: v });
@@ -59,9 +58,8 @@ export const useSettings = create<SettingsState>()(
     }),
     {
       name: "uzus-settings",
-      // v3: introduced theme = "strategic" as the default. Old v2 entries
-      // with `theme: "light"` or `"dark"` keep their preference.
-      version: 3,
+      // v4: renamed the previous strategic theme to command.
+      version: 4,
       migrate: (persisted: unknown, version: number) => {
         let v = persisted as Record<string, unknown> | null;
         if (v && typeof v === "object" && "aiModel" in v) {
@@ -69,8 +67,11 @@ export const useSettings = create<SettingsState>()(
           v = rest as Record<string, unknown>;
         }
         // v2 → v3: legacy values are kept; no field rename needed.
+        if (v && typeof v === "object" && v.theme === "strategic") {
+          v = { ...v, theme: "command" };
+        }
         if (version < 3 && v && typeof v === "object" && !("theme" in v)) {
-          v = { ...v, theme: "strategic" };
+          v = { ...v, theme: "command" };
         }
         return v as unknown as SettingsState;
       },

@@ -29,7 +29,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
         <button
           type="button"
           onClick={reset}
-          className="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-1.5 text-[12.5px] font-medium text-white transition hover:bg-[var(--color-primary-2)]"
+          className="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)] px-3 py-1.5 text-[12.5px] font-medium text-[var(--color-primary-contrast)] transition hover:bg-[var(--color-primary-2)]"
         >
           <RotateCw className="size-3.5" />
           Retry
