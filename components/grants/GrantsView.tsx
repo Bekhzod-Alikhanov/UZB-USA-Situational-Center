@@ -136,7 +136,7 @@ export function GrantsView({
                     {t(`statuses.${g.status}`)}
                   </span>
                 </div>
-                <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{g.title}</h3>
+                <h2 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{g.title}</h2>
                 <div className="text-[11.5px] text-[var(--color-ink-muted)]">
                   <div>
                     <span className="font-medium text-[var(--color-ink)]">{t("donor")}:</span> {g.donor}

@@ -24,14 +24,14 @@ export function TradeTable() {
       <table className="table">
         <thead>
           <tr>
-            <th className="sticky left-0 bg-[var(--color-surface-2)]">{tc("indicator")}</th>
+            <th scope="col" className="sticky left-0 bg-[var(--color-surface-2)]">{tc("indicator")}</th>
             {years.map((y) => (
               <th key={y} className="text-right">
                 {y}
               </th>
             ))}
-            <th className="text-right">{tc("growth2017")}</th>
-            <th className="text-right">{tc("growth2024")}</th>
+            <th scope="col" className="text-right">{tc("growth2017")}</th>
+            <th scope="col" className="text-right">{tc("growth2024")}</th>
           </tr>
         </thead>
         <tbody>

@@ -119,11 +119,11 @@ export function ComtradeHs6Top() {
         <table className="table">
           <thead>
             <tr>
-              <th className="w-10 text-right">#</th>
-              <th className="w-20">HS-6</th>
-              <th>Commodity</th>
-              <th className="text-right">Value, $</th>
-              <th className="w-20 text-right">Share</th>
+              <th scope="col" className="w-10 text-right">#</th>
+              <th scope="col" className="w-20">HS-6</th>
+              <th scope="col">Commodity</th>
+              <th scope="col" className="text-right">Value, $</th>
+              <th scope="col" className="w-20 text-right">Share</th>
             </tr>
           </thead>
           <tbody>

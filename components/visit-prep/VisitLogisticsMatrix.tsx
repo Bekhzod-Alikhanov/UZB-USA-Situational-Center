@@ -114,11 +114,11 @@ export function VisitLogisticsMatrix() {
             <table className="table">
               <thead>
                 <tr>
-                  <th className="w-44">Workstream</th>
-                  <th className="w-32">Status</th>
-                  <th className="w-28">Coverage</th>
-                  <th className="w-44">Lead</th>
-                  <th>Notes</th>
+                  <th scope="col" className="w-44">Workstream</th>
+                  <th scope="col" className="w-32">Status</th>
+                  <th scope="col" className="w-28">Coverage</th>
+                  <th scope="col" className="w-44">Lead</th>
+                  <th scope="col">Notes</th>
                 </tr>
               </thead>
               <tbody>

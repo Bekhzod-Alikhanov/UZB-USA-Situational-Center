@@ -84,7 +84,7 @@ export async function ContactsView({ locale, q = "" }: Props) {
               </span>
               {c.is_demo ? <DemoBadge /> : null}
             </div>
-            <h3 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{c.org}</h3>
+            <h2 className="serif text-[15px] font-medium leading-snug text-[var(--color-ink)]">{c.org}</h2>
 
             <div className="flex items-start gap-1.5 text-[11.5px] text-[var(--color-ink-muted)]">
               <MapPin className="mt-0.5 size-3 shrink-0" />

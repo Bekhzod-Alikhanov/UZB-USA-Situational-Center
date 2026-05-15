@@ -127,14 +127,15 @@ export function MonthlyTradeChart() {
             />
             <Legend iconType="square" wrapperStyle={{ fontSize: 11, paddingTop: 6 }} />
             <ReferenceLine y={0} stroke="var(--color-border-strong)" strokeWidth={1} />
-            <Bar dataKey="Exports" fill="var(--color-pos)" radius={[2, 2, 0, 0]} />
-            <Bar dataKey="Imports" fill="var(--color-warn)" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="Exports" fill="var(--color-pos)" radius={[2, 2, 0, 0]} isAnimationActive={false} />
+            <Bar dataKey="Imports" fill="var(--color-warn)" radius={[2, 2, 0, 0]} isAnimationActive={false} />
             <Line
               type="monotone"
               dataKey="Balance"
               stroke="var(--color-primary)"
               strokeWidth={1.75}
               dot={{ r: 2.5, fill: "var(--color-primary)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
+              isAnimationActive={false}
             />
           </ComposedChart>
         )}

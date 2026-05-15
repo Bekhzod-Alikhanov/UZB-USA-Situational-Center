@@ -48,7 +48,7 @@ export async function ForeignAssistanceView() {
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-3">
-          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">{t("totalTitle")}</h4>
+          <h2 className="serif text-[13px] font-medium text-[var(--color-ink)]">{t("totalTitle")}</h2>
           <MiniBars data={yearsData} height={220} format={(v) => `$${v}M`} />
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
@@ -57,14 +57,14 @@ export async function ForeignAssistanceView() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <h4 className="serif text-[13px] font-medium text-[var(--color-ink)]">{t("agencyTitle")}</h4>
+          <h2 className="serif text-[13px] font-medium text-[var(--color-ink)]">{t("agencyTitle")}</h2>
           <div className="overflow-x-auto rounded-md border border-[var(--color-border)]">
             <table className="table">
               <thead>
                 <tr>
-                  <th>{t("agency")}</th>
-                  <th className="text-right">{t("amount")}</th>
-                  <th className="text-right">{t("share")}</th>
+                  <th scope="col">{t("agency")}</th>
+                  <th scope="col" className="text-right">{t("amount")}</th>
+                  <th scope="col" className="text-right">{t("share")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,9 +87,9 @@ export async function ForeignAssistanceView() {
             </table>
           </div>
 
-          <h4 className="serif mt-2 text-[13px] font-medium text-[var(--color-ink)]">
+          <h2 className="serif mt-2 text-[13px] font-medium text-[var(--color-ink)]">
             {t("splitTitle")}
-          </h4>
+          </h2>
           <div className="grid grid-cols-2 gap-2">
             {foreignAssistanceFy2024Categories.map((c) => (
               <div

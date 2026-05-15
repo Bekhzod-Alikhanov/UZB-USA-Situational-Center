@@ -329,11 +329,11 @@ function ReconciliationDetail({ r, locale }: { r: ReconciledVisit; locale: strin
             <table className="table">
               <thead>
                 <tr>
-                  <th>{T.commitment}</th>
-                  <th className="w-44">{T.owner}</th>
-                  <th className="w-24 text-right">{T.progress}</th>
-                  <th className="w-28">{T.deadline}</th>
-                  <th className="w-28">{T.statusCol}</th>
+                  <th scope="col">{T.commitment}</th>
+                  <th scope="col" className="w-44">{T.owner}</th>
+                  <th scope="col" className="w-24 text-right">{T.progress}</th>
+                  <th scope="col" className="w-28">{T.deadline}</th>
+                  <th scope="col" className="w-28">{T.statusCol}</th>
                 </tr>
               </thead>
               <tbody>

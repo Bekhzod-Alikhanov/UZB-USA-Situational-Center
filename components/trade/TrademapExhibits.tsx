@@ -413,7 +413,7 @@ function ExhibitLightbox({
                   justifyContent: "center",
                   transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
                   transformOrigin: "center center",
-                  transition: isDragging ? "none" : "transform 0.18s ease",
+                  transition: isDragging ? "none" : "transform var(--duration-base) var(--ease-out)",
                 }}
               >
                 <Image

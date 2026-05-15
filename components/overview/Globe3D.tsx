@@ -31,6 +31,12 @@ export function Globe3D({ height = 380 }: { height?: number }) {
     (async () => {
       const { default: Globe } = await import("globe.gl");
       if (cancelled || !ref.current) return;
+      // Respect OS-level reduced-motion preference. globe.gl runs both an
+      // arc-dash animation and a constant auto-rotation; both are gated.
+      const reducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
       const g = new Globe(ref.current)
         .backgroundColor("rgba(0,0,0,0)")
         .globeImageUrl("/textures/earth-night.jpg")
@@ -48,7 +54,7 @@ export function Globe3D({ height = 380 }: { height?: number }) {
         .arcStroke(0.5)
         .arcDashLength(0.4)
         .arcDashGap(2)
-        .arcDashAnimateTime(2800)
+        .arcDashAnimateTime(reducedMotion ? 0 : 2800)
         .pointsData(POINTS)
         .pointLat("lat")
         .pointLng("lng")
@@ -57,7 +63,7 @@ export function Globe3D({ height = 380 }: { height?: number }) {
         .pointRadius("size")
         .pointLabel("label");
 
-      g.controls().autoRotate = true;
+      g.controls().autoRotate = !reducedMotion;
       g.controls().autoRotateSpeed = 0.4;
       g.pointOfView({ lat: 40, lng: 0, altitude: 2.2 }, 0);
       globe = g as unknown as { _destructor?: () => void };

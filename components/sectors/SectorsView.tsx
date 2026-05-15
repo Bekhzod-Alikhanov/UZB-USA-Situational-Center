@@ -114,11 +114,11 @@ export function SectorsView({ locale = "en" }: { locale?: string }) {
           </caption>
           <thead>
             <tr>
-              <th>Sector</th>
-              <th>U.S. fit</th>
-              <th>Readiness</th>
-              <th>Risk</th>
-              <th>Recommended action</th>
+              <th scope="col">Sector</th>
+              <th scope="col">U.S. fit</th>
+              <th scope="col">Readiness</th>
+              <th scope="col">Risk</th>
+              <th scope="col">Recommended action</th>
             </tr>
           </thead>
           <tbody>
@@ -156,9 +156,9 @@ export function SectorsView({ locale = "en" }: { locale?: string }) {
                   <Icon className="size-5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="serif text-[16px] font-medium leading-snug tracking-tight text-[var(--color-ink)]">
+                  <h2 className="serif text-[16px] font-medium leading-snug tracking-tight text-[var(--color-ink)]">
                     {s.sector}
-                  </h3>
+                  </h2>
                 </div>
                 <SourceBadge sourceId={s.sourceId} />
               </header>

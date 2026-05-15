@@ -43,7 +43,7 @@ export function BenchmarkChart({ data, format, metricLabel }: Props) {
             }}
             formatter={(v) => [format(Number(v)), metricLabel]}
           />
-          <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+          <Bar dataKey="value" radius={[4, 4, 0, 0]} isAnimationActive={false}>
             {data.map((d) => (
               <Cell key={d.name} fill={d.name === "UZ" ? "var(--color-primary)" : "var(--color-border-strong)"} />
             ))}

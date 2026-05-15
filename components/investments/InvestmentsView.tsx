@@ -265,15 +265,15 @@ export function InvestmentsView() {
           <table className="table">
             <thead>
               <tr>
-                <th>{t("table.project")}</th>
-                <th className="w-[160px]">{t("table.sector")}</th>
-                <th className="w-[140px]">{t("table.region")}</th>
-                <th className="w-[200px]">{t("table.partners")}</th>
-                <th className="w-[84px] text-right">{t("table.value")}</th>
-                <th className="w-[72px] text-right">{t("table.jobs")}</th>
-                <th className="w-[108px]">{t("table.status")}</th>
-                <th className="w-[150px]">{t("table.confidence")}</th>
-                <th className="w-[260px]">{t("table.nextAction")}</th>
+                <th scope="col">{t("table.project")}</th>
+                <th scope="col" className="w-[160px]">{t("table.sector")}</th>
+                <th scope="col" className="w-[140px]">{t("table.region")}</th>
+                <th scope="col" className="w-[200px]">{t("table.partners")}</th>
+                <th scope="col" className="w-[84px] text-right">{t("table.value")}</th>
+                <th scope="col" className="w-[72px] text-right">{t("table.jobs")}</th>
+                <th scope="col" className="w-[108px]">{t("table.status")}</th>
+                <th scope="col" className="w-[150px]">{t("table.confidence")}</th>
+                <th scope="col" className="w-[260px]">{t("table.nextAction")}</th>
               </tr>
             </thead>
             <tbody>
@@ -509,7 +509,7 @@ function ConfidenceBadge({ confidence, label }: { confidence: InvestmentSourceCo
 function ToolbarStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-end">
-      <span className="text-[10px] uppercase tracking-wider opacity-70">{label}</span>
+      <span className="text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">{label}</span>
       <span className="mono text-[13px] tabular text-[var(--color-ink)]">{value}</span>
     </div>
   );

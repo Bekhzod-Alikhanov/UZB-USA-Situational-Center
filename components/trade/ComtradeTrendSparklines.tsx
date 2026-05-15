@@ -207,11 +207,11 @@ export function ComtradeTrendSparklines() {
         <table className="table">
           <thead>
             <tr>
-              <th className="w-20">{T.hs6}</th>
-              <th>{T.commodity}</th>
-              <th className="w-32 text-center">{T.trend}</th>
-              <th className="w-20 text-right">{T.cagr}</th>
-              <th className="w-24 text-right">{T.latest}</th>
+              <th scope="col" className="w-20">{T.hs6}</th>
+              <th scope="col">{T.commodity}</th>
+              <th scope="col" className="w-32 text-center">{T.trend}</th>
+              <th scope="col" className="w-20 text-right">{T.cagr}</th>
+              <th scope="col" className="w-24 text-right">{T.latest}</th>
             </tr>
           </thead>
           <tbody>

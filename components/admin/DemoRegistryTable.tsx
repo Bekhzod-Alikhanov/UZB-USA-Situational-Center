@@ -47,11 +47,11 @@ export function DemoRegistryTable() {
         <table className="table">
           <thead>
             <tr>
-              <th>Where</th>
-              <th>What</th>
-              <th>Agency</th>
-              <th className="w-[200px]">File</th>
-              <th className="w-[120px]">Status</th>
+              <th scope="col">Where</th>
+              <th scope="col">What</th>
+              <th scope="col">Agency</th>
+              <th scope="col" className="w-[200px]">File</th>
+              <th scope="col" className="w-[120px]">Status</th>
             </tr>
           </thead>
           <tbody>

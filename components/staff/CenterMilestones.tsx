@@ -144,7 +144,7 @@ export function CenterMilestones() {
                     </span>
                   </span>
                 </div>
-                <h4 className="serif text-[14px] font-medium leading-snug text-[var(--color-ink)]">{m.title}</h4>
+                <h2 className="serif text-[14px] font-medium leading-snug text-[var(--color-ink)]">{m.title}</h2>
                 <p className="text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{m.description}</p>
               </div>
             </li>

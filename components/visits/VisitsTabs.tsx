@@ -87,11 +87,11 @@ export function VisitsTabs() {
           <table className="table">
             <thead>
               <tr>
-                <th className="w-[90px]">Date</th>
-                <th>Title</th>
-                <th className="w-[92px]">Level</th>
-                <th className="w-[96px]">Direction</th>
-                <th>Location</th>
+                <th scope="col" className="w-[90px]">Date</th>
+                <th scope="col">Title</th>
+                <th scope="col" className="w-[92px]">Level</th>
+                <th scope="col" className="w-[96px]">Direction</th>
+                <th scope="col">Location</th>
               </tr>
             </thead>
             <tbody>

@@ -179,7 +179,7 @@ export async function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }
                   </span>
                 ))}
               </div>
-              <h3 className="text-[14px] font-medium leading-snug text-[var(--color-ink)]">{n.title}</h3>
+              <h2 className="text-[14px] font-medium leading-snug text-[var(--color-ink)]">{n.title}</h2>
               <p className="mt-1 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{n.summary}</p>
               <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-[var(--color-ink-muted)]">
                 <span className="italic">{n.source}</span>

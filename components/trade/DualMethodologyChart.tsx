@@ -117,6 +117,7 @@ export function DualMethodologyChart() {
               stroke="var(--color-primary)"
               strokeWidth={1.75}
               dot={{ r: 2.5, fill: "var(--color-primary)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
@@ -126,6 +127,7 @@ export function DualMethodologyChart() {
               strokeWidth={1.75}
               strokeDasharray="4 3"
               dot={{ r: 2.5, fill: "var(--color-warn)", stroke: "var(--color-surface)", strokeWidth: 1.5 }}
+              isAnimationActive={false}
             />
           </LineChart>
         )}
