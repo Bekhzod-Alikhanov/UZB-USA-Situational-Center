@@ -1139,7 +1139,48 @@
       "trade": "Savdo",
       "delegations": "Delegatsiyalar"
     },
-    "toggle3d": "3D globusga o‘tish"
+    "toggle3d": "3D globusga o‘tish",
+    "strategic": {
+      "eyebrow": "Tezkor kesim",
+      "title": "AQSh — O‘zbekiston ishtiroki",
+      "sub": "Shtatlar YaIMi, aholi, talabalar, vakolatxonalar va rejalashtirilgan tashriflar — Vaziyat Markazi tomonidan muvofiqlashtiriladi",
+      "executiveBrief": "Qisqacha brifing",
+      "metrics": {
+        "gdpLabel": "AQSh umumiy YaIMi",
+        "gdpSub": "BEA SAGDP1",
+        "popLabel": "AQSh aholisi",
+        "popSub": "U.S. Census",
+        "studentsLabel": "UZdan talabalar",
+        "studentsSub": "Open Doors / IIE",
+        "missionsLabel": "Faol vakolatxonalar",
+        "missionsSub": "{active} faol · {planned} rejalashtirilgan",
+        "visitsLabel": "Rejalashtirilgan tashriflar",
+        "visitsSub": "2026 yilga {count} ta"
+      },
+      "panel": {
+        "eyebrow": "Faol ishtirok",
+        "title": "AQShdagi O‘zbekiston",
+        "sub": "{cities} ta shahar · {active} ta faol vakolatxona · {visits} ta rejalashtirilgan tashrif",
+        "metricsHeader": "Faollik signali",
+        "engagementLabel": "Faollik darajasi",
+        "engagementValue": "Strategik",
+        "coverageLabel": "Qamrov o‘sishi",
+        "coverageValue": "+2 shahar",
+        "coverageDelta": "2024 ga nisbatan",
+        "assetsHeader": "Vakolatxonalar va konsulliklar",
+        "viewAll": "To‘liq reestrni ochish",
+        "statusActive": "Faol",
+        "statusOpened": "2026da ochilgan",
+        "statusPlanned": "Rejalashtirilgan",
+        "noteHeader": "Bu nimani anglatadi",
+        "noteText": "Xarita shtatning iqtisodiy og‘irligi (YaIM, aholi), talab signali (UZ talabalari) va diplomatik ishtirok (mavjud va rejalashtirilgan vakolatxonalar)ni birlashtiradi. Qaysi shtatlar keyingi tashrif, vakolatxona ochish yoki savdo-targ‘ibot tadbiri uchun ustuvor ekanligini aniqlash uchun foydalaning."
+      },
+      "loadGate": {
+        "title": "Interaktiv xarita so‘rov bo‘yicha yuklanadi",
+        "body": "Shtatlar kesimidagi xarita og‘irroq browser runtime ishlatadi. Geografik tahlil kerak bo‘lganda yuklang; yuqoridagi yig‘ma panel doimo ochiq.",
+        "button": "Interaktiv xaritani yuklash"
+      }
+    }
   },
   "admin": {
     "title": "Boshqaruv",

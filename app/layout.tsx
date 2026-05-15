@@ -61,15 +61,17 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f1115" },
-  ],
+  // Strategic Vision is the default surface; match the OS chrome to it so
+  // the iOS/Android status bar doesn't flash a contrasting color.
+  themeColor: "#131315",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // `strategic` is the May 2026 default theme. SettingsSync swaps to
+    // `dark` or removes both classes if the persisted user preference
+    // says otherwise; `suppressHydrationWarning` covers that swap.
+    <html lang="en" className="strategic" suppressHydrationWarning>
       <body className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>

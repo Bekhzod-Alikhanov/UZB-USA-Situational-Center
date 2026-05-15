@@ -1139,7 +1139,48 @@
       "trade": "Trade",
       "delegations": "Delegations"
     },
-    "toggle3d": "Switch to 3D globe"
+    "toggle3d": "Switch to 3D globe",
+    "strategic": {
+      "eyebrow": "Live snapshot",
+      "title": "United States — Uzbekistan footprint",
+      "sub": "State GDP, population, students, missions, and planned bilateral visits — coordinated through the Situational Center",
+      "executiveBrief": "Executive brief",
+      "metrics": {
+        "gdpLabel": "Total US GDP",
+        "gdpSub": "BEA SAGDP1",
+        "popLabel": "Total US population",
+        "popSub": "U.S. Census",
+        "studentsLabel": "Students from UZ",
+        "studentsSub": "Open Doors / IIE",
+        "missionsLabel": "Active missions",
+        "missionsSub": "{active} active · {planned} planned",
+        "visitsLabel": "Planned UZ visits",
+        "visitsSub": "{count} on the 2026 calendar"
+      },
+      "panel": {
+        "eyebrow": "Active presence",
+        "title": "Uzbekistan in the United States",
+        "sub": "{cities} cities · {active} active missions · {visits} planned visits",
+        "metricsHeader": "Engagement signal",
+        "engagementLabel": "Engagement tier",
+        "engagementValue": "Strategic",
+        "coverageLabel": "Coverage growth",
+        "coverageValue": "+2 cities",
+        "coverageDelta": "vs 2024",
+        "assetsHeader": "Missions & consulates",
+        "viewAll": "Open full registry",
+        "statusActive": "Active",
+        "statusOpened": "Opened 2026",
+        "statusPlanned": "Planned",
+        "noteHeader": "What this means",
+        "noteText": "The map combines hard economic weight (state GDP, population), demand signal (students from UZ), and diplomatic presence (open and planned missions). Use it to brief which states deserve the next visit, mission opening, or trade-promotion event."
+      },
+      "loadGate": {
+        "title": "Interactive map ready on demand",
+        "body": "The state-level footprint map uses a heavier browser runtime. Load it when geographic detail matters; the summary panel above is always available.",
+        "button": "Load interactive map"
+      }
+    }
   },
   "admin": {
     "title": "Administration",
