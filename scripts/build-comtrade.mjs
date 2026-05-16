@@ -281,8 +281,112 @@ export const comtradeMeta = {
 };
 `;
 
-fs.writeFileSync(OUT, output);
-console.log("Wrote:", OUT, fs.statSync(OUT).size, "bytes");
+function extractSection(text, startMarker, endMarker) {
+  const start = text.indexOf(startMarker);
+  if (start === -1) throw new Error(`Missing Comtrade output marker: ${startMarker}`);
+  const end = endMarker ? text.indexOf(endMarker, start + startMarker.length) : text.length;
+  if (endMarker && end === -1) throw new Error(`Missing Comtrade output marker: ${endMarker}`);
+  return text.slice(start, end).trimEnd();
+}
+
+function writeComtradeSlices(text) {
+  const outDir = path.dirname(OUT);
+  const header = `/**
+ * UN Comtrade UZ-US bilateral trade slices.
+ *
+ * Generated from raw Comtrade pulls so lazy UI components can import only the
+ * dataset they render.
+ */
+`;
+  const write = (file, content) => fs.writeFileSync(path.join(outDir, file), `${content.trimEnd()}\n`);
+
+  write(
+    "comtrade-types.ts",
+    `${header}
+export interface Hs6Row {
+  hs6: string;
+  desc: string;
+  valueUsd: number;
+}
+
+export interface MirrorRow {
+  hs6: string;
+  desc: string;
+  /** UZ reports as exporter to US. */
+  uzExportsToUs: number;
+  /** US reports as importer from UZ. */
+  usImportsFromUz: number;
+  /** UZ reports as importer from US. */
+  uzImportsFromUs: number;
+  /** US reports as exporter to UZ. */
+  usExportsToUz: number;
+}
+
+export interface Hs2Row {
+  hs2: string;
+  desc: string;
+  valueUsd: number;
+}
+
+export interface Hs6Trend {
+  hs6: string;
+  desc: string;
+  series: Record<number, number>;
+}
+`,
+  );
+  write(
+    "comtrade-hs6.ts",
+    `${header}
+import type { Hs6Row } from "./comtrade-types";
+
+${extractSection(text, "export const topUsImportsFromUzByYear", "export const topUzExportsToUsByYear")}`,
+  );
+  write(
+    "comtrade-hs6-uz.ts",
+    `${header}
+import type { Hs6Row } from "./comtrade-types";
+
+${extractSection(text, "export const topUzExportsToUsByYear", "export const hs2_2024_usImports")}`,
+  );
+  write(
+    "comtrade-hs2.ts",
+    `${header}
+import type { Hs2Row } from "./comtrade-types";
+
+${extractSection(text, "export const hs2_2024_usImports", "export const mirror2024")}`,
+  );
+  write(
+    "comtrade-mirror.ts",
+    `${header}
+import type { MirrorRow } from "./comtrade-types";
+
+${extractSection(text, "export const mirror2024", "export const trendTopUsImports")}`,
+  );
+  write(
+    "comtrade-trends.ts",
+    `${header}
+import type { Hs6Trend } from "./comtrade-types";
+
+${extractSection(text, "export const trendTopUsImports", "export const comtradeAnnualUzReporter")}`,
+  );
+  write("comtrade-meta.ts", `${header}\n${extractSection(text, "export const comtradeAnnualUzReporter", null)}`);
+  write(
+    "comtrade.ts",
+    `${header}
+export type { Hs2Row, Hs6Row, Hs6Trend, MirrorRow } from "./comtrade-types";
+export { topUsImportsFromUzByYear, topUsExportsToUzByYear } from "./comtrade-hs6";
+export { topUzExportsToUsByYear, topUzImportsFromUsByYear } from "./comtrade-hs6-uz";
+export { hs2_2024_usImports, hs2_2024_usExports, hs2_2025_usImports, hs2_2025_usExports } from "./comtrade-hs2";
+export { mirror2024 } from "./comtrade-mirror";
+export { trendTopUsImports, trendTopUsExports } from "./comtrade-trends";
+export { comtradeAnnualUzReporter, comtradeAnnualUsReporter, comtradeMeta } from "./comtrade-meta";
+`,
+  );
+}
+
+writeComtradeSlices(output);
+console.log("Wrote sliced Comtrade modules under:", path.dirname(OUT));
 
 // Sanity check totals (in millions)
 console.log("\\nAnnual totals ($M):");

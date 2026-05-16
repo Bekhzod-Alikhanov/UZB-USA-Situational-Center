@@ -16,7 +16,7 @@ interface Exhibit {
 
 const EXHIBITS: Exhibit[] = [
   {
-    src: "/trademap/uzbekistan-s-products-with-potential-to-united-states.png",
+    src: "/trademap/uzbekistan-s-products-with-potential-to-united-states.webp",
     title: {
       en: "UZ products with export potential to the U.S. — overview",
       ru: "Продукты UZ с экспортным потенциалом в США — обзор",
@@ -29,7 +29,7 @@ const EXHIBITS: Exhibit[] = [
     side: "uz-to-us",
   },
   {
-    src: "/trademap/uzbekistan-s-products-with-potential-to-united-states-1.png",
+    src: "/trademap/uzbekistan-s-products-with-potential-to-united-states-1.webp",
     title: {
       en: "UZ export potential to the U.S. — by product detail",
       ru: "Потенциал экспорта UZ → США — детализация по продукту",
@@ -42,7 +42,7 @@ const EXHIBITS: Exhibit[] = [
     side: "uz-to-us",
   },
   {
-    src: "/trademap/uzbekistan-s-products-with-potential-to-united-states-2.png",
+    src: "/trademap/uzbekistan-s-products-with-potential-to-united-states-2.webp",
     title: {
       en: "UZ export potential — third view",
       ru: "Потенциал экспорта UZ — третий вид",
@@ -55,7 +55,7 @@ const EXHIBITS: Exhibit[] = [
     side: "uz-to-us",
   },
   {
-    src: "/trademap/uzbekistan-s-diversification-products-for-export-to-united-states.png",
+    src: "/trademap/uzbekistan-s-diversification-products-for-export-to-united-states.webp",
     title: {
       en: "UZ diversification candidates for export to the U.S.",
       ru: "Кандидаты для диверсификации экспорта UZ → США",
@@ -68,7 +68,7 @@ const EXHIBITS: Exhibit[] = [
     side: "uz-to-us",
   },
   {
-    src: "/trademap/united-states-s-products-with-potential-to-uzbekistan.png",
+    src: "/trademap/united-states-s-products-with-potential-to-uzbekistan.webp",
     title: {
       en: "U.S. products with export potential to Uzbekistan — overview",
       ru: "Продукты США с экспортным потенциалом в UZ — обзор",
@@ -81,7 +81,7 @@ const EXHIBITS: Exhibit[] = [
     side: "us-to-uz",
   },
   {
-    src: "/trademap/united-states-s-products-with-potential-to-uzbekistan-1.png",
+    src: "/trademap/united-states-s-products-with-potential-to-uzbekistan-1.webp",
     title: {
       en: "U.S. export potential to UZ — by product detail",
       ru: "Потенциал экспорта США → UZ — детализация по продукту",
@@ -94,7 +94,7 @@ const EXHIBITS: Exhibit[] = [
     side: "us-to-uz",
   },
   {
-    src: "/trademap/united-states-s-diversification-products-for-export-to-uzbekistan.png",
+    src: "/trademap/united-states-s-diversification-products-for-export-to-uzbekistan.webp",
     title: {
       en: "U.S. diversification candidates for export to Uzbekistan",
       ru: "Кандидаты для диверсификации экспорта США → UZ",

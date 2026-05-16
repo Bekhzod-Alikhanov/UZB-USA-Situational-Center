@@ -8,10 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import type { ComponentType } from "react";
 import Fuse from "fuse.js";
-import { visits } from "@/data/visits";
-import { counterparts } from "@/data/counterparts";
-import { investments } from "@/data/investments";
-import { agreements } from "@/data/agreements";
+import { searchAgreements, searchCounterparts, searchInvestments, searchVisits } from "@/data/search-index";
 import { localizedHref, NAV_ITEMS } from "@/lib/navigation";
 
 type SearchEntity = {
@@ -47,34 +44,34 @@ export function SearchCommand() {
 
   const items: SearchEntity[] = useMemo(() => {
     const pages = PAGE_ENTITIES(locale, tNav, tGroups);
-    const vs: SearchEntity[] = visits.map((v) => ({
+    const vs: SearchEntity[] = searchVisits.map((v) => ({
       id: `v-${v.id}`,
       title: v.title,
-      subtitle: `${v.date} · ${v.level}`,
+      subtitle: v.subtitle,
       type: "visit",
       href: `/${locale}/visits`,
       icon: Target,
     }));
-    const ps: SearchEntity[] = counterparts.map((p) => ({
+    const ps: SearchEntity[] = searchCounterparts.map((p) => ({
       id: `c-${p.id}`,
-      title: p.name,
-      subtitle: p.position,
+      title: p.title,
+      subtitle: p.subtitle,
       type: "person",
       href: `/${locale}/counterparts`,
       icon: Users,
     }));
-    const inv: SearchEntity[] = investments.map((i) => ({
+    const inv: SearchEntity[] = searchInvestments.map((i) => ({
       id: `i-${i.id}`,
       title: i.title,
-      subtitle: `${i.sector} · ${i.region}`,
+      subtitle: i.subtitle,
       type: "investment",
       href: `/${locale}/investments`,
       icon: Briefcase,
     }));
-    const ag: SearchEntity[] = agreements.map((a) => ({
+    const ag: SearchEntity[] = searchAgreements.map((a) => ({
       id: `a-${a.id}`,
       title: a.title,
-      subtitle: `${a.category} · ${a.signedOn}`,
+      subtitle: a.subtitle,
       type: "agreement",
       href: `/${locale}/agreements`,
       icon: FileText,

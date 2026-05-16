@@ -7,7 +7,7 @@
 #
 # After this completes, run:
 #   node scripts/build-comtrade.mjs
-# to regenerate data/comtrade.ts.
+# to regenerate data/comtrade*.ts slices.
 
 set -e
 DIR="$(cd "$(dirname "$0")/.." && pwd)/input/comtrade"

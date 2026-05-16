@@ -1,6 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
-import { mirror2024, comtradeMeta, type MirrorRow } from "@/data/comtrade";
+import { mirror2024 } from "@/data/comtrade-mirror";
+import { comtradeMeta } from "@/data/comtrade-meta";
+import type { MirrorRow } from "@/data/comtrade-types";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 
@@ -83,12 +85,22 @@ export function ComtradeMirror() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" className="w-20">HS-6</th>
+              <th scope="col" className="w-20">
+                HS-6
+              </th>
               <th scope="col">Commodity</th>
-              <th scope="col" className="text-right">UZ-side, $</th>
-              <th scope="col" className="text-right">US-side, $</th>
-              <th scope="col" className="w-24 text-right">Gap, $</th>
-              <th scope="col" className="w-16 text-right">Ratio</th>
+              <th scope="col" className="text-right">
+                UZ-side, $
+              </th>
+              <th scope="col" className="text-right">
+                US-side, $
+              </th>
+              <th scope="col" className="w-24 text-right">
+                Gap, $
+              </th>
+              <th scope="col" className="w-16 text-right">
+                Ratio
+              </th>
             </tr>
           </thead>
           <tbody>

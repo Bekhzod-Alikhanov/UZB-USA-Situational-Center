@@ -55,6 +55,7 @@ input/comtrade/*.json
 
 # Design reference (not deployed)
 _design_ref/
+.stitch/designs/qa-*.png
 
 # Lighthouse run artefacts (kept locally, summarised in LIGHTHOUSE_AUDIT.md)
 lh-*.json

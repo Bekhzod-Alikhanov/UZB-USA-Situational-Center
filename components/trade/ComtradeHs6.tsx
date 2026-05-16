@@ -1,12 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
-import {
-  topUsImportsFromUzByYear,
-  topUsExportsToUzByYear,
-  comtradeAnnualUsReporter,
-  comtradeMeta,
-  type Hs6Row,
-} from "@/data/comtrade";
+import { topUsImportsFromUzByYear, topUsExportsToUzByYear } from "@/data/comtrade-hs6";
+import { comtradeAnnualUsReporter, comtradeMeta } from "@/data/comtrade-meta";
+import type { Hs6Row } from "@/data/comtrade-types";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 
@@ -119,11 +115,19 @@ export function ComtradeHs6Top() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" className="w-10 text-right">#</th>
-              <th scope="col" className="w-20">HS-6</th>
+              <th scope="col" className="w-10 text-right">
+                #
+              </th>
+              <th scope="col" className="w-20">
+                HS-6
+              </th>
               <th scope="col">Commodity</th>
-              <th scope="col" className="text-right">Value, $</th>
-              <th scope="col" className="w-20 text-right">Share</th>
+              <th scope="col" className="text-right">
+                Value, $
+              </th>
+              <th scope="col" className="w-20 text-right">
+                Share
+              </th>
             </tr>
           </thead>
           <tbody>

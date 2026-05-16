@@ -2,7 +2,9 @@
 import { useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { trendTopUsImports, trendTopUsExports, comtradeMeta, type Hs6Trend } from "@/data/comtrade";
+import { trendTopUsImports, trendTopUsExports } from "@/data/comtrade-trends";
+import { comtradeMeta } from "@/data/comtrade-meta";
+import type { Hs6Trend } from "@/data/comtrade-types";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 
@@ -207,11 +209,19 @@ export function ComtradeTrendSparklines() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" className="w-20">{T.hs6}</th>
+              <th scope="col" className="w-20">
+                {T.hs6}
+              </th>
               <th scope="col">{T.commodity}</th>
-              <th scope="col" className="w-32 text-center">{T.trend}</th>
-              <th scope="col" className="w-20 text-right">{T.cagr}</th>
-              <th scope="col" className="w-24 text-right">{T.latest}</th>
+              <th scope="col" className="w-32 text-center">
+                {T.trend}
+              </th>
+              <th scope="col" className="w-20 text-right">
+                {T.cagr}
+              </th>
+              <th scope="col" className="w-24 text-right">
+                {T.latest}
+              </th>
             </tr>
           </thead>
           <tbody>

@@ -3,14 +3,9 @@ import { useId, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import { Treemap, hierarchy, treemapBinary } from "@visx/hierarchy";
 import { ParentSize } from "@visx/responsive";
-import {
-  hs2_2024_usImports,
-  hs2_2024_usExports,
-  hs2_2025_usImports,
-  hs2_2025_usExports,
-  comtradeMeta,
-  type Hs2Row,
-} from "@/data/comtrade";
+import { hs2_2024_usImports, hs2_2024_usExports, hs2_2025_usImports, hs2_2025_usExports } from "@/data/comtrade-hs2";
+import { comtradeMeta } from "@/data/comtrade-meta";
+import type { Hs2Row } from "@/data/comtrade-types";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 

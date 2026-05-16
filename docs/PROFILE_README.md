@@ -22,7 +22,7 @@ I build production-grade software at the intersection of policy and engineering.
 
 ## 🚀 Featured project — UZ–US Situational Center
 
-[![Dashboard preview](https://raw.githubusercontent.com/bekhzod1990/UZB-USA-Situational-Center/main/docs/screenshots/overview.png)](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
+[![Dashboard preview](https://raw.githubusercontent.com/bekhzod1990/UZB-USA-Situational-Center/main/docs/screenshots/overview.webp)](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
 
 A production digital monitoring platform for the Center on Uzbekistan–USA
 cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Primary
