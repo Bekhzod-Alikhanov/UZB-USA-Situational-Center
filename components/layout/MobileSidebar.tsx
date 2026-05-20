@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { Landmark, MapPin, X } from "lucide-react";
+import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
 import { localizedHref, NAV_GROUPS, TONE_VAR_MAP } from "@/lib/navigation";
@@ -141,18 +141,6 @@ export function MobileSidebar({ trigger }: MobileSidebarProps) {
               );
             })}
           </nav>
-
-          {/* Footer */}
-          <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2.5">
-            <div className="flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
-              <MapPin className="size-3" />
-              <span>{tShell("footer.location")}</span>
-            </div>
-            <div className="mt-1 text-[10px] text-[var(--color-ink-faint)]">
-              <Landmark className="mr-1 inline size-2.5" />
-              {tShell("footer.record")}
-            </div>
-          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

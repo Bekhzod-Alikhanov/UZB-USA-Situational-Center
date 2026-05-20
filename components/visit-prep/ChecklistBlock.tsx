@@ -11,9 +11,9 @@ interface Item {
 }
 
 const INITIAL: Item[] = [
-  { id: "c-01", text: "Executive Order / Ф-4 reporting form filed", done: true, agency: "Presidential Admin." },
+  { id: "c-01", text: "Mandate reporting form filed", done: true, agency: "Center" },
   { id: "c-02", text: "Diplomatic notes exchanged (DC ↔ Tashkent)", done: true, agency: "MFA" },
-  { id: "c-03", text: "Delegation composition signed", done: true, agency: "Presidential Admin." },
+  { id: "c-03", text: "Delegation composition signed", done: true, agency: "Center" },
   { id: "c-04", text: "Visas + clearances", done: true, agency: "MFA + Consular" },
   { id: "c-05", text: "Air transport + VIP slots", done: true, agency: "Uzbekistan Airways" },
   { id: "c-06", text: "Protocol briefing complete", done: false, agency: "Protocol Dept." },

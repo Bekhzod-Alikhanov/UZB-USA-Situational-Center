@@ -3,7 +3,7 @@
  *
  * Source: Annex 1 ("Protocol on agreement of prices, stages and deadlines of
  * services") to the civil-law contract dated 15.04.2026 under Presidential
- * Ordinance Ф-4 (17.02.2026). Monetary amounts intentionally omitted.
+ * Center founding mandate (17.02.2026). Monetary amounts intentionally omitted.
  *
  * Deadlines are real (`is_demo: false`); status is derived in the UI from the
  * current date relative to `dueDate`.

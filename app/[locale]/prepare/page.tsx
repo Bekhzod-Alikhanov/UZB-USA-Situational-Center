@@ -73,7 +73,7 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
             <div className="flex-1">
               <div className="stat-label">Delegation head</div>
               <div className="mt-1 text-[14px] text-[var(--color-ink)]">
-                {next.participantsUz[0] ?? "Presidential Administration"}
+                {next.participantsUz[0] ?? "Delegation lead"}
               </div>
             </div>
           </CardBody>

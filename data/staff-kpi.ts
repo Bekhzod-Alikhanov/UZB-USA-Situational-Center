@@ -1,6 +1,6 @@
 /**
  * Staff KPI templates — the Situational Center has an authorized headcount
- * of 10 per Presidential Ordinance Ф-4. Real names and per-person KPIs are
+ * of 10 per Center founding mandate. Real names and per-person KPIs are
  * internal HR data; this module ships role-slot templates with realistic
  * ranges so the UI can be validated. Each entry stays `is_demo: true`
  * pending the Center's HR department supplying the production roster.

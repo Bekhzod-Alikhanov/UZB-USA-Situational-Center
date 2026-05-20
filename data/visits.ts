@@ -188,7 +188,7 @@ export const visits: Visit[] = [
     direction: "us-uz",
     format: "forum",
     location: "Tashkent",
-    participantsUz: ["Head of Presidential Administration S. Mirziyoyeva"],
+    participantsUz: ["S. Mirziyoyeva"],
     participantsUs: ["SPE Sergio Gor", "U.S. business delegation"],
     outcomes: ["Informal first session of US-UZ Business & Investment Council"],
     is_demo: false,

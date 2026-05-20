@@ -48,7 +48,7 @@ export const demoRegistry: DemoEntry[] = [
   },
   {
     where: "Staff KPI",
-    what: "10 role-slot templates per F-4 headcount (no person names)",
+    what: "10 role-slot templates per Center headcount (no person names)",
     file: "data/staff-kpi.ts",
     agency: "Situational Center HR",
     status: "pending",

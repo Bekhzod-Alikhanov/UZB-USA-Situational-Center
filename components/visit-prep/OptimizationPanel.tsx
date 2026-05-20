@@ -24,7 +24,7 @@ const INITIAL: Member[] = [
   { id: "m-04", name: "Minister of Energy", role: "Minerals track", keep: true, reason: "critical minerals MoU lead" },
   {
     id: "m-05",
-    name: "Chief of Staff, Presidential Administration",
+    name: "Center Director",
     role: "Coordination",
     keep: true,
     reason: "anchor",
