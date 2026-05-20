@@ -45,7 +45,7 @@ const SEED: Task[] = [
     id: "t-01",
     stage: "plan",
     title: "Confirm delegation composition (11 members — optimizer result)",
-    owner: "Presidential Admin.",
+    owner: "Center",
     due: "D-30",
     priority: "high",
   },
@@ -68,7 +68,7 @@ const SEED: Task[] = [
     id: "t-04",
     stage: "plan",
     title: "Coordinate Trump-side window + fallback slot",
-    owner: "Presidential Admin.",
+    owner: "Center",
     due: "D-25",
     priority: "high",
   },
@@ -124,7 +124,7 @@ const SEED: Task[] = [
   { id: "t-14", stage: "exec", title: "Business round-table with AUCC", owner: "MIIT + AUCC", due: "D-2" },
   { id: "t-15", stage: "exec", title: "Minerals MoU signing ceremony", owner: "MinEnergy + State Dept.", due: "D-1" },
 
-  { id: "t-16", stage: "follow", title: "Outcome memo → Presidential Admin.", owner: "MFA", due: "D+3" },
+  { id: "t-16", stage: "follow", title: "Outcome memo → Center", owner: "MFA", due: "D+3" },
   {
     id: "t-17",
     stage: "follow",

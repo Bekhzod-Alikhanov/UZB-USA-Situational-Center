@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { Landmark, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { localizedHref, NAV_GROUPS, TONE_VAR_MAP } from "@/lib/navigation";
 import { TimezoneClocks } from "./TimezoneClocks";
@@ -13,7 +12,6 @@ export function Sidebar() {
   const tNav = useTranslations("nav");
   const tBrand = useTranslations("brand");
   const tGroups = useTranslations("navGroups");
-  const tShell = useTranslations("shell");
 
   return (
     <aside className="command-sidebar sticky top-0 hidden h-screen w-[248px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] lg:flex">
@@ -123,18 +121,6 @@ export function Sidebar() {
       {/* Timezone clocks */}
       <div className="border-t border-[var(--color-border)] px-3 py-2">
         <TimezoneClocks />
-      </div>
-
-      {/* Brand footer */}
-      <div className="border-t border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface-2)_88%,transparent)] px-4 py-2.5">
-        <div className="flex items-center gap-2 text-[10.5px] text-[var(--color-ink-muted)]">
-          <MapPin className="size-3" />
-          <span>{tShell("footer.location")}</span>
-        </div>
-        <div className="mt-1 text-[10px] text-[var(--color-ink-faint)]">
-          <Landmark className="mr-1 inline size-2.5" />
-          {tShell("footer.record")}
-        </div>
       </div>
     </aside>
   );

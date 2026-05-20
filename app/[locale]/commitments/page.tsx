@@ -50,7 +50,7 @@ export default async function CommitmentsPage({ params }: { params: Promise<{ lo
         </div>
       </div>
 
-      <DemoBanner agency="MFA minutes · Presidential Administration tracker" />
+      <DemoBanner agency="MFA minutes · Bilateral coordination tracker" />
 
       <Card>
         <CardHeader title={registryCopy.title} sub={`${total} ${registryCopy.linked}`} />

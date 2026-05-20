@@ -287,13 +287,16 @@ export const sources: Source[] = [
     data_type: "Investment single-window project intake",
   },
   {
+    // sourceId kept stable — used by data/staff-kpi.ts, lib/freshness.ts,
+    // and other consumers; renaming would break references. Only the
+    // user-visible `name` and `note` were neutralized.
     id: "f4_ordinance_2026",
     level: "A",
-    name: "Presidential Ordinance Ф-4 (17.02.2026) — Situational Center mandate",
-    sourceFile: "(internal — Office of the President)",
+    name: "Situational Center founding mandate (17.02.2026)",
+    sourceFile: "(internal mandate document)",
     fetched_at: "2026-02-17",
     data_type: "Center facts: location, staffing, scope, aggregate counts",
-    note: "Production should attach the original signed order.",
+    note: "Production should attach the original signed mandate.",
   },
   {
     id: "gpd_protocol_2026",
@@ -302,7 +305,7 @@ export const sources: Source[] = [
     sourceFile: "(internal — Agency for Strategic Development and Reforms)",
     fetched_at: "2026-04-15",
     data_type: "12 monthly deliverables of the Situational Center Project Office, deadlines 15.05.2026 → 15.04.2027",
-    note: "Annex 1 to the civil-law contract under Presidential Ordinance Ф-4.",
+    note: "Annex 1 to the Situational Center civil-law contract.",
   },
 
   // -------------------------------------------------------------------
