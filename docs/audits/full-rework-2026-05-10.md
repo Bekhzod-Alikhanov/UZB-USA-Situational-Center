@@ -144,7 +144,7 @@ In order (each one is independently green — `pnpm verify && pnpm build` after 
 6. *(Phase C, pending)* **chore(rbac):** align lib/auth/roles.ts with documented permission taxonomy + add can() helper
 7. *(Phase C, pending)* **docs(audits):** architecture-drift 2026-05-10 + full-rework 2026-05-10
 
-Branch: https://github.com/bekhzod1990/UZB-USA-Situational-Center/tree/claude/clever-goodall-c9c679
+Branch: https://github.com/Bekhzod-Alikhanov/UZB-USA-Situational-Center/tree/claude/clever-goodall-c9c679
 
 ---
 
