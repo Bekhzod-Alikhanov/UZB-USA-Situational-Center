@@ -1,10 +1,10 @@
-# CLAUDE.md — UZ–US Situational Center dashboard
+# CLAUDE.md — UZ–US Situational Center platform
 
 This file orients future Claude Code sessions in this repo. Read it first; it is the canonical map of structure, conventions, and non-obvious rules.
 
 ## What this is
 
-A production-grade Next.js 16 dashboard for the **Situational Center on Uzbekistan–USA cooperation**, authorized by Presidential Ordinance Ф-4 (17.02.2026). Primary audience: the Advisor to the President, government officials (Президент Админ., МИД, МИПТ, хокимияты, Посольство), business (AUCC, UZ/US companies), delegation heads, and the Center's staff.
+A production-grade Next.js 16 platform for the **Situational Center on Uzbekistan–USA cooperation**, authorized by Presidential Ordinance Ф-4 (17.02.2026). Primary audience: the Advisor to the President, government officials (Президент Админ., МИД, МИПТ, хокимияты, Посольство), business (AUCC, UZ/US companies), delegation heads, and the Center's staff.
 
 The product is **demo-ready and production-quality**, but every synthetic value carries `is_demo: true` and is visually flagged (DemoBadge / DemoUnderline / DemoBanner) so reputation is protected when real data is later swapped in.
 
@@ -67,8 +67,8 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 6. **Suspense around `useSearchParams`.** Any client component using `useSearchParams` must be wrapped in `<Suspense>` at the page level, otherwise SSG bails out at build (`/commitments` is the canonical example).
 7. **Print exports.** Use `<PrintButton />` + `@media print` CSS in `globals.css`. The print block force-overrides dark-mode tokens to light values so PDFs are always clean. Do not introduce a separate PDF library — `window.print()` covers all current cases.
 8. **AI gating.** `/api/chat` returns 503 unless `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` are both configured. The client (`AssistantChat.tsx`) also checks server availability and `useSettings.aiEnabled`. Never call the AI route without both gates passing.
-9. **PII / operational-content boundary (visit-prep).** The dashboard tracks **status only** for visit preparation: percentage complete, owner role-slots, due dates, document titles, booking statuses, coverage counts. It NEVER contains: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, financial estimates, individual delegate names, personal contact details. That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, that's a security regression — reject the PR.
-10. **No-downgrade official data.** Live ingestion may store raw snapshots and review items, but it must not replace a newer approved dashboard metric with an older source period. Same-period revisions require review. Newer official values are publication candidates, not automatic replacements, unless a source policy explicitly permits auto-publication.
+9. **PII / operational-content boundary (visit-prep).** The platform tracks **status only** for visit preparation: percentage complete, owner role-slots, due dates, document titles, booking statuses, coverage counts. It NEVER contains: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, financial estimates, individual delegate names, personal contact details. That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, that's a security regression — reject the PR.
+10. **No-downgrade official data.** Live ingestion may store raw snapshots and review items, but it must not replace a newer approved published metric with an older source period. Same-period revisions require review. Newer official values are publication candidates, not automatic replacements, unless a source policy explicitly permits auto-publication.
 
 ## Common operations
 
@@ -172,7 +172,7 @@ Reproduce: `node scripts/lh-all.mjs` writes `lh-*.json` per route + a console su
 
 ## Known constraints
 
-- **Operational backend is opt-in.** `DATA_BACKEND=static` (default) keeps the dashboard fully deployable from bundled `data/*.ts`. To wire up live ingestion, set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` + `CRON_SECRET` and run `database/schema.sql`. The 5 live-data connectors (`lib/live-data/*`) and the daily cron (`/api/cron/ingest`) only write through the no-downgrade policy in `lib/data-governance/*`.
+- **Operational backend is opt-in.** `DATA_BACKEND=static` (default) keeps the platform fully deployable from bundled `data/*.ts`. To wire up live ingestion, set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` + `CRON_SECRET` and run `database/schema.sql`. The 5 live-data connectors (`lib/live-data/*`) and the daily cron (`/api/cron/ingest`) only write through the no-downgrade policy in `lib/data-governance/*`.
 - **Map basemap is light-only.** OpenFreeMap raster style does not have a dark variant; map labels stay readable on the light tiles regardless of UI theme.
 - **AI is BYOK and opt-in.** Set `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` in Vercel env (or `.env.local`) to enable the assistant; without both, the route 503s gracefully.
 - **Vercel cold start.** `/api/data/*`, `/api/chat`, `/api/cron/ingest` are serverless and may take +800–1500 ms on the first request after ~5 min idle on Hobby tier. Pro tier has always-warm functions.

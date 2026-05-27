@@ -65,8 +65,8 @@
       "outsideWorkingHours": "Outside working hours"
     },
     "searchDialog": {
-      "title": "Search dashboard",
-      "aria": "Search dashboard pages, people, visits, agreements, and projects",
+      "title": "Search platform",
+      "aria": "Search platform pages, people, visits, agreements, and projects",
       "empty": "No results",
       "types": {
         "page": "Page",
@@ -149,15 +149,15 @@
       },
       "staff": {
         "title": "Staff KPI",
-        "description": "Internal staff KPI dashboard, milestones, operational cadence, completion tracking, and source-marked demo status."
+        "description": "Internal staff KPI tracker, milestones, operational cadence, completion tracking, and source-marked demo status."
       },
       "assistant": {
         "title": "AI Assistant",
-        "description": "Environment-gated assistant for source-aware interpretation of the Uzbekistan-USA intelligence dashboard."
+        "description": "Environment-gated assistant for source-aware interpretation of the Uzbekistan-USA intelligence platform."
       },
       "adminLogin": {
         "title": "Admin Login",
-        "description": "Secure administrator sign-in for protected operations and internal dashboard management."
+        "description": "Secure administrator sign-in for protected operations and internal platform management."
       }
     }
   },
@@ -735,7 +735,7 @@
       },
       "privatization": {
         "emptyTitle": "Source-backed privatization data required",
-        "emptyDescription": "The dashboard is ready for a privatization pipeline, but no verified asset-level records are loaded yet. Required fields include asset name, sector, ownership status, transaction type, stage, timeline, government counterpart, value range, U.S. investor relevance, source IDs, risk level, and next step.",
+        "emptyDescription": "The platform is ready for a privatization pipeline, but no verified asset-level records are loaded yet. Required fields include asset name, sector, ownership status, transaction type, stage, timeline, government counterpart, value range, U.S. investor relevance, source IDs, risk level, and next step.",
         "schemaTitle": "Required source-backed fields before publication",
         "schemaFields": "asset name · sector · owner/counterpart · transaction type · stage · value range · U.S. investor relevance · source IDs · risk · next action",
         "safeState": "Safe empty state: no company or asset names are invented. Add records only after owner approval and source IDs are available."
@@ -750,7 +750,7 @@
         "source": "Source",
         "whatThisMeans": "What this means:",
         "demoLabel": "DEMO.",
-        "meaningDemo": "This row should be used for dashboard workflow demonstration only until the responsible agency supplies a source-backed project record.",
+        "meaningDemo": "This row should be used for workflow demonstration only until the responsible agency supplies a source-backed project record.",
         "meaningVerified": "This row can support executive briefing, while still retaining its source badge and as-of context.",
         "meaningInternal": "This row is useful for internal pipeline tracking, but should not be quoted publicly until owner review and source confirmation are complete.",
         "actionTitle": "Action and publication guidance",

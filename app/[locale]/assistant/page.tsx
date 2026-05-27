@@ -31,9 +31,9 @@ export default async function AssistantPage({ params }: { params: Promise<{ loca
           }
         : {
             title: "Privacy and scope",
-            sub: "Use for sourced dashboard interpretation, not sensitive operations",
+            sub: "Use for sourced platform interpretation, not sensitive operations",
             body:
-              "Do not enter passport details, reservation codes, personal contact details, confidential draft agreements, or non-public negotiation positions. The assistant should answer from the dashboard context and source summaries only.",
+              "Do not enter passport details, reservation codes, personal contact details, confidential draft agreements, or non-public negotiation positions. The assistant should answer from the platform context and source summaries only.",
           };
 
   return (

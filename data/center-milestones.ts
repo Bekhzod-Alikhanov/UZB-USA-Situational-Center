@@ -11,7 +11,7 @@
 export type MilestoneTrack =
   | "governance"
   | "visits"
-  | "dashboard"
+  | "platform"
   | "expertise"
   | "strategy"
   | "reporting"
@@ -57,11 +57,11 @@ export const centerMilestones: CenterMilestone[] = [
   },
   {
     stage: 3,
-    title: "Dashboard improvement package after pilot testing",
+    title: "Platform improvement package after pilot testing",
     description:
       "Refine the indicator set, identify gaps in the data, propose interface improvements following first-round testing.",
     dueDate: "2026-07-15",
-    track: "dashboard",
+    track: "platform",
     is_demo: false,
     sourceId: "gpd_protocol_2026",
   },

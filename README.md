@@ -1,4 +1,4 @@
-# UZ–US Situational Center · dashboard
+# UZ–US Situational Center · platform
 
 > **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 21 routes · 56 data integrations · AI on Claude Sonnet 4.6 · [enterprise architecture pack](./docs/architecture/)
 >
@@ -72,7 +72,7 @@ cp .env.example .env.local       # set ADMIN_PASSWORD; optionally enable the ass
 pnpm dev                         # → http://localhost:3000
 ```
 
-Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 19 public dashboard sections plus the gated admin area and counterpart detail pages.
+Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 19 public platform sections plus the gated admin area and counterpart detail pages.
 
 ### Common scripts
 
@@ -92,7 +92,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 | `pnpm test:a11y`       | Playwright + axe accessibility checks for critical violations            |
 | `pnpm knip`            | Finds unused dependencies, files, and exports                            |
 | `pnpm format:check`    | Prettier formatting check                                                |
-| `pnpm lhci`            | Lighthouse CI run against key dashboard pages                            |
+| `pnpm lhci`            | Lighthouse CI run against key platform pages                            |
 | `pnpm verify`          | Lint + typecheck + data validation + governance checks + unit tests      |
 | `pnpm start`           | Serve the production build locally                                       |
 
@@ -157,7 +157,7 @@ The repo includes dev-only quality tools that do not ship runtime code to users:
 - **Knip** for unused code/dependency discovery.
 - **Prettier** for optional formatting normalization.
 
-Run `pnpm build` before `pnpm test:e2e`, `pnpm test:a11y`, or `pnpm lhci`. For local browser checks, run `pnpm exec playwright install chromium` once. The GitHub workflow `Dashboard QA` is manual (`workflow_dispatch`) so heavy browser and Lighthouse runs do not slow every push unless you request them.
+Run `pnpm build` before `pnpm test:e2e`, `pnpm test:a11y`, or `pnpm lhci`. For local browser checks, run `pnpm exec playwright install chromium` once. The GitHub workflow `Platform QA` is manual (`workflow_dispatch`) so heavy browser and Lighthouse runs do not slow every push unless you request them.
 
 ## Production operations
 
@@ -180,7 +180,7 @@ Optional live public-data and governed-ingestion routes:
 
 The operational database schema lives at `database/schema.sql`. It is designed for Postgres/Supabase and covers users, sources, commitments, decisions, comments, audit logs, source-version policies, raw source snapshots, normalized observations, a review queue, and approved published metrics. Do not switch `DATA_BACKEND` away from `static` until auth, RLS, backups, and data-owner approval are in place.
 
-Live ingestion follows a no-downgrade rule: if an official pull returns a period older than the currently approved metric, it is stored/reviewed but cannot replace the dashboard value. Same-period revisions require review. Newer values are publication candidates, not automatic replacements, unless a future source policy explicitly allows auto-publication.
+Live ingestion follows a no-downgrade rule: if an official pull returns a period older than the currently approved metric, it is stored/reviewed but cannot replace the published value. Same-period revisions require review. Newer values are publication candidates, not automatic replacements, unless a future source policy explicitly allows auto-publication.
 
 ## Repository and package hygiene
 

@@ -39,7 +39,7 @@ export const sectorOpportunities: SectorOpportunity[] = [
     signal:
       "Official market guidance highlights privatization and state-asset reform as a channel for foreign investors.",
     whyItMatters:
-      "Creates a dashboard lane for Franklin Templeton/UzNIF, transaction advisors, and post-privatization governance support.",
+      "Creates a platform lane for Franklin Templeton/UzNIF, transaction advisors, and post-privatization governance support.",
     nextQuestion:
       "Which assets need data rooms, valuation work, and investor outreach before the next bilateral forum?",
     sourceId: "tradegov_market_opportunities",
@@ -92,7 +92,7 @@ export const sectorOpportunities: SectorOpportunity[] = [
     sector: "IT, digital, AI, and startups",
     icon: "it",
     signal:
-      "The official forum listed IT/digital as a priority and the 2026 dashboard concept includes a $250M AI/digital fund.",
+      "The official forum listed IT/digital as a priority and the 2026 platform concept includes a $250M AI/digital fund.",
     whyItMatters: "Creates a bridge between venture capital, workforce, e-government, and commercial service exports.",
     nextQuestion:
       "Which startup, AI, and digital-infrastructure projects have U.S. investor or university counterpart matches?",

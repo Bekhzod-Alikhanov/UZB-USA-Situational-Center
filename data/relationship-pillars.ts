@@ -61,7 +61,7 @@ export const relationshipPillars: RelationshipPillar[] = [
     signal: `$${(investmentValue / 1000).toFixed(1)}B pipeline`,
     metric: `${investments.length} projects`,
     narrative:
-      "The investment portfolio is the dashboard's strongest executive story, but demo pipeline rows must be replaced before external use.",
+      "The investment portfolio is the platform's strongest executive story, but demo pipeline rows must be replaced before external use.",
     href: "/investments",
     tone: "invest",
     sourceId: "dfc_joint_framework",

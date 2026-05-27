@@ -77,7 +77,7 @@ export const staff: StaffMember[] = [
   {
     id: "s-05-data",
     name: "Slot 05 · Analytics",
-    role: "Data & analytics — dashboard authority",
+    role: "Data & analytics — platform authority",
     directionality: "analytics",
     tasksAssigned: 19,
     tasksCompleted: 17,

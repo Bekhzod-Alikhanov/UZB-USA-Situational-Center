@@ -59,7 +59,7 @@ export default async function StaffPage({ params }: { params: Promise<{ locale: 
         </CardBody>
       </Card>
 
-      <DemoBanner agency="Internal — Situational Center HR dashboard" />
+      <DemoBanner agency="Internal — Situational Center HR roster" />
 
       <Card tone="people">
         <CardHeader

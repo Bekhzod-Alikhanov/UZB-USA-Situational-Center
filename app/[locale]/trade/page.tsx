@@ -86,7 +86,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
             advancedTitle: "Advanced analysis remains",
             advancedSub: "HS, mirror, ITC, and services exhibits are below",
             advancedText:
-              "Technical charts are preserved for analysts and researchers in the Advanced Trade Analysis section rather than removed from the dashboard.",
+              "Technical charts are preserved for analysts and researchers in the Advanced Trade Analysis section rather than removed from the platform.",
             flowSummary:
               "What this means: this chart is the fastest visual view of direction, volatility, and whether UZ exports are keeping pace with imports from the United States. It is loaded on demand to keep the first mobile paint light.",
           };

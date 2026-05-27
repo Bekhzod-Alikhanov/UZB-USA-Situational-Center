@@ -5,7 +5,7 @@ import { locales, type Locale } from "@/lib/i18n/config";
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://uz-us-center.vercel.app";
 export const siteTitle = "Uzbekistan-USA Economic and Investment Intelligence Platform";
 export const siteDescription =
-  "Executive intelligence dashboard for Uzbekistan-USA economic relations, trade flows, investment opportunities, diplomatic activity, and source-backed operational analysis.";
+  "Executive intelligence platform for Uzbekistan-USA economic relations, trade flows, investment opportunities, diplomatic activity, and source-backed operational analysis.";
 
 function normalizePath(path = "") {
   if (!path || path === "/") return "";

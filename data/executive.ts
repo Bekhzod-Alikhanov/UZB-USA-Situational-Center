@@ -149,7 +149,7 @@ export function buildExecutiveBriefing(): ExecutiveBriefing {
       {
         id: "opp-visa",
         title: "Turn visa-free travel into a people-to-people KPI",
-        detail: "Pair UZ tourism announcements with State visa and DHS admissions data for a mobility dashboard.",
+        detail: "Pair UZ tourism announcements with State visa and DHS admissions data for a mobility view.",
         owner: "Tourism Committee / MFA",
         href: "/events",
         tone: "positive",

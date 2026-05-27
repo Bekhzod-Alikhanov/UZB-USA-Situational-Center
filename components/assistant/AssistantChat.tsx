@@ -56,7 +56,7 @@ function UnavailableState() {
       <p className="max-w-lg text-[13px] text-[var(--color-ink-muted)]">
         Set <code className="mono rounded bg-[var(--color-surface-2)] px-1">ASSISTANT_ENABLED=true</code> and{" "}
         <code className="mono rounded bg-[var(--color-surface-2)] px-1">ANTHROPIC_API_KEY</code> on the server to enable
-        this page. The dashboard, exports, maps, charts, and data modules continue to work without AI.
+        this page. The platform, exports, maps, charts, and data modules continue to work without AI.
       </p>
     </div>
   );

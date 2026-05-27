@@ -89,7 +89,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
             <CardHeader title={t("import")} sub="Bulk upload updated data" />
             <CardBody>
               <div
-                title="Backend pending — public dashboard reads bundled data/*.ts; live ingest requires the operational system"
+                title="Backend pending — public platform reads bundled data/*.ts; live ingest requires the operational system"
                 aria-disabled
                 className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] p-6 text-center opacity-60"
               >
@@ -100,7 +100,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                 </span>
               </div>
               <div className="mt-2 text-[10.5px] text-[var(--color-ink-muted)]">
-                Public dashboard reads bundled <code className="mono">data/*.ts</code> at build time. Live data ingest
+                Public platform reads bundled <code className="mono">data/*.ts</code> at build time. Live data ingest
                 will live in the operational system with auth + audit, not this repo.
               </div>
             </CardBody>
@@ -120,7 +120,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
               <button
                 type="button"
                 disabled
-                title="Backend pending — user management will live in the operational system, not the public dashboard"
+                title="Backend pending — user management will live in the operational system, not the public platform"
                 className="mt-3 flex items-center gap-1.5 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-2.5 py-1 text-[11.5px] text-[var(--color-ink-faint)] cursor-not-allowed"
               >
                 <UsersIcon className="size-3" />
