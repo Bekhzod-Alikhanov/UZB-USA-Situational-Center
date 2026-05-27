@@ -22,19 +22,19 @@ I build production-grade software at the intersection of policy and engineering.
 
 ## 🚀 Featured project — UZ–US Situational Center
 
-[![Dashboard preview](https://raw.githubusercontent.com/bekhzod1990/UZB-USA-Situational-Center/main/docs/screenshots/overview.webp)](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
+[![Platform preview](https://raw.githubusercontent.com/bekhzod1990/UZB-USA-Situational-Center/main/docs/screenshots/overview.webp)](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
 
-A production digital monitoring platform for the Center on Uzbekistan–USA
-cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Primary
-user is the Advisor to the President.
+A production-grade bilateral coordination platform for the Situational
+Center on Uzbekistan–USA cooperation. Primary user is the Advisor to the
+President.
 
-- **~33,200 lines of hand-written TypeScript** · 96 React components · 21 trilingual routes (EN / RU / UZ-Latn) · 11 API routes · 25 server-side library modules
-- **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12 tables) + 5 live API connectors (BEA, Census, EXIM, World Bank, ForeignAssistance.gov) + 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, State Department, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, and others)
+- **~36,800 lines of hand-written TypeScript** · 96 React components · 21 trilingual routes (EN / RU / UZ-Latn) · 11 API routes · 26 server-side library modules
+- **69 data integrations**: 1 operational PostgreSQL database (Supabase, 12 tables) + 5 live API connectors (BEA, Census, EXIM, World Bank, ForeignAssistance.gov) + 63 cited primary sources from ~30 organisations (USTR, DFC, USAID, State Department, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, and others)
 - **Governed live-data layer** with daily Vercel cron ingestion + no-downgrade policy + audit trail
 - **AI assistant** powered by Claude Sonnet 4.6 with prompt caching over a compiled RAG context
-- **Enterprise architecture pack** — 9 800 lines of target-architecture docs, 11 narrative documents and **13 Draw.io diagrams** (C4 context / container / component, BPMN ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model)
-- **Lighthouse — median Performance 91, Accessibility 98** across all 17 routes (six routes hit A11y 100); TBT 13–59 ms, CLS 0
-- **Node 24 LTS** runtime · 57 production commits · full Vitest + Playwright + axe + Lighthouse-CI stack
+- **Enterprise architecture pack** — ~6,400 lines of target-architecture docs across 25 Markdown files: 11 narrative documents and **13 Draw.io diagrams** (C4 context / container / component, BPMN ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model)
+- **Lighthouse — median Performance 91, Accessibility 100** across all 17 audited routes (every route hits A11y 100); TBT 13–67 ms, CLS 0
+- **Node 24 LTS** runtime · 80 production commits · full Vitest + Playwright + axe + Lighthouse-CI stack
 
 → [**🌐 Live demo**](https://uz-us-center.vercel.app/en) · [**📦 Code**](https://github.com/bekhzod1990/UZB-USA-Situational-Center) · [**🏛 Architecture pack**](https://github.com/bekhzod1990/UZB-USA-Situational-Center/tree/main/docs/architecture)
 

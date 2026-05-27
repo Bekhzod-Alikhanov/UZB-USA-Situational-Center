@@ -10,7 +10,7 @@ export default function NotFound() {
         </div>
         <div className="serif text-[22px] font-medium tracking-tight text-[var(--color-ink)]">Page not found</div>
         <div className="mt-1 text-[13px] text-[var(--color-ink-muted)]">
-          The route you requested isn&apos;t part of this dashboard. Try the overview page.
+          The route you requested isn&apos;t part of this platform. Try the overview page.
         </div>
         <Link
           href="/en"

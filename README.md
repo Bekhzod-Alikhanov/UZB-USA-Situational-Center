@@ -1,8 +1,8 @@
-# UZ–US Situational Center · dashboard
+# UZ–US Situational Center · platform
 
-> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 21 routes · 56 data integrations · AI on Claude Sonnet 4.6 · [enterprise architecture pack](./docs/architecture/)
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 21 routes · 69 data integrations · AI on Claude Sonnet 4.6 · [enterprise architecture pack](./docs/architecture/)
 >
-> Deployment-candidate monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
+> Production-grade bilateral coordination platform for the Situational Center on Uzbekistan–USA cooperation. Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
 ![Overview](docs/screenshots/overview.webp)
 
@@ -19,15 +19,15 @@
 
 ## What's inside
 
-- **21 trilingual routes** (English, Russian, Uzbek-Latin) — overview, trade, investments, visits, agreements, commitments, grants, counterparts, sanctions and export-control compliance, regional benchmarking, an interactive U.S. states map, and an AI assistant.
-- **~33,200 lines of hand-written TypeScript** across 96 React components, 34 source-of-truth data modules, 11 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19).
-- **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
+- **21 trilingual routes** (English, Russian, Uzbek-Latin) — executive brief, trade, investments, visits, agreements, commitments, grants, sectors, sanctions and export-control compliance, counterparts, regional benchmark, events calendar, contacts directory, staff KPI, strategic news signals, visit-preparation workspace, interactive U.S. states map, and an AI assistant.
+- **~36,800 lines of hand-written TypeScript** across 96 React components, 42 source-of-truth data modules, 11 API routes, and 26 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19).
+- **69 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 63 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
-- **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 34 data modules.
-- **Enterprise architecture pack** — [`docs/architecture/`](./docs/architecture/) ships **9 800 lines** of target-architecture documentation: 11 narrative documents (overview, target architecture, component catalog, auth & RBAC, data flow, user journeys, BPMN, bottlenecks & risks, migration roadmap, glossary) and **13 diagrams** in Draw.io (C4 context / container / component, BPMN for ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model). Designed to read in Obsidian or directly on GitHub.
+- **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 42 data modules.
+- **Enterprise architecture pack** — [`docs/architecture/`](./docs/architecture/) ships **~6,400 lines** of target-architecture documentation across **25 Markdown files**: 11 narrative documents (overview, target architecture, component catalog, auth & RBAC, data flow, user journeys, BPMN, bottlenecks & risks, migration roadmap, glossary) and **13 diagrams** in Draw.io (C4 context / container / component, BPMN for ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model). Designed to read in Obsidian or directly on GitHub.
 - **Verification gate** — `pnpm verify` runs lint, typecheck, source/route validation, governance checks, and Vitest unit tests. Browser, accessibility, and Lighthouse checks are separate heavier commands and should be run before public release.
-- **Lighthouse and axe coverage** — local sweep across all 17 routes shows **median Performance 91, median Accessibility 98** (six routes hit A11y 100); TBT 13–59 ms; CLS 0 everywhere. Charts lazy-loaded with IntersectionObserver, the map runtime is gated behind a load button, news/contacts filters are server-rendered. Lighthouse CI and Playwright/axe wired into the verification stack.
-- **57 production commits** over ~3 weeks — full git history of architectural decisions, perf waves, data-governance evolution, and the enterprise documentation pack.
+- **Lighthouse and axe coverage** — local sweep across all 17 audited routes shows **median Performance 91, median Accessibility 100 (every route hits A11y 100)**; TBT 13–67 ms; CLS 0 everywhere. Charts lazy-loaded with IntersectionObserver, the map runtime is gated behind a load button, news/contacts filters are server-rendered. Lighthouse CI and Playwright/axe wired into the verification stack.
+- **80 production commits** over ~6 weeks — full git history of architectural decisions, perf waves, data-governance evolution, design-system redesign, and the enterprise documentation pack.
 
 > **Demo-ready with production-oriented guardrails.** Synthetic values should carry `is_demo: true` and be visually flagged. Investment records are split into verified, source-backed/pending, and illustrative/demo buckets so demo rows cannot be mistaken for official pipeline totals. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the provenance map.
 
@@ -72,7 +72,7 @@ cp .env.example .env.local       # set ADMIN_PASSWORD; optionally enable the ass
 pnpm dev                         # → http://localhost:3000
 ```
 
-Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 19 public dashboard sections plus the gated admin area and counterpart detail pages.
+Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 19 public platform sections plus the gated admin area and counterpart detail pages.
 
 ### Common scripts
 
@@ -92,7 +92,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 | `pnpm test:a11y`       | Playwright + axe accessibility checks for critical violations            |
 | `pnpm knip`            | Finds unused dependencies, files, and exports                            |
 | `pnpm format:check`    | Prettier formatting check                                                |
-| `pnpm lhci`            | Lighthouse CI run against key dashboard pages                            |
+| `pnpm lhci`            | Lighthouse CI run against key platform pages                            |
 | `pnpm verify`          | Lint + typecheck + data validation + governance checks + unit tests      |
 | `pnpm start`           | Serve the production build locally                                       |
 
@@ -157,7 +157,7 @@ The repo includes dev-only quality tools that do not ship runtime code to users:
 - **Knip** for unused code/dependency discovery.
 - **Prettier** for optional formatting normalization.
 
-Run `pnpm build` before `pnpm test:e2e`, `pnpm test:a11y`, or `pnpm lhci`. For local browser checks, run `pnpm exec playwright install chromium` once. The GitHub workflow `Dashboard QA` is manual (`workflow_dispatch`) so heavy browser and Lighthouse runs do not slow every push unless you request them.
+Run `pnpm build` before `pnpm test:e2e`, `pnpm test:a11y`, or `pnpm lhci`. For local browser checks, run `pnpm exec playwright install chromium` once. The GitHub workflow `Platform QA` is manual (`workflow_dispatch`) so heavy browser and Lighthouse runs do not slow every push unless you request them.
 
 ## Production operations
 
@@ -180,7 +180,7 @@ Optional live public-data and governed-ingestion routes:
 
 The operational database schema lives at `database/schema.sql`. It is designed for Postgres/Supabase and covers users, sources, commitments, decisions, comments, audit logs, source-version policies, raw source snapshots, normalized observations, a review queue, and approved published metrics. Do not switch `DATA_BACKEND` away from `static` until auth, RLS, backups, and data-owner approval are in place.
 
-Live ingestion follows a no-downgrade rule: if an official pull returns a period older than the currently approved metric, it is stored/reviewed but cannot replace the dashboard value. Same-period revisions require review. Newer values are publication candidates, not automatic replacements, unless a future source policy explicitly allows auto-publication.
+Live ingestion follows a no-downgrade rule: if an official pull returns a period older than the currently approved metric, it is stored/reviewed but cannot replace the published value. Same-period revisions require review. Newer values are publication candidates, not automatic replacements, unless a future source policy explicitly allows auto-publication.
 
 ## Repository and package hygiene
 

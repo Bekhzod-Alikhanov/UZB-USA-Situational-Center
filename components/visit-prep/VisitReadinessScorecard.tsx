@@ -174,7 +174,7 @@ export function VisitReadinessScorecard() {
 
           <p className="text-[10.5px] text-[var(--color-ink-faint)]">
             Status tracking only. Document content, talking-point text, draft agreement bodies, passport / visa numbers,
-            and booking codes do not live in this dashboard — they belong to a separate operational system with auth and
+            and booking codes do not live in this platform — they belong to a separate operational system with auth and
             audit.
           </p>
         </>

@@ -129,7 +129,7 @@ export const sources: Source[] = [
   {
     id: "input_figma_pdf",
     level: "A",
-    name: "Figma dashboard concept: O'zbekiston-AQSH Situatsion Markaz",
+    name: "Figma platform concept: O'zbekiston-AQSH Situatsion Markaz",
     sourceFile: "input/Данные к US_SC/Страница (FIGMA)/O'ZBЕKISTON – AQSH SITUATSION MARKAZ.pdf",
     fetched_at: "2026-04-24",
     data_type: "Prototype metrics, project portfolio status, visual targets",
@@ -345,7 +345,7 @@ export const sources: Source[] = [
     fetched_at: "2026-05-04",
     data_type:
       "SDMX APIs for macroeconomic and financial datasets; used for future FX, BOP, reserves, and macro context after mapping review",
-    note: "Connector is registry-ready; dataset-specific mapping should be approved before dashboard publication.",
+    note: "Connector is registry-ready; dataset-specific mapping should be approved before platform publication.",
   },
   {
     id: "exim_authorizations_data",

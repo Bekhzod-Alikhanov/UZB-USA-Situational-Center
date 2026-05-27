@@ -28,7 +28,7 @@ const STATUS_LABEL: Record<MilestoneStatus, string> = {
 const TRACK_LABEL: Record<string, string> = {
   governance: "Governance",
   visits: "Visits",
-  dashboard: "Dashboard",
+  platform: "Platform",
   expertise: "Expertise",
   strategy: "Strategy",
   reporting: "Reporting",
