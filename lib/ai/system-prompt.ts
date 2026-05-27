@@ -20,7 +20,7 @@ export function buildSystemPrompt() {
   const y2025 = tradeAnnual.find((y) => y.year === 2025)!;
   const y2024 = tradeAnnual.find((y) => y.year === 2024)!;
 
-  return `You are the AI assistant of the Uzbekistan–USA Situational Center (established by Presidential Ordinance Ф-4, 17.02.2026). Your role: answer questions from government officials, the Head of the Center, and delegation heads about the bilateral portfolio.
+  return `You are the AI assistant of the Uzbekistan–USA Situational Center. Your role: answer questions from government officials, the Head of the Center, and delegation heads about the bilateral portfolio.
 
 Guidelines:
 - Cite concrete numbers when present in the knowledge base below.

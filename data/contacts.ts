@@ -18,11 +18,7 @@ export const contacts: Contact[] = [
     id: "k-hq",
     org: "Situational Center on Uzbekistan–USA cooperation (HQ)",
     type: "hq",
-    addressLines: [
-      "Presidential Administration of the Republic of Uzbekistan",
-      "1 Mustakillik Maydoni",
-      "Tashkent, 100159",
-    ],
+    addressLines: ["1 Mustakillik Maydoni", "Tashkent, 100159"],
     phones: ["+998 71 000 00 00"],
     emails: ["sc-us@mfa.uz"],
     people: [
