@@ -3,7 +3,7 @@
 This is a ready-to-use README for your GitHub profile. To activate it:
 
 1. Go to <https://github.com/new>
-2. **Repository name:** `Bekhzod-Alikhanov` (must be exactly your GitHub username)
+2. **Repository name:** `bekhzod1990` (must be exactly your GitHub username)
 3. ☑ **Public**
 4. ☑ **Add a README file**
 5. **Create repository**
@@ -11,7 +11,7 @@ This is a ready-to-use README for your GitHub profile. To activate it:
    below → **Commit changes**.
 
 The README of a same-named repo is rendered at the top of your GitHub
-profile page (`https://github.com/Bekhzod-Alikhanov`).
+profile page (`https://github.com/bekhzod1990`).
 
 ---
 
@@ -22,7 +22,7 @@ I build production-grade software at the intersection of policy and engineering.
 
 ## 🚀 Featured project — UZ–US Situational Center
 
-[![Platform preview](https://raw.githubusercontent.com/Bekhzod-Alikhanov/UZB-USA-Situational-Center/main/docs/screenshots/overview.webp)](https://github.com/Bekhzod-Alikhanov/UZB-USA-Situational-Center)
+[![Platform preview](https://raw.githubusercontent.com/bekhzod1990/UZB-USA-Situational-Center/main/docs/screenshots/overview.webp)](https://github.com/bekhzod1990/UZB-USA-Situational-Center)
 
 A production-grade bilateral coordination platform for the Situational
 Center on Uzbekistan–USA cooperation. Primary user is the Advisor to the
@@ -36,7 +36,7 @@ President.
 - **Lighthouse — median Performance 91, Accessibility 100** across all 17 audited routes (every route hits A11y 100); TBT 13–67 ms, CLS 0
 - **Node 24 LTS** runtime · 80 production commits · full Vitest + Playwright + axe + Lighthouse-CI stack
 
-→ [**🌐 Live demo**](https://uz-us-center.vercel.app/en) · [**📦 Code**](https://github.com/Bekhzod-Alikhanov/UZB-USA-Situational-Center) · [**🏛 Architecture pack**](https://github.com/Bekhzod-Alikhanov/UZB-USA-Situational-Center/tree/main/docs/architecture)
+→ [**🌐 Live demo**](https://uz-us-center.vercel.app/en) · [**📦 Code**](https://github.com/bekhzod1990/UZB-USA-Situational-Center) · [**🏛 Architecture pack**](https://github.com/bekhzod1990/UZB-USA-Situational-Center/tree/main/docs/architecture)
 
 ## 🛠 Tech I work with
 
