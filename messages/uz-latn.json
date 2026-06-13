@@ -1158,13 +1158,6 @@
     "hideDemoDesc": "is_demo=true qiymatlar bor bo‘lgan barcha komponentlarni yashiradi.",
     "presentation": "Taqdimot rejimi",
     "presentationDesc": "DEMO belgilari va nuqtali tagchiziqlarni yashiradi, lekin ma’lumotlar qoladi.",
-    "theme": "Mavzu",
-    "themeDesc": "Command yuzasini yoki eski yorug‘/qorong‘i rejimlarni tanlang.",
-    "themes": {
-      "command": "Boshqaruv",
-      "light": "Yorug‘",
-      "dark": "Qorong‘i"
-    },
     "model": "AI modeli",
     "registry": "Demo ma’lumotlar reestri",
     "registryDesc": "Har bir sintetik qiymat va haqiqiy ma’lumotni yetkazib beruvchi idora ro‘yxati.",

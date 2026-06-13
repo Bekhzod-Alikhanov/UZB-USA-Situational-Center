@@ -1,12 +1,12 @@
 "use client";
-import { useSettings, type Theme } from "@/lib/store/settings";
+import { useSettings } from "@/lib/store/settings";
 import * as Switch from "@radix-ui/react-switch";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export function SettingsPanel() {
   const t = useTranslations("admin");
-  const { hideDemo, setHideDemo, presentationMode, setPresentationMode, theme, setTheme } = useSettings();
+  const { hideDemo, setHideDemo, presentationMode, setPresentationMode } = useSettings();
 
   return (
     <div className="flex flex-col gap-3">
@@ -17,15 +17,6 @@ export function SettingsPanel() {
         checked={presentationMode}
         onChange={setPresentationMode}
       />
-      <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <div className="text-[13px] font-medium text-[var(--color-ink)]">{t("theme")}</div>
-            <div className="text-[11px] text-[var(--color-ink-muted)]">{t("themeDesc")}</div>
-          </div>
-          <SegmentedTheme value={theme} onChange={setTheme} />
-        </div>
-      </div>
     </div>
   );
 }
@@ -63,28 +54,5 @@ function SettingRow({
         />
       </Switch.Root>
     </label>
-  );
-}
-
-function SegmentedTheme({ value, onChange }: { value: Theme; onChange: (v: Theme) => void }) {
-  const t = useTranslations("admin");
-  return (
-    <div className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] p-0.5">
-      {(["command", "light", "dark"] as const).map((v) => (
-        <button
-          key={v}
-          type="button"
-          onClick={() => onChange(v)}
-          className={cn(
-            "rounded px-2.5 py-1 text-[11.5px] font-medium transition",
-            value === v
-              ? "bg-[var(--color-primary)] text-[#071827]"
-              : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
-          )}
-        >
-          {t(`themes.${v}`)}
-        </button>
-      ))}
-    </div>
   );
 }

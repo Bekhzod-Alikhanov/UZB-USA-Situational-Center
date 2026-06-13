@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { LocaleSwitch } from "./LocaleSwitch";
-import { ThemeSwitch } from "./ThemeSwitch";
 import { FreshnessPill } from "./FreshnessPill";
 import { MobileSidebar } from "./MobileSidebar";
 import { Search, Menu } from "lucide-react";
@@ -80,7 +79,6 @@ export function Topbar() {
           <FreshnessPill />
         </span>
         <LocaleSwitch />
-        <ThemeSwitch />
       </div>
     </header>
   );

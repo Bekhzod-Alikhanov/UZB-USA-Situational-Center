@@ -1158,13 +1158,6 @@
     "hideDemoDesc": "Hides every component that contains is_demo=true values.",
     "presentation": "Presentation mode",
     "presentationDesc": "Removes DEMO badges and dotted underlines but keeps the data.",
-    "theme": "Theme",
-    "themeDesc": "Choose the command surface or legacy light/dark modes.",
-    "themes": {
-      "command": "Command",
-      "light": "Light",
-      "dark": "Dark"
-    },
     "model": "AI model",
     "registry": "Demo data registry",
     "registryDesc": "Master list of every synthetic value and the agency responsible for supplying real data.",

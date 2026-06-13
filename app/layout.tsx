@@ -68,9 +68,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // `command` is the default theme. The legacy `strategic` class remains
-    // during first paint so existing scoped map styles keep working.
-    <html lang="en" className="command strategic" suppressHydrationWarning>
+    // `command` is the sole theme (Diplomatic Command Surface). `lang` is
+    // corrected to the active locale client-side in SettingsSync; the App
+    // Router only lets the root layout own the <html> element.
+    <html lang="en" className="command" suppressHydrationWarning>
       <body className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>
