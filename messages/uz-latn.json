@@ -193,34 +193,6 @@
       "mandate": "Prezident Farmoyishi F-4 (17.02.2026) bilan tasdiqlangan. Manba ishonchliligi ko‘rinib turadi; demo va ko‘rib chiqilayotgan qiymatlar iqtibosga tayyor raqamlardan ajratilgan.",
       "print": "PDF eksport"
     },
-    "story": {
-      "executiveTitle": "Munosabatlar hozir qayerda",
-      "executiveSub": "Batafsil tahliliy maydondan oldin qisqa ijro ko‘rinishi",
-      "actionsTitle": "Tavsiya etilgan keyingi harakatlar",
-      "actionsSub": "Qaror qabul qilish qatlami; batafsil reestrlar quyida qoladi",
-      "signals": {
-        "trade": {
-          "label": "Savdo munosabatlari",
-          "value": "2025 aylanma ${turnover}M",
-          "note": "Tovar oqimlari o‘smoqda, ammo O‘zbekiston tomoni uchun balans AQShdan importga og‘ishgan."
-        },
-        "investment": {
-          "label": "Investitsiya ishonchliligi",
-          "value": "${value}B tekshirildi",
-          "note": "{pending} manbali qator egasi tomonidan ko‘rib chiqilishi kerak; {demo} illyustrativ qator sarlavha ko‘rsatkichidan chiqarilgan."
-        },
-        "diplomacy": {
-          "label": "Diplomatik impuls",
-          "value": "{count} ikki tomonlama hujjat",
-          "note": "Tashriflar, bitimlar va forumlar loyiha va mas’ul harakatlar bilan yanada zichroq bog‘lanishi kerak."
-        }
-      },
-      "actions": {
-        "one": "Tashqi brifinglardan oldin manbali investitsiya va xususiylashtirish yozuvlarini ustuvor tekshirish.",
-        "two": "Iqtibosga tayyor savdo qatori uchun Savdo bo‘limidan foydalanish; HS/ITC tafsilotlarini kengaytirilgan tahlilda saqlash.",
-        "three": "To‘siqlarni alohida sahifalar emas, topshiriqlar, compliance va sektor keyingi harakatlari orqali kuzatish."
-      }
-    },
     "narrationLabels": {
       "what": "Bu nimani anglatadi",
       "why": "Nega muhim",
