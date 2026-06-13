@@ -1,6 +1,6 @@
 # UZ–US Situational Center · dashboard
 
-> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 21 routes · 56 data integrations · AI on Claude Sonnet 4.6 · [enterprise architecture pack](./docs/architecture/)
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 20 routes · 56 data integrations · [enterprise architecture pack](./docs/architecture/)
 >
 > Deployment-candidate monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
@@ -19,11 +19,10 @@
 
 ## What's inside
 
-- **21 trilingual routes** (English, Russian, Uzbek-Latin) — overview, trade, investments, visits, agreements, commitments, grants, counterparts, sanctions and export-control compliance, regional benchmarking, an interactive U.S. states map, and an AI assistant.
-- **~33,200 lines of hand-written TypeScript** across 96 React components, 34 source-of-truth data modules, 11 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19).
+- **20 trilingual routes** (English, Russian, Uzbek-Latin) — overview, trade, investments, visits, agreements, commitments, grants, counterparts, sanctions and export-control compliance, regional benchmarking, and an interactive U.S. states map.
+- **~33,000 lines of hand-written TypeScript** across 94 React components, 34 source-of-truth data modules, 10 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19).
 - **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
-- **AI assistant** (Claude Sonnet 4.6) with prompt caching over a compiled RAG context spanning all 34 data modules.
 - **Enterprise architecture pack** — [`docs/architecture/`](./docs/architecture/) ships **9 800 lines** of target-architecture documentation: 11 narrative documents (overview, target architecture, component catalog, auth & RBAC, data flow, user journeys, BPMN, bottlenecks & risks, migration roadmap, glossary) and **13 diagrams** in Draw.io (C4 context / container / component, BPMN for ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model). Designed to read in Obsidian or directly on GitHub.
 - **Verification gate** — `pnpm verify` runs lint, typecheck, source/route validation, governance checks, and Vitest unit tests. Browser, accessibility, and Lighthouse checks are separate heavier commands and should be run before public release.
 - **Lighthouse and axe coverage** — local sweep across all 17 routes shows **median Performance 91, median Accessibility 98** (six routes hit A11y 100); TBT 13–59 ms; CLS 0 everywhere. Charts lazy-loaded with IntersectionObserver, the map runtime is gated behind a load button, news/contacts filters are server-rendered. Lighthouse CI and Playwright/axe wired into the verification stack.
@@ -53,14 +52,13 @@ Advanced charts, maps, and analytical exhibits are preserved through hierarchy i
 | Layer                | Choice                                                                                                                                                                                                                  |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Runtime              | Node.js 24 LTS on Vercel · V8 13 (Maglev) · Edge middleware for locale routing                                                                                                                                          |
-| API                  | 11 Next.js Route Handlers (`/api/admin/ingest/*`, `/api/cron/ingest`, `/api/data/*/latest`, `/api/live-data/*`, `/api/chat`)                                                                                            |
+| API                  | 10 Next.js Route Handlers (`/api/admin/ingest/*`, `/api/cron/ingest`, `/api/data/*/latest`, `/api/live-data/*`)                                                                                                         |
 | Operational database | PostgreSQL 17 via Supabase · 12-table schema (audit log, source records, commitments, decisions, comments, ingest runs, raw snapshots, normalized observations, published metrics, review queue, source-version policy) |
 | DB access            | Server-only Supabase REST adapter (`lib/db/adapter.ts`) — no JS client, ~30 KB saved on bundle                                                                                                                          |
 | Live-data ingestion  | 5 official-source connectors (BEA · U.S. Census · EXIM · World Bank · ForeignAssistance.gov) hit by a daily Vercel cron at 07:00 UTC, lands in `raw_snapshot → normalized_observation → published_metric` pipeline      |
 | Data governance      | No-downgrade policy · pending-vs-published states · static fallback · full audit trail (`lib/data-governance/*`)                                                                                                        |
 | Auth                 | Signed, short-lived cookie password gate on `/admin` (server action + middleware) · role-aware                                                                                                                          |
-| AI                   | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3 (Claude Sonnet 4.6) with prompt caching + streaming                                                                                                                           |
-| Build pipeline       | `pnpm verify` (lint + typecheck + 63-source / 204-reference / 21-route validation + governance + Vitest) gated in Vercel build command                                                                                  |
+| Build pipeline       | `pnpm verify` (lint + typecheck + 63-source / 204-reference / 20-route validation + governance + Vitest) gated in Vercel build command                                                                                  |
 | Tests                | Vitest (unit) · Playwright (e2e + axe a11y) · Lighthouse CI · GitHub Actions workflow                                                                                                                                   |
 | Package manager      | **pnpm**                                                                                                                                                                                                                |
 
@@ -68,11 +66,11 @@ Advanced charts, maps, and analytical exhibits are preserved through hierarchy i
 
 ```bash
 pnpm install
-cp .env.example .env.local       # set ADMIN_PASSWORD; optionally enable the assistant
+cp .env.example .env.local       # set ADMIN_PASSWORD
 pnpm dev                         # → http://localhost:3000
 ```
 
-Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 19 public dashboard sections plus the gated admin area and counterpart detail pages.
+Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 18 public dashboard sections plus the gated admin area and counterpart detail pages.
 
 ### Common scripts
 
@@ -120,10 +118,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
 /[locale]/staff                  KPI table w/ composite-score ranking
 /[locale]/news                   Curated press feed (16 verified entries)
-/[locale]/assistant              AI chat (BYOK Anthropic key)
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
-
-/api/chat                        Dynamic — Anthropic stream proxy (503 unless ASSISTANT_ENABLED=true and key is set)
 ```
 
 ## Deploy to Vercel
@@ -133,8 +128,6 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 3. **Set environment variables** in _Project Settings → Environment Variables_ (Production + Preview):
    - `ADMIN_PASSWORD` — required for the admin gate
    - `ADMIN_SESSION_SECRET` — strongly recommended; signs the admin session cookie independently of the password
-   - `ASSISTANT_ENABLED=true` — optional; explicitly enables the `/assistant` server route
-   - `ANTHROPIC_API_KEY` — optional; required together with `ASSISTANT_ENABLED=true`
    - `DATA_BACKEND=static` — default; keep this until a private operational database is provisioned
    - `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` — optional; server-only operational database adapter
    - `CRON_SECRET` — required before Vercel scheduled ingestion can call `/api/cron/ingest`
@@ -144,7 +137,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 4. **Deploy.** First build takes ~3 minutes.
 5. **Custom domain** (optional): add via _Project Settings → Domains_.
 
-The `/api/chat` route is a dynamic Node route; everything else is fully static and cached at the edge.
+The `/api/*` routes are dynamic Node routes; the localized pages are fully static and cached at the edge.
 
 ## QA tooling
 
@@ -200,7 +193,6 @@ before handoff, and run `node scripts/check-package-hygiene.mjs <extracted-packa
 4. **Tokens, not literals.** Reference CSS vars (`var(--color-primary)`) defined in `app/globals.css`. Avoid raw hex except inside maplibre paint specs.
 5. **`"use client"` discipline.** Server components by default. Wrap `useSearchParams` in `<Suspense>` at the page level.
 6. **Print exports.** Use `<PrintButton />`; the `@media print` block in `globals.css` force-overrides dark-mode tokens for clean PDFs.
-7. **AI gating.** `/api/chat` returns 503 unless `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` are both configured. The client (`AssistantChat.tsx`) also checks server availability and `useSettings.aiEnabled`.
 
 See [`CLAUDE.md`](./CLAUDE.md) for the full style and architectural guide future Claude Code sessions will follow.
 

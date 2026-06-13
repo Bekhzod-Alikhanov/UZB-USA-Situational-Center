@@ -114,7 +114,6 @@ const expectedRoutes = [
   "compliance",
   "staff",
   "news",
-  "assistant",
   "benchmark",
 ];
 
@@ -130,9 +129,6 @@ if (!readme.includes(`Next.js ${pkg.dependencies.next}`)) {
 }
 if (!/next-intl v4/i.test(readme)) {
   fail("README should document next-intl v4 to match package.json.");
-}
-if (!read(".env.example").includes("ASSISTANT_ENABLED")) {
-  fail(".env.example must document ASSISTANT_ENABLED.");
 }
 if (!read(".env.example").includes("ADMIN_SESSION_SECRET")) {
   fail(".env.example must document ADMIN_SESSION_SECRET.");
@@ -178,6 +174,18 @@ for (const relPath of trackedFiles()) {
   const text = read(relPath);
   if (unsafeAdminFallbackPatterns.some((pattern) => text.includes(pattern))) {
     fail(`Unsafe admin fallback reference found in tracked file: ${relPath}`);
+  }
+  // Guard against double-encoded UTF-8 (mojibake) in source and i18n files.
+  // The signature "â€" (â€) appears when UTF-8 punctuation/okina is
+  // re-saved as cp1252/Latin-1. Scoped to app/components/lib/data/messages so
+  // historical docs are not retroactively failed.
+  const normalized = relPath.replace(/\\/g, "/");
+  if (
+    /^(app|components|lib|data|messages)\//.test(normalized) &&
+    /\.(ts|tsx|json)$/.test(normalized) &&
+    text.includes("â€")
+  ) {
+    fail(`Mojibake (double-encoded UTF-8 "â€…") found in ${relPath}. Re-save the file as UTF-8.`);
   }
 }
 

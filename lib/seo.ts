@@ -35,7 +35,6 @@ export const SEO_ROUTES = {
   counterpart: "/counterparts",
   prepare: "/prepare",
   staff: "/staff",
-  assistant: "/assistant",
   adminLogin: "/admin/login",
 } as const;
 

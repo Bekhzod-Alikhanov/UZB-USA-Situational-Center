@@ -22,7 +22,6 @@
     "staff": "Shtab KPI",
     "contacts": "Kontaktlar",
     "news": "Yangiliklar tasmasi",
-    "assistant": "AI-yordamchi",
     "admin": "Boshqaruv"
   },
   "navGroups": {
@@ -150,10 +149,6 @@
       "staff": {
         "title": "Shtab KPI",
         "description": "Shtabning ichki KPI paneli, bosqichlar, operatsion ritm, bajarilish kuzatuvi va demo-status belgilari."
-      },
-      "assistant": {
-        "title": "AI-yordamchi",
-        "description": "O'zbekiston-AQSh razvedka panelini manbalar asosida talqin qilish uchun muhit orqali yoqiladigan yordamchi."
       },
       "adminLogin": {
         "title": "Administrator kirishi",
@@ -1105,32 +1100,6 @@
       }
     }
   },
-  "assistant": {
-    "title": "AI-yordamchi",
-    "subtitle": "Portfel haqida yordamchidan so‘rang — RAG barcha ma’lumot fayllari bo‘yicha",
-    "disabled": "Yordamchi o‘chirilgan. Uni Boshqaruv → AI sozlamalaridan yoqing.",
-    "placeholder": "Loyiha, tashrif, kelishuv, hamkor haqida so‘rang…",
-    "send": "Jo‘natish",
-    "thinking": "O‘ylanmoqda…",
-    "model": "AI modeli",
-    "chat": {
-      "disabledTitle": "AI-yordamchi o‘chirilgan",
-      "disabledDescription": "Uni Boshqaruv → AI-yordamchi bo‘limida yoqing.",
-      "title": "Claude — Markaz yordamchisi",
-      "intro": "Ikki tomonlama portfel haqida savol bering. Yordamchida savdo, investitsiyalar, tashriflar, bitimlar, topshiriqlar, grantlar, hamkorlar, kompliyans va yangiliklar bo‘yicha aktual kontekst bor.",
-      "suggestionsLabel": "Takliflar",
-      "suggestions": {
-        "trade": "2025-yilda AQSh-O‘zbekiston savdo aylanmasi qancha bo‘lgan?",
-        "navoi": "Navoiy hududida qaysi AQSh kompaniyalarining investitsiya loyihalari bor?",
-        "visits": "Keyingi 90 kundagi tashriflarni qisqacha jamla.",
-        "ofac": "Bugungi kunda O‘zbekistonning OFAC statusi qanday?",
-        "caucus": "Kongressdagi Uzbekistan Caucus hamraislarini kimlar tashkil etadi?"
-      },
-      "unavailable": "AI-yordamchi mavjud emas — server toggli yoki kalit sozlanmagan. Vercel → Project Settings → Environment Variables bo‘limida {assistantEnabled} va {anthropicKey} ni belgilang, keyin qayta deploy qiling. Demo va tahliliy modullar yordamchisiz ham ishlaydi.",
-      "requestFailed": "So‘rov bajarilmadi.",
-      "stop": "To‘xtatish"
-    }
-  },
   "map": {
     "title": "Interaktiv xarita",
     "subtitle": "Investitsiyalar, savdo oqimlari, jonli delegatsiyalar",
@@ -1196,8 +1165,6 @@
       "light": "Yorug‘",
       "dark": "Qorong‘i"
     },
-    "ai": "AI-yordamchi",
-    "aiDesc": "Claude asosidagi yordamchini yoqish. Standart model: Sonnet 4.6.",
     "model": "AI modeli",
     "registry": "Demo ma’lumotlar reestri",
     "registryDesc": "Har bir sintetik qiymat va haqiqiy ma’lumotni yetkazib beruvchi idora ro‘yxati.",

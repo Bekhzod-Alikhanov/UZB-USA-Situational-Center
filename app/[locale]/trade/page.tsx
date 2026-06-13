@@ -60,19 +60,19 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
       : locale === "uz-latn"
         ? {
             quoteTitle: "Iqtibos uchun tayyor qator",
-            quoteSub: "Oâ€˜zbekiston tomoni boâ€˜yicha rasmiy yillik hikoya uchun UZ Statdan foydalaning",
+            quoteSub: "O'zbekiston tomoni bo'yicha rasmiy yillik hikoya uchun UZ Statdan foydalaning",
             quoteText:
-              "Yillik jadval va oqim grafigi aylanma, eksport, import va ikki tomonlama balans boâ€˜yicha eng aniq ijro koâ€˜rinishini beradi. U.S. Census yoki Comtrade bilan solishtirganda metodologiya izohlarini koâ€˜rinadigan qoldiring.",
-            changedTitle: "Nima oâ€˜zgardi",
+              "Yillik jadval va oqim grafigi aylanma, eksport, import va ikki tomonlama balans bo'yicha eng aniq ijro ko'rinishini beradi. U.S. Census yoki Comtrade bilan solishtirganda metodologiya izohlarini ko'rinadigan qoldiring.",
+            changedTitle: "Nima o'zgardi",
             changedSub: "Balans masalasi sarlavha raqamidan muhimroq",
             changedText:
-              "Oqimlarning oâ€˜sishi foydali, ammo ustuvor suhbat eksport diversifikatsiyasi, bozorga kirish va forumlarni mahsulot darajasidagi imkoniyatlarga aylantirish haqida boâ€˜lishi kerak.",
+              "Oqimlarning o'sishi foydali, ammo ustuvor suhbat eksport diversifikatsiyasi, bozorga kirish va forumlarni mahsulot darajasidagi imkoniyatlarga aylantirish haqida bo'lishi kerak.",
             advancedTitle: "Kengaytirilgan tahlil saqlandi",
             advancedSub: "HS, oynaviy tafovutlar, ITC va xizmatlar quyida",
             advancedText:
-              "Texnik grafiklar oâ€˜chirilmadi; ular tahlilchilar va tadqiqotchilar uchun kengaytirilgan savdo tahlili boâ€˜limida saqlangan.",
+              "Texnik grafiklar o'chirilmadi; ular tahlilchilar va tadqiqotchilar uchun kengaytirilgan savdo tahlili bo'limida saqlangan.",
             flowSummary:
-              "Bu nimani anglatadi: ushbu grafik yoâ€˜nalish, volatillik va Oâ€˜zbekiston eksporti AQShdan import bilan hamqadamligini eng tez koâ€˜rsatadi. Mobil birinchi render yengil boâ€˜lishi uchun talab boâ€˜yicha yuklanadi.",
+              "Bu nimani anglatadi: ushbu grafik yo'nalish, volatillik va O'zbekiston eksporti AQShdan import bilan hamqadamligini eng tez ko'rsatadi. Mobil birinchi render yengil bo'lishi uchun talab bo'yicha yuklanadi.",
           }
         : {
             quoteTitle: "Quote-ready series",

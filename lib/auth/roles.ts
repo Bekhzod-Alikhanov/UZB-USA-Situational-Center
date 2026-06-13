@@ -35,8 +35,7 @@ export type Permission =
   | "policy:edit"
   | "audit:export"
   | "admin:view"
-  | "ingestion:trigger"
-  | "ai:configure";
+  | "ingestion:trigger";
 
 const VIEWER_PERMS: Permission[] = ["dashboard:view", "source:view", "export:read"];
 
@@ -74,7 +73,6 @@ const ADMIN_PERMS: Permission[] = Array.from(
     "audit:export",
     "admin:view",
     "ingestion:trigger",
-    "ai:configure",
   ]),
 );
 
@@ -90,7 +88,6 @@ export const routeAccessPolicy: Array<{ pattern: string; permission: Permission 
   { pattern: "/admin", permission: "admin:view" },
   { pattern: "/commitments", permission: "dashboard:view" },
   { pattern: "/prepare", permission: "dashboard:view" },
-  { pattern: "/assistant", permission: "dashboard:view" },
 ];
 
 export function roleHasPermission(role: UserRole, permission: Permission) {

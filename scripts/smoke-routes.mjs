@@ -18,7 +18,6 @@ const routes = [
   "compliance",
   "staff",
   "news",
-  "assistant",
   "benchmark",
   "admin/login",
 ];

@@ -33,7 +33,7 @@ export default async function LocaleLayout({
         </div>
       </div>
       <SearchCommandLazy />
-      <SettingsSync />
+      <SettingsSync locale={locale} />
     </NextIntlClientProvider>
   );
 }

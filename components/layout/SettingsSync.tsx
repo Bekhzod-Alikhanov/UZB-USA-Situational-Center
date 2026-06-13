@@ -9,8 +9,14 @@ import { useSettings } from "@/lib/store/settings";
  * through props. Mount once in the locale-shell layout. The setters in
  * `lib/store/settings.ts` apply the attributes synchronously on toggle;
  * this effect handles the initial-hydration case after `persist` rehydrate.
+ *
+ * Also corrects `<html lang>` to the active locale. The root layout
+ * (`app/layout.tsx`) ships a static `lang="en"` because the App Router only
+ * lets the root own the `<html>` element; this syncs it to the real locale
+ * (BCP-47 `uz-Latn` for Uzbek-Latin) so assistive tech and crawlers reading
+ * the live DOM get the correct language on `/ru` and `/uz-latn` routes.
  */
-export function SettingsSync() {
+export function SettingsSync({ locale }: { locale: string }) {
   const hideDemo = useSettings((s) => s.hideDemo);
   const presentation = useSettings((s) => s.presentationMode);
   const theme = useSettings((s) => s.theme);
@@ -23,7 +29,8 @@ export function SettingsSync() {
     html.classList.toggle("dark", theme === "dark");
     html.classList.toggle("command", theme === "command");
     html.classList.toggle("strategic", theme === "command");
-  }, [hideDemo, presentation, theme]);
+    html.lang = locale === "uz-latn" ? "uz-Latn" : locale;
+  }, [hideDemo, presentation, theme, locale]);
 
   return null;
 }

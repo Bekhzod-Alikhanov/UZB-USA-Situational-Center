@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
 
 export function SettingsPanel() {
   const t = useTranslations("admin");
-  const { hideDemo, setHideDemo, presentationMode, setPresentationMode, theme, setTheme, aiEnabled, setAiEnabled } =
-    useSettings();
+  const { hideDemo, setHideDemo, presentationMode, setPresentationMode, theme, setTheme } = useSettings();
 
   return (
     <div className="flex flex-col gap-3">
@@ -18,8 +17,6 @@ export function SettingsPanel() {
         checked={presentationMode}
         onChange={setPresentationMode}
       />
-      <SettingRow title={t("ai")} desc={t("aiDesc")} checked={aiEnabled} onChange={setAiEnabled} />
-
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
         <div className="flex items-center justify-between gap-4">
           <div>

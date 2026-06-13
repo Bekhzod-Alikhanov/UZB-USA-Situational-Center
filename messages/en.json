@@ -22,7 +22,6 @@
     "staff": "Staff KPI",
     "contacts": "Contacts",
     "news": "Strategic signals",
-    "assistant": "AI assistant",
     "admin": "Admin"
   },
   "navGroups": {
@@ -150,10 +149,6 @@
       "staff": {
         "title": "Staff KPI",
         "description": "Internal staff KPI dashboard, milestones, operational cadence, completion tracking, and source-marked demo status."
-      },
-      "assistant": {
-        "title": "AI Assistant",
-        "description": "Environment-gated assistant for source-aware interpretation of the Uzbekistan-USA intelligence dashboard."
       },
       "adminLogin": {
         "title": "Admin Login",
@@ -1105,32 +1100,6 @@
       }
     }
   },
-  "assistant": {
-    "title": "AI assistant",
-    "subtitle": "Ask the assistant anything about the portfolio — RAG over all data files",
-    "disabled": "Assistant disabled. Activate it in Admin → AI settings.",
-    "placeholder": "Ask about a project, visit, commitment, partner…",
-    "send": "Send",
-    "thinking": "Thinking…",
-    "model": "Model",
-    "chat": {
-      "disabledTitle": "AI assistant is disabled",
-      "disabledDescription": "Enable it in Admin → AI assistant toggle.",
-      "title": "Claude — Center Assistant",
-      "intro": "Ask me anything about the bilateral portfolio. I have up-to-date context on trade, investments, visits, agreements, commitments, grants, counterparts, compliance, and news.",
-      "suggestionsLabel": "Suggestions",
-      "suggestions": {
-        "trade": "What is the 2025 U.S.-Uzbekistan trade turnover?",
-        "navoi": "Which U.S. companies have investment projects in Navoi region?",
-        "visits": "Summarize the upcoming visits in the next 90 days.",
-        "ofac": "What is Uzbekistan's OFAC status as of today?",
-        "caucus": "Who co-chairs the Uzbekistan Caucus in Congress?"
-      },
-      "unavailable": "AI assistant unavailable — server toggle or key not configured. Set {assistantEnabled} and {anthropicKey} in Vercel → Project Settings → Environment Variables, then redeploy. Demo and analytics modules work without the assistant.",
-      "requestFailed": "Request failed.",
-      "stop": "Stop"
-    }
-  },
   "map": {
     "title": "Interactive map",
     "subtitle": "Investments, trade flows, live delegations",
@@ -1196,16 +1165,13 @@
       "light": "Light",
       "dark": "Dark"
     },
-    "ai": "AI assistant",
-    "aiDesc": "Toggle to enable the Claude-powered assistant. Default model: Sonnet 4.6.",
     "model": "AI model",
     "registry": "Demo data registry",
     "registryDesc": "Master list of every synthetic value and the agency responsible for supplying real data.",
     "audit": "Audit log",
     "import": "CSV / XLSX import",
     "users": "Users",
-    "delegationLocation": "Delegation live location"
-    ,
+    "delegationLocation": "Delegation live location",
     "login": {
       "title": "Admin sign-in",
       "subtitle": "Restricted to Situational Center personnel",

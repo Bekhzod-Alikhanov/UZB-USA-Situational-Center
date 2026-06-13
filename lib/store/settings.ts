@@ -14,12 +14,10 @@ interface SettingsState {
   hideDemo: boolean;
   presentationMode: boolean;
   theme: Theme;
-  aiEnabled: boolean;
 
   setHideDemo: (v: boolean) => void;
   setPresentationMode: (v: boolean) => void;
   setTheme: (v: Theme) => void;
-  setAiEnabled: (v: boolean) => void;
 }
 
 function applyThemeClass(theme: Theme) {
@@ -37,7 +35,6 @@ export const useSettings = create<SettingsState>()(
       presentationMode: false,
       // Command is the default. Existing light/dark users keep their preference.
       theme: "command",
-      aiEnabled: false,
       setHideDemo: (v) => {
         set({ hideDemo: v });
         if (typeof document !== "undefined") {
@@ -54,16 +51,19 @@ export const useSettings = create<SettingsState>()(
         set({ theme: v });
         applyThemeClass(v);
       },
-      setAiEnabled: (v) => set({ aiEnabled: v }),
     }),
     {
       name: "uzus-settings",
-      // v4: renamed the previous strategic theme to command.
-      version: 4,
+      // v5: removed the AI assistant; strip persisted `aiEnabled`/`aiModel`.
+      version: 5,
       migrate: (persisted: unknown, version: number) => {
         let v = persisted as Record<string, unknown> | null;
         if (v && typeof v === "object" && "aiModel" in v) {
           const { aiModel: _aiModel, ...rest } = v;
+          v = rest as Record<string, unknown>;
+        }
+        if (v && typeof v === "object" && "aiEnabled" in v) {
+          const { aiEnabled: _aiEnabled, ...rest } = v;
           v = rest as Record<string, unknown>;
         }
         // v2 → v3: legacy values are kept; no field rename needed.
