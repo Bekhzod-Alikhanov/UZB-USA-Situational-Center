@@ -1,6 +1,6 @@
 # UZ–US Situational Center · dashboard
 
-> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 20 routes · 56 data integrations · [enterprise architecture pack](./docs/architecture/)
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 20 routes · ~43k lines of code · 56 data integrations · [enterprise architecture pack](./docs/architecture/)
 >
 > Deployment-candidate monitoring platform for the Situational Center on Uzbekistan–USA cooperation, authorized by Presidential Ordinance Ф-4 (17.02.2026). Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
 
@@ -20,7 +20,7 @@
 ## What's inside
 
 - **20 trilingual routes** (English, Russian, Uzbek-Latin) — overview, trade, investments, visits, agreements, commitments, grants, counterparts, sanctions and export-control compliance, regional benchmarking, and an interactive U.S. states map.
-- **~33,000 lines of hand-written TypeScript** across 94 React components, 34 source-of-truth data modules, 10 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19).
+- **36,500+ lines of hand-written TypeScript** (204 files) across 93 React components, 42 source-of-truth data modules, 10 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19). Counting the trilingual i18n catalogs (~3,700 lines), design-token CSS, build/validation scripts, and the PostgreSQL schema, the codebase is **≈ 43,000 hand-written lines** of code and content (≈ 51,700 including the architecture-docs pack). Generated artifacts (the pnpm lockfile, Draw.io diagram XML) are excluded.
 - **56 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 50 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
 - **Enterprise architecture pack** — [`docs/architecture/`](./docs/architecture/) ships **9 800 lines** of target-architecture documentation: 11 narrative documents (overview, target architecture, component catalog, auth & RBAC, data flow, user journeys, BPMN, bottlenecks & risks, migration roadmap, glossary) and **13 diagrams** in Draw.io (C4 context / container / component, BPMN for ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model). Designed to read in Obsidian or directly on GitHub.
