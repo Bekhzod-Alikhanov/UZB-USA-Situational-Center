@@ -6,6 +6,7 @@ import { news } from "./news";
 import { relationshipPillars } from "./relationship-pillars";
 import { nextAnchorVisit } from "./visits";
 import { sourceQualitySummary } from "@/lib/source-quality";
+import { localizedCommitmentTitle, localizedOwner } from "@/lib/i18n/overview-content";
 
 export type ExecutiveItemTone = "critical" | "watch" | "positive" | "neutral";
 
@@ -163,33 +164,6 @@ const COPY: Record<
   },
 };
 
-const COMMITMENT_TITLES: Record<string, Partial<Record<ExecutiveLocale, string>>> = {
-  "cm-agreement-register": {
-    ru: "Преобразовать 138 агрегированных соглашений в реестр уровня отдельных документов",
-    "uz-latn": "138 ta umumiy kelishuvni hujjat darajasidagi reestrga aylantirish",
-  },
-  "cm-dfc-pipeline": {
-    ru: "Подготовить приоритетный портфель для рамочного соглашения DFC",
-    "uz-latn": "DFC qo'shma investitsiya ramkasi uchun ustuvor portfel tayyorlash",
-  },
-  "cm-dfc-readiness": {
-    ru: "Матрица готовности проектов для шорт-листа DFC",
-    "uz-latn": "DFC qisqa ro'yxati uchun loyiha tayyorligi matritsasi",
-  },
-  "cm-investment-platform": {
-    ru: "Рабочий план реализации инвестиционной платформы",
-    "uz-latn": "Investitsiya platformasi bo'yicha amalga oshirish rejasi",
-  },
-  "cm-usaid-strategy-review": {
-    ru: "Среднесрочный обзор стратегии USAID по развитию страны",
-    "uz-latn": "USAID mamlakat taraqqiyoti strategiyasini oraliq ko'rib chiqish",
-  },
-  "cm-visit-pack": {
-    ru: "Завершить печатный шаблон пакета подготовки визита",
-    "uz-latn": "Tashrifga tayyorgarlik paketi shablonini yakunlash",
-  },
-};
-
 const NEWS_TEXT: Record<
   string,
   Partial<Record<ExecutiveLocale, { title: string; detail: string }>>
@@ -248,25 +222,6 @@ const EVENT_TEXT: Record<
   },
 };
 
-const OWNER_LABELS: Record<string, Partial<Record<ExecutiveLocale, string>>> = {
-  "MFA legal department + Situational Center": {
-    ru: "Юридический департамент МИД + Ситуационный центр",
-    "uz-latn": "TIV yuridik departamenti + Situatsion markaz",
-  },
-  "MIIT / UzInvest / Situational Center": {
-    ru: "МИПТ / UzInvest / Ситуационный центр",
-    "uz-latn": "MIIT / UzInvest / Situatsion markaz",
-  },
-  "Situational Center": {
-    ru: "Ситуационный центр",
-    "uz-latn": "Situatsion markaz",
-  },
-  "Situational Center data lead": {
-    ru: "Руководитель данных Ситуационного центра",
-    "uz-latn": "Situatsion markaz ma'lumotlar rahbari",
-  },
-};
-
 function normalizeLocale(locale?: string): ExecutiveLocale {
   if (locale === "ru") return "ru";
   if (locale === "uz-latn") return "uz-latn";
@@ -286,16 +241,12 @@ function commitmentTone(commitment: Commitment): ExecutiveItemTone {
   return "neutral";
 }
 
-function localizedOwner(owner: string, locale: ExecutiveLocale) {
-  return OWNER_LABELS[owner]?.[locale] ?? owner;
-}
-
 function actionFromCommitment(commitment: Commitment, locale: ExecutiveLocale, copy = COPY[locale]): ExecutiveItem {
   const delta = daysUntil(commitment.dueDate);
   const dueText = delta < 0 ? copy.overdue(Math.abs(delta)) : copy.dueSoon(delta);
   return {
     id: commitment.id,
-    title: COMMITMENT_TITLES[commitment.id]?.[locale] ?? commitment.title,
+    title: localizedCommitmentTitle(commitment.id, commitment.title, locale),
     detail: copy.complete(commitment.progressPct, dueText),
     owner: localizedOwner(commitment.owner, locale),
     due: commitment.dueDate,
@@ -375,7 +326,7 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
         id: "opp-dfc",
         title: copy.opportunities.dfc.title,
         detail: copy.opportunities.dfc.detail,
-        owner: "MIIT / DFC liaison",
+        owner: localizedOwner("MIIT / DFC liaison", locale),
         href: "/investments",
         tone: "positive",
         sourceId: "dfc_joint_framework",
@@ -384,7 +335,7 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
         id: "opp-census-live",
         title: copy.opportunities.census.title,
         detail: copy.opportunities.census.detail,
-        owner: "Data engineering",
+        owner: localizedOwner("Data engineering", locale),
         href: "/trade",
         tone: "positive",
         sourceId: "census_intl_trade_api",
@@ -393,7 +344,7 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
         id: "opp-visa",
         title: copy.opportunities.visa.title,
         detail: copy.opportunities.visa.detail,
-        owner: "Tourism Committee / MFA",
+        owner: localizedOwner("Tourism Committee / MFA", locale),
         href: "/events",
         tone: "positive",
         sourceId: "govuz_us_visa_free_2026",
@@ -402,7 +353,7 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
         id: "opp-education",
         title: copy.opportunities.education.title,
         detail: copy.opportunities.education.detail,
-        owner: "MFA / Higher Education Ministry",
+        owner: localizedOwner("MFA / Higher Education Ministry", locale),
         href: "/grants",
         tone: "neutral",
         sourceId: "iie_open_doors",

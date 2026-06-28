@@ -7,6 +7,11 @@ import { commitments, type Commitment } from "@/data/commitments";
 import { agreements, type Agreement } from "@/data/agreements";
 import { centerMilestones, deriveMilestoneStatus, type CenterMilestone } from "@/data/center-milestones";
 import { visitScorecards, visitPipelines, scorecardReadinessPct, type VisitScorecard } from "@/data/visit-prep";
+import {
+  localizedCommitmentTitle,
+  localizedMilestoneTitle,
+  localizedOwner,
+} from "@/lib/i18n/overview-content";
 import { cn } from "@/lib/utils";
 
 type Severity = "critical" | "warn" | "watch";
@@ -37,6 +42,12 @@ interface Strings {
   showing: (limit: number, total: number) => string;
   visitReadinessLabel: (pct: number) => string;
   milestoneStage: string;
+  ctxDue: (date: string) => string;
+  ctxProgress: (pct: number) => string;
+  ctxAgreement: (date: string) => string;
+  ctxDeadline: (date: string) => string;
+  ctxDueDate: (date: string) => string;
+  ctxVisit: (days: number, range: string) => string;
 }
 
 const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
@@ -56,6 +67,12 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     showing: (limit, total) => `Showing ${limit} of ${total}. Full list on the source pages.`,
     visitReadinessLabel: (pct) => ` — readiness ${pct}%`,
     milestoneStage: "Stage",
+    ctxDue: (date) => `due ${date}`,
+    ctxProgress: (pct) => `${pct}% complete`,
+    ctxAgreement: (date) => `Signed ${date} · awaiting ratification / entry into force`,
+    ctxDeadline: (date) => `Deadline ${date}`,
+    ctxDueDate: (date) => `Due ${date}`,
+    ctxVisit: (days, range) => `T-${days} days · ${range}`,
   },
   ru: {
     critical: "Эскалация",
@@ -65,7 +82,7 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     sourceAgreement: "Соглашение",
     sourceMilestone: "Этап Штаба",
     sourceVisitReadiness: "Готовность визита",
-    aggregator: "Агрегатор: commitments + agreements + center milestones + visit readiness",
+    aggregator: "Агрегатор: поручения + соглашения + этапы Центра + готовность визитов",
     countCritical: "эскалация",
     countWarn: "контроль",
     countWatch: "наблюдение",
@@ -73,6 +90,12 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     showing: (limit, total) => `Показаны ${limit} из ${total}. Полный список — на страницах источников.`,
     visitReadinessLabel: (pct) => ` — готовность ${pct}%`,
     milestoneStage: "Этап",
+    ctxDue: (date) => `срок ${date}`,
+    ctxProgress: (pct) => `выполнено ${pct}%`,
+    ctxAgreement: (date) => `Подписано ${date} · ожидает ратификации / вступления в силу`,
+    ctxDeadline: (date) => `Срок ${date}`,
+    ctxDueDate: (date) => `Срок ${date}`,
+    ctxVisit: (days, range) => `T-${days} дн. · ${range}`,
   },
   "uz-latn": {
     critical: "Eskalatsiya",
@@ -82,7 +105,7 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     sourceAgreement: "Bitim",
     sourceMilestone: "Markaz bosqichi",
     sourceVisitReadiness: "Tashrif tayyorligi",
-    aggregator: "Agregator: commitments + agreements + center milestones + visit readiness",
+    aggregator: "Agregator: topshiriqlar + bitimlar + Markaz bosqichlari + tashrif tayyorligi",
     countCritical: "eskalatsiya",
     countWarn: "nazorat",
     countWatch: "kuzatuv",
@@ -90,6 +113,12 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     showing: (limit, total) => `${total} dan ${limit} ko'rsatildi. To'liq ro'yxat manba sahifalarda.`,
     visitReadinessLabel: (pct) => ` — tayyorlik ${pct}%`,
     milestoneStage: "Bosqich",
+    ctxDue: (date) => `muddat ${date}`,
+    ctxProgress: (pct) => `${pct}% bajarildi`,
+    ctxAgreement: (date) => `Imzolangan ${date} · ratifikatsiya / kuchga kirishni kutmoqda`,
+    ctxDeadline: (date) => `Muddat ${date}`,
+    ctxDueDate: (date) => `Muddat ${date}`,
+    ctxVisit: (days, range) => `T-${days} kun · ${range}`,
   },
 };
 
@@ -124,8 +153,8 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         id: `commit-${c.id}`,
         source: "commitment",
         severity: "critical",
-        title: c.title,
-        context: `${c.owner} · due ${c.dueDate}`,
+        title: localizedCommitmentTitle(c.id, c.title, locale),
+        context: `${localizedOwner(c.owner, locale)} · ${T.ctxDue(c.dueDate)}`,
         href: `/${locale}/commitments?status=overdue&q=${encodeURIComponent(c.title.slice(0, 24))}`,
         dueDate: c.dueDate,
       });
@@ -134,8 +163,8 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         id: `commit-${c.id}`,
         source: "commitment",
         severity: "warn",
-        title: c.title,
-        context: `${c.owner} · ${c.progressPct}% complete`,
+        title: localizedCommitmentTitle(c.id, c.title, locale),
+        context: `${localizedOwner(c.owner, locale)} · ${T.ctxProgress(c.progressPct)}`,
         href: `/${locale}/commitments?status=watch&q=${encodeURIComponent(c.title.slice(0, 24))}`,
         dueDate: c.dueDate,
       });
@@ -149,7 +178,7 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         source: "agreement",
         severity: "warn",
         title: a.title,
-        context: `Signed ${a.signedOn} · awaiting ratification / entry into force`,
+        context: T.ctxAgreement(a.signedOn),
         href: `/${locale}/agreements`,
         dueDate: a.signedOn,
       });
@@ -163,8 +192,8 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         id: `milestone-${m.stage}`,
         source: "milestone",
         severity: "critical",
-        title: `${T.milestoneStage} ${m.stage}: ${m.title}`,
-        context: `Deadline ${m.dueDate}`,
+        title: `${T.milestoneStage} ${m.stage}: ${localizedMilestoneTitle(m.stage, m.title, locale)}`,
+        context: T.ctxDeadline(m.dueDate),
         href: `/${locale}/staff`,
         dueDate: m.dueDate,
       });
@@ -173,8 +202,8 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         id: `milestone-${m.stage}`,
         source: "milestone",
         severity: "watch",
-        title: `${T.milestoneStage} ${m.stage}: ${m.title}`,
-        context: `Due ${m.dueDate}`,
+        title: `${T.milestoneStage} ${m.stage}: ${localizedMilestoneTitle(m.stage, m.title, locale)}`,
+        context: T.ctxDueDate(m.dueDate),
         href: `/${locale}/staff`,
         dueDate: m.dueDate,
       });
@@ -194,7 +223,7 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         source: "visit-readiness",
         severity: pct < 50 ? "critical" : "warn",
         title: `${pipeline.title}${T.visitReadinessLabel(pct)}`,
-        context: `T-${daysToVisit} days · ${pipeline.dateRange}`,
+        context: T.ctxVisit(daysToVisit, pipeline.dateRange),
         href: `/${locale}/prepare`,
         dueDate: pipeline.date,
       });

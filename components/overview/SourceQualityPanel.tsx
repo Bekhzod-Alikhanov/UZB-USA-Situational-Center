@@ -3,8 +3,9 @@ import { sourceQualitySummary } from "@/lib/source-quality";
 import { externalDataConnectors } from "@/data/external-data";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { LiveConnectorMonitor } from "@/components/overview/LiveConnectorMonitor";
+import { localizedCadence } from "@/lib/i18n/overview-content";
 import { cn } from "@/lib/utils";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const STATUS_CLASS = {
   fresh: "bg-[var(--color-pos-soft)] text-[var(--color-pos)]",
@@ -22,6 +23,7 @@ const CONNECTOR_CLASS = {
 
 export async function SourceQualityPanel() {
   const summary = sourceQualitySummary();
+  const locale = await getLocale();
   const t = await getTranslations("overview.sourceQuality");
 
   return (
@@ -96,7 +98,7 @@ export async function SourceQualityPanel() {
                 </div>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
                   <span className="mono text-[10px] uppercase tracking-wider text-[var(--color-ink-faint)]">
-                    {connector.cadence}
+                    {localizedCadence(connector.cadence, locale)}
                   </span>
                   <SourceBadge sourceId={connector.sourceId} />
                 </div>

@@ -23,15 +23,22 @@ const TYPE_COLOR: Record<HorizonItem["type"], string> = {
   deadline: "var(--color-rose)",
 };
 
-const TYPE_LABEL: Record<HorizonItem["type"], string> = {
-  visit: "visit",
-  council: "council",
-  ceremony: "ceremony",
-  forum: "forum",
-  deadline: "deadline",
+const TYPE_LABELS: Record<"en" | "ru" | "uz-latn", Record<HorizonItem["type"], string>> = {
+  en: { visit: "visit", council: "council", ceremony: "ceremony", forum: "forum", deadline: "deadline" },
+  ru: { visit: "визит", council: "совет", ceremony: "церемония", forum: "форум", deadline: "срок" },
+  "uz-latn": { visit: "tashrif", council: "kengash", ceremony: "marosim", forum: "forum", deadline: "muddat" },
 };
 
-const DATE_FMT = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short" });
+function pickTypeLabels(locale: string) {
+  if (locale === "ru") return TYPE_LABELS.ru;
+  if (locale === "uz-latn") return TYPE_LABELS["uz-latn"];
+  return TYPE_LABELS.en;
+}
+
+function dateFormatter(locale: string) {
+  const tag = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
+  return new Intl.DateTimeFormat(tag, { day: "2-digit", month: "short" });
+}
 
 function classifyVisitType(visitFormat: string, title: string): HorizonItem["type"] {
   const t = title.toLowerCase();
@@ -91,6 +98,8 @@ export function Horizon() {
   const locale = useLocale();
   const today = useMemo(() => new Date(), []);
   const items = useMemo(() => buildHorizon(today), [today]);
+  const TYPE_LABEL = pickTypeLabels(locale);
+  const DATE_FMT = useMemo(() => dateFormatter(locale), [locale]);
   const max = 90;
 
   const empty =
