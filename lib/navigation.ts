@@ -18,7 +18,6 @@ import {
   Newspaper,
   Settings,
   ShieldCheck,
-  Sparkles,
   Target,
   Users,
   UsersRound,
@@ -93,7 +92,6 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { key: "prepare", href: "/prepare", icon: ClipboardList, tone: "visits", audience: "operations" },
       { key: "staff", href: "/staff", icon: UsersRound, tone: "people", audience: "operations" },
-      { key: "assistant", href: "/assistant", icon: Sparkles, tone: "primary", audience: "advanced" },
       { key: "admin", href: "/admin", icon: Settings, tone: "slate", audience: "operations" },
     ],
   },

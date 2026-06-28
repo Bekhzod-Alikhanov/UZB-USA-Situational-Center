@@ -5,7 +5,6 @@ const pages = [
   { path: "/en", name: "overview" },
   { path: "/en/trade", name: "trade" },
   { path: "/en/benchmark", name: "benchmark" },
-  { path: "/en/assistant", name: "assistant" },
   { path: "/en/admin/login", name: "admin login" },
 ];
 

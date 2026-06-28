@@ -1,13 +1,13 @@
 "use client";
-import { useSettings, type Theme } from "@/lib/store/settings";
+import { useSettings } from "@/lib/store/settings";
+import type { Theme } from "@/lib/store/settings";
 import * as Switch from "@radix-ui/react-switch";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export function SettingsPanel() {
   const t = useTranslations("admin");
-  const { hideDemo, setHideDemo, presentationMode, setPresentationMode, theme, setTheme, aiEnabled, setAiEnabled } =
-    useSettings();
+  const { hideDemo, setHideDemo, presentationMode, setPresentationMode, theme, setTheme } = useSettings();
 
   return (
     <div className="flex flex-col gap-3">
@@ -18,10 +18,8 @@ export function SettingsPanel() {
         checked={presentationMode}
         onChange={setPresentationMode}
       />
-      <SettingRow title={t("ai")} desc={t("aiDesc")} checked={aiEnabled} onChange={setAiEnabled} />
-
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-[13px] font-medium text-[var(--color-ink)]">{t("theme")}</div>
             <div className="text-[11px] text-[var(--color-ink-muted)]">{t("themeDesc")}</div>
@@ -72,20 +70,20 @@ function SettingRow({
 function SegmentedTheme({ value, onChange }: { value: Theme; onChange: (v: Theme) => void }) {
   const t = useTranslations("admin");
   return (
-    <div className="flex items-center gap-0.5 rounded-md border border-[var(--color-border)] p-0.5">
-      {(["command", "light", "dark"] as const).map((v) => (
+    <div className="inline-flex w-fit items-center gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] p-0.5">
+      {(["light", "dark", "command"] as const).map((theme) => (
         <button
-          key={v}
+          key={theme}
           type="button"
-          onClick={() => onChange(v)}
+          onClick={() => onChange(theme)}
           className={cn(
-            "rounded px-2.5 py-1 text-[11.5px] font-medium transition",
-            value === v
-              ? "bg-[var(--color-primary)] text-[#071827]"
-              : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-2)]",
+            "cursor-pointer rounded px-2.5 py-1 text-[11.5px] font-medium transition",
+            value === theme
+              ? "bg-[var(--color-primary)] text-[var(--color-primary-contrast)]"
+              : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]",
           )}
         >
-          {t(`themes.${v}`)}
+          {t(`themes.${theme}`)}
         </button>
       ))}
     </div>

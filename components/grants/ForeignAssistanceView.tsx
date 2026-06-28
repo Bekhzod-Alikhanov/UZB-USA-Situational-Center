@@ -1,4 +1,4 @@
-// Server component â€” the FY-by-year bars used to be a Recharts BarChart;
+// Server component — the FY-by-year bars used to be a Recharts BarChart;
 // replaced with a zero-dep SVG <MiniBars /> to remove ~80 KB of Recharts
 // from this page's bundle (per Wave 2.2 of the perf plan).
 import { MiniBars, type MiniBarItem } from "@/components/charts/MiniBars";

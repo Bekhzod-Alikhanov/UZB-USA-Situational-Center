@@ -64,7 +64,7 @@ const INITIAL: Member[] = [
   },
   {
     id: "m-15",
-    name: "Assistant — protocol support (duplicate)",
+    name: "Protocol support (duplicate)",
     role: "Protocol",
     keep: false,
     reason: "protocol already staffed",

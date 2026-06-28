@@ -1,42 +1,39 @@
 "use client";
-import { useSettings, type Theme } from "@/lib/store/settings";
+
 import { Command, Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useSettings, type Theme } from "@/lib/store/settings";
 
-/**
- * Three-state theme switch. Cycles command -> light -> dark -> command.
- * The actual class-on-<html> wiring lives in `useSettings.setTheme` and
- * `SettingsSync`; this button just rotates the value.
- */
-const ORDER: Theme[] = ["command", "light", "dark"];
+const ORDER: Theme[] = ["light", "dark", "command"];
 
 const ICON: Record<Theme, React.ComponentType<{ className?: string }>> = {
+  light: Sun,
+  dark: Moon,
   command: Command,
-  light: Moon,
-  dark: Sun,
 };
 
 export function ThemeSwitch() {
   const theme = useSettings((s) => s.theme);
   const setTheme = useSettings((s) => s.setTheme);
-  const tShell = useTranslations("shell");
-  const Icon = ICON[theme] ?? Command;
+  const t = useTranslations("shell");
+  const Icon = ICON[theme] ?? Sun;
 
   function cycle() {
-    const i = ORDER.indexOf(theme);
-    const next = ORDER[(i + 1) % ORDER.length] ?? "command";
-    setTheme(next);
+    const index = ORDER.indexOf(theme);
+    setTheme(ORDER[(index + 1) % ORDER.length] ?? "light");
   }
+
+  const current = t(`themes.${theme}`);
 
   return (
     <button
       type="button"
-      aria-label={tShell("toggleTheme")}
-      title={tShell("toggleTheme") + " - " + theme}
+      aria-label={t("toggleThemeCurrent", { theme: current })}
+      title={t("toggleThemeCurrent", { theme: current })}
       onClick={cycle}
-      className="inline-flex size-8 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
+      className="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-muted)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
     >
-      <Icon className="size-4" />
+      <Icon className="size-4" aria-hidden />
     </button>
   );
 }

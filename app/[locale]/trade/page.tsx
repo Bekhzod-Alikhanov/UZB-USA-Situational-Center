@@ -17,6 +17,7 @@ import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { TradeChartDisclosure } from "@/components/trade/TradeChartDisclosure";
 import { AdvancedTradeAnalysis } from "@/components/trade/AdvancedTradeAnalysis";
+import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 // Below-the-fold charts are dynamic-loaded + IntersectionObserver-gated to
 // drop the route's initial TBT/transfer. See components/trade/LazyCharts.tsx.
 import { LazyMonthlyTrade, LazyExportStructure, LazyImportStructure } from "@/components/trade/LazyCharts";
@@ -54,25 +55,21 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           advancedSub: "HS, зеркальные, ITC и услуги находятся ниже",
           advancedText:
             "Технические графики сохранены для аналитиков и исследователей в разделе расширенного анализа торговли, а не удалены из панели.",
-          flowSummary:
-            "Что это означает: этот график быстрее всего показывает направление, волатильность и то, успевает ли экспорт Узбекистана за импортом из США. Он загружается по запросу, чтобы облегчить первый экран на мобильных устройствах.",
         }
       : locale === "uz-latn"
         ? {
             quoteTitle: "Iqtibos uchun tayyor qator",
-            quoteSub: "Oâ€˜zbekiston tomoni boâ€˜yicha rasmiy yillik hikoya uchun UZ Statdan foydalaning",
+            quoteSub: "O'zbekiston tomoni bo'yicha rasmiy yillik hikoya uchun UZ Statdan foydalaning",
             quoteText:
-              "Yillik jadval va oqim grafigi aylanma, eksport, import va ikki tomonlama balans boâ€˜yicha eng aniq ijro koâ€˜rinishini beradi. U.S. Census yoki Comtrade bilan solishtirganda metodologiya izohlarini koâ€˜rinadigan qoldiring.",
-            changedTitle: "Nima oâ€˜zgardi",
+              "Yillik jadval va oqim grafigi aylanma, eksport, import va ikki tomonlama balans bo'yicha eng aniq ijro ko'rinishini beradi. U.S. Census yoki Comtrade bilan solishtirganda metodologiya izohlarini ko'rinadigan qoldiring.",
+            changedTitle: "Nima o'zgardi",
             changedSub: "Balans masalasi sarlavha raqamidan muhimroq",
             changedText:
-              "Oqimlarning oâ€˜sishi foydali, ammo ustuvor suhbat eksport diversifikatsiyasi, bozorga kirish va forumlarni mahsulot darajasidagi imkoniyatlarga aylantirish haqida boâ€˜lishi kerak.",
+              "Oqimlarning o'sishi foydali, ammo ustuvor suhbat eksport diversifikatsiyasi, bozorga kirish va forumlarni mahsulot darajasidagi imkoniyatlarga aylantirish haqida bo'lishi kerak.",
             advancedTitle: "Kengaytirilgan tahlil saqlandi",
             advancedSub: "HS, oynaviy tafovutlar, ITC va xizmatlar quyida",
             advancedText:
-              "Texnik grafiklar oâ€˜chirilmadi; ular tahlilchilar va tadqiqotchilar uchun kengaytirilgan savdo tahlili boâ€˜limida saqlangan.",
-            flowSummary:
-              "Bu nimani anglatadi: ushbu grafik yoâ€˜nalish, volatillik va Oâ€˜zbekiston eksporti AQShdan import bilan hamqadamligini eng tez koâ€˜rsatadi. Mobil birinchi render yengil boâ€˜lishi uchun talab boâ€˜yicha yuklanadi.",
+              "Texnik grafiklar o'chirilmadi; ular tahlilchilar va tadqiqotchilar uchun kengaytirilgan savdo tahlili bo'limida saqlangan.",
           }
         : {
             quoteTitle: "Quote-ready series",
@@ -87,8 +84,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
             advancedSub: "HS, mirror, ITC, and services exhibits are below",
             advancedText:
               "Technical charts are preserved for analysts and researchers in the Advanced Trade Analysis section rather than removed from the platform.",
-            flowSummary:
-              "What this means: this chart is the fastest visual view of direction, volatility, and whether UZ exports are keeping pace with imports from the United States. It is loaded on demand to keep the first mobile paint light.",
           };
 
   return (
@@ -106,26 +101,40 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-        <Card tone="trade">
-          <CardHeader title={copy.quoteTitle} sub={copy.quoteSub} />
-          <CardBody>
-            <p className="text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{copy.quoteText}</p>
-          </CardBody>
-        </Card>
-        <Card tone="agree">
-          <CardHeader title={copy.changedTitle} sub={copy.changedSub} />
-          <CardBody>
-            <p className="text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{copy.changedText}</p>
-          </CardBody>
-        </Card>
-        <Card tone="slate">
-          <CardHeader title={copy.advancedTitle} sub={copy.advancedSub} />
-          <CardBody>
-            <p className="text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{copy.advancedText}</p>
-          </CardBody>
-        </Card>
-      </div>
+      <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+          {[
+            { title: copy.quoteTitle, sub: copy.quoteSub, text: copy.quoteText },
+            { title: copy.changedTitle, sub: copy.changedSub, text: copy.changedText },
+            { title: copy.advancedTitle, sub: copy.advancedSub, text: copy.advancedText },
+          ].map((item) => (
+            <div key={item.title} className="border-l-2 border-[var(--color-border)] pl-3">
+              <div className="text-[13px] font-semibold text-[var(--color-ink)]">{item.title}</div>
+              <div className="mt-0.5 text-[11.5px] text-[var(--color-ink-muted)]">{item.sub}</div>
+              <p className="mt-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Card tone="trade">
+        <CardHeader
+          icon={<TrendingUp className="size-3.5" />}
+          tone="trade"
+          title={t("sections.flowTitle")}
+          sub={t("sections.flowSub")}
+          right={<SourceBadge sourceId="input_trade_stat_docx" />}
+        />
+        <CardBody>
+          <TradeFlowChart height={300} />
+          <ChartNarration
+            labels={narrationLabels}
+            what={t("narration.flow.what")}
+            why={t("narration.flow.why")}
+            how={t("narration.flow.how")}
+          />
+        </CardBody>
+      </Card>
 
       <Card tone="trade">
         <CardHeader
@@ -181,30 +190,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           </CardBody>
         </Card>
       </div>
-
-      <Card tone="trade">
-        <CardHeader
-          icon={<TrendingUp className="size-3.5" />}
-          tone="trade"
-          title={t("sections.flowTitle")}
-          sub={t("sections.flowSub")}
-          right={<SourceBadge sourceId="input_trade_stat_docx" />}
-        />
-        <CardBody>
-          <TradeChartDisclosure
-            kind="flow"
-            buttonLabel={t("sections.flowButton")}
-            height={340}
-            summary={copy.flowSummary}
-          />
-          <ChartNarration
-            labels={narrationLabels}
-            what={t("narration.flow.what")}
-            why={t("narration.flow.why")}
-            how={t("narration.flow.how")}
-          />
-        </CardBody>
-      </Card>
 
       <Card tone="trade">
         <CardHeader
@@ -361,4 +346,3 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
     </div>
   );
 }
-

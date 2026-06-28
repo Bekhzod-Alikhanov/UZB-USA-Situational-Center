@@ -7,7 +7,6 @@ import {
   Scale,
   AlertTriangle,
   CalendarDays,
-  CheckCircle2,
   Layers,
   Gift,
   Users2,
@@ -33,6 +32,7 @@ import { PrintButton } from "@/components/exports/PrintButton";
 import { ExecutiveCommandCenter } from "@/components/overview/ExecutiveCommandCenter";
 import { RelationshipPillars } from "@/components/overview/RelationshipPillars";
 import { SourceQualityPanel } from "@/components/overview/SourceQualityPanel";
+import { TodayDecisionStrip } from "@/components/overview/TodayDecisionStrip";
 import { getRouteSeo } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -55,35 +55,12 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
   const grantsTotal = grants.reduce((a, g) => a + g.valueMusd, 0);
   const verifiedInvestmentValue = investmentCredibilitySummary.verified.totalValueUsdM;
   const pendingInvestmentRows = investmentCredibilitySummary.pending.totalProjects;
-  const demoInvestmentRows = investmentCredibilitySummary.illustrativeDemo.totalProjects;
   const narrationLabels = {
     what: t("narrationLabels.what"),
     why: t("narrationLabels.why"),
     how: t("narrationLabels.how"),
     source: t("narrationLabels.source"),
   };
-  const executiveSignals = [
-    {
-      label: t("story.signals.trade.label"),
-      value: t("story.signals.trade.value", { turnover: y2025.turnover.toLocaleString("en-US") }),
-      note: t("story.signals.trade.note"),
-    },
-    {
-      label: t("story.signals.investment.label"),
-      value: t("story.signals.investment.value", { value: (verifiedInvestmentValue / 1000).toFixed(2) }),
-      note: t("story.signals.investment.note", { pending: pendingInvestmentRows, demo: demoInvestmentRows }),
-    },
-    {
-      label: t("story.signals.diplomacy.label"),
-      value: t("story.signals.diplomacy.value", { count: agreementsAggregate.totalDocuments }),
-      note: t("story.signals.diplomacy.note"),
-    },
-  ];
-  const executiveActions = [
-    t("story.actions.one"),
-    t("story.actions.two"),
-    t("story.actions.three"),
-  ];
 
   const dateLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
   const dateLabel = new Intl.DateTimeFormat(dateLocale, {
@@ -119,50 +96,9 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
         </div>
       </header>
 
-      <section className="grid grid-cols-1 gap-3 xl:grid-cols-[1.25fr_0.75fr]">
-        <Card tone="primary" variant="panelHero">
-          <CardHeader
-            icon={<CheckCircle2 className="size-3.5" />}
-            tone="primary"
-            title={t("story.executiveTitle")}
-            sub={t("story.executiveSub")}
-          />
-          <CardBody>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-              {executiveSignals.map((item) => (
-                <div key={item.label} className="rounded-md border border-[var(--color-border)] p-3">
-                  <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                    {item.label}
-                  </div>
-                  <div className="mt-1 text-[15px] font-semibold text-[var(--color-ink)]">{item.value}</div>
-                  <p className="mt-1.5 text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">{item.note}</p>
-                </div>
-              ))}
-            </div>
-          </CardBody>
-        </Card>
-
-        <Card tone="rose" variant="danger">
-          <CardHeader
-            icon={<AlertTriangle className="size-3.5" />}
-            tone="rose"
-            title={t("story.actionsTitle")}
-            sub={t("story.actionsSub")}
-          />
-          <CardBody>
-            <ol className="space-y-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-              {executiveActions.map((action, idx) => (
-                <li key={action} className="flex gap-2">
-                  <span className="mono mt-0.5 text-[10px] font-semibold text-[var(--color-rose)]">{idx + 1}</span>
-                  <span>{action}</span>
-                </li>
-              ))}
-            </ol>
-          </CardBody>
-        </Card>
-      </section>
-
       {/* HERO KPI ROW — 4 large tone-coded KPIs */}
+      <TodayDecisionStrip locale={locale} />
+
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
         <KpiCard
           tone="trade"

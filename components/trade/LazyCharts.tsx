@@ -73,7 +73,7 @@ const TrademapExhibitsImpl = dynamic(
 
 export function LazyMonthlyTrade() {
   return (
-    <LazyMount minHeight={320}>
+    <LazyMount minHeight={320} fallback={<Skeleton h={300} />}>
       <MonthlyTradeChartImpl />
     </LazyMount>
   );
@@ -81,7 +81,7 @@ export function LazyMonthlyTrade() {
 
 export function LazyExportStructure() {
   return (
-    <LazyMount minHeight={300}>
+    <LazyMount minHeight={300} fallback={<Skeleton h={280} />}>
       <StructureTreemapImpl items={exportStructure2025} height={300} />
     </LazyMount>
   );
@@ -89,7 +89,7 @@ export function LazyExportStructure() {
 
 export function LazyImportStructure() {
   return (
-    <LazyMount minHeight={300}>
+    <LazyMount minHeight={300} fallback={<Skeleton h={280} />}>
       <StructureTreemapImpl items={importStructure2025} height={300} />
     </LazyMount>
   );
@@ -97,7 +97,7 @@ export function LazyImportStructure() {
 
 export function LazyComtradeHs6() {
   return (
-    <LazyMount minHeight={400}>
+    <LazyMount minHeight={400} fallback={<Skeleton h={400} />}>
       <ComtradeHs6TopImpl />
     </LazyMount>
   );
@@ -105,7 +105,7 @@ export function LazyComtradeHs6() {
 
 export function LazyComtradeMirror() {
   return (
-    <LazyMount minHeight={400}>
+    <LazyMount minHeight={400} fallback={<Skeleton h={400} />}>
       <ComtradeMirrorImpl />
     </LazyMount>
   );
@@ -113,7 +113,7 @@ export function LazyComtradeMirror() {
 
 export function LazyComtradeTrendSparklines() {
   return (
-    <LazyMount minHeight={300}>
+    <LazyMount minHeight={300} fallback={<Skeleton h={300} />}>
       <ComtradeTrendSparklinesImpl />
     </LazyMount>
   );
@@ -121,7 +121,7 @@ export function LazyComtradeTrendSparklines() {
 
 export function LazyHs2ChapterTreemap() {
   return (
-    <LazyMount minHeight={400}>
+    <LazyMount minHeight={400} fallback={<Skeleton h={400} />}>
       <Hs2ChapterTreemapImpl />
     </LazyMount>
   );
@@ -129,7 +129,7 @@ export function LazyHs2ChapterTreemap() {
 
 export function LazyTrademapProducts() {
   return (
-    <LazyMount minHeight={380}>
+    <LazyMount minHeight={380} fallback={<Skeleton h={380} />}>
       <TrademapProductsImpl />
     </LazyMount>
   );
@@ -137,7 +137,7 @@ export function LazyTrademapProducts() {
 
 export function LazyServicesEbops() {
   return (
-    <LazyMount minHeight={300}>
+    <LazyMount minHeight={300} fallback={<Skeleton h={300} />}>
       <ServicesEbopsImpl />
     </LazyMount>
   );
@@ -145,7 +145,7 @@ export function LazyServicesEbops() {
 
 export function LazyTrademapExhibits() {
   return (
-    <LazyMount minHeight={300}>
+    <LazyMount minHeight={300} fallback={<Skeleton h={300} />}>
       <TrademapExhibitsImpl />
     </LazyMount>
   );

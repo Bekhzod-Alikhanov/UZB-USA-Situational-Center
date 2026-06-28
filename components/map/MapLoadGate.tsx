@@ -1,15 +1,19 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Map, Loader2 } from "lucide-react";
+import { Building2, GraduationCap, Layers3, Loader2, Map, Plane } from "lucide-react";
 import { useState } from "react";
 
 const UsCenteredMapImpl = dynamic(() => import("./UsCenteredMap").then((m) => ({ default: m.UsCenteredMap })), {
   ssr: false,
   loading: () => (
-    <div className="flex min-h-[520px] items-center justify-center rounded-md bg-[var(--color-surface-2)] text-[12px] text-[var(--color-ink-muted)]">
-      <Loader2 className="mr-2 size-4 animate-spin" aria-hidden />
-      Loading interactive map
+    <div
+      className="flex min-h-[520px] items-center justify-center rounded-md bg-[var(--color-surface-2)] text-[12px] text-[var(--color-ink-muted)]"
+      role="status"
+      aria-live="polite"
+    >
+      <Loader2 className="size-4 animate-spin" aria-hidden />
+      <span className="sr-only">Loading</span>
     </div>
   ),
 });
@@ -18,16 +22,25 @@ const COPY = {
   en: {
     title: "Interactive map is available on demand",
     body: "The state-level footprint map uses a heavier browser map runtime. Load it when you need geographic exploration; the summary metrics above stay available immediately.",
+    previewTitle: "What loads",
+    layers: ["State GDP and population", "UZ missions and planned visits", "Students and engagement signals"],
+    use: "Use it to choose which state deserves the next visit, mission opening, or trade-promotion event.",
     button: "Load interactive map",
   },
   ru: {
     title: "Интерактивная карта доступна по запросу",
-    body: "Карта по штатам использует более тяжёлый браузерный runtime. Загружайте её, когда нужна географическая детализация; сводные показатели выше доступны сразу.",
+    body: "Карта по штатам использует более тяжелый браузерный модуль. Загружайте ее, когда нужна географическая детализация; сводные показатели выше доступны сразу.",
+    previewTitle: "Что загрузится",
+    layers: ["ВВП и население штатов", "Миссии УЗ и плановые визиты", "Студенты и сигналы вовлечения"],
+    use: "Используйте карту, чтобы выбрать штат для следующего визита, открытия миссии или торгового мероприятия.",
     button: "Загрузить интерактивную карту",
   },
   "uz-latn": {
     title: "Interaktiv xarita so'rov bo'yicha yuklanadi",
-    body: "Shtatlar kesimidagi xarita og'irroq browser runtime ishlatadi. Geografik tahlil kerak bo'lganda yuklang; yuqoridagi xulosa ko'rsatkichlari darhol ochiladi.",
+    body: "Shtatlar kesimidagi xarita og'irroq browser modulidan foydalanadi. Geografik tahlil kerak bo'lganda yuklang; yuqoridagi xulosa ko'rsatkichlari darhol ochiladi.",
+    previewTitle: "Nima yuklanadi",
+    layers: ["Shtat YaIMi va aholisi", "UZ missiyalari va rejalangan tashriflar", "Talabalar va faollik signallari"],
+    use: "Keyingi tashrif, missiya ochilishi yoki savdo tadbiri uchun qaysi shtat muhimligini tanlashda foydalaning.",
     button: "Interaktiv xaritani yuklash",
   },
 } as const;
@@ -38,11 +51,6 @@ export function MapLoadGate({ locale }: { locale: string }) {
 
   if (loaded) return <UsCenteredMapImpl />;
 
-  // Pick palette based on whether we're inside a Strategic Vision dark page.
-  // The .strategic-page wrapper exposes --sv-* tokens; if absent, the
-  // CSS-var fallbacks resolve to the original light-mode tokens. This means
-  // the same component cleanly serves both /map (dark) and other consumers
-  // (light).
   return (
     <div
       className="flex min-h-[480px] flex-col items-center justify-center rounded-2xl border border-dashed p-6 text-center"
@@ -70,6 +78,48 @@ export function MapLoadGate({ locale }: { locale: string }) {
       >
         {copy.body}
       </p>
+
+      <div
+        className="mt-4 w-full max-w-xl rounded-xl border p-3 text-left"
+        style={{
+          borderColor: "var(--sv-outline, var(--color-border))",
+          background: "color-mix(in oklab, var(--sv-surface, var(--color-surface)) 82%, transparent)",
+        }}
+      >
+        <div
+          className="mb-2 text-[10.5px] font-semibold uppercase tracking-[0.14em]"
+          style={{ color: "var(--sv-secondary, var(--color-primary))" }}
+        >
+          {copy.previewTitle}
+        </div>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+          {copy.layers.map((label, index) => {
+            const icons = [Building2, Plane, GraduationCap] as const;
+            const Icon = icons[index] ?? Layers3;
+            return (
+              <div
+                key={label}
+                className="flex items-start gap-2 rounded-lg border border-[var(--sv-outline,var(--color-border))] p-2"
+              >
+                <Icon
+                  className="mt-0.5 size-3.5 shrink-0"
+                  style={{ color: "var(--sv-secondary, var(--color-primary))" }}
+                />
+                <span className="text-[11px] leading-snug" style={{ color: "var(--sv-on-surface, var(--color-ink))" }}>
+                  {label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <p
+          className="mt-2 text-[11.5px] leading-relaxed"
+          style={{ color: "var(--sv-on-surface-variant, var(--color-ink-muted))" }}
+        >
+          {copy.use}
+        </p>
+      </div>
+
       <button
         type="button"
         onClick={() => setLoaded(true)}
