@@ -50,6 +50,8 @@
     "switchLanguage": "Сменить язык",
     "toggleTheme": "Переключить тему",
     "toggleThemeCurrent": "Переключить тему. Сейчас: {theme}",
+    "presentationEnter": "Включить режим доклада (скрыть demo-маркеры)",
+    "presentationExit": "Выйти из режима доклада",
     "themes": {
       "light": "Светлая",
       "dark": "Тёмная",

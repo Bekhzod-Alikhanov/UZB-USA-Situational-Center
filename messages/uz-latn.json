@@ -50,6 +50,8 @@
     "switchLanguage": "Tilni almashtirish",
     "toggleTheme": "Mavzuni almashtirish",
     "toggleThemeCurrent": "Mavzuni almashtirish. Hozir: {theme}",
+    "presentationEnter": "Taqdimot rejimiga kirish (demo belgilarini yashirish)",
+    "presentationExit": "Taqdimot rejimidan chiqish",
     "themes": {
       "light": "Yorug'",
       "dark": "Qorong'i",

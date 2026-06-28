@@ -4,6 +4,7 @@ import { LocaleSwitch } from "./LocaleSwitch";
 import { FreshnessPill } from "./FreshnessPill";
 import { MobileSidebar } from "./MobileSidebar";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { PresentationToggle } from "./PresentationToggle";
 import { Search, Menu } from "lucide-react";
 import { useSearch } from "@/lib/store/search";
 import { useEffect } from "react";
@@ -81,6 +82,7 @@ export function Topbar() {
         </span>
         <LocaleSwitch />
         <ThemeSwitch />
+        <PresentationToggle />
       </div>
     </header>
   );
