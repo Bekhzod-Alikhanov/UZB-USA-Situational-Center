@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Stat } from "@/components/ui/Stat";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { InvestmentsView } from "@/components/investments/InvestmentsView";
+import { CredibilityCards } from "@/components/investments/CredibilityCards";
 import { investmentCredibilitySummary, investments, investmentsTotals } from "@/data/investments";
 import { getRouteSeo } from "@/lib/seo";
 
@@ -49,41 +50,7 @@ export default async function InvestmentsPage({ params }: { params: Promise<{ lo
 
       <DemoBanner agency="MIIT · UzInvest · Agency for Investments" />
 
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-        <Card tone="invest">
-          <CardHeader title={t("credibilityCards.verifiedTitle")} sub={t("credibilityCards.verifiedSub")} />
-          <CardBody>
-            <div className="mono text-[24px] font-semibold tabular text-[var(--color-ink)]">
-              ${(investmentCredibilitySummary.verified.totalValueUsdM / 1000).toFixed(2)}B
-            </div>
-            <p className="mt-1 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-              {t("credibilityCards.verifiedText")}
-            </p>
-          </CardBody>
-        </Card>
-        <Card tone="agree">
-          <CardHeader title={t("credibilityCards.pendingTitle")} sub={t("credibilityCards.pendingSub")} />
-          <CardBody>
-            <div className="mono text-[24px] font-semibold tabular text-[var(--color-ink)]">
-              ${(investmentCredibilitySummary.pending.totalValueUsdM / 1000).toFixed(2)}B
-            </div>
-            <p className="mt-1 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-              {t("credibilityCards.pendingText")}
-            </p>
-          </CardBody>
-        </Card>
-        <Card tone="rose">
-          <CardHeader title={t("credibilityCards.demoTitle")} sub={t("credibilityCards.demoSub")} />
-          <CardBody>
-            <div className="mono text-[24px] font-semibold tabular text-[var(--color-ink)]">
-              ${(investmentCredibilitySummary.illustrativeDemo.totalValueUsdM / 1000).toFixed(2)}B
-            </div>
-            <p className="mt-1 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-              {t("credibilityCards.demoText")}
-            </p>
-          </CardBody>
-        </Card>
-      </div>
+      <CredibilityCards />
 
       <Card>
         <CardHeader
