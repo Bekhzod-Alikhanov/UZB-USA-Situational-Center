@@ -96,7 +96,7 @@
       },
       "investments": {
         "title": "Investitsiya va xususiylashtirish",
-        "description": "Tekshirilgan loyihalar, tasdiqlanishi kerak yozuvlar, demo ma'lumotlar va xususiylashtirish tayyorligi ajratilgan investitsiya pipeline."
+        "description": "Tekshirilgan loyihalar, tasdiqlanishi kerak yozuvlar, demo ma'lumotlar va xususiylashtirish tayyorligi ajratilgan investitsiya loyihalari puli."
       },
       "sectors": {
         "title": "Sohalar va AQSh bozoriga chiqish",
@@ -152,7 +152,7 @@
       },
       "prepare": {
         "title": "Tashrifga tayyorgarlik",
-        "description": "Tashrif pipeline, hujjatlar, logistika, natijalar va tashrifdan keyingi solishtirish uchun operatsion ish maydoni."
+        "description": "Tashriflar puli, hujjatlar, logistika, natijalar va tashrifdan keyingi solishtirish uchun operatsion ish maydoni."
       },
       "staff": {
         "title": "Shtab KPI",
@@ -660,26 +660,26 @@
       "pipeline": "Tayyorgarlikda"
     },
     "credibilityCards": {
-      "verifiedTitle": "Tekshirilgan rasmiy pipeline",
+      "verifiedTitle": "Tekshirilgan rasmiy loyihalar puli",
       "verifiedSub": "Faqat ochiq manbalar bilan tasdiqlangan yozuvlar",
       "verifiedText": "Tashqi iqtibos uchun eng xavfsiz investitsiya ko‘rsatkichi. Ichki va demo qatorlar chiqarib tashlangan.",
       "pendingTitle": "Manbali, ko‘rib chiqilmoqda",
       "pendingSub": "Ichki yoki manba talab qiladigan yozuvlar",
       "pendingText": "Muvofiqlashtirish uchun foydali, ammo ijro darajasida e’lon qilishdan oldin egasi tasdiqlashi kerak.",
-      "demoTitle": "Illyustrativ demo pipeline",
+      "demoTitle": "Illyustrativ demo loyihalar puli",
       "demoSub": "Faqat illyustrativ ssenariylar",
-      "demoText": "Real pipeline sifatida iqtibos keltirmang. Bu qatorlar belgilangan, qidiriladigan va filtrlanadigan holda qoladi.",
+      "demoText": "Real loyihalar puli sifatida iqtibos keltirmang. Bu qatorlar belgilangan, qidiriladigan va filtrlanadigan holda qoladi.",
       "portfolioTitle": "Faol portfel va xususiylashtirish tayyorligi",
       "portfolioSub": "Jami {count} ta qator · tekshirilgan, ko‘rib chiqilayotgan va demo qiymatlar quyida ajratilgan"
     },
     "workspace": {
       "credibility": {
         "label": "Ishonchlilik qoidasi:",
-        "text": "asosiy investitsiya ko‘rsatkichlari tekshirilgan ochiq yozuvlar, egasi ko‘rib chiqayotgan manbali yozuvlar va namoyish pipeline qatorlarini alohida ko‘rsatadi. Demo qiymatlar ish jarayonini ko‘rsatadi, ammo rasmiy jami emas."
+        "text": "asosiy investitsiya ko‘rsatkichlari tekshirilgan ochiq yozuvlar, egasi ko‘rib chiqayotgan manbali yozuvlar va namoyish loyihalar puli qatorlarini alohida ko‘rsatadi. Demo qiymatlar ish jarayonini ko‘rsatadi, ammo rasmiy jami emas."
       },
       "demoControl": {
-        "show": "Demo pipeline ko'rsatish ({count})",
-        "hide": "Demo pipelineni yashirish"
+        "show": "Demo loyihalar pulini ko'rsatish ({count})",
+        "hide": "Demo loyihalar pulini yashirish"
       },
       "stageControl": {
         "showAll": "Barcha bosqichlarni ko'rsatish ({count} bo'sh)",
@@ -722,7 +722,7 @@
       },
       "privatization": {
         "emptyTitle": "Xususiylashtirish uchun manbali ma’lumot kerak",
-        "emptyDescription": "Panel xususiylashtirish pipeline uchun tayyor, ammo aktiv darajasida tekshirilgan yozuvlar hali yuklanmagan. Majburiy maydonlar: aktiv nomi, soha, egalik statusi, bitim turi, bosqich, muddat, davlat kontrparti, qiymat diapazoni, AQSh investorlari uchun dolzarblik, source ID, risk darajasi va keyingi qadam.",
+        "emptyDescription": "Panel xususiylashtirish loyihalar puli uchun tayyor, ammo aktiv darajasida tekshirilgan yozuvlar hali yuklanmagan. Majburiy maydonlar: aktiv nomi, soha, egalik statusi, bitim turi, bosqich, muddat, davlat kontrparti, qiymat diapazoni, AQSh investorlari uchun dolzarblik, source ID, risk darajasi va keyingi qadam.",
         "schemaTitle": "E’lon qilishdan oldin manbali talab qilinadigan maydonlar",
         "schemaFields": "aktiv nomi · sektor · egasi/kontrpart · bitim turi · bosqich · qiymat diapazoni · AQSh investori uchun dolzarblik · source ID · risk · keyingi harakat",
         "safeState": "Xavfsiz bo‘sh holat: kompaniya yoki aktiv nomlari o‘ylab topilmaydi. Yozuvlarni faqat egasi tasdiqlagandan va source ID mavjud bo‘lgandan keyin qo‘shing."
@@ -739,7 +739,7 @@
         "demoLabel": "NAMOYISH.",
         "meaningDemo": "Bu qator mas’ul idora manbaga ega loyiha yozuvini bermaguncha faqat panel ish jarayonini ko‘rsatish uchun ishlatiladi.",
         "meaningVerified": "Bu qator source badge va as-of konteksti saqlangan holda ijro brifingida ishlatilishi mumkin.",
-        "meaningInternal": "Bu qator ichki pipeline monitoringi uchun foydali, ammo egasi ko‘rib chiqmaguncha va manba tasdiqlanmaguncha ommaga iqtibos qilinmasligi kerak.",
+        "meaningInternal": "Bu qator ichki loyihalar puli monitoringi uchun foydali, ammo egasi ko‘rib chiqmaguncha va manba tasdiqlanmaguncha ommaga iqtibos qilinmasligi kerak.",
         "actionTitle": "Harakat va e’lon qilish doirasi",
         "projectOwner": "Loyiha egasi",
         "counterpart": "Kontrpart",
@@ -774,7 +774,7 @@
         },
         "publication": {
           "verified": "Source badge va as-of konteksti bilan ko‘rsatilsa, ijro brifingida ishlatilishi mumkin.",
-          "demo": "Faqat illyustrativ ish jarayoni qatori; real loyiha yoki rasmiy pipeline qiymati sifatida iqtibos qilmang.",
+          "demo": "Faqat illyustrativ ish jarayoni qatori; real loyiha yoki rasmiy loyihalar puli qiymati sifatida iqtibos qilmang.",
           "internal": "Ichki muvofiqlashtirish uchun foydali; e’lon qilishdan oldin egasi ko‘rib chiqishi va manba tasdig‘i kerak."
         }
       },
