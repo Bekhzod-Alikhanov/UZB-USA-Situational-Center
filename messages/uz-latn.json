@@ -381,7 +381,7 @@
         "watch": "Kuzatuv",
         "stale": "Eskirgan"
       },
-      "thresholdNote": "Yangilik shkalasi: 30 kungacha yangi, 30–90 kun nazoratda, 90 kundan oshsa eskirgan. Yuqori panel platformaning so'nggi tekshiruvini ko'rsatadi, har bir manba yangi degani emas.",
+      "thresholdNote": "Manba yoshi shkalasi: 45 kungacha yangi, 45–120 kun nazoratda, 120 kundan oshsa eskirgan. Yuqori panel platformaning so'nggi tekshiruvini (eng eski manba bo'yicha) ko'rsatadi, har bir manba yangi degani emas.",
       "freshness": {
         "fresh": "yangi",
         "watch": "kuzatuv",
