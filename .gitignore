@@ -71,3 +71,9 @@ route-test-server.*.log
 /.lhci/
 /.lighthouseci/
 /coverage/
+
+# agent tooling / runtime logs (not project code)
+debug.log
+audit-server.*.log
+.agents/
+.codex/

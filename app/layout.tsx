@@ -61,16 +61,16 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // Diplomatic Command Surface is the default; match the OS chrome to it so
-  // the iOS/Android status bar doesn't flash a contrasting color.
-  themeColor: "#0d1117",
+  // Light is the default first paint; persisted dark/command preferences sync
+  // after hydration through SettingsSync.
+  themeColor: "#fafaf7",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // `command` is the default theme. The legacy `strategic` class remains
-    // during first paint so existing scoped map styles keep working.
-    <html lang="en" className="command strategic" suppressHydrationWarning>
+    // `lang` is corrected to the active locale client-side in SettingsSync;
+    // the App Router only lets the root layout own the <html> element.
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>

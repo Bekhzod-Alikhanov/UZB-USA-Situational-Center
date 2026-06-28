@@ -15,7 +15,7 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Runtime              | Node.js 24 LTS on Vercel                                                          | `engines.node = >=24.0.0 <25.0.0`. V8 13.x, Maglev compiler enabled.                                  |
 | Framework            | Next.js 16.2.4, App Router, Turbopack                                             | React 19.2. TypeScript 6 strict.                                                                      |
 | Styling              | Tailwind CSS v4 (`@theme`, `@utility`)                                            | All design tokens in `app/globals.css`. No tailwind.config.ts.                                        |
-| State                | Zustand v5.0.13 + persist                                                         | `lib/store/settings.ts` is the global UI store (theme, locale, hideDemo, presentationMode, AI flags). |
+| State                | Zustand v5.0.13 + persist                                                         | `lib/store/settings.ts` is the global UI store (theme, hideDemo, presentationMode).                   |
 | i18n                 | next-intl v4, subpath routing `/[locale]/...`                                     | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                                      |
 | Tables               | TanStack Table v8                                                                 | Server-shaped data, client filter/sort/page.                                                          |
 | Charts               | Recharts (line/bar/area), Visx (sankey/chord/treemap), zero-dep `<MiniBars />`    | Heavy charts are `next/dynamic({ ssr:false })`-loaded behind `<LazyMount />`.                         |
@@ -25,11 +25,10 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Live ingestion       | 5 connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov)          | Daily Vercel cron at 07:00 UTC → `raw_snapshot → normalized_observation → published_metric`.          |
 | Data governance      | No-downgrade policy, pending-vs-published, static fallback (`lib/data-governance/*`) | Enforced by `pnpm test:governance` in the verify gate.                                                |
 | Auth                 | Signed, short-lived cookie password gate on `/admin`                              | Server action + middleware. Set `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET`.                            |
-| AI                   | Vercel AI SDK v6 + `@ai-sdk/anthropic` v3.0.74                                    | Sonnet 4.6. Gated by `ASSISTANT_ENABLED` and `ANTHROPIC_API_KEY`. Lazy-loaded behind interaction.      |
 | Tests                | Vitest (unit), Playwright (e2e + axe a11y), Lighthouse CI                         | `tests/`, `lhci.config.cjs`, `playwright.config.ts`. CI on `.github/workflows/qa.yml`.                |
 | Package manager      | **pnpm**                                                                          | Lockfile at `pnpm-lock.yaml`.                                                                         |
 
-## Routes (19 public sidebar sections × 3 locales + admin/login + counterpart SSG)
+## Routes (18 public sidebar sections × 3 locales + admin/login + counterpart SSG)
 
 ```
 /[locale]/                       Overview (KPIs + globe + timeline + alerts)
@@ -51,10 +50,7 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
 /[locale]/staff                  KPI table w/ composite-score ranking
 /[locale]/news                   Curated feed
-/[locale]/assistant              AI chat (BYOK Anthropic key)
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
-
-/api/chat                        Dynamic — Anthropic stream proxy (503 unless ASSISTANT_ENABLED=true and key is set)
 ```
 
 ## Hard rules
@@ -66,9 +62,8 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 5. **`"use client"` discipline.** Server components by default. Add `"use client"` only when needed (event handlers, hooks, browser APIs). Server components cannot pass `ssr: false` to `next/dynamic` — wrap in a `"use client"` shell instead.
 6. **Suspense around `useSearchParams`.** Any client component using `useSearchParams` must be wrapped in `<Suspense>` at the page level, otherwise SSG bails out at build (`/commitments` is the canonical example).
 7. **Print exports.** Use `<PrintButton />` + `@media print` CSS in `globals.css`. The print block force-overrides dark-mode tokens to light values so PDFs are always clean. Do not introduce a separate PDF library — `window.print()` covers all current cases.
-8. **AI gating.** `/api/chat` returns 503 unless `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` are both configured. The client (`AssistantChat.tsx`) also checks server availability and `useSettings.aiEnabled`. Never call the AI route without both gates passing.
-9. **PII / operational-content boundary (visit-prep).** The platform tracks **status only** for visit preparation: percentage complete, owner role-slots, due dates, document titles, booking statuses, coverage counts. It NEVER contains: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, financial estimates, individual delegate names, personal contact details. That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, that's a security regression — reject the PR.
-10. **No-downgrade official data.** Live ingestion may store raw snapshots and review items, but it must not replace a newer approved published metric with an older source period. Same-period revisions require review. Newer official values are publication candidates, not automatic replacements, unless a source policy explicitly permits auto-publication.
+8. **PII / operational-content boundary (visit-prep).** The platform tracks **status only** for visit preparation: percentage complete, owner role-slots, due dates, document titles, booking statuses, coverage counts. It NEVER contains: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, financial estimates, individual delegate names, personal contact details. That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, that's a security regression — reject the PR.
+9. **No-downgrade official data.** Live ingestion may store raw snapshots and review items, but it must not replace a newer approved published metric with an older source period. Same-period revisions require review. Newer official values are publication candidates, not automatic replacements, unless a source policy explicitly permits auto-publication.
 
 ## Common operations
 
@@ -99,7 +94,6 @@ app/
   [locale]/             Localized App Router pages (server components by default)
     layout.tsx          Sidebar + Topbar shell
     counterparts/[id]/  generateStaticParams over data/counterparts.ts
-  api/chat/route.ts     Anthropic streamText proxy with env gating and request limits
   api/admin/ingest/*    Admin-only governed official-data ingestion dry-run/status
   api/cron/ingest       Vercel cron ingestion endpoint, requires CRON_SECRET
   api/data/*/latest     Approved-current metrics with DB-first/static-fallback reads
@@ -110,7 +104,7 @@ app/
 components/
   benchmark/, commitments/, compliance/, contacts/, counterparts/, events/,
   grants/, investments/, news/, staff/, trade/, visits/, visit-prep/,
-  overview/, map/, charts/, demo-markers/, exports/, assistant/, admin/,
+  overview/, map/, charts/, demo-markers/, exports/, admin/,
   layout/, ui/
 
 data/                   Source-of-truth typed modules (one file per entity)
@@ -174,6 +168,5 @@ Reproduce: `node scripts/lh-all.mjs` writes `lh-*.json` per route + a console su
 
 - **Operational backend is opt-in.** `DATA_BACKEND=static` (default) keeps the platform fully deployable from bundled `data/*.ts`. To wire up live ingestion, set `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` + `CRON_SECRET` and run `database/schema.sql`. The 5 live-data connectors (`lib/live-data/*`) and the daily cron (`/api/cron/ingest`) only write through the no-downgrade policy in `lib/data-governance/*`.
 - **Map basemap is light-only.** OpenFreeMap raster style does not have a dark variant; map labels stay readable on the light tiles regardless of UI theme.
-- **AI is BYOK and opt-in.** Set `ASSISTANT_ENABLED=true` and `ANTHROPIC_API_KEY` in Vercel env (or `.env.local`) to enable the assistant; without both, the route 503s gracefully.
-- **Vercel cold start.** `/api/data/*`, `/api/chat`, `/api/cron/ingest` are serverless and may take +800–1500 ms on the first request after ~5 min idle on Hobby tier. Pro tier has always-warm functions.
+- **Vercel cold start.** `/api/data/*`, `/api/cron/ingest` are serverless and may take +800–1500 ms on the first request after ~5 min idle on Hobby tier. Pro tier has always-warm functions.
 - **Russian content** is shipped but may need professional review before production publication — current strings come from compact translation passes, not native-speaker review.

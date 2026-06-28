@@ -1,7 +1,7 @@
 "use client";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { useLocale } from "next-intl";
-import { Database, AlertTriangle, AlertCircle } from "lucide-react";
+import { AlertCircle, AlertTriangle, Database } from "lucide-react";
 import { computeFreshness } from "@/lib/freshness";
 import { cn } from "@/lib/utils";
 
@@ -44,43 +44,43 @@ interface Strings {
 
 const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
   en: {
-    upToDate: "Up-to-date",
-    stale: "Stale",
-    outdated: "Outdated",
-    panelTitle: "Data freshness",
-    asOf: "Reference date",
+    upToDate: "Reviewed",
+    stale: "Review soon",
+    outdated: "Needs review",
+    panelTitle: "Source freshness",
+    asOf: "Last reviewed",
     sourcesCounted: "Sources counted",
     oldestAge: "Oldest source age",
     medianAge: "Median age",
     days: "d",
     oldestSource: "Oldest source",
-    note: "Scale: ≤30 d — up-to-date · 30–90 d — stale · >90 d — outdated. Internal legal sources (decrees, contracts) are excluded from decay.",
+    note: "Freshness scale: <=30 d fresh, 30-90 d watch, >90 d stale. Internal legal sources are excluded from decay.",
   },
   ru: {
-    upToDate: "Актуально",
-    stale: "Устаревает",
-    outdated: "Устарело",
-    panelTitle: "Актуальность данных",
-    asOf: "Эталонная дата",
+    upToDate: "Проверено",
+    stale: "Нужна проверка",
+    outdated: "Требует проверки",
+    panelTitle: "Актуальность источников",
+    asOf: "Последняя проверка",
     sourcesCounted: "Источников учтено",
-    oldestAge: "Старейший возраст",
+    oldestAge: "Возраст старейшего",
     medianAge: "Медианный возраст",
     days: "дн.",
     oldestSource: "Самый старый источник",
-    note: "Шкала: ≤30 дней — актуально · 30–90 — устаревает · >90 — устарело. Внутренние юридические источники (Указы, контракты) не считаются устаревающими.",
+    note: "Шкала свежести: <=30 дней свежий, 30-90 дней на контроле, >90 дней устарел. Внутренние юридические источники не учитываются в устаревании.",
   },
   "uz-latn": {
-    upToDate: "Yangi",
-    stale: "Eskirmoqda",
-    outdated: "Eskirgan",
-    panelTitle: "Ma'lumotlarning yangiligi",
-    asOf: "Mos sana",
+    upToDate: "Tekshirildi",
+    stale: "Tekshiruv kerak",
+    outdated: "Qayta ko'rish kerak",
+    panelTitle: "Manbalar yangiligi",
+    asOf: "So'nggi tekshiruv",
     sourcesCounted: "Hisobga olingan manbalar",
-    oldestAge: "Eng eski yosh",
+    oldestAge: "Eng eski manba yoshi",
     medianAge: "Median yosh",
     days: "kun",
     oldestSource: "Eng eski manba",
-    note: "Shkala: ≤30 kun — yangi · 30–90 — eskirmoqda · >90 — eskirgan. Ichki huquqiy manbalar (Farmonlar, shartnomalar) eskirmaydi.",
+    note: "Yangilik shkalasi: <=30 kun yangi, 30-90 kun nazoratda, >90 kun eskirgan. Ichki huquqiy manbalar eskirish hisobiga kiritilmaydi.",
   },
 };
 
@@ -134,7 +134,7 @@ export function FreshnessPill() {
         )}
         aria-haspopup="dialog"
         aria-expanded={open}
-        title={`${T.asOf}: ${REPORT.asOf} · ${REPORT.sourcesCounted} ${T.sourcesCounted.toLowerCase()}`}
+        title={`${T.asOf}: ${REPORT.asOf} - ${REPORT.sourcesCounted} ${T.sourcesCounted.toLowerCase()}`}
       >
         <Icon className="size-3" />
         <span className="hidden sm:inline">{LEVEL_LABEL[REPORT.level]}</span>

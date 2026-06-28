@@ -14,6 +14,44 @@ This file documents chart, map, table, and visualization hierarchy changes made 
 | Privatization module in `components/investments/InvestmentsView.tsx`                                                                                                 | Add safe empty state       | Future source-backed privatization pipeline                             | No verified records currently exist                             | `/[locale]/investments` -> Privatization tab                                                   | No fake records added                          |
 | Sector cards in `components/sectors/SectorsView.tsx`                                                                                                                 | Keep but add matrix        | Sector signals, why-it-matters notes, next questions                    | Cards alone made comparison hard                                | Same `/[locale]/sectors` page under opportunity matrix                                         | No analytical loss                             |
 | Map and benchmark routes                                                                                                                                             | Move in navigation only    | Geographic footprint and regional benchmark analysis                    | Secondary/advanced for executive users                          | Existing `/[locale]/map` and `/[locale]/benchmark` routes, now grouped under Advanced Analysis | No route or visualization removal              |
-| Prepare, staff, assistant, admin routes                                                                                                                              | Move in navigation only    | Internal operations, AI, and admin workflows                            | Mixed internal workflows with public/executive product          | Existing routes, now grouped under Operations                                                  | No route or visualization removal              |
+| Prepare, staff, admin routes                                                                                                                                         | Move in navigation only    | Internal operations and admin workflows                                 | Mixed internal workflows with public/executive product          | Existing routes, now grouped under Operations                                                  | No route or visualization removal              |
 
-Candidate deletions: none. No useful charts, maps, tables, historical records, source records, methodology notes, or localized pages were deleted.
+Candidate deletions: none for useful source-backed exhibits. No useful charts, maps, tables, historical records, source records, methodology notes, or localized pages were deleted.
+
+## 2026-06-27 UI Regression Follow-Up
+
+- Current component and file path: `TradeFlowChart` in `components/charts/TradeFlowChart.tsx`.
+  Value provided: quote-ready annual view of turnover, exports, imports, and balance.
+  Current problem: it was reachable through a disclosure, while a weaker inline sparkline occupied the executive summary slot.
+  Target location: promoted to the main `/[locale]/trade` flow before the annual table.
+  What remains preserved: chart, source badge, narration, annual table, methodology notes.
+  Risk: low; one above-the-fold Recharts component returns to the main trade page.
+  Recommendation: keep and promote.
+  Confidence level: high.
+
+- Current component and file path: `DualMethodologyChart` in `components/trade/DualMethodologyChart.tsx`.
+  Value provided: UZ Stat vs U.S. Census methodology comparison.
+  Current problem: important but too technical for first-screen executive scanning.
+  Target location: remains in the methodology disclosure on `/[locale]/trade`.
+  What remains preserved: full chart, methodology note, narration.
+  Risk: low; disclosure keeps performance and comprehension manageable.
+  Recommendation: keep lazy.
+  Confidence level: high.
+
+- Current component and file path: `LazyMonthlyTrade`, `LazyExportStructure`, `LazyImportStructure`, and advanced HS/ITC/services charts in `components/trade/LazyCharts.tsx`.
+  Value provided: monthly monitoring, commodity structure, mirror/HS/services analyst depth.
+  Current problem: too much technical depth above the fold would crowd the executive story.
+  Target location: unchanged below the main annual flow, loaded lazily or under Advanced Trade Analysis.
+  What remains preserved: every chart and source-backed analytical exhibit.
+  Risk: low; no visualization is deleted.
+  Recommendation: keep.
+  Confidence level: high.
+
+- Current component and file path: inline `TradePulseSummary` in `app/[locale]/trade/page.tsx`.
+  Value provided: intended as quick scan summary.
+  Current problem: visually weaker and duplicative of `TradeFlowChart`.
+  Target location: removed in favor of the existing full chart.
+  What remains preserved: underlying annual data and stronger chart representation.
+  Risk: low; analytical capability improves and no source data is removed.
+  Recommendation: archive/remove.
+  Confidence level: high.

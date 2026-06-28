@@ -5,7 +5,7 @@ const shouldStartServer = process.env.LHCI_SKIP_START !== "1";
 module.exports = {
   ci: {
     collect: {
-      url: [`${baseUrl}/en`, `${baseUrl}/en/trade`, `${baseUrl}/en/benchmark`, `${baseUrl}/en/assistant`],
+      url: [`${baseUrl}/en`, `${baseUrl}/en/trade`, `${baseUrl}/en/benchmark`],
       ...(shouldStartServer
         ? {
             startServerCommand: `pnpm start -H 127.0.0.1 -p ${startPort}`,

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "01-overview-desktop",
+    "route": "/en",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\01-overview-desktop.png",
+    "title": "Uzbekistan-USA Intelligence Platform · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en",
+    "durationMs": 2979,
+    "consoleErrors": []
+  },
+  {
+    "name": "02-overview-source-readiness",
+    "route": "/en",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\02-overview-source-readiness.png",
+    "title": "Uzbekistan-USA Intelligence Platform · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en",
+    "durationMs": 2808,
+    "consoleErrors": []
+  },
+  {
+    "name": "03-trade-desktop",
+    "route": "/en/trade",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\03-trade-desktop.png",
+    "title": "Trade & Economic Flows · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en/trade",
+    "durationMs": 3314,
+    "consoleErrors": []
+  },
+  {
+    "name": "04-investments-desktop",
+    "route": "/en/investments",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\04-investments-desktop.png",
+    "title": "Investment & Privatization · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en/investments",
+    "durationMs": 2817,
+    "consoleErrors": []
+  },
+  {
+    "name": "05-map-load-gate",
+    "route": "/en/map",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\05-map-load-gate.png",
+    "title": "U.S. Map & Uzbekistan Footprint · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en/map",
+    "durationMs": 2752,
+    "consoleErrors": []
+  },
+  {
+    "name": "06-mobile-menu",
+    "route": "/en",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\06-mobile-menu.png",
+    "title": "Uzbekistan-USA Intelligence Platform · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en",
+    "durationMs": 2920,
+    "consoleErrors": []
+  },
+  {
+    "name": "07-mobile-overview",
+    "route": "/en",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\07-mobile-overview.png",
+    "title": "Uzbekistan-USA Intelligence Platform · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/en",
+    "durationMs": 2649,
+    "consoleErrors": []
+  },
+  {
+    "name": "08-russian-overview",
+    "route": "/ru",
+    "file": "C:\\Users\\behzo\\Downloads\\US-UZB Dashboard\\docs\\audits\\platform-improvements-2026-06-27\\screenshots\\08-russian-overview.png",
+    "title": "Платформа аналитики Узбекистан-США · UZ-US Intelligence",
+    "finalUrl": "http://localhost:3010/ru",
+    "durationMs": 2779,
+    "consoleErrors": []
+  }
+]

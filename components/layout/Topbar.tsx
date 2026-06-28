@@ -1,9 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { LocaleSwitch } from "./LocaleSwitch";
-import { ThemeSwitch } from "./ThemeSwitch";
 import { FreshnessPill } from "./FreshnessPill";
 import { MobileSidebar } from "./MobileSidebar";
+import { ThemeSwitch } from "./ThemeSwitch";
 import { Search, Menu } from "lucide-react";
 import { useSearch } from "@/lib/store/search";
 import { useEffect } from "react";

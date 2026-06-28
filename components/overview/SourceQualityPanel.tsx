@@ -45,6 +45,9 @@ export async function SourceQualityPanel() {
           <MiniStat label={t("stats.watch")} value={summary.watch} tone="warn" />
           <MiniStat label={t("stats.stale")} value={summary.stale} tone="neg" />
         </div>
+        <div className="border-t border-[var(--color-border)] px-4 py-2 text-[10.5px] leading-relaxed text-[var(--color-ink-faint)]">
+          {t("thresholdNote")}
+        </div>
         <ul className="flex flex-col divide-y divide-[var(--color-border)]">
           {summary.needsAttention.slice(0, 4).map((source) => (
             <li key={source.id} className="flex items-start justify-between gap-3 px-4 py-3">

@@ -148,12 +148,6 @@ function auditSourceHotspots() {
       message: "Admin login page contains hardcoded English form copy.",
       severity: "error",
     },
-    {
-      file: "components/assistant/AssistantChatCore.tsx",
-      patterns: [/Suggestions/, /Stop/, /"Send"/, /Ask about a project/],
-      message: "Assistant chat contains hardcoded English UI copy.",
-      severity: "warn",
-    },
   ];
 
   for (const check of checks) {
@@ -190,7 +184,6 @@ async function auditRenderedRoutes() {
     "news",
     "prepare",
     "staff",
-    "assistant",
     "admin/login",
   ];
 
@@ -202,7 +195,6 @@ async function auditRenderedRoutes() {
     "What this means",
     "All sectors",
     "No projects",
-    "Privacy and scope",
     "Sign in",
     "Password",
     "Registry",

@@ -22,7 +22,6 @@
     "staff": "Staff KPI",
     "contacts": "Contacts",
     "news": "Strategic signals",
-    "assistant": "AI assistant",
     "admin": "Admin"
   },
   "navGroups": {
@@ -50,6 +49,12 @@
     "search": "Search",
     "switchLanguage": "Switch language",
     "toggleTheme": "Toggle theme",
+    "toggleThemeCurrent": "Toggle theme. Current: {theme}",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "command": "Command"
+    },
     "footer": {
       "location": "Tashkent · Presidential Administration",
       "record": "F-4 · 17.02.2026"
@@ -151,10 +156,6 @@
         "title": "Staff KPI",
         "description": "Internal staff KPI tracker, milestones, operational cadence, completion tracking, and source-marked demo status."
       },
-      "assistant": {
-        "title": "AI Assistant",
-        "description": "Environment-gated assistant for source-aware interpretation of the Uzbekistan-USA intelligence platform."
-      },
       "adminLogin": {
         "title": "Admin Login",
         "description": "Secure administrator sign-in for protected operations and internal platform management."
@@ -197,34 +198,6 @@
       "subtitle": "Bilateral economic and diplomatic coordination — source-backed metrics, momentum signals, and recommended next actions.",
       "mandate": "Source confidence remains visible; demo and pending values are separated from quote-safe figures.",
       "print": "Export PDF"
-    },
-    "story": {
-      "executiveTitle": "Where the relationship stands now",
-      "executiveSub": "A compact read before the detailed analytical workspace",
-      "actionsTitle": "Recommended next actions",
-      "actionsSub": "Decision-oriented layer; detailed registries remain below",
-      "signals": {
-        "trade": {
-          "label": "Trade relationship",
-          "value": "2025 turnover ${turnover}M",
-          "note": "Goods flows are growing, but the bilateral balance remains import-heavy from the Uzbekistan view."
-        },
-        "investment": {
-          "label": "Investment credibility",
-          "value": "${value}B verified",
-          "note": "{pending} source-backed rows need owner review; {demo} illustrative rows are excluded from the headline."
-        },
-        "diplomacy": {
-          "label": "Diplomatic momentum",
-          "value": "{count} bilateral documents",
-          "note": "Visits, agreements, and forums need a tighter project/action conversion layer."
-        }
-      },
-      "actions": {
-        "one": "Prioritize source-backed investment and privatization records before external briefings.",
-        "two": "Use Trade & Economic Flows for the quote-ready series; keep HS/ITC detail in advanced analysis.",
-        "three": "Track bottlenecks through commitments, compliance, and sector next actions rather than isolated pages."
-      }
     },
     "narrationLabels": {
       "what": "What this means",
@@ -406,6 +379,7 @@
         "watch": "Watch",
         "stale": "Stale"
       },
+      "thresholdNote": "Freshness scale: <=30 days fresh, 30-90 days watch, >90 days stale. The topbar shows last platform review, not a claim that every source is fresh.",
       "freshness": {
         "fresh": "fresh",
         "watch": "watch",
@@ -698,6 +672,15 @@
       "credibility": {
         "label": "Credibility rule:",
         "text": "headline investment totals separate verified public records, source-backed records pending owner review, and illustrative demo pipeline rows. Demo values remain useful for interface testing, but they are not official pipeline totals."
+      },
+      "demoControl": {
+        "show": "Show demo pipeline ({count})",
+        "hide": "Hide demo pipeline"
+      },
+      "stageControl": {
+        "showAll": "Show all stages ({count} empty)",
+        "hideEmpty": "Hide empty stages",
+        "hiddenLabel": "Empty stages hidden:"
       },
       "tabs": {
         "board": "Board",
@@ -1105,32 +1088,6 @@
       }
     }
   },
-  "assistant": {
-    "title": "AI assistant",
-    "subtitle": "Ask the assistant anything about the portfolio — RAG over all data files",
-    "disabled": "Assistant disabled. Activate it in Admin → AI settings.",
-    "placeholder": "Ask about a project, visit, commitment, partner…",
-    "send": "Send",
-    "thinking": "Thinking…",
-    "model": "Model",
-    "chat": {
-      "disabledTitle": "AI assistant is disabled",
-      "disabledDescription": "Enable it in Admin → AI assistant toggle.",
-      "title": "Claude — Center Assistant",
-      "intro": "Ask me anything about the bilateral portfolio. I have up-to-date context on trade, investments, visits, agreements, commitments, grants, counterparts, compliance, and news.",
-      "suggestionsLabel": "Suggestions",
-      "suggestions": {
-        "trade": "What is the 2025 U.S.-Uzbekistan trade turnover?",
-        "navoi": "Which U.S. companies have investment projects in Navoi region?",
-        "visits": "Summarize the upcoming visits in the next 90 days.",
-        "ofac": "What is Uzbekistan's OFAC status as of today?",
-        "caucus": "Who co-chairs the Uzbekistan Caucus in Congress?"
-      },
-      "unavailable": "AI assistant unavailable — server toggle or key not configured. Set {assistantEnabled} and {anthropicKey} in Vercel → Project Settings → Environment Variables, then redeploy. Demo and analytics modules work without the assistant.",
-      "requestFailed": "Request failed.",
-      "stop": "Stop"
-    }
-  },
   "map": {
     "title": "Interactive map",
     "subtitle": "Investments, trade flows, live delegations",
@@ -1190,22 +1147,18 @@
     "presentation": "Presentation mode",
     "presentationDesc": "Removes DEMO badges and dotted underlines but keeps the data.",
     "theme": "Theme",
-    "themeDesc": "Choose the command surface or legacy light/dark modes.",
+    "themeDesc": "Choose the reading surface for this browser.",
     "themes": {
-      "command": "Command",
       "light": "Light",
-      "dark": "Dark"
+      "dark": "Dark",
+      "command": "Command"
     },
-    "ai": "AI assistant",
-    "aiDesc": "Toggle to enable the Claude-powered assistant. Default model: Sonnet 4.6.",
-    "model": "AI model",
     "registry": "Demo data registry",
     "registryDesc": "Master list of every synthetic value and the agency responsible for supplying real data.",
     "audit": "Audit log",
     "import": "CSV / XLSX import",
     "users": "Users",
-    "delegationLocation": "Delegation live location"
-    ,
+    "delegationLocation": "Delegation live location",
     "login": {
       "title": "Admin sign-in",
       "subtitle": "Restricted to Situational Center personnel",

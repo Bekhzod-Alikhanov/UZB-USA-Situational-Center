@@ -55,7 +55,7 @@ Localization is a P0 release blocker.
 - Supported locales are `en`, `ru`, and `uz-latn`.
 - English pages must not show Russian shell labels unless intentionally multilingual.
 - Russian and Uzbek Latin pages must not show English UI copy except official names, source titles, company names, treaty titles, source IDs, HS/ECCN/EBOPS terms, and quoted source names.
-- UI labels, explanations, filters, empty states, table headers, chart titles, chart legends, axis labels, tooltips, CTAs, dialogs, admin labels, assistant labels, and source/confidence labels must be localized.
+- UI labels, explanations, filters, empty states, table headers, chart titles, chart legends, axis labels, tooltips, CTAs, dialogs, admin labels, and source/confidence labels must be localized.
 - Dates, numbers, percentages, and currencies should use locale-aware formatting.
 - Keep official source titles in their original language where appropriate, but localize surrounding explanatory copy.
 - Do not add new hardcoded English/Russian/Uzbek UI strings in components. Add message keys or typed locale maps.
@@ -122,8 +122,7 @@ Do not delete or wholesale rewrite without owner approval:
 - Admin routes and write-capable APIs must remain authenticated.
 - Cron ingestion must require `CRON_SECRET`.
 - Do not expose service-role credentials or private operational data client-side.
-- The assistant must remain env-gated and should not be used for sensitive personal, passport, reservation, confidential negotiation, or non-public legal content.
-- Add rate limiting before treating assistant/admin/live probe functionality as production-ready.
+- Add rate limiting before treating admin/live-probe functionality as production-ready.
 
 ## Done Criteria
 

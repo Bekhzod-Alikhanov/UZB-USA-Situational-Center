@@ -102,13 +102,18 @@ export function InvestmentsView() {
   const [minValue, setMinValue] = useState<number>(0);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Investment | null>(null);
+  const [showDemoRows, setShowDemoRows] = useState(false);
+  const [showAllStages, setShowAllStages] = useState(false);
   const hideDemo = useSettings((s) => s.hideDemo);
   const presentation = useSettings((s) => s.presentationMode);
 
   const filtered = useMemo(() => {
     return investments.filter((i) => {
+      const rowConfidence = investmentConfidence(i);
+      if (hideDemo && i.is_demo) return false;
+      if (!showDemoRows && confidence === "all" && rowConfidence === "illustrative_demo") return false;
       if (sector !== "all" && i.sector !== sector) return false;
-      if (confidence !== "all" && investmentConfidence(i) !== confidence) return false;
+      if (confidence !== "all" && rowConfidence !== confidence) return false;
       if (i.valueMusd < minValue) return false;
       if (search) {
         const s = search.toLowerCase();
@@ -121,7 +126,7 @@ export function InvestmentsView() {
       }
       return true;
     });
-  }, [sector, confidence, minValue, search]);
+  }, [sector, confidence, minValue, search, hideDemo, showDemoRows]);
 
   const grouped = useMemo(() => {
     const m: Record<InvestmentStatus, Investment[]> = {
@@ -142,18 +147,41 @@ export function InvestmentsView() {
     ["verified_official", "company_confirmed"].includes(investmentConfidence(i)),
   );
   const demoFiltered = filtered.filter((i) => investmentConfidence(i) === "illustrative_demo");
+  const hiddenDemoRows = investments.filter((i) => investmentConfidence(i) === "illustrative_demo").length;
+  const visibleStatusOrder = showAllStages ? STATUS_ORDER : STATUS_ORDER.filter((status) => grouped[status].length > 0);
+  const hiddenEmptyStatuses = STATUS_ORDER.filter((status) => grouped[status].length === 0);
   const actionProfileFor = (investment: Investment) => localizedActionProfile(investment, t, locale);
   const selectedAction = selected ? actionProfileFor(selected) : null;
 
   return (
     <Tabs.Root defaultValue="board" className="flex flex-col gap-4">
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
-        <div className="flex items-start gap-2">
+        <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-start gap-2">
           <Info className="mt-0.5 size-3.5 shrink-0 text-[var(--color-primary)]" aria-hidden />
           <p>
             <span className="font-semibold text-[var(--color-ink)]">{t("credibility.label")}</span>{" "}
             {t("credibility.text")}
           </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowDemoRows((value) => !value)}
+              className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[11.5px] font-medium text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
+            >
+              {showDemoRows ? t("demoControl.hide") : t("demoControl.show", { count: hiddenDemoRows })}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowAllStages((value) => !value)}
+              className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-[11.5px] font-medium text-[var(--color-ink-muted)] transition hover:bg-[var(--color-surface-2)] hover:text-[var(--color-ink)]"
+            >
+              {showAllStages
+                ? t("stageControl.hideEmpty")
+                : t("stageControl.showAll", { count: hiddenEmptyStatuses.length })}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -243,21 +271,35 @@ export function InvestmentsView() {
       </div>
 
       <Tabs.Content value="board">
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          {STATUS_ORDER.map((s) => (
-            <Column
-              key={s}
-              statusLabel={t(`statuses.${s}`)}
-              items={grouped[s]}
-              onOpen={setSelected}
-              emptyTitle={t("empty.title")}
-              emptyDescription={t("empty.description")}
-              confidenceLabel={(confidenceKey) => t(`confidence.${confidenceKey}`)}
-              nextActionLabel={t("table.nextAction")}
-              actionProfileFor={actionProfileFor}
-            />
-          ))}
-        </div>
+        {visibleStatusOrder.length ? (
+          <div className="flex gap-3 overflow-x-auto pb-2">
+            {visibleStatusOrder.map((s) => (
+              <Column
+                key={s}
+                statusLabel={t(`statuses.${s}`)}
+                items={grouped[s]}
+                onOpen={setSelected}
+                emptyTitle={t("empty.title")}
+                emptyDescription={t("empty.description")}
+                confidenceLabel={(confidenceKey) => t(`confidence.${confidenceKey}`)}
+                nextActionLabel={t("table.nextAction")}
+                actionProfileFor={actionProfileFor}
+              />
+            ))}
+          </div>
+        ) : (
+          <EmptyState className="rounded-md border border-dashed border-[var(--color-border)] px-4 py-6" title={t("empty.title")} description={t("empty.description")} />
+        )}
+        {!showAllStages && hiddenEmptyStatuses.length ? (
+          <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px] text-[var(--color-ink-muted)]">
+            <span className="font-medium text-[var(--color-ink-faint)]">{t("stageControl.hiddenLabel")}</span>
+            {hiddenEmptyStatuses.map((status) => (
+              <span key={status} className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-0.5">
+                {t(`statuses.${status}`)}
+              </span>
+            ))}
+          </div>
+        ) : null}
       </Tabs.Content>
 
       <Tabs.Content value="table">
@@ -594,7 +636,7 @@ function Column({
         })}
         {items.length === 0 ? (
           <EmptyState
-            className="px-3 py-5"
+            className="px-2 py-3"
             title={emptyTitle}
             description={emptyDescription}
           />

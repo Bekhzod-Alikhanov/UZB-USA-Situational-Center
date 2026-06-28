@@ -90,7 +90,7 @@ function pickUi(locale: string) {
 }
 
 export function ExecutiveCommandCenter({ locale }: { locale: string }) {
-  const briefing = buildExecutiveBriefing();
+  const briefing = buildExecutiveBriefing(locale);
   const ui = pickUi(locale);
 
   return (

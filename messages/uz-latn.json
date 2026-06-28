@@ -22,7 +22,6 @@
     "staff": "Shtab KPI",
     "contacts": "Kontaktlar",
     "news": "Yangiliklar tasmasi",
-    "assistant": "AI-yordamchi",
     "admin": "Boshqaruv"
   },
   "navGroups": {
@@ -50,6 +49,12 @@
     "search": "Qidiruv",
     "switchLanguage": "Tilni almashtirish",
     "toggleTheme": "Mavzuni almashtirish",
+    "toggleThemeCurrent": "Mavzuni almashtirish. Hozir: {theme}",
+    "themes": {
+      "light": "Yorug'",
+      "dark": "Qorong'i",
+      "command": "Operatsion"
+    },
     "footer": {
       "location": "Toshkent · Prezident Administratsiyasi",
       "record": "F-4 · 17.02.2026"
@@ -151,10 +156,6 @@
         "title": "Shtab KPI",
         "description": "Shtabning ichki KPI kuzatuvchisi, bosqichlar, operatsion ritm, bajarilish kuzatuvi va demo-status belgilari."
       },
-      "assistant": {
-        "title": "AI-yordamchi",
-        "description": "O'zbekiston-AQSh razvedka platformasini manbalar asosida talqin qilish uchun muhit orqali yoqiladigan yordamchi."
-      },
       "adminLogin": {
         "title": "Administrator kirishi",
         "description": "Ichki operatsiyalar va platforma boshqaruvi uchun himoyalangan administrator kirishi."
@@ -197,34 +198,6 @@
       "subtitle": "Ikki tomonlama iqtisodiy va diplomatik aloqalarni muvofiqlashtirish — manba bilan ko‘rsatkichlar, impuls signallari va tavsiya etilgan harakatlar.",
       "mandate": "Manba ishonchliligi ko‘rinib turadi; demo va ko‘rib chiqilayotgan qiymatlar iqtibosga tayyor raqamlardan ajratilgan.",
       "print": "PDF eksport"
-    },
-    "story": {
-      "executiveTitle": "Munosabatlar hozir qayerda",
-      "executiveSub": "Batafsil tahliliy maydondan oldin qisqa ijro ko‘rinishi",
-      "actionsTitle": "Tavsiya etilgan keyingi harakatlar",
-      "actionsSub": "Qaror qabul qilish qatlami; batafsil reestrlar quyida qoladi",
-      "signals": {
-        "trade": {
-          "label": "Savdo munosabatlari",
-          "value": "2025 aylanma ${turnover}M",
-          "note": "Tovar oqimlari o‘smoqda, ammo O‘zbekiston tomoni uchun balans AQShdan importga og‘ishgan."
-        },
-        "investment": {
-          "label": "Investitsiya ishonchliligi",
-          "value": "${value}B tekshirildi",
-          "note": "{pending} manbali qator egasi tomonidan ko‘rib chiqilishi kerak; {demo} illyustrativ qator sarlavha ko‘rsatkichidan chiqarilgan."
-        },
-        "diplomacy": {
-          "label": "Diplomatik impuls",
-          "value": "{count} ikki tomonlama hujjat",
-          "note": "Tashriflar, bitimlar va forumlar loyiha va mas’ul harakatlar bilan yanada zichroq bog‘lanishi kerak."
-        }
-      },
-      "actions": {
-        "one": "Tashqi brifinglardan oldin manbali investitsiya va xususiylashtirish yozuvlarini ustuvor tekshirish.",
-        "two": "Iqtibosga tayyor savdo qatori uchun Savdo bo‘limidan foydalanish; HS/ITC tafsilotlarini kengaytirilgan tahlilda saqlash.",
-        "three": "To‘siqlarni alohida sahifalar emas, topshiriqlar, compliance va sektor keyingi harakatlari orqali kuzatish."
-      }
     },
     "narrationLabels": {
       "what": "Bu nimani anglatadi",
@@ -406,6 +379,7 @@
         "watch": "Kuzatuv",
         "stale": "Eskirgan"
       },
+      "thresholdNote": "Yangilik shkalasi: 30 kungacha yangi, 30–90 kun nazoratda, 90 kundan oshsa eskirgan. Yuqori panel platformaning so'nggi tekshiruvini ko'rsatadi, har bir manba yangi degani emas.",
       "freshness": {
         "fresh": "yangi",
         "watch": "kuzatuv",
@@ -698,6 +672,15 @@
       "credibility": {
         "label": "Ishonchlilik qoidasi:",
         "text": "asosiy investitsiya ko‘rsatkichlari tekshirilgan ochiq yozuvlar, egasi ko‘rib chiqayotgan manbali yozuvlar va namoyish pipeline qatorlarini alohida ko‘rsatadi. Demo qiymatlar interfeysni test qilish uchun foydali, ammo rasmiy pipeline jami emas."
+      },
+      "demoControl": {
+        "show": "Demo pipeline ko'rsatish ({count})",
+        "hide": "Demo pipelineni yashirish"
+      },
+      "stageControl": {
+        "showAll": "Barcha bosqichlarni ko'rsatish ({count} bo'sh)",
+        "hideEmpty": "Bo'sh bosqichlarni yashirish",
+        "hiddenLabel": "Yashirilgan bo'sh bosqichlar:"
       },
       "tabs": {
         "board": "Doska",
@@ -1105,32 +1088,6 @@
       }
     }
   },
-  "assistant": {
-    "title": "AI-yordamchi",
-    "subtitle": "Portfel haqida yordamchidan so‘rang — RAG barcha ma’lumot fayllari bo‘yicha",
-    "disabled": "Yordamchi o‘chirilgan. Uni Boshqaruv → AI sozlamalaridan yoqing.",
-    "placeholder": "Loyiha, tashrif, kelishuv, hamkor haqida so‘rang…",
-    "send": "Jo‘natish",
-    "thinking": "O‘ylanmoqda…",
-    "model": "AI modeli",
-    "chat": {
-      "disabledTitle": "AI-yordamchi o‘chirilgan",
-      "disabledDescription": "Uni Boshqaruv → AI-yordamchi bo‘limida yoqing.",
-      "title": "Claude — Markaz yordamchisi",
-      "intro": "Ikki tomonlama portfel haqida savol bering. Yordamchida savdo, investitsiyalar, tashriflar, bitimlar, topshiriqlar, grantlar, hamkorlar, kompliyans va yangiliklar bo‘yicha aktual kontekst bor.",
-      "suggestionsLabel": "Takliflar",
-      "suggestions": {
-        "trade": "2025-yilda AQSh-O‘zbekiston savdo aylanmasi qancha bo‘lgan?",
-        "navoi": "Navoiy hududida qaysi AQSh kompaniyalarining investitsiya loyihalari bor?",
-        "visits": "Keyingi 90 kundagi tashriflarni qisqacha jamla.",
-        "ofac": "Bugungi kunda O‘zbekistonning OFAC statusi qanday?",
-        "caucus": "Kongressdagi Uzbekistan Caucus hamraislarini kimlar tashkil etadi?"
-      },
-      "unavailable": "AI-yordamchi mavjud emas — server toggli yoki kalit sozlanmagan. Vercel → Project Settings → Environment Variables bo‘limida {assistantEnabled} va {anthropicKey} ni belgilang, keyin qayta deploy qiling. Demo va tahliliy modullar yordamchisiz ham ishlaydi.",
-      "requestFailed": "So‘rov bajarilmadi.",
-      "stop": "To‘xtatish"
-    }
-  },
   "map": {
     "title": "Interaktiv xarita",
     "subtitle": "Investitsiyalar, savdo oqimlari, jonli delegatsiyalar",
@@ -1190,15 +1147,12 @@
     "presentation": "Taqdimot rejimi",
     "presentationDesc": "DEMO belgilari va nuqtali tagchiziqlarni yashiradi, lekin ma’lumotlar qoladi.",
     "theme": "Mavzu",
-    "themeDesc": "Command yuzasini yoki eski yorug‘/qorong‘i rejimlarni tanlang.",
+    "themeDesc": "Ushbu brauzer uchun ko'rish rejimini tanlang.",
     "themes": {
-      "command": "Boshqaruv",
-      "light": "Yorug‘",
-      "dark": "Qorong‘i"
+      "light": "Yorug'",
+      "dark": "Qorong'i",
+      "command": "Operatsion"
     },
-    "ai": "AI-yordamchi",
-    "aiDesc": "Claude asosidagi yordamchini yoqish. Standart model: Sonnet 4.6.",
-    "model": "AI modeli",
     "registry": "Demo ma’lumotlar reestri",
     "registryDesc": "Har bir sintetik qiymat va haqiqiy ma’lumotni yetkazib beruvchi idora ro‘yxati.",
     "audit": "Audit jurnali",

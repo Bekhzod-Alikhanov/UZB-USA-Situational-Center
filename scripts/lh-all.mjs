@@ -19,7 +19,6 @@ const routes = [
   "compliance",
   "staff",
   "news",
-  "assistant",
   "benchmark",
   "sectors",
 ];

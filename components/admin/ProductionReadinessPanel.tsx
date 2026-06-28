@@ -21,7 +21,6 @@ export function ProductionReadinessPanel() {
   const env = {
     adminPassword: Boolean(process.env.ADMIN_PASSWORD),
     adminSessionSecret: Boolean(process.env.ADMIN_SESSION_SECRET),
-    assistantEnabled: process.env.ASSISTANT_ENABLED === "true" && Boolean(process.env.ANTHROPIC_API_KEY),
     dataBackend: process.env.DATA_BACKEND || "static",
     supabase: Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY),
   };
@@ -43,12 +42,6 @@ export function ProductionReadinessPanel() {
           </div>
           <EnvRow label="ADMIN_PASSWORD" ok={env.adminPassword} detail="Required for admin login" />
           <EnvRow label="ADMIN_SESSION_SECRET" ok={env.adminSessionSecret} detail="Recommended for signed cookies" />
-          <EnvRow
-            label="AI assistant"
-            ok={env.assistantEnabled}
-            detail="ASSISTANT_ENABLED=true and ANTHROPIC_API_KEY"
-            optional
-          />
           <EnvRow
             label="DATA_BACKEND"
             ok={env.dataBackend !== "static"}

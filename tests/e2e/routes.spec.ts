@@ -19,7 +19,6 @@ const routes = [
   "compliance",
   "staff",
   "news",
-  "assistant",
   "benchmark",
   "admin/login",
 ];
@@ -60,9 +59,4 @@ test("critical API routes preserve expected auth and fallback behavior", async (
   await expect((await request.get("/api/data/mobility/latest")).status()).toBe(200);
   await expect((await request.get("/api/admin/ingest/status")).status()).toBe(401);
   await expect((await request.get("/api/cron/ingest")).status()).toBe(401);
-
-  const chat = await request.post("/api/chat", {
-    data: { messages: [{ role: "user", parts: [{ type: "text", text: "smoke" }] }] },
-  });
-  expect([200, 400, 503]).toContain(chat.status());
 });

@@ -1,0 +1,53 @@
+[
+  {
+    "route": "/en/trade",
+    "file": "en-trade-light.png",
+    "htmlClass": "light-default",
+    "svgCount": 63,
+    "emptyProjectCopyVisible": false
+  },
+  {
+    "route": "/ru/trade",
+    "file": "ru-trade-light.png",
+    "htmlClass": "light-default",
+    "svgCount": 63,
+    "emptyProjectCopyVisible": false
+  },
+  {
+    "route": "/en/investments",
+    "file": "en-investments-light.png",
+    "htmlClass": "light-default",
+    "svgCount": 45,
+    "emptyProjectCopyVisible": false
+  },
+  {
+    "route": "/ru/investments",
+    "file": "ru-investments-light.png",
+    "htmlClass": "light-default",
+    "svgCount": 45,
+    "emptyProjectCopyVisible": false
+  },
+  {
+    "route": "/en",
+    "file": "en-home-light.png",
+    "htmlClass": "light-default",
+    "svgCount": 165,
+    "emptyProjectCopyVisible": false
+  },
+  {
+    "route": "/ru",
+    "file": "ru-home-light.png",
+    "htmlClass": "light-default",
+    "svgCount": 165,
+    "emptyProjectCopyVisible": false
+  },
+  {
+    "route": "/en/trade theme cycle",
+    "classes": [
+      "light-default",
+      "dark",
+      "command strategic",
+      "light-default"
+    ]
+  }
+]

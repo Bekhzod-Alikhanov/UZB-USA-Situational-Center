@@ -18,7 +18,6 @@ const routes = [
   "compliance",
   "staff",
   "news",
-  "assistant",
   "benchmark",
   "admin/login",
 ];
@@ -37,15 +36,6 @@ for (const locale of locales) {
     await checkGet(`/${locale}${route ? `/${route}` : ""}`);
   }
   await checkGet(`/${locale}/admin`, [302, 303, 307, 308]);
-}
-
-const chatResponse = await fetch(`${baseUrl}/api/chat`, {
-  method: "POST",
-  headers: { "content-type": "application/json" },
-  body: JSON.stringify({ messages: [{ role: "user", parts: [{ type: "text", text: "smoke test" }] }] }),
-});
-if (![200, 400, 503].includes(chatResponse.status)) {
-  failures.push(`/api/chat: expected 200/400/503 depending on env/provider state but received ${chatResponse.status}`);
 }
 
 const liveHealth = await fetch(`${baseUrl}/api/live-data/health`, { redirect: "manual" });
