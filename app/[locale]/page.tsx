@@ -19,6 +19,7 @@ import { nextAnchorVisit } from "@/data/visits";
 import { grants } from "@/data/grants";
 import { KpiCard } from "@/components/overview/KpiCard";
 import { MicroKpi } from "@/components/overview/MicroKpi";
+import { CountUpValue } from "@/components/overview/CountUpValue";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { ChartNarration } from "@/components/ui/ChartNarration";
 import { TradeFlowEditorial } from "@/components/overview/TradeFlowEditorial";
@@ -105,10 +106,11 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           icon={<TrendingUp className="size-4" />}
           label={t("kpi.turnover2025")}
           value={
-            <>
-              ${y2025.turnover.toLocaleString("en-US")}
-              <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
-            </>
+            <CountUpValue
+              value={y2025.turnover}
+              prefix="$"
+              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
+            />
           }
           sub={t("kpi.uzStat2025")}
           deltaPct={turnoverDelta}
@@ -120,10 +122,11 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           icon={<ArrowUpFromLine className="size-4" />}
           label={t("kpi.exports2025")}
           value={
-            <>
-              ${y2025.exports.toLocaleString("en-US")}
-              <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
-            </>
+            <CountUpValue
+              value={y2025.exports}
+              prefix="$"
+              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
+            />
           }
           sub={t("kpi.jan2026Exports")}
           deltaPct={exportsDelta}
@@ -135,10 +138,11 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           icon={<ArrowDownToLine className="size-4" />}
           label={t("kpi.imports2025")}
           value={
-            <>
-              ${y2025.imports.toLocaleString("en-US")}
-              <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
-            </>
+            <CountUpValue
+              value={y2025.imports}
+              prefix="$"
+              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
+            />
           }
           sub={t("kpi.jan2026Imports", { growth: tradeJan2026.importsGrowthPct })}
           deltaPct={importsDelta}
@@ -150,10 +154,11 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           icon={<Scale className="size-4" />}
           label={t("kpi.balance2025")}
           value={
-            <>
-              −${Math.abs(y2025.balance).toLocaleString("en-US")}
-              <span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>
-            </>
+            <CountUpValue
+              value={Math.abs(y2025.balance)}
+              prefix="−$"
+              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
+            />
           }
           sub={t("kpi.deficitWidened")}
           delta="neg"
@@ -166,14 +171,14 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
         <MicroKpi
           tone="agree"
           label={t("kpi.agreements")}
-          value={agreementsAggregate.totalDocuments}
+          value={<CountUpValue value={agreementsAggregate.totalDocuments} />}
           sub={t("kpi.investAgreements", { count: agreementsAggregate.totalInvestAgreements })}
           href={`/${locale}/agreements`}
         />
         <MicroKpi
           tone="invest"
           label={t("kpi.projects")}
-          value={investmentCredibilitySummary.verified.totalProjects}
+          value={<CountUpValue value={investmentCredibilitySummary.verified.totalProjects} />}
           sub={t("kpi.verifiedPending", {
             value: (verifiedInvestmentValue / 1000).toFixed(2),
             pending: pendingInvestmentRows,
@@ -190,14 +195,14 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
         <MicroKpi
           tone="people"
           label={t("kpi.delegations")}
-          value={liveDelegations.length}
+          value={<CountUpValue value={liveDelegations.length} />}
           sub={anchor ? t("kpi.nextDate", { date: anchor.date }) : undefined}
           href={`/${locale}/visits`}
         />
         <MicroKpi
           tone="rose"
           label={t("kpi.grants")}
-          value={`$${grantsTotal.toFixed(1)}M`}
+          value={<CountUpValue value={grantsTotal} prefix="$" suffix="M" decimals={1} />}
           sub={t("kpi.grantPrograms", { count: grants.length })}
           href={`/${locale}/grants`}
         />
