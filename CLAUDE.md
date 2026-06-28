@@ -145,13 +145,14 @@ DEMO_DATA_REGISTRY.md   Master log of every is_demo entry + responsible agency
 
 ## Accessibility & performance targets
 
-Latest local Lighthouse sweep (May 2026, all 17 routes, mobile emulation, `pnpm build && next start -p 3100`):
+Latest **live production** Lighthouse sweep (June 2026, 16 routes, `https://uz-us-center.vercel.app/ru`, mobile emulation; Lighthouse's accessibility category runs axe-core):
 
-- **Median Performance: 91.** All 17 routes ≥ 89. Best routes hit 92.
-- **Median Accessibility: 98.** Six routes hit 100 (`/`, `/trade`, `/map`, `/events`, `/benchmark`, `/counterparts`).
-- **TBT: 13–59 ms across all routes** (was 460 ms on `/trade` before Wave 2 lazy-loading).
+- **Median Performance: 93.** Range 86–99; 14 of 16 routes ≥ 92. Two heavier routes: `staff` (88) and `news` (86) from their interactive tables.
+- **Median Accessibility: 100.** Every route 100 after the June contrast/label-in-name pass (small delta-pill / decision-strip / map status-badge text darkened for AA in the light theme; `LocaleSwitch` + `SourceBadge` accessible names now contain their visible text).
+- **Best Practices: 96 · SEO: 100** median.
+- **TBT: under 50 ms on 14 of 16 routes** (`staff`/`news` ~300 ms from table sort/filter hydration).
 - **CLS: 0 everywhere.**
-- **Transfer: 365–410 KB per route** (down from 427–536 KB baseline).
+- **Transfer: 399–529 KB per route.**
 
 Targets to keep:
 
@@ -162,7 +163,7 @@ Targets to keep:
 - Images use `next/image` where remote (whitehouse.gov, state.gov, wikimedia).
 - No client-side data fetching during SSG — pages should hit `data/*.ts` directly.
 
-Reproduce: `node scripts/lh-all.mjs` writes `lh-*.json` per route + a console summary.
+Reproduce: `node scripts/lh-all.mjs` (local `next start`) or `LH_BASE=https://uz-us-center.vercel.app/ru node scripts/lh-all.mjs` (live production) writes `lh-*.json` per route + a console summary.
 
 ## Known constraints
 

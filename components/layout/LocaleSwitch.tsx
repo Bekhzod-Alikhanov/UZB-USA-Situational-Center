@@ -30,7 +30,7 @@ export function LocaleSwitch() {
       <DropdownMenu.Trigger asChild>
         <button
           type="button"
-          aria-label={tShell("switchLanguage")}
+          aria-label={`${current.code} — ${tShell("switchLanguage")}`}
           className={cn(
             "inline-flex items-center gap-1.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-2)]",
             pending && "opacity-60",

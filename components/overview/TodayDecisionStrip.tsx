@@ -111,11 +111,7 @@ function DecisionCard({
   if (!item) return null;
 
   const toneClass =
-    tone === "rose"
-      ? "text-[var(--color-rose)] bg-[var(--color-rose-soft)] border-[var(--color-rose)]/30"
-      : tone === "invest"
-        ? "text-[var(--color-invest)] bg-[var(--color-invest-soft)] border-[var(--color-invest)]/30"
-        : "text-[var(--color-primary)] bg-[var(--color-primary-soft)] border-[var(--color-primary)]/30";
+    tone === "rose" ? "exec-tone-rose" : tone === "invest" ? "exec-tone-invest" : "exec-tone-primary";
 
   return (
     <article className="group rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 transition hover:border-[var(--color-border-strong)]">

@@ -1,8 +1,30 @@
 # UZ–US Situational Center · platform
 
-> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 20 routes · ~43k lines of code · 69 data integrations · [enterprise architecture pack](./docs/architecture/)
+[![Live demo](https://img.shields.io/badge/demo-live-0a7c5a?style=flat-square)](https://uz-us-center.vercel.app/en)
+![Next.js](https://img.shields.io/badge/Next.js-16.2-000?style=flat-square&logo=nextdotjs)
+![React](https://img.shields.io/badge/React-19.2-149eca?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=flat-square&logo=tailwindcss)
+![Lighthouse Performance](https://img.shields.io/badge/Lighthouse_Perf-93-0a7c5a?style=flat-square&logo=lighthouse)
+![Accessibility](https://img.shields.io/badge/A11y-100-0a7c5a?style=flat-square&logo=lighthouse)
+![Code](https://img.shields.io/badge/code-~44k_lines-1a3a6c?style=flat-square)
+![i18n](https://img.shields.io/badge/i18n-EN·RU·UZ-1a3a6c?style=flat-square)
+
+> **[🌐 Live demo](https://uz-us-center.vercel.app/en)** · trilingual (EN / RU / UZ-Latn) · 20 routes · ~44k lines of code · 69 data integrations · [enterprise architecture pack](./docs/architecture/)
 >
 > Production-grade bilateral coordination platform for the Situational Center on Uzbekistan–USA cooperation. Built for the Advisor to the President, government officials, business stakeholders, and the Center's staff.
+
+## Contents
+
+[Why it stands out](#why-it-stands-out) · [What's inside](#whats-inside) · [Stack](#stack) · [Quick start](#quick-start) · [Routes](#routes-18-public-sidebar-sections--3-locales--adminlogin--counterpart-ssg) · [Deploy](#deploy-to-vercel) · [QA tooling](#qa-tooling) · [Production operations](#production-operations) · [Hard rules](#hard-rules-for-contributors) · [Source provenance](#source-provenance)
+
+## Why it stands out
+
+- **Quote-safe by construction.** Every figure traces to `data/sources.ts` (63 cited primary sources) or is flagged `is_demo`; investment records are split into verified / source-backed-pending / illustrative buckets so a demo row can never be mistaken for an official total.
+- **Governed live-data pipeline.** A daily Vercel cron lands official figures in a `raw_snapshot → normalized_observation → published_metric` flow behind a **no-downgrade policy** — newer-period official values are publication candidates, not silent overwrites.
+- **Genuinely trilingual** (EN · RU · UZ-Latn) down to chart narration, table headers, status labels, and source confidence — not just the shell.
+- **Executive-grade UX.** One-click presentation mode hides demo markers for live briefings; clean one-page print-to-PDF; light "day" surface + dark "command" surface; reduced-motion-aware.
+- **Measured, not claimed.** Live production Lighthouse: median Performance **93**, Accessibility **100 on every route**, CLS **0** everywhere.
 
 ![Overview](docs/screenshots/overview.webp)
 
@@ -20,13 +42,13 @@
 ## What's inside
 
 - **20 trilingual routes** (English, Russian, Uzbek-Latin) — executive brief, trade, investments, visits, agreements, commitments, grants, sectors, sanctions and export-control compliance, counterparts, regional benchmark, events calendar, contacts directory, staff KPI, strategic news signals, visit-preparation workspace, and an interactive U.S. states map.
-- **36,500+ lines of hand-written TypeScript** across 93 React components, 42 source-of-truth data modules, 10 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19). Counting the trilingual i18n catalogs (~3,500 lines), design-token CSS, build/validation scripts, and the PostgreSQL schema, the codebase is **≈ 43,000 hand-written lines** of code and content. Generated artifacts (the pnpm lockfile, Draw.io diagram XML) are excluded.
+- **38,500+ lines of hand-written TypeScript** across 99 React components, 42 source-of-truth data modules, 10 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19). Counting the trilingual i18n catalogs (~3,600 lines), design-token CSS, build/validation scripts, and the PostgreSQL schema, the codebase is **≈ 44,000 hand-written lines** of code and content. Generated artifacts (the pnpm lockfile, Draw.io diagram XML) are excluded.
 - **69 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 63 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
 - **Enterprise architecture pack** — [`docs/architecture/`](./docs/architecture/) ships **~6,400 lines** of target-architecture documentation across **25 Markdown files**: 11 narrative documents (overview, target architecture, component catalog, auth & RBAC, data flow, user journeys, BPMN, bottlenecks & risks, migration roadmap, glossary) and **13 diagrams** in Draw.io (C4 context / container / component, BPMN for ingestion / publication / commitment, viewer & admin journeys, auth sequence, RBAC matrix, data lineage, deployment, UML data model). Designed to read in Obsidian or directly on GitHub.
 - **Verification gate** — `pnpm verify` runs lint, typecheck, source/route validation, governance checks, and Vitest unit tests. Browser, accessibility, and Lighthouse checks are separate heavier commands and should be run before public release.
-- **Lighthouse and axe coverage** — local sweep across all 17 audited routes shows **median Performance 91, median Accessibility 100 (every route hits A11y 100)**; TBT 13–67 ms; CLS 0 everywhere. Charts lazy-loaded with IntersectionObserver, the map runtime is gated behind a load button, news/contacts filters are server-rendered. Lighthouse CI and Playwright/axe wired into the verification stack.
-- **80 production commits** over ~6 weeks — full git history of architectural decisions, perf waves, data-governance evolution, design-system redesign, and the enterprise documentation pack.
+- **Lighthouse and axe coverage** — live production sweep (16 routes · mobile · Lighthouse, whose accessibility category runs axe-core) shows **median Performance 93 (89–99), Accessibility 100 on every route, Best Practices 96, SEO 100**; CLS 0 everywhere; TBT under 50 ms on 14 of 16 routes. Charts lazy-loaded with IntersectionObserver, the map runtime is gated behind a load button, news/contacts filters are server-rendered. Lighthouse CI and Playwright/axe wired into the verification stack.
+- **100+ production commits** over ~10 weeks — full git history of architectural decisions, perf waves, data-governance evolution, design-system redesign, and the enterprise documentation pack.
 
 > **Demo-ready with production-oriented guardrails.** Synthetic values should carry `is_demo: true` and be visually flagged. Investment records are split into verified, source-backed/pending, and illustrative/demo buckets so demo rows cannot be mistaken for official pipeline totals. See [`DEMO_DATA_REGISTRY.md`](./DEMO_DATA_REGISTRY.md), [`SOURCE_REGISTRY.md`](./SOURCE_REGISTRY.md), and [`DATA_INVENTORY.md`](./DATA_INVENTORY.md) for the provenance map.
 
