@@ -92,7 +92,7 @@
       },
       "trade": {
         "title": "Savdo va iqtisodiy oqimlar",
-        "description": "Metodologiya izohlari va saqlangan kengaytirilgan grafiklar bilan O'zbekiston-AQSh savdosining yillik va oylik tahlili."
+        "description": "Metodologiya izohlari va kengaytirilgan analitik grafiklar bilan O'zbekiston-AQSh savdosining yillik va oylik tahlili."
       },
       "investments": {
         "title": "Investitsiya va xususiylashtirish",
@@ -667,15 +667,15 @@
       "pendingSub": "Ichki yoki manba talab qiladigan yozuvlar",
       "pendingText": "Muvofiqlashtirish uchun foydali, ammo ijro darajasida e’lon qilishdan oldin egasi tasdiqlashi kerak.",
       "demoTitle": "Illyustrativ demo pipeline",
-      "demoSub": "Ssenariy walkthrough uchun saqlangan",
+      "demoSub": "Faqat illyustrativ ssenariylar",
       "demoText": "Real pipeline sifatida iqtibos keltirmang. Bu qatorlar belgilangan, qidiriladigan va filtrlanadigan holda qoladi.",
       "portfolioTitle": "Faol portfel va xususiylashtirish tayyorligi",
-      "portfolioSub": "{count} ta qator saqlandi · tekshirilgan, ko‘rib chiqilayotgan va demo qiymatlar quyida ajratilgan"
+      "portfolioSub": "Jami {count} ta qator · tekshirilgan, ko‘rib chiqilayotgan va demo qiymatlar quyida ajratilgan"
     },
     "workspace": {
       "credibility": {
         "label": "Ishonchlilik qoidasi:",
-        "text": "asosiy investitsiya ko‘rsatkichlari tekshirilgan ochiq yozuvlar, egasi ko‘rib chiqayotgan manbali yozuvlar va namoyish pipeline qatorlarini alohida ko‘rsatadi. Demo qiymatlar interfeysni test qilish uchun foydali, ammo rasmiy pipeline jami emas."
+        "text": "asosiy investitsiya ko‘rsatkichlari tekshirilgan ochiq yozuvlar, egasi ko‘rib chiqayotgan manbali yozuvlar va namoyish pipeline qatorlarini alohida ko‘rsatadi. Demo qiymatlar ish jarayonini ko‘rsatadi, ammo rasmiy jami emas."
       },
       "demoControl": {
         "show": "Demo pipeline ko'rsatish ({count})",

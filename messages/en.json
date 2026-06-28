@@ -92,7 +92,7 @@
       },
       "trade": {
         "title": "Trade & Economic Flows",
-        "description": "Quote-ready annual and monthly Uzbekistan-USA trade analysis with methodology notes and preserved advanced exhibits."
+        "description": "Quote-ready annual and monthly Uzbekistan-USA trade analysis with methodology notes and advanced analytical exhibits."
       },
       "investments": {
         "title": "Investment & Privatization",
@@ -667,15 +667,15 @@
       "pendingSub": "Internal or source-needed records",
       "pendingText": "Useful for coordination, but requires owner sign-off before executive publication.",
       "demoTitle": "Illustrative demo pipeline",
-      "demoSub": "Retained for scenario walkthroughs",
+      "demoSub": "Illustrative scenarios only",
       "demoText": "Do not quote as a real pipeline. These rows remain marked, searchable, and filterable.",
       "portfolioTitle": "Active portfolio and privatization readiness",
-      "portfolioSub": "{count} total rows preserved · verified, pending, and demo values are separated below"
+      "portfolioSub": "{count} total rows · verified, pending, and demo values are separated below"
     },
     "workspace": {
       "credibility": {
         "label": "Credibility rule:",
-        "text": "headline investment totals separate verified public records, source-backed records pending owner review, and illustrative demo pipeline rows. Demo values remain useful for interface testing, but they are not official pipeline totals."
+        "text": "headline investment totals separate verified public records, source-backed records pending owner review, and illustrative demo pipeline rows. Demo values illustrate the workflow but are not official pipeline totals."
       },
       "demoControl": {
         "show": "Show demo pipeline ({count})",
