@@ -28,7 +28,7 @@ export async function SourceQualityPanel() {
 
   return (
     <div className="grid grid-cols-1 gap-4 xl:grid-cols-[0.95fr_1.05fr]">
-      <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
+      <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-2)]">
         <div className="flex items-center gap-2 border-b border-[var(--color-border)] px-4 py-3">
           <FileCheck2 className="size-4 text-[var(--color-primary)]" />
           <div>
@@ -72,7 +72,7 @@ export async function SourceQualityPanel() {
         </ul>
       </section>
 
-      <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
+      <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-2)]">
         <div className="flex items-center gap-2 border-b border-[var(--color-border)] px-4 py-3">
           <DatabaseZap className="size-4 text-[var(--color-primary)]" />
           <div>

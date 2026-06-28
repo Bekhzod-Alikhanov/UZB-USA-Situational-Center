@@ -219,6 +219,18 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
 
       <SourceQualityPanel />
 
+      {/* SECTION DIVIDER — separates the 60-second executive answer above from
+          the detailed analytical drill-down below, for faster executive scan. */}
+      <div className="mt-2 flex items-start gap-4">
+        <div className="shrink-0">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-ink-muted)]">
+            {t("detailedAnalysis")}
+          </div>
+          <p className="mt-0.5 text-[11px] text-[var(--color-ink-faint)]">{t("detailedAnalysisSub")}</p>
+        </div>
+        <div className="mt-1.5 h-px flex-1 bg-gradient-to-r from-[var(--color-border-strong)] to-transparent" />
+      </div>
+
       {/* MAIN GRID — left 1.55fr, right 1fr */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.55fr_1fr]">
         {/* LEFT COLUMN */}
