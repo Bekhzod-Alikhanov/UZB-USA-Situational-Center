@@ -468,13 +468,59 @@
   .delta-pill {
     @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11.5px] font-semibold tabular;
   }
+  /* Small (<14px) delta text on a soft tint must clear WCAG AA 4.5:1. The
+     bright light-theme accent falls just short, so darken the text in the
+     light theme; dark / command keep the bright accent (it already passes on
+     the dark tint). */
   .delta-pill-pos {
     background: color-mix(in oklab, var(--color-pos) 16%, transparent);
-    color: var(--color-pos);
+    color: color-mix(in oklab, var(--color-pos) 82%, #000);
   }
   .delta-pill-neg {
     background: color-mix(in oklab, var(--color-neg) 16%, transparent);
+    color: color-mix(in oklab, var(--color-neg) 90%, #000);
+  }
+  :root.dark .delta-pill-pos,
+  :root.command .delta-pill-pos,
+  :root.strategic .delta-pill-pos {
+    color: var(--color-pos);
+  }
+  :root.dark .delta-pill-neg,
+  :root.command .delta-pill-neg,
+  :root.strategic .delta-pill-neg {
     color: var(--color-neg);
+  }
+  /* Executive "Today" decision-strip tone badges. Same small-text AA concern
+     as the delta pills — darken the label text in the light theme only. */
+  .exec-tone-rose,
+  .exec-tone-invest,
+  .exec-tone-primary {
+    border-style: solid;
+  }
+  .exec-tone-rose {
+    background: var(--color-rose-soft);
+    border-color: color-mix(in oklab, var(--color-rose) 30%, transparent);
+    color: color-mix(in oklab, var(--color-rose) 70%, #000);
+  }
+  .exec-tone-invest {
+    background: var(--color-invest-soft);
+    border-color: color-mix(in oklab, var(--color-invest) 30%, transparent);
+    color: color-mix(in oklab, var(--color-invest) 72%, #000);
+  }
+  .exec-tone-primary {
+    background: var(--color-primary-soft);
+    border-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+    color: var(--color-primary);
+  }
+  :root.dark .exec-tone-rose,
+  :root.command .exec-tone-rose,
+  :root.strategic .exec-tone-rose {
+    color: var(--color-rose);
+  }
+  :root.dark .exec-tone-invest,
+  :root.command .exec-tone-invest,
+  :root.strategic .exec-tone-invest {
+    color: var(--color-invest);
   }
   .delta-pill-neu {
     background: var(--color-surface-2);
@@ -686,10 +732,12 @@
     --sv-outline-variant: var(--color-border);
     --sv-primary: var(--color-primary);
     --sv-primary-container: var(--color-primary-soft);
-    --sv-secondary: #0e7490; /* darker cyan keeps AA contrast on light fills */
-    --sv-tertiary: #b45309;
+    /* Accent + status colors darkened for the light theme so the tiny (9.5px)
+       status-badge text clears WCAG AA 4.5:1 on its 10%-opacity tint. */
+    --sv-secondary: #0b5a6e;
+    --sv-tertiary: #8a3f07;
     --sv-error: var(--color-neg);
-    --sv-success: var(--color-pos);
+    --sv-success: #07623f;
   }
   :root:not(.dark):not(.command):not(.strategic) .strategic-tile {
     background: var(--color-surface);
@@ -707,6 +755,11 @@
     background: var(--color-surface);
     border-color: var(--color-border);
     color: var(--color-ink);
+  }
+  /* The 0.7 opacity on the tile sub-label drops ink-muted to ~#8c8c8c on the
+     light tile (fails AA); restore full opacity in the light theme. */
+  :root:not(.dark):not(.command):not(.strategic) .strategic-tile-sub {
+    opacity: 1;
   }
   /* The dark hover fill (#d8e2ff) would leave near-white label text illegible
      on light; darken the teal CTA on hover instead. */

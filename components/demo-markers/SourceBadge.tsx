@@ -49,6 +49,10 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
     </>
   );
 
+  // The visible text must be contained in the accessible name (WCAG 2.5.3
+  // Label in Name); prepend it to the descriptive aria-label below.
+  const visibleText = variant === "chip" ? src.name : `[${src.level}] ${src.id}`;
+
   const baseClass = cn(
     "inline-flex items-center gap-1 rounded border px-1.5 py-0.5 transition",
     variant === "chip" ? "text-[11px]" : "text-[9.5px] uppercase tracking-wider",
@@ -65,7 +69,7 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
         rel="noreferrer"
         className={baseClass}
         title={`${src.name} - fetched ${src.fetched_at}`}
-        aria-label={`Source: ${src.name}. External source fetched ${src.fetched_at}. Opens in a new tab.`}
+        aria-label={`${visibleText}. Source: ${src.name}. External source fetched ${src.fetched_at}. Opens in a new tab.`}
       >
         {inner}
       </a>
@@ -76,7 +80,7 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
     <span
       className={baseClass}
       title={`${src.name} - ${src.sourceFile ?? "internal"} - fetched ${src.fetched_at}`}
-      aria-label={`Source: ${src.name}. Attached or internal source fetched ${src.fetched_at}.`}
+      aria-label={`${visibleText}. Source: ${src.name}. Attached or internal source fetched ${src.fetched_at}.`}
     >
       {inner}
     </span>
