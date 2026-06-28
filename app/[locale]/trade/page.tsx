@@ -13,6 +13,7 @@ import {
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { ChartNarration } from "@/components/ui/ChartNarration";
 import { TradeTable } from "@/components/trade/TradeTable";
+import { TradeAnnualSummary } from "@/components/trade/TradeAnnualSummary";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { TradeChartDisclosure } from "@/components/trade/TradeChartDisclosure";
@@ -145,6 +146,7 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           right={<SourceBadge sourceId="input_trade_stat_docx" />}
         />
         <CardBody>
+          <TradeAnnualSummary locale={locale} />
           <TradeTable />
           <ChartNarration
             labels={narrationLabels}
