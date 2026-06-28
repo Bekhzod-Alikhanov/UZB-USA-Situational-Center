@@ -41,52 +41,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
     how: t("narrationLabels.how"),
     source: t("narrationLabels.source"),
   };
-  const copy =
-    locale === "ru"
-      ? {
-          quoteTitle: "Серия для цитирования",
-          quoteSub: "Используйте UZ Stat для официальной годовой картины со стороны Узбекистана",
-          quoteText:
-            "Годовая таблица и график потоков дают самый ясный управленческий взгляд на оборот, экспорт, импорт и двусторонний баланс. При сравнении с U.S. Census или Comtrade сохраняйте методологические примечания.",
-          changedTitle: "Что изменилось",
-          changedSub: "Вопрос баланса важнее заголовочной суммы",
-          changedText:
-            "Рост потоков полезен, но приоритетный разговор - диверсификация экспорта, доступ на рынок и превращение форумов в возможности на уровне продуктов.",
-          advancedTitle: "Расширенный анализ сохранён",
-          advancedSub: "HS, зеркальные, ITC и услуги находятся ниже",
-          advancedText:
-            "Технические графики сохранены для аналитиков и исследователей в разделе расширенного анализа торговли, а не удалены из панели.",
-        }
-      : locale === "uz-latn"
-        ? {
-            quoteTitle: "Iqtibos uchun tayyor qator",
-            quoteSub: "O'zbekiston tomoni bo'yicha rasmiy yillik hikoya uchun UZ Statdan foydalaning",
-            quoteText:
-              "Yillik jadval va oqim grafigi aylanma, eksport, import va ikki tomonlama balans bo'yicha eng aniq ijro ko'rinishini beradi. U.S. Census yoki Comtrade bilan solishtirganda metodologiya izohlarini ko'rinadigan qoldiring.",
-            changedTitle: "Nima o'zgardi",
-            changedSub: "Balans masalasi sarlavha raqamidan muhimroq",
-            changedText:
-              "Oqimlarning o'sishi foydali, ammo ustuvor suhbat eksport diversifikatsiyasi, bozorga kirish va forumlarni mahsulot darajasidagi imkoniyatlarga aylantirish haqida bo'lishi kerak.",
-            advancedTitle: "Kengaytirilgan tahlil saqlandi",
-            advancedSub: "HS, oynaviy tafovutlar, ITC va xizmatlar quyida",
-            advancedText:
-              "Texnik grafiklar o'chirilmadi; ular tahlilchilar va tadqiqotchilar uchun kengaytirilgan savdo tahlili bo'limida saqlangan.",
-          }
-        : {
-            quoteTitle: "Quote-ready series",
-            quoteSub: "Use UZ Stat for the official Uzbekistan-side annual story",
-            quoteText:
-              "The annual table and flow chart give the clearest executive view of turnover, exports, imports, and the bilateral balance. Keep methodology notes visible when comparing against U.S. Census or Comtrade.",
-            changedTitle: "What changed",
-            changedSub: "The balance question is more important than the headline total",
-            changedText:
-              "Growth in flows is useful, but the priority conversation is export diversification, market access, and converting forums into product-level opportunities.",
-            advancedTitle: "Advanced analysis remains",
-            advancedSub: "HS, mirror, ITC, and services exhibits are below",
-            advancedText:
-              "Technical charts are preserved for analysts and researchers in the Advanced Trade Analysis section rather than removed from the platform.",
-          };
-
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-end justify-between gap-4">
@@ -101,22 +55,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           </div>
         </div>
       </div>
-
-      <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-card)]">
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-          {[
-            { title: copy.quoteTitle, sub: copy.quoteSub, text: copy.quoteText },
-            { title: copy.changedTitle, sub: copy.changedSub, text: copy.changedText },
-            { title: copy.advancedTitle, sub: copy.advancedSub, text: copy.advancedText },
-          ].map((item) => (
-            <div key={item.title} className="border-l-2 border-[var(--color-border)] pl-3">
-              <div className="text-[13px] font-semibold text-[var(--color-ink)]">{item.title}</div>
-              <div className="mt-0.5 text-[11.5px] text-[var(--color-ink-muted)]">{item.sub}</div>
-              <p className="mt-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <Card tone="trade">
         <CardHeader

@@ -665,6 +665,55 @@
     outline-color: var(--sv-secondary);
   }
 
+  /* ----------------------------------------------------------------------
+     Light-theme variant of the /map strategic surface. The map page is built
+     entirely on --sv-* tokens (plus a few hard-coded dark glass/tile fills);
+     by default `.strategic-page` pins the dark cockpit palette regardless of
+     the chosen theme. When the site is in the light (default) theme we remap
+     those tokens — and the glass/tile/button fills — to the light premium
+     palette so the map page matches the rest of the dashboard instead of
+     staying black. Dark and command themes keep the original cockpit look.
+     ---------------------------------------------------------------------- */
+  :root:not(.dark):not(.command):not(.strategic) .strategic-page {
+    --sv-bg: var(--color-bg);
+    --sv-bg-soft: var(--color-surface-2);
+    --sv-surface: var(--color-surface);
+    --sv-surface-high: var(--color-surface-2);
+    --sv-surface-low: var(--color-surface-2);
+    --sv-on-surface: var(--color-ink);
+    --sv-on-surface-variant: var(--color-ink-muted);
+    --sv-outline: var(--color-border-strong);
+    --sv-outline-variant: var(--color-border);
+    --sv-primary: var(--color-primary);
+    --sv-primary-container: var(--color-primary-soft);
+    --sv-secondary: #0e7490; /* darker cyan keeps AA contrast on light fills */
+    --sv-tertiary: #b45309;
+    --sv-error: var(--color-neg);
+    --sv-success: var(--color-pos);
+  }
+  :root:not(.dark):not(.command):not(.strategic) .strategic-tile {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+  :root:not(.dark):not(.command):not(.strategic) .strategic-tile:hover {
+    border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border));
+  }
+  :root:not(.dark):not(.command):not(.strategic) .strategic-glass {
+    background: color-mix(in oklab, var(--color-surface) 92%, transparent);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-card-elevated);
+  }
+  :root:not(.dark):not(.command):not(.strategic) .strategic-button-ghost {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-ink);
+  }
+  /* The dark hover fill (#d8e2ff) would leave near-white label text illegible
+     on light; darken the teal CTA on hover instead. */
+  :root:not(.dark):not(.command):not(.strategic) .strategic-button-primary:hover {
+    background: color-mix(in oklab, var(--sv-secondary) 86%, black);
+  }
+
   .demo-underline {
     text-decoration: underline dotted var(--color-demo);
     text-underline-offset: 3px;
