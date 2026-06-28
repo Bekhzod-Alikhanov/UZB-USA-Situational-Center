@@ -66,14 +66,14 @@ export function TodayDecisionStrip({ locale }: { locale: string }) {
   ] as const;
 
   return (
-    <section className="rounded-lg border border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-surface)_88%,transparent)] p-3 shadow-[var(--shadow-card)]">
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="size-1.5 rounded-full bg-[var(--color-primary)]" aria-hidden />
-          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[var(--color-ink-faint)]">
-            {copy.eyebrow}
-          </div>
-        </div>
+    <section className="relative overflow-hidden rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface)] p-3.5 shadow-[var(--shadow-card-elevated)] sm:p-4">
+      {/* Premium accent strip — marks this as the executive's first fixation. */}
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-people)] to-transparent opacity-90"
+      />
+      <div className="mb-2.5 flex items-center justify-between gap-3">
+        <div className="page-eyebrow">{copy.eyebrow}</div>
         <div className="hidden text-[11px] text-[var(--color-ink-muted)] sm:block">{copy.title}</div>
       </div>
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
