@@ -50,6 +50,8 @@
     "switchLanguage": "Switch language",
     "toggleTheme": "Toggle theme",
     "toggleThemeCurrent": "Toggle theme. Current: {theme}",
+    "presentationEnter": "Enter presentation mode (hide demo markers)",
+    "presentationExit": "Exit presentation mode",
     "themes": {
       "light": "Light",
       "dark": "Dark",
