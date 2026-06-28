@@ -111,7 +111,14 @@ export function InvestmentsView() {
     return investments.filter((i) => {
       const rowConfidence = investmentConfidence(i);
       if (hideDemo && i.is_demo) return false;
-      if (!showDemoRows && confidence === "all" && rowConfidence === "illustrative_demo") return false;
+      if (!showDemoRows && confidence === "all") {
+        // The default board collapses demo records behind the explicit toggle.
+        // In presentation/executive mode, collapse ALL synthetic (is_demo)
+        // rows so verified + pending records lead; otherwise collapse just the
+        // illustrative-demo subset (analyst default, unchanged).
+        if (presentation && i.is_demo) return false;
+        if (rowConfidence === "illustrative_demo") return false;
+      }
       if (sector !== "all" && i.sector !== sector) return false;
       if (confidence !== "all" && rowConfidence !== confidence) return false;
       if (i.valueMusd < minValue) return false;
@@ -126,7 +133,7 @@ export function InvestmentsView() {
       }
       return true;
     });
-  }, [sector, confidence, minValue, search, hideDemo, showDemoRows]);
+  }, [sector, confidence, minValue, search, hideDemo, showDemoRows, presentation]);
 
   const grouped = useMemo(() => {
     const m: Record<InvestmentStatus, Investment[]> = {
@@ -147,7 +154,9 @@ export function InvestmentsView() {
     ["verified_official", "company_confirmed"].includes(investmentConfidence(i)),
   );
   const demoFiltered = filtered.filter((i) => investmentConfidence(i) === "illustrative_demo");
-  const hiddenDemoRows = investments.filter((i) => investmentConfidence(i) === "illustrative_demo").length;
+  const hiddenDemoRows = investments.filter((i) =>
+    presentation ? i.is_demo : investmentConfidence(i) === "illustrative_demo",
+  ).length;
   const visibleStatusOrder = showAllStages ? STATUS_ORDER : STATUS_ORDER.filter((status) => grouped[status].length > 0);
   const hiddenEmptyStatuses = STATUS_ORDER.filter((status) => grouped[status].length === 0);
   const actionProfileFor = (investment: Investment) => localizedActionProfile(investment, t, locale);
