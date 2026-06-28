@@ -381,7 +381,7 @@
         "watch": "Watch",
         "stale": "Stale"
       },
-      "thresholdNote": "Freshness scale: <=30 days fresh, 30-90 days watch, >90 days stale. The topbar shows last platform review, not a claim that every source is fresh.",
+      "thresholdNote": "Source-age scale: <=45 days fresh, 45-120 days watch, >120 days stale. The topbar shows the last platform review (graded by the oldest source), not a claim that every source is fresh.",
       "freshness": {
         "fresh": "fresh",
         "watch": "watch",

@@ -54,7 +54,7 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     medianAge: "Median age",
     days: "d",
     oldestSource: "Oldest source",
-    note: "Freshness scale: <=30 d fresh, 30-90 d watch, >90 d stale. Internal legal sources are excluded from decay.",
+    note: "Platform review grade, set by the oldest tracked source: <=30 d reviewed, 30-90 d review soon, >90 d needs review. This is separate from per-source freshness shown on the overview. Internal legal sources do not decay.",
   },
   ru: {
     upToDate: "Проверено",
@@ -67,7 +67,7 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     medianAge: "Медианный возраст",
     days: "дн.",
     oldestSource: "Самый старый источник",
-    note: "Шкала свежести: <=30 дней свежий, 30-90 дней на контроле, >90 дней устарел. Внутренние юридические источники не учитываются в устаревании.",
+    note: "Грейд проверки платформы по самому старому источнику: <=30 дней — проверено, 30-90 дней — нужна проверка, >90 дней — требует проверки. Это не то же, что свежесть отдельных источников на обзоре. Внутренние юридические источники не устаревают.",
   },
   "uz-latn": {
     upToDate: "Tekshirildi",
@@ -80,7 +80,7 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     medianAge: "Median yosh",
     days: "kun",
     oldestSource: "Eng eski manba",
-    note: "Yangilik shkalasi: <=30 kun yangi, 30-90 kun nazoratda, >90 kun eskirgan. Ichki huquqiy manbalar eskirish hisobiga kiritilmaydi.",
+    note: "Platforma tekshiruvi bahosi eng eski manba bo'yicha: <=30 kun — tekshirilgan, 30-90 kun — tekshiruv kerak, >90 kun — qayta ko'rish kerak. Bu obzordagi alohida manbalar yangiligidan farq qiladi. Ichki huquqiy manbalar eskirmaydi.",
   },
 };
 
