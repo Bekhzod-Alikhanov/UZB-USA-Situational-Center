@@ -7,7 +7,11 @@ interface LazyMountProps {
   rootMargin?: string;
   /** Reserve this much vertical space so the layout doesn't jump on mount. */
   minHeight?: number | string;
-  /** Render this until visible. Defaults to a transparent placeholder. */
+  /**
+   * Render this until visible. When omitted, a subtle pulsing skeleton sized
+   * to `minHeight` is shown (premium loading state). Pass `null` explicitly
+   * for a transparent placeholder.
+   */
   fallback?: ReactNode;
   className?: string;
 }
@@ -25,7 +29,7 @@ export function LazyMount({
   children,
   rootMargin = "240px",
   minHeight = 280,
-  fallback = null,
+  fallback,
   className,
 }: LazyMountProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -58,9 +62,22 @@ export function LazyMount({
 
   const reservedHeight = typeof minHeight === "number" ? `${minHeight}px` : minHeight;
 
+  // Default premium loading state: a subtle pulse sized to the reserved space.
+  // `prefers-reduced-motion` neutralizes the pulse via the global CSS guard.
+  const placeholder =
+    fallback === undefined ? (
+      <div
+        className="w-full animate-pulse rounded-md bg-[var(--color-surface-2)]"
+        style={{ height: reservedHeight }}
+        aria-busy
+      />
+    ) : (
+      fallback
+    );
+
   return (
     <div ref={ref} className={className} style={{ minHeight: reservedHeight }}>
-      {visible ? children : fallback}
+      {visible ? children : placeholder}
     </div>
   );
 }
