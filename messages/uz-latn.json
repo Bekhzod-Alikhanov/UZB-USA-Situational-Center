@@ -296,7 +296,7 @@
         },
         "investment": {
           "title": "Investitsiya",
-          "signal": "Pipeline qiymati",
+          "signal": "Portfel qiymati",
           "metric": "Loyihalar reestri",
           "narrative": "Investitsiya portfeli eng kuchli ijro hikoyasi, ammo demo qatorlar tashqi foydalanishdan oldin alohida qolishi kerak.",
           "action": "DFC/EXIMga tayyor loyihalarni ustuvor qilish va sponsor, egasi, qiymat, status hamda manba maydonlarini talab qilish."
