@@ -2,6 +2,7 @@ const baseUrl = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/,
 const locales = ["en", "ru", "uz-latn"];
 const routes = [
   "",
+  "brief",
   "trade",
   "visits",
   "prepare",

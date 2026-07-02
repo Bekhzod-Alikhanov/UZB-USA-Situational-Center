@@ -280,9 +280,12 @@
     background:
       linear-gradient(180deg, rgba(149, 191, 255, 0.045), rgba(13, 17, 23, 0) 34rem),
       linear-gradient(90deg, var(--command-grid) 1px, transparent 1px),
-      linear-gradient(180deg, var(--command-grid) 1px, transparent 1px),
-      var(--command-canvas);
-    background-size: auto, 56px 56px, 56px 56px, auto;
+      linear-gradient(180deg, var(--command-grid) 1px, transparent 1px), var(--command-canvas);
+    background-size:
+      auto,
+      56px 56px,
+      56px 56px,
+      auto;
   }
 
   html,
@@ -824,9 +827,7 @@
     -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
   .command-brand-mark {
-    background:
-      linear-gradient(135deg, var(--color-primary), var(--color-people)),
-      var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-people)), var(--color-primary);
     box-shadow: 0 10px 24px color-mix(in oklab, var(--color-people) 22%, transparent);
   }
   .command-status-line {
@@ -930,6 +931,314 @@
     background: #f2f2f2 !important;
   }
   tbody tr {
+    break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   /brief — exhibition executive surface (append-only block).
+   Consumed exclusively by app/[locale]/brief + components/brief/*.
+   New --brief-* tokens only; existing --color-* values are never remapped.
+   Dark is the primary presentation mode (projector); light is a clean
+   paper fallback. Gold accent is decorative/large-type only — small text
+   always uses the ink scale for AA contrast.
+   ========================================================================== */
+:root {
+  --brief-void: #f7f5ef;
+  --brief-surface: #fffdf8;
+  --brief-surface-2: #f0ece1;
+  --brief-border: #e3ddcc;
+  --brief-border-strong: #c8bfa4;
+  --brief-ink: #171921;
+  --brief-ink-muted: #4d5160;
+  --brief-ink-faint: #70747f;
+  --brief-accent: #8a6d1a; /* darkened gold — ≥4.5:1 on paper */
+  --brief-accent-bright: #b8901f; /* strokes / sparkline / large type only */
+  --brief-accent-soft: rgba(184, 144, 31, 0.14);
+  --brief-pos: #0a7c5a;
+  --brief-neg: #a5342a;
+}
+:root.dark,
+:root.command,
+:root.strategic {
+  --brief-void: #0a0e16; /* deep graphite-navy, not black */
+  --brief-surface: #0f141f;
+  --brief-surface-2: #131a28;
+  --brief-border: rgba(201, 162, 39, 0.16);
+  --brief-border-strong: rgba(201, 162, 39, 0.34);
+  --brief-ink: #ece9df;
+  --brief-ink-muted: #aaaa9e;
+  --brief-ink-faint: #83847c;
+  --brief-accent: #d3ab2e;
+  --brief-accent-bright: #e8c766;
+  --brief-accent-soft: rgba(201, 162, 39, 0.12);
+  --brief-pos: #4ec59a;
+  --brief-neg: #e07a72;
+}
+
+.brief-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40; /* above the shell topbar (z-30), below the cmd-K dialog (z-50) */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--brief-void);
+  color: var(--brief-ink);
+  font-family: var(--font-sans);
+}
+/* The locale shell (sidebar + topbar) stays mounted beneath the exhibition
+   overlay, but the overlay cannot out-stack the sticky topbar (z-30) from
+   inside main's z-[1] stacking context — no z-index inside main can win.
+   Hide the chrome for the duration instead; visibility also removes it from
+   the tab order and the accessibility tree. Reverses on navigation. */
+body:has(.brief-overlay) .command-sidebar,
+body:has(.brief-overlay) .command-topbar {
+  visibility: hidden;
+}
+.brief-frame {
+  margin: 0 auto;
+  max-width: 1680px;
+  padding: 0 clamp(20px, 4vw, 72px) 48px;
+}
+.brief-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brief-accent);
+}
+.brief-hero-value {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(56px, 6.5vw, 104px);
+  font-weight: 550;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.brief-stat-value {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(30px, 2.6vw, 44px);
+  font-weight: 550;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.brief-voice {
+  font-family: var(--brief-font-voice), var(--font-serif);
+  font-size: clamp(19px, 1.6vw, 25px);
+  line-height: 1.45;
+  color: var(--brief-ink-muted);
+  border-left: 2px solid var(--brief-accent-bright);
+  padding-left: 18px;
+}
+.brief-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--brief-border-strong), var(--brief-border) 55%, transparent);
+}
+/* Stat band: 1px gold-tint dividers via grid gap on a border-colored track —
+   no per-card boxes (exhibition principle: air + hairlines, not frames). */
+.brief-band {
+  display: grid;
+  gap: 1px;
+  background: var(--brief-border);
+}
+.brief-band > * {
+  background: var(--brief-void);
+  padding: 22px 26px 24px;
+}
+.brief-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--brief-border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 550;
+  color: var(--brief-ink-muted);
+  background: transparent;
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out);
+}
+.brief-chip:hover {
+  border-color: var(--brief-border-strong);
+  color: var(--brief-ink);
+}
+.brief-chip[aria-pressed="true"] {
+  border-color: var(--brief-accent);
+  background: var(--brief-accent-soft);
+  color: var(--brief-ink);
+}
+.brief-tooltip {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  max-width: 320px;
+  border: 1px solid var(--brief-border-strong);
+  background: color-mix(in oklab, var(--brief-surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 12px 14px;
+  pointer-events: none;
+}
+.brief-globe-skeleton {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, var(--brief-accent-soft), transparent 58%),
+    radial-gradient(circle at 50% 50%, var(--brief-surface-2), var(--brief-void) 72%);
+  border: 1px solid var(--brief-border);
+  opacity: 0.9;
+}
+
+/* --- one-time intro ------------------------------------------------------ */
+.brief-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: var(--brief-void);
+  animation: brief-intro-out 0.8s var(--ease-in-out) 2.5s both;
+}
+.brief-intro-inner {
+  text-align: center;
+  padding: 0 24px;
+}
+.brief-intro-title {
+  font-family: var(--brief-font-voice), var(--font-serif);
+  font-size: clamp(34px, 4.4vw, 64px);
+  letter-spacing: 0.01em;
+  color: var(--brief-ink);
+  animation: brief-fade-scale 1s var(--ease-out) 0.15s both;
+}
+.brief-intro-line {
+  margin: 22px auto 20px;
+  height: 1px;
+  width: min(360px, 56vw);
+  background: var(--brief-accent-bright);
+  transform-origin: center;
+  animation: brief-line-x 0.7s var(--ease-out) 1.05s both;
+}
+.brief-intro-sub {
+  font-size: 13px;
+  font-weight: 550;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brief-ink-muted);
+  animation: brief-fade-scale 0.8s var(--ease-out) 1.25s both;
+}
+/* Dashboard content rises softly out of the intro. Only transform/opacity. */
+.brief-reveal {
+  animation: brief-reveal-up 0.8s var(--ease-out) both;
+}
+.brief-reveal-1 {
+  animation-delay: 2.7s;
+}
+.brief-reveal-2 {
+  animation-delay: 2.85s;
+}
+.brief-reveal-3 {
+  animation-delay: 3s;
+}
+.brief-reveal-4 {
+  animation-delay: 3.15s;
+}
+@keyframes brief-fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes brief-line-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes brief-intro-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes brief-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Returning visitors this session (inline <script> sets the attribute before
+   first paint) skip the intro and the staggered reveal entirely. */
+html[data-brief-intro-done] .brief-intro {
+  display: none;
+}
+html[data-brief-intro-done] .brief-reveal {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brief-intro {
+    display: none;
+  }
+  .brief-reveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media print {
+  /* A fixed scroll container prints exactly one clipped page — flatten it. */
+  .brief-overlay {
+    position: static !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+  .brief-intro,
+  .brief-globe-region {
+    display: none !important;
+  }
+  .brief-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  :root,
+  :root.dark,
+  :root.command,
+  :root.strategic {
+    --brief-void: #ffffff !important;
+    --brief-surface: #ffffff !important;
+    --brief-surface-2: #f5f5f0 !important;
+    --brief-border: #d0d0d0 !important;
+    --brief-border-strong: #b5b5b5 !important;
+    --brief-ink: #000000 !important;
+    --brief-ink-muted: #444444 !important;
+    --brief-ink-faint: #777777 !important;
+    --brief-accent: #6d5615 !important;
+    --brief-accent-bright: #8a6d1a !important;
+    --brief-accent-soft: rgba(138, 109, 26, 0.1) !important;
+  }
+  .brief-band > *,
+  .brief-print-block {
     break-inside: avoid;
   }
 }

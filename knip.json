@@ -10,7 +10,7 @@
     "tests/**/*.ts"
   ],
   "project": ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
-  "ignoreDependencies": ["@lhci/cli", "lighthouse", "tailwindcss"],
+  "ignoreDependencies": ["@lhci/cli", "lighthouse", "tailwindcss", "three"],
   "ignoreIssues": {
     "data/trade.ts": ["duplicates"]
   },

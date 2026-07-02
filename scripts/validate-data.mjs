@@ -96,6 +96,7 @@ for (const locale of locales.filter((locale) => locale !== "en")) {
 
 const expectedRoutes = [
   "",
+  "brief",
   "trade",
   "visits",
   "prepare",
