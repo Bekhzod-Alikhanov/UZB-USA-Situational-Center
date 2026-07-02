@@ -6,18 +6,43 @@
     },
     "header": {
       "title": "Uzbekistan — United States",
-      "sub": "Strategic overview"
+      "sub": "Situational screen"
     },
-    "hero": {
-      "eyebrow": "Bilateral trade · {year}",
-      "unit": "million USD",
-      "yoyLabel": "year over year",
-      "since2017": "{times}× growth since 2017 · second consecutive year above $1 billion",
-      "sparkAria": "Annual bilateral trade turnover, 2017–2025, million USD",
-      "methodology": "National statistics of Uzbekistan",
-      "voice": "The partnership has reached a durable high: trade above one billion dollars for a second consecutive year, anchored by operating American investment and a standing presidential dialogue."
+    "clocks": {
+      "tashkent": "Tashkent",
+      "washington": "Washington"
+    },
+    "kpi": {
+      "turnover": "Trade turnover · {year}",
+      "yoy": "year over year",
+      "mln": "mln",
+      "invest": "Verified U.S. investment",
+      "investSub": "+${pending} mln pending verification",
+      "projects": "Active projects",
+      "projectsSub": "{verified} verified · {pending} pending review",
+      "documents": "Bilateral documents",
+      "documentsSub": "{invest} investment agreements",
+      "visits": "Visits · 2025–2026",
+      "visitsSub": "{incoming} incoming from the U.S.",
+      "commitments": "Commitments tracked",
+      "commitmentsSub": "{avg}% avg completion"
+    },
+    "trade": {
+      "title": "Trade dynamics",
+      "sparkAria": "Annual trade turnover 2017–2025, million USD",
+      "viewAnnual": "Annual · 2017–2025",
+      "viewMonthly": "Monthly · 18 mo",
+      "turnover": "Turnover",
+      "exports": "UZ exports",
+      "imports": "UZ imports",
+      "exportsUs": "U.S. exports",
+      "importsUs": "U.S. imports",
+      "methodologyUz": "UZ national statistics",
+      "methodologyUs": "U.S. Census Bureau"
     },
     "globe": {
+      "title": "Cooperation geography",
+      "sub": "projects · missions · delegations",
       "ariaLabel": "Interactive globe: investment projects in Uzbekistan, Uzbek missions in the United States, and delegation routes between Tashkent, Washington and New York",
       "corridorDc": "Tashkent — Washington · {count}",
       "corridorNy": "Tashkent — New York · {count}",
@@ -37,16 +62,19 @@
         "planned-2027": "Planned · 2027"
       }
     },
-    "stats": {
-      "portfolioLabel": "Verified U.S. investment",
-      "mln": "mln",
-      "portfolioSub": "+${pending} mln pending verification · {projects} projects in the active portfolio",
-      "visitsLabel": "Visits & meetings",
-      "visitsSub": "Presidential and ministerial level · 2025–2026",
-      "documentsLabel": "Bilateral documents",
-      "documentsSub": "{invest} investment agreements in the legal base",
-      "commitmentsLabel": "Commitments tracked",
-      "commitmentsSub": "{avg}% average completion"
+    "visit": {
+      "title": "Nearest visit",
+      "countDays": "days left",
+      "countDelegation": "delegation groups",
+      "countProgram": "program blocks",
+      "countChecklist": "checklist",
+      "readinessAria": "Visit preparation readiness: {pct}%"
+    },
+    "horizon": {
+      "title": "Next 30 days",
+      "empty": "No scheduled items in the window",
+      "beyond": "beyond the 30-day window",
+      "inWindow": "within 30 days"
     },
     "invest": {
       "title": "Investment — leading sectors",
@@ -78,22 +106,26 @@
       "watchNote": "{watch, plural, one {# item under close watch} other {# items under close watch}}"
     },
     "attention": {
-      "title": "Needs leadership attention",
+      "title": "Needs attention",
       "overdue": "Overdue",
       "watch": "Watch",
       "due": "due {date}"
     },
-    "horizon": {
-      "title": "Next 30 days",
-      "empty": "No scheduled items in the window",
-      "beyond": "beyond the 30-day window",
-      "inWindow": "within 30 days"
+    "agreementsChart": {
+      "title": "Legal base structure",
+      "total": "documents",
+      "interstate": "Interstate",
+      "intergov": "Intergovernmental",
+      "interagency": "Interagency",
+      "other": "Other",
+      "investLine": "+ {count} investment agreements tracked separately"
     },
     "footer": {
-      "updatedJustNow": "Updated just now",
-      "updatedMinutes": "{minutes, plural, one {Updated # minute ago} other {Updated # minutes ago}}",
+      "updatedJustNow": "updated just now",
+      "updatedMinutes": "{minutes, plural, one {updated # minute ago} other {updated # minutes ago}}",
       "sources": "{count, plural, one {# official source} other {# official sources}}",
-      "print": "Export PDF"
+      "print": "Export PDF",
+      "methodologies": "UZ national statistics · U.S. Census Bureau · MFA registry"
     }
   },
   "brand": {

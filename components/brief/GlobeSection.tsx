@@ -54,7 +54,7 @@ export function GlobeSection() {
   const toggleCorridor = (c: Corridor) => setHighlight((cur) => (cur === c ? null : c));
 
   return (
-    <div className="brief-globe-region relative h-[520px] xl:h-[600px]">
+    <div className="brief-globe-region relative h-[360px] xl:h-[400px]">
       <div role="img" aria-label={t("ariaLabel")} className="absolute inset-0">
         <LazyMount minHeight="100%" className="h-full" fallback={<GlobeSkeleton />}>
           <BriefGlobeDynamic

@@ -12,10 +12,8 @@ export async function AttentionList({ locale }: { locale: string }) {
   const day = new Intl.DateTimeFormat(intlLocale(locale), { day: "numeric", month: "short" });
 
   return (
-    <div className="brief-print-block mt-7">
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--brief-ink-faint)]">
-        {t("title")}
-      </h2>
+    <div className="brief-print-block mt-5 border-t border-[var(--brief-border)] pt-3.5">
+      <h2 className="brief-eyebrow">{t("title")}</h2>
       <ul className="mt-3 space-y-2.5">
         {rows.map((row) => (
           <li key={row.id} className="flex items-start gap-2.5">
