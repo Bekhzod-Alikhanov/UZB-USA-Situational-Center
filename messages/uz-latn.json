@@ -1,4 +1,101 @@
 {
+  "brief": {
+    "intro": {
+      "title": "O‘zbekiston — AQSH",
+      "subtitle": "Vaziyat markazi · ikki tomonlama hamkorlik"
+    },
+    "header": {
+      "title": "O‘zbekiston — AQSH",
+      "sub": "Strategik sharh"
+    },
+    "hero": {
+      "eyebrow": "Tovar ayirboshlash · {year}",
+      "unit": "mln AQSH dollari",
+      "yoyLabel": "o‘tgan yilga nisbatan",
+      "since2017": "2017 yildan beri {times} barobar o‘sish · ikkinchi yil ketma-ket $1 mlrd dan yuqori",
+      "sparkAria": "Yillik tovar ayirboshlash 2017–2025, mln AQSH dollari",
+      "methodology": "O‘zbekiston milliy statistikasi",
+      "voice": "Sheriklik barqaror cho‘qqiga chiqdi: savdo ikkinchi yil ketma-ket milliard dollardan oshdi, Amerika investitsiyalari iqtisodiyotda ishlamoqda, muloqot esa prezidentlar darajasida davom etmoqda."
+    },
+    "globe": {
+      "ariaLabel": "Interaktiv globus: O‘zbekistondagi investitsiya loyihalari, AQSHdagi vakolatxonalar hamda Toshkent — Vashington va Nyu-York delegatsiya yo‘nalishlari",
+      "corridorDc": "Toshkent — Vashington · {count}",
+      "corridorNy": "Toshkent — Nyu-York · {count}",
+      "legendInvestments": "Investitsiya loyihalari",
+      "legendMissions": "Diplomatik vakolatxonalar",
+      "legendVisits": "Tashriflar va delegatsiyalar",
+      "hubTitle": "Toshkent",
+      "incoming": "{count, plural, other {AQSHdan # ta tashrif · 2025–2026}}",
+      "moreProjects": "{count, plural, other {+ yana # ta loyiha}}",
+      "valueMln": "${value} mln",
+      "undisclosed": "Summasi rasman oshkor qilinmagan",
+      "pipelineLabel": "Tayyorgarlik bosqichida",
+      "missionStatus": {
+        "active": "Faoliyat yuritmoqda",
+        "opened-2026": "2026 yilda ochilgan",
+        "planned-2026": "Reja · 2026",
+        "planned-2027": "Reja · 2027"
+      }
+    },
+    "stats": {
+      "portfolioLabel": "Tasdiqlangan AQSH investitsiyalari",
+      "mln": "mln",
+      "portfolioSub": "+${pending} mln tasdiqlanmoqda · faol portfelda {projects} ta loyiha",
+      "visitsLabel": "Tashriflar va uchrashuvlar",
+      "visitsSub": "Prezident va vazirlar darajasida · 2025–2026",
+      "documentsLabel": "Ikki tomonlama hujjatlar",
+      "documentsSub": "Huquqiy bazada {invest} ta investitsiya bitimi",
+      "commitmentsLabel": "Nazoratdagi topshiriqlar",
+      "commitmentsSub": "o‘rtacha bajarilish {avg}%"
+    },
+    "invest": {
+      "title": "Investitsiyalar — yetakchi tarmoqlar",
+      "sector": {
+        "finance": "Moliya",
+        "energy": "Energetika",
+        "mining-metals": "Kon-metallurgiya",
+        "minerals-rare-earth": "Muhim minerallar",
+        "it-digital": "IT va raqamlashtirish",
+        "agri-food": "Agro-oziq-ovqat",
+        "automotive": "Avtomobilsozlik",
+        "chemicals": "Kimyo"
+      },
+      "valueMln": "${value} mln",
+      "projects": "{count, plural, other {# ta loyiha}}"
+    },
+    "docs": {
+      "title": "Ishlab chiqilayotgan asosiy hujjat",
+      "flagshipTitle": "AQSH DFC bilan qo‘shma investitsiya platformasi",
+      "flagshipMeta": "Asosiy shartlar {date} da imzolangan · joriy etilmoqda"
+    },
+    "commitments": {
+      "title": "Topshiriqlar ijrosi",
+      "done": "Bajarildi",
+      "inProgress": "Jarayonda",
+      "overdue": "Muddati o‘tgan",
+      "completion": "{total} ta topshiriq bo‘yicha o‘rtacha",
+      "scaleAria": "Topshiriqlar: {done} bajarildi, {inMotion} jarayonda, {overdue} muddati o‘tgan",
+      "watchNote": "{watch, plural, other {# ta topshiriq alohida nazoratda}}"
+    },
+    "attention": {
+      "title": "E’tibor talab qiladi",
+      "overdue": "Muddati o‘tgan",
+      "watch": "Nazoratda",
+      "due": "muddat: {date}"
+    },
+    "horizon": {
+      "title": "30 kunlik gorizont",
+      "empty": "Yaqin oynada tadbirlar yo‘q",
+      "beyond": "30 kundan keyin",
+      "inWindow": "yaqin 30 kun ichida"
+    },
+    "footer": {
+      "updatedJustNow": "Hozirgina yangilandi",
+      "updatedMinutes": "{minutes, plural, other {# daqiqa oldin yangilandi}}",
+      "sources": "{count, plural, other {# ta rasmiy manba}}",
+      "print": "PDF eksport"
+    }
+  },
   "brand": {
     "title": "O‘zbekiston – AQSh",
     "subtitle": "Vaziyat Markazi",
@@ -86,6 +183,10 @@
   },
   "seo": {
     "routes": {
+      "brief": {
+        "title": "Strategik sharh",
+        "description": "O‘zbekiston — AQSH munosabatlari bo‘yicha ko‘rgazmali ekran: savdo, tasdiqlangan investitsiyalar, topshiriqlar ijrosi, delegatsiyalar va 30 kunlik gorizont."
+      },
       "overview": {
         "title": "O'zbekiston-AQSh iqtisodiy-intellekt platformasi",
         "description": "Savdo, investitsiya, diplomatiya, xatarlar, manbalar va keyingi harakatlar bo'yicha ijro brifi."

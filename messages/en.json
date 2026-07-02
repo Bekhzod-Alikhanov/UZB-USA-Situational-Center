@@ -1,4 +1,101 @@
 {
+  "brief": {
+    "intro": {
+      "title": "Uzbekistan — United States",
+      "subtitle": "Situational Center · Bilateral Cooperation"
+    },
+    "header": {
+      "title": "Uzbekistan — United States",
+      "sub": "Strategic overview"
+    },
+    "hero": {
+      "eyebrow": "Bilateral trade · {year}",
+      "unit": "million USD",
+      "yoyLabel": "year over year",
+      "since2017": "{times}× growth since 2017 · second consecutive year above $1 billion",
+      "sparkAria": "Annual bilateral trade turnover, 2017–2025, million USD",
+      "methodology": "National statistics of Uzbekistan",
+      "voice": "The partnership has reached a durable high: trade above one billion dollars for a second consecutive year, anchored by operating American investment and a standing presidential dialogue."
+    },
+    "globe": {
+      "ariaLabel": "Interactive globe: investment projects in Uzbekistan, Uzbek missions in the United States, and delegation routes between Tashkent, Washington and New York",
+      "corridorDc": "Tashkent — Washington · {count}",
+      "corridorNy": "Tashkent — New York · {count}",
+      "legendInvestments": "Investment projects",
+      "legendMissions": "Diplomatic missions",
+      "legendVisits": "Visits & delegations",
+      "hubTitle": "Tashkent",
+      "incoming": "{count, plural, one {# incoming U.S. visit · 2025–2026} other {# incoming U.S. visits · 2025–2026}}",
+      "moreProjects": "{count, plural, one {+# more project} other {+# more projects}}",
+      "valueMln": "${value} million",
+      "undisclosed": "Value not publicly disclosed",
+      "pipelineLabel": "In preparation",
+      "missionStatus": {
+        "active": "Active mission",
+        "opened-2026": "Opened in 2026",
+        "planned-2026": "Planned · 2026",
+        "planned-2027": "Planned · 2027"
+      }
+    },
+    "stats": {
+      "portfolioLabel": "Verified U.S. investment",
+      "mln": "mln",
+      "portfolioSub": "+${pending} mln pending verification · {projects} projects in the active portfolio",
+      "visitsLabel": "Visits & meetings",
+      "visitsSub": "Presidential and ministerial level · 2025–2026",
+      "documentsLabel": "Bilateral documents",
+      "documentsSub": "{invest} investment agreements in the legal base",
+      "commitmentsLabel": "Commitments tracked",
+      "commitmentsSub": "{avg}% average completion"
+    },
+    "invest": {
+      "title": "Investment — leading sectors",
+      "sector": {
+        "finance": "Finance",
+        "energy": "Energy",
+        "mining-metals": "Mining & metallurgy",
+        "minerals-rare-earth": "Critical minerals",
+        "it-digital": "IT & digital",
+        "agri-food": "Agri-food",
+        "automotive": "Automotive",
+        "chemicals": "Chemicals"
+      },
+      "valueMln": "${value} mln",
+      "projects": "{count, plural, one {# project} other {# projects}}"
+    },
+    "docs": {
+      "title": "Key document in progress",
+      "flagshipTitle": "Joint Investment Framework with the U.S. DFC",
+      "flagshipMeta": "Heads of Terms signed {date} · implementation under way"
+    },
+    "commitments": {
+      "title": "Execution of commitments",
+      "done": "Completed",
+      "inProgress": "In motion",
+      "overdue": "Overdue",
+      "completion": "average across {total} commitments",
+      "scaleAria": "Commitments: {done} completed, {inMotion} in motion, {overdue} overdue",
+      "watchNote": "{watch, plural, one {# item under close watch} other {# items under close watch}}"
+    },
+    "attention": {
+      "title": "Needs leadership attention",
+      "overdue": "Overdue",
+      "watch": "Watch",
+      "due": "due {date}"
+    },
+    "horizon": {
+      "title": "Next 30 days",
+      "empty": "No scheduled items in the window",
+      "beyond": "beyond the 30-day window",
+      "inWindow": "within 30 days"
+    },
+    "footer": {
+      "updatedJustNow": "Updated just now",
+      "updatedMinutes": "{minutes, plural, one {Updated # minute ago} other {Updated # minutes ago}}",
+      "sources": "{count, plural, one {# official source} other {# official sources}}",
+      "print": "Export PDF"
+    }
+  },
   "brand": {
     "title": "Uzbekistan – USA",
     "subtitle": "Situational Center",
@@ -86,6 +183,10 @@
   },
   "seo": {
     "routes": {
+      "brief": {
+        "title": "Executive Brief",
+        "description": "Exhibition-grade executive brief on Uzbekistan-USA relations: trade, verified investment, commitments execution, delegations, and the 30-day horizon."
+      },
       "overview": {
         "title": "Uzbekistan-USA Intelligence Platform",
         "description": "Executive brief on Uzbekistan-USA trade, investment, diplomacy, risks, sources, and next actions."

@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 const locales = ["en", "ru", "uz-latn"];
 const routes = [
   "",
+  "brief",
   "trade",
   "visits",
   "prepare",
