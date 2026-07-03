@@ -88,6 +88,21 @@ export function upcomingHorizon(asOf: Date, days = 30, minItems = 3, maxItems = 
   return all.slice(0, Math.max(minItems, Math.min(maxItems, all.length)));
 }
 
+/** Nearest upcoming visit-preparation pipeline (falls back to the latest one
+ *  so the panel never renders empty after the season's last visit). */
+export function nextPipeline(asOf: Date) {
+  const upcoming = visitPipelines
+    .filter((p) => parseDay(p.date).getTime() >= asOf.getTime())
+    .sort((a, b) => a.date.localeCompare(b.date));
+  return upcoming[0] ?? visitPipelines[visitPipelines.length - 1];
+}
+
+/** Whole days from `asOf` until a date-only string (0 when today/past). */
+export function daysUntil(dateStr: string, asOf: Date): number {
+  const ms = parseDay(dateStr).getTime() - asOf.getTime();
+  return Math.max(0, Math.ceil(ms / 86_400_000));
+}
+
 /** Overdue first, then watch — same triage order as the overview AlertsPanel. */
 export function attentionRows(limit = 3): Commitment[] {
   const byDue = (a: Commitment, b: Commitment) => a.dueDate.localeCompare(b.dueDate);

@@ -6,6 +6,8 @@ import {
   commitmentsAvgProgress,
   investmentHighlights,
   parseDay,
+  nextPipeline,
+  daysUntil,
 } from "@/components/brief/brief-data";
 import { buildBriefGlobeData, resolveRegion } from "@/components/brief/geo";
 import { tradeAnnualUz } from "@/data/trade";
@@ -31,6 +33,15 @@ describe("brief-data", () => {
     // Dates stay sorted ascending.
     const dates = items.map((i) => i.date);
     expect([...dates].sort()).toEqual(dates);
+  });
+
+  it("picks the nearest upcoming pipeline and counts days to it", () => {
+    const asOf = new Date(2026, 6, 2); // 2026-07-02 local
+    const pipeline = nextPipeline(asOf);
+    expect(pipeline.id).toBe("visit-pipeline-tashkent-2026");
+    expect(daysUntil(pipeline.date, asOf)).toBe(6);
+    // After the season's last visit it falls back to the latest record.
+    expect(nextPipeline(new Date(2027, 0, 1)).id).toBe("visit-pipeline-nyc-unga-2026");
   });
 
   it("returns overdue commitments before watch items", () => {

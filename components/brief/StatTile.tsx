@@ -1,22 +1,25 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 /**
- * Stat tile for the /brief band. No card chrome by design — the parent
- * `.brief-band` grid draws 1px hairline dividers between tiles.
+ * KPI tile for the /brief videowall: colored accent strip on the left
+ * (prototype-style), big tabular value, one short sub-line. The accent is a
+ * CSS value (pass a var(--brief-*) token, never raw hex).
  */
 interface StatTileProps {
   label: string;
   /** Big value node — typically a <BriefNumber> with a unit suffix. */
   children: ReactNode;
   sub?: ReactNode;
+  /** CSS color for the left strip, e.g. "var(--brief-accent-2)". */
+  accent?: string;
 }
 
-export function StatTile({ label, children, sub }: StatTileProps) {
+export function StatTile({ label, children, sub, accent }: StatTileProps) {
   return (
-    <div>
-      <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--brief-ink-faint)]">{label}</div>
-      <div className="brief-stat-value mt-2 text-[var(--brief-ink)]">{children}</div>
-      {sub ? <div className="mt-1.5 text-[12.5px] leading-snug text-[var(--brief-ink-muted)]">{sub}</div> : null}
+    <div className="brief-kpi" style={accent ? ({ "--kpi-accent": accent } as CSSProperties) : undefined}>
+      <div className="brief-eyebrow">{label}</div>
+      <div className="brief-kpi-value">{children}</div>
+      {sub ? <div className="brief-kpi-sub">{sub}</div> : null}
     </div>
   );
 }

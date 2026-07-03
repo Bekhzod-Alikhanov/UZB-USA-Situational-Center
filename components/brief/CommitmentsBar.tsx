@@ -2,13 +2,13 @@ import { getTranslations } from "next-intl/server";
 import { countByStatus, commitments } from "@/data/commitments";
 import { commitmentsAvgProgress } from "@/components/brief/brief-data";
 import { BriefNumber } from "@/components/brief/BriefNumber";
-import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 
 /**
  * Aggregated commitments execution for /brief: one segmented scale
  * (done / in motion / overdue — the three states leadership reads at a
  * glance) plus an animated average-completion figure. The register itself is
- * workflow data (is_demo across the board), so the block carries a DemoBadge.
+ * workflow data (is_demo across the board) — the parent panel head carries
+ * the gated DemoBadge.
  */
 export async function CommitmentsBar() {
   const t = await getTranslations("brief.commitments");
@@ -25,14 +25,8 @@ export async function CommitmentsBar() {
 
   return (
     <div className="brief-print-block">
-      <div className="flex items-baseline justify-between gap-3">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--brief-ink-faint)]">
-          {t("title")}
-        </h2>
-        <DemoBadge source="Situational Center" />
-      </div>
-      <div className="mt-3 flex items-baseline gap-2">
-        <span className="brief-stat-value text-[var(--brief-ink)]">
+      <div className="flex items-baseline gap-2">
+        <span className="brief-kpi-value !mt-0">
           <BriefNumber value={avg} decimals={0} suffix="%" />
         </span>
         <span className="text-[12.5px] text-[var(--brief-ink-muted)]">{t("completion", { total })}</span>

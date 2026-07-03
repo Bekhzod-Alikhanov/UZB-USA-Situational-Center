@@ -6,18 +6,43 @@
     },
     "header": {
       "title": "O‘zbekiston — AQSH",
-      "sub": "Strategik sharh"
+      "sub": "Vaziyat ekrani"
     },
-    "hero": {
-      "eyebrow": "Tovar ayirboshlash · {year}",
-      "unit": "mln AQSH dollari",
-      "yoyLabel": "o‘tgan yilga nisbatan",
-      "since2017": "2017 yildan beri {times} barobar o‘sish · ikkinchi yil ketma-ket $1 mlrd dan yuqori",
+    "clocks": {
+      "tashkent": "Toshkent",
+      "washington": "Vashington"
+    },
+    "kpi": {
+      "turnover": "Tovar ayirboshlash · {year}",
+      "yoy": "yilga nisbatan",
+      "mln": "mln",
+      "invest": "Tasdiqlangan AQSH investitsiyalari",
+      "investSub": "+${pending} mln tasdiqlanmoqda",
+      "projects": "Faol loyihalar",
+      "projectsSub": "{verified} tasdiqlangan · {pending} tekshiruvda",
+      "documents": "Ikki tomonlama hujjatlar",
+      "documentsSub": "{invest} ta investitsiya bitimi",
+      "visits": "Tashriflar · 2025–2026",
+      "visitsSub": "AQSHdan {incoming} ta tashrif",
+      "commitments": "Nazoratdagi topshiriqlar",
+      "commitmentsSub": "o‘rtacha bajarilish {avg}%"
+    },
+    "trade": {
+      "title": "Savdo dinamikasi",
       "sparkAria": "Yillik tovar ayirboshlash 2017–2025, mln AQSH dollari",
-      "methodology": "O‘zbekiston milliy statistikasi",
-      "voice": "Sheriklik barqaror cho‘qqiga chiqdi: savdo ikkinchi yil ketma-ket milliard dollardan oshdi, Amerika investitsiyalari iqtisodiyotda ishlamoqda, muloqot esa prezidentlar darajasida davom etmoqda."
+      "viewAnnual": "Yillik · 2017–2025",
+      "viewMonthly": "Oylik · 18 oy",
+      "turnover": "Ayirboshlash",
+      "exports": "O‘z eksporti",
+      "imports": "O‘z importi",
+      "exportsUs": "AQSH eksporti",
+      "importsUs": "AQSH importi",
+      "methodologyUz": "O‘zbekiston milliy statistikasi",
+      "methodologyUs": "AQSH aholini ro‘yxatga olish byurosi"
     },
     "globe": {
+      "title": "Hamkorlik geografiyasi",
+      "sub": "loyihalar · vakolatxonalar · delegatsiyalar",
       "ariaLabel": "Interaktiv globus: O‘zbekistondagi investitsiya loyihalari, AQSHdagi vakolatxonalar hamda Toshkent — Vashington va Nyu-York delegatsiya yo‘nalishlari",
       "corridorDc": "Toshkent — Vashington · {count}",
       "corridorNy": "Toshkent — Nyu-York · {count}",
@@ -37,16 +62,19 @@
         "planned-2027": "Reja · 2027"
       }
     },
-    "stats": {
-      "portfolioLabel": "Tasdiqlangan AQSH investitsiyalari",
-      "mln": "mln",
-      "portfolioSub": "+${pending} mln tasdiqlanmoqda · faol portfelda {projects} ta loyiha",
-      "visitsLabel": "Tashriflar va uchrashuvlar",
-      "visitsSub": "Prezident va vazirlar darajasida · 2025–2026",
-      "documentsLabel": "Ikki tomonlama hujjatlar",
-      "documentsSub": "Huquqiy bazada {invest} ta investitsiya bitimi",
-      "commitmentsLabel": "Nazoratdagi topshiriqlar",
-      "commitmentsSub": "o‘rtacha bajarilish {avg}%"
+    "visit": {
+      "title": "Yaqin tashrif",
+      "countDays": "kun qoldi",
+      "countDelegation": "delegatsiya guruhlari",
+      "countProgram": "dastur bloklari",
+      "countChecklist": "nazorat ro‘yxati",
+      "readinessAria": "Tashrifga tayyorgarlik darajasi: {pct}%"
+    },
+    "horizon": {
+      "title": "30 kunlik gorizont",
+      "empty": "Yaqin oynada tadbirlar yo‘q",
+      "beyond": "30 kundan keyin",
+      "inWindow": "yaqin 30 kun ichida"
     },
     "invest": {
       "title": "Investitsiyalar — yetakchi tarmoqlar",
@@ -83,17 +111,21 @@
       "watch": "Nazoratda",
       "due": "muddat: {date}"
     },
-    "horizon": {
-      "title": "30 kunlik gorizont",
-      "empty": "Yaqin oynada tadbirlar yo‘q",
-      "beyond": "30 kundan keyin",
-      "inWindow": "yaqin 30 kun ichida"
+    "agreementsChart": {
+      "title": "Huquqiy baza tuzilmasi",
+      "total": "hujjat",
+      "interstate": "Davlatlararo",
+      "intergov": "Hukumatlararo",
+      "interagency": "Idoralararo",
+      "other": "Boshqa",
+      "investLine": "+ {count} ta investitsiya bitimi alohida yuritiladi"
     },
     "footer": {
-      "updatedJustNow": "Hozirgina yangilandi",
+      "updatedJustNow": "hozirgina yangilandi",
       "updatedMinutes": "{minutes, plural, other {# daqiqa oldin yangilandi}}",
       "sources": "{count, plural, other {# ta rasmiy manba}}",
-      "print": "PDF eksport"
+      "print": "PDF eksport",
+      "methodologies": "O‘z milliy statistikasi · U.S. Census Bureau · TIV reestri"
     }
   },
   "brand": {
