@@ -141,14 +141,10 @@
     "prepare": "Tashrifga tayyorgarlik",
     "commitments": "Kelishuvlar reestri",
     "agreements": "Ikki tomonlama bitimlar",
-    "events": "Tadbirlar va kalendar",
     "grants": "Grantlar",
     "map": "Interaktiv xarita",
-    "sectors": "Sohalar imkoniyatlari",
     "compliance": "AQSh kompliyans",
-    "counterparts": "Hamkorlar",
     "benchmark": "Mintaqaviy taqqoslash",
-    "staff": "Shtab KPI",
     "contacts": "Kontaktlar",
     "news": "Yangiliklar tasmasi",
     "admin": "Boshqaruv"
@@ -231,10 +227,6 @@
         "title": "Investitsiya va xususiylashtirish",
         "description": "Tekshirilgan loyihalar, tasdiqlanishi kerak yozuvlar, demo ma'lumotlar va xususiylashtirish tayyorligi ajratilgan investitsiya loyihalari puli."
       },
-      "sectors": {
-        "title": "Sohalar va AQSh bozoriga chiqish",
-        "description": "O'zbekiston-AQSh hamkorligi uchun soha imkoniyatlari, signallar, to'siqlar va AQSh bozoriga chiqish savollari."
-      },
       "map": {
         "title": "AQSh xaritasi va O'zbekiston ishtiroki",
         "description": "Shtatlar kesimida AQSh YaIMi, aholi, O'zbekiston talabalari, vakolatxonalar, rejalashtirilgan tashriflar va bozor konteksti."
@@ -250,10 +242,6 @@
       "agreements": {
         "title": "Ikki tomonlama bitimlar",
         "description": "O'zbekiston-AQSh bitimlari reestri va tahlili: huquqiy tayanchlar, toifalar, manba holati va xronologiya."
-      },
-      "events": {
-        "title": "Tadbirlar va kalendar",
-        "description": "O'zbekiston-AQSh muvofiqlashtiruvi, delegatsiyalar, biznes forumlar va siyosiy lahzalar uchun kelgusi va o'tgan tadbirlar."
       },
       "commitments": {
         "title": "Harakatlar va topshiriqlar",
@@ -275,35 +263,14 @@
         "title": "Kontaktlar ma'lumotnomasi",
         "description": "Ikki tomonlama ish uchun agentliklar, muvofiqlashtiruvchi organlar, elchixonalar, kengashlar va ishchi kontaktlar katalogi."
       },
-      "counterparts": {
-        "title": "Hamkorlar",
-        "description": "AQSh rasmiylari, Kongress vakillari, institutlar, mavzular, aloqalar tarixi va manbalar bo'yicha brifing reestri."
-      },
-      "counterpart": {
-        "title": "{name} - hamkor brifi",
-        "description": "Manbali hamkor brifi: aloqalar tarixi, rol konteksti, mavzular, qo'mitalar va tayyorgarlik izohlari."
-      },
       "prepare": {
         "title": "Tashrifga tayyorgarlik",
         "description": "Tashriflar puli, hujjatlar, logistika, natijalar va tashrifdan keyingi solishtirish uchun operatsion ish maydoni."
-      },
-      "staff": {
-        "title": "Shtab KPI",
-        "description": "Shtabning ichki KPI kuzatuvchisi, bosqichlar, operatsion ritm, bajarilish kuzatuvi va demo-status belgilari."
       },
       "adminLogin": {
         "title": "Administrator kirishi",
         "description": "Ichki operatsiyalar va platforma boshqaruvi uchun himoyalangan administrator kirishi."
       }
-    }
-  },
-  "sectorsPage": {
-    "title": "Sohalar imkoniyatlari",
-    "subtitle": "AQSh-O‘zbekiston hamkorligida eng kuchli ta’sirga ega {count} yo‘nalish bo‘yicha brifing darajasidagi tahlil",
-    "print": "Sohalar brifini eksport qilish",
-    "card": {
-      "title": "Ikki tomonlama hamkorlik qayerda eng katta ta’sir beradi",
-      "sub": "Har bir kartada signal, ahamiyati va uchrashuvda muhokama qilinadigan keyingi savol berilgan"
     }
   },
   "benchmarkPage": {
@@ -334,40 +301,6 @@
       "mandate": "Manba ishonchliligi ko‘rinib turadi; demo va ko‘rib chiqilayotgan qiymatlar iqtibosga tayyor raqamlardan ajratilgan.",
       "print": "PDF eksport"
     },
-    "narrationLabels": {
-      "what": "Bu nimani anglatadi",
-      "why": "Nega muhim",
-      "how": "Qanday foydalanish",
-      "source": "Manba va birlik"
-    },
-    "narration": {
-      "flow": {
-        "what": "Savdo hajmi mutlaq qiymatda kengaymoqda, lekin balans tarkiban AQShning O‘zbekistonga eksporti tomonga og‘ishgan.",
-        "why": "Rahbariyat uchun asosiy savdo masalasi faqat sarlavha aylanmasi emas, eksport diversifikatsiyasi va bozorga kirishdir.",
-        "how": "Brifinglarda birinchi grafik sifatida ishlating, so‘ng metodologiya va mahsulot tafsilotlari uchun Savdo bo‘limini oching.",
-        "source": "Mln AQSh dollari, O‘zbekiston tomonining yillik metodologiyasi."
-      },
-      "sectors": {
-        "what": "Investitsiya qiymati bir nechta sektorda jamlangan; ayrim qatorlar tekshirilgan, boshqalari muvofiqlashtirish yoki demo yozuvlaridir.",
-        "why": "Iqtibosga tayyor imkoniyatlarni egasi, source ID yoki AQSh kontrpart xaritasi kerak bo‘lgan yozuvlardan ajratish zarur.",
-        "how": "Keyingi due diligence yo‘nalishini tanlash uchun sektor setkasidan foydalaning, keyin Investitsiya moduliga o‘ting."
-      },
-      "monthly": {
-        "what": "Oylik ma’lumotlar yaqin muddatli pulsni ko‘rsatadi, ammo yillik iqtibosga tayyor qatorni almashtirmaydi.",
-        "why": "Ular rasmiy yillik narrativ yangilanishidan oldin burilish nuqtalarini ko‘rishga yordam beradi.",
-        "how": "Yagona tashqi sarlavha emas, erta ogohlantirish grafigi sifatida ishlating."
-      },
-      "risk": {
-        "what": "Risk ko‘rinishi topshiriqlar, bitimlar, bosqichlar va tashrif tayyorligini bitta operatsion navbatga birlashtiradi.",
-        "why": "Rahbariyat faqat e’lon qilingan faktlarni emas, natijaga nima to‘sqinlik qilayotganini ko‘rishi kerak.",
-        "how": "Har bir bandni ochib, manba, topshiriq egasi yoki tashrif tayyorligi sahifasi bilan ishlang."
-      },
-      "grants": {
-        "what": "Grant va yordam yozuvlari soft-power va rivojlanish yo‘nalishlarini ko‘rsatadi, lekin hisob tizimlari farq qiladi.",
-        "why": "UZ ichki grantlari, USAID yozuvlari va ForeignAssistance.gov majburiyatlarini metodologik tekshiruvsiz qo‘shmang.",
-        "how": "Portfelni tushunish uchun donutdan foydalaning, grantlar sahifasida metodologiya izohlarini ko‘rinadigan qoldiring."
-      }
-    },
     "kpi": {
       "turnover2025": "Tovar aylanmasi (2025)",
       "exports2025": "UZ → AQSh eksport",
@@ -395,10 +328,6 @@
     "detailedAnalysis": "Batafsil tahlil",
     "detailedAnalysisSub": "Savdo, sohalar, hamkorlar, xatarlar va 90 kunlik gorizont",
     "cards": {
-      "relationshipPillars": {
-        "title": "Munosabatlar tayanchlari",
-        "sub": "Diplomatiya, savdo, investitsiya, xavfsizlik, ta’lim, mobillik va mintaqaviy strategiya - har birida keyingi qadam bor"
-      },
       "flowSub": "Mln AQSh dollari · 2017–2025 · UZ Stat (punktir - aylanma)",
       "sectorsTitle": "Sektorlar",
       "sectorsSub": "8 yo‘nalish · investments.ts dan agregatsiya qilingan",
@@ -412,61 +341,6 @@
       "riskSub": "4 reestr bo‘yicha live agregator",
       "horizonTitle": "90 kunlik gorizont",
       "horizonSub": "tashriflar, tadbirlar, muddatlar"
-    },
-    "relationshipPillars": {
-      "nextMove": "Keyingi qadam",
-      "openSection": "Bo'limni ochish",
-      "items": {
-        "diplomacy": {
-          "title": "Diplomatiya",
-          "signal": "Faol oynadagi tashriflar",
-          "metric": "Huquqiy instrumentlar",
-          "narrative": "Munosabatlarda operatsion ritmni qo'llab-quvvatlash uchun yetarli yuqori darajadagi kadens bor, ammo bitimlar metama'lumotlari egalar tomonidan tasdiqlanishi kerak.",
-          "action": "Shartnomalar bazasini qidiriladigan bitimlar reestriga aylantirish."
-        },
-        "trade": {
-          "title": "Savdo",
-          "signal": "Savdo topshiriqlari",
-          "metric": "UZ/US ikki metodologiyasi",
-          "narrative": "Savdo tahlili UZ Stat va U.S. Census aniq metodologiya chegaralari bilan yonma-yon ko'rsatilganda eng ishonchli bo'ladi.",
-          "action": "Oylik Census yangilanishini avtomatlashtirish va O'zbekiston tomoni raqamlarini manba egasi bilan tasdiqlangan saqlash."
-        },
-        "investment": {
-          "title": "Investitsiya",
-          "signal": "Portfel qiymati",
-          "metric": "Loyihalar reestri",
-          "narrative": "Investitsiya portfeli eng kuchli ijro hikoyasi, ammo demo qatorlar tashqi foydalanishdan oldin alohida qolishi kerak.",
-          "action": "DFC/EXIMga tayyor loyihalarni ustuvor qilish va sponsor, egasi, qiymat, status hamda manba maydonlarini talab qilish."
-        },
-        "security-minerals": {
-          "title": "Xavfsizlik va minerallar",
-          "signal": "Kritik minerallar yozuvlari",
-          "metric": "C5+1 ta'minot zanjiri yo'nalishi",
-          "narrative": "Kritik minerallar iqtisodiyot, xavfsizlik va mintaqaviy strategiyani bog'laydi; bu doimiy kuzatuv ro'yxati bo'lishi kerak.",
-          "action": "Hamkor, kon sessiyasi, moliyalashtirish, eksport nazorati va infratuzilma bog'liqliklari bilan minerallar trekkerini yaratish."
-        },
-        "education-aid": {
-          "title": "Ta'lim va yordam",
-          "signal": "Grantlar va dasturlar",
-          "metric": "O'zbekiston va AQSh tomonlari hisobi",
-          "narrative": "Rivojlanish yordami va ta'lim soft power ko'rsatkichlari sifatida foydali, ammo ularning hisob tizimlari alohida qolishi kerak.",
-          "action": "Open Doors ta'lim ma'lumotlarini qo'shish va ForeignAssistance.gov sektor xulosalarini normallashtirish."
-        },
-        "people-mobility": {
-          "title": "Odamlar va mobillik",
-          "signal": "Madaniyat/mobillik signallari",
-          "metric": "2026-yildan AQSh fuqarolari uchun vizasiz rejim",
-          "narrative": "Vizasiz sayohat va turizm o'sishi viza/admissions ma'lumotlari bilan bog'lansa, munosabatlarning alohida metrikasiga aylanishi mumkin.",
-          "action": "State viza statistikasi, DHS admissions va Open Doors ta'lim oqimlarini qo'shish."
-        },
-        "regional-strategy": {
-          "title": "Mintaqaviy strategiya",
-          "signal": "Diplomatik va kengash tadbirlari",
-          "metric": "C5+1 va peer benchmark",
-          "narrative": "Benchmark sahifasi foydali, ammo uni aniq siyosiy xulosalar va mintaqaviy raqobat bilan bog'lash kerak.",
-          "action": "Makro benchmarklarni World Bank WDI orqali yangilash va har bir metrika bo'yicha siyosiy xulosa qo'shish."
-        }
-      }
     },
     "sectorTiles": {
       "projectsShort": "{count} loy.",
@@ -504,69 +378,6 @@
         "Economy": "Iqtisodiyot",
         "Agriculture": "Qishloq xo'jaligi",
         "Other": "Boshqa"
-      }
-    },
-    "sourceQuality": {
-      "sourceTitle": "Manba ishonchliligi va yangiligi",
-      "sourceSub": "{total} ta ro‘yxatdagi manba, {official} ta rasmiy, {internal} ta ichki",
-      "liveTitle": "Live ma’lumotlar va baza tayyorligi",
-      "liveSub": "Ochiq APIlar ixtiyoriy server konnektorlari sifatida ulangan; yopiq operatsiyalar uchun credentials kerak.",
-      "stats": {
-        "fresh": "Yangi",
-        "watch": "Kuzatuv",
-        "stale": "Eskirgan"
-      },
-      "thresholdNote": "Manba yoshi shkalasi: 45 kungacha yangi, 45–120 kun nazoratda, 120 kundan oshsa eskirgan. Yuqori panel platformaning so'nggi tekshiruvini (eng eski manba bo'yicha) ko'rsatadi, har bir manba yangi degani emas.",
-      "freshness": {
-        "fresh": "yangi",
-        "watch": "kuzatuv",
-        "stale": "eskirgan",
-        "undated": "sanasiz"
-      },
-      "age": {
-        "undated": "sanasiz",
-        "days": "{days} kun"
-      },
-      "reasons": {
-        "internal": "Biriktirilgan yoki ichki manba, {age}; e’lon qilishdan oldin egasi sign-offini tasdiqlang.",
-        "stale": "Ochiq manba: {age}; ijro brifingidan oldin yangilang.",
-        "official": "Rasmiy ochiq manba, {age}.",
-        "partner": "Ochiq hamkor yoki hosila manba, {age}; manba izohini ko‘rinadigan qoldiring."
-      },
-      "connectorStatus": {
-        "live-ready": "live tayyor",
-        "key-required": "kalit kerak",
-        "manual-review": "qo‘lda ko‘rib chiqish",
-        "planned": "rejalashtirilgan"
-      },
-      "connectorUse": {
-        "census-hs-trade": "Tovar savdosi, HS tuzilmasi, so‘rov limitlari imkon berganda shtat/port eksportlari.",
-        "world-bank-wdi": "Mintaqaviy benchmark, YaIM, aholi, TTXI va makro kontekst.",
-        "bea-services": "Xizmatlar savdosi, xalqaro tranzaksiyalar, investitsiya pozitsiyasi va USTR xizmatlar ko‘rsatkichini tekshirish.",
-        "imf-data": "SDMX dataset mappingidan keyin FX, to‘lov balansi, zaxiralar va makromoliyaviy kontekst.",
-        "foreign-assistance": "AQSh tashqi yordam majburiyatlari/to‘lovlari yil, agentlik va sektor bo‘yicha."
-      },
-      "monitor": {
-        "title": "Operatsion ma’lumotlar monitori",
-        "ready": "{mode} rejimi, {liveReady}/{total} live-ready konnektor",
-        "checking": "Tayyorlik tekshirilmoqda...",
-        "unavailable": "Health check mavjud emas",
-        "probe": "Tekshirish",
-        "probeAria": "Live ma’lumot konnektorlarini tekshirish",
-        "database": "Ma’lumotlar bazasi",
-        "writable": "yozish mumkin",
-        "readOnly": "faqat o‘qish",
-        "databaseConfigured": "Operatsion baza ushbu muhit uchun sozlangan.",
-        "databaseStatic": "Statik rejim faol; yozish operatsiyalari mavjud emas.",
-        "probeStatus": {
-          "not-probed": "tekshirilmagan",
-          "not-configured": "sozlanmagan",
-          "error": "xato",
-          "live-ready": "live tayyor",
-          "key-required": "kalit kerak",
-          "manual-review": "qo‘lda ko‘rib chiqish",
-          "planned": "rejalashtirilgan"
-        }
       }
     },
     "timeline": "So‘nggi faoliyat",
@@ -695,23 +506,13 @@
     "tabs": {
       "timeline": "Xronologiya",
       "grid": "Kartalar",
-      "table": "Jadval"
+      "table": "Jadval",
+      "calendar": "Taqvim"
     }
   },
   "prepare": {
     "title": "Tashrifga tayyorgarlik",
-    "subtitle": "Workflow · chek-listlar · optimallashtirish",
-    "stages": {
-      "plan": "Reja",
-      "coord": "Muvofiqlashtirish",
-      "brief": "Brifing",
-      "exec": "Ijro",
-      "follow": "Kuzatib borish"
-    },
-    "optimize": {
-      "title": "Delegatsiya optimallashtirgichi",
-      "sub": "Algoritmik tavsiya"
-    }
+    "subtitle": "Workflow · chek-listlar · optimallashtirish"
   },
   "commitments": {
     "title": "Kelishuvlar reestri",
@@ -944,50 +745,11 @@
         "finance": "Moliya",
         "minerals-rare-earth": "Minerallar / noyob yer"
       }
+    },
+    "sectorsCard": {
+      "title": "Tarmoq imkoniyatlari",
+      "sub": "AQSH bozoriga chiqish uchun {count} ta tarmoq brifingi"
     }
-  },
-  "events": {
-    "title": "Tadbirlar va kalendar",
-    "subtitle": "Rejalashtirilgan va so‘nggi tadbirlar",
-    "stats": {
-      "total": "Jami",
-      "upcoming": "Kutilayotgan"
-    },
-    "card": {
-      "title": "Kalendar",
-      "sub": "C5+1 · muloqotlar · forumlar · kengashlar · biznes"
-    },
-    "filters": {
-      "all": "Barchasi",
-      "summit": "Sammitlar",
-      "dialogue": "Muloqotlar",
-      "forum": "Forumlar",
-      "business": "Biznes",
-      "council": "Kengashlar",
-      "cultural": "Madaniy",
-      "parliamentary": "Parlament"
-    },
-    "types": {
-      "summit": "Sammit",
-      "dialogue": "Muloqot",
-      "forum": "Forum tadbiri",
-      "business": "Biznes",
-      "council": "Kengash",
-      "cultural": "Madaniy",
-      "parliamentary": "Parlament"
-    },
-    "searchLabel": "Tadbirlarni nomi yoki joyi bo‘yicha qidirish",
-    "searchPlaceholder": "Nomi yoki joyi",
-    "ics": ".ics eksport",
-    "sections": {
-      "upcoming": "Kutilayotgan",
-      "past": "O‘tgan"
-    },
-    "countdown": {
-      "in": "{days} kundan keyin",
-      "ago": "{days} kun oldin"
-    },
-    "linkedVisit": "Bog‘langan tashrif"
   },
   "grants": {
     "title": "Grantlar portfeli",
@@ -1088,43 +850,14 @@
         "gov-agency": "Davlat agentligi",
         "council": "Muvofiqlashtiruvchi organ"
       }
+    },
+    "keyFigures": {
+      "title": "AQSHning asosiy shaxslari",
+      "sub": "Ikki tomonlama kun tartibidagi {count} rasmiy shaxs"
     }
   },
   "counterparts": {
-    "title": "AQSh hamkorlari",
-    "subtitle": "Ijro hokimiyati, Kongress va O‘zbekiston bilan ishlayotgan rasmiylar",
     "search": "Ism, lavozim yoki rolni qidirish…",
-    "groups": {
-      "executive": "Ijro hokimiyati",
-      "senate": "AQSh Senati",
-      "house": "AQSh Vakillar palatasi",
-      "state": "Davlat departamenti",
-      "other": "Boshqa"
-    },
-    "briefing": "Briefing kartasi",
-    "generatePdf": "Briefing PDF yaratish",
-    "party": "Partiya",
-    "position": "Lavozim",
-    "uzHistory": "O‘zbekiston bilan tarix",
-    "keyVotes": "Muhim ovozlar",
-    "quotes": "Iqtiboslar",
-    "back": "Hamkorlarga qaytish",
-    "stats": {
-      "executive": "Ijro hokimiyati",
-      "congress": "Kongress",
-      "total": "Jami"
-    },
-    "card": {
-      "title": "Brifing reestri",
-      "sub": "Profilni ochish uchun kartani bosing"
-    },
-    "detail": {
-      "recordedEngagements": "{count} ta qayd etilgan aloqa",
-      "keyTopics": "Asosiy mavzular",
-      "committees": "Qo'mitalar",
-      "profileSummary": "Profil xulosasi",
-      "source": "Manba"
-    },
     "grid": {
       "all": "Barchasi",
       "engagements": "{count} ta aloqa",
@@ -1174,19 +907,6 @@
       },
       "disclaimer": "Illyustrativ kalkulyator. Haqiqiy litsenziyalash BIS / DDTC / OFAC tomonidan belgilanadi � yuristga murojaat qiling."
     }
-  },
-  "staff": {
-    "title": "Shtab KPI",
-    "subtitle": "Markaz tahlilchilari va muvofiqlashtiruvchilarining oylik ko‘rsatkichlari",
-    "columns": {
-      "name": "Tahlilchi",
-      "role": "Rol",
-      "briefs": "Briefing",
-      "visits": "Tashriflar",
-      "commitments": "Kelishuvlar",
-      "score": "Ball"
-    },
-    "month": "Oy"
   },
   "news": {
     "title": "Yangiliklar tasmasi",
@@ -1327,5 +1047,38 @@
     "viewAll": "Barchasini ko‘rish",
     "loading": "Yuklanmoqda…",
     "empty": "Ma’lumot yo‘q"
+  },
+  "events": {
+    "filters": {
+      "all": "Barchasi",
+      "summit": "Sammitlar",
+      "dialogue": "Muloqotlar",
+      "forum": "Forumlar",
+      "business": "Biznes",
+      "council": "Kengashlar",
+      "cultural": "Madaniy",
+      "parliamentary": "Parlament"
+    },
+    "types": {
+      "summit": "Sammit",
+      "dialogue": "Muloqot",
+      "forum": "Forum tadbiri",
+      "business": "Biznes",
+      "council": "Kengash",
+      "cultural": "Madaniy",
+      "parliamentary": "Parlament"
+    },
+    "searchLabel": "Tadbirlarni nomi yoki joyi bo‘yicha qidirish",
+    "searchPlaceholder": "Nomi yoki joyi",
+    "ics": ".ics eksport",
+    "sections": {
+      "upcoming": "Kutilayotgan",
+      "past": "O‘tgan"
+    },
+    "countdown": {
+      "in": "{days} kundan keyin",
+      "ago": "{days} kun oldin"
+    },
+    "linkedVisit": "Bog‘langan tashrif"
   }
 }

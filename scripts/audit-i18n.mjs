@@ -126,7 +126,13 @@ function auditSourceHotspots() {
     },
     {
       file: "components/investments/InvestmentsView.tsx",
-      patterns: [/All sectors/, /All confidence/, /No projects/, /What this means/, /Source-backed privatization data required/],
+      patterns: [
+        /All sectors/,
+        /All confidence/,
+        /No projects/,
+        /What this means/,
+        /Source-backed privatization data required/,
+      ],
       message: "Investment workspace contains hardcoded English controls, empty states, or drawer copy.",
       severity: "error",
     },

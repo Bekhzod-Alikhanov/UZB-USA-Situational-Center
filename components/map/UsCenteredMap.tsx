@@ -412,7 +412,10 @@ export function UsCenteredMap() {
                     fill={fill}
                     stroke={isSelected ? "#1A3A6C" : "rgba(0,0,0,0.35)"}
                     strokeWidth={isSelected ? 2 : 0.7}
-                    style={{ cursor: meta ? "pointer" : "default", transition: "stroke var(--duration-fast) var(--ease-out)" }}
+                    style={{
+                      cursor: meta ? "pointer" : "default",
+                      transition: "stroke var(--duration-fast) var(--ease-out)",
+                    }}
                     onMouseMove={(e) => {
                       if (!meta) return;
                       const rect = containerRef.current?.getBoundingClientRect();

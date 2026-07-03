@@ -110,13 +110,17 @@ function DecisionCard({
 }) {
   if (!item) return null;
 
-  const toneClass =
-    tone === "rose" ? "exec-tone-rose" : tone === "invest" ? "exec-tone-invest" : "exec-tone-primary";
+  const toneClass = tone === "rose" ? "exec-tone-rose" : tone === "invest" ? "exec-tone-invest" : "exec-tone-primary";
 
   return (
     <article className="group rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 transition hover:border-[var(--color-border-strong)]">
       <div className="mb-2 flex items-center justify-between gap-2">
-        <span className={cn("inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider", toneClass)}>
+        <span
+          className={cn(
+            "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+            toneClass,
+          )}
+        >
           {icon}
           {label}
         </span>

@@ -2,11 +2,15 @@
 import { useTranslations } from "next-intl";
 import { counterparts, PARTY_TONE, STANCE_TEXT, type CounterpartRole } from "@/data/counterparts";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 
-export function CounterpartsGrid({ locale }: { locale: string }) {
+/**
+ * Key U.S. figures grid, hosted on /contacts since the portal-slim pass.
+ * The per-person briefing dossiers (63 SSG pages) were retired as the main
+ * manual-upkeep burden, so cards are informational, not links.
+ */
+export function CounterpartsGrid() {
   const t = useTranslations("counterparts");
   const [role, setRole] = useState<CounterpartRole | "all">("all");
   const [search, setSearch] = useState("");
@@ -67,10 +71,9 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((c) => (
-          <Link
+          <div
             key={c.id}
-            href={`/${locale}/counterparts/${c.id}`}
-            className="group flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-hover)]"
+            className="flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
           >
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
@@ -100,7 +103,7 @@ export function CounterpartsGrid({ locale }: { locale: string }) {
                 })}
               </span>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

@@ -77,7 +77,9 @@ function buildHorizon(today: Date, max = 90): HorizonItem[] {
         label: e.title,
         type: "forum",
         party: "uz",
-        href: `/events`,
+        // Events merged into the visits section (calendar tab) in the
+        // portal-slim pass.
+        href: `/visits`,
       });
     }
   }

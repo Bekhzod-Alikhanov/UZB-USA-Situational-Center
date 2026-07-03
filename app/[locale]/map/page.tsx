@@ -79,10 +79,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
         {/* Main canvas: map on left, glassmorphic side panel on right */}
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_440px]">
           {/* Map canvas */}
-          <div
-            className="strategic-glass relative overflow-hidden p-0"
-            style={{ minHeight: 560 }}
-          >
+          <div className="strategic-glass relative overflow-hidden p-0" style={{ minHeight: 560 }}>
             <div className="absolute inset-0 rounded-2xl bg-[var(--sv-surface-low)]">
               <MapLoadGate locale={locale} />
             </div>
@@ -165,9 +162,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
                       className="flex items-start justify-between gap-3 rounded-lg border border-[var(--sv-outline)]/30 bg-[var(--sv-surface-low)]/60 p-3 transition-colors hover:border-[var(--sv-secondary)]/40"
                     >
                       <div className="min-w-0">
-                        <div className="truncate text-[12.5px] font-medium text-[var(--sv-on-surface)]">
-                          {m.name}
-                        </div>
+                        <div className="truncate text-[12.5px] font-medium text-[var(--sv-on-surface)]">{m.name}</div>
                         <div className="mt-0.5 text-[10.5px] text-[var(--sv-on-surface-variant)]">
                           {m.city}, {m.state}
                         </div>
@@ -199,17 +194,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
   );
 }
 
-function Tile({
-  icon,
-  label,
-  value,
-  sub,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  sub: string;
-}) {
+function Tile({ icon, label, value, sub }: { icon: React.ReactNode; label: string; value: string; sub: string }) {
   return (
     <div className="strategic-tile">
       <div className="strategic-tile-label">

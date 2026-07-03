@@ -39,11 +39,7 @@ interface GrantsViewProps {
   emptyDescription?: string;
 }
 
-export function GrantsView({
-  records = grants,
-  emptyTitle,
-  emptyDescription,
-}: GrantsViewProps) {
+export function GrantsView({ records = grants, emptyTitle, emptyDescription }: GrantsViewProps) {
   const t = useTranslations("grants.view");
   const [sector, setSector] = useState<Grant["sector"] | "all">("all");
   const [search, setSearch] = useState("");

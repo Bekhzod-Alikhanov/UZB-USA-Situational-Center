@@ -167,11 +167,11 @@ export function InvestmentsView() {
       <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[12px] leading-relaxed text-[var(--color-ink-muted)]">
         <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-start gap-2">
-          <Info className="mt-0.5 size-3.5 shrink-0 text-[var(--color-primary)]" aria-hidden />
-          <p>
-            <span className="font-semibold text-[var(--color-ink)]">{t("credibility.label")}</span>{" "}
-            {t("credibility.text")}
-          </p>
+            <Info className="mt-0.5 size-3.5 shrink-0 text-[var(--color-primary)]" aria-hidden />
+            <p>
+              <span className="font-semibold text-[var(--color-ink)]">{t("credibility.label")}</span>{" "}
+              {t("credibility.text")}
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <button
@@ -297,13 +297,20 @@ export function InvestmentsView() {
             ))}
           </div>
         ) : (
-          <EmptyState className="rounded-md border border-dashed border-[var(--color-border)] px-4 py-6" title={t("empty.title")} description={t("empty.description")} />
+          <EmptyState
+            className="rounded-md border border-dashed border-[var(--color-border)] px-4 py-6"
+            title={t("empty.title")}
+            description={t("empty.description")}
+          />
         )}
         {!showAllStages && hiddenEmptyStatuses.length ? (
           <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px] text-[var(--color-ink-muted)]">
             <span className="font-medium text-[var(--color-ink-faint)]">{t("stageControl.hiddenLabel")}</span>
             {hiddenEmptyStatuses.map((status) => (
-              <span key={status} className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-0.5">
+              <span
+                key={status}
+                className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-0.5"
+              >
                 {t(`statuses.${status}`)}
               </span>
             ))}
@@ -317,14 +324,30 @@ export function InvestmentsView() {
             <thead>
               <tr>
                 <th scope="col">{t("table.project")}</th>
-                <th scope="col" className="w-[160px]">{t("table.sector")}</th>
-                <th scope="col" className="w-[140px]">{t("table.region")}</th>
-                <th scope="col" className="w-[200px]">{t("table.partners")}</th>
-                <th scope="col" className="w-[84px] text-right">{t("table.value")}</th>
-                <th scope="col" className="w-[72px] text-right">{t("table.jobs")}</th>
-                <th scope="col" className="w-[108px]">{t("table.status")}</th>
-                <th scope="col" className="w-[150px]">{t("table.confidence")}</th>
-                <th scope="col" className="w-[260px]">{t("table.nextAction")}</th>
+                <th scope="col" className="w-[160px]">
+                  {t("table.sector")}
+                </th>
+                <th scope="col" className="w-[140px]">
+                  {t("table.region")}
+                </th>
+                <th scope="col" className="w-[200px]">
+                  {t("table.partners")}
+                </th>
+                <th scope="col" className="w-[84px] text-right">
+                  {t("table.value")}
+                </th>
+                <th scope="col" className="w-[72px] text-right">
+                  {t("table.jobs")}
+                </th>
+                <th scope="col" className="w-[108px]">
+                  {t("table.status")}
+                </th>
+                <th scope="col" className="w-[150px]">
+                  {t("table.confidence")}
+                </th>
+                <th scope="col" className="w-[260px]">
+                  {t("table.nextAction")}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -366,7 +389,10 @@ export function InvestmentsView() {
                       </span>
                     </td>
                     <td>
-                      <ConfidenceBadge confidence={investmentConfidence(i)} label={t(`confidence.${investmentConfidence(i)}`)} />
+                      <ConfidenceBadge
+                        confidence={investmentConfidence(i)}
+                        label={t(`confidence.${investmentConfidence(i)}`)}
+                      />
                     </td>
                     <td className="max-w-[260px] text-[11.5px] leading-relaxed text-[var(--color-ink-muted)]">
                       {actionProfile.nextAction}
@@ -519,7 +545,10 @@ export function InvestmentsView() {
                       <div className="stat-label">{t("drawer.blockers")}</div>
                       <ul className="mt-1.5 space-y-1">
                         {selectedAction.blockers.map((blocker) => (
-                          <li key={blocker} className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-1">
+                          <li
+                            key={blocker}
+                            className="rounded border border-[var(--color-border)] bg-[var(--color-surface-2)] px-2 py-1"
+                          >
                             {blocker}
                           </li>
                         ))}
@@ -607,7 +636,9 @@ function Column({
   return (
     <div className="flex min-w-[220px] shrink-0 flex-col gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-2.5 xl:min-w-[240px]">
       <div className="flex items-center justify-between px-1 pb-1">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">{statusLabel}</span>
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
+          {statusLabel}
+        </span>
         <span className="mono text-[10px] tabular text-[var(--color-ink-muted)]">
           {items.length} · ${(total / 1000).toFixed(1)}B
         </span>
@@ -644,11 +675,7 @@ function Column({
           );
         })}
         {items.length === 0 ? (
-          <EmptyState
-            className="px-2 py-3"
-            title={emptyTitle}
-            description={emptyDescription}
-          />
+          <EmptyState className="px-2 py-3" title={emptyTitle} description={emptyDescription} />
         ) : null}
       </div>
     </div>

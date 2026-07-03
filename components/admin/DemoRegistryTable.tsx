@@ -50,8 +50,12 @@ export function DemoRegistryTable() {
               <th scope="col">Where</th>
               <th scope="col">What</th>
               <th scope="col">Agency</th>
-              <th scope="col" className="w-[200px]">File</th>
-              <th scope="col" className="w-[120px]">Status</th>
+              <th scope="col" className="w-[200px]">
+                File
+              </th>
+              <th scope="col" className="w-[120px]">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>

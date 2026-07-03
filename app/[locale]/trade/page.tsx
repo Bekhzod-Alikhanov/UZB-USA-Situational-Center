@@ -25,7 +25,6 @@ import { LazyMonthlyTrade, LazyExportStructure, LazyImportStructure } from "@/co
 import { topExportCategoriesUZ, topImportCategoriesUS, tradeMeta } from "@/data/trade";
 import { getRouteSeo } from "@/lib/seo";
 
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   return getRouteSeo({ locale, routeKey: "trade" });

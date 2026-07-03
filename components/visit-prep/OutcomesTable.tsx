@@ -38,14 +38,24 @@ export function OutcomesTable() {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col" className="w-[88px]">Date</th>
+            <th scope="col" className="w-[88px]">
+              Date
+            </th>
             <th scope="col">Visit</th>
             <th scope="col">Plan</th>
             <th scope="col">Actual</th>
-            <th scope="col" className="w-[110px]">Score</th>
-            <th scope="col" className="w-[160px]">Verification</th>
-            <th scope="col" className="w-[112px]">Status</th>
-            <th scope="col" className="w-[120px]">Source</th>
+            <th scope="col" className="w-[110px]">
+              Score
+            </th>
+            <th scope="col" className="w-[160px]">
+              Verification
+            </th>
+            <th scope="col" className="w-[112px]">
+              Status
+            </th>
+            <th scope="col" className="w-[120px]">
+              Source
+            </th>
           </tr>
         </thead>
         <tbody>

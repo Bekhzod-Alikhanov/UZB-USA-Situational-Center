@@ -1,28 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import {
-  Plane,
-  Layout,
-  Workflow,
-  Target,
-  Lightbulb,
-  CheckSquare,
-  Hourglass,
-  FileText,
-  Truck,
-  Repeat,
-} from "lucide-react";
+import { Plane, Target, Repeat } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { KanbanBoard } from "@/components/visit-prep/KanbanBoard";
-import { OptimizationPanel } from "@/components/visit-prep/OptimizationPanel";
-import { ChecklistBlock } from "@/components/visit-prep/ChecklistBlock";
 import { PipelinePanel } from "@/components/visit-prep/PipelinePanel";
 import { OutcomesTable } from "@/components/visit-prep/OutcomesTable";
-import { VisitReadinessScorecard } from "@/components/visit-prep/VisitReadinessScorecard";
-import { TMinusTimeline } from "@/components/visit-prep/TMinusTimeline";
 import { PostVisitReconciliation } from "@/components/visit-prep/PostVisitReconciliation";
-import { VisitDocumentRegistry } from "@/components/visit-prep/VisitDocumentRegistry";
-import { VisitLogisticsMatrix } from "@/components/visit-prep/VisitLogisticsMatrix";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { nextAnchorVisit } from "@/data/visits";
 import { visitPipelines, visitOutcomes } from "@/data/visit-prep";
@@ -33,13 +15,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return getRouteSeo({ locale, routeKey: "prepare" });
 }
 
+/**
+ * Visit lifecycle monitoring, slimmed to the Center's mission (portal-slim
+ * pass): the upcoming-visit pipeline, plan-vs-actual outcomes, and post-visit
+ * reconciliation with linked roadmaps. The operational blocks that demanded
+ * constant manual upkeep (kanban, checklists, 7-block scorecards, logistics
+ * matrix, document registry, T-minus timeline) were retired — that content
+ * belongs to the operational system, not the monitoring portal.
+ */
 export default async function PreparePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("prepare");
   const next = nextAnchorVisit(new Date());
-  const documentRegistryTitle =
-    locale === "ru" ? "Реестр документов" : locale === "uz-latn" ? "Hujjatlar reestri" : "Document registry";
 
   return (
     <div className="flex flex-col gap-6">
@@ -92,66 +80,6 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
         </CardBody>
       </Card>
 
-      <Card tone="rose">
-        <CardHeader
-          icon={<Hourglass className="size-3.5" />}
-          tone="rose"
-          title="T-minus visit timeline"
-          sub="Are we on schedule? — checkpoints derived from visit date and 7-block readiness"
-        />
-        <CardBody>
-          <TMinusTimeline />
-        </CardBody>
-      </Card>
-
-      <Card tone="primary">
-        <CardHeader
-          icon={<Layout className="size-3.5" />}
-          tone="primary"
-          title="7-block readiness scorecard"
-          sub="Status tracking only — content lives in the operational system, not here"
-        />
-        <CardBody>
-          <VisitReadinessScorecard />
-        </CardBody>
-      </Card>
-
-      <Card tone="agree">
-        <CardHeader
-          icon={<FileText className="size-3.5" />}
-          tone="agree"
-          title={documentRegistryTitle}
-          sub="Titles, owners, statuses, due dates — never the document body"
-        />
-        <CardBody>
-          <VisitDocumentRegistry />
-        </CardBody>
-      </Card>
-
-      <Card tone="people">
-        <CardHeader
-          icon={<Truck className="size-3.5" />}
-          tone="people"
-          title="Logistics readiness matrix"
-          sub="Booking statuses and coverage counts — no PNRs, no PII, no booking codes"
-        />
-        <CardBody>
-          <VisitLogisticsMatrix />
-        </CardBody>
-      </Card>
-
-      <Card tone="invest">
-        <CardHeader
-          icon={<Workflow className="size-3.5" />}
-          tone="invest"
-          title="Workflow"
-          sub="Drag cards between stages — plan → coordination → briefing → execution → follow-up"
-        />
-        <CardBody>
-          <KanbanBoard />
-        </CardBody>
-      </Card>
-
       <Card tone="visits">
         <CardHeader
           icon={<Target className="size-3.5" />}
@@ -175,32 +103,6 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
           <PostVisitReconciliation />
         </CardBody>
       </Card>
-
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <Card tone="agree">
-          <CardHeader
-            icon={<Lightbulb className="size-3.5" />}
-            tone="agree"
-            title={t("optimize.title")}
-            sub={t("optimize.sub")}
-          />
-          <CardBody>
-            <OptimizationPanel />
-          </CardBody>
-        </Card>
-
-        <Card tone="people">
-          <CardHeader
-            icon={<CheckSquare className="size-3.5" />}
-            tone="people"
-            title="Checklist"
-            sub="Pre-visit status tracking"
-          />
-          <CardBody>
-            <ChecklistBlock />
-          </CardBody>
-        </Card>
-      </div>
     </div>
   );
 }

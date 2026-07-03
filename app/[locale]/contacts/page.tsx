@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { ContactsView } from "@/components/contacts/ContactsView";
+import { CounterpartsGrid } from "@/components/counterparts/CounterpartsGrid";
 import { contacts } from "@/data/contacts";
+import { counterparts } from "@/data/counterparts";
 import { getRouteSeo } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -48,6 +50,14 @@ export default async function ContactsPage({
         <CardHeader title={t("card.title")} sub={t("card.sub")} />
         <CardBody>
           <ContactsView locale={locale} q={q} />
+        </CardBody>
+      </Card>
+
+      {/* Key U.S. figures — merged from the retired /counterparts section. */}
+      <Card>
+        <CardHeader title={t("keyFigures.title")} sub={t("keyFigures.sub", { count: counterparts.length })} />
+        <CardBody>
+          <CounterpartsGrid />
         </CardBody>
       </Card>
     </div>

@@ -57,7 +57,7 @@ export function SearchCommand() {
       title: p.title,
       subtitle: p.subtitle,
       type: "person",
-      href: `/${locale}/counterparts`,
+      href: `/${locale}/contacts`,
       icon: Users,
     }));
     const inv: SearchEntity[] = searchInvestments.map((i) => ({

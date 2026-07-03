@@ -100,11 +100,19 @@ export function ServicesEbops() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" className="w-28">EBOPS</th>
+              <th scope="col" className="w-28">
+                EBOPS
+              </th>
               <th scope="col">Category</th>
-              <th scope="col" className="w-32">Family</th>
-              <th scope="col" className="text-right">Value, {baseYear}</th>
-              <th scope="col" className="w-16 text-right">Share</th>
+              <th scope="col" className="w-32">
+                Family
+              </th>
+              <th scope="col" className="text-right">
+                Value, {baseYear}
+              </th>
+              <th scope="col" className="w-16 text-right">
+                Share
+              </th>
             </tr>
           </thead>
           <tbody>

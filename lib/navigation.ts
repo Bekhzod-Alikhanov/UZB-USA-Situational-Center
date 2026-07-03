@@ -4,7 +4,6 @@ import {
   BarChart3,
   BookOpen,
   Briefcase,
-  Calendar,
   ClipboardList,
   Cog,
   FileText,
@@ -12,7 +11,6 @@ import {
   Gift,
   Globe2,
   Landmark,
-  Lightbulb,
   LineChart,
   ListChecks,
   Newspaper,
@@ -20,8 +18,6 @@ import {
   ShieldCheck,
   Target,
   Users,
-  UsersRound,
-  UserSquare,
 } from "lucide-react";
 
 export type NavTone = "trade" | "visits" | "invest" | "agree" | "people" | "rose" | "slate" | "primary";
@@ -54,7 +50,6 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { key: "trade", href: "/trade", icon: BarChart3, tone: "trade", audience: "business" },
       { key: "investments", href: "/investments", icon: Briefcase, tone: "invest", audience: "business" },
-      { key: "sectors", href: "/sectors", icon: Lightbulb, tone: "agree", audience: "business" },
     ],
   },
   {
@@ -63,8 +58,6 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { key: "visits", href: "/visits", icon: Target, tone: "visits", audience: "diplomacy" },
       { key: "agreements", href: "/agreements", icon: FileText, tone: "agree", audience: "diplomacy" },
-      { key: "events", href: "/events", icon: Calendar, tone: "agree", audience: "diplomacy" },
-      { key: "counterparts", href: "/counterparts", icon: UserSquare, tone: "visits", audience: "diplomacy" },
       { key: "contacts", href: "/contacts", icon: Users, tone: "people", audience: "diplomacy" },
     ],
   },
@@ -91,7 +84,6 @@ export const NAV_GROUPS: NavGroup[] = [
     icon: Cog,
     items: [
       { key: "prepare", href: "/prepare", icon: ClipboardList, tone: "visits", audience: "operations" },
-      { key: "staff", href: "/staff", icon: UsersRound, tone: "people", audience: "operations" },
       { key: "admin", href: "/admin", icon: Settings, tone: "slate", audience: "operations" },
     ],
   },

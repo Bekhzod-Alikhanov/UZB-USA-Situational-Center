@@ -92,7 +92,7 @@ cp .env.example .env.local       # set ADMIN_PASSWORD
 pnpm dev                         # → http://localhost:3000
 ```
 
-Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 18 public platform sections plus the gated admin area and counterpart detail pages.
+Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's preferred locale). The root sidebar lists 14 public platform sections plus the gated admin area; the /brief situational videowall is reachable by direct URL.
 
 ### Common scripts
 
@@ -118,27 +118,23 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 
 > **Cache note:** running `pnpm build` while `pnpm dev` is alive will clobber the Turbopack cache and cause "missing required error components" errors in the running dev server. Stop dev before running build, or use `pnpm typecheck` for fast verification during development.
 
-## Routes (18 public sidebar sections × 3 locales + admin/login + counterpart SSG)
+## Routes (14 public sidebar sections × 3 locales + /brief videowall + admin/login)
 
 ```
-/[locale]/                       Overview (KPIs + globe + timeline + alerts)
+/[locale]/                       Overview (KPIs + trade flow + risk radar + horizon)
+/[locale]/brief                  Situational videowall (direct URL, not in the sidebar)
 /[locale]/trade                  UZ Stat ↔ U.S. Census dual-methodology view
-/[locale]/visits                 Vertical timeline 1992–2026
-/[locale]/prepare                Visit pipelines · Kanban · plan-vs-actual outcomes
+/[locale]/visits                 Timeline · grid · table · events-calendar tab
+/[locale]/prepare                Visit pipeline · plan-vs-actual outcomes · roadmaps
 /[locale]/commitments            TanStack Table · URL-synced status filter
 /[locale]/agreements             Timeline + sphere/year filters
 /[locale]/map                    Maplibre 3-layer + 3D globe toggle
 /[locale]/admin                  Settings, registry viewer, audit log (gated)
 /[locale]/admin/login            Password gate (no auth needed)
-/[locale]/investments            Portfolio cards + sector/region/status filters
-/[locale]/events                 Unified calendar + iCal export
+/[locale]/investments            Portfolio cards + sector-opportunity briefings
 /[locale]/grants                 7 UZ-side grant rows + 4 U.S.-side program records + ForeignAssistance.gov obligations
-/[locale]/contacts               Org directory · 13-member Council roster
-/[locale]/counterparts           Grid w/ role/party/stance filters
-/[locale]/counterparts/[id]      SSG briefing card (21 × 3 locales = 63 paths)
-/[locale]/sectors                8 sector-opportunity briefing cards
+/[locale]/contacts               Org directory · Council roster · key U.S. figures grid
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
-/[locale]/staff                  KPI table w/ composite-score ranking
 /[locale]/news                   Curated press feed (16 verified entries)
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
 ```

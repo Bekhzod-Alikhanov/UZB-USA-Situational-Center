@@ -2,11 +2,17 @@
 import { useTranslations } from "next-intl";
 import * as Tabs from "@radix-ui/react-tabs";
 import { VisitsTimeline } from "./VisitsTimeline";
+import { EventsView } from "@/components/events/EventsView";
 import { visits } from "@/data/visits";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 
-export function VisitsTabs() {
+/**
+ * Visits section tabs. The events calendar (formerly the standalone /events
+ * page) lives here as a fourth tab since the portal-slim merge — one place
+ * for the whole visit lifecycle.
+ */
+export function VisitsTabs({ locale, todayIso }: { locale: string; todayIso: string }) {
   const t = useTranslations("visits.tabs");
   const [direction, setDirection] = useState<"all" | "uz-us" | "us-uz">("all");
 
@@ -22,6 +28,7 @@ export function VisitsTabs() {
             { v: "timeline", l: t("timeline") },
             { v: "grid", l: t("grid") },
             { v: "table", l: t("table") },
+            { v: "calendar", l: t("calendar") },
           ].map((tab) => (
             <Tabs.Trigger
               key={tab.v}
@@ -87,10 +94,16 @@ export function VisitsTabs() {
           <table className="table">
             <thead>
               <tr>
-                <th scope="col" className="w-[90px]">Date</th>
+                <th scope="col" className="w-[90px]">
+                  Date
+                </th>
                 <th scope="col">Title</th>
-                <th scope="col" className="w-[92px]">Level</th>
-                <th scope="col" className="w-[96px]">Direction</th>
+                <th scope="col" className="w-[92px]">
+                  Level
+                </th>
+                <th scope="col" className="w-[96px]">
+                  Direction
+                </th>
                 <th scope="col">Location</th>
               </tr>
             </thead>
@@ -107,6 +120,10 @@ export function VisitsTabs() {
             </tbody>
           </table>
         </div>
+      </Tabs.Content>
+
+      <Tabs.Content value="calendar" className="mt-5">
+        <EventsView locale={locale} todayIso={todayIso} />
       </Tabs.Content>
     </Tabs.Root>
   );

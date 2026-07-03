@@ -47,13 +47,6 @@ export const demoRegistry: DemoEntry[] = [
     status: "pending",
   },
   {
-    where: "Staff KPI",
-    what: "10 role-slot templates per Center headcount (no person names)",
-    file: "data/staff-kpi.ts",
-    agency: "Situational Center HR",
-    status: "pending",
-  },
-  {
     where: "Contacts / staff",
     what: "10 HQ staff placeholders ('Staff Member 1–10')",
     file: "data/contacts.ts:k-hq.people",

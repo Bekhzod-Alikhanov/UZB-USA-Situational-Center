@@ -127,12 +127,23 @@ export function ExecutiveCommandCenter({ locale }: { locale: string }) {
               ))}
             </div>
 
-            <BriefingList title={ui.priorityActions} items={briefing.priorityActions} locale={locale} openLabel={ui.open} />
+            <BriefingList
+              title={ui.priorityActions}
+              items={briefing.priorityActions}
+              locale={locale}
+              openLabel={ui.open}
+            />
           </div>
 
           <div className="grid grid-cols-1 gap-4">
             <BriefingList title={ui.risks} items={briefing.risks} locale={locale} compact openLabel={ui.open} />
-            <BriefingList title={ui.opportunities} items={briefing.opportunities} locale={locale} compact openLabel={ui.open} />
+            <BriefingList
+              title={ui.opportunities}
+              items={briefing.opportunities}
+              locale={locale}
+              compact
+              openLabel={ui.open}
+            />
             <BriefingList title={ui.changes} items={briefing.changes} locale={locale} compact openLabel={ui.open} />
           </div>
         </div>
