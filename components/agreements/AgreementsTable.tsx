@@ -100,12 +100,22 @@ export function AgreementsTable() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" className="w-[92px]">{t("table.headers.signed")}</th>
+              <th scope="col" className="w-[92px]">
+                {t("table.headers.signed")}
+              </th>
               <th scope="col">{t("table.headers.title")}</th>
-              <th scope="col" className="w-[140px]">{t("table.headers.category")}</th>
-              <th scope="col" className="w-[120px]">{t("table.headers.sphere")}</th>
-              <th scope="col" className="w-[92px]">{t("table.headers.status")}</th>
-              <th scope="col" className="w-[120px]">{t("table.headers.source")}</th>
+              <th scope="col" className="w-[140px]">
+                {t("table.headers.category")}
+              </th>
+              <th scope="col" className="w-[120px]">
+                {t("table.headers.sphere")}
+              </th>
+              <th scope="col" className="w-[92px]">
+                {t("table.headers.status")}
+              </th>
+              <th scope="col" className="w-[120px]">
+                {t("table.headers.source")}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -141,9 +151,7 @@ export function AgreementsTable() {
           </tbody>
         </table>
         {sortedDesc.length === 0 ? (
-          <div className="py-12 text-center text-[13px] text-[var(--color-ink-muted)]">
-            {t("table.empty")}
-          </div>
+          <div className="py-12 text-center text-[13px] text-[var(--color-ink-muted)]">{t("table.empty")}</div>
         ) : null}
       </div>
     </div>

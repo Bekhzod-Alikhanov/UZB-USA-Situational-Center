@@ -46,7 +46,9 @@ export function Sidebar() {
               key={group.key}
               className={cn(
                 "relative mb-4 rounded-lg border border-transparent px-1 py-1 last:mb-2",
-                groupActive ? "border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-primary)_5%,transparent)]" : "",
+                groupActive
+                  ? "border-[var(--color-border)] bg-[color-mix(in_oklab,var(--color-primary)_5%,transparent)]"
+                  : "",
               )}
             >
               {groupActive ? (

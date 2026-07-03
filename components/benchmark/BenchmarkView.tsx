@@ -16,12 +16,7 @@ const BenchmarkChart = dynamic(() => import("./BenchmarkChart").then((m) => ({ d
 });
 
 type MetricKey =
-  | "gdpUsdBn"
-  | "populationM"
-  | "tradeWithUsUsdBn"
-  | "exportsToUsUsdM"
-  | "importsFromUsUsdM"
-  | "fdiFromUsUsdM";
+  "gdpUsdBn" | "populationM" | "tradeWithUsUsdBn" | "exportsToUsUsdM" | "importsFromUsUsdM" | "fdiFromUsUsdM";
 
 interface MetricDef {
   key: MetricKey;
@@ -192,7 +187,10 @@ export function BenchmarkView() {
           <table className="w-full">
             <thead>
               <tr>
-                <th scope="col" className="sticky left-0 border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-left text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]">
+                <th
+                  scope="col"
+                  className="sticky left-0 border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-left text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-muted)]"
+                >
                   Metric
                 </th>
                 {benchmark.map((c) => (
@@ -257,11 +255,17 @@ export function BenchmarkView() {
             <thead>
               <tr>
                 <th scope="col">Country</th>
-                <th scope="col" className="text-right">WB Rank</th>
+                <th scope="col" className="text-right">
+                  WB Rank
+                </th>
                 <th scope="col">Visa</th>
                 <th scope="col">GSP</th>
-                <th scope="col" className="text-right">Trade · US ($Bn)</th>
-                <th scope="col" className="text-right">FDI · US ($M)</th>
+                <th scope="col" className="text-right">
+                  Trade · US ($Bn)
+                </th>
+                <th scope="col" className="text-right">
+                  FDI · US ($M)
+                </th>
                 <th scope="col"></th>
               </tr>
             </thead>

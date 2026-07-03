@@ -5,7 +5,9 @@ import { Stat } from "@/components/ui/Stat";
 import { DemoBanner } from "@/components/demo-markers/DemoBanner";
 import { InvestmentsView } from "@/components/investments/InvestmentsView";
 import { CredibilityCards } from "@/components/investments/CredibilityCards";
+import { SectorsView } from "@/components/sectors/SectorsView";
 import { investmentCredibilitySummary, investments, investmentsTotals } from "@/data/investments";
+import { sectorsMeta } from "@/data/sectors";
 import { getRouteSeo } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -59,6 +61,14 @@ export default async function InvestmentsPage({ params }: { params: Promise<{ lo
         />
         <CardBody>
           <InvestmentsView />
+        </CardBody>
+      </Card>
+
+      {/* Sector opportunity briefings — merged from the retired /sectors page. */}
+      <Card>
+        <CardHeader title={t("sectorsCard.title")} sub={t("sectorsCard.sub", { count: sectorsMeta.total })} />
+        <CardBody>
+          <SectorsView locale={locale} />
         </CardBody>
       </Card>
     </div>

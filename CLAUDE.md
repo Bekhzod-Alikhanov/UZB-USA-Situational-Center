@@ -20,7 +20,6 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Tables               | TanStack Table v8                                                                 | Server-shaped data, client filter/sort/page.                                                          |
 | Charts               | Recharts (line/bar/area), Visx (sankey/chord/treemap), zero-dep `<MiniBars />`    | Heavy charts are `next/dynamic({ ssr:false })`-loaded behind `<LazyMount />`.                         |
 | Maps                 | maplibre-gl 5.x (OpenFreeMap), Globe.gl 2.45.x, d3-geo Albers USA                 | `/map` is gated behind `<MapLoadGate />` — runtime only fetched on user click.                        |
-| Drag-and-drop        | @dnd-kit                                                                          | Used in Visit Prepare Kanban with mount-gate to avoid React 19 SSR aria-describedby drift.            |
 | Operational database | PostgreSQL 17 via Supabase                                                        | 12-table schema (`database/schema.sql`). Server-only REST adapter at `lib/db/adapter.ts`.             |
 | Live ingestion       | 5 connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov)          | Daily Vercel cron at 07:00 UTC → `raw_snapshot → normalized_observation → published_metric`.          |
 | Data governance      | No-downgrade policy, pending-vs-published, static fallback (`lib/data-governance/*`) | Enforced by `pnpm test:governance` in the verify gate.                                                |
@@ -28,27 +27,27 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Tests                | Vitest (unit), Playwright (e2e + axe a11y), Lighthouse CI                         | `tests/`, `lhci.config.cjs`, `playwright.config.ts`. CI on `.github/workflows/qa.yml`.                |
 | Package manager      | **pnpm**                                                                          | Lockfile at `pnpm-lock.yaml`.                                                                         |
 
-## Routes (18 public sidebar sections × 3 locales + admin/login + counterpart SSG)
+## Routes (14 public sidebar sections × 3 locales + /brief videowall + admin/login)
+
+Slimmed in the 2026-07 portal-slim pass: /staff and the /counterparts dossier
+pages were removed; /events merged into /visits (calendar tab); /sectors merged
+into /investments; the counterparts grid moved onto /contacts.
 
 ```
-/[locale]/                       Overview (KPIs + globe + timeline + alerts)
+/[locale]/                       Overview (KPIs + trade flow + risk radar + horizon)
+/[locale]/brief                  Situational videowall (direct URL, not in the sidebar)
 /[locale]/trade                  Annual + monthly trade, structure, rankings
-/[locale]/visits                 Vertical timeline of bilateral visits 1992–2026
-/[locale]/prepare                Visit pipelines · Kanban · plan-vs-actual outcomes
+/[locale]/visits                 Timeline · grid · table · events-calendar tab
+/[locale]/prepare                Visit pipeline · plan-vs-actual outcomes · roadmaps
 /[locale]/commitments            TanStack Table, URL-synced status filter
 /[locale]/agreements             Timeline + sphere/year filters
 /[locale]/map                    Maplibre 3-layer + 3D globe toggle
 /[locale]/admin                  Settings, registry viewer, audit log (gated)
 /[locale]/admin/login            Password gate (no auth needed)
-/[locale]/investments            Portfolio cards + sector/region/status filters
-/[locale]/events                 Unified calendar + iCal export
+/[locale]/investments            Portfolio cards + sector-opportunity briefings
 /[locale]/grants                 7 UZ-side grant rows + 4 U.S.-side program records + ForeignAssistance.gov obligations
-/[locale]/contacts               Org directory · 13-member Council roster
-/[locale]/counterparts           Grid w/ role/party/stance filters
-/[locale]/counterparts/[id]      SSG briefing card (21 × 3 locales = 63 paths)
-/[locale]/sectors                8 sector-opportunity briefing cards
+/[locale]/contacts               Org directory · Council roster · key U.S. figures grid
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
-/[locale]/staff                  KPI table w/ composite-score ranking
 /[locale]/news                   Curated feed
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
 ```

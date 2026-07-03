@@ -6,12 +6,8 @@ import { AlertTriangle, Clock, FileWarning, CalendarClock, ClipboardCheck, Arrow
 import { commitments, type Commitment } from "@/data/commitments";
 import { agreements, type Agreement } from "@/data/agreements";
 import { centerMilestones, deriveMilestoneStatus, type CenterMilestone } from "@/data/center-milestones";
-import { visitScorecards, visitPipelines, scorecardReadinessPct, type VisitScorecard } from "@/data/visit-prep";
-import {
-  localizedCommitmentTitle,
-  localizedMilestoneTitle,
-  localizedOwner,
-} from "@/lib/i18n/overview-content";
+import { visitPipelines } from "@/data/visit-prep";
+import { localizedCommitmentTitle, localizedMilestoneTitle, localizedOwner } from "@/lib/i18n/overview-content";
 import { cn } from "@/lib/utils";
 
 type Severity = "critical" | "warn" | "watch";
@@ -194,7 +190,7 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         severity: "critical",
         title: `${T.milestoneStage} ${m.stage}: ${localizedMilestoneTitle(m.stage, m.title, locale)}`,
         context: T.ctxDeadline(m.dueDate),
-        href: `/${locale}/staff`,
+        href: `/${locale}/admin`,
         dueDate: m.dueDate,
       });
     } else if (status === "in-progress") {
@@ -204,18 +200,18 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
         severity: "watch",
         title: `${T.milestoneStage} ${m.stage}: ${localizedMilestoneTitle(m.stage, m.title, locale)}`,
         context: T.ctxDueDate(m.dueDate),
-        href: `/${locale}/staff`,
+        href: `/${locale}/admin`,
         dueDate: m.dueDate,
       });
     }
   }
 
-  for (const sc of visitScorecards as VisitScorecard[]) {
-    const pipeline = visitPipelines.find((p) => p.id === sc.pipelineRef);
-    if (!pipeline) continue;
+  // Readiness risk straight from the pipeline's own readiness figure (the
+  // per-block scorecards were retired in the portal-slim pass).
+  for (const pipeline of visitPipelines) {
     const visitDate = new Date(pipeline.date + "T00:00:00Z");
     const daysToVisit = Math.round((visitDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-    const pct = scorecardReadinessPct(sc);
+    const pct = pipeline.readiness;
     if (daysToVisit < 0) continue;
     if (daysToVisit <= 30 && pct < 70) {
       out.push({

@@ -173,7 +173,7 @@ export function LiveConnectorMonitor() {
                       "inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider",
                       STATUS_CLASS[tone],
                     )}
-                    >
+                  >
                     {tone === "ok" ? <CheckCircle2 className="size-3" /> : null}
                     {statusLabel(probe?.status ?? connector.status)}
                   </span>

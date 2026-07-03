@@ -150,9 +150,7 @@ export async function NewsFeed({ locale, tonality = "all", tag = "all", q = "" }
 
       <ul className="flex flex-col divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
         {filtered.length === 0 ? (
-          <li className="py-6 text-center text-[12px] text-[var(--color-ink-muted)]">
-            {t("feed.empty")}
-          </li>
+          <li className="py-6 text-center text-[12px] text-[var(--color-ink-muted)]">{t("feed.empty")}</li>
         ) : null}
         {filtered.map((n) => (
           <li key={n.id} className="flex flex-col gap-2 py-3 md:flex-row md:gap-5">

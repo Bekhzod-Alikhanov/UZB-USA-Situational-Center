@@ -7,7 +7,6 @@ import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { benchmarkMeta } from "@/data/benchmark";
 import { getRouteSeo } from "@/lib/seo";
 
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   return getRouteSeo({ locale, routeKey: "benchmark" });
@@ -50,4 +49,3 @@ export default async function BenchmarkPage({ params }: { params: Promise<{ loca
     </div>
   );
 }
-

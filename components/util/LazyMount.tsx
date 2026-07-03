@@ -25,13 +25,7 @@ interface LazyMountProps {
  *
  * Always reserves `minHeight` to keep CLS at 0.
  */
-export function LazyMount({
-  children,
-  rootMargin = "240px",
-  minHeight = 280,
-  fallback,
-  className,
-}: LazyMountProps) {
+export function LazyMount({ children, rootMargin = "240px", minHeight = 280, fallback, className }: LazyMountProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 

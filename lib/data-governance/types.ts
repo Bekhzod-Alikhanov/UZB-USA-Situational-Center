@@ -1,12 +1,5 @@
 export type MetricDomain =
-  | "trade"
-  | "macro"
-  | "assistance"
-  | "finance"
-  | "mobility"
-  | "education"
-  | "security"
-  | "operations";
+  "trade" | "macro" | "assistance" | "finance" | "mobility" | "education" | "security" | "operations";
 
 export type IngestCadence = "daily" | "weekly" | "monthly" | "quarterly" | "annual" | "manual";
 
@@ -24,15 +17,7 @@ export interface MetricDimensions {
   country?: string;
   partnerCountry?: string;
   flow?:
-    | "exports"
-    | "imports"
-    | "balance"
-    | "turnover"
-    | "obligations"
-    | "disbursements"
-    | "stock"
-    | "count"
-    | "status";
+    "exports" | "imports" | "balance" | "turnover" | "obligations" | "disbursements" | "stock" | "count" | "status";
   productCode?: string;
   productName?: string;
   agency?: string;

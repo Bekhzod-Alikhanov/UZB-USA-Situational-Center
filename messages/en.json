@@ -141,14 +141,10 @@
     "prepare": "Visit preparation",
     "commitments": "Actions & commitments",
     "agreements": "Bilateral agreements",
-    "events": "Events & calendar",
     "grants": "Grants",
     "map": "Interactive map",
-    "sectors": "Sectors & U.S. entry",
     "compliance": "US compliance",
-    "counterparts": "Counterparts",
     "benchmark": "Regional benchmark",
-    "staff": "Staff KPI",
     "contacts": "Contacts",
     "news": "Strategic signals",
     "admin": "Admin"
@@ -231,10 +227,6 @@
         "title": "Investment & Privatization",
         "description": "Source-aware investment pipeline, verified project value, pending records, illustrative demo separation, and privatization readiness."
       },
-      "sectors": {
-        "title": "Sectors & U.S. Market Entry",
-        "description": "Briefing-level sector opportunities, signals, bottlenecks, and U.S. market-entry questions for Uzbekistan-USA cooperation."
-      },
       "map": {
         "title": "U.S. Map & Uzbekistan Footprint",
         "description": "State-level U.S. map for GDP, population, students, Uzbek missions, planned visits, and market-entry context."
@@ -250,10 +242,6 @@
       "agreements": {
         "title": "Bilateral Agreements",
         "description": "Registry and analysis of Uzbekistan-USA agreements, legal anchors, categories, source status, and timeline."
-      },
-      "events": {
-        "title": "Events & Calendar",
-        "description": "Upcoming and historical events for Uzbekistan-USA coordination, delegations, business forums, and policy moments."
       },
       "commitments": {
         "title": "Actions & Commitments",
@@ -275,35 +263,14 @@
         "title": "Contacts Directory",
         "description": "Directory of agencies, coordination bodies, embassies, councils, and staff contacts for bilateral work."
       },
-      "counterparts": {
-        "title": "Counterparts",
-        "description": "Briefing registry for U.S. officials, congressional stakeholders, institutions, topics, engagement history, and sources."
-      },
-      "counterpart": {
-        "title": "{name} - Counterpart Briefing",
-        "description": "Source-aware counterpart briefing with engagement history, role context, topics, committees, and preparation notes."
-      },
       "prepare": {
         "title": "Visit Preparation",
         "description": "Operational visit-preparation workspace for pipeline status, documents, logistics, outcomes, and post-visit reconciliation."
-      },
-      "staff": {
-        "title": "Staff KPI",
-        "description": "Internal staff KPI tracker, milestones, operational cadence, completion tracking, and source-marked demo status."
       },
       "adminLogin": {
         "title": "Admin Login",
         "description": "Secure administrator sign-in for protected operations and internal platform management."
       }
-    }
-  },
-  "sectorsPage": {
-    "title": "Sector opportunities",
-    "subtitle": "Briefing-quality reads on the {count} cooperation lanes with the strongest U.S.-Uzbekistan leverage",
-    "print": "Export sector brief",
-    "card": {
-      "title": "Where bilateral cooperation has the most leverage",
-      "sub": "Each card carries a signal, a why-it-matters, and a next-question to push the conversation forward in a meeting"
     }
   },
   "benchmarkPage": {
@@ -334,40 +301,6 @@
       "mandate": "Source confidence remains visible; demo and pending values are separated from quote-safe figures.",
       "print": "Export PDF"
     },
-    "narrationLabels": {
-      "what": "What this means",
-      "why": "Why it matters",
-      "how": "How to use",
-      "source": "Source and unit"
-    },
-    "narration": {
-      "flow": {
-        "what": "The relationship is expanding in absolute trade volume, while the balance remains structurally tilted toward U.S. exports to Uzbekistan.",
-        "why": "Senior users should treat export diversification and market-access work as the main trade agenda, not only the headline turnover number.",
-        "how": "Use this as the first chart in briefings, then open Trade & Economic Flows for methodology and product-level detail.",
-        "source": "USD millions, Uzbekistan-side annual methodology."
-      },
-      "sectors": {
-        "what": "Investment value clusters in a small set of sectors; some rows are verified and others are coordination or demo records.",
-        "why": "The priority is to separate quote-safe opportunities from records that still need owners, source IDs, or U.S. counterpart mapping.",
-        "how": "Use the sector grid to choose the next due-diligence lane, then go to Investment & Privatization for action fields."
-      },
-      "monthly": {
-        "what": "Monthly goods data gives the near-term pulse, but it should not override the annual quote-ready series.",
-        "why": "It helps staff see inflection points and timing before official annual narratives are updated.",
-        "how": "Use as an early-warning chart, not as the sole external headline."
-      },
-      "risk": {
-        "what": "The risk view joins commitments, agreements, milestones, and visit readiness into one operating queue.",
-        "why": "Executives need to see what blocks outcomes, not just what has already been announced.",
-        "how": "Open each item to work the source registry, commitment owner, or visit-prep page."
-      },
-      "grants": {
-        "what": "Grant and assistance records show soft-power and development lanes, but accounting systems differ.",
-        "why": "Do not combine UZ-side internal grants, USAID records, and ForeignAssistance.gov obligations without reconciliation.",
-        "how": "Use the donut to orient the portfolio, then keep methodology notes visible on the grants page."
-      }
-    },
     "kpi": {
       "turnover2025": "Trade turnover 2025",
       "exports2025": "UZ → US exports",
@@ -395,10 +328,6 @@
     "detailedAnalysis": "Detailed analysis",
     "detailedAnalysisSub": "Trade, sectors, partners, risks and the 90-day horizon",
     "cards": {
-      "relationshipPillars": {
-        "title": "Relationship pillars",
-        "sub": "Diplomacy, trade, investment, security, education, mobility, and regional strategy - each with a next move"
-      },
       "flowSub": "USD M · 2017–2025 · UZ Stat (turnover dashed)",
       "sectorsTitle": "Sectors",
       "sectorsSub": "8 lanes · aggregated from investments.ts",
@@ -412,61 +341,6 @@
       "riskSub": "live aggregator across 4 registries",
       "horizonTitle": "90-day horizon",
       "horizonSub": "visits, events, deadlines"
-    },
-    "relationshipPillars": {
-      "nextMove": "Next move",
-      "openSection": "Open section",
-      "items": {
-        "diplomacy": {
-          "title": "Diplomacy",
-          "signal": "Active-window visits",
-          "metric": "Legal instruments",
-          "narrative": "The relationship has enough high-level cadence to support an operating rhythm, but agreement-level metadata still needs owner validation.",
-          "action": "Convert the treaty base into a searchable agreement-level register."
-        },
-        "trade": {
-          "title": "Trade",
-          "signal": "Trade commitments",
-          "metric": "Dual UZ/US methodology",
-          "narrative": "Trade analysis is strongest when UZ Stat and U.S. Census are shown side by side with explicit methodology boundaries.",
-          "action": "Automate monthly Census refresh and keep UZ-side figures source-owner approved."
-        },
-        "investment": {
-          "title": "Investment",
-          "signal": "Pipeline value",
-          "metric": "Project register",
-          "narrative": "The investment portfolio is the strongest executive story, but demo rows must remain separated before external use.",
-          "action": "Prioritize DFC/EXIM-ready projects and require sponsor, owner, value, status, and source fields."
-        },
-        "security-minerals": {
-          "title": "Security and minerals",
-          "signal": "Critical-minerals records",
-          "metric": "C5+1 supply-chain lane",
-          "narrative": "Critical minerals connect economic, security, and regional strategy; this should be treated as a standing watchlist.",
-          "action": "Create a minerals tracker with counterpart, concession, financing, export-control, and infrastructure dependencies."
-        },
-        "education-aid": {
-          "title": "Education and aid",
-          "signal": "Grants and programs",
-          "metric": "UZ-side plus U.S.-side accounting",
-          "narrative": "Development assistance and education are useful soft-power indicators, but their accounting systems must stay separate.",
-          "action": "Add Open Doors education data and normalize ForeignAssistance.gov sector summaries."
-        },
-        "people-mobility": {
-          "title": "People and mobility",
-          "signal": "Culture/mobility signals",
-          "metric": "Visa-free U.S. citizens from 2026",
-          "narrative": "Visa-free travel and tourism growth can become a distinctive relationship metric if paired with visa/admissions data.",
-          "action": "Add State visa statistics, DHS admissions, and Open Doors education flows."
-        },
-        "regional-strategy": {
-          "title": "Regional strategy",
-          "signal": "Diplomacy/council events",
-          "metric": "C5+1 and peer benchmark",
-          "narrative": "The benchmark page is valuable, but it should be connected to concrete policy implications and regional competition.",
-          "action": "Refresh macro benchmark data through World Bank WDI and add policy implication notes per metric."
-        }
-      }
     },
     "sectorTiles": {
       "projectsShort": "{count} proj.",
@@ -504,69 +378,6 @@
         "Economy": "Economy",
         "Agriculture": "Agriculture",
         "Other": "Other"
-      }
-    },
-    "sourceQuality": {
-      "sourceTitle": "Source confidence and freshness",
-      "sourceSub": "{total} registered sources, {official} official, {internal} internal",
-      "liveTitle": "Live data and database readiness",
-      "liveSub": "Public APIs are wired as optional server connectors; private operations need credentials.",
-      "stats": {
-        "fresh": "Fresh",
-        "watch": "Watch",
-        "stale": "Stale"
-      },
-      "thresholdNote": "Source-age scale: <=45 days fresh, 45-120 days watch, >120 days stale. The topbar shows the last platform review (graded by the oldest source), not a claim that every source is fresh.",
-      "freshness": {
-        "fresh": "fresh",
-        "watch": "watch",
-        "stale": "stale",
-        "undated": "undated"
-      },
-      "age": {
-        "undated": "undated",
-        "days": "{days}d old"
-      },
-      "reasons": {
-        "internal": "Attached/internal source, {age}; confirm owner sign-off before publication.",
-        "stale": "Public source is {age}; refresh before executive use.",
-        "official": "Official public source, {age}.",
-        "partner": "Public partner/derived source, {age}; keep source note visible."
-      },
-      "connectorStatus": {
-        "live-ready": "live-ready",
-        "key-required": "key required",
-        "manual-review": "manual review",
-        "planned": "planned"
-      },
-      "connectorUse": {
-        "census-hs-trade": "Merchandise trade, HS structure, state/port exports where query limits allow.",
-        "world-bank-wdi": "Regional benchmark, GDP, population, FDI, macro context.",
-        "bea-services": "Services trade, international transactions, investment position, and USTR services-figure validation.",
-        "imf-data": "FX, balance-of-payments, reserves, and macro-financial context after SDMX dataset mapping.",
-        "foreign-assistance": "U.S. foreign assistance obligations/disbursements by year, agency, and sector."
-      },
-      "monitor": {
-        "title": "Operational data monitor",
-        "ready": "{mode} mode, {liveReady}/{total} live-ready connectors",
-        "checking": "Checking readiness...",
-        "unavailable": "Health check unavailable",
-        "probe": "Probe",
-        "probeAria": "Probe live data connectors",
-        "database": "Database",
-        "writable": "writable",
-        "readOnly": "read-only",
-        "databaseConfigured": "Operational database is configured for this environment.",
-        "databaseStatic": "Static mode is active; write operations are not available.",
-        "probeStatus": {
-          "not-probed": "not probed",
-          "not-configured": "not configured",
-          "error": "error",
-          "live-ready": "live-ready",
-          "key-required": "key required",
-          "manual-review": "manual review",
-          "planned": "planned"
-        }
       }
     },
     "timeline": "Recent activity",
@@ -695,23 +506,13 @@
     "tabs": {
       "timeline": "Timeline",
       "grid": "Grid",
-      "table": "Table"
+      "table": "Table",
+      "calendar": "Calendar"
     }
   },
   "prepare": {
     "title": "Visit preparation",
-    "subtitle": "Workflow · checklists · optimization",
-    "stages": {
-      "plan": "Plan",
-      "coord": "Coordination",
-      "brief": "Briefing",
-      "exec": "Execution",
-      "follow": "Follow-up"
-    },
-    "optimize": {
-      "title": "Delegation optimizer",
-      "sub": "Algorithmic recommendation"
-    }
+    "subtitle": "Workflow · checklists · optimization"
   },
   "commitments": {
     "title": "Commitments registry",
@@ -944,50 +745,11 @@
         "finance": "Finance",
         "minerals-rare-earth": "Minerals / rare earth"
       }
+    },
+    "sectorsCard": {
+      "title": "Sector opportunities",
+      "sub": "{count} sector briefings for U.S. market entry"
     }
-  },
-  "events": {
-    "title": "Events & calendar",
-    "subtitle": "Upcoming and recent diplomatic and business events",
-    "stats": {
-      "total": "Total",
-      "upcoming": "Upcoming"
-    },
-    "card": {
-      "title": "Calendar",
-      "sub": "C5+1 · dialogues · forums · councils · business"
-    },
-    "filters": {
-      "all": "All",
-      "summit": "Summits",
-      "dialogue": "Dialogues",
-      "forum": "Forums",
-      "business": "Business",
-      "council": "Councils",
-      "cultural": "Cultural",
-      "parliamentary": "Parliamentary"
-    },
-    "types": {
-      "summit": "Summit",
-      "dialogue": "Dialogue",
-      "forum": "Forum",
-      "business": "Business",
-      "council": "Council",
-      "cultural": "Cultural",
-      "parliamentary": "Parliamentary"
-    },
-    "searchLabel": "Search events by title or location",
-    "searchPlaceholder": "Search title or location",
-    "ics": "Export .ics",
-    "sections": {
-      "upcoming": "Upcoming",
-      "past": "Past"
-    },
-    "countdown": {
-      "in": "in {days}d",
-      "ago": "{days}d ago"
-    },
-    "linkedVisit": "Linked visit"
   },
   "grants": {
     "title": "Grants portfolio",
@@ -1088,43 +850,14 @@
         "gov-agency": "Government agency",
         "council": "Coordination body"
       }
+    },
+    "keyFigures": {
+      "title": "Key U.S. figures",
+      "sub": "{count} officials and leaders shaping the bilateral agenda"
     }
   },
   "counterparts": {
-    "title": "U.S. counterparts",
-    "subtitle": "Executive Branch, Congress and senior officials engaging on Uzbekistan",
     "search": "Search name, title or role…",
-    "groups": {
-      "executive": "Executive Branch",
-      "senate": "U.S. Senate",
-      "house": "U.S. House",
-      "state": "State Department",
-      "other": "Other"
-    },
-    "briefing": "Briefing card",
-    "generatePdf": "Generate briefing PDF",
-    "party": "Party",
-    "position": "Position",
-    "uzHistory": "History with Uzbekistan",
-    "keyVotes": "Key votes",
-    "quotes": "Quotes",
-    "back": "Back to counterparts",
-    "stats": {
-      "executive": "Executive",
-      "congress": "Congress",
-      "total": "Total"
-    },
-    "card": {
-      "title": "Briefing registry",
-      "sub": "Click any card to open the briefing profile"
-    },
-    "detail": {
-      "recordedEngagements": "{count} recorded engagements",
-      "keyTopics": "Key topics",
-      "committees": "Committees",
-      "profileSummary": "Profile summary",
-      "source": "Source"
-    },
     "grid": {
       "all": "All",
       "engagements": "{count} engagements",
@@ -1174,19 +907,6 @@
       },
       "disclaimer": "Simplified illustrative calculator. Actual licensing is determined by BIS / DDTC / OFAC — confirm with counsel."
     }
-  },
-  "staff": {
-    "title": "Staff KPI",
-    "subtitle": "Monthly performance of the Situational Center's analysts and coordinators",
-    "columns": {
-      "name": "Analyst",
-      "role": "Role",
-      "briefs": "Briefs",
-      "visits": "Visits",
-      "commitments": "Commitments",
-      "score": "Score"
-    },
-    "month": "Month"
   },
   "news": {
     "title": "Curated news",
@@ -1327,5 +1047,38 @@
     "viewAll": "View all",
     "loading": "Loading…",
     "empty": "No data available"
+  },
+  "events": {
+    "filters": {
+      "all": "All",
+      "summit": "Summits",
+      "dialogue": "Dialogues",
+      "forum": "Forums",
+      "business": "Business",
+      "council": "Councils",
+      "cultural": "Cultural",
+      "parliamentary": "Parliamentary"
+    },
+    "types": {
+      "summit": "Summit",
+      "dialogue": "Dialogue",
+      "forum": "Forum",
+      "business": "Business",
+      "council": "Council",
+      "cultural": "Cultural",
+      "parliamentary": "Parliamentary"
+    },
+    "searchLabel": "Search events by title or location",
+    "searchPlaceholder": "Search title or location",
+    "ics": "Export .ics",
+    "sections": {
+      "upcoming": "Upcoming",
+      "past": "Past"
+    },
+    "countdown": {
+      "in": "in {days}d",
+      "ago": "{days}d ago"
+    },
+    "linkedVisit": "Linked visit"
   }
 }

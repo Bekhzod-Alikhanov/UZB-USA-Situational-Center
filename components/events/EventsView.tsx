@@ -179,8 +179,7 @@ function EventCard({
   const t = useTranslations("events");
   const date = new Date(event.date);
   const delta = daysBetween(date, today);
-  const countdown =
-    delta >= 0 ? t("countdown.in", { days: delta }) : t("countdown.ago", { days: Math.abs(delta) });
+  const countdown = delta >= 0 ? t("countdown.in", { days: delta }) : t("countdown.ago", { days: Math.abs(delta) });
 
   return (
     <article

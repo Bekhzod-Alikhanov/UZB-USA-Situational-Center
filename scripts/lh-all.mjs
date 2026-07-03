@@ -13,15 +13,11 @@ const routes = [
   "agreements",
   "map",
   "investments",
-  "events",
   "grants",
   "contacts",
-  "counterparts",
   "compliance",
-  "staff",
   "news",
   "benchmark",
-  "sectors",
 ];
 
 const BASE = process.env.LH_BASE || "http://localhost:3100/en";

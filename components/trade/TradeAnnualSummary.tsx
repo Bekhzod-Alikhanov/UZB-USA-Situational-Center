@@ -47,10 +47,35 @@ export async function TradeAnnualSummary({ locale }: { locale: string }) {
   const y2024 = tradeAnnual.find((y) => y.year === 2024)!;
 
   const tiles: { key: Tone; label: string; series: number[]; latest: number; prev: number; signed?: boolean }[] = [
-    { key: "trade", label: ti("turnover"), series: tradeAnnual.map((y) => y.turnover), latest: y2025.turnover, prev: y2024.turnover },
-    { key: "invest", label: ti("exports"), series: tradeAnnual.map((y) => y.exports), latest: y2025.exports, prev: y2024.exports },
-    { key: "agree", label: ti("imports"), series: tradeAnnual.map((y) => y.imports), latest: y2025.imports, prev: y2024.imports },
-    { key: "rose", label: ti("balance"), series: tradeAnnual.map((y) => Math.abs(y.balance)), latest: y2025.balance, prev: y2024.balance, signed: true },
+    {
+      key: "trade",
+      label: ti("turnover"),
+      series: tradeAnnual.map((y) => y.turnover),
+      latest: y2025.turnover,
+      prev: y2024.turnover,
+    },
+    {
+      key: "invest",
+      label: ti("exports"),
+      series: tradeAnnual.map((y) => y.exports),
+      latest: y2025.exports,
+      prev: y2024.exports,
+    },
+    {
+      key: "agree",
+      label: ti("imports"),
+      series: tradeAnnual.map((y) => y.imports),
+      latest: y2025.imports,
+      prev: y2024.imports,
+    },
+    {
+      key: "rose",
+      label: ti("balance"),
+      series: tradeAnnual.map((y) => Math.abs(y.balance)),
+      latest: y2025.balance,
+      prev: y2024.balance,
+      signed: true,
+    },
   ];
 
   const fmt = (v: number) =>
@@ -85,7 +110,9 @@ export async function TradeAnnualSummary({ locale }: { locale: string }) {
                 {(deltaPct > 0 ? "+" : "") + deltaPct.toFixed(1)}%
               </span>
             </div>
-            <div className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">{fmt(tile.latest)}</div>
+            <div className="mono mt-1 text-[16px] font-semibold tabular text-[var(--color-ink)]">
+              {fmt(tile.latest)}
+            </div>
             <div className="mt-1.5">
               <Sparkline values={tile.series} color={color} />
             </div>

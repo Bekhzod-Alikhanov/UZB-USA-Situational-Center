@@ -14,6 +14,10 @@ export default async function VisitsPage({ params }: { params: Promise<{ locale:
   setRequestLocale(locale);
   const t = await getTranslations("visits");
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayIso = today.toISOString().slice(0, 10);
+
   return (
     <div className="flex flex-col gap-5">
       <div>
@@ -23,7 +27,7 @@ export default async function VisitsPage({ params }: { params: Promise<{ locale:
 
       <div className="card p-0">
         <div className="px-4 pt-3">
-          <VisitsTabs />
+          <VisitsTabs locale={locale} todayIso={todayIso} />
         </div>
       </div>
 

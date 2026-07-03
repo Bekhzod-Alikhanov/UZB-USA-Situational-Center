@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
     optimizePackageImports: [
       "lucide-react",
       "recharts",
-      "@dnd-kit/core",
       "@visx/hierarchy",
       "@visx/group",
       "@visx/responsive",

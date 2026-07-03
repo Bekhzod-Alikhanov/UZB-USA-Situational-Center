@@ -21,7 +21,6 @@ import { KpiCard } from "@/components/overview/KpiCard";
 import { MicroKpi } from "@/components/overview/MicroKpi";
 import { CountUpValue } from "@/components/overview/CountUpValue";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { ChartNarration } from "@/components/ui/ChartNarration";
 import { TradeFlowEditorial } from "@/components/overview/TradeFlowEditorial";
 import { MonthlyBars } from "@/components/overview/MonthlyBars";
 import { SectorsGrid } from "@/components/overview/SectorsGrid";
@@ -31,8 +30,6 @@ import { Horizon } from "@/components/overview/Horizon";
 import { RiskRadar } from "@/components/overview/RiskRadar";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { ExecutiveCommandCenter } from "@/components/overview/ExecutiveCommandCenter";
-import { RelationshipPillars } from "@/components/overview/RelationshipPillars";
-import { SourceQualityPanel } from "@/components/overview/SourceQualityPanel";
 import { TodayDecisionStrip } from "@/components/overview/TodayDecisionStrip";
 import { getRouteSeo } from "@/lib/seo";
 
@@ -56,12 +53,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
   const grantsTotal = grants.reduce((a, g) => a + g.valueMusd, 0);
   const verifiedInvestmentValue = investmentCredibilitySummary.verified.totalValueUsdM;
   const pendingInvestmentRows = investmentCredibilitySummary.pending.totalProjects;
-  const narrationLabels = {
-    what: t("narrationLabels.what"),
-    why: t("narrationLabels.why"),
-    how: t("narrationLabels.how"),
-    source: t("narrationLabels.source"),
-  };
 
   const dateLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
   const dateLabel = new Intl.DateTimeFormat(dateLocale, {
@@ -78,8 +69,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">
               <span className="size-1 rounded-full bg-[var(--color-primary)]" />
-              {t("hero.dailyBrief")} ·
-              {dateLabel}
+              {t("hero.dailyBrief")} ·{dateLabel}
             </span>
           </div>
           <h1 className="serif text-[24px] font-medium leading-[1.05] tracking-tight text-[var(--color-ink)] sm:text-[32px] lg:text-[40px]">
@@ -210,20 +200,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
 
       <ExecutiveCommandCenter locale={locale} />
 
-      <Card tone="primary" variant="panel">
-        <CardHeader
-          icon={<Layers className="size-3.5" />}
-          tone="primary"
-          title={t("cards.relationshipPillars.title")}
-          sub={t("cards.relationshipPillars.sub")}
-        />
-        <CardBody>
-          <RelationshipPillars locale={locale} />
-        </CardBody>
-      </Card>
-
-      <SourceQualityPanel />
-
       {/* SECTION DIVIDER — separates the 60-second executive answer above from
           the detailed analytical drill-down below, for faster executive scan. */}
       <div className="mt-2 flex items-start gap-4">
@@ -249,13 +225,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             />
             <CardBody>
               <TradeFlowEditorial height={250} />
-              <ChartNarration
-                labels={narrationLabels}
-                what={t("narration.flow.what")}
-                why={t("narration.flow.why")}
-                how={t("narration.flow.how")}
-                source={t("narration.flow.source")}
-              />
             </CardBody>
           </Card>
 
@@ -268,12 +237,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             />
             <CardBody>
               <SectorsGrid />
-              <ChartNarration
-                labels={narrationLabels}
-                what={t("narration.sectors.what")}
-                why={t("narration.sectors.why")}
-                how={t("narration.sectors.how")}
-              />
             </CardBody>
           </Card>
 
@@ -307,12 +270,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
                     </div>
                   </div>
                 </div>
-                <ChartNarration
-                  labels={narrationLabels}
-                  what={t("narration.monthly.what")}
-                  why={t("narration.monthly.why")}
-                  how={t("narration.monthly.how")}
-                />
               </CardBody>
             </Card>
 
@@ -341,12 +298,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             />
             <CardBody>
               <RiskRadar limit={6} />
-              <ChartNarration
-                labels={narrationLabels}
-                what={t("narration.risk.what")}
-                why={t("narration.risk.why")}
-                how={t("narration.risk.how")}
-              />
             </CardBody>
           </Card>
 
@@ -371,12 +322,6 @@ export default async function OverviewPage({ params }: { params: Promise<{ local
             />
             <CardBody>
               <GrantsDonut size={132} />
-              <ChartNarration
-                labels={narrationLabels}
-                what={t("narration.grants.what")}
-                why={t("narration.grants.why")}
-                how={t("narration.grants.how")}
-              />
             </CardBody>
           </Card>
         </div>

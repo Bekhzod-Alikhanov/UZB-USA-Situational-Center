@@ -146,12 +146,22 @@ export function TrademapProducts() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col" className="w-20">HS-6</th>
+              <th scope="col" className="w-20">
+                HS-6
+              </th>
               <th scope="col">Commodity</th>
-              <th scope="col" className="text-right">Value</th>
-              <th scope="col" className="w-16 text-right">Share</th>
-              <th scope="col" className="w-20 text-right">5Y growth</th>
-              <th scope="col" className="w-20 text-right">5Y qty</th>
+              <th scope="col" className="text-right">
+                Value
+              </th>
+              <th scope="col" className="w-16 text-right">
+                Share
+              </th>
+              <th scope="col" className="w-20 text-right">
+                5Y growth
+              </th>
+              <th scope="col" className="w-20 text-right">
+                5Y qty
+              </th>
             </tr>
           </thead>
           <tbody>
