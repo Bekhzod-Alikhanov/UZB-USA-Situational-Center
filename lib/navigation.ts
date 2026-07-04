@@ -42,7 +42,10 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     key: "executive",
     icon: Activity,
-    items: [{ key: "overview", href: "", icon: Activity, tone: "primary", audience: "executive" }],
+    items: [
+      { key: "brief", href: "", icon: Activity, tone: "primary", audience: "executive" },
+      { key: "overview", href: "/overview", icon: LineChart, tone: "primary", audience: "analyst" },
+    ],
   },
   {
     key: "economic",

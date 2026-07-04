@@ -34,8 +34,9 @@ pages were removed; /events merged into /visits (calendar tab); /sectors merged
 into /investments; the counterparts grid moved onto /contacts.
 
 ```
-/[locale]/                       Overview (KPIs + trade flow + risk radar + horizon)
-/[locale]/brief                  Situational videowall (direct URL, not in the sidebar)
+/[locale]/                       Executive brief — landing page (in-shell panel, fullscreen mode)
+/[locale]/overview               Working dashboard (trade editorial, sectors, risk radar, horizon)
+/[locale]/brief                  permanentRedirect → / (bookmarks)
 /[locale]/trade                  Annual + monthly trade, structure, rankings
 /[locale]/visits                 Timeline · grid · table · events-calendar tab
 /[locale]/prepare                Visit pipeline · plan-vs-actual outcomes · roadmaps

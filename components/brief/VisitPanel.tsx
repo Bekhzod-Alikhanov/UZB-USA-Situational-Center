@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import { nextPipeline, daysUntil, upcomingHorizon, intlLocale, parseDay } from "@/components/brief/brief-data";
+import { localizedEventTitle, localizedPipelineTheme, localizedPipelineTitle } from "@/lib/i18n/overview-content";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 
 /**
@@ -62,9 +63,11 @@ export function VisitPanel() {
           <span>{month.format(date)}</span>
         </div>
         <div className="min-w-0">
-          <p className="text-[13.5px] font-semibold leading-snug text-[var(--brief-ink)]">{pipeline.title}</p>
+          <p className="text-[13.5px] font-semibold leading-snug text-[var(--brief-ink)]">
+            {localizedPipelineTitle(pipeline.id, pipeline.title, locale)}
+          </p>
           <p className="mt-1 text-[11.5px] text-[var(--brief-ink-muted)]">
-            {pipeline.theme} <DemoBadge className="ml-1 align-middle" />
+            {localizedPipelineTheme(pipeline.id, pipeline.theme, locale)} <DemoBadge variant="dot" className="ml-1" />
           </p>
         </div>
       </div>
@@ -103,7 +106,10 @@ export function VisitPanel() {
                 </span>
                 <div className="min-w-0 border-l border-[var(--brief-border)] pl-2.5">
                   <p className="truncate text-[12.5px] leading-snug text-[var(--brief-ink)]">
-                    {item.title} {item.isDemo ? <DemoBadge className="ml-1 align-middle" /> : null}
+                    {item.kind === "event"
+                      ? localizedEventTitle(item.id, item.title, locale)
+                      : localizedPipelineTitle(item.id, item.title, locale)}{" "}
+                    {item.isDemo ? <DemoBadge variant="dot" className="ml-1" /> : null}
                   </p>
                   <p className="text-[10.5px] text-[var(--brief-ink-faint)]">
                     {item.location ? `${item.location} · ` : ""}

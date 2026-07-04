@@ -6,7 +6,9 @@
     },
     "header": {
       "title": "O‘zbekiston — AQSH",
-      "sub": "Vaziyat ekrani"
+      "sub": "Vaziyat ekrani",
+      "fullscreen": "Taqdimot rejimi (to'liq ekran)",
+      "exitFullscreen": "To'liq ekrandan chiqish"
     },
     "clocks": {
       "tashkent": "Toshkent",
@@ -126,7 +128,8 @@
       "sources": "{count, plural, other {# ta rasmiy manba}}",
       "print": "PDF eksport",
       "methodologies": "O‘z milliy statistikasi · U.S. Census Bureau · TIV reestri"
-    }
+    },
+    "openDetail": "Bo'limni ochish"
   },
   "brand": {
     "title": "O‘zbekiston – AQSh",
@@ -147,7 +150,8 @@
     "benchmark": "Mintaqaviy taqqoslash",
     "contacts": "Kontaktlar",
     "news": "Yangiliklar tasmasi",
-    "admin": "Boshqaruv"
+    "admin": "Boshqaruv",
+    "brief": "Brifing"
   },
   "navGroups": {
     "executive": "Ijro brifi",

@@ -60,6 +60,8 @@ export interface BriefGlobePoint {
 
 export interface BriefGlobeArc {
   id: string;
+  /** Source record id in data/visits.ts or data/visit-prep.ts (for localized title lookups). */
+  refId: string;
   kind: "visit" | "pipeline";
   corridor: Corridor;
   startLat: number;
@@ -167,6 +169,7 @@ export function buildBriefGlobeData(hideDemo: boolean): BriefGlobeData {
     const end = corridor === "dc" ? CITY_COORDS.washington : CITY_COORDS.newyork;
     arcs.push({
       id: `${id}-${corridor}`,
+      refId: id,
       kind,
       corridor,
       startLat: CITY_COORDS.tashkent.lat,

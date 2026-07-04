@@ -294,3 +294,163 @@ export function localizedCadence(cadence: string, locale?: string): string {
   if (l === "en") return cadence;
   return CADENCE_LABELS[cadence]?.[l] ?? cadence;
 }
+
+/** Visit-preparation pipeline titles keyed by `data/visit-prep.ts` id. */
+const PIPELINE_TITLES: Record<string, Localized> = {
+  "visit-pipeline-washington-2026": {
+    ru: "Делегация Узбекистана — экономическая миссия в Вашингтон",
+    "uz-latn": "O'zbekiston delegatsiyasi — Vashingtonga iqtisodiy missiya",
+  },
+  "visit-pipeline-tashkent-2026": {
+    ru: "Бизнес-делегация США — Ташкент и Самарканд",
+    "uz-latn": "AQSH biznes-delegatsiyasi — Toshkent va Samarqand",
+  },
+  "visit-pipeline-nyc-unga-2026": {
+    ru: "Последующий визит на полях ГА ООН — Нью-Йорк",
+    "uz-latn": "BMT Bosh Assambleyasi doirasidagi keyingi tashrif — Nyu-York",
+  },
+};
+
+/** Pipeline theme lines keyed by pipeline id (agency names stay as-is). */
+const PIPELINE_THEMES: Record<string, Localized> = {
+  "visit-pipeline-washington-2026": {
+    ru: "Инвестиции · DFC · критические минералы · AI-хаб",
+    "uz-latn": "Investitsiyalar · DFC · muhim minerallar · AI-hab",
+  },
+  "visit-pipeline-tashkent-2026": {
+    ru: "ИИ · фармацевтика · логистика · регионы",
+    "uz-latn": "AI · farmatsevtika · logistika · hududlar",
+  },
+  "visit-pipeline-nyc-unga-2026": {
+    ru: "Сверка договорённостей майского визита",
+    "uz-latn": "May tashrifi kelishuvlarini tekshirish",
+  },
+};
+
+/** Diplomatic event titles keyed by `data/events.ts` id. */
+const EVENT_TITLES: Record<string, Localized> = {
+  "e-dfc-framework-2026": {
+    ru: "DFC объявил о намерении создать совместную инвестиционную платформу (Heads of Terms)",
+    "uz-latn": "DFC qo'shma investitsiya platformasini tuzish niyatini e'lon qildi (Heads of Terms)",
+  },
+  "e-council-launch-washington-2026": {
+    ru: "Американо-узбекский деловой и инвестиционный совет — официальный запуск в Вашингтоне",
+    "uz-latn": "Amerika-O'zbekiston biznes va investitsiya kengashi — Vashingtonda rasmiy ochilish",
+  },
+  "e-ustr-council-2026": {
+    ru: "Обсуждение инвестиционного профиля: Совет и USTR",
+    "uz-latn": "Kengash va USTR investitsiya profili muhokamasi",
+  },
+  "e-tiif-2026": {
+    ru: "TIIF 2026 — Ташкентский международный инвестиционный форум (бизнес-форум США–Узбекистан)",
+    "uz-latn": "TIIF 2026 — Toshkent xalqaro investitsiya forumi (AQSH–O'zbekiston biznes-forumi)",
+  },
+  "e-davos-cp-2026": {
+    ru: "Подписание Хартии Совета мира",
+    "uz-latn": "Tinchlik kengashi Xartiyasining imzolanishi",
+  },
+  "e-minerals-feb-2026": {
+    ru: "Министерская конференция по критическим минералам",
+    "uz-latn": "Muhim minerallar bo'yicha vazirlar konferensiyasi",
+  },
+  "e-b51-bishkek-2026": {
+    ru: "Бизнес-форум B5+1 — Бишкек",
+    "uz-latn": "B5+1 biznes-forumi — Bishkek",
+  },
+  "e-council-peace-feb-2026": {
+    ru: "Совет мира — учредительное заседание",
+    "uz-latn": "Tinchlik kengashi — ta'sis yig'ilishi",
+  },
+  "e-us-uz-bc-april-2026": {
+    ru: "Деловой и инвестиционный совет США–УЗ — первая полноформатная сессия",
+    "uz-latn": "AQSH–O'z biznes va investitsiya kengashi — birinchi to'liq sessiya",
+  },
+  "e-sd5-2026": {
+    ru: "Расширенный диалог стратегического партнёрства — 5-е заседание",
+    "uz-latn": "Kengaytirilgan strategik sheriklik muloqoti — 5-sessiya",
+  },
+};
+
+/** Visit titles keyed by `data/visits.ts` id. */
+const VISIT_TITLES: Record<string, Localized> = {
+  "v-2025-03-miller": {
+    ru: "Визит конгрессвумен Кэрол Миллер в Узбекистан",
+    "uz-latn": "Kongress a'zosi Kerol Millerning O'zbekistonga tashrifi",
+  },
+  "v-2025-04-saidov": {
+    ru: "Визит главы МИД Бахтиёра Саидова в Вашингтон",
+    "uz-latn": "TIV rahbari Baxtiyor Saidovning Vashingtonga tashrifi",
+  },
+  "v-2025-08-zampolli": {
+    ru: "Визит спецпосланника Паоло Дзамполли в Узбекистан",
+    "uz-latn": "Maxsus elchi Paolo Zampollining O'zbekistonga tashrifi",
+  },
+  "v-2025-09-unga": {
+    ru: "Двусторонняя встреча на 80-й ГА ООН",
+    "uz-latn": "BMT BAning 80-sessiyasida ikki tomonlama uchrashuv",
+  },
+  "v-2025-10-gor-landau": {
+    ru: "Визит спецпосланника Серджо Гора и первого замгоссекретаря Кристофера Ландау",
+    "uz-latn": "Maxsus elchi Serjio Gor va davlat kotibi o'rinbosari Kristofer Landau tashrifi",
+  },
+  "v-2025-11-c5-1": {
+    ru: "Президент Мирзиёев — саммит C5+1 в Вашингтоне",
+    "uz-latn": "Prezident Mirziyoyev — Vashingtonda C5+1 sammiti",
+  },
+  "v-2025-11-adams": {
+    ru: "Визит мэра Нью-Йорка Эрика Адамса в Узбекистан",
+    "uz-latn": "Nyu-York meri Erik Adamsning O'zbekistonga tashrifi",
+  },
+  "v-2025-11-utah": {
+    ru: "Делегация штата Юта (элдер Беднар, Stirling Foundation)",
+    "uz-latn": "Yuta shtati delegatsiyasi (Elder Bednar, Stirling Foundation)",
+  },
+  "v-2025-11-miit": {
+    ru: "Визит министра инвестиций, промышленности и торговли в США",
+    "uz-latn": "Investitsiya, sanoat va savdo vazirining AQShga tashrifi",
+  },
+  "v-2026-01-davos": {
+    ru: "Подписание Хартии Совета мира",
+    "uz-latn": "Tinchlik kengashi Xartiyasining imzolanishi",
+  },
+  "v-2026-02-04-minerals": {
+    ru: "Министерская по критическим минералам — подписан меморандум",
+    "uz-latn": "Muhim minerallar vazirlar yig'ini — memorandum imzolandi",
+  },
+  "v-2026-02-06-gor": {
+    ru: "Визит спецпосланника Серджо Гора — 1-я сессия Делового и инвестиционного совета США–УЗ",
+    "uz-latn": "Maxsus elchi Serjio Gor tashrifi — AQSH–O'z biznes va investitsiya kengashining 1-sessiyasi",
+  },
+  "v-2026-02-17-state": {
+    ru: "Президент Мирзиёев — рабочий визит в Вашингтон (учредительное заседание Совета мира)",
+    "uz-latn": "Prezident Mirziyoyev — Vashingtonga ishchi tashrif (Tinchlik kengashi ta'sis yig'ilishi)",
+  },
+  "v-2026-04-upcoming-council": {
+    ru: "Первая полноформатная сессия Делового и инвестиционного совета США–УЗ (план)",
+    "uz-latn": "AQSH–O'z biznes va investitsiya kengashining birinchi to'liq sessiyasi (reja)",
+  },
+};
+
+export function localizedPipelineTitle(id: string, fallback: string, locale?: string): string {
+  const l = normalizeOverviewLocale(locale);
+  if (l === "en") return fallback;
+  return PIPELINE_TITLES[id]?.[l] ?? fallback;
+}
+
+export function localizedPipelineTheme(id: string, fallback: string, locale?: string): string {
+  const l = normalizeOverviewLocale(locale);
+  if (l === "en") return fallback;
+  return PIPELINE_THEMES[id]?.[l] ?? fallback;
+}
+
+export function localizedEventTitle(id: string, fallback: string, locale?: string): string {
+  const l = normalizeOverviewLocale(locale);
+  if (l === "en") return fallback;
+  return EVENT_TITLES[id]?.[l] ?? fallback;
+}
+
+export function localizedVisitTitle(id: string, fallback: string, locale?: string): string {
+  const l = normalizeOverviewLocale(locale);
+  if (l === "en") return fallback;
+  return VISIT_TITLES[id]?.[l] ?? fallback;
+}

@@ -1,329 +1,316 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import {
-  TrendingUp,
-  ArrowUpFromLine,
-  ArrowDownToLine,
-  Scale,
-  AlertTriangle,
-  CalendarDays,
-  Layers,
-  Gift,
-  Users2,
-} from "lucide-react";
-import { tradeAnnual, tradeJan2026 } from "@/data/trade";
-import { agreementsAggregate } from "@/data/agreements";
-import { investmentCredibilitySummary } from "@/data/investments";
-import { liveDelegations } from "@/data/delegations";
-import { nextAnchorVisit } from "@/data/visits";
-import { grants } from "@/data/grants";
-import { KpiCard } from "@/components/overview/KpiCard";
-import { MicroKpi } from "@/components/overview/MicroKpi";
-import { CountUpValue } from "@/components/overview/CountUpValue";
-import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { TradeFlowEditorial } from "@/components/overview/TradeFlowEditorial";
-import { MonthlyBars } from "@/components/overview/MonthlyBars";
-import { SectorsGrid } from "@/components/overview/SectorsGrid";
-import { CounterpartsRank } from "@/components/overview/CounterpartsRank";
-import { GrantsDonut } from "@/components/overview/GrantsDonut";
-import { Horizon } from "@/components/overview/Horizon";
-import { RiskRadar } from "@/components/overview/RiskRadar";
-import { PrintButton } from "@/components/exports/PrintButton";
-import { ExecutiveCommandCenter } from "@/components/overview/ExecutiveCommandCenter";
-import { TodayDecisionStrip } from "@/components/overview/TodayDecisionStrip";
 import { getRouteSeo } from "@/lib/seo";
+import { tradeAnnualUz } from "@/data/trade";
+import { investmentCredibilitySummary } from "@/data/investments";
+import { agreements, agreementsAggregate } from "@/data/agreements";
+import { visits } from "@/data/visits";
+import { commitments } from "@/data/commitments";
+import { sourcesMeta } from "@/data/sources";
+import {
+  yoyPct,
+  investmentHighlights,
+  commitmentsAvgProgress,
+  intlLocale,
+  parseDay,
+} from "@/components/brief/brief-data";
+import { briefVoice } from "@/components/brief/fonts";
+import { BriefIntro } from "@/components/brief/BriefIntro";
+import { BriefNumber } from "@/components/brief/BriefNumber";
+import { BriefClocks } from "@/components/brief/BriefClocks";
+import { BriefTradeChart } from "@/components/brief/BriefTradeChart";
+import { BriefAgreementsDonut } from "@/components/brief/BriefAgreementsDonut";
+import { VisitPanel } from "@/components/brief/VisitPanel";
+import { Sparkline } from "@/components/brief/Sparkline";
+import { StatTile } from "@/components/brief/StatTile";
+import { CommitmentsBar } from "@/components/brief/CommitmentsBar";
+import { AttentionList } from "@/components/brief/AttentionList";
+import { GlobeSection } from "@/components/brief/GlobeSection";
+import { UpdatedAt } from "@/components/brief/UpdatedAt";
+import { FullscreenButton } from "@/components/brief/FullscreenButton";
+import { PrintButton } from "@/components/exports/PrintButton";
+import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return getRouteSeo({ locale, routeKey: "overview" });
+  return getRouteSeo({ locale, routeKey: "brief" });
 }
 
-export default async function OverviewPage({ params }: { params: Promise<{ locale: string }> }) {
+/** Compact deep-link arrow for a brief panel head. */
+function PanelLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      prefetch={false}
+      aria-label={label}
+      className="inline-flex size-6 shrink-0 items-center justify-center rounded-md border border-[var(--brief-border)] text-[var(--brief-ink-faint)] transition hover:border-[var(--brief-border-strong)] hover:text-[var(--brief-ink)]"
+    >
+      <ArrowUpRight className="size-3.5" />
+    </Link>
+  );
+}
+
+/**
+ * "/" — the executive brief is the site landing page (brief-home pass).
+ * Same situational-videowall composition as before, but rendered as a
+ * bounded panel INSIDE the normal shell (sidebar + topbar visible) instead
+ * of a fixed overlay; every KPI tile and panel deep-links into its detail
+ * section, and a fullscreen button restores the projector presentation
+ * mode. The staff working dashboard lives on /overview.
+ */
+export default async function BriefHomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("overview");
+  const t = await getTranslations("brief");
 
-  const y2025 = tradeAnnual.find((y) => y.year === 2025)!;
-  const y2024 = tradeAnnual.find((y) => y.year === 2024)!;
-  const turnoverDelta = ((y2025.turnover - y2024.turnover) / y2024.turnover) * 100;
-  const exportsDelta = ((y2025.exports - y2024.exports) / y2024.exports) * 100;
-  const importsDelta = ((y2025.imports - y2024.imports) / y2024.imports) * 100;
+  const trade = tradeAnnualUz[tradeAnnualUz.length - 1];
+  const yoy = yoyPct();
+  const verified = investmentCredibilitySummary.verified;
+  const pending = investmentCredibilitySummary.pending;
+  const sectors = investmentHighlights(3);
+  const maxSectorValue = sectors[0]?.valueMusd ?? 1;
+  const avgProgress = commitmentsAvgProgress();
+  const incoming = visits.filter((v) => v.direction === "us-uz").length;
+  const flagship = agreements.find((a) => a.id === "a-2026-dfc-framework");
 
-  const anchor = nextAnchorVisit();
-  const grantsTotal = grants.reduce((a, g) => a + g.valueMusd, 0);
-  const verifiedInvestmentValue = investmentCredibilitySummary.verified.totalValueUsdM;
-  const pendingInvestmentRows = investmentCredibilitySummary.pending.totalProjects;
-
-  const dateLocale = locale === "ru" ? "ru-RU" : locale === "uz-latn" ? "uz-Latn-UZ" : "en-GB";
-  const dateLabel = new Intl.DateTimeFormat(dateLocale, {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(new Date());
+  const nf = new Intl.NumberFormat(intlLocale(locale));
+  const pctf = new Intl.NumberFormat(intlLocale(locale), {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+    signDisplay: "always",
+  });
+  const df = new Intl.DateTimeFormat(intlLocale(locale), { day: "numeric", month: "long", year: "numeric" });
+  const openDetail = t("openDetail");
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* HERO HEADER — daily brief chip + serif title + actions */}
-      <header className="flex flex-col gap-3 pb-1 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-        <div className="min-w-0">
-          <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">
-              <span className="size-1 rounded-full bg-[var(--color-primary)]" />
-              {t("hero.dailyBrief")} ·{dateLabel}
+    <div id="brief-stage" className={`brief-stage ${briefVoice.variable}`}>
+      {/* Synchronous pre-paint gate: returning visitors this session skip the
+          intro with zero flash (see BriefIntro for the full replay matrix). */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `try{if(sessionStorage.getItem("uzus-brief-intro"))document.documentElement.setAttribute("data-brief-intro-done","")}catch(e){}`,
+        }}
+      />
+      <BriefIntro title={t("intro.title")} subtitle={t("intro.subtitle")} />
+
+      <div className="brief-frame">
+        {/* Header strip: wordmark · live clocks · fullscreen · print */}
+        <div className="brief-reveal brief-reveal-1 flex min-h-[64px] flex-wrap items-center justify-between gap-x-6 gap-y-2 py-2.5">
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="grid size-9 place-items-center rounded-lg bg-[var(--brief-accent)] text-[11px] font-extrabold text-white"
+            >
+              UZ·US
             </span>
+            <div>
+              <div className="text-[14px] font-bold tracking-[0.02em] text-[var(--brief-ink)]">{t("header.title")}</div>
+              <div className="text-[11px] text-[var(--brief-ink-faint)]">
+                {t("header.sub")} · <UpdatedAt className="text-[var(--brief-ink-faint)]" />
+              </div>
+            </div>
           </div>
-          <h1 className="serif text-[24px] font-medium leading-[1.05] tracking-tight text-[var(--color-ink)] sm:text-[32px] lg:text-[40px]">
-            {t("hero.titleLead")} · <span className="text-[var(--color-ink-muted)]">{t("hero.titleAccent")}</span>
-          </h1>
-          <p className="mt-1.5 max-w-2xl text-[12px] leading-relaxed text-[var(--color-ink-muted)] sm:text-[13px]">
-            {t("hero.subtitle")}
-          </p>
-          <p className="mt-1 max-w-2xl text-[11.5px] leading-relaxed text-[var(--color-ink-faint)]">
-            {t("hero.mandate")}
-          </p>
-        </div>
-        <div className="shrink-0 self-start sm:self-end">
-          <PrintButton label={t("hero.print")} />
-        </div>
-      </header>
-
-      {/* HERO KPI ROW — 4 large tone-coded KPIs */}
-      <TodayDecisionStrip locale={locale} />
-
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <KpiCard
-          tone="trade"
-          icon={<TrendingUp className="size-4" />}
-          label={t("kpi.turnover2025")}
-          value={
-            <CountUpValue
-              value={y2025.turnover}
-              prefix="$"
-              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
-            />
-          }
-          sub={t("kpi.uzStat2025")}
-          deltaPct={turnoverDelta}
-          deltaLabel={t("kpi.versus2024")}
-          href={`/${locale}/trade`}
-        />
-        <KpiCard
-          tone="invest"
-          icon={<ArrowUpFromLine className="size-4" />}
-          label={t("kpi.exports2025")}
-          value={
-            <CountUpValue
-              value={y2025.exports}
-              prefix="$"
-              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
-            />
-          }
-          sub={t("kpi.jan2026Exports")}
-          deltaPct={exportsDelta}
-          deltaLabel={t("kpi.versus2024")}
-          href={`/${locale}/trade?direction=exports`}
-        />
-        <KpiCard
-          tone="agree"
-          icon={<ArrowDownToLine className="size-4" />}
-          label={t("kpi.imports2025")}
-          value={
-            <CountUpValue
-              value={y2025.imports}
-              prefix="$"
-              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
-            />
-          }
-          sub={t("kpi.jan2026Imports", { growth: tradeJan2026.importsGrowthPct })}
-          deltaPct={importsDelta}
-          deltaLabel={t("kpi.versus2024")}
-          href={`/${locale}/trade?direction=imports`}
-        />
-        <KpiCard
-          tone="rose"
-          icon={<Scale className="size-4" />}
-          label={t("kpi.balance2025")}
-          value={
-            <CountUpValue
-              value={Math.abs(y2025.balance)}
-              prefix="−$"
-              suffix={<span className="ml-0.5 text-[20px] font-medium text-[var(--color-ink-muted)]">M</span>}
-            />
-          }
-          sub={t("kpi.deficitWidened")}
-          delta="neg"
-          href={`/${locale}/trade`}
-        />
-      </div>
-
-      {/* MICRO KPI STRIP — 5 secondary metrics */}
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5">
-        <MicroKpi
-          tone="agree"
-          label={t("kpi.agreements")}
-          value={<CountUpValue value={agreementsAggregate.totalDocuments} />}
-          sub={t("kpi.investAgreements", { count: agreementsAggregate.totalInvestAgreements })}
-          href={`/${locale}/agreements`}
-        />
-        <MicroKpi
-          tone="invest"
-          label={t("kpi.projects")}
-          value={<CountUpValue value={investmentCredibilitySummary.verified.totalProjects} />}
-          sub={t("kpi.verifiedPending", {
-            value: (verifiedInvestmentValue / 1000).toFixed(2),
-            pending: pendingInvestmentRows,
-          })}
-          href={`/${locale}/investments`}
-        />
-        <MicroKpi
-          tone="visits"
-          label={t("kpi.relations")}
-          value={t("kpi.relationsValue")}
-          sub={t("kpi.sinceDate")}
-          href={`/${locale}/visits`}
-        />
-        <MicroKpi
-          tone="people"
-          label={t("kpi.delegations")}
-          value={<CountUpValue value={liveDelegations.length} />}
-          sub={anchor ? t("kpi.nextDate", { date: anchor.date }) : undefined}
-          href={`/${locale}/visits`}
-        />
-        <MicroKpi
-          tone="rose"
-          label={t("kpi.grants")}
-          value={<CountUpValue value={grantsTotal} prefix="$" suffix="M" decimals={1} />}
-          sub={t("kpi.grantPrograms", { count: grants.length })}
-          href={`/${locale}/grants`}
-        />
-      </div>
-
-      <ExecutiveCommandCenter locale={locale} />
-
-      {/* SECTION DIVIDER — separates the 60-second executive answer above from
-          the detailed analytical drill-down below, for faster executive scan. */}
-      <div className="mt-2 flex items-start gap-4">
-        <div className="shrink-0">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-ink-muted)]">
-            {t("detailedAnalysis")}
-          </div>
-          <p className="mt-0.5 text-[11px] text-[var(--color-ink-faint)]">{t("detailedAnalysisSub")}</p>
-        </div>
-        <div className="mt-1.5 h-px flex-1 bg-gradient-to-r from-[var(--color-border-strong)] to-transparent" />
-      </div>
-
-      {/* MAIN GRID — left 1.55fr, right 1fr */}
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.55fr_1fr]">
-        {/* LEFT COLUMN */}
-        <div className="flex min-w-0 flex-col gap-4">
-          <Card tone="trade">
-            <CardHeader
-              icon={<TrendingUp className="size-3.5" />}
-              tone="trade"
-              title={t("flow")}
-              sub={t("cards.flowSub")}
-            />
-            <CardBody>
-              <TradeFlowEditorial height={250} />
-            </CardBody>
-          </Card>
-
-          <Card tone="invest">
-            <CardHeader
-              icon={<Layers className="size-3.5" />}
-              tone="invest"
-              title={t("cards.sectorsTitle")}
-              sub={t("cards.sectorsSub")}
-            />
-            <CardBody>
-              <SectorsGrid />
-            </CardBody>
-          </Card>
-
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <Card tone="trade">
-              <CardHeader
-                icon={<CalendarDays className="size-3.5" />}
-                tone="trade"
-                title={t("cards.monthlyTitle")}
-                sub={t("cards.monthlySub")}
+          <div className="flex items-center gap-4">
+            <BriefClocks />
+            <div className="flex items-center gap-2">
+              <FullscreenButton targetId="brief-stage" />
+              <PrintButton
+                label={t("footer.print")}
+                className="!border-[var(--brief-border)] !bg-[var(--brief-surface)] !text-[var(--brief-ink)] hover:!bg-[var(--brief-surface-2)]"
               />
-              <CardBody>
-                <MonthlyBars height={180} />
-                <div className="mt-3 grid grid-cols-2 gap-2 text-[11px]">
-                  <div className="rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
-                    <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                      {t("cards.monthlyExportKpi")}
+            </div>
+          </div>
+        </div>
+        <div className="brief-rule mb-4" />
+
+        {/* KPI strip — 6 tiles, accent strips, count-ups, deep links */}
+        <section className="brief-reveal brief-reveal-2 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+          <StatTile
+            label={t("kpi.turnover", { year: trade.year })}
+            accent="var(--brief-accent-bright)"
+            href={`/${locale}/trade`}
+            sub={
+              <>
+                <span
+                  className="font-semibold tabular-nums"
+                  style={{ color: yoy >= 0 ? "var(--brief-pos)" : "var(--brief-neg)" }}
+                >
+                  {pctf.format(yoy)}%
+                </span>{" "}
+                {t("kpi.yoy")}
+              </>
+            }
+          >
+            <BriefNumber value={trade.turnover} decimals={1} prefix="$" />
+            <span className="ml-1 text-[13px] font-medium text-[var(--brief-ink-muted)]">{t("kpi.mln")}</span>
+          </StatTile>
+          <StatTile
+            label={t("kpi.invest")}
+            accent="var(--brief-accent-2)"
+            href={`/${locale}/investments`}
+            sub={t("kpi.investSub", { pending: nf.format(pending.totalValueUsdM) })}
+          >
+            <BriefNumber value={verified.totalValueUsdM} prefix="$" />
+            <span className="ml-1 text-[13px] font-medium text-[var(--brief-ink-muted)]">{t("kpi.mln")}</span>
+          </StatTile>
+          <StatTile
+            label={t("kpi.projects")}
+            accent="var(--brief-pos)"
+            href={`/${locale}/investments`}
+            sub={t("kpi.projectsSub", { verified: verified.totalProjects, pending: pending.totalProjects })}
+          >
+            <BriefNumber value={verified.totalProjects + pending.totalProjects} />
+          </StatTile>
+          <StatTile
+            label={t("kpi.documents")}
+            accent="var(--brief-accent)"
+            href={`/${locale}/agreements`}
+            sub={t("kpi.documentsSub", { invest: agreementsAggregate.totalInvestAgreements })}
+          >
+            <BriefNumber value={agreementsAggregate.totalDocuments} />
+          </StatTile>
+          <StatTile
+            label={t("kpi.visits")}
+            accent="var(--brief-accent)"
+            href={`/${locale}/visits`}
+            sub={t("kpi.visitsSub", { incoming })}
+          >
+            <BriefNumber value={visits.length} />
+          </StatTile>
+          <StatTile
+            label={t("kpi.commitments")}
+            accent="var(--brief-warn)"
+            href={`/${locale}/commitments`}
+            sub={
+              <>
+                {t("kpi.commitmentsSub", { avg: avgProgress })} <DemoBadge variant="dot" className="align-middle" />
+              </>
+            }
+          >
+            <BriefNumber value={commitments.length} />
+          </StatTile>
+        </section>
+
+        {/* Main row: trade dynamics · globe · nearest visit */}
+        <section className="brief-reveal brief-reveal-3 mt-4 grid gap-4 xl:grid-cols-12">
+          <div className="brief-panel xl:col-span-5">
+            <div className="brief-panel-head">
+              <span className="brief-panel-title">{t("trade.title")}</span>
+              <span className="flex items-center gap-3">
+                <span className="hidden text-[11px] tabular-nums text-[var(--brief-ink-faint)] sm:inline">
+                  2017 — {trade.year} ·{" "}
+                  <Sparkline
+                    data={tradeAnnualUz.map((y) => ({ year: y.year, value: y.turnover }))}
+                    width={92}
+                    height={20}
+                    label={t("trade.sparkAria")}
+                  />
+                </span>
+                <PanelLink href={`/${locale}/trade`} label={`${openDetail}: ${t("trade.title")}`} />
+              </span>
+            </div>
+            <div className="brief-panel-body">
+              <BriefTradeChart />
+            </div>
+          </div>
+
+          <div className="brief-panel hidden md:flex xl:col-span-4">
+            <div className="brief-panel-head">
+              <span className="brief-panel-title">{t("globe.title")}</span>
+              <span className="flex items-center gap-3">
+                <span className="text-[11px] text-[var(--brief-ink-faint)]">{t("globe.sub")}</span>
+                <PanelLink href={`/${locale}/map`} label={`${openDetail}: ${t("globe.title")}`} />
+              </span>
+            </div>
+            <div className="brief-panel-body">
+              <GlobeSection />
+            </div>
+          </div>
+
+          <div className="brief-panel xl:col-span-3">
+            <div className="brief-panel-head">
+              <span className="brief-panel-title">{t("visit.title")}</span>
+              <PanelLink href={`/${locale}/prepare`} label={`${openDetail}: ${t("visit.title")}`} />
+            </div>
+            <div className="brief-panel-body">
+              <VisitPanel />
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom row: sectors + flagship · execution + attention · agreements */}
+        <section className="brief-reveal brief-reveal-4 mt-4 grid gap-4 xl:grid-cols-12">
+          <div className="brief-panel xl:col-span-4">
+            <div className="brief-panel-head">
+              <span className="brief-panel-title">{t("invest.title")}</span>
+              <PanelLink href={`/${locale}/investments`} label={`${openDetail}: ${t("invest.title")}`} />
+            </div>
+            <div className="brief-panel-body brief-print-block">
+              <ul className="space-y-3.5">
+                {sectors.map((s) => (
+                  <li key={s.sector}>
+                    <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
+                      <span className="text-[var(--brief-ink)]">{t(`invest.sector.${s.sector}`)}</span>
+                      <span className="tabular-nums text-[var(--brief-ink-muted)]">
+                        {t("invest.valueMln", { value: nf.format(s.valueMusd) })} ·{" "}
+                        {t("invest.projects", { count: s.projects })}
+                      </span>
                     </div>
-                    <div className="mono mt-0.5 flex items-baseline gap-1.5 text-[13.5px] font-semibold tabular text-[var(--color-ink)]">
-                      $19.0M
-                      <span className="mono text-[10px] text-[var(--color-pos)]">+19%</span>
+                    <div className="mt-1.5 h-[6px] w-full rounded-full bg-[var(--brief-surface-2)]">
+                      <div
+                        className="h-full rounded-full bg-[var(--brief-accent)]"
+                        style={{ width: `${Math.max(6, (s.valueMusd / maxSectorValue) * 100)}%` }}
+                      />
                     </div>
-                  </div>
-                  <div className="rounded-md bg-[var(--color-surface-2)] px-2.5 py-1.5">
-                    <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                      {t("cards.monthlyImportKpi")}
-                    </div>
-                    <div className="mono mt-0.5 flex items-baseline gap-1.5 text-[13.5px] font-semibold tabular text-[var(--color-ink)]">
-                      $7.1M
-                      <span className="mono text-[10px] text-[var(--color-pos)]">+21%</span>
-                    </div>
-                  </div>
+                  </li>
+                ))}
+              </ul>
+              {flagship ? (
+                <div className="mt-5 border-t border-[var(--brief-border)] pt-3.5">
+                  <div className="brief-eyebrow">{t("docs.title")}</div>
+                  <p className="mt-1.5 text-[13px] font-semibold leading-snug text-[var(--brief-ink)]">
+                    {t("docs.flagshipTitle")}
+                  </p>
+                  <p className="mt-0.5 text-[11.5px] text-[var(--brief-ink-muted)]">
+                    {t("docs.flagshipMeta", { date: df.format(parseDay(flagship.signedOn)) })}
+                  </p>
                 </div>
-              </CardBody>
-            </Card>
-
-            <Card tone="people">
-              <CardHeader
-                icon={<Users2 className="size-3.5" />}
-                tone="people"
-                title={t("cards.partnersTitle")}
-                sub={t("cards.partnersSub")}
-              />
-              <CardBody>
-                <CounterpartsRank />
-              </CardBody>
-            </Card>
+              ) : null}
+            </div>
           </div>
-        </div>
 
-        {/* RIGHT COLUMN */}
-        <div className="flex min-w-0 flex-col gap-4">
-          <Card tone="rose" variant="danger">
-            <CardHeader
-              icon={<AlertTriangle className="size-3.5" />}
-              tone="rose"
-              title={t("cards.riskTitle")}
-              sub={t("cards.riskSub")}
-            />
-            <CardBody>
-              <RiskRadar limit={6} />
-            </CardBody>
-          </Card>
+          <div className="brief-panel xl:col-span-4">
+            <div className="brief-panel-head">
+              <span className="brief-panel-title">{t("commitments.title")}</span>
+              <span className="flex items-center gap-3">
+                <DemoBadge variant="dot" />
+                <PanelLink href={`/${locale}/commitments`} label={`${openDetail}: ${t("commitments.title")}`} />
+              </span>
+            </div>
+            <div className="brief-panel-body">
+              <CommitmentsBar />
+              <AttentionList locale={locale} />
+            </div>
+          </div>
 
-          <Card tone="visits" variant="panelMuted">
-            <CardHeader
-              icon={<CalendarDays className="size-3.5" />}
-              tone="visits"
-              title={t("cards.horizonTitle")}
-              sub={t("cards.horizonSub")}
-            />
-            <CardBody>
-              <Horizon />
-            </CardBody>
-          </Card>
+          <div className="brief-panel xl:col-span-4">
+            <div className="brief-panel-head">
+              <span className="brief-panel-title">{t("agreementsChart.title")}</span>
+              <PanelLink href={`/${locale}/agreements`} label={`${openDetail}: ${t("agreementsChart.title")}`} />
+            </div>
+            <div className="brief-panel-body">
+              <BriefAgreementsDonut />
+            </div>
+          </div>
+        </section>
 
-          <Card tone="invest">
-            <CardHeader
-              icon={<Gift className="size-3.5" />}
-              tone="invest"
-              title={t("kpi.grants")}
-              sub={`$${grantsTotal.toFixed(2)}M · ${t("kpi.grantPrograms", { count: grants.length })}`}
-            />
-            <CardBody>
-              <GrantsDonut size={132} />
-            </CardBody>
-          </Card>
+        {/* Footer strip */}
+        <div className="brief-reveal brief-reveal-4 mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--brief-border)] pt-3">
+          <p className="text-[11px] text-[var(--brief-ink-faint)]">
+            {t("footer.sources", { count: sourcesMeta.total })} · {t("footer.methodologies")}
+          </p>
         </div>
       </div>
     </div>

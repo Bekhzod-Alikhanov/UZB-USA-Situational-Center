@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { attentionRows, intlLocale, parseDay } from "@/components/brief/brief-data";
+import { localizedCommitmentTitle } from "@/lib/i18n/overview-content";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 
 /**
@@ -24,7 +25,7 @@ export async function AttentionList({ locale }: { locale: string }) {
             />
             <div className="min-w-0">
               <p className="truncate text-[13.5px] leading-snug text-[var(--brief-ink)]">
-                {row.title} <DemoBadge className="ml-1 align-middle" />
+                {localizedCommitmentTitle(row.id, row.title, locale)} <DemoBadge variant="dot" className="ml-1" />
               </p>
               <p className="text-[11.5px] text-[var(--brief-ink-faint)]">
                 {row.status === "overdue" ? t("overdue") : t("watch")} ·{" "}

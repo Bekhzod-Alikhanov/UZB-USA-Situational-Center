@@ -980,38 +980,41 @@
   --brief-neg: #ff8f87;
 }
 
-.brief-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 40; /* above the shell topbar (z-30), below the cmd-K dialog (z-50) */
-  overflow-y: auto;
-  overscroll-behavior: contain;
+/* The brief is the site landing page: a bounded situational panel rendered
+   inside the normal shell (sidebar + topbar visible). `position: relative`
+   scopes the intro overlay; the border separates the panel from the light
+   shell background (in dark themes the surfaces nearly match and the border
+   reads as a hairline). Fullscreen presentation mode is the same element
+   promoted by the Fullscreen API. */
+.brief-stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--brief-border);
+  border-radius: 12px;
   background: var(--brief-void);
   color: var(--brief-ink);
   font-family: var(--font-sans);
 }
 /* Command-room depth on the dark surface: two restrained radial washes,
    no texture/noise. Light theme stays flat. */
-:root.dark .brief-overlay,
-:root.command .brief-overlay,
-:root.strategic .brief-overlay {
+:root.dark .brief-stage,
+:root.command .brief-stage,
+:root.strategic .brief-stage {
   background:
     radial-gradient(circle at 16% 0%, rgba(36, 87, 197, 0.2), transparent 36%),
     radial-gradient(circle at 86% 4%, rgba(14, 165, 183, 0.1), transparent 28%), var(--brief-void);
 }
-/* The locale shell (sidebar + topbar) stays mounted beneath the exhibition
-   overlay, but the overlay cannot out-stack the sticky topbar (z-30) from
-   inside main's z-[1] stacking context — no z-index inside main can win.
-   Hide the chrome for the duration instead; visibility also removes it from
-   the tab order and the accessibility tree. Reverses on navigation. */
-body:has(.brief-overlay) .command-sidebar,
-body:has(.brief-overlay) .command-topbar {
-  visibility: hidden;
+.brief-stage:fullscreen {
+  border: 0;
+  border-radius: 0;
+  overflow-y: auto;
 }
 .brief-frame {
+  padding: 0 clamp(14px, 1.6vw, 26px) 22px;
+}
+.brief-stage:fullscreen .brief-frame {
   margin: 0 auto;
   max-width: 1800px;
-  padding: 0 clamp(14px, 2vw, 32px) 28px;
 }
 .brief-eyebrow {
   font-size: 11px;
@@ -1191,13 +1194,16 @@ body:has(.brief-overlay) .command-topbar {
   opacity: 0.9;
 }
 
-/* --- one-time intro ------------------------------------------------------ */
+/* --- one-time intro ------------------------------------------------------
+   Absolute inside .brief-stage: covers the panel only, so the shell stays
+   visible while the ceremony plays. */
 .brief-intro {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 10;
   display: grid;
   place-items: center;
+  border-radius: inherit;
   background: var(--brief-void);
   animation: brief-intro-out 0.8s var(--ease-in-out) 2.5s both;
 }
@@ -1303,10 +1309,10 @@ html[data-brief-intro-done] .brief-reveal {
 }
 
 @media print {
-  /* A fixed scroll container prints exactly one clipped page — flatten it. */
-  .brief-overlay {
+  .brief-stage {
     position: static !important;
     overflow: visible !important;
+    border: 0 !important;
     background: #ffffff !important;
   }
   .brief-intro,

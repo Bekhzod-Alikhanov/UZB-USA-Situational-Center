@@ -4,6 +4,7 @@ const locales = ["en", "ru", "uz-latn"];
 const routes = [
   "",
   "brief",
+  "overview",
   "trade",
   "visits",
   "prepare",
@@ -32,12 +33,23 @@ test.describe("localized public routes", () => {
   }
 });
 
-test("overview includes executive and data-readiness layers", async ({ page }) => {
+test("landing page serves the executive brief inside the shell", async ({ page }) => {
   await page.goto("/en");
 
+  // Brief KPI band is server-rendered; the sidebar must stay visible now
+  // that the brief is an in-shell page rather than a fixed overlay.
+  await expect(page.getByText("Trade turnover", { exact: false }).first()).toBeVisible();
+  await expect(page.locator("aside").first()).toBeVisible();
+});
+
+test("overview keeps the working-dashboard layers behind progressive disclosure", async ({ page }) => {
+  await page.goto("/en/overview");
+
+  const summary = page.getByText("Situation read").first();
+  await expect(summary).toBeVisible();
+  await summary.click();
   await expect(page.getByText("Executive command center")).toBeVisible();
-  await expect(page.getByText("Relationship pillars").first()).toBeVisible();
-  await expect(page.getByText("Live data and database readiness")).toBeVisible();
+  await expect(page.getByText("Priority actions").first()).toBeVisible();
 });
 
 test("admin route redirects to login when unauthenticated", async ({ page }) => {

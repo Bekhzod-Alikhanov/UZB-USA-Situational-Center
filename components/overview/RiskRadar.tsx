@@ -124,12 +124,6 @@ function pickStr(locale: string): Strings {
   return STR.en;
 }
 
-const SEVERITY_TONE: Record<Severity, string> = {
-  critical: "border-[var(--color-neg)]/30 bg-[var(--color-neg-soft)] text-[var(--color-neg)]",
-  warn: "border-[var(--color-warn)]/30 bg-[var(--color-warn-soft)] text-[var(--color-warn)]",
-  watch: "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]",
-};
-
 const SEVERITY_RANK: Record<Severity, number> = { critical: 0, warn: 1, watch: 2 };
 
 const SOURCE_ICON: Record<RiskItem["source"], React.ComponentType<{ className?: string }>> = {
@@ -291,34 +285,41 @@ export function RiskRadar({ limit = 6 }: { limit?: number }) {
                 prefetch={false}
                 className="group flex items-start gap-3 rounded-md border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface)]"
               >
-                <Icon
-                  className={cn(
-                    "mt-0.5 size-4 shrink-0",
-                    it.severity === "critical"
-                      ? "text-[var(--color-neg)]"
-                      : it.severity === "warn"
-                        ? "text-[var(--color-warn)]"
-                        : "text-[var(--color-primary)]",
-                  )}
-                />
+                {/* Icon already encodes the source and color encodes severity —
+                    the former per-row text chips live on as tooltips
+                    (bureaucracy-reduction pass; summary count pills above keep
+                    the explicit wording). */}
+                <span title={SOURCE_LABEL[it.source]} className="mt-0.5 shrink-0">
+                  <Icon
+                    className={cn(
+                      "size-4",
+                      it.severity === "critical"
+                        ? "text-[var(--color-neg)]"
+                        : it.severity === "warn"
+                          ? "text-[var(--color-warn)]"
+                          : "text-[var(--color-primary)]",
+                    )}
+                  />
+                  <span className="sr-only">{SOURCE_LABEL[it.source]}</span>
+                </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-2">
                     <span className="truncate text-[12.5px] font-medium text-[var(--color-ink)]">{it.title}</span>
                   </div>
-                  <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-[10.5px] text-[var(--color-ink-muted)]">
-                    <span className="rounded bg-[var(--color-surface)] px-1.5 py-0.5 uppercase tracking-wider text-[var(--color-ink-faint)]">
-                      {SOURCE_LABEL[it.source]}
-                    </span>
-                    <span className="truncate">{it.context}</span>
-                  </div>
+                  <div className="mt-0.5 truncate text-[10.5px] text-[var(--color-ink-muted)]">{it.context}</div>
                 </div>
                 <span
+                  title={SEVERITY_LABEL[it.severity]}
                   className={cn(
-                    "shrink-0 rounded-full border px-1.5 py-0.5 text-[9.5px] font-medium uppercase tracking-wider",
-                    SEVERITY_TONE[it.severity],
+                    "mt-1.5 inline-block size-2 shrink-0 rounded-full",
+                    it.severity === "critical"
+                      ? "bg-[var(--color-neg)]"
+                      : it.severity === "warn"
+                        ? "bg-[var(--color-warn)]"
+                        : "bg-[var(--color-primary)]",
                   )}
                 >
-                  {SEVERITY_LABEL[it.severity]}
+                  <span className="sr-only">{SEVERITY_LABEL[it.severity]}</span>
                 </span>
                 <ArrowRight className="mt-0.5 size-3.5 shrink-0 text-[var(--color-ink-faint)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-ink-muted)]" />
               </Link>
