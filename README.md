@@ -121,8 +121,9 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 ## Routes (14 public sidebar sections × 3 locales + /brief videowall + admin/login)
 
 ```
-/[locale]/                       Overview (KPIs + trade flow + risk radar + horizon)
-/[locale]/brief                  Situational videowall (direct URL, not in the sidebar)
+/[locale]/                       Executive brief — landing page (in-shell panel, fullscreen mode)
+/[locale]/overview               Working dashboard (trade editorial, sectors, risk radar, horizon)
+/[locale]/brief                  permanentRedirect → / (bookmarks)
 /[locale]/trade                  UZ Stat ↔ U.S. Census dual-methodology view
 /[locale]/visits                 Timeline · grid · table · events-calendar tab
 /[locale]/prepare                Visit pipeline · plan-vs-actual outcomes · roadmaps

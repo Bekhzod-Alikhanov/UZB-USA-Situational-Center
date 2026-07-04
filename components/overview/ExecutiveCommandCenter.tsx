@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ComponentType } from "react";
-import { AlertTriangle, ArrowRight, CheckCircle2, Clock3, ShieldCheck, Sparkles } from "lucide-react";
+import { AlertTriangle, ArrowRight, CheckCircle2, ChevronDown, Clock3, ShieldCheck, Sparkles } from "lucide-react";
 import { buildExecutiveBriefing, type ExecutiveItem, type ExecutiveItemTone } from "@/data/executive";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
@@ -30,6 +30,8 @@ const UI = {
     opportunities: "Opportunities to exploit",
     changes: "Latest changes",
     open: "Open",
+    expand: "Expand the full readout",
+    risksLink: "Risks are aggregated in the risk radar below",
     metricLabels: {
       "Priority actions": "Priority actions",
       Overdue: "Overdue",
@@ -50,6 +52,8 @@ const UI = {
     opportunities: "Возможности для реализации",
     changes: "Последние изменения",
     open: "Открыть",
+    expand: "Развернуть полную сводку",
+    risksLink: "Риски собраны в риск-радаре ниже",
     metricLabels: {
       "Priority actions": "Приоритетные действия",
       Overdue: "Просрочено",
@@ -70,6 +74,8 @@ const UI = {
     opportunities: "Amalga oshiriladigan imkoniyatlar",
     changes: "So'nggi o'zgarishlar",
     open: "Ochish",
+    expand: "To'liq svodkani ochish",
+    risksLink: "Xatarlar quyidagi xatar radarida jamlangan",
     metricLabels: {
       "Priority actions": "Ustuvor harakatlar",
       Overdue: "Muddati o'tgan",
@@ -89,65 +95,121 @@ function pickUi(locale: string) {
   return UI.en;
 }
 
+/**
+ * Slimmed in the brief-home pass: the 550px readout collapsed behind a
+ * native <details> — the closed state is a one-line situation summary with
+ * four counters (progressive disclosure; no data is lost, it is one click
+ * away). The risks list moved out of the expanded body entirely: it
+ * duplicated the RiskRadar rendered on the same page, so a jump link
+ * replaces it.
+ */
 export function ExecutiveCommandCenter({ locale }: { locale: string }) {
   const briefing = buildExecutiveBriefing(locale);
   const ui = pickUi(locale);
 
+  const summaryCounters = [
+    ...briefing.metrics.slice(0, 3),
+    { label: ui.opportunities, value: String(briefing.opportunities.length), tone: "positive" as const },
+  ];
+
   return (
     <Card tone="primary" className="overflow-hidden">
-      <CardHeader
-        tone="primary"
-        icon={<Sparkles className="size-3.5" />}
-        title={ui.title}
-        sub={ui.sub(briefing.asOf)}
-      />
-      <CardBody>
-        <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.25fr_0.95fr]">
-          <div className="flex flex-col gap-4">
-            <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4">
-              <div className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
-                {ui.situation}
-              </div>
-              <h2 className="serif mt-1 text-[20px] font-medium leading-tight text-[var(--color-ink)]">
-                {briefing.headline}
-              </h2>
-              <p className="mt-2 max-w-4xl text-[13px] leading-relaxed text-[var(--color-ink-muted)]">
-                {briefing.readout}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-              {briefing.metrics.map((metric) => (
-                <div key={metric.label} className={cn("rounded-md border px-3 py-2", TONE_CLASS[metric.tone])}>
-                  <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
+      <details className="group">
+        <summary
+          className="cursor-pointer list-none px-4 py-3 transition hover:bg-[var(--color-surface-2)] [&::-webkit-details-marker]:hidden"
+          title={ui.expand}
+        >
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span className="inline-flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+              <Sparkles className="size-3.5 text-[var(--color-primary)]" />
+              {ui.situation}
+            </span>
+            <span className="serif min-w-0 flex-1 truncate text-[15px] font-medium text-[var(--color-ink)]">
+              {briefing.headline}
+            </span>
+            <span className="flex items-center gap-2">
+              {summaryCounters.map((metric) => (
+                <span
+                  key={metric.label}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10.5px] font-semibold",
+                    TONE_CLASS[metric.tone],
+                  )}
+                  title={ui.metricLabels[metric.label as keyof typeof ui.metricLabels] ?? metric.label}
+                >
+                  <span className="mono tabular">{metric.value}</span>
+                  <span className="hidden max-w-[110px] truncate font-medium normal-case tracking-normal lg:inline">
                     {ui.metricLabels[metric.label as keyof typeof ui.metricLabels] ?? metric.label}
-                  </div>
-                  <div className="mono mt-1 text-[18px] font-semibold tabular">{metric.value}</div>
-                </div>
+                  </span>
+                </span>
               ))}
+              <ChevronDown className="size-4 text-[var(--color-ink-faint)] transition group-open:rotate-180" />
+            </span>
+          </div>
+        </summary>
+
+        <div className="border-t border-[var(--color-border)]">
+          <CardHeader
+            tone="primary"
+            icon={<Sparkles className="size-3.5" />}
+            title={ui.title}
+            sub={ui.sub(briefing.asOf)}
+          />
+          <CardBody>
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.25fr_0.95fr]">
+              <div className="flex flex-col gap-4">
+                <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4">
+                  <div className="text-[10.5px] font-semibold uppercase tracking-wider text-[var(--color-ink-faint)]">
+                    {ui.situation}
+                  </div>
+                  <h2 className="serif mt-1 text-[20px] font-medium leading-tight text-[var(--color-ink)]">
+                    {briefing.headline}
+                  </h2>
+                  <p className="mt-2 max-w-4xl text-[13px] leading-relaxed text-[var(--color-ink-muted)]">
+                    {briefing.readout}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                  {briefing.metrics.map((metric) => (
+                    <div key={metric.label} className={cn("rounded-md border px-3 py-2", TONE_CLASS[metric.tone])}>
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-ink)]">
+                        {ui.metricLabels[metric.label as keyof typeof ui.metricLabels] ?? metric.label}
+                      </div>
+                      <div className="mono mt-1 text-[18px] font-semibold tabular">{metric.value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <BriefingList
+                  title={ui.priorityActions}
+                  items={briefing.priorityActions}
+                  locale={locale}
+                  openLabel={ui.open}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                <a
+                  href="#risk-radar"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-[12.5px] font-medium text-[var(--color-ink-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-ink)]"
+                >
+                  {ui.risksLink}
+                  <ArrowRight className="size-3.5 shrink-0" />
+                </a>
+                <BriefingList
+                  title={ui.opportunities}
+                  items={briefing.opportunities}
+                  locale={locale}
+                  compact
+                  openLabel={ui.open}
+                />
+                <BriefingList title={ui.changes} items={briefing.changes} locale={locale} compact openLabel={ui.open} />
+              </div>
             </div>
-
-            <BriefingList
-              title={ui.priorityActions}
-              items={briefing.priorityActions}
-              locale={locale}
-              openLabel={ui.open}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 gap-4">
-            <BriefingList title={ui.risks} items={briefing.risks} locale={locale} compact openLabel={ui.open} />
-            <BriefingList
-              title={ui.opportunities}
-              items={briefing.opportunities}
-              locale={locale}
-              compact
-              openLabel={ui.open}
-            />
-            <BriefingList title={ui.changes} items={briefing.changes} locale={locale} compact openLabel={ui.open} />
-          </div>
+          </CardBody>
         </div>
-      </CardBody>
+      </details>
     </Card>
   );
 }

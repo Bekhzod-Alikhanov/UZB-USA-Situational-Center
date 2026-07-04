@@ -1,8 +1,10 @@
 const baseUrl = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, "");
 const locales = ["en", "ru", "uz-latn"];
+// "/brief" is intentionally absent: it is a permanentRedirect stub to "/"
+// (this fetch does not follow redirects); the e2e suite covers the redirect.
 const routes = [
   "",
-  "brief",
+  "overview",
   "trade",
   "visits",
   "prepare",

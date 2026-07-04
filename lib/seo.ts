@@ -17,8 +17,8 @@ function routeFor(locale: Locale, path = "") {
 }
 
 export const SEO_ROUTES = {
-  overview: "",
-  brief: "/brief",
+  brief: "",
+  overview: "/overview",
   trade: "/trade",
   investments: "/investments",
   map: "/map",

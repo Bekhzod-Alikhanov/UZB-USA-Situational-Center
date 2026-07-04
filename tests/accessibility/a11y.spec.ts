@@ -2,8 +2,8 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const pages = [
-  { path: "/en", name: "overview" },
-  { path: "/en/brief", name: "brief" },
+  { path: "/en", name: "brief home" },
+  { path: "/en/overview", name: "overview" },
   { path: "/en/trade", name: "trade" },
   { path: "/en/benchmark", name: "benchmark" },
   { path: "/en/admin/login", name: "admin login" },

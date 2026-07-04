@@ -6,7 +6,7 @@ import fs from "node:fs";
 
 const routes = [
   "",
-  "brief",
+  "overview",
   "trade",
   "visits",
   "commitments",

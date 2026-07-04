@@ -6,7 +6,9 @@
     },
     "header": {
       "title": "Uzbekistan — United States",
-      "sub": "Situational screen"
+      "sub": "Situational screen",
+      "fullscreen": "Enter presentation mode (fullscreen)",
+      "exitFullscreen": "Exit fullscreen"
     },
     "clocks": {
       "tashkent": "Tashkent",
@@ -126,7 +128,8 @@
       "sources": "{count, plural, one {# official source} other {# official sources}}",
       "print": "Export PDF",
       "methodologies": "UZ national statistics · U.S. Census Bureau · MFA registry"
-    }
+    },
+    "openDetail": "Open section"
   },
   "brand": {
     "title": "Uzbekistan – USA",
@@ -147,7 +150,8 @@
     "benchmark": "Regional benchmark",
     "contacts": "Contacts",
     "news": "Strategic signals",
-    "admin": "Admin"
+    "admin": "Admin",
+    "brief": "Brief"
   },
   "navGroups": {
     "executive": "Executive brief",
