@@ -14,8 +14,8 @@ const LOG: Entry[] = [
     id: "l-1",
     ts: "2026-04-20 14:12",
     actor: "b.umurzakov",
-    action: "updated commitment status",
-    entity: "cm-03 → in-progress 60%",
+    action: "updated roadmap step state",
+    entity: "smq-01-s2 → in-progress",
     tone: "info",
   },
   {
@@ -23,7 +23,7 @@ const LOG: Entry[] = [
     ts: "2026-04-20 12:45",
     actor: "system",
     action: "imported CSV",
-    entity: "data/commitments (32 rows)",
+    entity: "data/roadmaps (61 projects)",
     tone: "ok",
   },
   {

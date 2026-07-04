@@ -41,7 +41,7 @@
 
 ## What's inside
 
-- **20 trilingual routes** (English, Russian, Uzbek-Latin) — executive brief, trade, investments, visits, agreements, commitments, grants, sectors, sanctions and export-control compliance, counterparts, regional benchmark, events calendar, contacts directory, staff KPI, strategic news signals, visit-preparation workspace, and an interactive U.S. states map.
+- **Trilingual monitoring routes** (English, Russian, Uzbek-Latin) — executive brief, trade, investments, visits, agreements, regional roadmap execution (61 real projects from the signed Samarkand and Khorezm hokimiyat roadmaps), grants, sanctions and export-control compliance, regional benchmark, contacts directory, a password-gated visit-preparation workspace, and an interactive U.S. states map.
 - **38,500+ lines of hand-written TypeScript** across 99 React components, 42 source-of-truth data modules, 10 API routes, and 25 server-side library modules — all on Node.js 24 LTS + Next.js 16.2 (App Router · Turbopack · React 19). Counting the trilingual i18n catalogs (~3,600 lines), design-token CSS, build/validation scripts, and the PostgreSQL schema, the codebase is **≈ 44,000 hand-written lines** of code and content. Generated artifacts (the pnpm lockfile, Draw.io diagram XML) are excluded.
 - **69 data integrations**: 1 operational PostgreSQL database (Supabase, 12-table schema with audit trail and review queue), 5 live API connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov), and 63 cited primary sources from ~30 organisations (USTR, DFC, USAID, U.S. State Department, White House, UN Comtrade, OECD, ITC Trade Map, Open Doors / IIE, gov.uz, lex.uz, CBU, AUCC, US-UZ Council, and others).
 - **Governed live-data layer** — daily Vercel cron at 07:00 UTC ingests fresh figures into a `raw_snapshot → normalized_observation → published_metric` pipeline; a no-downgrade policy keeps published metrics intact while reviewers approve revisions.
@@ -118,7 +118,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 
 > **Cache note:** running `pnpm build` while `pnpm dev` is alive will clobber the Turbopack cache and cause "missing required error components" errors in the running dev server. Stop dev before running build, or use `pnpm typecheck` for fast verification during development.
 
-## Routes (14 public sidebar sections × 3 locales + /brief videowall + admin/login)
+## Routes (13 public sidebar sections × 3 locales + redirect stubs + admin/login)
 
 ```
 /[locale]/                       Executive brief — landing page (in-shell panel, fullscreen mode)
@@ -126,8 +126,9 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 /[locale]/brief                  permanentRedirect → / (bookmarks)
 /[locale]/trade                  UZ Stat ↔ U.S. Census dual-methodology view
 /[locale]/visits                 Timeline · grid · table · events-calendar tab
-/[locale]/prepare                Visit pipeline · plan-vs-actual outcomes · roadmaps
-/[locale]/commitments            TanStack Table · URL-synced status filter
+/[locale]/prepare                Visit dossiers: delegation · day program · materials (PASSWORD-GATED)
+/[locale]/roadmaps               Regional roadmap monitor — 61 projects (Samarkand 48 + Khorezm 13)
+/[locale]/commitments            permanentRedirect → /roadmaps (bookmarks)
 /[locale]/agreements             Timeline + sphere/year filters
 /[locale]/map                    Maplibre 3-layer + 3D globe toggle
 /[locale]/admin                  Settings, registry viewer, audit log (gated)
@@ -136,7 +137,6 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 /[locale]/grants                 7 UZ-side grant rows + 4 U.S.-side program records + ForeignAssistance.gov obligations
 /[locale]/contacts               Org directory · Council roster · key U.S. figures grid
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
-/[locale]/news                   Curated press feed (16 verified entries)
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
 ```
 

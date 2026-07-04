@@ -26,8 +26,8 @@
       "documentsSub": "{invest} ta investitsiya bitimi",
       "visits": "Tashriflar · 2025–2026",
       "visitsSub": "AQSHdan {incoming} ta tashrif",
-      "commitments": "Nazoratdagi topshiriqlar",
-      "commitmentsSub": "o‘rtacha bajarilish {avg}%"
+      "roadmaps": "Yo'l xaritasi loyihalari",
+      "roadmapsSub": "${value} mlrd e'lon qilingan · {done}% vazifa bajarilgan"
     },
     "trade": {
       "title": "Savdo dinamikasi",
@@ -67,10 +67,9 @@
     "visit": {
       "title": "Yaqin tashrif",
       "countDays": "kun qoldi",
-      "countDelegation": "delegatsiya guruhlari",
-      "countProgram": "dastur bloklari",
-      "countChecklist": "nazorat ro‘yxati",
-      "readinessAria": "Tashrifga tayyorgarlik darajasi: {pct}%"
+      "countDelegation": "delegatsiya",
+      "countMeetings": "uchrashuvlar",
+      "countMaterials": "materiallar"
     },
     "horizon": {
       "title": "30 kunlik gorizont",
@@ -98,20 +97,12 @@
       "flagshipTitle": "AQSH DFC bilan qo‘shma investitsiya platformasi",
       "flagshipMeta": "Asosiy shartlar {date} da imzolangan · joriy etilmoqda"
     },
-    "commitments": {
-      "title": "Topshiriqlar ijrosi",
-      "done": "Bajarildi",
-      "inProgress": "Jarayonda",
-      "overdue": "Muddati o‘tgan",
-      "completion": "{total} ta topshiriq bo‘yicha o‘rtacha",
-      "scaleAria": "Topshiriqlar: {done} bajarildi, {inMotion} jarayonda, {overdue} muddati o‘tgan",
-      "watchNote": "{watch, plural, other {# ta topshiriq alohida nazoratda}}"
-    },
     "attention": {
-      "title": "E’tibor talab qiladi",
-      "overdue": "Muddati o‘tgan",
-      "watch": "Nazoratda",
-      "due": "muddat: {date}"
+      "title": "E'tibor talab qiladi",
+      "overdue": "Muddati o'tgan",
+      "dueSoon": "Muddat yaqin",
+      "due": "muddat — {date}",
+      "allGreen": "Yo'l xaritasi vazifalarining barchasi yashil zonada."
     },
     "agreementsChart": {
       "title": "Huquqiy baza tuzilmasi",
@@ -129,7 +120,16 @@
       "print": "PDF eksport",
       "methodologies": "O‘z milliy statistikasi · U.S. Census Bureau · TIV reestri"
     },
-    "openDetail": "Bo'limni ochish"
+    "openDetail": "Bo'limni ochish",
+    "execution": {
+      "title": "Yo'l xaritalari ijrosi",
+      "done": "Bajarildi",
+      "inMotion": "Jarayonda",
+      "overdue": "Muddati o'tgan",
+      "completion": "yo'l xaritalaridagi {total} vazifadan bajarildi",
+      "scaleAria": "Yo'l xaritasi vazifalari: {done} bajarilgan, {inMotion} jarayonda, {overdue} muddati o'tgan",
+      "dueSoonNote": "{count, plural, one {# vazifa muddati 30 kun ichida} other {# vazifa muddati 30 kun ichida}}"
+    }
   },
   "brand": {
     "title": "O‘zbekiston – AQSh",
@@ -142,16 +142,15 @@
     "investments": "Investitsiyalar",
     "visits": "Tashriflar va delegatsiyalar",
     "prepare": "Tashrifga tayyorgarlik",
-    "commitments": "Kelishuvlar reestri",
     "agreements": "Ikki tomonlama bitimlar",
     "grants": "Grantlar",
     "map": "Interaktiv xarita",
     "compliance": "AQSh kompliyans",
     "benchmark": "Mintaqaviy taqqoslash",
     "contacts": "Kontaktlar",
-    "news": "Yangiliklar tasmasi",
     "admin": "Boshqaruv",
-    "brief": "Brifing"
+    "brief": "Brifing",
+    "roadmaps": "Yo'l xaritalari"
   },
   "navGroups": {
     "executive": "Ijro brifi",
@@ -217,7 +216,7 @@
     "routes": {
       "brief": {
         "title": "Strategik sharh",
-        "description": "O‘zbekiston — AQSH munosabatlari bo‘yicha ko‘rgazmali ekran: savdo, tasdiqlangan investitsiyalar, topshiriqlar ijrosi, delegatsiyalar va 30 kunlik gorizont."
+        "description": "O‘zbekiston — AQSH munosabatlari bo‘yicha ko‘rgazmali ekran: savdo, tasdiqlangan investitsiyalar, yo'l xaritalari ijrosi, delegatsiyalar va 30 kunlik gorizont."
       },
       "overview": {
         "title": "O'zbekiston-AQSh iqtisodiy-intellekt platformasi",
@@ -247,10 +246,6 @@
         "title": "Ikki tomonlama bitimlar",
         "description": "O'zbekiston-AQSh bitimlari reestri va tahlili: huquqiy tayanchlar, toifalar, manba holati va xronologiya."
       },
-      "commitments": {
-        "title": "Harakatlar va topshiriqlar",
-        "description": "Tashriflar, bitimlar, mas'ullar, status va keyingi harakat xatari bilan bog'langan operatsion topshiriqlar reestri."
-      },
       "compliance": {
         "title": "AQSh kompliyans",
         "description": "Sanksiyalar, eksport nazorati, tariflar, FATF konteksti va AQSh bozoriga chiqish tekshiruvlari bo'yicha manbali ma'lumotnoma."
@@ -258,10 +253,6 @@
       "grants": {
         "title": "Grantlar va yordam",
         "description": "Ichki grant reestri va U.S. foreign assistance yozuvlari: manbalar ajratilishi, metodologiya va solishtirish izohlari."
-      },
-      "news": {
-        "title": "Strategik signallar",
-        "description": "Diplomatiya, savdo, investitsiya, minerallar, xavfsizlik va iqtisodiyot bo'yicha filtrlanuvchi yangiliklar va siyosiy signallar."
       },
       "contacts": {
         "title": "Kontaktlar ma'lumotnomasi",
@@ -274,6 +265,10 @@
       "adminLogin": {
         "title": "Administrator kirishi",
         "description": "Ichki operatsiyalar va platforma boshqaruvi uchun himoyalangan administrator kirishi."
+      },
+      "roadmaps": {
+        "title": "Hududlar yo'l xaritalari",
+        "description": "Samarqand va Xorazm imzolangan yo'l xaritalari ijro monitori: 61 loyiha, hujjat muddatlari, mas'ullar, avtomatik holat."
       }
     }
   },
@@ -515,17 +510,42 @@
     }
   },
   "prepare": {
-    "title": "Tashrifga tayyorgarlik",
-    "subtitle": "Workflow · chek-listlar · optimallashtirish"
-  },
-  "commitments": {
-    "title": "Kelishuvlar reestri",
-    "subtitle": "Sammit, uchrashuv va MoU bo‘yicha barcha majburiyatlar monitoringi",
-    "statuses": {
-      "done": "Bajarildi",
-      "progress": "Bajarilmoqda",
-      "watch": "Nazoratda",
-      "overdue": "Muddati o‘tgan"
+    "title": "Tashriflarga tayyorgarlik",
+    "subtitle": "Kim, qachon, qayerga va qanday maqsadda boradi — hamda hokimlik materiallar paketi",
+    "gatedNote": "Yopiq bo'lim",
+    "upcomingTitle": "Kutilayotgan va joriy tashriflar",
+    "completedTitle": "Yakunlangan tashriflar",
+    "noUpcoming": "Kutilayotgan tashriflar ro'yxatga olinmagan.",
+    "outcomesTitle": "Yakunlar · reja va fakt",
+    "outcomesSub": "{count} tasdiqlangan yoki kutilayotgan solishtiruv — har bir tashrif bo'yicha siklni yakunlaydi",
+    "card": {
+      "direction": {
+        "uzToUsa": "O'z → AQSh",
+        "usaToUz": "AQSh → O'z"
+      },
+      "status": {
+        "planning": "Rejalashtirilmoqda",
+        "confirmed": "Tasdiqlangan",
+        "in-progress": "Davom etmoqda",
+        "completed": "Yakunlangan"
+      },
+      "delegation": "Delegatsiya",
+      "program": "Kunlar bo'yicha dastur",
+      "materials": "Materiallar",
+      "emptyDelegation": "Tarkib hali taqdim etilmagan.",
+      "emptyProgram": "Dastur hali taqdim etilmagan.",
+      "emptyMaterials": "Materiallar ro'yxatga olinmagan.",
+      "materialType": {
+        "presentation": "Taqdimot",
+        "speech": "Nutq",
+        "agenda": "Kun tartibi",
+        "briefing": "Ma'lumotnoma",
+        "other": "Hujjat"
+      },
+      "materialReceived": "qabul qilingan",
+      "materialExpected": "kutilmoqda",
+      "fileOnRequest": "fayl — Markazdan so'rov bo'yicha",
+      "openMaterial": "havolani ochish"
     }
   },
   "agreements": {
@@ -912,43 +932,6 @@
       "disclaimer": "Illyustrativ kalkulyator. Haqiqiy litsenziyalash BIS / DDTC / OFAC tomonidan belgilanadi � yuristga murojaat qiling."
     }
   },
-  "news": {
-    "title": "Yangiliklar tasmasi",
-    "subtitle": "Teglangan tasma, qo‘lda tonallik baholash",
-    "filters": {
-      "all": "Barchasi",
-      "positive": "Ijobiy",
-      "neutral": "Neytral",
-      "critical": "Tanqidiy"
-    },
-    "read": "Manbani o‘qish",
-    "stats": {
-      "positive": "Ijobiy",
-      "neutral": "Neytral",
-      "critical": "Tanqidiy",
-      "total": "Jami"
-    },
-    "feed": {
-      "tonalityAria": "Tonallik bo'yicha filter",
-      "tagLabel": "Teg",
-      "tagAria": "Teg bo'yicha filter",
-      "searchAria": "Sarlavha yoki xulosa bo'yicha qidirish",
-      "searchPlaceholder": "Sarlavha yoki xulosa bo'yicha qidirish",
-      "apply": "Qo'llash",
-      "empty": "Joriy filtrlarga mos yangilik topilmadi.",
-      "tags": {
-        "all": "Barcha teglar",
-        "presidential": "Prezident",
-        "trade": "Savdo",
-        "investment": "Investitsiya",
-        "minerals": "Minerallar",
-        "security": "Xavfsizlik",
-        "diplomatic": "Diplomatiya",
-        "culture": "Madaniyat",
-        "economy": "Iqtisodiyot"
-      }
-    }
-  },
   "map": {
     "title": "Interaktiv xarita",
     "subtitle": "Investitsiyalar, savdo oqimlari, jonli delegatsiyalar",
@@ -1084,5 +1067,53 @@
       "ago": "{days} kun oldin"
     },
     "linkedVisit": "Bog‘langan tashrif"
+  },
+  "roadmaps": {
+    "title": "Hududlar yo'l xaritalari",
+    "subtitle": "Hokimliklar imzolagan yo'l xaritalari ijro monitori: Samarqand va Xorazmning AQShga missiyalari, 2026-yil may",
+    "region": {
+      "visitNote": "AQShga tashrif yakunlari bo'yicha, {dates}",
+      "projects": "Loyihalar",
+      "bln": "mlrd",
+      "declaredValue": "E'lon qilingan summa",
+      "stepsDone": "Bajarilgan vazifalar",
+      "nextMilestone": "Yaqin bosqich — {month}"
+    },
+    "health": {
+      "onTrack": "Grafikda",
+      "attention": "E'tibor",
+      "offTrack": "Muddat buzilgan"
+    },
+    "filters": {
+      "all": "Ikkala viloyat",
+      "samarkand": "Samarqand",
+      "khorezm": "Xorazm",
+      "searchPlaceholder": "Qidiruv: loyiha, tashabbuskor…",
+      "searchLabel": "Yo'l xaritasi loyihalari bo'yicha qidiruv"
+    },
+    "list": {
+      "showing": "{count, plural, one {# loyiha} other {# loyiha}} ko'rsatildi",
+      "mln": "mln",
+      "steps": "vazifalar {done}/{total}",
+      "due": "muddat — {month}",
+      "note": "Izoh",
+      "empty": "Filtrga mos loyiha topilmadi."
+    },
+    "projectHealth": {
+      "done": "Bajarilgan",
+      "on-track": "Grafikda",
+      "attention": "Muddat yaqin",
+      "off-track": "Muddati o'tgan vazifalar"
+    },
+    "stepHealth": {
+      "done": "Bajarildi",
+      "on-track": "Grafikda",
+      "due-soon": "Muddat yaqin",
+      "overdue": "Muddati o'tgan"
+    },
+    "explorer": {
+      "title": "Loyihalar va vazifalar",
+      "sub": "Ikkita imzolangan yo'l xaritasidan {count} loyiha · ijro belgilari Markaz va hokimliklar tomonidan kiritiladi"
+    }
   }
 }

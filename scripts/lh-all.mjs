@@ -9,14 +9,13 @@ const routes = [
   "overview",
   "trade",
   "visits",
-  "commitments",
+  "roadmaps",
   "agreements",
   "map",
   "investments",
   "grants",
   "contacts",
   "compliance",
-  "news",
   "benchmark",
 ];
 

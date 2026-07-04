@@ -7,15 +7,9 @@ import { tradeAnnualUz } from "@/data/trade";
 import { investmentCredibilitySummary } from "@/data/investments";
 import { agreements, agreementsAggregate } from "@/data/agreements";
 import { visits } from "@/data/visits";
-import { commitments } from "@/data/commitments";
+import { roadmapProjects, roadmapDonePct, regionRoadmaps } from "@/data/roadmaps";
 import { sourcesMeta } from "@/data/sources";
-import {
-  yoyPct,
-  investmentHighlights,
-  commitmentsAvgProgress,
-  intlLocale,
-  parseDay,
-} from "@/components/brief/brief-data";
+import { yoyPct, investmentHighlights, intlLocale, parseDay } from "@/components/brief/brief-data";
 import { briefVoice } from "@/components/brief/fonts";
 import { BriefIntro } from "@/components/brief/BriefIntro";
 import { BriefNumber } from "@/components/brief/BriefNumber";
@@ -25,13 +19,12 @@ import { BriefAgreementsDonut } from "@/components/brief/BriefAgreementsDonut";
 import { VisitPanel } from "@/components/brief/VisitPanel";
 import { Sparkline } from "@/components/brief/Sparkline";
 import { StatTile } from "@/components/brief/StatTile";
-import { CommitmentsBar } from "@/components/brief/CommitmentsBar";
+import { RoadmapExecutionBar } from "@/components/brief/RoadmapExecutionBar";
 import { AttentionList } from "@/components/brief/AttentionList";
 import { GlobeSection } from "@/components/brief/GlobeSection";
 import { UpdatedAt } from "@/components/brief/UpdatedAt";
 import { FullscreenButton } from "@/components/brief/FullscreenButton";
 import { PrintButton } from "@/components/exports/PrintButton";
-import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -71,7 +64,8 @@ export default async function BriefHomePage({ params }: { params: Promise<{ loca
   const pending = investmentCredibilitySummary.pending;
   const sectors = investmentHighlights(3);
   const maxSectorValue = sectors[0]?.valueMusd ?? 1;
-  const avgProgress = commitmentsAvgProgress();
+  const roadmapValueMusd = regionRoadmaps.reduce((sum, r) => sum + r.totalValueMusd, 0);
+  const roadmapPct = roadmapDonePct();
   const incoming = visits.filter((v) => v.direction === "us-uz").length;
   const flagship = agreements.find((a) => a.id === "a-2026-dfc-framework");
 
@@ -180,16 +174,12 @@ export default async function BriefHomePage({ params }: { params: Promise<{ loca
             <BriefNumber value={visits.length} />
           </StatTile>
           <StatTile
-            label={t("kpi.commitments")}
+            label={t("kpi.roadmaps")}
             accent="var(--brief-warn)"
-            href={`/${locale}/commitments`}
-            sub={
-              <>
-                {t("kpi.commitmentsSub", { avg: avgProgress })} <DemoBadge variant="dot" className="align-middle" />
-              </>
-            }
+            href={`/${locale}/roadmaps`}
+            sub={t("kpi.roadmapsSub", { value: nf.format(roadmapValueMusd / 1000), done: roadmapPct })}
           >
-            <BriefNumber value={commitments.length} />
+            <BriefNumber value={roadmapProjects.length} />
           </StatTile>
         </section>
 
@@ -232,7 +222,7 @@ export default async function BriefHomePage({ params }: { params: Promise<{ loca
           <div className="brief-panel xl:col-span-3">
             <div className="brief-panel-head">
               <span className="brief-panel-title">{t("visit.title")}</span>
-              <PanelLink href={`/${locale}/prepare`} label={`${openDetail}: ${t("visit.title")}`} />
+              <PanelLink href={`/${locale}/visits`} label={`${openDetail}: ${t("visit.title")}`} />
             </div>
             <div className="brief-panel-body">
               <VisitPanel />
@@ -283,15 +273,12 @@ export default async function BriefHomePage({ params }: { params: Promise<{ loca
 
           <div className="brief-panel xl:col-span-4">
             <div className="brief-panel-head">
-              <span className="brief-panel-title">{t("commitments.title")}</span>
-              <span className="flex items-center gap-3">
-                <DemoBadge variant="dot" />
-                <PanelLink href={`/${locale}/commitments`} label={`${openDetail}: ${t("commitments.title")}`} />
-              </span>
+              <span className="brief-panel-title">{t("execution.title")}</span>
+              <PanelLink href={`/${locale}/roadmaps`} label={`${openDetail}: ${t("execution.title")}`} />
             </div>
             <div className="brief-panel-body">
-              <CommitmentsBar />
-              <AttentionList locale={locale} />
+              <RoadmapExecutionBar />
+              <AttentionList />
             </div>
           </div>
 

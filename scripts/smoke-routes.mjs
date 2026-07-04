@@ -1,21 +1,21 @@
 const baseUrl = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, "");
 const locales = ["en", "ru", "uz-latn"];
-// "/brief" is intentionally absent: it is a permanentRedirect stub to "/"
-// (this fetch does not follow redirects); the e2e suite covers the redirect.
+// "/brief" and "/commitments" are intentionally absent: they are
+// permanentRedirect stubs (this fetch does not follow redirects); the e2e
+// suite covers both redirects. "/prepare" is password-gated and checked as a
+// redirect below, next to /admin.
 const routes = [
   "",
   "overview",
   "trade",
   "visits",
-  "prepare",
-  "commitments",
+  "roadmaps",
   "agreements",
   "map",
   "investments",
   "grants",
   "contacts",
   "compliance",
-  "news",
   "benchmark",
   "admin/login",
 ];
@@ -34,6 +34,7 @@ for (const locale of locales) {
     await checkGet(`/${locale}${route ? `/${route}` : ""}`);
   }
   await checkGet(`/${locale}/admin`, [302, 303, 307, 308]);
+  await checkGet(`/${locale}/prepare`, [302, 303, 307, 308]);
 }
 
 const liveHealth = await fetch(`${baseUrl}/api/live-data/health`, { redirect: "manual" });

@@ -86,7 +86,7 @@ const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
 
 export const routeAccessPolicy: Array<{ pattern: string; permission: Permission }> = [
   { pattern: "/admin", permission: "admin:view" },
-  { pattern: "/commitments", permission: "dashboard:view" },
+  { pattern: "/roadmaps", permission: "dashboard:view" },
   { pattern: "/prepare", permission: "dashboard:view" },
 ];
 

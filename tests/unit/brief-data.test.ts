@@ -1,16 +1,8 @@
 import { describe, expect, it } from "vitest";
-import {
-  yoyPct,
-  upcomingHorizon,
-  attentionRows,
-  commitmentsAvgProgress,
-  investmentHighlights,
-  parseDay,
-  nextPipeline,
-  daysUntil,
-} from "@/components/brief/brief-data";
+import { yoyPct, upcomingHorizon, investmentHighlights, parseDay, daysUntil } from "@/components/brief/brief-data";
 import { buildBriefGlobeData, resolveRegion } from "@/components/brief/geo";
 import { tradeAnnualUz } from "@/data/trade";
+import { nextVisit, materialsReceived, upcomingVisits } from "@/data/visit-prep";
 
 describe("brief-data", () => {
   it("parses date-only strings as local dates (no UTC day shift)", () => {
@@ -26,8 +18,8 @@ describe("brief-data", () => {
   it("widens the horizon window when fewer than 3 items fall inside it", () => {
     const items = upcomingHorizon(new Date("2026-07-02"), 30);
     expect(items.length).toBeGreaterThanOrEqual(3);
-    // Only the Tashkent pipeline (2026-07-08) is inside the literal window.
-    expect(items[0].id).toBe("visit-pipeline-tashkent-2026");
+    // Only the inbound Tashkent visit (2026-07-08) is inside the literal window.
+    expect(items[0].id).toBe("uv-us-delegation-tashkent-2026-07");
     expect(items[0].beyondWindow).toBe(false);
     expect(items.slice(1).every((i) => i.beyondWindow)).toBe(true);
     // Dates stay sorted ascending.
@@ -35,33 +27,46 @@ describe("brief-data", () => {
     expect([...dates].sort()).toEqual(dates);
   });
 
-  it("picks the nearest upcoming pipeline and counts days to it", () => {
-    const asOf = new Date(2026, 6, 2); // 2026-07-02 local
-    const pipeline = nextPipeline(asOf);
-    expect(pipeline.id).toBe("visit-pipeline-tashkent-2026");
-    expect(daysUntil(pipeline.date, asOf)).toBe(6);
-    // After the season's last visit it falls back to the latest record.
-    expect(nextPipeline(new Date(2027, 0, 1)).id).toBe("visit-pipeline-nyc-unga-2026");
-  });
-
-  it("returns overdue commitments before watch items", () => {
-    const rows = attentionRows(3);
-    expect(rows[0].status).toBe("overdue");
-    expect(rows.every((r) => r.status === "overdue" || r.status === "watch")).toBe(true);
-    expect(rows).toHaveLength(3);
-  });
-
-  it("averages commitment progress to a whole percentage", () => {
-    const avg = commitmentsAvgProgress();
-    expect(Number.isInteger(avg)).toBe(true);
-    expect(avg).toBeGreaterThan(0);
-    expect(avg).toBeLessThanOrEqual(100);
+  it("excludes completed visits from the horizon", () => {
+    const items = upcomingHorizon(new Date("2026-05-01"), 365);
+    expect(items.some((i) => i.id === "uv-samarkand-usa-2026-05")).toBe(false);
+    expect(items.some((i) => i.id === "uv-khorezm-usa-2026-05")).toBe(false);
   });
 
   it("ranks real-portfolio sectors by disclosed value", () => {
     const top = investmentHighlights(3);
     expect(top.map((s) => s.sector)).toEqual(["finance", "energy", "mining-metals"]);
     expect(top[0].valueMusd).toBe(2000);
+  });
+});
+
+describe("visit-prep", () => {
+  it("picks the nearest not-yet-finished visit and counts days to it", () => {
+    const asOf = new Date(2026, 6, 2); // 2026-07-02 local
+    const visit = nextVisit(asOf);
+    expect(visit.id).toBe("uv-us-delegation-tashkent-2026-07");
+    expect(daysUntil(visit.startDate, asOf)).toBe(6);
+    // After the season's last visit it falls back to the latest record.
+    expect(nextVisit(new Date(2027, 0, 1)).id).toBe("uv-unga-followup-2026-09");
+  });
+
+  it("keeps an in-progress visit current until its end date", () => {
+    const during = nextVisit(new Date(2026, 6, 9)); // 2026-07-09, mid-visit
+    expect(during.id).toBe("uv-us-delegation-tashkent-2026-07");
+  });
+
+  it("counts received materials against the package total", () => {
+    const samarkand = upcomingVisits.find((v) => v.id === "uv-samarkand-usa-2026-05")!;
+    expect(materialsReceived(samarkand)).toEqual({ received: 1, total: 1 });
+    const tashkent = upcomingVisits.find((v) => v.id === "uv-us-delegation-tashkent-2026-07")!;
+    expect(materialsReceived(tashkent).received).toBe(0);
+  });
+
+  it("never stores personal identifiers in visit records (hard rule #8)", () => {
+    const serialized = JSON.stringify(upcomingVisits).toLowerCase();
+    for (const forbidden of ["passport", "pnr", "booking", "visa number"]) {
+      expect(serialized).not.toContain(forbidden);
+    }
   });
 });
 
@@ -79,11 +84,11 @@ describe("brief geo", () => {
     expect(data.rings).toHaveLength(0);
   });
 
-  it("carries demo pipeline arcs (flagged) when hideDemo is off", () => {
+  it("carries demo visit arcs (flagged) when hideDemo is off", () => {
     const data = buildBriefGlobeData(false);
     expect(data.arcs.filter((a) => a.kind === "pipeline").every((a) => a.isDemo)).toBe(true);
     expect(data.arcs.some((a) => a.isDemo)).toBe(true);
-    // Inbound US→UZ pipeline renders as a Tashkent pulse, not an invented arc.
+    // Inbound US→UZ visit renders as a Tashkent pulse, not an invented arc.
     expect(data.rings).toHaveLength(1);
   });
 

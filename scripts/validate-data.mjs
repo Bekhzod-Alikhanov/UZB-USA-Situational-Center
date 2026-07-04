@@ -101,7 +101,8 @@ const expectedRoutes = [
   "trade",
   "visits",
   "prepare",
-  "commitments",
+  "commitments", // permanentRedirect stub → /roadmaps
+  "roadmaps",
   "agreements",
   "map",
   "admin",
@@ -110,7 +111,6 @@ const expectedRoutes = [
   "grants",
   "contacts",
   "compliance",
-  "news",
   "benchmark",
 ];
 

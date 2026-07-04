@@ -1,17 +1,18 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import type { CSSProperties } from "react";
-import { nextPipeline, daysUntil, upcomingHorizon, intlLocale, parseDay } from "@/components/brief/brief-data";
-import { localizedEventTitle, localizedPipelineTheme, localizedPipelineTitle } from "@/lib/i18n/overview-content";
+import { daysUntil, upcomingHorizon, intlLocale, parseDay } from "@/components/brief/brief-data";
+import { nextVisit, visitTitle, visitPurpose, materialsReceived } from "@/data/visit-prep";
+import { localizedEventTitle } from "@/lib/i18n/overview-content";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 
 /**
- * "Nearest visit" videowall panel: date box, readiness ring (conic gauge),
- * four counters (days left / delegation groups / program blocks / checklist)
- * and the rest of the horizon underneath. Computed on the client from the
- * real "now" (the page is SSG; a server Date would freeze at build time).
- * All pipeline records are demo workflow rows — DemoBadge-marked.
+ * "Nearest visit" videowall panel: date box, four counters (days left /
+ * delegation size / meetings / materials received) and the rest of the
+ * horizon underneath. Computed on the client from the real "now" (the page
+ * is SSG; a server Date would freeze at build time). Delegation/meeting
+ * details live behind the password gate on /prepare — this public panel
+ * shows counts only.
  */
 export function VisitPanel() {
   const t = useTranslations("brief.visit");
@@ -41,18 +42,18 @@ export function VisitPanel() {
     );
   }
 
-  const pipeline = nextPipeline(now);
-  const date = parseDay(pipeline.date);
-  const checklistDone = pipeline.checklist.filter((c) => c.state === "Done").length;
+  const visit = nextVisit(now);
+  const date = parseDay(visit.startDate);
+  const materials = materialsReceived(visit);
   const horizon = upcomingHorizon(now, 30)
-    .filter((item) => item.id !== pipeline.id)
+    .filter((item) => item.id !== visit.id)
     .slice(0, 3);
 
   const counters = [
-    { key: "days", value: String(daysUntil(pipeline.date, now)), label: t("countDays") },
-    { key: "delegation", value: String(pipeline.delegation.length), label: t("countDelegation") },
-    { key: "program", value: String(pipeline.program.length), label: t("countProgram") },
-    { key: "checklist", value: `${checklistDone}/${pipeline.checklist.length}`, label: t("countChecklist") },
+    { key: "days", value: String(daysUntil(visit.startDate, now)), label: t("countDays") },
+    { key: "delegation", value: String(visit.delegation.length), label: t("countDelegation") },
+    { key: "meetings", value: String(visit.meetings.length), label: t("countMeetings") },
+    { key: "materials", value: `${materials.received}/${materials.total}`, label: t("countMaterials") },
   ];
 
   return (
@@ -64,33 +65,22 @@ export function VisitPanel() {
         </div>
         <div className="min-w-0">
           <p className="text-[13.5px] font-semibold leading-snug text-[var(--brief-ink)]">
-            {localizedPipelineTitle(pipeline.id, pipeline.title, locale)}
+            {visitTitle(visit, locale)}
+            {visit.is_demo ? <DemoBadge variant="dot" className="ml-1" /> : null}
           </p>
-          <p className="mt-1 text-[11.5px] text-[var(--brief-ink-muted)]">
-            {localizedPipelineTheme(pipeline.id, pipeline.theme, locale)} <DemoBadge variant="dot" className="ml-1" />
-          </p>
+          <p className="mt-1 line-clamp-2 text-[11.5px] text-[var(--brief-ink-muted)]">{visitPurpose(visit, locale)}</p>
         </div>
       </div>
 
-      <div className="mt-4 flex items-center gap-4">
-        <div
-          className="brief-ring shrink-0"
-          style={{ "--ring": pipeline.readiness } as CSSProperties}
-          role="img"
-          aria-label={t("readinessAria", { pct: pipeline.readiness })}
-        >
-          <strong>{pipeline.readiness}%</strong>
-        </div>
-        <div className="grid flex-1 grid-cols-2 gap-2">
-          {counters.map((c) => (
-            <div key={c.key} className="rounded-md bg-[var(--brief-surface-2)] px-2.5 py-2 text-center">
-              <div className="text-[18px] font-bold tabular-nums leading-none text-[var(--brief-ink)]">{c.value}</div>
-              <div className="mt-1.5 text-[9.5px] font-semibold uppercase tracking-[0.08em] text-[var(--brief-ink-faint)]">
-                {c.label}
-              </div>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        {counters.map((c) => (
+          <div key={c.key} className="rounded-md bg-[var(--brief-surface-2)] px-2.5 py-2 text-center">
+            <div className="text-[18px] font-bold tabular-nums leading-none text-[var(--brief-ink)]">{c.value}</div>
+            <div className="mt-1.5 text-[9.5px] font-semibold uppercase tracking-[0.08em] text-[var(--brief-ink-faint)]">
+              {c.label}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       <div className="mt-4 border-t border-[var(--brief-border)] pt-3">
@@ -108,7 +98,9 @@ export function VisitPanel() {
                   <p className="truncate text-[12.5px] leading-snug text-[var(--brief-ink)]">
                     {item.kind === "event"
                       ? localizedEventTitle(item.id, item.title, locale)
-                      : localizedPipelineTitle(item.id, item.title, locale)}{" "}
+                      : locale === "ru" && item.titleRu
+                        ? item.titleRu
+                        : item.title}{" "}
                     {item.isDemo ? <DemoBadge variant="dot" className="ml-1" /> : null}
                   </p>
                   <p className="text-[10.5px] text-[var(--brief-ink-faint)]">

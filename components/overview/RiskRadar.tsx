@@ -3,18 +3,18 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 import { useMemo } from "react";
 import { AlertTriangle, Clock, FileWarning, CalendarClock, ClipboardCheck, ArrowRight } from "lucide-react";
-import { commitments, type Commitment } from "@/data/commitments";
+import { allRoadmapSteps, stepHealth, roadmapProjectTitle, roadmapStepTitle } from "@/data/roadmaps";
 import { agreements, type Agreement } from "@/data/agreements";
 import { centerMilestones, deriveMilestoneStatus, type CenterMilestone } from "@/data/center-milestones";
-import { visitPipelines } from "@/data/visit-prep";
-import { localizedCommitmentTitle, localizedMilestoneTitle, localizedOwner } from "@/lib/i18n/overview-content";
+import { upcomingVisits, visitTitle, materialsReceived } from "@/data/visit-prep";
+import { localizedMilestoneTitle } from "@/lib/i18n/overview-content";
 import { cn } from "@/lib/utils";
 
 type Severity = "critical" | "warn" | "watch";
 
 interface RiskItem {
   id: string;
-  source: "commitment" | "agreement" | "milestone" | "visit-readiness";
+  source: "roadmap" | "agreement" | "milestone" | "visit-readiness";
   severity: Severity;
   title: string;
   context: string;
@@ -26,7 +26,7 @@ interface Strings {
   critical: string;
   warn: string;
   watch: string;
-  sourceCommitment: string;
+  sourceRoadmap: string;
   sourceAgreement: string;
   sourceMilestone: string;
   sourceVisitReadiness: string;
@@ -36,10 +36,9 @@ interface Strings {
   countWatch: string;
   allGreen: string;
   showing: (limit: number, total: number) => string;
-  visitReadinessLabel: (pct: number) => string;
+  visitReadinessLabel: (received: number, total: number) => string;
   milestoneStage: string;
   ctxDue: (date: string) => string;
-  ctxProgress: (pct: number) => string;
   ctxAgreement: (date: string) => string;
   ctxDeadline: (date: string) => string;
   ctxDueDate: (date: string) => string;
@@ -51,20 +50,19 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     critical: "Escalation",
     warn: "Watch",
     watch: "Monitor",
-    sourceCommitment: "Commitment",
+    sourceRoadmap: "Roadmap task",
     sourceAgreement: "Agreement",
     sourceMilestone: "Center milestone",
     sourceVisitReadiness: "Visit readiness",
-    aggregator: "Aggregator: commitments + agreements + center milestones + visit readiness",
+    aggregator: "Aggregator: roadmap tasks + agreements + center milestones + visit readiness",
     countCritical: "escalation",
     countWarn: "watch",
     countWatch: "monitor",
-    allGreen: "All commitments, agreements, milestones and visit pipelines are tracking green.",
+    allGreen: "All roadmap tasks, agreements, milestones and visit pipelines are tracking green.",
     showing: (limit, total) => `Showing ${limit} of ${total}. Full list on the source pages.`,
-    visitReadinessLabel: (pct) => ` — readiness ${pct}%`,
+    visitReadinessLabel: (received, total) => ` — materials ${received}/${total}`,
     milestoneStage: "Stage",
     ctxDue: (date) => `due ${date}`,
-    ctxProgress: (pct) => `${pct}% complete`,
     ctxAgreement: (date) => `Signed ${date} · awaiting ratification / entry into force`,
     ctxDeadline: (date) => `Deadline ${date}`,
     ctxDueDate: (date) => `Due ${date}`,
@@ -74,20 +72,19 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     critical: "Эскалация",
     warn: "Контроль",
     watch: "Наблюдение",
-    sourceCommitment: "Поручение",
+    sourceRoadmap: "Задача дорожной карты",
     sourceAgreement: "Соглашение",
     sourceMilestone: "Этап Штаба",
     sourceVisitReadiness: "Готовность визита",
-    aggregator: "Агрегатор: поручения + соглашения + этапы Центра + готовность визитов",
+    aggregator: "Агрегатор: задачи дорожных карт + соглашения + этапы Центра + готовность визитов",
     countCritical: "эскалация",
     countWarn: "контроль",
     countWatch: "наблюдение",
-    allGreen: "Все обязательства, соглашения, этапы и визиты в зелёной зоне.",
+    allGreen: "Все задачи дорожных карт, соглашения, этапы и визиты в зелёной зоне.",
     showing: (limit, total) => `Показаны ${limit} из ${total}. Полный список — на страницах источников.`,
-    visitReadinessLabel: (pct) => ` — готовность ${pct}%`,
+    visitReadinessLabel: (received, total) => ` — материалы ${received}/${total}`,
     milestoneStage: "Этап",
     ctxDue: (date) => `срок ${date}`,
-    ctxProgress: (pct) => `выполнено ${pct}%`,
     ctxAgreement: (date) => `Подписано ${date} · ожидает ратификации / вступления в силу`,
     ctxDeadline: (date) => `Срок ${date}`,
     ctxDueDate: (date) => `Срок ${date}`,
@@ -97,20 +94,19 @@ const STR: Record<"en" | "ru" | "uz-latn", Strings> = {
     critical: "Eskalatsiya",
     warn: "Nazorat",
     watch: "Kuzatuv",
-    sourceCommitment: "Topshiriq",
+    sourceRoadmap: "Yo'l xaritasi vazifasi",
     sourceAgreement: "Bitim",
     sourceMilestone: "Markaz bosqichi",
     sourceVisitReadiness: "Tashrif tayyorligi",
-    aggregator: "Agregator: topshiriqlar + bitimlar + Markaz bosqichlari + tashrif tayyorligi",
+    aggregator: "Agregator: yo'l xaritasi vazifalari + bitimlar + Markaz bosqichlari + tashrif tayyorligi",
     countCritical: "eskalatsiya",
     countWarn: "nazorat",
     countWatch: "kuzatuv",
-    allGreen: "Barcha topshiriqlar va tashriflar yashil zonada.",
+    allGreen: "Barcha yo'l xaritasi vazifalari va tashriflar yashil zonada.",
     showing: (limit, total) => `${total} dan ${limit} ko'rsatildi. To'liq ro'yxat manba sahifalarda.`,
-    visitReadinessLabel: (pct) => ` — tayyorlik ${pct}%`,
+    visitReadinessLabel: (received, total) => ` — materiallar ${received}/${total}`,
     milestoneStage: "Bosqich",
     ctxDue: (date) => `muddat ${date}`,
-    ctxProgress: (pct) => `${pct}% bajarildi`,
     ctxAgreement: (date) => `Imzolangan ${date} · ratifikatsiya / kuchga kirishni kutmoqda`,
     ctxDeadline: (date) => `Muddat ${date}`,
     ctxDueDate: (date) => `Muddat ${date}`,
@@ -127,7 +123,7 @@ function pickStr(locale: string): Strings {
 const SEVERITY_RANK: Record<Severity, number> = { critical: 0, warn: 1, watch: 2 };
 
 const SOURCE_ICON: Record<RiskItem["source"], React.ComponentType<{ className?: string }>> = {
-  commitment: AlertTriangle,
+  roadmap: AlertTriangle,
   agreement: FileWarning,
   milestone: CalendarClock,
   "visit-readiness": ClipboardCheck,
@@ -137,28 +133,21 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
   const T = pickStr(locale);
   const out: RiskItem[] = [];
 
-  for (const c of commitments as Commitment[]) {
-    if (c.status === "overdue") {
-      out.push({
-        id: `commit-${c.id}`,
-        source: "commitment",
-        severity: "critical",
-        title: localizedCommitmentTitle(c.id, c.title, locale),
-        context: `${localizedOwner(c.owner, locale)} · ${T.ctxDue(c.dueDate)}`,
-        href: `/${locale}/commitments?status=overdue&q=${encodeURIComponent(c.title.slice(0, 24))}`,
-        dueDate: c.dueDate,
-      });
-    } else if (c.status === "watch") {
-      out.push({
-        id: `commit-${c.id}`,
-        source: "commitment",
-        severity: "warn",
-        title: localizedCommitmentTitle(c.id, c.title, locale),
-        context: `${localizedOwner(c.owner, locale)} · ${T.ctxProgress(c.progressPct)}`,
-        href: `/${locale}/commitments?status=watch&q=${encodeURIComponent(c.title.slice(0, 24))}`,
-        dueDate: c.dueDate,
-      });
-    }
+  // Roadmap tasks: health derived from the document deadlines — overdue
+  // escalates, due-soon goes on watch. Deep link opens /roadmaps filtered to
+  // the task's region.
+  for (const { project, step } of allRoadmapSteps()) {
+    const health = stepHealth(step, today);
+    if (health !== "overdue" && health !== "due-soon") continue;
+    out.push({
+      id: `roadmap-${step.id}`,
+      source: "roadmap",
+      severity: health === "overdue" ? "critical" : "warn",
+      title: roadmapStepTitle(step, locale),
+      context: `${roadmapProjectTitle(project, locale)} · ${T.ctxDue(step.due)}`,
+      href: `/${locale}/roadmaps?region=${project.region}&q=${encodeURIComponent(project.title.slice(0, 24))}`,
+      dueDate: `${step.due}-28`,
+    });
   }
 
   for (const a of agreements as Agreement[]) {
@@ -200,22 +189,24 @@ function buildRisks(locale: string, today: Date): RiskItem[] {
     }
   }
 
-  // Readiness risk straight from the pipeline's own readiness figure (the
-  // per-block scorecards were retired in the portal-slim pass).
-  for (const pipeline of visitPipelines) {
-    const visitDate = new Date(pipeline.date + "T00:00:00Z");
+  // Readiness risk from the hokimiyat material package: a visit inside the
+  // 30-day window with materials still outstanding goes on watch (escalates
+  // when nothing has arrived at all).
+  for (const visit of upcomingVisits) {
+    if (visit.status === "completed") continue;
+    const visitDate = new Date(visit.startDate + "T00:00:00Z");
     const daysToVisit = Math.round((visitDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-    const pct = pipeline.readiness;
     if (daysToVisit < 0) continue;
-    if (daysToVisit <= 30 && pct < 70) {
+    const { received, total } = materialsReceived(visit);
+    if (daysToVisit <= 30 && total > 0 && received < total) {
       out.push({
-        id: `visit-${pipeline.id}`,
+        id: `visit-${visit.id}`,
         source: "visit-readiness",
-        severity: pct < 50 ? "critical" : "warn",
-        title: `${pipeline.title}${T.visitReadinessLabel(pct)}`,
-        context: T.ctxVisit(daysToVisit, pipeline.dateRange),
+        severity: received === 0 ? "critical" : "warn",
+        title: `${visitTitle(visit, locale)}${T.visitReadinessLabel(received, total)}`,
+        context: T.ctxVisit(daysToVisit, `${visit.startDate} → ${visit.endDate}`),
         href: `/${locale}/prepare`,
-        dueDate: pipeline.date,
+        dueDate: visit.startDate,
       });
     }
   }
@@ -237,7 +228,7 @@ export function RiskRadar({ limit = 6 }: { limit?: number }) {
     watch: T.watch,
   };
   const SOURCE_LABEL: Record<RiskItem["source"], string> = {
-    commitment: T.sourceCommitment,
+    roadmap: T.sourceRoadmap,
     agreement: T.sourceAgreement,
     milestone: T.sourceMilestone,
     "visit-readiness": T.sourceVisitReadiness,
