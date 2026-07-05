@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { roadmapAttention, roadmapProjectTitle, roadmapStepTitle } from "@/data/roadmaps";
 import { intlLocale } from "@/components/brief/brief-data";
+import { useRoadmapOverrides } from "@/components/roadmaps/live";
 
 /**
  * "Requires attention" — at most three triaged roadmap tasks (overdue first,
@@ -13,6 +14,7 @@ export function AttentionList() {
   const t = useTranslations("brief.attention");
   const locale = useLocale();
   const [now, setNow] = useState<Date | null>(null);
+  const { overrides } = useRoadmapOverrides();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -24,7 +26,7 @@ export function AttentionList() {
     [locale],
   );
 
-  const rows = now ? roadmapAttention(3, now) : [];
+  const rows = now ? roadmapAttention(3, now, overrides) : [];
 
   return (
     <div className="brief-print-block mt-5 border-t border-[var(--brief-border)] pt-3.5">

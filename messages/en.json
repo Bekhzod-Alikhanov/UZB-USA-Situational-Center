@@ -546,6 +546,25 @@
       "materialExpected": "expected",
       "fileOnRequest": "file available from the Center on request",
       "openMaterial": "open link"
+    },
+    "uploads": {
+      "title": "Files on the platform",
+      "empty": "No files uploaded yet.",
+      "titlePlaceholder": "Document title…",
+      "titleLabel": "Document title",
+      "typeLabel": "Material type",
+      "fileLabel": "File",
+      "upload": "Upload",
+      "limits": "PDF, Office, ZIP or images · up to 25 MB",
+      "saved": "Uploaded.",
+      "error": "Upload failed",
+      "type": {
+        "presentation": "Presentation",
+        "speech": "Speech",
+        "agenda": "Agenda",
+        "briefing": "Briefing",
+        "other": "Document"
+      }
     }
   },
   "agreements": {
@@ -1114,6 +1133,19 @@
     "explorer": {
       "title": "Projects and tasks",
       "sub": "{count} projects from the two signed roadmaps · task states will be updated by the Center and hokimiyats"
+    },
+    "form": {
+      "stateLabel": "Status",
+      "markDone": "Mark done",
+      "markInProgress": "In progress",
+      "markReset": "Back to plan",
+      "notePlaceholder": "Note for the Center / hokimiyat…",
+      "noteLabel": "Note text",
+      "authorPlaceholder": "Who is submitting (name, position)",
+      "authorLabel": "Author",
+      "save": "Save",
+      "saved": "Saved — the monitor updates immediately.",
+      "error": "Could not save"
     }
   }
 }

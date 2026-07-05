@@ -8,6 +8,7 @@ import {
   type VisitMaterialType,
 } from "@/data/visit-prep";
 import { intlLocale } from "@/components/brief/brief-data";
+import { MaterialUploadsPanel } from "@/components/visit-prep/MaterialUploadsPanel";
 import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
@@ -187,6 +188,7 @@ export async function VisitCard({ visit, locale }: { visit: UpcomingVisit; local
               <li className="text-[12px] text-[var(--color-ink-faint)]">{t("card.emptyMaterials")}</li>
             ) : null}
           </ul>
+          <MaterialUploadsPanel visitId={visit.id} region={visit.region} />
         </section>
       </div>
 

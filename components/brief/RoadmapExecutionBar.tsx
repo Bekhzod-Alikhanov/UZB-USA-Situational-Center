@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { roadmapStepCounts, roadmapDonePct, allRoadmapSteps } from "@/data/roadmaps";
+import { useRoadmapOverrides } from "@/components/roadmaps/live";
 import { BriefNumber } from "@/components/brief/BriefNumber";
 
 /**
@@ -14,6 +15,7 @@ import { BriefNumber } from "@/components/brief/BriefNumber";
 export function RoadmapExecutionBar() {
   const t = useTranslations("brief.execution");
   const [now, setNow] = useState<Date | null>(null);
+  const { overrides } = useRoadmapOverrides();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -30,10 +32,10 @@ export function RoadmapExecutionBar() {
     );
   }
 
-  const counts = roadmapStepCounts(now);
+  const counts = roadmapStepCounts(now, overrides);
   const total = allRoadmapSteps().length;
   const inMotion = counts["on-track"] + counts["due-soon"];
-  const donePct = roadmapDonePct();
+  const donePct = roadmapDonePct(overrides);
 
   const segments = [
     { key: "done", value: counts.done, color: "var(--brief-pos)", label: t("done") },

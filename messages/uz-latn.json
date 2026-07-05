@@ -546,6 +546,25 @@
       "materialExpected": "kutilmoqda",
       "fileOnRequest": "fayl — Markazdan so'rov bo'yicha",
       "openMaterial": "havolani ochish"
+    },
+    "uploads": {
+      "title": "Platformadagi fayllar",
+      "empty": "Hozircha fayl yuklanmagan.",
+      "titlePlaceholder": "Hujjat nomi…",
+      "titleLabel": "Hujjat nomi",
+      "typeLabel": "Material turi",
+      "fileLabel": "Fayl",
+      "upload": "Yuklash",
+      "limits": "PDF, Office, ZIP yoki rasm · 25 MB gacha",
+      "saved": "Yuklandi.",
+      "error": "Yuklashda xatolik",
+      "type": {
+        "presentation": "Taqdimot",
+        "speech": "Nutq",
+        "agenda": "Kun tartibi",
+        "briefing": "Ma'lumotnoma",
+        "other": "Hujjat"
+      }
     }
   },
   "agreements": {
@@ -1114,6 +1133,19 @@
     "explorer": {
       "title": "Loyihalar va vazifalar",
       "sub": "Ikkita imzolangan yo'l xaritasidan {count} loyiha · ijro belgilari Markaz va hokimliklar tomonidan kiritiladi"
+    },
+    "form": {
+      "stateLabel": "Holat",
+      "markDone": "Bajarildi",
+      "markInProgress": "Jarayonda",
+      "markReset": "Rejaga qaytarish",
+      "notePlaceholder": "Markaz / hokimlik uchun izoh…",
+      "noteLabel": "Izoh matni",
+      "authorPlaceholder": "Kim kiritmoqda (ism, lavozim)",
+      "authorLabel": "Muallif",
+      "save": "Saqlash",
+      "saved": "Saqlandi — monitor darhol yangilanadi.",
+      "error": "Saqlab bo'lmadi"
     }
   }
 }

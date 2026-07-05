@@ -11,6 +11,7 @@ import {
   type RegionRollup,
 } from "@/data/roadmaps";
 import { intlLocale } from "@/components/brief/brief-data";
+import { useRoadmapOverrides } from "@/components/roadmaps/live";
 
 /**
  * Region rollup cards for /roadmaps: project/step counters with derived
@@ -22,6 +23,7 @@ export function RegionCards() {
   const t = useTranslations("roadmaps");
   const locale = useLocale();
   const [now, setNow] = useState<Date | null>(null);
+  const { overrides } = useRoadmapOverrides();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -42,7 +44,7 @@ export function RegionCards() {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       {regionRoadmaps.map((meta) => {
-        const rollup: RegionRollup | null = now ? regionRollup(meta.region, now) : null;
+        const rollup: RegionRollup | null = now ? regionRollup(meta.region, now, overrides) : null;
         return (
           <div
             key={meta.region}
