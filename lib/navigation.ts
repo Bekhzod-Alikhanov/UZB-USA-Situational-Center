@@ -13,7 +13,6 @@ import {
   Landmark,
   LineChart,
   ListChecks,
-  Newspaper,
   Settings,
   ShieldCheck,
   Target,
@@ -68,10 +67,9 @@ export const NAV_GROUPS: NavGroup[] = [
     key: "risks",
     icon: ListChecks,
     items: [
-      { key: "commitments", href: "/commitments", icon: ClipboardList, tone: "rose", audience: "operations" },
+      { key: "roadmaps", href: "/roadmaps", icon: ListChecks, tone: "rose", audience: "operations" },
       { key: "compliance", href: "/compliance", icon: ShieldCheck, tone: "slate", audience: "business" },
       { key: "grants", href: "/grants", icon: Gift, tone: "invest", audience: "analyst" },
-      { key: "news", href: "/news", icon: Newspaper, tone: "rose", audience: "analyst" },
     ],
   },
   {

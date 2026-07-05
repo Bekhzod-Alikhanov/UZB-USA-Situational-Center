@@ -113,7 +113,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                 <UserRow name="E. Umurzakov" role="Head, Situational Center" active />
                 <UserRow name="A. Abdukodirov" role="Deputy" active />
                 <UserRow name="Analyst 1" role="Trade + investments" active />
-                <UserRow name="Analyst 2" role="Visits + commitments" active />
+                <UserRow name="Analyst 2" role="Visits + roadmaps" active />
                 <UserRow name="Analyst 3" role="Compliance + counterparts" />
                 <UserRow name="Press liaison" role="Comms" />
               </ul>

@@ -3,9 +3,8 @@
  * /data modules; unit-tested in tests/unit/brief-data.test.ts.
  */
 import { tradeAnnualUz, type TradeYear } from "@/data/trade";
-import { commitments, type Commitment } from "@/data/commitments";
 import { events } from "@/data/events";
-import { visitPipelines } from "@/data/visit-prep";
+import { upcomingVisits } from "@/data/visit-prep";
 import { investments, type InvestmentSector } from "@/data/investments";
 
 /**
@@ -42,6 +41,8 @@ export function yoyPct(series: TradeYear[] = tradeAnnualUz): number {
 export interface HorizonItem {
   id: string;
   title: string;
+  /** Russian title for data-borne items (upcoming visits). */
+  titleRu?: string;
   date: string;
   location?: string;
   kind: "event" | "visit";
@@ -70,14 +71,17 @@ export function upcomingHorizon(asOf: Date, days = 30, minItems = 3, maxItems = 
       isDemo: e.is_demo,
       beyondWindow: false,
     })),
-    ...visitPipelines.map((p) => ({
-      id: p.id,
-      title: p.title,
-      date: p.date,
-      kind: "visit" as const,
-      isDemo: p.is_demo,
-      beyondWindow: false,
-    })),
+    ...upcomingVisits
+      .filter((v) => v.status !== "completed")
+      .map((v) => ({
+        id: v.id,
+        title: v.title,
+        titleRu: v.titleRu,
+        date: v.startDate,
+        kind: "visit" as const,
+        isDemo: v.is_demo,
+        beyondWindow: false,
+      })),
   ]
     .filter((item) => parseDay(item.date).getTime() >= from)
     .sort((a, b) => a.date.localeCompare(b.date))
@@ -88,33 +92,10 @@ export function upcomingHorizon(asOf: Date, days = 30, minItems = 3, maxItems = 
   return all.slice(0, Math.max(minItems, Math.min(maxItems, all.length)));
 }
 
-/** Nearest upcoming visit-preparation pipeline (falls back to the latest one
- *  so the panel never renders empty after the season's last visit). */
-export function nextPipeline(asOf: Date) {
-  const upcoming = visitPipelines
-    .filter((p) => parseDay(p.date).getTime() >= asOf.getTime())
-    .sort((a, b) => a.date.localeCompare(b.date));
-  return upcoming[0] ?? visitPipelines[visitPipelines.length - 1];
-}
-
 /** Whole days from `asOf` until a date-only string (0 when today/past). */
 export function daysUntil(dateStr: string, asOf: Date): number {
   const ms = parseDay(dateStr).getTime() - asOf.getTime();
   return Math.max(0, Math.ceil(ms / 86_400_000));
-}
-
-/** Overdue first, then watch — same triage order as the overview AlertsPanel. */
-export function attentionRows(limit = 3): Commitment[] {
-  const byDue = (a: Commitment, b: Commitment) => a.dueDate.localeCompare(b.dueDate);
-  const overdue = commitments.filter((c) => c.status === "overdue").sort(byDue);
-  const watch = commitments.filter((c) => c.status === "watch").sort(byDue);
-  return [...overdue, ...watch].slice(0, limit);
-}
-
-/** Mean progress across the commitments register, rounded to a whole %. */
-export function commitmentsAvgProgress(): number {
-  if (commitments.length === 0) return 0;
-  return Math.round(commitments.reduce((a, c) => a + c.progressPct, 0) / commitments.length);
 }
 
 export interface SectorHighlight {

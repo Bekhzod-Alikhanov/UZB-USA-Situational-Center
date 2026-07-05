@@ -19,13 +19,6 @@ export const demoRegistry: DemoEntry[] = [
     status: "requested",
   },
   {
-    where: "Commitments / registry",
-    what: "17 source-anchored workflow records — sourceId points to originating event",
-    file: "data/commitments.ts",
-    agency: "Situational Center internal + responsible agencies",
-    status: "pending",
-  },
-  {
     where: "Agreements / detail",
     what: "9 agreement-level rows beyond the aggregate",
     file: "data/agreements.ts",
@@ -68,17 +61,10 @@ export const demoRegistry: DemoEntry[] = [
     status: "pending",
   },
   {
-    where: "Visit prep / pipelines",
-    what: "3 upcoming visits with readiness scores",
-    file: "data/visit-prep.ts:visitPipelines",
-    agency: "Situational Center internal",
-    status: "pending",
-  },
-  {
-    where: "Visit prep / roadmaps",
-    what: "3 cross-visit cooperation roadmaps",
-    file: "data/visit-prep.ts:visitRoadmaps",
-    agency: "Situational Center internal",
+    where: "Visit prep / upcoming visits",
+    what: "2 demo upcoming visits + demo delegation/meeting/material rows on the real May-2026 regional missions",
+    file: "data/visit-prep.ts:upcomingVisits",
+    agency: "Situational Center internal + regional khokimiyats",
     status: "pending",
   },
 ];

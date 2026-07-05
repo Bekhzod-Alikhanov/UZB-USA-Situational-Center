@@ -1,5 +1,4 @@
 import { agreementsAggregate } from "./agreements";
-import { commitments } from "./commitments";
 import { events } from "./events";
 import { grants } from "./grants";
 import { investments } from "./investments";
@@ -25,7 +24,6 @@ const grantValue = grants.reduce((sum, item) => sum + item.valueMusd, 0);
 const criticalMinerals = investments.filter(
   (item) => item.sector === "minerals-rare-earth" || item.sector === "mining-metals",
 );
-const tradeCommitments = commitments.filter((item) => item.sphere === "trade");
 const diplomaticEvents = events.filter(
   (item) => item.type === "dialogue" || item.type === "summit" || item.type === "council",
 );
@@ -46,7 +44,7 @@ export const relationshipPillars: RelationshipPillar[] = [
   {
     id: "trade",
     title: "Trade",
-    signal: `${tradeCommitments.length} trade commitments`,
+    signal: "UZ Stat + U.S. Census series",
     metric: "Dual UZ/US methodology",
     narrative:
       "Trade analysis is strongest when UZ Stat and U.S. Census are shown side by side with explicit methodology boundaries.",

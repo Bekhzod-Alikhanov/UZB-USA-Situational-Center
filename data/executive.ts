@@ -1,4 +1,11 @@
-import { commitments, type Commitment } from "./commitments";
+import {
+  allRoadmapSteps,
+  stepHealth,
+  roadmapProjectTitle,
+  roadmapStepTitle,
+  type RoadmapProject,
+  type RoadmapStep,
+} from "./roadmaps";
 import { events } from "./events";
 import { externalDataSummary } from "./external-data";
 import { investments } from "./investments";
@@ -6,7 +13,7 @@ import { news } from "./news";
 import { relationshipPillars } from "./relationship-pillars";
 import { nextAnchorVisit } from "./visits";
 import { sourceQualitySummary } from "@/lib/source-quality";
-import { localizedCommitmentTitle, localizedOwner } from "@/lib/i18n/overview-content";
+import { localizedOwner } from "@/lib/i18n/overview-content";
 
 export type ExecutiveItemTone = "critical" | "watch" | "positive" | "neutral";
 
@@ -32,7 +39,7 @@ export interface ExecutiveBriefing {
   changes: ExecutiveItem[];
 }
 
-const AS_OF = "2026-05-04";
+const AS_OF = "2026-07-04";
 type ExecutiveLocale = "en" | "ru" | "uz-latn";
 
 const COPY: Record<
@@ -42,7 +49,6 @@ const COPY: Record<
     readout: string;
     overdue: (days: number) => string;
     dueSoon: (days: number) => string;
-    complete: (pct: number, due: string) => string;
     demoRiskTitle: string;
     demoRiskDetail: (count: number) => string;
     methodologyRiskTitle: string;
@@ -64,7 +70,6 @@ const COPY: Record<
       "The strongest immediate lanes are investment finance, critical minerals, Council operating cadence, and visa/tourism mobility. The main executive risk is not technical: it is source ownership, methodology separation, and action accountability.",
     overdue: (days) => `${days}d overdue`,
     dueSoon: (days) => `T-${days}d`,
-    complete: (pct, due) => `${pct}% complete, ${due}.`,
     demoRiskTitle: "Demo investment rows remain visible in strategic pipeline",
     demoRiskDetail: (count) =>
       `${count} investment records still require MIIT/UzInvest source-owner replacement before external publication.`,
@@ -99,7 +104,6 @@ const COPY: Record<
       "Ближайшие сильные направления: инвестиционное финансирование, критические минералы, рабочий ритм Совета и визово-туристическая мобильность. Главный исполнительный риск не технический: это владельцы источников, разделение методологий и ответственность за действия.",
     overdue: (days) => `просрочено на ${days} дн.`,
     dueSoon: (days) => `T-${days} дн.`,
-    complete: (pct, due) => `${pct}% выполнено, ${due}.`,
     demoRiskTitle: "Демо-записи инвестиций остаются видимыми в стратегическом портфеле",
     demoRiskDetail: (count) =>
       `${count} инвестиционных записей требуют замены владельцем источника MIIT/UzInvest перед внешней публикацией.`,
@@ -113,7 +117,8 @@ const COPY: Record<
       },
       census: {
         title: "Автоматизировать ежемесячное обновление торговли Census",
-        detail: "API Census готов к подключению и может поддерживать актуальность американской торговой методологии после внедрения.",
+        detail:
+          "API Census готов к подключению и может поддерживать актуальность американской торговой методологии после внедрения.",
       },
       visa: {
         title: "Превратить безвизовый режим в KPI по связям между людьми",
@@ -134,7 +139,6 @@ const COPY: Record<
       "Eng kuchli yaqin yo'nalishlar: investitsiya moliyasi, kritik minerallar, Kengashning operatsion ritmi va viza/turizm mobilligi. Asosiy ijro xatari texnik emas: manba egaligi, metodologiyalarni ajratish va harakatlar bo'yicha javobgarlik.",
     overdue: (days) => `${days} kun kechikkan`,
     dueSoon: (days) => `T-${days} kun`,
-    complete: (pct, due) => `${pct}% bajarilgan, ${due}.`,
     demoRiskTitle: "Demo investitsiya yozuvlari strategik portfelda ko'rinib turibdi",
     demoRiskDetail: (count) =>
       `${count} investitsiya yozuvi tashqi e'lon oldidan MIIT/UzInvest manba egasi tomonidan almashtirilishi kerak.`,
@@ -144,7 +148,8 @@ const COPY: Record<
     opportunities: {
       dfc: {
         title: "DFC ramkasini bankka tayyor loyihalar qisqa ro'yxatiga aylantirish",
-        detail: "Kritik minerallar, infratuzilma va energetika eng yuqori qiymatli ikki tomonlama investitsiya yo'nalishiga aylanishi mumkin.",
+        detail:
+          "Kritik minerallar, infratuzilma va energetika eng yuqori qiymatli ikki tomonlama investitsiya yo'nalishiga aylanishi mumkin.",
       },
       census: {
         title: "Census oylik savdo yangilanishini avtomatlashtirish",
@@ -164,10 +169,7 @@ const COPY: Record<
   },
 };
 
-const NEWS_TEXT: Record<
-  string,
-  Partial<Record<ExecutiveLocale, { title: string; detail: string }>>
-> = {
+const NEWS_TEXT: Record<string, Partial<Record<ExecutiveLocale, { title: string; detail: string }>>> = {
   "n-gateway-council-roster": {
     ru: {
       title: "Опубликован состав Совета с 13 участниками от Узбекистана и США",
@@ -183,31 +185,24 @@ const NEWS_TEXT: Record<
   "n-gateway-council-2026": {
     ru: {
       title: "Американо-узбекский деловой и инвестиционный совет начал работу в Вашингтоне",
-      detail:
-        "Совет провел официальный запуск; делегации обменялись обязательствами по рабочим группам.",
+      detail: "Совет провел официальный запуск; делегации обменялись обязательствами по рабочим группам.",
     },
     "uz-latn": {
       title: "AQSh-O'zbekiston biznes va investitsiya kengashi Vashingtonda ish boshladi",
-      detail:
-        "Kengash rasmiy ishga tushirildi; delegatsiyalar ishchi guruhlar bo'yicha majburiyatlar almashdi.",
+      detail: "Kengash rasmiy ishga tushirildi; delegatsiyalar ishchi guruhlar bo'yicha majburiyatlar almashdi.",
     },
   },
 };
 
-const EVENT_TEXT: Record<
-  string,
-  Partial<Record<ExecutiveLocale, { title: string; detail: string }>>
-> = {
+const EVENT_TEXT: Record<string, Partial<Record<ExecutiveLocale, { title: string; detail: string }>>> = {
   "e-tiif-2026": {
     ru: {
       title: "ТИИФ 2026: Ташкентский международный инвестиционный форум",
-      detail:
-        "Подтверждена площадка с бизнес-форумом Узбекистан-США; состав делегации ожидает подтверждения.",
+      detail: "Подтверждена площадка с бизнес-форумом Узбекистан-США; состав делегации ожидает подтверждения.",
     },
     "uz-latn": {
       title: "TIIF 2026: Toshkent xalqaro investitsiya forumi",
-      detail:
-        "AQSh-O'zbekiston biznes forumi bilan maydon tasdiqlangan; delegatsiya tarkibi kutilmoqda.",
+      detail: "AQSh-O'zbekiston biznes forumi bilan maydon tasdiqlangan; delegatsiya tarkibi kutilmoqda.",
     },
   },
   "e-sd5-2026": {
@@ -234,25 +229,34 @@ function daysUntil(date: string, asOf = AS_OF) {
   return Math.ceil((target - now) / (24 * 60 * 60 * 1000));
 }
 
-function commitmentTone(commitment: Commitment): ExecutiveItemTone {
-  if (commitment.status === "overdue") return "critical";
-  if (commitment.status === "watch" || commitment.progressPct < 35) return "watch";
-  if (commitment.status === "done") return "positive";
-  return "neutral";
+/** Last day of a roadmap step's "YYYY-MM" due month, ISO date string. */
+function stepDueDate(due: string): string {
+  const [y, m] = due.split("-").map(Number);
+  const lastDay = new Date(Date.UTC(y, m, 0)).getUTCDate();
+  return `${due}-${String(lastDay).padStart(2, "0")}`;
 }
 
-function actionFromCommitment(commitment: Commitment, locale: ExecutiveLocale, copy = COPY[locale]): ExecutiveItem {
-  const delta = daysUntil(commitment.dueDate);
+function actionFromRoadmapStep(
+  row: { project: RoadmapProject; step: RoadmapStep },
+  locale: ExecutiveLocale,
+  copy = COPY[locale],
+): ExecutiveItem {
+  const { project, step } = row;
+  const dueDate = stepDueDate(step.due);
+  const delta = daysUntil(dueDate);
   const dueText = delta < 0 ? copy.overdue(Math.abs(delta)) : copy.dueSoon(delta);
+  const health = stepHealth(step, new Date(`${AS_OF}T00:00:00Z`));
+  const tone: ExecutiveItemTone =
+    health === "overdue" ? "critical" : health === "due-soon" ? "watch" : health === "done" ? "positive" : "neutral";
   return {
-    id: commitment.id,
-    title: localizedCommitmentTitle(commitment.id, commitment.title, locale),
-    detail: copy.complete(commitment.progressPct, dueText),
-    owner: localizedOwner(commitment.owner, locale),
-    due: commitment.dueDate,
-    href: "/commitments",
-    tone: commitmentTone(commitment),
-    sourceId: commitment.sourceId,
+    id: step.id,
+    title: roadmapStepTitle(step, locale),
+    detail: `${roadmapProjectTitle(project, locale)} · ${dueText}`,
+    owner: step.owners.join(", "),
+    due: dueDate,
+    href: "/roadmaps",
+    tone,
+    sourceId: project.sourceId,
   };
 }
 
@@ -260,11 +264,13 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
   const locale = normalizeLocale(localeInput);
   const copy = COPY[locale];
   const sourceSummary = sourceQualitySummary(new Date(`${AS_OF}T00:00:00Z`));
-  const overdue = commitments.filter((item) => item.status === "overdue");
-  const watch = commitments.filter((item) => item.status === "watch");
-  const dueSoon = commitments
-    .filter((item) => item.status !== "done")
-    .sort((a, b) => daysUntil(a.dueDate) - daysUntil(b.dueDate))
+  const asOfDate = new Date(`${AS_OF}T00:00:00Z`);
+  const steps = allRoadmapSteps();
+  const overdue = steps.filter((row) => stepHealth(row.step, asOfDate) === "overdue");
+  const watch = steps.filter((row) => stepHealth(row.step, asOfDate) === "due-soon");
+  const dueSoon = steps
+    .filter((row) => row.step.state !== "done")
+    .sort((a, b) => a.step.due.localeCompare(b.step.due))
     .slice(0, 5);
   const demoInvestments = investments.filter((item) => item.is_demo).length;
   const totalInvestmentValue = investments.reduce((sum, item) => sum + item.valueMusd, 0);
@@ -297,10 +303,10 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
       { label: "Fresh sources", value: `${sourceSummary.fresh}/${sourceSummary.total}`, tone: "positive" },
       { label: "Relationship pillars", value: relationshipPillars.length.toString(), tone: "neutral" },
     ],
-    priorityActions: dueSoon.map((commitment) => actionFromCommitment(commitment, locale, copy)),
+    priorityActions: dueSoon.map((row) => actionFromRoadmapStep(row, locale, copy)),
     risks: (
       [
-        ...overdue.map((commitment) => actionFromCommitment(commitment, locale, copy)),
+        ...overdue.map((row) => actionFromRoadmapStep(row, locale, copy)),
         {
           id: "risk-demo-investments",
           title: copy.demoRiskTitle,
@@ -345,7 +351,7 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
         title: copy.opportunities.visa.title,
         detail: copy.opportunities.visa.detail,
         owner: localizedOwner("Tourism Committee / MFA", locale),
-        href: "/events",
+        href: "/visits",
         tone: "positive",
         sourceId: "govuz_us_visa_free_2026",
       },
@@ -360,30 +366,26 @@ export function buildExecutiveBriefing(localeInput?: string): ExecutiveBriefing 
       },
     ],
     changes: [
-      ...latestNews.map(
-        (item): ExecutiveItem => ({
-          id: item.id,
-          title: NEWS_TEXT[item.id]?.[locale]?.title ?? item.title,
-          detail: NEWS_TEXT[item.id]?.[locale]?.detail ?? item.summary,
-          owner: item.source,
-          due: item.date,
-          href: "/news",
-          tone: item.tonality === "positive" ? "positive" : "neutral",
-          sourceId: item.sourceId,
-        }),
-      ),
-      ...upcomingEvents.map(
-        (item): ExecutiveItem => ({
-          id: item.id,
-          title: EVENT_TEXT[item.id]?.[locale]?.title ?? item.title,
-          detail: EVENT_TEXT[item.id]?.[locale]?.detail ?? item.description,
-          owner: item.location,
-          due: item.date,
-          href: "/events",
-          tone: "neutral" as const,
-          sourceId: item.sourceId,
-        }),
-      ),
+      ...latestNews.map((item): ExecutiveItem => ({
+        id: item.id,
+        title: NEWS_TEXT[item.id]?.[locale]?.title ?? item.title,
+        detail: NEWS_TEXT[item.id]?.[locale]?.detail ?? item.summary,
+        owner: item.source,
+        due: item.date,
+        href: "/visits",
+        tone: item.tonality === "positive" ? "positive" : "neutral",
+        sourceId: item.sourceId,
+      })),
+      ...upcomingEvents.map((item): ExecutiveItem => ({
+        id: item.id,
+        title: EVENT_TEXT[item.id]?.[locale]?.title ?? item.title,
+        detail: EVENT_TEXT[item.id]?.[locale]?.detail ?? item.description,
+        owner: item.location,
+        due: item.date,
+        href: "/visits",
+        tone: "neutral" as const,
+        sourceId: item.sourceId,
+      })),
       ...(anchor
         ? [
             {

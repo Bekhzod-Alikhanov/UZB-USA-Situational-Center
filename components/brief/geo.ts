@@ -11,7 +11,7 @@
 import { investments, type Investment } from "@/data/investments";
 import { uzMissionsUs } from "@/data/uz-missions-us";
 import { visits } from "@/data/visits";
-import { visitPipelines } from "@/data/visit-prep";
+import { upcomingVisits } from "@/data/visit-prep";
 
 export const CITY_COORDS = {
   tashkent: { lat: 41.3111, lng: 69.2797 },
@@ -191,16 +191,16 @@ export function buildBriefGlobeData(hideDemo: boolean): BriefGlobeData {
   }
 
   const rings: BriefGlobeRing[] = [];
-  if (!hideDemo) {
-    for (const p of visitPipelines) {
-      if (p.direction === "UZ to USA" || p.direction === "Bilateral") {
-        const corridor: Corridor = p.title.includes("Washington") ? "dc" : "ny";
-        pushArc("pipeline", p.id, p.title, p.date, corridor, p.is_demo);
-      } else {
-        // Inbound US→UZ pipeline: destination pulse at Tashkent — the US
-        // origin city is not in the record, so no arc origin is invented.
-        rings.push({ id: p.id, ...CITY_COORDS.tashkent, title: p.title, isDemo: p.is_demo });
-      }
+  for (const v of upcomingVisits) {
+    if (v.status === "completed") continue;
+    if (hideDemo && v.is_demo) continue;
+    if (v.direction === "UZ to USA") {
+      const corridor: Corridor = v.destinations.some((d) => d.includes("Washington")) ? "dc" : "ny";
+      pushArc("pipeline", v.id, v.title, v.startDate, corridor, v.is_demo);
+    } else {
+      // Inbound US→UZ visit: destination pulse at Tashkent — the US origin
+      // city is not in the record, so no arc origin is invented.
+      rings.push({ id: v.id, ...CITY_COORDS.tashkent, title: v.title, isDemo: v.is_demo });
     }
   }
 

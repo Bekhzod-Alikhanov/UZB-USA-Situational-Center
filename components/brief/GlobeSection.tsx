@@ -7,7 +7,8 @@ import { DemoBadge } from "@/components/demo-markers/DemoBadge";
 import { useSettings } from "@/lib/store/settings";
 import { buildBriefGlobeData, type Corridor } from "@/components/brief/geo";
 import { intlLocale, parseDay } from "@/components/brief/brief-data";
-import { localizedPipelineTitle, localizedVisitTitle } from "@/lib/i18n/overview-content";
+import { localizedVisitTitle } from "@/lib/i18n/overview-content";
+import { upcomingVisits, visitTitle } from "@/data/visit-prep";
 import type { BriefHoverPayload } from "@/components/brief/BriefGlobe";
 
 /**
@@ -134,7 +135,10 @@ export function GlobeSection() {
             <>
               <p className="text-[13px] font-semibold leading-snug text-[var(--brief-ink)]">
                 {hover.arc.kind === "pipeline"
-                  ? localizedPipelineTitle(hover.arc.refId, hover.arc.title, locale)
+                  ? (() => {
+                      const visit = upcomingVisits.find((v) => v.id === hover.arc?.refId);
+                      return visit ? visitTitle(visit, locale) : hover.arc.title;
+                    })()
                   : localizedVisitTitle(hover.arc.refId, hover.arc.title, locale)}
               </p>
               <p className="mt-1 text-[12px] text-[var(--brief-ink-muted)]">

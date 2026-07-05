@@ -151,7 +151,9 @@ export function verifyAdminPassword(candidate: string): boolean {
 }
 
 export function isSafeAdminRedirect(from: string, locale: string): boolean {
-  if (!from.startsWith(`/${locale}/admin`)) return false;
+  // Only same-locale paths inside the password-gated sections (see
+  // GATED_SECTIONS in proxy.ts) are valid post-login targets.
+  if (!from.startsWith(`/${locale}/admin`) && !from.startsWith(`/${locale}/prepare`)) return false;
   if (from.includes("//")) return false;
   return !from.startsWith(`/${locale}/admin/login`);
 }

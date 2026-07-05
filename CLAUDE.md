@@ -27,11 +27,15 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Tests                | Vitest (unit), Playwright (e2e + axe a11y), Lighthouse CI                         | `tests/`, `lhci.config.cjs`, `playwright.config.ts`. CI on `.github/workflows/qa.yml`.                |
 | Package manager      | **pnpm**                                                                          | Lockfile at `pnpm-lock.yaml`.                                                                         |
 
-## Routes (14 public sidebar sections × 3 locales + /brief videowall + admin/login)
+## Routes (13 public sidebar sections × 3 locales + redirect stubs + admin/login)
 
 Slimmed in the 2026-07 portal-slim pass: /staff and the /counterparts dossier
 pages were removed; /events merged into /visits (calendar tab); /sectors merged
-into /investments; the counterparts grid moved onto /contacts.
+into /investments; the counterparts grid moved onto /contacts. In the
+roadmaps-monitoring pass: /commitments (demo registry) was replaced by
+/roadmaps (real signed hokimiyat roadmaps), /news was removed (data/news.ts
+stays — executive.ts reads it), and /prepare was rebuilt as a password-gated
+visit-dossier workspace.
 
 ```
 /[locale]/                       Executive brief — landing page (in-shell panel, fullscreen mode)
@@ -39,8 +43,9 @@ into /investments; the counterparts grid moved onto /contacts.
 /[locale]/brief                  permanentRedirect → / (bookmarks)
 /[locale]/trade                  Annual + monthly trade, structure, rankings
 /[locale]/visits                 Timeline · grid · table · events-calendar tab
-/[locale]/prepare                Visit pipeline · plan-vs-actual outcomes · roadmaps
-/[locale]/commitments            TanStack Table, URL-synced status filter
+/[locale]/prepare                Visit dossiers: delegation · day program · materials (PASSWORD-GATED via proxy.ts)
+/[locale]/roadmaps               Regional roadmap monitor — 61 real projects (Samarkand 48 + Khorezm 13), derived health
+/[locale]/commitments            permanentRedirect → /roadmaps (bookmarks)
 /[locale]/agreements             Timeline + sphere/year filters
 /[locale]/map                    Maplibre 3-layer + 3D globe toggle
 /[locale]/admin                  Settings, registry viewer, audit log (gated)
@@ -49,9 +54,16 @@ into /investments; the counterparts grid moved onto /contacts.
 /[locale]/grants                 7 UZ-side grant rows + 4 U.S.-side program records + ForeignAssistance.gov obligations
 /[locale]/contacts               Org directory · Council roster · key U.S. figures grid
 /[locale]/compliance             OFAC/BIS/EAR/ITAR/GSP/MFN status + ECCN calc
-/[locale]/news                   Curated feed
 /[locale]/benchmark              UZ vs CA-5 + Caucasus ranking, heatmap
 ```
+
+Roadmap language policy: `data/roadmaps.ts` stores the document original
+(Uzbek Cyrillic) in `title` and the Russian translation in `titleRu`; the ru
+locale shows the translation, en/uz-latn show the original
+(`roadmapProjectTitle`/`roadmapStepTitle` helpers). Task health is DERIVED
+from document deadlines (`stepHealth`), never typed in by hand — the only
+manual signal is `step.state` ("done"/"in-progress"/null), which the Center
+edits in the data file until the этап-2 hokimiyat forms land (Supabase).
 
 ## Hard rules
 
@@ -62,7 +74,7 @@ into /investments; the counterparts grid moved onto /contacts.
 5. **`"use client"` discipline.** Server components by default. Add `"use client"` only when needed (event handlers, hooks, browser APIs). Server components cannot pass `ssr: false` to `next/dynamic` — wrap in a `"use client"` shell instead.
 6. **Suspense around `useSearchParams`.** Any client component using `useSearchParams` must be wrapped in `<Suspense>` at the page level, otherwise SSG bails out at build (`/commitments` is the canonical example).
 7. **Print exports.** Use `<PrintButton />` + `@media print` CSS in `globals.css`. The print block force-overrides dark-mode tokens to light values so PDFs are always clean. Do not introduce a separate PDF library — `window.print()` covers all current cases.
-8. **PII / operational-content boundary (visit-prep).** The platform tracks **status only** for visit preparation: percentage complete, owner role-slots, due dates, document titles, booking statuses, coverage counts. It NEVER contains: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, financial estimates, individual delegate names, personal contact details. That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, that's a security regression — reject the PR.
+8. **PII / operational-content boundary (visit-prep).** `/prepare` is password-gated (proxy.ts `GATED_SECTIONS`), and ONLY because of that gate the owner permits it to carry **delegation member names, meeting programs, and material registries** (titles + external links). The platform still NEVER contains — gated or not: passport numbers, visa numbers, flight booking codes / PNRs, hotel reservation codes, talking-point text, draft MoU bodies, personal contact details (phones/emails). That content belongs to a separate operational system with auth + audit + document storage. If a future contributor adds such fields to `data/visit-prep.ts`, or surfaces delegation names on any UNGATED page, that's a security regression — reject the PR. (A unit test greps `upcomingVisits` for forbidden identifier keywords.)
 9. **No-downgrade official data.** Live ingestion may store raw snapshots and review items, but it must not replace a newer approved published metric with an older source period. Same-period revisions require review. Newer official values are publication candidates, not automatic replacements, unless a source policy explicitly permits auto-publication.
 
 ## Common operations

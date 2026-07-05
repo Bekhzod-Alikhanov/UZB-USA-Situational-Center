@@ -1,5 +1,5 @@
 /**
- * Localized content for overview data entities — commitment titles, owner
+ * Localized content for overview data entities — owner
  * labels, Situational Center milestone titles, and connector cadence phrases.
  *
  * The English source-of-truth stays in the `data/*.ts` modules; this file only
@@ -22,78 +22,6 @@ function normalizeOverviewLocale(locale?: string): OverviewLocale {
 }
 
 type Localized = { ru: string; "uz-latn": string };
-
-/** Commitment titles keyed by `data/commitments.ts` id. */
-const COMMITMENT_TITLES: Record<string, Localized> = {
-  "cm-council-cadence": {
-    ru: "Установить рабочий ритм Совета и реестр рабочих групп",
-    "uz-latn": "Kengashning ish ritmi va ishchi guruhlar reestrini belgilash",
-  },
-  "cm-council-roster": {
-    ru: "Справочник членов Совета — официальная публикация и валидация",
-    "uz-latn": "Kengash a'zolari ma'lumotnomasi — rasmiy e'lon va tasdiqlash",
-  },
-  "cm-dfc-pipeline": {
-    ru: "Подготовить приоритетный портфель для рамочного соглашения DFC",
-    "uz-latn": "DFC qo'shma investitsiya ramkasi uchun ustuvor portfel tayyorlash",
-  },
-  "cm-dfc-readiness": {
-    ru: "Матрица готовности проектов для шорт-листа DFC",
-    "uz-latn": "DFC qisqa ro'yxati uchun loyiha tayyorligi matritsasi",
-  },
-  "cm-exim-pipeline": {
-    ru: "Определить возможности экспортного финансирования, готовые для EXIM",
-    "uz-latn": "EXIM uchun tayyor eksport moliyalashtirish imkoniyatlarini aniqlash",
-  },
-  "cm-minerals-mou": {
-    ru: "Меморандум по критическим минералам — рамка ежеквартального совместного обзора",
-    "uz-latn": "Kritik minerallar bo'yicha memorandum — choraklik qo'shma ko'rib chiqish ramkasi",
-  },
-  "cm-minerals-survey": {
-    ru: "Протокол обмена данными геологической разведки с USGS",
-    "uz-latn": "USGS bilan geologik qidiruv ma'lumotlari almashinuvi protokoli",
-  },
-  "cm-agreement-register": {
-    ru: "Преобразовать 138 агрегированных соглашений в реестр уровня отдельных документов",
-    "uz-latn": "138 ta umumiy kelishuvni hujjat darajasidagi reestrga aylantirish",
-  },
-  "cm-visit-pack": {
-    ru: "Завершить печатный шаблон пакета подготовки визита",
-    "uz-latn": "Tashrifga tayyorgarlik paketi shablonini yakunlash",
-  },
-  "cm-trade-agenda": {
-    ru: "Подготовить перечень вопросов по торговому соглашению после встречи с USTR",
-    "uz-latn": "USTR uchrashuvidan so'ng savdo kelishuvi bo'yicha masalalar ro'yxatini tayyorlash",
-  },
-  "cm-wto-implementation": {
-    ru: "Итоги переговоров о доступе на рынки ВТО — отслеживание реализации",
-    "uz-latn": "JST bozorga kirish bo'yicha muzokaralar natijalari — amalga oshirishni kuzatish",
-  },
-  "cm-visa-free-rollout": {
-    ru: "30-дневный безвизовый режим для граждан США — операционный запуск",
-    "uz-latn": "AQSh fuqarolari uchun 30 kunlik vizasiz rejim — operatsion ishga tushirish",
-  },
-  "cm-investment-platform": {
-    ru: "Рабочий план реализации инвестиционной платформы",
-    "uz-latn": "Investitsiya platformasi bo'yicha amalga oshirish rejasi",
-  },
-  "cm-council-tashkent-may": {
-    ru: "Рабочая сессия Совета в Ташкенте — повестка и результаты",
-    "uz-latn": "Kengashning Toshkentdagi ishchi sessiyasi — kun tartibi va natijalar",
-  },
-  "cm-air-products-followup": {
-    ru: "Диалог по эксплуатационной фазе проекта Air Products GTL",
-    "uz-latn": "Air Products GTL loyihasining ishlash bosqichi bo'yicha muloqot",
-  },
-  "cm-usaid-strategy-review": {
-    ru: "Среднесрочный обзор стратегии USAID по развитию страны",
-    "uz-latn": "USAID mamlakat taraqqiyoti strategiyasini oraliq ko'rib chiqish",
-  },
-  "cm-project-cure-tranche": {
-    ru: "Project C.U.R.E. — финальная поставка для клиник Самарканда",
-    "uz-latn": "Project C.U.R.E. — Samarqand klinikalariga yakuniy yetkazib berish",
-  },
-};
 
 /** Commitment / opportunity owner labels keyed by the English owner string. */
 const OWNER_LABELS: Record<string, Localized> = {
@@ -271,12 +199,6 @@ const CADENCE_LABELS: Record<string, Localized> = {
   Live: { ru: "В реальном времени", "uz-latn": "Real vaqt" },
 };
 
-export function localizedCommitmentTitle(id: string, fallback: string, locale?: string): string {
-  const l = normalizeOverviewLocale(locale);
-  if (l === "en") return fallback;
-  return COMMITMENT_TITLES[id]?.[l] ?? fallback;
-}
-
 export function localizedOwner(owner: string, locale?: string): string {
   const l = normalizeOverviewLocale(locale);
   if (l === "en") return owner;
@@ -294,38 +216,6 @@ export function localizedCadence(cadence: string, locale?: string): string {
   if (l === "en") return cadence;
   return CADENCE_LABELS[cadence]?.[l] ?? cadence;
 }
-
-/** Visit-preparation pipeline titles keyed by `data/visit-prep.ts` id. */
-const PIPELINE_TITLES: Record<string, Localized> = {
-  "visit-pipeline-washington-2026": {
-    ru: "Делегация Узбекистана — экономическая миссия в Вашингтон",
-    "uz-latn": "O'zbekiston delegatsiyasi — Vashingtonga iqtisodiy missiya",
-  },
-  "visit-pipeline-tashkent-2026": {
-    ru: "Бизнес-делегация США — Ташкент и Самарканд",
-    "uz-latn": "AQSH biznes-delegatsiyasi — Toshkent va Samarqand",
-  },
-  "visit-pipeline-nyc-unga-2026": {
-    ru: "Последующий визит на полях ГА ООН — Нью-Йорк",
-    "uz-latn": "BMT Bosh Assambleyasi doirasidagi keyingi tashrif — Nyu-York",
-  },
-};
-
-/** Pipeline theme lines keyed by pipeline id (agency names stay as-is). */
-const PIPELINE_THEMES: Record<string, Localized> = {
-  "visit-pipeline-washington-2026": {
-    ru: "Инвестиции · DFC · критические минералы · AI-хаб",
-    "uz-latn": "Investitsiyalar · DFC · muhim minerallar · AI-hab",
-  },
-  "visit-pipeline-tashkent-2026": {
-    ru: "ИИ · фармацевтика · логистика · регионы",
-    "uz-latn": "AI · farmatsevtika · logistika · hududlar",
-  },
-  "visit-pipeline-nyc-unga-2026": {
-    ru: "Сверка договорённостей майского визита",
-    "uz-latn": "May tashrifi kelishuvlarini tekshirish",
-  },
-};
 
 /** Diplomatic event titles keyed by `data/events.ts` id. */
 const EVENT_TITLES: Record<string, Localized> = {
@@ -430,18 +320,6 @@ const VISIT_TITLES: Record<string, Localized> = {
     "uz-latn": "AQSH–O'z biznes va investitsiya kengashining birinchi to'liq sessiyasi (reja)",
   },
 };
-
-export function localizedPipelineTitle(id: string, fallback: string, locale?: string): string {
-  const l = normalizeOverviewLocale(locale);
-  if (l === "en") return fallback;
-  return PIPELINE_TITLES[id]?.[l] ?? fallback;
-}
-
-export function localizedPipelineTheme(id: string, fallback: string, locale?: string): string {
-  const l = normalizeOverviewLocale(locale);
-  if (l === "en") return fallback;
-  return PIPELINE_THEMES[id]?.[l] ?? fallback;
-}
 
 export function localizedEventTitle(id: string, fallback: string, locale?: string): string {
   const l = normalizeOverviewLocale(locale);

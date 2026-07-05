@@ -26,8 +26,8 @@
       "documentsSub": "{invest} investment agreements",
       "visits": "Visits · 2025–2026",
       "visitsSub": "{incoming} incoming from the U.S.",
-      "commitments": "Commitments tracked",
-      "commitmentsSub": "{avg}% avg completion"
+      "roadmaps": "Roadmap projects",
+      "roadmapsSub": "${value}B declared · {done}% tasks done"
     },
     "trade": {
       "title": "Trade dynamics",
@@ -67,10 +67,9 @@
     "visit": {
       "title": "Nearest visit",
       "countDays": "days left",
-      "countDelegation": "delegation groups",
-      "countProgram": "program blocks",
-      "countChecklist": "checklist",
-      "readinessAria": "Visit preparation readiness: {pct}%"
+      "countDelegation": "delegation",
+      "countMeetings": "meetings",
+      "countMaterials": "materials"
     },
     "horizon": {
       "title": "Next 30 days",
@@ -98,20 +97,12 @@
       "flagshipTitle": "Joint Investment Framework with the U.S. DFC",
       "flagshipMeta": "Heads of Terms signed {date} · implementation under way"
     },
-    "commitments": {
-      "title": "Execution of commitments",
-      "done": "Completed",
-      "inProgress": "In motion",
-      "overdue": "Overdue",
-      "completion": "average across {total} commitments",
-      "scaleAria": "Commitments: {done} completed, {inMotion} in motion, {overdue} overdue",
-      "watchNote": "{watch, plural, one {# item under close watch} other {# items under close watch}}"
-    },
     "attention": {
       "title": "Needs attention",
       "overdue": "Overdue",
-      "watch": "Watch",
-      "due": "due {date}"
+      "dueSoon": "Due soon",
+      "due": "due {date}",
+      "allGreen": "All roadmap tasks are tracking green."
     },
     "agreementsChart": {
       "title": "Legal base structure",
@@ -129,7 +120,16 @@
       "print": "Export PDF",
       "methodologies": "UZ national statistics · U.S. Census Bureau · MFA registry"
     },
-    "openDetail": "Open section"
+    "openDetail": "Open section",
+    "execution": {
+      "title": "Roadmap execution",
+      "done": "Done",
+      "inMotion": "In motion",
+      "overdue": "Overdue",
+      "completion": "of {total} roadmap tasks done",
+      "scaleAria": "Roadmap tasks: {done} done, {inMotion} in motion, {overdue} overdue",
+      "dueSoonNote": "{count, plural, one {# task due within 30 days} other {# tasks due within 30 days}}"
+    }
   },
   "brand": {
     "title": "Uzbekistan – USA",
@@ -142,16 +142,15 @@
     "investments": "Investment & Privatization",
     "visits": "Visits & delegations",
     "prepare": "Visit preparation",
-    "commitments": "Actions & commitments",
     "agreements": "Bilateral agreements",
     "grants": "Grants",
     "map": "Interactive map",
     "compliance": "US compliance",
     "benchmark": "Regional benchmark",
     "contacts": "Contacts",
-    "news": "Strategic signals",
     "admin": "Admin",
-    "brief": "Brief"
+    "brief": "Brief",
+    "roadmaps": "Regional roadmaps"
   },
   "navGroups": {
     "executive": "Executive brief",
@@ -217,7 +216,7 @@
     "routes": {
       "brief": {
         "title": "Executive Brief",
-        "description": "Exhibition-grade executive brief on Uzbekistan-USA relations: trade, verified investment, commitments execution, delegations, and the 30-day horizon."
+        "description": "Exhibition-grade executive brief on Uzbekistan-USA relations: trade, verified investment, roadmap execution, delegations, and the 30-day horizon."
       },
       "overview": {
         "title": "Uzbekistan-USA Intelligence Platform",
@@ -247,10 +246,6 @@
         "title": "Bilateral Agreements",
         "description": "Registry and analysis of Uzbekistan-USA agreements, legal anchors, categories, source status, and timeline."
       },
-      "commitments": {
-        "title": "Actions & Commitments",
-        "description": "Operational register of commitments linked to visits, agreements, owners, status, and follow-up risk."
-      },
       "compliance": {
         "title": "U.S. Compliance",
         "description": "Source-backed compliance reference for sanctions, export controls, tariffs, FATF context, and U.S. market-entry checks."
@@ -258,10 +253,6 @@
       "grants": {
         "title": "Grants & Assistance",
         "description": "Internal grant register and U.S. foreign assistance records with source separation, methodology, and reconciliation notes."
-      },
-      "news": {
-        "title": "Strategic Signals",
-        "description": "Filtered news and policy signals for Uzbekistan-USA diplomacy, trade, investment, minerals, security, and economy."
       },
       "contacts": {
         "title": "Contacts Directory",
@@ -274,6 +265,10 @@
       "adminLogin": {
         "title": "Admin Login",
         "description": "Secure administrator sign-in for protected operations and internal platform management."
+      },
+      "roadmaps": {
+        "title": "Regional Roadmaps",
+        "description": "Execution monitor for the signed Samarkand and Khorezm investment roadmaps: 61 projects, document deadlines, responsible officials, derived health."
       }
     }
   },
@@ -516,16 +511,41 @@
   },
   "prepare": {
     "title": "Visit preparation",
-    "subtitle": "Workflow · checklists · optimization"
-  },
-  "commitments": {
-    "title": "Commitments registry",
-    "subtitle": "Tracking every commitment from summits, meetings and MoUs",
-    "statuses": {
-      "done": "Completed",
-      "progress": "In progress",
-      "watch": "On watch",
-      "overdue": "Overdue"
+    "subtitle": "Who travels, when, where and why — plus the hokimiyat material package",
+    "gatedNote": "Restricted section",
+    "upcomingTitle": "Upcoming and active visits",
+    "completedTitle": "Completed visits",
+    "noUpcoming": "No upcoming visits registered.",
+    "outcomesTitle": "Outcomes · plan vs actual",
+    "outcomesSub": "{count} verified or pending readouts — closes the loop on every visit",
+    "card": {
+      "direction": {
+        "uzToUsa": "UZ → USA",
+        "usaToUz": "USA → UZ"
+      },
+      "status": {
+        "planning": "Planning",
+        "confirmed": "Confirmed",
+        "in-progress": "In progress",
+        "completed": "Completed"
+      },
+      "delegation": "Delegation",
+      "program": "Day-by-day program",
+      "materials": "Materials",
+      "emptyDelegation": "Composition not yet submitted.",
+      "emptyProgram": "Program not yet submitted.",
+      "emptyMaterials": "No materials registered.",
+      "materialType": {
+        "presentation": "Presentation",
+        "speech": "Speech",
+        "agenda": "Agenda",
+        "briefing": "Briefing",
+        "other": "Document"
+      },
+      "materialReceived": "received",
+      "materialExpected": "expected",
+      "fileOnRequest": "file available from the Center on request",
+      "openMaterial": "open link"
     }
   },
   "agreements": {
@@ -912,43 +932,6 @@
       "disclaimer": "Simplified illustrative calculator. Actual licensing is determined by BIS / DDTC / OFAC — confirm with counsel."
     }
   },
-  "news": {
-    "title": "Curated news",
-    "subtitle": "Tagged feed with manual tonality scoring",
-    "filters": {
-      "all": "All",
-      "positive": "Positive",
-      "neutral": "Neutral",
-      "critical": "Critical"
-    },
-    "read": "Read source",
-    "stats": {
-      "positive": "Positive",
-      "neutral": "Neutral",
-      "critical": "Critical",
-      "total": "Total"
-    },
-    "feed": {
-      "tonalityAria": "Filter by tonality",
-      "tagLabel": "Tag",
-      "tagAria": "Filter by tag",
-      "searchAria": "Search title or summary",
-      "searchPlaceholder": "Search title or summary",
-      "apply": "Apply",
-      "empty": "No news matches the current filters.",
-      "tags": {
-        "all": "All tags",
-        "presidential": "Presidential",
-        "trade": "Trade",
-        "investment": "Investment",
-        "minerals": "Minerals",
-        "security": "Security",
-        "diplomatic": "Diplomatic",
-        "culture": "Culture",
-        "economy": "Economy"
-      }
-    }
-  },
   "map": {
     "title": "Interactive map",
     "subtitle": "Investments, trade flows, live delegations",
@@ -1084,5 +1067,53 @@
       "ago": "{days}d ago"
     },
     "linkedVisit": "Linked visit"
+  },
+  "roadmaps": {
+    "title": "Regional roadmaps",
+    "subtitle": "Execution monitor for the signed hokimiyat roadmaps: Samarkand and Khorezm missions to the USA, May 2026",
+    "region": {
+      "visitNote": "based on the U.S. visit, {dates}",
+      "projects": "Projects",
+      "bln": "bn",
+      "declaredValue": "Declared value",
+      "stepsDone": "Tasks done",
+      "nextMilestone": "Next milestone — {month}"
+    },
+    "health": {
+      "onTrack": "On track",
+      "attention": "Attention",
+      "offTrack": "Off track"
+    },
+    "filters": {
+      "all": "Both regions",
+      "samarkand": "Samarkand",
+      "khorezm": "Khorezm",
+      "searchPlaceholder": "Search project, initiator…",
+      "searchLabel": "Search roadmap projects"
+    },
+    "list": {
+      "showing": "{count, plural, one {# project} other {# projects}} shown",
+      "mln": "mln",
+      "steps": "tasks {done}/{total}",
+      "due": "due {month}",
+      "note": "Note",
+      "empty": "No projects match the filter."
+    },
+    "projectHealth": {
+      "done": "Completed",
+      "on-track": "On track",
+      "attention": "Deadline approaching",
+      "off-track": "Overdue tasks"
+    },
+    "stepHealth": {
+      "done": "Done",
+      "on-track": "On track",
+      "due-soon": "Due soon",
+      "overdue": "Overdue"
+    },
+    "explorer": {
+      "title": "Projects and tasks",
+      "sub": "{count} projects from the two signed roadmaps · task states will be updated by the Center and hokimiyats"
+    }
   }
 }

@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 const locales = ["en", "ru", "uz-latn"];
+// "brief", "commitments" and "prepare" resolve via redirects (goto follows
+// them): /brief → /, /commitments → /roadmaps, /prepare → the login page.
 const routes = [
   "",
   "brief",
@@ -9,13 +11,13 @@ const routes = [
   "visits",
   "prepare",
   "commitments",
+  "roadmaps",
   "agreements",
   "map",
   "investments",
   "grants",
   "contacts",
   "compliance",
-  "news",
   "benchmark",
   "admin/login",
 ];
@@ -56,6 +58,31 @@ test("admin route redirects to login when unauthenticated", async ({ page }) => 
   await page.goto("/en/admin");
 
   await expect(page).toHaveURL(/\/en\/admin\/login/);
+});
+
+test("visit preparation is password-gated", async ({ page }) => {
+  await page.goto("/en/prepare");
+
+  await expect(page).toHaveURL(/\/en\/admin\/login\?from=%2Fen%2Fprepare/);
+});
+
+test("old commitments URL permanently redirects to roadmaps", async ({ page }) => {
+  await page.goto("/ru/commitments");
+
+  await expect(page).toHaveURL(/\/ru\/roadmaps/);
+});
+
+test("news section is removed", async ({ page }) => {
+  const response = await page.goto("/en/news");
+
+  expect(response?.status()).toBe(404);
+});
+
+test("roadmaps page renders both regional rollups", async ({ page }) => {
+  await page.goto("/en/roadmaps");
+
+  await expect(page.getByText("Samarqand viloyati").first()).toBeVisible();
+  await expect(page.getByText("Xorazm viloyati").first()).toBeVisible();
 });
 
 test("critical API routes preserve expected auth and fallback behavior", async ({ request }) => {
