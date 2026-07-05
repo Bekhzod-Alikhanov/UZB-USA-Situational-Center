@@ -62,8 +62,20 @@ Roadmap language policy: `data/roadmaps.ts` stores the document original
 locale shows the translation, en/uz-latn show the original
 (`roadmapProjectTitle`/`roadmapStepTitle` helpers). Task health is DERIVED
 from document deadlines (`stepHealth`), never typed in by hand — the only
-manual signal is `step.state` ("done"/"in-progress"/null), which the Center
-edits in the data file until the этап-2 hokimiyat forms land (Supabase).
+manual signal is `step.state` ("done"/"in-progress"/null).
+
+Stage 2 (hokimiyat operations, 2026-07): the gate cookie now carries a ROLE
+(`admin` | `samarkand` | `khorezm`; `lib/auth/admin.ts` `GateRole`).
+ADMIN_PASSWORD → admin; REGION_PASSWORD_SAMARKAND / REGION_PASSWORD_KHOREZM →
+hokimiyat editors, who can enter /prepare (not /admin), mark THEIR region's
+roadmap tasks done / leave notes (append-only `roadmap_step_update` journal,
+POST /api/roadmaps/step-updates) and upload visit materials (private
+`visit-materials` Storage bucket, /api/visit-materials, signed 1-hour links).
+Live step states OVERRIDE the `data/roadmaps.ts` baseline via
+`overrideStep()`/`RoadmapOverrides` (fetched client-side from GET
+/api/roadmaps/step-updates; empty when Supabase is unset, so static deploys
+degrade gracefully). Stage-2 tables live in
+`database/migrations/2026-07-stage2-hokimiyat.sql` — run AFTER schema.sql.
 
 ## Hard rules
 

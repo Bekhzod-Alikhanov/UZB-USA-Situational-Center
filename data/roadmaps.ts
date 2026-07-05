@@ -23,6 +23,31 @@ export type RoadmapRegionId = "samarkand" | "khorezm";
 export type RoadmapStepState = "done" | "in-progress" | null;
 export type RoadmapStepHealth = "done" | "on-track" | "due-soon" | "overdue";
 
+/**
+ * Stage-2 live override for one step, reduced from the Supabase
+ * `roadmap_step_update` journal (see /api/roadmaps/step-updates). `state`
+ * present (including null = reset) replaces the static baseline; `note`
+ * present replaces the file note. Absent field → baseline wins.
+ */
+export interface RoadmapStepOverride {
+  state?: RoadmapStepState;
+  note?: string;
+  updatedAt?: string;
+  author?: string;
+}
+
+export type RoadmapOverrides = Record<string, RoadmapStepOverride>;
+
+export function overrideStep(step: RoadmapStep, overrides?: RoadmapOverrides): RoadmapStep {
+  const o = overrides?.[step.id];
+  if (!o) return step;
+  return {
+    ...step,
+    state: o.state !== undefined ? o.state : step.state,
+    note: o.note !== undefined ? o.note : step.note,
+  };
+}
+
 export interface RoadmapStep {
   id: string;
   /** Verbatim document text (Uzbek Cyrillic). */
@@ -1091,8 +1116,12 @@ export function stepHealth(step: RoadmapStep, today: Date = new Date()): Roadmap
 
 export type RoadmapProjectHealth = "done" | "on-track" | "attention" | "off-track";
 
-export function projectHealth(project: RoadmapProject, today: Date = new Date()): RoadmapProjectHealth {
-  const healths = project.steps.map((s) => stepHealth(s, today));
+export function projectHealth(
+  project: RoadmapProject,
+  today: Date = new Date(),
+  overrides?: RoadmapOverrides,
+): RoadmapProjectHealth {
+  const healths = project.steps.map((s) => stepHealth(overrideStep(s, overrides), today));
   if (healths.every((h) => h === "done")) return "done";
   if (healths.includes("overdue")) return "off-track";
   if (healths.includes("due-soon")) return "attention";
@@ -1111,7 +1140,11 @@ export interface RegionRollup {
   nextMilestone?: { project: RoadmapProject; step: RoadmapStep };
 }
 
-export function regionRollup(region: RoadmapRegionId, today: Date = new Date()): RegionRollup {
+export function regionRollup(
+  region: RoadmapRegionId,
+  today: Date = new Date(),
+  overrides?: RoadmapOverrides,
+): RegionRollup {
   const projects = projectsOf(region);
   const rollup: RegionRollup = {
     projects: projects.length,
@@ -1123,12 +1156,13 @@ export function regionRollup(region: RoadmapRegionId, today: Date = new Date()):
     totalSteps: 0,
   };
   for (const project of projects) {
-    const health = projectHealth(project, today);
+    const health = projectHealth(project, today, overrides);
     if (health === "done") rollup.done += 1;
     else if (health === "on-track") rollup.onTrack += 1;
     else if (health === "attention") rollup.attention += 1;
     else rollup.offTrack += 1;
-    for (const s of project.steps) {
+    for (const raw of project.steps) {
+      const s = overrideStep(raw, overrides);
       rollup.totalSteps += 1;
       if (s.state === "done") rollup.doneSteps += 1;
       else if (!rollup.nextMilestone || s.due < rollup.nextMilestone.step.due) {
@@ -1148,25 +1182,33 @@ export function allRoadmapSteps(): Array<{ project: RoadmapProject; step: Roadma
 export function roadmapAttention(
   limit = 3,
   today: Date = new Date(),
+  overrides?: RoadmapOverrides,
 ): Array<{ project: RoadmapProject; step: RoadmapStep; health: RoadmapStepHealth }> {
   const rows = allRoadmapSteps()
-    .map((row) => ({ ...row, health: stepHealth(row.step, today) }))
+    .map(({ project, step }) => {
+      const patched = overrideStep(step, overrides);
+      return { project, step: patched, health: stepHealth(patched, today) };
+    })
     .filter((row) => row.health === "overdue" || row.health === "due-soon");
   const rank: Record<RoadmapStepHealth, number> = { overdue: 0, "due-soon": 1, "on-track": 2, done: 3 };
   return rows.sort((a, b) => rank[a.health] - rank[b.health] || a.step.due.localeCompare(b.step.due)).slice(0, limit);
 }
 
 /** Share of steps across both regions that are marked done, whole %. */
-export function roadmapDonePct(): number {
+export function roadmapDonePct(overrides?: RoadmapOverrides): number {
   const steps = allRoadmapSteps();
   if (steps.length === 0) return 0;
-  return Math.round((steps.filter(({ step }) => step.state === "done").length / steps.length) * 100);
+  const done = steps.filter(({ step }) => overrideStep(step, overrides).state === "done").length;
+  return Math.round((done / steps.length) * 100);
 }
 
 /** Step-status counts for the landing execution bar. */
-export function roadmapStepCounts(today: Date = new Date()): Record<RoadmapStepHealth, number> {
+export function roadmapStepCounts(
+  today: Date = new Date(),
+  overrides?: RoadmapOverrides,
+): Record<RoadmapStepHealth, number> {
   const counts: Record<RoadmapStepHealth, number> = { done: 0, "on-track": 0, "due-soon": 0, overdue: 0 };
-  for (const { step } of allRoadmapSteps()) counts[stepHealth(step, today)] += 1;
+  for (const { step } of allRoadmapSteps()) counts[stepHealth(overrideStep(step, overrides), today)] += 1;
   return counts;
 }
 

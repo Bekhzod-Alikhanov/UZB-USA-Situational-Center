@@ -3,15 +3,33 @@ export const ADMIN_COOKIE = "uzus_admin_auth";
 const SESSION_TTL_SECONDS = 60 * 60 * 8;
 const SESSION_PURPOSE = "uzus-admin";
 
+/**
+ * Who is behind the password gate. "admin" is the Center (full access);
+ * the region roles are hokimiyat editors limited to their own roadmap and
+ * their region's visit materials (stage-2 access model chosen by the owner).
+ */
+export type GateRole = "admin" | "samarkand" | "khorezm";
+
 interface AdminSessionPayload {
   exp: number;
   iat: number;
   purpose: typeof SESSION_PURPOSE;
-  v: 1;
+  /** v1 tokens predate roles and are treated as admin until they expire. */
+  v: 1 | 2;
+  role?: GateRole;
 }
 
 function getAdminPassword(): string | undefined {
   return process.env.ADMIN_PASSWORD?.trim() || undefined;
+}
+
+const REGION_PASSWORD_ENV: Record<Exclude<GateRole, "admin">, string> = {
+  samarkand: "REGION_PASSWORD_SAMARKAND",
+  khorezm: "REGION_PASSWORD_KHOREZM",
+};
+
+function getRegionPassword(role: Exclude<GateRole, "admin">): string | undefined {
+  return process.env[REGION_PASSWORD_ENV[role]]?.trim() || undefined;
 }
 
 function isWeakSecret(secret: string): boolean {
@@ -101,7 +119,7 @@ export function requireAdminPassword(): string {
   return password;
 }
 
-export async function createAdminSessionToken(now = Date.now()): Promise<string> {
+export async function createGateSessionToken(role: GateRole, now = Date.now()): Promise<string> {
   const secret = getSigningSecret();
   if (!secret) {
     throw new Error("A strong ADMIN_SESSION_SECRET is required to sign admin sessions in production.");
@@ -111,30 +129,43 @@ export async function createAdminSessionToken(now = Date.now()): Promise<string>
     exp: now + SESSION_TTL_SECONDS * 1000,
     iat: now,
     purpose: SESSION_PURPOSE,
-    v: 1,
+    v: 2,
+    role,
   };
   const body = encodeBase64Url(JSON.stringify(payload));
   const signature = await signPayload(body, secret);
   return `${body}.${signature}`;
 }
 
-export async function verifyAdminSessionToken(token: string | undefined, now = Date.now()): Promise<boolean> {
-  if (!token) return false;
+export async function createAdminSessionToken(now = Date.now()): Promise<string> {
+  return createGateSessionToken("admin", now);
+}
+
+/** Verify a gate cookie and return the caller's role, or null when invalid. */
+export async function verifyGateSessionToken(token: string | undefined, now = Date.now()): Promise<GateRole | null> {
+  if (!token) return null;
   const secret = getSigningSecret();
-  if (!secret) return false;
+  if (!secret) return null;
 
   const [body, signature] = token.split(".");
-  if (!body || !signature) return false;
-  if (!(await verifySignature(body, signature, secret))) return false;
+  if (!body || !signature) return null;
+  if (!(await verifySignature(body, signature, secret))) return null;
 
   try {
     const payload = JSON.parse(decodeBase64UrlText(body)) as Partial<AdminSessionPayload>;
-    return (
-      payload.v === 1 && payload.purpose === SESSION_PURPOSE && typeof payload.exp === "number" && payload.exp > now
-    );
+    if (payload.purpose !== SESSION_PURPOSE || typeof payload.exp !== "number" || payload.exp <= now) return null;
+    if (payload.v === 1) return "admin";
+    if (payload.v === 2 && (payload.role === "admin" || payload.role === "samarkand" || payload.role === "khorezm")) {
+      return payload.role;
+    }
+    return null;
   } catch {
-    return false;
+    return null;
   }
+}
+
+export async function verifyAdminSessionToken(token: string | undefined, now = Date.now()): Promise<boolean> {
+  return (await verifyGateSessionToken(token, now)) === "admin";
 }
 
 export async function verifyAdminCookieValue(cookieValue: string | undefined): Promise<boolean> {
@@ -148,6 +179,25 @@ export function verifyCronSecretHeader(authHeader: string | null): boolean {
 
 export function verifyAdminPassword(candidate: string): boolean {
   return constantTimeEqual(candidate, requireAdminPassword());
+}
+
+/**
+ * Match a submitted password against the admin password and the per-region
+ * hokimiyat passwords. Always runs every configured comparison so timing does
+ * not reveal which password (if any) matched.
+ */
+export function verifyGatePassword(candidate: string): GateRole | null {
+  let matched: GateRole | null = null;
+  const admin = getAdminPassword();
+  if (admin && constantTimeEqual(candidate, admin)) matched = "admin";
+  for (const role of ["samarkand", "khorezm"] as const) {
+    const password = getRegionPassword(role);
+    if (password && constantTimeEqual(candidate, password) && matched === null) matched = role;
+  }
+  if (!admin && !getRegionPassword("samarkand") && !getRegionPassword("khorezm")) {
+    throw new Error("ADMIN_PASSWORD is required before the admin area can be used.");
+  }
+  return matched;
 }
 
 export function isSafeAdminRedirect(from: string, locale: string): boolean {

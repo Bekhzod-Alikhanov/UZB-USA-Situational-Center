@@ -4,35 +4,38 @@ import { redirect } from "next/navigation";
 import {
   ADMIN_COOKIE,
   adminSessionMaxAge,
-  createAdminSessionToken,
+  createGateSessionToken,
   isSafeAdminRedirect,
-  verifyAdminPassword,
+  verifyGatePassword,
+  type GateRole,
 } from "@/lib/auth/admin";
 
 /**
- * Verify the supplied password against `ADMIN_PASSWORD`. If correct, set a
- * signed, short-lived httpOnly cookie and redirect to the requested admin path.
- * If wrong or not configured, redirect back to the login page with an error flag.
+ * Verify the supplied password against the gate passwords: ADMIN_PASSWORD →
+ * "admin", REGION_PASSWORD_SAMARKAND / REGION_PASSWORD_KHOREZM → hokimiyat
+ * editor roles. On success, set a signed, short-lived httpOnly cookie carrying
+ * the role and redirect to the requested gated path (region roles are never
+ * sent into /admin — the proxy would bounce them back here in a loop).
  */
 export async function login(formData: FormData): Promise<void> {
   const password = String(formData.get("password") ?? "");
   const from = String(formData.get("from") ?? "");
   const locale = String(formData.get("locale") ?? "en");
 
-  let authorized = false;
+  let role: GateRole | null = null;
   try {
-    authorized = verifyAdminPassword(password);
+    role = verifyGatePassword(password);
   } catch {
     redirect(`/${locale}/admin/login?error=config${from ? `&from=${encodeURIComponent(from)}` : ""}`);
   }
-  if (!authorized) {
+  if (!role) {
     redirect(`/${locale}/admin/login?error=1${from ? `&from=${encodeURIComponent(from)}` : ""}`);
   }
 
   const cookieStore = await cookies();
   let token: string;
   try {
-    token = await createAdminSessionToken();
+    token = await createGateSessionToken(role);
   } catch {
     redirect(`/${locale}/admin/login?error=config${from ? `&from=${encodeURIComponent(from)}` : ""}`);
   }
@@ -46,8 +49,18 @@ export async function login(formData: FormData): Promise<void> {
     path: "/",
   });
 
-  // Redirect to the originally-requested admin path, or default admin home.
-  const target = from && isSafeAdminRedirect(from, locale) ? from : `/${locale}/admin`;
+  // Redirect to the originally-requested gated path when the role may enter
+  // it; hokimiyat editors default to the visit-preparation workspace.
+  const fromIsSafe = from && isSafeAdminRedirect(from, locale);
+  const fromIsAdmin = from.startsWith(`/${locale}/admin`);
+  const target =
+    role === "admin"
+      ? fromIsSafe
+        ? from
+        : `/${locale}/admin`
+      : fromIsSafe && !fromIsAdmin
+        ? from
+        : `/${locale}/prepare`;
   redirect(target);
 }
 

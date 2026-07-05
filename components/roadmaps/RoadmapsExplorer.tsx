@@ -7,6 +7,7 @@ import {
   roadmapProjects,
   projectHealth,
   stepHealth,
+  overrideStep,
   roadmapProjectTitle,
   roadmapStepTitle,
   type RoadmapRegionId,
@@ -14,6 +15,8 @@ import {
   type RoadmapProjectHealth,
 } from "@/data/roadmaps";
 import { intlLocale } from "@/components/brief/brief-data";
+import { useGateRole, useRoadmapOverrides } from "@/components/roadmaps/live";
+import { StepUpdateForm } from "@/components/roadmaps/StepUpdateForm";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { cn } from "@/lib/utils";
 
@@ -58,6 +61,10 @@ export function RoadmapsExplorer() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setNow(new Date());
   }, []);
+
+  // Stage 2: live journal overrides + the caller's gate role (edit forms).
+  const { overrides, refresh } = useRoadmapOverrides();
+  const { role } = useGateRole();
 
   const monthFmt = useMemo(
     () => new Intl.DateTimeFormat(intlLocale(locale), { month: "long", year: "numeric" }),
@@ -125,8 +132,9 @@ export function RoadmapsExplorer() {
 
       <ul className="flex flex-col gap-2">
         {filtered.map((project) => {
-          const health = now ? projectHealth(project, now) : null;
-          const doneSteps = project.steps.filter((s) => s.state === "done").length;
+          const health = now ? projectHealth(project, now, overrides) : null;
+          const doneSteps = project.steps.filter((s) => overrideStep(s, overrides).state === "done").length;
+          const canEdit = role === "admin" || role === project.region;
           return (
             <li key={project.id}>
               <details className="group rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
@@ -171,7 +179,9 @@ export function RoadmapsExplorer() {
                 </summary>
 
                 <ol className="border-t border-[var(--color-border)] px-4 py-3">
-                  {project.steps.map((step, index) => {
+                  {project.steps.map((rawStep, index) => {
+                    const step = overrideStep(rawStep, overrides);
+                    const liveMeta = overrides[rawStep.id];
                     const sh = now ? stepHealth(step, now) : "on-track";
                     return (
                       <li
@@ -202,7 +212,13 @@ export function RoadmapsExplorer() {
                           {step.note ? (
                             <p className="mt-1 rounded bg-[var(--color-surface-2)] px-2 py-1 text-[11px] text-[var(--color-ink-muted)]">
                               {t("list.note")}: {step.note}
+                              {liveMeta?.author ? (
+                                <span className="text-[var(--color-ink-faint)]"> — {liveMeta.author}</span>
+                              ) : null}
                             </p>
+                          ) : null}
+                          {canEdit ? (
+                            <StepUpdateForm step={rawStep} currentState={step.state} onSaved={refresh} />
                           ) : null}
                         </div>
                       </li>
