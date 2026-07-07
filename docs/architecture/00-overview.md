@@ -21,6 +21,7 @@ related:
 Платформа — **аналитическая ситуационная среда** для Аппарата Президента, МИД, МИИП и хокимиятов по линии сотрудничества Узбекистан ↔ США. Авторизована Постановлением Президента Ф-4 (17.02.2026).
 
 Аудитория:
+
 - **Принимающие решения**: Советник Президента, Министры, Главы делегаций
 - **Аналитический контур**: команда Центра ситуационного управления
 - **Партнёры**: AUCC, представители UZ/US бизнеса, посольство
@@ -53,6 +54,7 @@ flowchart LR
 ```
 
 **Проблемы текущего состояния** (детально в [[07-bottlenecks-and-risks]]):
+
 - 1 общий пароль вместо персональных учёток → нет аудита кто что сделал
 - Данные зашиты в bundle → невозможно обновить без передеплоя
 - `DATA_BACKEND=static` по умолчанию → governance-pipeline существует, но **не работает**
@@ -116,18 +118,18 @@ flowchart LR
 
 ## Ключевые архитектурные решения (ADR-краткие)
 
-| # | Решение | Альтернативы | Обоснование |
-|---|---|---|---|
-| 1 | **Postgres 17 как DWH** | ClickHouse, Snowflake, BigQuery | Объёмы малы (~10⁴–10⁵ строк/год), Postgres + индексы достаточно. Знакомая команде технология. |
-| 2 | **dbt для трансформаций** | Hand-rolled SQL, Spark | SQL-first, тестируемо, документация lineage из коробки. Заменяет ad-hoc скрипты. |
-| 3 | **Dagster (не Airflow)** | Airflow, Prefect | Asset-first модель совпадает с `published_metric`/`metric_identity`. Lineage UI бесплатно. Легче, чем Airflow. |
-| 4 | **FastAPI как backend API** | Next.js Route Handlers, Express | Зрелые OIDC-библиотеки (`authlib`), нативный Pydantic, автогенерация OpenAPI, легче подключить E-IMZO/OneID. |
-| 5 | **Keycloak as IdP** | Auth0, Okta, AzureAD | On-prem обязателен. OSS, поддерживает OIDC + SAML + LDAP federation, бесплатен. |
-| 6 | **Next.js остаётся для UI руководителей** | Чистый React + Vite | Уже инвестировано в SSR/i18n/design tokens. SEO не важно, но performance важно. |
-| 7 | **Superset для аналитиков** | Metabase, Redash, Power BI | OSS, on-prem, RLS на уровне Postgres, SQL Lab для analyst-команды. |
-| 8 | **MinIO как landing zone** | AWS S3, Azure Blob | Резидентность РУз. S3-совместимый API → можно мигрировать без изменения кода. |
-| 9 | **OpenTelemetry + Sentry + Grafana** | Datadog, New Relic | OSS-стек, on-prem, без внешних зависимостей. |
-| 10 | **Docker Compose → Kubernetes** | Только Compose, чистый VM | Compose для staging/dev (1 узел), K8s (k3s) для прод (HA, секреты). |
+| #   | Решение                                   | Альтернативы                    | Обоснование                                                                                                    |
+| --- | ----------------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 1   | **Postgres 17 как DWH**                   | ClickHouse, Snowflake, BigQuery | Объёмы малы (~10⁴–10⁵ строк/год), Postgres + индексы достаточно. Знакомая команде технология.                  |
+| 2   | **dbt для трансформаций**                 | Hand-rolled SQL, Spark          | SQL-first, тестируемо, документация lineage из коробки. Заменяет ad-hoc скрипты.                               |
+| 3   | **Dagster (не Airflow)**                  | Airflow, Prefect                | Asset-first модель совпадает с `published_metric`/`metric_identity`. Lineage UI бесплатно. Легче, чем Airflow. |
+| 4   | **FastAPI как backend API**               | Next.js Route Handlers, Express | Зрелые OIDC-библиотеки (`authlib`), нативный Pydantic, автогенерация OpenAPI, легче подключить E-IMZO/OneID.   |
+| 5   | **Keycloak as IdP**                       | Auth0, Okta, AzureAD            | On-prem обязателен. OSS, поддерживает OIDC + SAML + LDAP federation, бесплатен.                                |
+| 6   | **Next.js остаётся для UI руководителей** | Чистый React + Vite             | Уже инвестировано в SSR/i18n/design tokens. SEO не важно, но performance важно.                                |
+| 7   | **Superset для аналитиков**               | Metabase, Redash, Power BI      | OSS, on-prem, RLS на уровне Postgres, SQL Lab для analyst-команды.                                             |
+| 8   | **MinIO как landing zone**                | AWS S3, Azure Blob              | Резидентность РУз. S3-совместимый API → можно мигрировать без изменения кода.                                  |
+| 9   | **OpenTelemetry + Sentry + Grafana**      | Datadog, New Relic              | OSS-стек, on-prem, без внешних зависимостей.                                                                   |
+| 10  | **Docker Compose → Kubernetes**           | Только Compose, чистый VM       | Compose для staging/dev (1 узел), K8s (k3s) для прод (HA, секреты).                                            |
 
 Подробное обсуждение → [[01-target-architecture]] и [[07-bottlenecks-and-risks]].
 
@@ -136,6 +138,7 @@ flowchart LR
 ## Scope: что входит и что не входит
 
 ### Входит в эту документацию
+
 - ✅ Архитектура платформы (compute, data, security)
 - ✅ Пути 5 ролей пользователей
 - ✅ Бизнес-процессы (ingestion, publication, commitment lifecycle)
@@ -144,6 +147,7 @@ flowchart LR
 - ✅ Узкие места и риски
 
 ### Не входит (требует отдельной документации)
+
 - ❌ Детальный UI/UX дизайн (Figma)
 - ❌ Сетевые регламенты (firewall rules, VLAN) — отдельный документ от ИБ-команды
 - ❌ Договорная и регуляторная часть (DPA, лицензии)

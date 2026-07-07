@@ -26,16 +26,16 @@ related:
 
 ## Lanes
 
-| Lane | Роль |
-|---|---|
-| **Dagster scheduler** | автомат, запускает по cron |
-| **Connector (Python)** | автомат, asset-материализация |
-| **External API** | внешний сервис |
-| **MinIO** | хранилище |
-| **Postgres raw.*** | БД |
-| **dbt** | автомат, трансформации |
-| **Editor** | человек, при необходимости review |
-| **Notification** | автомат, Telegram + email |
+| Lane                   | Роль                              |
+| ---------------------- | --------------------------------- |
+| **Dagster scheduler**  | автомат, запускает по cron        |
+| **Connector (Python)** | автомат, asset-материализация     |
+| **External API**       | внешний сервис                    |
+| **MinIO**              | хранилище                         |
+| **Postgres raw.***     | БД                                |
+| **dbt**                | автомат, трансформации            |
+| **Editor**             | человек, при необходимости review |
+| **Notification**       | автомат, Telegram + email         |
 
 ## Inline mermaid
 
@@ -87,25 +87,25 @@ flowchart LR
 
 ### Ограничения
 
-| Параметр | Значение |
-|---|---|
-| Connector timeout | 8 секунд |
-| Retry count | 3 (exponential backoff: 1s, 5s, 25s) |
-| Dagster run timeout | 5 минут |
-| Snapshot size limit | 10 MB (защита от runaway pull) |
+| Параметр            | Значение                             |
+| ------------------- | ------------------------------------ |
+| Connector timeout   | 8 секунд                             |
+| Retry count         | 3 (exponential backoff: 1s, 5s, 25s) |
+| Dagster run timeout | 5 минут                              |
+| Snapshot size limit | 10 MB (защита от runaway pull)       |
 
 ## Что происходит при ошибках
 
-| Ошибка | Реакция |
-|---|---|
-| HTTP 429 (rate limit) | Wait + retry (max 3) |
-| HTTP 503 (server unavailable) | Wait + retry |
-| HTTP 401/403 | Без retry, alert «secret rotation needed» |
-| HTTP 400 | Schema mismatch → Pydantic validation error → alert + manual review |
-| Timeout | Считается как 503, retry |
-| Empty response | quality_flag=`empty-response`, переходит в queue |
-| Postgres connection refused | Dagster retries; данные в MinIO живы |
-| dbt test failure | run fail; ничего в `marts.*` не появляется |
+| Ошибка                        | Реакция                                                             |
+| ----------------------------- | ------------------------------------------------------------------- |
+| HTTP 429 (rate limit)         | Wait + retry (max 3)                                                |
+| HTTP 503 (server unavailable) | Wait + retry                                                        |
+| HTTP 401/403                  | Без retry, alert «secret rotation needed»                           |
+| HTTP 400                      | Schema mismatch → Pydantic validation error → alert + manual review |
+| Timeout                       | Считается как 503, retry                                            |
+| Empty response                | quality_flag=`empty-response`, переходит в queue                    |
+| Postgres connection refused   | Dagster retries; данные в MinIO живы                                |
+| dbt test failure              | run fail; ничего в `marts.*` не появляется                          |
 
 ## Связанные
 

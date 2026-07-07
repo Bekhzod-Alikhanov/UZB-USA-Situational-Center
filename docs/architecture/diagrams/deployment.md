@@ -154,33 +154,33 @@ flowchart TB
 
 ## Сети
 
-| Сегмент | CIDR (пример) | Назначение |
-|---|---|---|
-| public | публичные IP | Traefik external |
-| dmz | 10.10.0.0/24 | Traefik, WAF |
-| app | 10.20.0.0/24 | k3s nodes |
-| data | 10.30.0.0/24 | Postgres, MinIO, Redis |
-| obs | 10.40.0.0/24 | Loki, Tempo, Grafana storage |
-| egress | 10.50.0.0/30 | Squid proxy |
-| bastion | 10.60.0.0/29 | DBA/Admin SSH |
-| dr | 10.100.0.0/16 | DR site |
+| Сегмент | CIDR (пример) | Назначение                   |
+| ------- | ------------- | ---------------------------- |
+| public  | публичные IP  | Traefik external             |
+| dmz     | 10.10.0.0/24  | Traefik, WAF                 |
+| app     | 10.20.0.0/24  | k3s nodes                    |
+| data    | 10.30.0.0/24  | Postgres, MinIO, Redis       |
+| obs     | 10.40.0.0/24  | Loki, Tempo, Grafana storage |
+| egress  | 10.50.0.0/30  | Squid proxy                  |
+| bastion | 10.60.0.0/29  | DBA/Admin SSH                |
+| dr      | 10.100.0.0/16 | DR site                      |
 
 Firewall между сегментами: explicit allow only.
 
 ## High Availability matrix
 
-| Компонент | Реплик | Режим | RTO | RPO |
-|---|---|---|---|---|
-| Traefik | 2 | active-active | < 30s | 0 |
-| Next.js | 2 | active-active | < 30s | 0 |
-| FastAPI | 3 | active-active | < 30s | 0 |
-| Superset | 2 | active-active | < 1m | 0 |
-| Keycloak | 2 | active-active с shared DB | < 1m | 0 |
-| Postgres DWH | 2 (HA) + 1 async | sync replica + async | < 5s | < 1s |
-| MinIO | 4 | EC 4+2 | < 30s | 0 |
-| Redis | 1+2 | Sentinel | < 30s | < 1s |
-| Dagster | 1 | singleton (state в Postgres) | < 5m | 0 |
-| LGTM stack | 1 каждый | non-critical | < 1h | acceptable |
+| Компонент    | Реплик           | Режим                        | RTO   | RPO        |
+| ------------ | ---------------- | ---------------------------- | ----- | ---------- |
+| Traefik      | 2                | active-active                | < 30s | 0          |
+| Next.js      | 2                | active-active                | < 30s | 0          |
+| FastAPI      | 3                | active-active                | < 30s | 0          |
+| Superset     | 2                | active-active                | < 1m  | 0          |
+| Keycloak     | 2                | active-active с shared DB    | < 1m  | 0          |
+| Postgres DWH | 2 (HA) + 1 async | sync replica + async         | < 5s  | < 1s       |
+| MinIO        | 4                | EC 4+2                       | < 30s | 0          |
+| Redis        | 1+2              | Sentinel                     | < 30s | < 1s       |
+| Dagster      | 1                | singleton (state в Postgres) | < 5m  | 0          |
+| LGTM stack   | 1 каждый         | non-critical                 | < 1h  | acceptable |
 
 ## Compliance аспекты
 
@@ -189,14 +189,14 @@ Firewall между сегментами: explicit allow only.
 
 ### Шифрование
 
-| Где | Тип | Управление ключами |
-|---|---|---|
-| Disk (DWH, MinIO) | LUKS / encrypted disks | Vault unseal-keys |
-| Postgres at-rest | TDE (если используется postgres-tde) или disk-level | Vault |
-| MinIO objects | SSE-S3 with KMS | Vault |
-| TLS in-transit | TLS 1.3 only | Let's Encrypt / гос. УЦ |
-| mTLS internal | Cilium-managed certs | rotated weekly |
-| Backups | encrypted by pgBackRest | Vault key |
+| Где               | Тип                                                 | Управление ключами      |
+| ----------------- | --------------------------------------------------- | ----------------------- |
+| Disk (DWH, MinIO) | LUKS / encrypted disks                              | Vault unseal-keys       |
+| Postgres at-rest  | TDE (если используется postgres-tde) или disk-level | Vault                   |
+| MinIO objects     | SSE-S3 with KMS                                     | Vault                   |
+| TLS in-transit    | TLS 1.3 only                                        | Let's Encrypt / гос. УЦ |
+| mTLS internal     | Cilium-managed certs                                | rotated weekly          |
+| Backups           | encrypted by pgBackRest                             | Vault key               |
 
 ### Аудит сети
 

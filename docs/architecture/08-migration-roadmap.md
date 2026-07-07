@@ -17,6 +17,7 @@ related:
 # План миграции AS-IS → TO-BE
 
 > [!info] Принципы перехода
+>
 > 1. **Никакого big-bang**. Параллельная работа старого и нового, постепенный switch.
 > 2. **Static fallback всегда жив**. Платформа должна быть хотя бы в read-only при любом этапе.
 > 3. **Безопасность раньше функциональности**. Compliance, аудит, identity — впереди feature work.
@@ -29,6 +30,7 @@ related:
 
 > [!tip] Если ресурсов меньше, чем нужно для full TO-BE
 > Запустите **только** эти компоненты, остальные добавьте позже:
+>
 > - **FastAPI** (заменяет Next.js API routes, даёт OIDC, audit, RBAC)
 > - **Postgres 17 + dbt** (DWH без оркестратора — APScheduler внутри FastAPI)
 > - **Keycloak** (одна реплика для начала)
@@ -174,14 +176,14 @@ gantt
 
 ### 2.3 Перенос existing endpoints
 
-| AS-IS endpoint | TO-BE endpoint | Статус |
-|---|---|---|
-| `/api/chat` | `/api/v1/ai/chat` | port + rate-limit + redaction |
-| `/api/admin/ingest/run` | `/api/v1/admin/ingestion/run` | port |
-| `/api/admin/ingest/status` | `/api/v1/admin/ingestion/status` | port |
-| `/api/cron/ingest` | `/api/v1/cron/ingest` (с `X-Internal-Token`) | port |
-| `/api/data/*/latest` | `/api/v1/data/{domain}/latest` | port |
-| `/api/live-data/*` | `/api/v1/live-data/*` | port |
+| AS-IS endpoint             | TO-BE endpoint                               | Статус                        |
+| -------------------------- | -------------------------------------------- | ----------------------------- |
+| `/api/chat`                | `/api/v1/ai/chat`                            | port + rate-limit + redaction |
+| `/api/admin/ingest/run`    | `/api/v1/admin/ingestion/run`                | port                          |
+| `/api/admin/ingest/status` | `/api/v1/admin/ingestion/status`             | port                          |
+| `/api/cron/ingest`         | `/api/v1/cron/ingest` (с `X-Internal-Token`) | port                          |
+| `/api/data/*/latest`       | `/api/v1/data/{domain}/latest`               | port                          |
+| `/api/live-data/*`         | `/api/v1/live-data/*`                        | port                          |
 
 **Acceptance**: Next.js полностью переключился на FastAPI; `app/api/*` остались только `auth/*` (next-auth callbacks).
 
@@ -318,27 +320,27 @@ gantt
 
 ## Контрольные точки
 
-| Веха | Критерий приёмки | Кто принимает |
-|---|---|---|
-| **M1: инфра готова** | k3s + Keycloak + Next.js работают on-prem | Tech Lead + ИБ |
-| **M2: API split** | FastAPI обслуживает все мутирующие операции | Архитектор |
-| **M3: data в DWH** | Все KPI приходят из `marts.published_metric` | Data team |
-| **M4: аттестация** | Сертификат CERT-UZ получен | ИБ + юр. отдел |
-| **M5: ops features** | Commitment + Decision + E-IMZO рабочие | Product |
-| **M6: enterprise complete** | Dagster + Superset + Vault | Tech Lead |
+| Веха                        | Критерий приёмки                             | Кто принимает  |
+| --------------------------- | -------------------------------------------- | -------------- |
+| **M1: инфра готова**        | k3s + Keycloak + Next.js работают on-prem    | Tech Lead + ИБ |
+| **M2: API split**           | FastAPI обслуживает все мутирующие операции  | Архитектор     |
+| **M3: data в DWH**          | Все KPI приходят из `marts.published_metric` | Data team      |
+| **M4: аттестация**          | Сертификат CERT-UZ получен                   | ИБ + юр. отдел |
+| **M5: ops features**        | Commitment + Decision + E-IMZO рабочие       | Product        |
+| **M6: enterprise complete** | Dagster + Superset + Vault                   | Tech Lead      |
 
 ---
 
 ## Риски миграции
 
-| Риск | Вероятность | Митигация |
-|---|---|---|
-| Аттестация задерживается | M | Pre-аттестация на этапе 0 + buffer 1 месяц |
-| Подрядчик ЦОД срывает SLA | M | Контракт с штрафами + параллельный fallback ЦОД |
-| Команда не справляется с темпом | H | Прагматичный минимум, отказ от Dagster/Superset |
-| API breaking change в Census/BEA | M | См. [[07-bottlenecks-and-risks#1.3]] |
-| E-IMZO не работает в k3s pods (нативные libs) | L | Server-side verify через отдельный pod-helper |
-| LDAP в АП не имеет нужных групп | M | Создание ролей через Keycloak local + ручной mapping |
+| Риск                                          | Вероятность | Митигация                                            |
+| --------------------------------------------- | ----------- | ---------------------------------------------------- |
+| Аттестация задерживается                      | M           | Pre-аттестация на этапе 0 + buffer 1 месяц           |
+| Подрядчик ЦОД срывает SLA                     | M           | Контракт с штрафами + параллельный fallback ЦОД      |
+| Команда не справляется с темпом               | H           | Прагматичный минимум, отказ от Dagster/Superset      |
+| API breaking change в Census/BEA              | M           | См. [[07-bottlenecks-and-risks#1.3]]                 |
+| E-IMZO не работает в k3s pods (нативные libs) | L           | Server-side verify через отдельный pod-helper        |
+| LDAP в АП не имеет нужных групп               | M           | Создание ролей через Keycloak local + ручной mapping |
 
 ---
 
@@ -358,15 +360,15 @@ gantt
 
 > [!warning] Не точный, требует уточнения у подрядчика
 
-| Статья | Один раз (CapEx) | Ежемесячно (OpEx) |
-|---|---|---|
-| Hardware (3 узла k3s + 1 data) | $30K | — |
-| Лицензии (все OSS) | $0 | $0 |
-| ЦОД (UzCloud) | $5K (setup) | $1.5K |
-| Pen-test + аттестация | $20K | — |
-| Команда (3 человека × 6 мес) | — | $15K/мес → $90K |
-| Внешние сервисы (Anthropic, OneID) | $0 | $0.5K |
-| **Итого** | **$55K + $90K** | **~$2K/мес** |
+| Статья                             | Один раз (CapEx) | Ежемесячно (OpEx) |
+| ---------------------------------- | ---------------- | ----------------- |
+| Hardware (3 узла k3s + 1 data)     | $30K             | —                 |
+| Лицензии (все OSS)                 | $0               | $0                |
+| ЦОД (UzCloud)                      | $5K (setup)      | $1.5K             |
+| Pen-test + аттестация              | $20K             | —                 |
+| Команда (3 человека × 6 мес)       | —                | $15K/мес → $90K   |
+| Внешние сервисы (Anthropic, OneID) | $0               | $0.5K             |
+| **Итого**                          | **$55K + $90K**  | **~$2K/мес**      |
 
 ---
 

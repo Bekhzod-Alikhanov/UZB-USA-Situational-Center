@@ -28,33 +28,33 @@ related:
 
 ### Краткая сводка по ресурсам
 
-| Ресурс | viewer | analyst | editor | executive | admin |
-|---|---|---|---|---|---|
-| Dashboard | R | R | R | R | R |
-| Trade / Macro / Investments | R | R | RW | R | RW |
-| Commitments | R | RW (own) | RW | R | RW |
-| Decisions (создание) | — | RW (draft) | RW | RW | RW |
-| Decisions (approve) | — | — | — | RW + sign | RW + sign |
-| Review queue | — | R | RW + MFA | — | RW + MFA |
-| Source policies | R | R | R | — | RW |
-| Users | — | — | — | — | RW |
-| Audit log | — | — | R (own) | R (own) | R (all) |
-| AI assistant | RW (rate-lim) | RW | RW | RW | RW (admin) |
-| Maintenance mode | — | — | — | — | RW |
-| Force logout | — | — | — | — | RW |
-| Secrets rotation | — | — | — | — | RW |
-| Superset | — | RW | RW | — | RW |
+| Ресурс                      | viewer        | analyst    | editor   | executive | admin      |
+| --------------------------- | ------------- | ---------- | -------- | --------- | ---------- |
+| Dashboard                   | R             | R          | R        | R         | R          |
+| Trade / Macro / Investments | R             | R          | RW       | R         | RW         |
+| Commitments                 | R             | RW (own)   | RW       | R         | RW         |
+| Decisions (создание)        | —             | RW (draft) | RW       | RW        | RW         |
+| Decisions (approve)         | —             | —          | —        | RW + sign | RW + sign  |
+| Review queue                | —             | R          | RW + MFA | —         | RW + MFA   |
+| Source policies             | R             | R          | R        | —         | RW         |
+| Users                       | —             | —          | —        | —         | RW         |
+| Audit log                   | —             | —          | R (own)  | R (own)   | R (all)    |
+| AI assistant                | RW (rate-lim) | RW         | RW       | RW        | RW (admin) |
+| Maintenance mode            | —             | —          | —        | —         | RW         |
+| Force logout                | —             | —          | —        | —         | RW         |
+| Secrets rotation            | —             | —          | —        | —         | RW         |
+| Superset                    | —             | RW         | RW       | —         | RW         |
 
 ### Краткая сводка по доменам (ABAC)
 
-| Роль | trade | macro | assist | finance | mobility | educ | security | ops |
-|---|---|---|---|---|---|---|---|---|
-| viewer | R | R | R | R | R | R | — | — |
-| analyst (МИИП) | RW | R | R | RW | — | — | — | R |
-| analyst (МИД) | R | R | RW | R | RW | RW | R | — |
-| editor (cross) | RW | RW | RW | RW | RW | RW | RW | R |
-| executive | R | R | R | R | R | R | R | R |
-| admin | RW | RW | RW | RW | RW | RW | RW | RW |
+| Роль           | trade | macro | assist | finance | mobility | educ | security | ops |
+| -------------- | ----- | ----- | ------ | ------- | -------- | ---- | -------- | --- |
+| viewer         | R     | R     | R      | R       | R        | R    | —        | —   |
+| analyst (МИИП) | RW    | R     | R      | RW      | —        | —    | —        | R   |
+| analyst (МИД)  | R     | R     | RW     | R       | RW       | RW   | R        | —   |
+| editor (cross) | RW    | RW    | RW     | RW      | RW       | RW   | RW       | R   |
+| executive      | R     | R     | R      | R       | R        | R    | R        | R   |
+| admin          | RW    | RW    | RW     | RW      | RW       | RW   | RW       | RW  |
 
 ## Inline mermaid (heatmap-style)
 
@@ -109,6 +109,7 @@ flowchart TB
 ## Принципы наследования
 
 Роли иерархичны:
+
 - `analyst` ← `viewer` (анlyst всё, что может viewer + commitments)
 - `editor` ← `analyst` (+ approve)
 - `executive` отдельно (виды viewer + approve decisions, но не редактирует данные)

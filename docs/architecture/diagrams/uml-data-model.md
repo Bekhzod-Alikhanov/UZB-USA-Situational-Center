@@ -26,13 +26,13 @@ related:
 
 ## Группировка
 
-| Schema | Сущности | Назначение |
-|---|---|---|
-| `auth.*` | AppUser, UserPreferences | identity-зеркало Keycloak |
-| `marts.*` | PublishedMetric, PublishedMetricHistory, DataReviewQueue, SourceVersionPolicy, SourceRecord | governance-данные |
-| `raw.*` | RawSourceSnapshot | сырые snapshots |
-| `staging/intermediate` | NormalizedObservation, ReviewQueueItem | dbt-промежуточные |
-| `ops.*` | CommitmentRecord, DecisionRecord, CommentRecord, AuditLog, IngestRun | операционные |
+| Schema                 | Сущности                                                                                    | Назначение                |
+| ---------------------- | ------------------------------------------------------------------------------------------- | ------------------------- |
+| `auth.*`               | AppUser, UserPreferences                                                                    | identity-зеркало Keycloak |
+| `marts.*`              | PublishedMetric, PublishedMetricHistory, DataReviewQueue, SourceVersionPolicy, SourceRecord | governance-данные         |
+| `raw.*`                | RawSourceSnapshot                                                                           | сырые snapshots           |
+| `staging/intermediate` | NormalizedObservation, ReviewQueueItem                                                      | dbt-промежуточные         |
+| `ops.*`                | CommitmentRecord, DecisionRecord, CommentRecord, AuditLog, IngestRun                        | операционные              |
 
 ## Inline mermaid · class diagram
 
@@ -270,6 +270,7 @@ metric_identity = metric_key + "::" + sorted(dimensions)
 ### Один `is_current=true` per metric_identity
 
 Constraint:
+
 ```sql
 create unique index published_metric_current_unique
   on marts.published_metric (metric_key, dimensions)
@@ -281,6 +282,7 @@ create unique index published_metric_current_unique
 ### `value` — variant
 
 В Postgres реализуется как 3 nullable колонки + check:
+
 ```sql
 check (
   (value_num is not null)::integer +
@@ -298,6 +300,7 @@ check (
 ### `is_demo` пропагация
 
 Если запись помечена `is_demo: true`:
+
 - В UI отображается с `DemoBadge`
 - При `hideDemo=true` — скрывается
 - В прод-DWH (`DATA_BACKEND=dwh, target=prod`) — dbt-test блокирует попадание в `marts.published_metric`

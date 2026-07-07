@@ -3,6 +3,7 @@
 Store generated Stitch screenshots and HTML exports here.
 
 Expected canonical exports:
+
 - `overview-desktop.html` / `overview-desktop.png`
 - `trade-analytics.html` / `trade-analytics.png`
 - `geospatial-map.html` / `geospatial-map.png`
@@ -12,6 +13,7 @@ Expected canonical exports:
 - `mobile-navigation.html` / `mobile-navigation.png`
 
 Current production QA screenshots:
+
 - `qa-overview-desktop.png`
 - `qa-overview-mobile.png`
 - `qa-trade-desktop.png`

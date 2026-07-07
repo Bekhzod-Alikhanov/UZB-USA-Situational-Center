@@ -43,11 +43,6 @@
   },
   {
     "route": "/en/trade theme cycle",
-    "classes": [
-      "light-default",
-      "dark",
-      "command strategic",
-      "light-default"
-    ]
+    "classes": ["light-default", "dark", "command strategic", "light-default"]
   }
 ]

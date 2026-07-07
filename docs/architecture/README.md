@@ -28,6 +28,7 @@ related:
 ## Быстрая навигация
 
 ### Ядро архитектуры
+
 - [[00-overview]] — обзор: AS-IS vs TO-BE, ключевые решения, scope
 - [[01-target-architecture]] — целевая архитектура, слои, технологии
 - [[02-component-catalog]] — каталог компонентов (что, зачем, на чём)
@@ -37,11 +38,13 @@ related:
 - [[06-business-processes]] — BPMN бизнес-процессов
 
 ### Решения и риски
+
 - [[07-bottlenecks-and-risks]] — узкие места, тупики, риски
 - [[08-migration-roadmap]] — план миграции AS-IS → TO-BE
 - [[09-glossary]] — глоссарий терминов
 
 ### Визуальная часть
+
 - [[diagrams/README|Каталог диаграмм]] — все .drawio с парными md
 
 ---
@@ -82,23 +85,24 @@ docs/architecture/
 
 ## Как читать эту документацию
 
-| Если вы… | Начните с… |
-|---|---|
-| Заказчик / руководитель Центра | [[00-overview]] → [[07-bottlenecks-and-risks]] → [[08-migration-roadmap]] |
-| Архитектор | [[01-target-architecture]] → [[diagrams/c4-container]] → [[02-component-catalog]] |
-| DevOps / SRE | [[diagrams/deployment]] → [[01-target-architecture#Развёртывание]] |
-| Безопасник | [[03-authentication-rbac]] → [[diagrams/auth-sequence]] → [[diagrams/rbac-matrix]] |
-| Backend-разработчик | [[02-component-catalog]] → [[04-data-flow]] → [[diagrams/uml-data-model]] |
-| Frontend-разработчик | [[05-user-journeys]] → [[diagrams/journey-viewer]] |
-| Data-инженер | [[04-data-flow]] → [[diagrams/bpmn-ingestion]] → [[diagrams/data-lineage]] |
-| Аналитик | [[05-user-journeys#Аналитик (analyst)]] → [[06-business-processes]] |
-| Product-менеджер | [[06-business-processes]] → [[05-user-journeys]] |
+| Если вы…                       | Начните с…                                                                         |
+| ------------------------------ | ---------------------------------------------------------------------------------- |
+| Заказчик / руководитель Центра | [[00-overview]] → [[07-bottlenecks-and-risks]] → [[08-migration-roadmap]]          |
+| Архитектор                     | [[01-target-architecture]] → [[diagrams/c4-container]] → [[02-component-catalog]]  |
+| DevOps / SRE                   | [[diagrams/deployment]] → [[01-target-architecture#Развёртывание]]                 |
+| Безопасник                     | [[03-authentication-rbac]] → [[diagrams/auth-sequence]] → [[diagrams/rbac-matrix]] |
+| Backend-разработчик            | [[02-component-catalog]] → [[04-data-flow]] → [[diagrams/uml-data-model]]          |
+| Frontend-разработчик           | [[05-user-journeys]] → [[diagrams/journey-viewer]]                                 |
+| Data-инженер                   | [[04-data-flow]] → [[diagrams/bpmn-ingestion]] → [[diagrams/data-lineage]]         |
+| Аналитик                       | [[05-user-journeys#Аналитик (analyst)]] → [[06-business-processes]]                |
+| Product-менеджер               | [[06-business-processes]] → [[05-user-journeys]]                                   |
 
 ---
 
 ## Conventions
 
 ### Obsidian
+
 - **Wiki-links** `[[...]]` для внутренней навигации
 - **Frontmatter** YAML с `tags`, `type`, `status`, `related`
 - **Callouts** для разметки рисков (`> [!warning]`), решений (`> [!note]`), tips (`> [!tip]`)
@@ -106,11 +110,13 @@ docs/architecture/
 - Парные **`.drawio` + `.md`** файлы в `diagrams/` — XML открывается в [diagrams.net](https://app.diagrams.net) или плагином [Diagrams](https://github.com/zapthedingbat/drawio-obsidian)
 
 ### Имена и теги
+
 - Теги: `#architecture/c4`, `#architecture/bpmn`, `#architecture/uml`, `#security/auth`, `#data/governance`, `#process/...`
 - Идентификаторы ролей: `viewer`, `analyst`, `editor`, `executive`, `admin`
 - Идентификаторы доменов данных: `trade`, `macro`, `assistance`, `finance`, `mobility`, `education`, `security`, `operations`
 
 ### Версионирование
+
 - Каждый md файл имеет `version` в frontmatter
 - Изменения архитектуры → bump major (1.0 → 2.0)
 - Уточнения / опечатки → bump patch (1.0 → 1.0.1)
@@ -119,15 +125,15 @@ docs/architecture/
 
 ## Принцип «единого источника истины»
 
-| Артефакт | Источник правды |
-|---|---|
-| Целевая архитектура | этот vault |
-| Текущий код | репозиторий (`/app`, `/lib`, `/data`) |
-| Данные операционные | DWH (`marts.*`, `ops.*`) |
-| Пользователи и роли | Keycloak (IdP) |
-| Бизнес-процессы | BPMN-диаграммы в `diagrams/bpmn-*.drawio` |
-| Контракт API | OpenAPI 3.1 (генерируется FastAPI) |
-| Контракт данных | dbt + Pydantic schema |
+| Артефакт            | Источник правды                           |
+| ------------------- | ----------------------------------------- |
+| Целевая архитектура | этот vault                                |
+| Текущий код         | репозиторий (`/app`, `/lib`, `/data`)     |
+| Данные операционные | DWH (`marts.*`, `ops.*`)                  |
+| Пользователи и роли | Keycloak (IdP)                            |
+| Бизнес-процессы     | BPMN-диаграммы в `diagrams/bpmn-*.drawio` |
+| Контракт API        | OpenAPI 3.1 (генерируется FastAPI)        |
+| Контракт данных     | dbt + Pydantic schema                     |
 
 Если документация и код расходятся — **код первичен** для текущего состояния, **документация первична** для целевого. Расхождение фиксируется в [[07-bottlenecks-and-risks]] до устранения.
 

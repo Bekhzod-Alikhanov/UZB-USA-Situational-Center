@@ -30,15 +30,15 @@ related:
 
 ### Действующие лица (lanes)
 
-| Lane | Роль |
-|---|---|
-| Dagster Scheduler | автомат |
-| Connector | автомат (Python) |
-| MinIO | хранилище |
-| Postgres `raw.*` | БД |
-| dbt | автомат |
-| Editor | человек |
-| Notification (Telegram) | автомат |
+| Lane                    | Роль             |
+| ----------------------- | ---------------- |
+| Dagster Scheduler       | автомат          |
+| Connector               | автомат (Python) |
+| MinIO                   | хранилище        |
+| Postgres `raw.*`        | БД               |
+| dbt                     | автомат          |
+| Editor                  | человек          |
+| Notification (Telegram) | автомат          |
 
 ### Поток
 
@@ -81,13 +81,13 @@ flowchart LR
 
 ### Исключения
 
-| Сценарий | Реакция |
-|---|---|
-| API недоступен 5 минут | Retry x3 → alert; следующий run по расписанию |
-| API key истёк | Alert «secret rotation needed» → admin в [[05-user-journeys#5. Admin]] |
-| Источник вернул мусор (parsing error) | Snapshot всё равно сохраняется; в `staging` не доедет; `quality_flags=['parse-error']` |
-| Постгрес лежит | Dagster ставит run в `failed`, retry через 10 мин; данные в MinIO живы → можно реплейнуть |
-| dbt тест упал | run помечен failed; никаких записей в `marts.*` не появляется до фикса |
+| Сценарий                              | Реакция                                                                                   |
+| ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| API недоступен 5 минут                | Retry x3 → alert; следующий run по расписанию                                             |
+| API key истёк                         | Alert «secret rotation needed» → admin в [[05-user-journeys#5. Admin]]                    |
+| Источник вернул мусор (parsing error) | Snapshot всё равно сохраняется; в `staging` не доедет; `quality_flags=['parse-error']`    |
+| Постгрес лежит                        | Dagster ставит run в `failed`, retry через 10 мин; данные в MinIO живы → можно реплейнуть |
+| dbt тест упал                         | run помечен failed; никаких записей в `marts.*` не появляется до фикса                    |
 
 ---
 
@@ -98,14 +98,14 @@ flowchart LR
 
 ### Действующие лица
 
-| Lane | Роль |
-|---|---|
-| Editor | человек |
+| Lane               | Роль    |
+| ------------------ | ------- |
+| Editor             | человек |
 | Admin (escalation) | человек |
-| FastAPI | автомат |
-| Postgres | БД |
-| Audit log | автомат |
-| Telegram | автомат |
+| FastAPI            | автомат |
+| Postgres           | БД      |
+| Audit log          | автомат |
+| Telegram           | автомат |
 
 ### Поток
 
@@ -183,15 +183,15 @@ stateDiagram-v2
 
 ### Жизненный цикл
 
-| Событие | Кто инициирует | Что происходит |
-|---|---|---|
-| Создание (`draft`) | analyst, editor | INSERT `commitment_record`, audit |
-| Согласование (`agreed`) | editor + executive co-sign | UPDATE status, audit |
-| В работе (`in_progress`) | owner | UPDATE status, due_date обязательно |
-| Сигнал риска (`watch`) | owner или система (за 7 дней до overdue) | UPDATE status, Telegram |
-| Просрочено (`overdue`) | автомат | nightly job: WHERE due_date < today AND status NOT IN done/cancelled |
-| Завершено (`done`) | owner + editor co-sign | UPDATE, audit, attach proof file (MinIO) |
-| Отменено (`cancelled`) | executive | UPDATE + reason ≥ 50 char |
+| Событие                  | Кто инициирует                           | Что происходит                                                       |
+| ------------------------ | ---------------------------------------- | -------------------------------------------------------------------- |
+| Создание (`draft`)       | analyst, editor                          | INSERT `commitment_record`, audit                                    |
+| Согласование (`agreed`)  | editor + executive co-sign               | UPDATE status, audit                                                 |
+| В работе (`in_progress`) | owner                                    | UPDATE status, due_date обязательно                                  |
+| Сигнал риска (`watch`)   | owner или система (за 7 дней до overdue) | UPDATE status, Telegram                                              |
+| Просрочено (`overdue`)   | автомат                                  | nightly job: WHERE due_date < today AND status NOT IN done/cancelled |
+| Завершено (`done`)       | owner + editor co-sign                   | UPDATE, audit, attach proof file (MinIO)                             |
+| Отменено (`cancelled`)   | executive                                | UPDATE + reason ≥ 50 char                                            |
 
 ### Связи с остальной системой
 
@@ -201,13 +201,13 @@ stateDiagram-v2
 
 ### Уведомления
 
-| Событие | Канал | Получатели |
-|---|---|---|
-| Created | Email + Telegram | Все co-owners |
-| Status changed | Telegram | Owner |
-| 7 дней до overdue | Telegram + Email | Owner + co-owners |
-| Overdue | Telegram + Email | Owner + executive домена |
-| Done | Email | Все co-owners + executive |
+| Событие           | Канал            | Получатели                |
+| ----------------- | ---------------- | ------------------------- |
+| Created           | Email + Telegram | Все co-owners             |
+| Status changed    | Telegram         | Owner                     |
+| 7 дней до overdue | Telegram + Email | Owner + co-owners         |
+| Overdue           | Telegram + Email | Owner + executive домена  |
+| Done              | Email            | Все co-owners + executive |
 
 ---
 
@@ -268,6 +268,7 @@ flowchart LR
 - Личные контакты
 
 Эти артефакты живут в **отдельной операционной системе** с полноценным authn/authz/document-storage и audit. Платформа знает только:
+
 - статус % lane (по чеклисту)
 - название документа (но не его текст)
 - факт «бронирование сделано» (но не код)
@@ -360,17 +361,17 @@ flowchart TD
 
 ## Сводная карта процессов
 
-| Процесс | Trigger | Длительность | Owner |
-|---|---|---|---|
-| Ingestion | Schedule (07:00 UTC) | < 10 мин | Data team |
-| Publication review | Появление item в queue | < 4 ч SLA | Editor |
-| Commitment lifecycle | Создание/событие | дни-месяцы | Owner + editor |
-| Decision workflow | Готов к рассмотрению | < 24 ч SLA | Executive |
-| Visit-prep | За N дней до визита | дни-недели | Protocol-lead |
-| AI assistance | Per request | < 30 сек | n/a (per-user) |
-| Backup | 02:00 UTC daily | < 30 мин | DevOps |
-| Restore drill | Quarterly | 4 ч | DBA + DevOps |
-| Incident response | Detection | по severity | On-call rotation |
+| Процесс              | Trigger                | Длительность | Owner            |
+| -------------------- | ---------------------- | ------------ | ---------------- |
+| Ingestion            | Schedule (07:00 UTC)   | < 10 мин     | Data team        |
+| Publication review   | Появление item в queue | < 4 ч SLA    | Editor           |
+| Commitment lifecycle | Создание/событие       | дни-месяцы   | Owner + editor   |
+| Decision workflow    | Готов к рассмотрению   | < 24 ч SLA   | Executive        |
+| Visit-prep           | За N дней до визита    | дни-недели   | Protocol-lead    |
+| AI assistance        | Per request            | < 30 сек     | n/a (per-user)   |
+| Backup               | 02:00 UTC daily        | < 30 мин     | DevOps           |
+| Restore drill        | Quarterly              | 4 ч          | DBA + DevOps     |
+| Incident response    | Detection              | по severity  | On-call rotation |
 
 ---
 

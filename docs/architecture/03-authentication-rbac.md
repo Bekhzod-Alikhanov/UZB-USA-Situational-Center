@@ -56,12 +56,12 @@ flowchart LR
   KC -->|access_token JWT| App["Приложение<br/>(Next.js, FastAPI)"]
 ```
 
-| Категория | Источник | MFA | Особенности |
-|---|---|---|---|
-| Гос. служащий | LDAP federation (если есть AD) | ✅ TOTP | Группы AD → Keycloak roles через mapper |
-| Сотрудник Центра | Keycloak local users | ✅ TOTP | Создаются админом, password rotation 90 дней |
-| Бизнес-пользователь | OneID РУз | ✅ (от OneID) | Только viewer + ограниченные домены |
-| Сервис-аккаунт | Client credentials grant | — | client_id/secret в Vault, ротация 30 дней |
+| Категория           | Источник                       | MFA           | Особенности                                  |
+| ------------------- | ------------------------------ | ------------- | -------------------------------------------- |
+| Гос. служащий       | LDAP federation (если есть AD) | ✅ TOTP       | Группы AD → Keycloak roles через mapper      |
+| Сотрудник Центра    | Keycloak local users           | ✅ TOTP       | Создаются админом, password rotation 90 дней |
+| Бизнес-пользователь | OneID РУз                      | ✅ (от OneID) | Только viewer + ограниченные домены          |
+| Сервис-аккаунт      | Client credentials grant       | —             | client_id/secret в Vault, ротация 30 дней    |
 
 > [!warning] Зачем federation, а не отдельные пароли
 > Если у пользователя есть учётка в ведомственном AD, **новый пароль не выдаётся**. Это устраняет риск parol123 и совпадает с требованиями к гос-системам РУз о привязке к корпоративной учётке.
@@ -120,29 +120,29 @@ sequenceDiagram
 
 ### JWT-конфигурация
 
-| Поле | Значение |
-|---|---|
-| **Algorithm** | RS256 (асимметричный) |
-| **Issuer** | `https://auth.uzus.local/realms/uzus` |
-| **Audience** | `uzus-ui`, `uzus-api`, `uzus-superset` (разные клиенты) |
-| **Access token TTL** | 15 минут |
-| **Refresh token TTL** | 8 часов · ротация при каждом use |
-| **Claims** | `sub`, `email`, `roles[]`, `domains[]`, `agency`, `mfa: true` |
-| **Передача** | `Authorization: Bearer ...` (никогда не в URL) |
+| Поле                    | Значение                                                                |
+| ----------------------- | ----------------------------------------------------------------------- |
+| **Algorithm**           | RS256 (асимметричный)                                                   |
+| **Issuer**              | `https://auth.uzus.local/realms/uzus`                                   |
+| **Audience**            | `uzus-ui`, `uzus-api`, `uzus-superset` (разные клиенты)                 |
+| **Access token TTL**    | 15 минут                                                                |
+| **Refresh token TTL**   | 8 часов · ротация при каждом use                                        |
+| **Claims**              | `sub`, `email`, `roles[]`, `domains[]`, `agency`, `mfa: true`           |
+| **Передача**            | `Authorization: Bearer ...` (никогда не в URL)                          |
 | **Storage на frontend** | **только server-side session** в Next.js, токены не уходят в browser JS |
 
 ### Защита от типовых атак
 
-| Атака | Контрмера |
-|---|---|
-| Brute force /login | Keycloak brute-force detector + CrowdSec на edge (lockout 30 минут после 5 неудач) |
-| Credential stuffing | HIBP-check паролей при создании · MFA обязательно |
-| Session fixation | Pre-auth random `state` + server-side session id ротируется на login |
-| CSRF | SameSite=Lax cookies + CSRF-токены для state-changing форм |
-| Token theft | HttpOnly + Secure cookies; короткий TTL access; ротация refresh |
-| MITM | TLS 1.3 only, HSTS preload, mTLS внутри кластера |
-| OIDC mix-up | strict `iss`/`aud` validation, PKCE обязательно для public clients |
-| Replay attacks | `jti` claim + Redis blacklist при logout |
+| Атака               | Контрмера                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| Brute force /login  | Keycloak brute-force detector + CrowdSec на edge (lockout 30 минут после 5 неудач) |
+| Credential stuffing | HIBP-check паролей при создании · MFA обязательно                                  |
+| Session fixation    | Pre-auth random `state` + server-side session id ротируется на login               |
+| CSRF                | SameSite=Lax cookies + CSRF-токены для state-changing форм                         |
+| Token theft         | HttpOnly + Secure cookies; короткий TTL access; ротация refresh                    |
+| MITM                | TLS 1.3 only, HSTS preload, mTLS внутри кластера                                   |
+| OIDC mix-up         | strict `iss`/`aud` validation, PKCE обязательно для public clients                 |
+| Replay attacks      | `jti` claim + Redis blacklist при logout                                           |
 
 ---
 
@@ -210,14 +210,14 @@ roles:
 
 Пример матрицы:
 
-| Роль × Домен | trade | macro | assistance | finance | mobility | education | security | operations |
-|---|---|---|---|---|---|---|---|---|
-| viewer | R | R | R | R | R | R | — | — |
-| analyst (МИИП) | RW | R | R | RW | — | — | — | R |
-| analyst (МИД) | R | R | RW | R | RW | RW | R | — |
-| editor (всех) | RW | RW | RW | RW | RW | RW | RW | R |
-| executive | R | R | R | R | R | R | R | R |
-| admin | RW | RW | RW | RW | RW | RW | RW | RW |
+| Роль × Домен   | trade | macro | assistance | finance | mobility | education | security | operations |
+| -------------- | ----- | ----- | ---------- | ------- | -------- | --------- | -------- | ---------- |
+| viewer         | R     | R     | R          | R       | R        | R         | —        | —          |
+| analyst (МИИП) | RW    | R     | R          | RW      | —        | —         | —        | R          |
+| analyst (МИД)  | R     | R     | RW         | R       | RW       | RW        | R        | —          |
+| editor (всех)  | RW    | RW    | RW         | RW      | RW       | RW        | RW       | R          |
+| executive      | R     | R     | R          | R       | R        | R         | R        | R          |
+| admin          | RW    | RW    | RW         | RW      | RW       | RW        | RW       | RW         |
 
 Реализация: claim `domains[]` в JWT → FastAPI guard сверяет с запрашиваемым доменом → Postgres RLS-policy проверяет `current_setting('app.user_domains')`.
 
@@ -225,25 +225,25 @@ roles:
 
 См. визуально [[diagrams/rbac-matrix]].
 
-| Ресурс / Действие | viewer | analyst | editor | executive | admin |
-|---|---|---|---|---|---|
-| `GET /api/v1/data/*/latest` | ✅ (по доменам) | ✅ | ✅ | ✅ | ✅ |
-| `GET /api/v1/data/*/history` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `GET /api/v1/governance/review-queue` | — | ✅ | ✅ | — | ✅ |
-| `POST /api/v1/governance/publish` | — | — | ✅ | — | ✅ |
-| `POST /api/v1/governance/reject` | — | — | ✅ | — | ✅ |
-| `POST /api/v1/commitments` | — | ✅ | ✅ | — | ✅ |
-| `PATCH /api/v1/commitments/{id}` | — | ✅ (own) | ✅ | — | ✅ |
-| `POST /api/v1/decisions` | — | ✅ (draft) | ✅ | — | ✅ |
-| `POST /api/v1/decisions/{id}/approve` | — | — | — | ✅ | ✅ |
-| `POST /api/v1/exports/pdf` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `POST /api/v1/ai/chat` | ✅ (rate-lim) | ✅ | ✅ | ✅ | ✅ |
-| `GET /api/v1/admin/users` | — | — | — | — | ✅ |
-| `POST /api/v1/admin/users` | — | — | — | — | ✅ |
-| `POST /api/v1/admin/policies` | — | — | — | — | ✅ |
-| `GET /api/v1/audit` | — | — | ✅ (own) | ✅ (own) | ✅ |
-| `POST /api/v1/ingestion/trigger` | — | — | — | — | ✅ |
-| Superset doors | — | ✅ | ✅ | — | ✅ |
+| Ресурс / Действие                     | viewer          | analyst    | editor   | executive | admin |
+| ------------------------------------- | --------------- | ---------- | -------- | --------- | ----- |
+| `GET /api/v1/data/*/latest`           | ✅ (по доменам) | ✅         | ✅       | ✅        | ✅    |
+| `GET /api/v1/data/*/history`          | ✅              | ✅         | ✅       | ✅        | ✅    |
+| `GET /api/v1/governance/review-queue` | —               | ✅         | ✅       | —         | ✅    |
+| `POST /api/v1/governance/publish`     | —               | —          | ✅       | —         | ✅    |
+| `POST /api/v1/governance/reject`      | —               | —          | ✅       | —         | ✅    |
+| `POST /api/v1/commitments`            | —               | ✅         | ✅       | —         | ✅    |
+| `PATCH /api/v1/commitments/{id}`      | —               | ✅ (own)   | ✅       | —         | ✅    |
+| `POST /api/v1/decisions`              | —               | ✅ (draft) | ✅       | —         | ✅    |
+| `POST /api/v1/decisions/{id}/approve` | —               | —          | —        | ✅        | ✅    |
+| `POST /api/v1/exports/pdf`            | ✅              | ✅         | ✅       | ✅        | ✅    |
+| `POST /api/v1/ai/chat`                | ✅ (rate-lim)   | ✅         | ✅       | ✅        | ✅    |
+| `GET /api/v1/admin/users`             | —               | —          | —        | —         | ✅    |
+| `POST /api/v1/admin/users`            | —               | —          | —        | —         | ✅    |
+| `POST /api/v1/admin/policies`         | —               | —          | —        | —         | ✅    |
+| `GET /api/v1/audit`                   | —               | —          | ✅ (own) | ✅ (own)  | ✅    |
+| `POST /api/v1/ingestion/trigger`      | —               | —          | —        | —         | ✅    |
+| Superset doors                        | —               | ✅         | ✅       | —         | ✅    |
 
 ---
 
@@ -260,7 +260,9 @@ export function can(session: Session, perm: Permission): boolean {
 }
 
 // Использование:
-{can(session, "decision:approve") && <ApproveButton />}
+{
+  can(session, "decision:approve") && <ApproveButton />;
+}
 ```
 
 > [!warning]
@@ -333,6 +335,7 @@ SET LOCAL app.user_role = 'analyst';
 ```
 
 **Свойства**:
+
 - WORM (write-once, read-many): `INSERT` only. Триггер запрещает `UPDATE`/`DELETE` через `before update do nothing`.
 - Подпись каждой записи приватным ключом backend (Ed25519). Ключ в Vault. Внешний верификатор может проверить целостность лога.
 - Экспорт: `admin` может выгрузить отрезок в подписанный JSON для регулятора.
@@ -410,13 +413,13 @@ create table ops.user_preferences (
 
 ### Закон РУз №ЗРУ-547 «О персональных данных»
 
-| Требование | Реализация |
-|---|---|
-| Хранение ПДн на территории РУз | DWH, MinIO, Keycloak — все on-prem в РУз |
-| Согласие субъекта | При первом login — экран согласия (для бизнес-пользователей) |
-| Минимизация | Храним только email + display_name + agency, не ФИО детально |
-| Право на удаление | `DELETE` каскадно через FastAPI `/admin/users/{id}` (audit-лог сохраняется в анонимизированной форме — `actor_id` остаётся, `email` обнуляется) |
-| Реестр обработки | Документ DPIA в `docs/compliance/` (отдельный) |
+| Требование                     | Реализация                                                                                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Хранение ПДн на территории РУз | DWH, MinIO, Keycloak — все on-prem в РУз                                                                                                        |
+| Согласие субъекта              | При первом login — экран согласия (для бизнес-пользователей)                                                                                    |
+| Минимизация                    | Храним только email + display_name + agency, не ФИО детально                                                                                    |
+| Право на удаление              | `DELETE` каскадно через FastAPI `/admin/users/{id}` (audit-лог сохраняется в анонимизированной форме — `actor_id` остаётся, `email` обнуляется) |
+| Реестр обработки               | Документ DPIA в `docs/compliance/` (отдельный)                                                                                                  |
 
 ### CERT-UZ / GosSUZI
 

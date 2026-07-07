@@ -134,4 +134,3 @@ A change is not done until:
 - `pnpm validate:data` and relevant type/lint/test commands have been run or explicitly documented as not run.
 - New user-visible strings are message-backed or intentionally exempted.
 - Any remaining release risks are documented.
-

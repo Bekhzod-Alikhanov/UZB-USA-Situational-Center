@@ -10,21 +10,21 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 
 ## Stack
 
-| Layer                | Choice                                                                            | Notes                                                                                                 |
-| -------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Runtime              | Node.js 24 LTS on Vercel                                                          | `engines.node = >=24.0.0 <25.0.0`. V8 13.x, Maglev compiler enabled.                                  |
-| Framework            | Next.js 16.2.9, App Router, Turbopack                                             | React 19.2. TypeScript 6 strict.                                                                      |
-| Styling              | Tailwind CSS v4 (`@theme`, `@utility`)                                            | All design tokens in `app/globals.css`. No tailwind.config.ts.                                        |
-| State                | Zustand v5.0.13 + persist                                                         | `lib/store/settings.ts` is the global UI store (theme, hideDemo, presentationMode).                   |
-| i18n                 | next-intl v4, subpath routing `/[locale]/...`                                     | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                                      |
-| Charts               | Recharts (line/bar/area), Visx (sankey/chord/treemap), zero-dep `<MiniBars />`    | Heavy charts are `next/dynamic({ ssr:false })`-loaded behind `<LazyMount />`.                         |
-| Maps                 | maplibre-gl 5.x (OpenFreeMap), Globe.gl 2.45.x, d3-geo Albers USA                 | `/map` is gated behind `<MapLoadGate />` — runtime only fetched on user click.                        |
-| Operational database | PostgreSQL 17 via Supabase                                                        | 12-table schema (`database/schema.sql`). Server-only REST adapter at `lib/db/adapter.ts`.             |
-| Live ingestion       | 5 connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov)          | Daily Vercel cron at 07:00 UTC → `raw_snapshot → normalized_observation → published_metric`.          |
-| Data governance      | No-downgrade policy, pending-vs-published, static fallback (`lib/data-governance/*`) | Enforced by `pnpm test:governance` in the verify gate.                                                |
-| Auth                 | Signed, short-lived cookie password gate on `/admin`                              | Server action + middleware. Set `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET`.                            |
-| Tests                | Vitest (unit), Playwright (e2e + axe a11y), Lighthouse CI                         | `tests/`, `lhci.config.cjs`, `playwright.config.ts`. CI on `.github/workflows/qa.yml`.                |
-| Package manager      | **pnpm**                                                                          | Lockfile at `pnpm-lock.yaml`.                                                                         |
+| Layer                | Choice                                                                               | Notes                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Runtime              | Node.js 24 LTS on Vercel                                                             | `engines.node = >=24.0.0 <25.0.0`. V8 13.x, Maglev compiler enabled.                         |
+| Framework            | Next.js 16.2.9, App Router, Turbopack                                                | React 19.2. TypeScript 6 strict.                                                             |
+| Styling              | Tailwind CSS v4 (`@theme`, `@utility`)                                               | All design tokens in `app/globals.css`. No tailwind.config.ts.                               |
+| State                | Zustand v5.0.13 + persist                                                            | `lib/store/settings.ts` is the global UI store (theme, hideDemo, presentationMode).          |
+| i18n                 | next-intl v4, subpath routing `/[locale]/...`                                        | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                             |
+| Charts               | Recharts (line/bar/area), Visx (sankey/chord/treemap), zero-dep `<MiniBars />`       | Heavy charts are `next/dynamic({ ssr:false })`-loaded behind `<LazyMount />`.                |
+| Maps                 | maplibre-gl 5.x (OpenFreeMap), Globe.gl 2.45.x, d3-geo Albers USA                    | `/map` is gated behind `<MapLoadGate />` — runtime only fetched on user click.               |
+| Operational database | PostgreSQL 17 via Supabase                                                           | 12-table schema (`database/schema.sql`). Server-only REST adapter at `lib/db/adapter.ts`.    |
+| Live ingestion       | 5 connectors (BEA, U.S. Census, EXIM, World Bank, ForeignAssistance.gov)             | Daily Vercel cron at 07:00 UTC → `raw_snapshot → normalized_observation → published_metric`. |
+| Data governance      | No-downgrade policy, pending-vs-published, static fallback (`lib/data-governance/*`) | Enforced by `pnpm test:governance` in the verify gate.                                       |
+| Auth                 | Signed, short-lived cookie password gate on `/admin`                                 | Server action + middleware. Set `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET`.                   |
+| Tests                | Vitest (unit), Playwright (e2e + axe a11y), Lighthouse CI                            | `tests/`, `lhci.config.cjs`, `playwright.config.ts`. CI on `.github/workflows/qa.yml`.       |
+| Package manager      | **pnpm**                                                                             | Lockfile at `pnpm-lock.yaml`.                                                                |
 
 ## Routes (13 public sidebar sections × 3 locales + redirect stubs + admin/login)
 
