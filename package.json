@@ -68,7 +68,7 @@
     "prettier": "^3.9.1",
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9",
+    "vitest": "^4.1.10",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "engines": {
@@ -77,7 +77,12 @@
   "pnpm": {
     "overrides": {
       "@babel/core": ">=7.29.6",
-      "postcss": ">=8.5.10"
+      "postcss": ">=8.5.10",
+      "tmp": "^0.2.6",
+      "qs": "^6.15.2",
+      "brace-expansion": "^5.0.6",
+      "ws": "^8.21.0",
+      "lighthouse>ws": "^7.5.11"
     }
   }
 }
