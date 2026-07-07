@@ -154,14 +154,6 @@ export const sources: Source[] = [
     note: "Used for portfolio-level figures pending the underlying project register.",
   },
   {
-    id: "president_uz_8197",
-    level: "B",
-    name: "President.uz — Uzbekistan-U.S. Business Forum (June 2025)",
-    url: "https://president.uz/ru/lists/view/8197",
-    fetched_at: "2026-04-24",
-    data_type: "Business forum, companies, investment and trade figures",
-  },
-  {
     id: "govuz_business_forum_2025",
     level: "B",
     name: "GOV.UZ — Uzbekistan-U.S. Business Forum (June 2025)",
@@ -169,14 +161,6 @@ export const sources: Source[] = [
     fetched_at: "2026-04-24",
     data_type: "Forum metrics: trade, US FDI, enterprises, FEZs, sector priorities",
     note: "Used to cross-check the June 2025 forum metrics.",
-  },
-  {
-    id: "ustr_visit_2024",
-    level: "B",
-    name: "USTR — Joint Statement on visit to Uzbekistan (June 2024)",
-    url: "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/june/joint-statement-visit-united-states-trade-representative-uzbekistan",
-    fetched_at: "2026-04-24",
-    data_type: "WTO, GSP, IP, meat and poultry market access context",
   },
   {
     id: "tradegov_market_opportunities",
@@ -564,34 +548,6 @@ export const sources: Source[] = [
     url: "https://lex.uz/ru/docs/19509",
     fetched_at: "2026-04-29",
     data_type: "Framework resolution for appointing heads of UZ diplomatic missions, including in the United States",
-  },
-  {
-    id: "lex_uz_treaties_law_2019",
-    level: "B",
-    name: "Law ЗРУ-518 (06.02.2019) — On International Treaties of Uzbekistan",
-    url: "https://lex.uz/ru/docs/4193763",
-    fetched_at: "2026-04-29",
-    data_type:
-      "Legal framework governing how Uzbekistan signs, ratifies and gives effect to international agreements (incl. those with the U.S.)",
-    note: "Supersedes 172-I (22.12.1995). Defines the procedural base under which the BIT, MoUs, and the Investment Platform Agreement become binding on UZ side.",
-  },
-  {
-    id: "lex_uz_investment_law_2019",
-    level: "B",
-    name: "Law ЗРУ-598 (25.12.2019) — On Investments and Investment Activity",
-    url: "https://lex.uz/ru/docs/4664144",
-    fetched_at: "2026-04-29",
-    data_type:
-      "Domestic investment legal base — protections, dispute resolution, and incentives applicable to U.S. investors operating in Uzbekistan",
-  },
-  {
-    id: "lex_uz_strategy_2030",
-    level: "B",
-    name: "Decree УП-158 (11.09.2023) — Strategy «Uzbekistan — 2030»",
-    url: "https://lex.uz/ru/docs/6600404",
-    fetched_at: "2026-04-29",
-    data_type:
-      "Umbrella national strategy naming the United States among priority partners for investment, technology and education cooperation",
   },
 ];
 

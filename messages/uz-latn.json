@@ -158,11 +158,7 @@
     "diplomacy": "Diplomatiya va hamkorlar",
     "risks": "Xatarlar, harakatlar va signallar",
     "advanced": "Kengaytirilgan tahlil",
-    "operations": "Operatsiyalar",
-    "monitoring": "Kuzatuv",
-    "execution": "Ijro",
-    "knowledge": "Bilimlar bazasi",
-    "internal": "Ichki"
+    "operations": "Operatsiyalar"
   },
   "top": {
     "title": "Ikki tomonlama kun tartibini muvofiqlashtirish portali",
@@ -978,7 +974,6 @@
     "audit": "Audit jurnali",
     "import": "CSV / XLSX import",
     "users": "Foydalanuvchilar",
-    "delegationLocation": "Delegatsiyalarning jonli lokatsiyasi",
     "login": {
       "title": "Administrator kirishi",
       "subtitle": "Faqat Situatsion markaz xodimlari uchun",
@@ -1003,13 +998,6 @@
     "close": "Yopish",
     "save": "Saqlash",
     "cancel": "Bekor qilish"
-  },
-  "common": {
-    "updated": "Yangilandi",
-    "source": "Manba",
-    "viewAll": "Barchasini ko‘rish",
-    "loading": "Yuklanmoqda…",
-    "empty": "Ma’lumot yo‘q"
   },
   "events": {
     "filters": {

@@ -70,6 +70,9 @@ export async function GET(req: NextRequest) {
   const visitId = req.nextUrl.searchParams.get("visit") ?? "";
   const visit = upcomingVisits.find((v) => v.id === visitId);
   if (!visit) return NextResponse.json({ error: "unknown visit" }, { status: 404 });
+  if (!roleMayAccessVisit(role, visit)) {
+    return NextResponse.json({ error: "role cannot access this visit" }, { status: 403 });
+  }
 
   const env = supabaseEnv();
   if (!env) return NextResponse.json({ files: [], backend: "static" }, { headers: { "cache-control": "no-store" } });
