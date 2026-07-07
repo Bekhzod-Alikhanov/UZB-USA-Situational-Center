@@ -430,46 +430,6 @@
       "share": "Share",
       "value": "Value, $M"
     },
-    "narrationLabels": {
-      "what": "What this means",
-      "why": "Why it matters",
-      "how": "How to use",
-      "source": "Source and unit"
-    },
-    "narration": {
-      "annual": {
-        "what": "The annual table is the quote-safe backbone for turnover, exports, imports, and balance.",
-        "why": "It gives officials a consistent headline series and prevents accidental mixing with U.S. reporter-side data.",
-        "how": "Use this for external annual statements, then cite methodology notes when comparing against Census or Comtrade.",
-        "source": "USD millions, State Statistics Committee of Uzbekistan."
-      },
-      "methodology": {
-        "what": "UZ Stat, U.S. Census, and Comtrade can describe the same flow differently.",
-        "why": "Mirror gaps are not necessarily errors; they can indicate valuation, timing, reporter, or classification differences.",
-        "how": "Use this chart when an analyst or policymaker asks why two public sources do not match."
-      },
-      "flow": {
-        "what": "The line view reveals direction and volatility across the full 2017-2025 relationship.",
-        "why": "It quickly shows whether exports, imports, and turnover are moving together or diverging.",
-        "how": "Use for executive briefings before drilling into monthly and product tables."
-      },
-      "monthly": {
-        "what": "Monthly U.S. Census data shows near-term trade pulse and seasonal movement.",
-        "why": "It is useful for monitoring recent changes, but it should not replace the quote-ready annual UZ Stat view.",
-        "how": "Use as a monitoring chart and keep annual methodology visible for external claims.",
-        "source": "USD values, U.S. Census reporter-side goods series."
-      },
-      "structure": {
-        "what": "The structure charts identify which categories carry the bilateral goods relationship.",
-        "why": "They connect policy conversations to concrete product lanes and market-entry questions.",
-        "how": "Use to choose where HS/Comtrade or ITC analysis should go deeper."
-      },
-      "categories": {
-        "what": "The ranked tables make the biggest export and import categories easy to quote and compare.",
-        "why": "They prevent the trade page from becoming only a time-series dashboard.",
-        "how": "Use the rank tables for meeting notes, then open advanced analysis for HS-level precision."
-      }
-    },
     "ranking": {
       "exporters": "Top UZ exporters to the USA",
       "importers": "Top US importers to Uzbekistan"
@@ -505,7 +465,6 @@
     "tabs": {
       "timeline": "Timeline",
       "grid": "Grid",
-      "table": "Table",
       "calendar": "Calendar"
     }
   },
@@ -516,8 +475,6 @@
     "upcomingTitle": "Upcoming and active visits",
     "completedTitle": "Completed visits",
     "noUpcoming": "No upcoming visits registered.",
-    "outcomesTitle": "Outcomes · plan vs actual",
-    "outcomesSub": "{count} verified or pending readouts — closes the loop on every visit",
     "card": {
       "direction": {
         "uzToUsa": "UZ → USA",

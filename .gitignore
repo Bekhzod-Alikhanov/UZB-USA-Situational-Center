@@ -77,3 +77,7 @@ debug.log
 audit-server.*.log
 .agents/
 .codex/
+
+# Local secrets — region/admin passwords, never commit
+пароли-регионов.txt
+*пароли*

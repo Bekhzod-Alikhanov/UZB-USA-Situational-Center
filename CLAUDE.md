@@ -17,7 +17,6 @@ The product is **demo-ready and production-quality**, but every synthetic value 
 | Styling              | Tailwind CSS v4 (`@theme`, `@utility`)                                            | All design tokens in `app/globals.css`. No tailwind.config.ts.                                        |
 | State                | Zustand v5.0.13 + persist                                                         | `lib/store/settings.ts` is the global UI store (theme, hideDemo, presentationMode).                   |
 | i18n                 | next-intl v4, subpath routing `/[locale]/...`                                     | 3 locales: `en`, `uz-latn`, `ru`. Messages in `messages/*.json`.                                      |
-| Tables               | TanStack Table v8                                                                 | Server-shaped data, client filter/sort/page.                                                          |
 | Charts               | Recharts (line/bar/area), Visx (sankey/chord/treemap), zero-dep `<MiniBars />`    | Heavy charts are `next/dynamic({ ssr:false })`-loaded behind `<LazyMount />`.                         |
 | Maps                 | maplibre-gl 5.x (OpenFreeMap), Globe.gl 2.45.x, d3-geo Albers USA                 | `/map` is gated behind `<MapLoadGate />` — runtime only fetched on user click.                        |
 | Operational database | PostgreSQL 17 via Supabase                                                        | 12-table schema (`database/schema.sql`). Server-only REST adapter at `lib/db/adapter.ts`.             |

@@ -27,7 +27,6 @@ export function VisitsTabs({ locale, todayIso }: { locale: string; todayIso: str
           {[
             { v: "timeline", l: t("timeline") },
             { v: "grid", l: t("grid") },
-            { v: "table", l: t("table") },
             { v: "calendar", l: t("calendar") },
           ].map((tab) => (
             <Tabs.Trigger
@@ -86,39 +85,6 @@ export function VisitsTabs({ locale, todayIso }: { locale: string; todayIso: str
               </div>
             </div>
           ))}
-        </div>
-      </Tabs.Content>
-
-      <Tabs.Content value="table" className="mt-5">
-        <div className="overflow-x-auto">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col" className="w-[90px]">
-                  Date
-                </th>
-                <th scope="col">Title</th>
-                <th scope="col" className="w-[92px]">
-                  Level
-                </th>
-                <th scope="col" className="w-[96px]">
-                  Direction
-                </th>
-                <th scope="col">Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((v) => (
-                <tr key={v.id}>
-                  <td className="mono text-[11.5px]">{v.date}</td>
-                  <td className="font-medium">{v.title}</td>
-                  <td className="uppercase tracking-wider text-[11px] text-[var(--color-ink-muted)]">{v.level}</td>
-                  <td className="text-[11.5px] text-[var(--color-ink-muted)]">{v.direction}</td>
-                  <td className="text-[11.5px] text-[var(--color-ink-muted)]">{v.location}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </Tabs.Content>
 

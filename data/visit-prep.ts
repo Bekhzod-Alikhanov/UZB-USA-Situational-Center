@@ -9,14 +9,9 @@
  * decision. Passport/visa numbers, PNRs, booking codes, talking-point text,
  * and personal contact details remain forbidden (CLAUDE.md hard rule #8) —
  * they belong to the operational system, not this monitoring platform.
- *
- * Post-visit plan-vs-actual outcomes (`visitOutcomes`) are unchanged.
  */
 
 import type { RoadmapRegionId } from "./roadmaps";
-
-export type OutcomeScore = "High" | "Medium-high" | "Medium" | "Below plan" | "Low";
-export type OutcomeStatus = "Verified" | "Needs verification" | "On track" | "At risk" | "Pending";
 
 export interface DelegationMember {
   /** Person's name — only ever populated for the password-gated section. */
@@ -69,21 +64,6 @@ export interface UpcomingVisit {
   meetings: VisitMeeting[];
   materials: VisitMaterial[];
   status: UpcomingVisitStatus;
-  is_demo: boolean;
-  sourceId?: string;
-}
-
-export interface VisitOutcome {
-  id: string;
-  visit: string;
-  /** Reference into `data/visits.ts` (Visit.id) when the outcome maps to a tracked visit. */
-  visitId?: string;
-  date: string;
-  plan: string;
-  actual: string;
-  score: OutcomeScore;
-  verification: string;
-  status: OutcomeStatus;
   is_demo: boolean;
   sourceId?: string;
 }
@@ -320,70 +300,3 @@ export function materialsReceived(visit: UpcomingVisit): { received: number; tot
     total: visit.materials.length,
   };
 }
-
-export const visitOutcomes: VisitOutcome[] = [
-  {
-    id: "outcome-washington-2026-04",
-    visit: "Washington, April 2026",
-    visitId: "v-2026-04-upcoming-council",
-    date: "2026-04-06",
-    plan: "Council launch · 4 B2G meetings · 1 signed framework",
-    actual: "Council launched · 5 meetings · DFC framework intent received",
-    score: "High",
-    verification: "Verified by US-UZ Gateway readout",
-    status: "Verified",
-    is_demo: false,
-    sourceId: "us_uz_gateway",
-  },
-  {
-    id: "outcome-washington-2026-02",
-    visit: "Washington, February 2026 (Critical Minerals)",
-    visitId: "v-2026-02-04-minerals",
-    date: "2026-02-04",
-    plan: "Critical Minerals MOU signed · supply-chain framework agreed",
-    actual: "MOU signed; investment-platform agreement exchanged at SPD",
-    score: "High",
-    verification: "MFA readout",
-    status: "Verified",
-    is_demo: false,
-    sourceId: "input_diplomatic_docx",
-  },
-  {
-    id: "outcome-washington-2025-11",
-    visit: "Washington C5+1, November 2025",
-    visitId: "v-2025-11-c5-1",
-    date: "2025-11-06",
-    plan: "Bilateral with President Trump · Council agreement · Kennedy Center business conference",
-    actual: "Bilateral held · Council agreement reached · 2 statements of intent",
-    score: "High",
-    verification: "Joint statement",
-    status: "Verified",
-    is_demo: false,
-    sourceId: "us_uz_gateway",
-  },
-  {
-    id: "outcome-uz-business-forum-2025",
-    visit: "Tashkent — UZ-US Business Forum, June 2025",
-    date: "2025-06-09",
-    plan: "Forum + B2G meetings · investor outreach",
-    actual: "~100 U.S. companies · $612.6M US FDI figure announced",
-    score: "Medium-high",
-    verification: "Government Portal readout",
-    status: "Verified",
-    is_demo: false,
-    sourceId: "govuz_business_forum_2025",
-  },
-  {
-    id: "outcome-saidov-us-2025",
-    visit: "FM Saidov — Washington, April 2025",
-    visitId: "v-2025-04-saidov",
-    date: "2025-04-08",
-    plan: "Meetings with Secretary Rubio and NSA Waltz",
-    actual: "Both meetings held · diplomatic coordination calendar set",
-    score: "Medium-high",
-    verification: "MFA readout",
-    status: "Verified",
-    is_demo: false,
-    sourceId: "input_diplomatic_docx",
-  },
-];
