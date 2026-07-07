@@ -5,13 +5,7 @@
  * assignments) — speculative quotes or unsourced opinions are excluded.
  */
 export type CounterpartRole =
-  | "executive"
-  | "state"
-  | "congress-senate"
-  | "congress-house"
-  | "business"
-  | "diplomat"
-  | "council";
+  "executive" | "state" | "congress-senate" | "congress-house" | "business" | "diplomat" | "council";
 export type Party = "R" | "D" | "I" | "N/A";
 export type Stance = "supportive" | "neutral" | "cautious";
 

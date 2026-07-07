@@ -12,15 +12,15 @@ Master log of every record in `data/*.ts` carrying `is_demo: true`. Each entry m
 
 ## Entries
 
-| Where                            | What                                                                                                            | File                                         | Responsible agency                                 | Status    |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------------- | --------- |
-| Investments — portfolio          | 25 illustrative rows plus 10 source-backed/pending rows; verified, pending, and demo totals are separated in UI | `data/investments.ts` (`is_demo:true` rows)  | MIIT + UzInvest + Invest Uzbekistan                | requested |
-| Agreements — detail              | 9 agreement-level rows beyond aggregate                                                                         | `data/agreements.ts` (`is_demo:true` rows)   | MFA Department of Americas                         | requested |
-| Map — delegations                | 3 live delegations                                                                                              | `data/delegations.ts`                        | Situational Center internal                        | pending   |
-| Contacts — staff                 | 10 HQ staff placeholders ("Staff Member 1–10")                                                                  | `data/contacts.ts:k-hq.people`               | Situational Center HR                              | pending   |
-| Events — future                  | Upcoming SD-5 entry                                                                                             | `data/events.ts:e-sd5-2026`                  | MFA                                                | pending   |
-| Compliance                       | CAATSA exposure rating                                                                                          | `data/compliance.ts:ofac-caatsa`             | MFA + Treasury (open source)                       | pending   |
-| Visit prep — upcoming visits     | 2 demo upcoming visits + demo delegation/meeting/material rows on the real May-2026 regional missions           | `data/visit-prep.ts:upcomingVisits`          | Situational Center internal + regional khokimiyats | pending   |
+| Where                        | What                                                                                                            | File                                        | Responsible agency                                 | Status    |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | -------------------------------------------------- | --------- |
+| Investments — portfolio      | 25 illustrative rows plus 10 source-backed/pending rows; verified, pending, and demo totals are separated in UI | `data/investments.ts` (`is_demo:true` rows) | MIIT + UzInvest + Invest Uzbekistan                | requested |
+| Agreements — detail          | 9 agreement-level rows beyond aggregate                                                                         | `data/agreements.ts` (`is_demo:true` rows)  | MFA Department of Americas                         | requested |
+| Map — delegations            | 3 live delegations                                                                                              | `data/delegations.ts`                       | Situational Center internal                        | pending   |
+| Contacts — staff             | 10 HQ staff placeholders ("Staff Member 1–10")                                                                  | `data/contacts.ts:k-hq.people`              | Situational Center HR                              | pending   |
+| Events — future              | Upcoming SD-5 entry                                                                                             | `data/events.ts:e-sd5-2026`                 | MFA                                                | pending   |
+| Compliance                   | CAATSA exposure rating                                                                                          | `data/compliance.ts:ofac-caatsa`            | MFA + Treasury (open source)                       | pending   |
+| Visit prep — upcoming visits | 2 demo upcoming visits + demo delegation/meeting/material rows on the real May-2026 regional missions           | `data/visit-prep.ts:upcomingVisits`         | Situational Center internal + regional khokimiyats | pending   |
 
 ## No longer demo after the Tier-B pass (2026-04-26)
 

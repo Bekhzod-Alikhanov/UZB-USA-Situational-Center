@@ -111,7 +111,7 @@ Open `http://localhost:3000`; you'll be redirected to `/en` (or your browser's p
 | `pnpm test:a11y`       | Playwright + axe accessibility checks for critical violations            |
 | `pnpm knip`            | Finds unused dependencies, files, and exports                            |
 | `pnpm format:check`    | Prettier formatting check                                                |
-| `pnpm lhci`            | Lighthouse CI run against key platform pages                            |
+| `pnpm lhci`            | Lighthouse CI run against key platform pages                             |
 | `pnpm verify`          | Lint + typecheck + data validation + governance checks + unit tests      |
 | `pnpm start`           | Serve the production build locally                                       |
 

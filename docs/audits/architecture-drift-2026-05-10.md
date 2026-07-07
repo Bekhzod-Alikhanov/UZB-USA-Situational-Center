@@ -9,12 +9,12 @@
 
 ## Summary
 
-| Slice | Real drift | Acceptable TO-BE | Total raw findings |
-|---|---:|---:|---:|
-| Backend / auth / governance / API | 3 | 2 | 6 |
-| Frontend | 3 | 2 | 5 |
-| Data layer | 7 | 0 | 8 |
-| **Total** | **13** | **4** | **19 raw** (→ 13 actionable, within the 15 cap) |
+| Slice                             | Real drift | Acceptable TO-BE |                              Total raw findings |
+| --------------------------------- | ---------: | ---------------: | ----------------------------------------------: |
+| Backend / auth / governance / API |          3 |                2 |                                               6 |
+| Frontend                          |          3 |                2 |                                               5 |
+| Data layer                        |          7 |                0 |                                               8 |
+| **Total**                         |     **13** |            **4** | **19 raw** (→ 13 actionable, within the 15 cap) |
 
 **Items I will fix this session (CODE FIX):** 3 — all converge on a single `lib/auth/roles.ts` expansion.
 **Items deferred (DOC FIX, out-of-scope):** 10 — listed below for a follow-up PR against the architecture pack.
@@ -47,7 +47,7 @@
 - **Type:** DOC FIX (cannot modify docs)
 - **Doc:** [docs/architecture/00-overview.md](docs/architecture/00-overview.md) AS-IS section, [04-data-flow.md](docs/architecture/04-data-flow.md).
 - **Code:** [lib/data-governance/ingest.ts](lib/data-governance/ingest.ts) wires exactly 5 (census, world-bank, foreign-assistance, bea, exim) ✓ — matches doc. But [data/external-data.ts](data/external-data.ts) lists 14 connector entries (5 `live-ready` + 1 `key-required` + 8 `manual-review`). Doc only describes the 5 live ones.
-- **Note:** AS-IS *behavior* matches docs; the registry surface is wider than the doc enumerates. Docs should say "5 live + 9 planned" rather than "5 connectors".
+- **Note:** AS-IS _behavior_ matches docs; the registry surface is wider than the doc enumerates. Docs should say "5 live + 9 planned" rather than "5 connectors".
 
 ### D-B4 — `lib/data-governance/policy.ts` matches doc; no AS-IS audit-log writes
 
@@ -110,7 +110,7 @@ Subsumed by D-B1.
 - **Severity:** P1
 - **Type:** Acceptable TO-BE (no server to sync to in AS-IS)
 - **Doc:** [docs/architecture/03-authentication-rbac.md:404–406](docs/architecture/03-authentication-rbac.md) — explicitly notes "Сейчас preferences живут в `localStorage`".
-- **Note:** Doc *correctly* describes AS-IS. Not drift.
+- **Note:** Doc _correctly_ describes AS-IS. Not drift.
 
 ---
 
@@ -170,6 +170,7 @@ All 7 findings here are **DOC FIX** — AS-IS code is correct; UML / data-flow d
 **One coherent fix consolidates D-B1, D-B6, D-F3, D-F4:**
 
 Expand [lib/auth/roles.ts](lib/auth/roles.ts):
+
 1. Add the missing 15 permissions to the `Permission` type union.
 2. Expand `ROLE_PERMISSIONS` per the doc's role taxonomy (lines 156–204 of `03-authentication-rbac.md`).
 3. Export `can(role, permission)` as a UX-guard alias for `roleHasPermission`.
@@ -183,6 +184,7 @@ D-F5 (dark-mode glow token) is logged as P2 polish; skipping to keep the Phase C
 ## DOC FIX backlog for a separate PR
 
 A future PR against the architecture pack should:
+
 1. **D-B3 / D-D6**: clarify connector count as "5 live + 9 planned".
 2. **D-D1**: align AppUser UML with [database/schema.sql:8–17](database/schema.sql) AS-IS.
 3. **D-D2**: mark DecisionRecord signature fields explicitly as TO-BE.

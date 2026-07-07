@@ -7,14 +7,7 @@
  */
 export type NewsTonality = "positive" | "neutral" | "critical";
 export type NewsTag =
-  | "presidential"
-  | "trade"
-  | "investment"
-  | "minerals"
-  | "security"
-  | "diplomatic"
-  | "culture"
-  | "economy";
+  "presidential" | "trade" | "investment" | "minerals" | "security" | "diplomatic" | "culture" | "economy";
 
 export interface NewsItem {
   id: string;

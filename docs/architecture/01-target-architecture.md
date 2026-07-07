@@ -26,29 +26,29 @@ related:
 
 ### Внешние акторы
 
-| Актор | Роль | Контакт с системой |
-|---|---|---|
-| **Советник Президента** | Главный потребитель | UI Frontend (Next.js) |
-| **Министры/гос. служащие** | Принимающие решения | UI Frontend |
-| **Аналитики Центра** | Готовят данные | UI Frontend + Superset |
-| **Редакторы данных** | Подтверждают/правят | UI Frontend (`/admin`) |
+| Актор                       | Роль                 | Контакт с системой       |
+| --------------------------- | -------------------- | ------------------------ |
+| **Советник Президента**     | Главный потребитель  | UI Frontend (Next.js)    |
+| **Министры/гос. служащие**  | Принимающие решения  | UI Frontend              |
+| **Аналитики Центра**        | Готовят данные       | UI Frontend + Superset   |
+| **Редакторы данных**        | Подтверждают/правят  | UI Frontend (`/admin`)   |
 | **Системный администратор** | Управляет платформой | Admin Console + Keycloak |
-| **External user (бизнес)** | Прохождение AUCC | UI Frontend (read-only) |
+| **External user (бизнес)**  | Прохождение AUCC     | UI Frontend (read-only)  |
 
 ### Внешние системы
 
-| Система | Назначение | Тип контакта |
-|---|---|---|
-| **Census Bureau API** | US-сторонние торговые данные | Outbound HTTPS, API key |
-| **BEA API** | US макро/услуги | Outbound HTTPS, API key |
-| **EXIM API** | Экспорт-кредиты | Outbound HTTPS |
-| **World Bank WDI** | Макро-индикаторы | Outbound HTTPS |
-| **ForeignAssistance.gov** | Обязательства USAID | Outbound HTTPS |
-| **OneID РУз** | SSO для внешних пользователей | OIDC |
-| **E-IMZO** | Цифровая подпись документов | Browser-side SDK + server verify |
-| **MFA-провайдер (Telegram bot/SMS)** | Второй фактор | Outbound API |
-| **SMTP-relay** | Уведомления | Outbound |
-| **CERT-UZ / GosSUZI** | Compliance, аудит | Контрольный доступ |
+| Система                              | Назначение                    | Тип контакта                     |
+| ------------------------------------ | ----------------------------- | -------------------------------- |
+| **Census Bureau API**                | US-сторонние торговые данные  | Outbound HTTPS, API key          |
+| **BEA API**                          | US макро/услуги               | Outbound HTTPS, API key          |
+| **EXIM API**                         | Экспорт-кредиты               | Outbound HTTPS                   |
+| **World Bank WDI**                   | Макро-индикаторы              | Outbound HTTPS                   |
+| **ForeignAssistance.gov**            | Обязательства USAID           | Outbound HTTPS                   |
+| **OneID РУз**                        | SSO для внешних пользователей | OIDC                             |
+| **E-IMZO**                           | Цифровая подпись документов   | Browser-side SDK + server verify |
+| **MFA-провайдер (Telegram bot/SMS)** | Второй фактор                 | Outbound API                     |
+| **SMTP-relay**                       | Уведомления                   | Outbound                         |
+| **CERT-UZ / GosSUZI**                | Compliance, аудит             | Контрольный доступ               |
 
 ### Inline mermaid · контекст
 
@@ -169,22 +169,22 @@ C4Context
 
 ### Контейнеры и их назначение
 
-| Контейнер | Технология | Назначение |
-|---|---|---|
-| **Next.js UI** | Next.js 16, React 19, TS, Tailwind v4 | Executive UX для руководителей. SSR-страницы → API |
-| **FastAPI Gateway** | Python 3.13, FastAPI, Pydantic v2, asyncpg | Основной API + admin + AI-proxy + аудит |
-| **Superset** | Apache Superset 4 | SQL Lab + ad-hoc дашборды для аналитиков |
-| **Admin Console** | FastAPI + HTMX или Next.js | Управление RBAC, политиками источников, ingestion-runs |
-| **Keycloak** | Keycloak 26 | IdP: OIDC, MFA, federation с OneID/AD |
-| **PostgreSQL DWH** | Postgres 17 | Все слои данных (raw/staging/marts/ops) |
-| **MinIO** | MinIO RELEASE | S3-совместимый объектный сторадж (raw, exports, PDF) |
-| **Redis** | Redis 8 | Cache, rate-limit, фоновые очереди |
-| **Dagster** | Dagster 1.x | Оркестратор ingestion-DAG'ов |
-| **dbt-core** | dbt 1.9 | SQL-трансформации raw → staging → marts |
-| **OpenTelemetry Collector** | Otel-collector | Сбор трасс/логов/метрик из всех сервисов |
-| **Loki + Tempo + Grafana** | LGTM-stack | Логи, трейсы, дашборды, алерты |
-| **Sentry** | Sentry self-hosted | Ошибки frontend и backend |
-| **Nginx / Traefik** | Traefik 3 | TLS termination, маршрутизация, mTLS до сервисов |
+| Контейнер                   | Технология                                 | Назначение                                             |
+| --------------------------- | ------------------------------------------ | ------------------------------------------------------ |
+| **Next.js UI**              | Next.js 16, React 19, TS, Tailwind v4      | Executive UX для руководителей. SSR-страницы → API     |
+| **FastAPI Gateway**         | Python 3.13, FastAPI, Pydantic v2, asyncpg | Основной API + admin + AI-proxy + аудит                |
+| **Superset**                | Apache Superset 4                          | SQL Lab + ad-hoc дашборды для аналитиков               |
+| **Admin Console**           | FastAPI + HTMX или Next.js                 | Управление RBAC, политиками источников, ingestion-runs |
+| **Keycloak**                | Keycloak 26                                | IdP: OIDC, MFA, federation с OneID/AD                  |
+| **PostgreSQL DWH**          | Postgres 17                                | Все слои данных (raw/staging/marts/ops)                |
+| **MinIO**                   | MinIO RELEASE                              | S3-совместимый объектный сторадж (raw, exports, PDF)   |
+| **Redis**                   | Redis 8                                    | Cache, rate-limit, фоновые очереди                     |
+| **Dagster**                 | Dagster 1.x                                | Оркестратор ingestion-DAG'ов                           |
+| **dbt-core**                | dbt 1.9                                    | SQL-трансформации raw → staging → marts                |
+| **OpenTelemetry Collector** | Otel-collector                             | Сбор трасс/логов/метрик из всех сервисов               |
+| **Loki + Tempo + Grafana**  | LGTM-stack                                 | Логи, трейсы, дашборды, алерты                         |
+| **Sentry**                  | Sentry self-hosted                         | Ошибки frontend и backend                              |
+| **Nginx / Traefik**         | Traefik 3                                  | TLS termination, маршрутизация, mTLS до сервисов       |
 
 Каждый контейнер описан подробнее в [[02-component-catalog]].
 
@@ -290,12 +290,12 @@ flowchart TD
 
 ### Окружения
 
-| Окружение | Назначение | Топология | Compliance |
-|---|---|---|---|
-| **dev** | Локальная разработка | Docker Compose, 1 узел | — |
-| **staging** | Pre-prod, демо | k3s 3 узла, общая БД | — |
+| Окружение      | Назначение           | Топология                       | Compliance         |
+| -------------- | -------------------- | ------------------------------- | ------------------ |
+| **dev**        | Локальная разработка | Docker Compose, 1 узел          | —                  |
+| **staging**    | Pre-prod, демо       | k3s 3 узла, общая БД            | —                  |
 | **production** | Боевое использование | k3s HA + отдельный data-cluster | Аттестация GosSUZI |
-| **DR** | Восстановление | Холодная копия в другом ЦОД | RPO 4ч / RTO 8ч |
+| **DR**         | Восстановление       | Холодная копия в другом ЦОД     | RPO 4ч / RTO 8ч    |
 
 ---
 
@@ -356,6 +356,7 @@ flowchart TB
 
 > [!warning] Сложность
 > Целевая архитектура добавляет 8–10 сервисов к существующему стеку. Это требует:
+>
 > - 2–3 штатных инженеров эксплуатации (DevOps/SRE),
 > - runbook'ов для каждого инцидентного сценария,
 > - регулярного DR-теста (раз в квартал).

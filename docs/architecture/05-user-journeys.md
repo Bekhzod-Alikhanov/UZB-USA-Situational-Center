@@ -22,13 +22,13 @@ related:
 
 ## Обзор ролей
 
-| Роль | Главная задача | Частота входа | Устройство |
-|---|---|---|---|
-| **Viewer** | Прочитать KPI, открыть дашборд утром | 1–3 раза в день | Десктоп / iPad |
-| **Analyst** | Подготовить набор данных для брифа | Ежедневно, 4–6 ч | Десктоп |
-| **Editor** | Утвердить новые метрики после ingestion | 1 раз в день | Десктоп |
-| **Executive** | Просмотр + одобрить решение | 1–2 раза в день | Десктоп / телефон |
-| **Admin** | Управление платформой, инциденты | По мере надобности | Десктоп |
+| Роль          | Главная задача                          | Частота входа      | Устройство        |
+| ------------- | --------------------------------------- | ------------------ | ----------------- |
+| **Viewer**    | Прочитать KPI, открыть дашборд утром    | 1–3 раза в день    | Десктоп / iPad    |
+| **Analyst**   | Подготовить набор данных для брифа      | Ежедневно, 4–6 ч   | Десктоп           |
+| **Editor**    | Утвердить новые метрики после ingestion | 1 раз в день       | Десктоп           |
+| **Executive** | Просмотр + одобрить решение             | 1–2 раза в день    | Десктоп / телефон |
+| **Admin**     | Управление платформой, инциденты        | По мере надобности | Десктоп           |
 
 ---
 
@@ -102,15 +102,15 @@ sequenceDiagram
 
 ### Что Viewer видит и может
 
-| Зона | Доступ |
-|---|---|
-| Главная (`/[locale]`) | ✅ Все KPI, картa, горизонт визитов, сигналы |
-| `/[locale]/trade` | ✅ Все графики, фильтры |
-| `/[locale]/visits`, `/agreements`, `/grants` | ✅ Чтение, экспорт PDF |
-| `/[locale]/counterparts/[id]` | ✅ Брифинг-карты |
-| `/[locale]/assistant` | ✅ AI-чат (rate-limit 20 запросов / час) |
-| `/[locale]/admin` | ❌ 403, кнопка скрыта в UI |
-| Изменение настроек | ✅ Только UI prefs (theme, language) |
+| Зона                                         | Доступ                                       |
+| -------------------------------------------- | -------------------------------------------- |
+| Главная (`/[locale]`)                        | ✅ Все KPI, картa, горизонт визитов, сигналы |
+| `/[locale]/trade`                            | ✅ Все графики, фильтры                      |
+| `/[locale]/visits`, `/agreements`, `/grants` | ✅ Чтение, экспорт PDF                       |
+| `/[locale]/counterparts/[id]`                | ✅ Брифинг-карты                             |
+| `/[locale]/assistant`                        | ✅ AI-чат (rate-limit 20 запросов / час)     |
+| `/[locale]/admin`                            | ❌ 403, кнопка скрыта в UI                   |
+| Изменение настроек                           | ✅ Только UI prefs (theme, language)         |
 
 ### Тонкие места для viewer
 
@@ -176,14 +176,14 @@ sequenceDiagram
 
 ### Что Analyst может дополнительно к Viewer
 
-| Действие | Где |
-|---|---|
-| Создать/редактировать commitment | `/admin/commitments` (subset admin UI) |
-| Создать draft decision | `/admin/decisions/new` |
-| Доступ в Superset SQL Lab | `https://superset.uzus.local` |
-| Подключиться к коннектору в Superset | только marts.* read-only |
-| Создать сохранённый чарт | в Superset |
-| Скачать выгрузку CSV/XLSX | через FastAPI или Superset |
+| Действие                             | Где                                    |
+| ------------------------------------ | -------------------------------------- |
+| Создать/редактировать commitment     | `/admin/commitments` (subset admin UI) |
+| Создать draft decision               | `/admin/decisions/new`                 |
+| Доступ в Superset SQL Lab            | `https://superset.uzus.local`          |
+| Подключиться к коннектору в Superset | только marts.* read-only               |
+| Создать сохранённый чарт             | в Superset                             |
+| Скачать выгрузку CSV/XLSX            | через FastAPI или Superset             |
 
 ### Тонкие места для analyst
 
@@ -340,12 +340,12 @@ sequenceDiagram
 
 ### Что Executive дополнительно может
 
-| Действие | Особенность |
-|---|---|
-| Подписать решение | E-IMZO обязательно (физический USB-токен или SIM-карта) |
-| Комментировать | Комментарии видят только executive + admin |
-| Настроить уведомления | Telegram / email per event-type |
-| Видеть аудит **своих** действий | Личный лог |
+| Действие                        | Особенность                                             |
+| ------------------------------- | ------------------------------------------------------- |
+| Подписать решение               | E-IMZO обязательно (физический USB-токен или SIM-карта) |
+| Комментировать                  | Комментарии видят только executive + admin              |
+| Настроить уведомления           | Telegram / email per event-type                         |
+| Видеть аудит **своих** действий | Личный лог                                              |
 
 ### Тонкие места для executive
 
@@ -439,19 +439,19 @@ sequenceDiagram
 
 ### Зоны admin-доступа
 
-| Раздел | Что доступно |
-|---|---|
-| `/admin` (главная) | сводка инцидентов, статус сервисов, демо-флаги |
-| `/admin/users` | CRUD users, role assignment, force logout, сброс TOTP |
-| `/admin/policies` | CRUD `source_version_policy`, demo registry |
-| `/admin/secrets` | ротация секретов через Vault (без раскрытия значений) |
-| `/admin/ingestion` | список runs, ручной trigger, статус коннекторов |
-| `/admin/audit` | полный лог + фильтры + экспорт |
-| `/admin/security` | failed logins, blocked IPs, AI quota breaches |
-| `/admin/maintenance` | включить maintenance mode, force cache invalidation |
-| Прямой доступ в Keycloak Admin | для emergency, через bookmark |
-| Прямой доступ в Grafana / Dagster / Sentry | через SSO |
-| Доступ в Postgres | только через bastion + 2FA + audit (`pgAudit`) |
+| Раздел                                     | Что доступно                                          |
+| ------------------------------------------ | ----------------------------------------------------- |
+| `/admin` (главная)                         | сводка инцидентов, статус сервисов, демо-флаги        |
+| `/admin/users`                             | CRUD users, role assignment, force logout, сброс TOTP |
+| `/admin/policies`                          | CRUD `source_version_policy`, demo registry           |
+| `/admin/secrets`                           | ротация секретов через Vault (без раскрытия значений) |
+| `/admin/ingestion`                         | список runs, ручной trigger, статус коннекторов       |
+| `/admin/audit`                             | полный лог + фильтры + экспорт                        |
+| `/admin/security`                          | failed logins, blocked IPs, AI quota breaches         |
+| `/admin/maintenance`                       | включить maintenance mode, force cache invalidation   |
+| Прямой доступ в Keycloak Admin             | для emergency, через bookmark                         |
+| Прямой доступ в Grafana / Dagster / Sentry | через SSO                                             |
+| Доступ в Postgres                          | только через bastion + 2FA + audit (`pgAudit`)        |
 
 ### Тонкие места для admin
 
@@ -469,6 +469,7 @@ sequenceDiagram
 См. детальный sequence: [[diagrams/auth-sequence]] и [[03-authentication-rbac#Authorization Code Flow с PKCE]].
 
 **Базовый поток**:
+
 1. Запрос ресурса → нет session → редирект на Keycloak
 2. Логин (federated или local) + MFA если применимо
 3. Code exchange → tokens → server-side session
@@ -478,6 +479,7 @@ sequenceDiagram
 ### Logout
 
 Любая роль:
+
 - Инициирует через UI «Выйти» → Next-auth уничтожает session → Keycloak SLO (single logout) → все вкладки получают `auth-required` next request.
 
 ### Сессия истекла

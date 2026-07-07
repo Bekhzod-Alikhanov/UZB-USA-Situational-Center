@@ -7,6 +7,7 @@ Use these prompts with the Stitch MCP `generate_screen_from_text` workflow after
 Diplomatic Command Surface: a dense, modern executive command dashboard for the Uzbekistan-USA Situational Center. Preserve current IA, source-governance warnings, demo markers, and trilingual-safe labels. Do not invent data, statistics, source names, agreements, investment projects, uptime values, or performance numbers. Use placeholder labels like `[verified KPI]` only where a real value is not provided.
 
 **DESIGN SYSTEM (REQUIRED):**
+
 - Platform: Web dashboard, desktop-first with mobile parity
 - Theme: Dark executive command surface, operational, diplomatic, data-dense
 - Background: Command Canvas (#0D1117)
@@ -26,6 +27,7 @@ Diplomatic Command Surface: a dense, modern executive command dashboard for the 
 Design the main morning brief dashboard for executives and analysts.
 
 **Page Structure:**
+
 1. **Command Shell:** Compact left navigation with grouped route families, active group rail, UZ-US mark, timezone/status footer, topbar with search, freshness, language, and theme controls.
 2. **Executive Brief Header:** Daily brief chip, serif title, short mandate, print/action control, source/freshness context.
 3. **Primary KPI Row:** Four dense KPI cards for turnover, exports, imports, and balance. Show source/freshness slots and visible confidence/demo state slots.
@@ -37,6 +39,7 @@ Design the main morning brief dashboard for executives and analysts.
 Design a dense trade intelligence page for analysts and business users.
 
 **Page Structure:**
+
 1. **Header:** Page title, source/freshness badges, export/print control.
 2. **Sticky Filter Rail:** Direction, period, product/service, source methodology controls.
 3. **Primary Chart:** Trade flow or monthly trend with direct labels, source narration, and confidence context.
@@ -48,6 +51,7 @@ Design a dense trade intelligence page for analysts and business users.
 Design the map route as the most immersive screen.
 
 **Page Structure:**
+
 1. **Full-Bleed Map Surface:** U.S.-centered map and Uzbekistan mission context; map is primary, not trapped in a decorative card.
 2. **Overlay Panels:** Active presence, state-level engagement, coverage, economic relevance, and source quality.
 3. **Controls:** Layer toggles, load interactive map state, keyboard/focus-visible controls.
@@ -58,6 +62,7 @@ Design the map route as the most immersive screen.
 Design a visit-prep workspace for operations users.
 
 **Page Structure:**
+
 1. **Readiness Header:** T-minus timeline, readiness score, next milestone.
 2. **Operational Board:** Kanban pipeline, checklist, logistics matrix, document registry.
 3. **Risk and Outcome Panels:** Gaps, blockers, post-visit reconciliation, responsible agency slots.
@@ -68,6 +73,7 @@ Design a visit-prep workspace for operations users.
 Design a quiet admin dashboard.
 
 **Page Structure:**
+
 1. **Admin Header:** Protected operations context, ingestion status, audit status.
 2. **Control Panels:** Data operations, settings, production readiness, demo registry, audit preview.
 3. **Risk Treatment:** Irreversible actions must have calm but clear danger styling using Risk Rose (#FF8F87).
@@ -78,6 +84,7 @@ Design a quiet admin dashboard.
 Design mobile parity for the overview and shell.
 
 **Page Structure:**
+
 1. **Topbar:** Menu, title, search, language, theme.
 2. **Drawer:** Same grouped IA as desktop with active group rail and compact labels.
 3. **Overview Stack:** Brief header, KPI cards, priority risks, next visit, source quality, and key chart previews in a single column.

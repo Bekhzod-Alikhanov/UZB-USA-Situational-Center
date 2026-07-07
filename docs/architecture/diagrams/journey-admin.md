@@ -125,6 +125,7 @@ sequenceDiagram
 ### Re-MFA для critical actions
 
 Не достаточно session-MFA при логине. Каждое из:
+
 - secret rotation
 - user creation / role assignment
 - maintenance mode toggle
@@ -136,6 +137,7 @@ sequenceDiagram
 ### Audit на всё
 
 Каждое действие admin пишется в `ops.audit_log` с полным контекстом:
+
 - before / after state
 - IP, User-Agent
 - target (user_id / secret_name / etc)
@@ -149,6 +151,7 @@ Admin **не может** выполнять SQL напрямую через UI.
 ### Vault-only для secrets
 
 Никакие секреты не показываются в UI. Только:
+
 - last_rotated date
 - rotated_by user
 - secret name

@@ -83,17 +83,18 @@ flowchart TD
 
 ### Co-sign на критические переходы
 
-| Переход | Кто подписывает |
-|---|---|
-| draft → agreed | editor + executive |
-| in_progress → done | owner + editor |
-| any → cancelled | executive (только) |
+| Переход            | Кто подписывает    |
+| ------------------ | ------------------ |
+| draft → agreed     | editor + executive |
+| in_progress → done | owner + editor     |
+| any → cancelled    | executive (только) |
 
 Co-sign реализован как **двух-шаговая процедура**: первый actor отмечает «готов», второй approve в течение 24 часов. После 24 ч — отменяется.
 
 ### Автоматический переход в `overdue`
 
 Nightly job (Dagster sensor):
+
 ```sql
 UPDATE ops.commitment_record
 SET status = 'overdue'
@@ -105,14 +106,14 @@ WHERE due_date < CURRENT_DATE
 
 ### Уведомления
 
-| Событие | Канал | Получатели |
-|---|---|---|
-| Created | Email + Telegram | All co-owners |
-| Status changed | Telegram | Owner |
-| 7 дней до overdue | Telegram + email | Owner + co-owners |
-| Overdue | Telegram + email | Owner + executive домена |
-| Done | Email | All co-owners + executive |
-| Cancelled | Email | All co-owners + executive |
+| Событие           | Канал            | Получатели                |
+| ----------------- | ---------------- | ------------------------- |
+| Created           | Email + Telegram | All co-owners             |
+| Status changed    | Telegram         | Owner                     |
+| 7 дней до overdue | Telegram + email | Owner + co-owners         |
+| Overdue           | Telegram + email | Owner + executive домена  |
+| Done              | Email            | All co-owners + executive |
+| Cancelled         | Email            | All co-owners + executive |
 
 ### Связи с остальной системой
 
@@ -123,6 +124,7 @@ WHERE due_date < CURRENT_DATE
 ### PII boundary
 
 > [!warning] Что НЕ хранится в commitment_record
+>
 > - Конкретные тексты документов
 > - Финансовые подробности (только агрегат `value_musd`)
 > - Личные данные исполнителей (только role-slot, не ФИО)

@@ -170,6 +170,7 @@ staging.stg_census__monthly
 > [!important] Каждое значение в UI трассируется до raw-snapshot
 
 Цепочка для любой цифры:
+
 1. `marts.published_metric.id` → SELECT по этому id
 2. `published_metric.connector_id + period_end` → найти `data_review_queue.observation`
 3. `observation.fetched_at` → `raw_source_snapshot.fetched_at`
@@ -194,16 +195,16 @@ Dagster показывает asset-graph: `census_api → minio_snapshot → raw
 
 ## Точки прерывания (data quality boundaries)
 
-| Точка | Что проверяется | Что делать при сбое |
-|---|---|---|
-| API → MinIO | HTTP 200, content-length > 0 | retry x3, alert |
-| MinIO → raw.* | JSONB валиден, hash совпадает | reject, alert |
-| raw → staging | Schema validation (Pydantic) | unknown-fields → quality_flag, отсутствие обязательных → fail |
-| staging → intermediate | Type coercion, обязательные поля | Pydantic ошибка → fail run |
-| intermediate → review queue | policy applied | `reject-older-period` идёт в queue со severity=block |
-| review queue → published_metric | editor approve + MFA | без approval — нет публикации |
-| published_metric → API | RLS check по user.domains | unauthorized → 403 |
-| API → UI | TS типы из OpenAPI | mismatch → CI fail на этапе сборки |
+| Точка                           | Что проверяется                  | Что делать при сбое                                           |
+| ------------------------------- | -------------------------------- | ------------------------------------------------------------- |
+| API → MinIO                     | HTTP 200, content-length > 0     | retry x3, alert                                               |
+| MinIO → raw.*                   | JSONB валиден, hash совпадает    | reject, alert                                                 |
+| raw → staging                   | Schema validation (Pydantic)     | unknown-fields → quality_flag, отсутствие обязательных → fail |
+| staging → intermediate          | Type coercion, обязательные поля | Pydantic ошибка → fail run                                    |
+| intermediate → review queue     | policy applied                   | `reject-older-period` идёт в queue со severity=block          |
+| review queue → published_metric | editor approve + MFA             | без approval — нет публикации                                 |
+| published_metric → API          | RLS check по user.domains        | unauthorized → 403                                            |
+| API → UI                        | TS типы из OpenAPI               | mismatch → CI fail на этапе сборки                            |
 
 ## Связанные документы
 

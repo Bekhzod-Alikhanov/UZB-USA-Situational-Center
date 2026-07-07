@@ -165,14 +165,14 @@ sequenceDiagram
 
 ### Жёсткие правила ingestion
 
-| Правило | Где реализовано | Тест |
-|---|---|---|
-| Snapshot всегда сохраняется в MinIO **до** парсинга | Dagster asset | контракт Dagster IO manager |
-| Дубликат по `content_hash` пропускается | UNIQUE constraint в `raw.<connector>` | upsert с `on_conflict do nothing` |
-| Любая ошибка коннектора → alert + auto-retry x3 | Dagster retry policy | unit test |
-| Нет частичных результатов (либо все observations, либо ни одной) | Транзакция в insert | integration test |
-| API-key никогда не пишется в логи | OTel processor `attribute filter` | review |
-| Outbound traffic только на allowlisted FQDN | Egress proxy (squid) | infra test |
+| Правило                                                          | Где реализовано                       | Тест                              |
+| ---------------------------------------------------------------- | ------------------------------------- | --------------------------------- |
+| Snapshot всегда сохраняется в MinIO **до** парсинга              | Dagster asset                         | контракт Dagster IO manager       |
+| Дубликат по `content_hash` пропускается                          | UNIQUE constraint в `raw.<connector>` | upsert с `on_conflict do nothing` |
+| Любая ошибка коннектора → alert + auto-retry x3                  | Dagster retry policy                  | unit test                         |
+| Нет частичных результатов (либо все observations, либо ни одной) | Транзакция в insert                   | integration test                  |
+| API-key никогда не пишется в логи                                | OTel processor `attribute filter`     | review                            |
+| Outbound traffic только на allowlisted FQDN                      | Egress proxy (squid)                  | infra test                        |
 
 ---
 
@@ -284,6 +284,7 @@ stateDiagram-v2
 
 > [!warning] Защита от ошибки
 > Approve действительно меняет видимое значение в KPI карточке Президента. Поэтому:
+>
 > - Подтверждение через MFA push (повторное TOTP).
 > - 5-минутное окно «откат» (immediately undo) — кнопка в audit-log странице.
 > - При большой дельте (>50%) — обязательное ввод `reviewer_note` ≥ 30 символов.
@@ -325,6 +326,7 @@ async def get_latest(domain: str):
 ### dbt docs
 
 `dbt docs generate && dbt docs serve` — публикует:
+
 - DAG моделей (raw → staging → marts)
 - Описание каждой колонки (из `schema.yml`)
 - Свежесть (`source freshness`)
@@ -334,6 +336,7 @@ async def get_latest(domain: str):
 ### Dagster lineage UI
 
 Asset graph + run history. Каждый asset показывает:
+
 - последний successful materialization,
 - размер snapshot (rows + bytes),
 - автоматические quality checks.
@@ -341,6 +344,7 @@ Asset graph + run history. Каждый asset показывает:
 ### Свежесть данных в UI
 
 Каждый KPI в Next.js видит badge:
+
 - 🟢 свежие (< 24 часа от ожидаемого cadence)
 - 🟡 устаревают (1–3x cadence)
 - 🔴 устарели (> 3x cadence) + alert админу
@@ -351,32 +355,32 @@ Asset graph + run history. Каждый asset показывает:
 
 ## Удаление и retention
 
-| Слой | Retention | Триггер |
-|---|---|---|
-| MinIO `raw-snapshots` | 7 лет | lifecycle rule |
-| `raw.*` (Postgres) | 1 год | nightly cleanup |
-| `staging.*` | transient (пересоздаётся каждый dbt run) | — |
-| `intermediate.*` | transient | — |
-| `marts.published_metric` | бесконечно | history через snapshot |
-| `marts.published_metric_history` | 7 лет | dbt snapshot lifecycle |
-| `marts.data_review_queue` (closed) | 3 года | nightly archive |
-| `ops.audit_log` | 7 лет | WORM, не удаляется до retention |
-| `ops.user_preferences` | вместе с user | каскад при удалении user |
-| Sentry events | 90 дней | retention |
-| Logs (Loki) | 30 дней горячее, 365 холодное | retention |
+| Слой                               | Retention                                | Триггер                         |
+| ---------------------------------- | ---------------------------------------- | ------------------------------- |
+| MinIO `raw-snapshots`              | 7 лет                                    | lifecycle rule                  |
+| `raw.*` (Postgres)                 | 1 год                                    | nightly cleanup                 |
+| `staging.*`                        | transient (пересоздаётся каждый dbt run) | —                               |
+| `intermediate.*`                   | transient                                | —                               |
+| `marts.published_metric`           | бесконечно                               | history через snapshot          |
+| `marts.published_metric_history`   | 7 лет                                    | dbt snapshot lifecycle          |
+| `marts.data_review_queue` (closed) | 3 года                                   | nightly archive                 |
+| `ops.audit_log`                    | 7 лет                                    | WORM, не удаляется до retention |
+| `ops.user_preferences`             | вместе с user                            | каскад при удалении user        |
+| Sentry events                      | 90 дней                                  | retention                       |
+| Logs (Loki)                        | 30 дней горячее, 365 холодное            | retention                       |
 
 ---
 
 ## Безопасность данных
 
-| Угроза | Контрмера |
-|---|---|
-| Утечка через сервис-аккаунт DWH | Postgres pgAudit + alert при чтении > N rows за минуту |
-| Доступ к raw данным в обход policy | RLS на `marts.*`, и `raw.*` доступен только сервис-роли `dbt_runner` |
-| Подделка audit-log | Ed25519 подпись каждой записи + цепочка hash (Merkle) с ежедневным якорем |
-| Случайное удаление в DWH | Нет права DELETE у app users; только DBA через emergency procedure с two-man rule |
-| MITM в outbound | TLS 1.2+ обязательно, mTLS если поддерживается источником |
-| API-key утечка в логах | OTel processor `attribute filter` маскирует `*key*`, `*secret*` |
+| Угроза                                                | Контрмера                                                                                                  |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Утечка через сервис-аккаунт DWH                       | Postgres pgAudit + alert при чтении > N rows за минуту                                                     |
+| Доступ к raw данным в обход policy                    | RLS на `marts.*`, и `raw.*` доступен только сервис-роли `dbt_runner`                                       |
+| Подделка audit-log                                    | Ed25519 подпись каждой записи + цепочка hash (Merkle) с ежедневным якорем                                  |
+| Случайное удаление в DWH                              | Нет права DELETE у app users; только DBA через emergency procedure с two-man rule                          |
+| MITM в outbound                                       | TLS 1.2+ обязательно, mTLS если поддерживается источником                                                  |
+| API-key утечка в логах                                | OTel processor `attribute filter` маскирует `*key*`, `*secret*`                                            |
 | Prompt injection через AI-чат на корпоративные данные | Server-side фильтр запрещает запросы про domain ∉ user.domains; output validation на ссылки в external URL |
 
 ---

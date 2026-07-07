@@ -9,11 +9,11 @@
 
 The skill's `products.csv` has 50+ rows; two are direct matches and a third is adjacent:
 
-| Skill row | Product type | Primary style | Dashboard style | Color focus | Key considerations |
-|---|---|---|---|---|---|
-| **#14** (primary match) | **Government / Public Service** | Accessible & Ethical + Minimalism | Executive Dashboard | Professional blue + high contrast | "WCAG AAA mandatory. Trust paramount." |
-| **#8** (secondary match) | **Analytics Dashboard** | Data-Dense + Heat Map | Drill-Down Analytics + Comparative | Cool→Hot gradients + neutral grey | "Clarity > aesthetics. Color-coded data priority." |
-| #7 (adjacent) | Financial Dashboard | Dark Mode (OLED) + Data-Dense | Financial Dashboard | Dark bg + red/green alerts + trust blue | "High contrast, real-time updates, accuracy paramount." |
+| Skill row                | Product type                    | Primary style                     | Dashboard style                    | Color focus                             | Key considerations                                      |
+| ------------------------ | ------------------------------- | --------------------------------- | ---------------------------------- | --------------------------------------- | ------------------------------------------------------- |
+| **#14** (primary match)  | **Government / Public Service** | Accessible & Ethical + Minimalism | Executive Dashboard                | Professional blue + high contrast       | "WCAG AAA mandatory. Trust paramount."                  |
+| **#8** (secondary match) | **Analytics Dashboard**         | Data-Dense + Heat Map             | Drill-Down Analytics + Comparative | Cool→Hot gradients + neutral grey       | "Clarity > aesthetics. Color-coded data priority."      |
+| #7 (adjacent)            | Financial Dashboard             | Dark Mode (OLED) + Data-Dense     | Financial Dashboard                | Dark bg + red/green alerts + trust blue | "High contrast, real-time updates, accuracy paramount." |
 
 **Synthesized profile:** Government + Analytics Dashboard hybrid. Executive audience (Advisor to the President, Ministers); analytical audience (Center staff, Aucc business). Restraint over ornament. WCAG ≥ AA mandatory. Data-density allowed because audience is expert.
 
@@ -21,16 +21,16 @@ The skill's `products.csv` has 50+ rows; two are direct matches and a third is a
 
 ## Validation: the existing dashboard already matches this profile
 
-| Skill recommendation | Current state | Verdict |
-|---|---|---|
-| Color: Professional navy + high contrast (#0F172A / #334155 / #0369A1 reference) | `--color-primary: #1a3a6c` (warmer navy), `--color-ink: #1a1a1a`, 8 domain accents tuned per sector | ✅ matches; project's slightly-warmer navy is a deliberate brand choice |
-| Style: Minimalism + Accessible & Ethical | Sober card-based layout, no decorative gradients beyond KPI top-strip, paper-noise body at 3% opacity | ✅ matches |
-| Dashboard pattern: Executive Dashboard | KPI hero row + main grid + drill-down via "/" → /trade etc. | ✅ matches |
-| WCAG AA contrast | A11y 100/100 across all 17 routes (Phase B result) | ✅ exceeds — every route at 100 |
-| Focus rings | Global `:focus-visible` rule, `outline: 2px solid var(--color-primary)` | ✅ matches |
-| Modular type scale | Sizes scattered between 10-40px across ~20 distinct values | ⚠️ gap — sprawl |
-| Heat map / Drill-down patterns | `/benchmark` has comparative ranking; `/map` has 3-layer drill-down; no proper heat map | ⚠️ partial — fine for the AS-IS surface area |
-| Trust signals (source badges, "fetched at", quote-safe labels) | `SourceBadge`, `DemoBadge`, `<ChartNarration>`, freshness pill | ✅ matches |
+| Skill recommendation                                                             | Current state                                                                                         | Verdict                                                                 |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Color: Professional navy + high contrast (#0F172A / #334155 / #0369A1 reference) | `--color-primary: #1a3a6c` (warmer navy), `--color-ink: #1a1a1a`, 8 domain accents tuned per sector   | ✅ matches; project's slightly-warmer navy is a deliberate brand choice |
+| Style: Minimalism + Accessible & Ethical                                         | Sober card-based layout, no decorative gradients beyond KPI top-strip, paper-noise body at 3% opacity | ✅ matches                                                              |
+| Dashboard pattern: Executive Dashboard                                           | KPI hero row + main grid + drill-down via "/" → /trade etc.                                           | ✅ matches                                                              |
+| WCAG AA contrast                                                                 | A11y 100/100 across all 17 routes (Phase B result)                                                    | ✅ exceeds — every route at 100                                         |
+| Focus rings                                                                      | Global `:focus-visible` rule, `outline: 2px solid var(--color-primary)`                               | ✅ matches                                                              |
+| Modular type scale                                                               | Sizes scattered between 10-40px across ~20 distinct values                                            | ⚠️ gap — sprawl                                                         |
+| Heat map / Drill-down patterns                                                   | `/benchmark` has comparative ranking; `/map` has 3-layer drill-down; no proper heat map               | ⚠️ partial — fine for the AS-IS surface area                            |
+| Trust signals (source badges, "fetched at", quote-safe labels)                   | `SourceBadge`, `DemoBadge`, `<ChartNarration>`, freshness pill                                        | ✅ matches                                                              |
 
 The skill's data essentially **endorses every existing design choice**. The Phase A/B/C work this session closed the visible gaps. The only remaining design-system gap the skill highlights is the type-scale sprawl.
 
@@ -63,7 +63,7 @@ The shared `.section-title` utility is used as the page-level `<h1>` on **17 of 
 + .section-title { @apply serif text-[20px] font-medium leading-[1.15] tracking-tight ... sm:text-[26px]; }
 ```
 
-Effect: every page title gains +4px on desktop, +2px on mobile, with explicit tight leading. Matches the skill's "Executive Dashboard" pattern — the heading should *feel* like the executive's first eye-fixation point.
+Effect: every page title gains +4px on desktop, +2px on mobile, with explicit tight leading. Matches the skill's "Executive Dashboard" pattern — the heading should _feel_ like the executive's first eye-fixation point.
 
 Print-mode override also bumped (`22px` → `24px`) so PDF exports stay proportional.
 
@@ -91,14 +91,14 @@ The `/counterparts/[id]` detail page uses a custom h1 — unchanged.
 
 ## Anti-patterns avoided (per skill's `ux-guidelines.csv`)
 
-| Risk the skill flags | How this redesign avoids it |
-|---|---|
-| Mixed icon sets / emoji icons | Using lucide-react throughout (no emojis) ✓ unchanged |
-| Layout shift from scale transforms on hover | Existing card hover uses `translateY(-1px)` + shadow only; no scale ✓ |
-| Light-mode glass cards with too-low contrast | Already addressed in Phase A ink-faint bump ✓ |
-| Focus-state removal | Phase A confirmed global `:focus-visible` rule + print-mode suppression ✓ |
-| Heading-order skips | Phase B fix — every page now has sequential h1 → h2 ✓ |
-| Hover-only interaction | Audit confirmed: all clickable affordances also work on tap/Enter ✓ |
+| Risk the skill flags                         | How this redesign avoids it                                               |
+| -------------------------------------------- | ------------------------------------------------------------------------- |
+| Mixed icon sets / emoji icons                | Using lucide-react throughout (no emojis) ✓ unchanged                     |
+| Layout shift from scale transforms on hover  | Existing card hover uses `translateY(-1px)` + shadow only; no scale ✓     |
+| Light-mode glass cards with too-low contrast | Already addressed in Phase A ink-faint bump ✓                             |
+| Focus-state removal                          | Phase A confirmed global `:focus-visible` rule + print-mode suppression ✓ |
+| Heading-order skips                          | Phase B fix — every page now has sequential h1 → h2 ✓                     |
+| Hover-only interaction                       | Audit confirmed: all clickable affordances also work on tap/Enter ✓       |
 
 ---
 
