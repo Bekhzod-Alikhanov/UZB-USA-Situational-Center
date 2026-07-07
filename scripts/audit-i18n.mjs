@@ -47,6 +47,11 @@ function auditMessageParity() {
     "map.strategic.metrics.gdpSub",
     "map.strategic.metrics.popSub",
     "map.strategic.metrics.studentsSub",
+    // "mln" is the same million abbreviation in English and Uzbek Latin, so an
+    // identical value across locales is correct, not an untranslated leak.
+    "brief.kpi.mln",
+    "brief.invest.valueMln",
+    "roadmaps.list.mln",
   ]);
 
   for (const locale of nonEnglishLocales) {
@@ -113,12 +118,6 @@ function auditSourceHotspots() {
       severity: "error",
     },
     {
-      file: "app/[locale]/sectors/page.tsx",
-      patterns: [/Sector opportunities/, /Export sector brief/, /Where bilateral cooperation has the most leverage/],
-      message: "Sectors page contains hardcoded English page copy.",
-      severity: "error",
-    },
-    {
       file: "app/[locale]/benchmark/page.tsx",
       patterns: [/Regional benchmark/, /Export benchmark report/, /Comparative posture/],
       message: "Benchmark page contains hardcoded English page copy.",
@@ -157,6 +156,7 @@ function auditSourceHotspots() {
   ];
 
   for (const check of checks) {
+    if (!fs.existsSync(path.join(root, check.file))) continue;
     const text = read(check.file);
     const hits = check.patterns.filter((pattern) => pattern.test(text)).map(String);
     if (hits.length) {

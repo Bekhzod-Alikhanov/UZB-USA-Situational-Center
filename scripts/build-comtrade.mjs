@@ -343,13 +343,6 @@ import type { Hs6Row } from "./comtrade-types";
 ${extractSection(text, "export const topUsImportsFromUzByYear", "export const topUzExportsToUsByYear")}`,
   );
   write(
-    "comtrade-hs6-uz.ts",
-    `${header}
-import type { Hs6Row } from "./comtrade-types";
-
-${extractSection(text, "export const topUzExportsToUsByYear", "export const hs2_2024_usImports")}`,
-  );
-  write(
     "comtrade-hs2.ts",
     `${header}
 import type { Hs2Row } from "./comtrade-types";
@@ -371,18 +364,6 @@ import type { Hs6Trend } from "./comtrade-types";
 ${extractSection(text, "export const trendTopUsImports", "export const comtradeAnnualUzReporter")}`,
   );
   write("comtrade-meta.ts", `${header}\n${extractSection(text, "export const comtradeAnnualUzReporter", null)}`);
-  write(
-    "comtrade.ts",
-    `${header}
-export type { Hs2Row, Hs6Row, Hs6Trend, MirrorRow } from "./comtrade-types";
-export { topUsImportsFromUzByYear, topUsExportsToUzByYear } from "./comtrade-hs6";
-export { topUzExportsToUsByYear, topUzImportsFromUsByYear } from "./comtrade-hs6-uz";
-export { hs2_2024_usImports, hs2_2024_usExports, hs2_2025_usImports, hs2_2025_usExports } from "./comtrade-hs2";
-export { mirror2024 } from "./comtrade-mirror";
-export { trendTopUsImports, trendTopUsExports } from "./comtrade-trends";
-export { comtradeAnnualUzReporter, comtradeAnnualUsReporter, comtradeMeta } from "./comtrade-meta";
-`,
-  );
 }
 
 writeComtradeSlices(output);

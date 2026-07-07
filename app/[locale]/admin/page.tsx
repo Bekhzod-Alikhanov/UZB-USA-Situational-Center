@@ -2,7 +2,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { SettingsPanel } from "@/components/admin/SettingsPanel";
 import { DemoRegistryTable } from "@/components/admin/DemoRegistryTable";
-import { DelegationLocationForm } from "@/components/admin/DelegationLocationForm";
 import { AuditLogPreview } from "@/components/admin/AuditLogPreview";
 import { LogOut, Upload, Users as UsersIcon } from "lucide-react";
 import { logout } from "./login/actions";
@@ -19,7 +18,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
       <div className="flex items-end justify-between gap-3">
         <div>
           <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">Toggles, data registry, delegation location, audit log</p>
+          <p className="section-sub">Toggles, data registry, audit log</p>
         </div>
         <form action={logout}>
           <input type="hidden" name="locale" value={locale} />
@@ -33,21 +32,12 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
         </form>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <Card>
-          <CardHeader title={t("toggles")} sub="Applied immediately across the whole portal" />
-          <CardBody>
-            <SettingsPanel />
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader title={t("delegationLocation")} sub="Updates Map → Layer 3 live delegations" />
-          <CardBody>
-            <DelegationLocationForm />
-          </CardBody>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader title={t("toggles")} sub="Applied immediately across the whole portal" />
+        <CardBody>
+          <SettingsPanel />
+        </CardBody>
+      </Card>
 
       <Card>
         <CardHeader
