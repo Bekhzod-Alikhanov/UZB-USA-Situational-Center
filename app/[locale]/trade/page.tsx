@@ -11,7 +11,6 @@ import {
   ScrollText,
 } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { ChartNarration } from "@/components/ui/ChartNarration";
 import { TradeTable } from "@/components/trade/TradeTable";
 import { TradeAnnualSummary } from "@/components/trade/TradeAnnualSummary";
 import { MethodologyNotesCard } from "@/components/trade/MethodologyNotesCard";
@@ -34,12 +33,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("trade");
-  const narrationLabels = {
-    what: t("narrationLabels.what"),
-    why: t("narrationLabels.why"),
-    how: t("narrationLabels.how"),
-    source: t("narrationLabels.source"),
-  };
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-end justify-between gap-4">
@@ -65,12 +58,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         />
         <CardBody>
           <TradeFlowChart height={300} />
-          <ChartNarration
-            labels={narrationLabels}
-            what={t("narration.flow.what")}
-            why={t("narration.flow.why")}
-            how={t("narration.flow.how")}
-          />
         </CardBody>
       </Card>
 
@@ -85,13 +72,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         <CardBody>
           <TradeAnnualSummary locale={locale} />
           <TradeTable />
-          <ChartNarration
-            labels={narrationLabels}
-            what={t("narration.annual.what")}
-            why={t("narration.annual.why")}
-            how={t("narration.annual.how")}
-            source={t("narration.annual.source")}
-          />
         </CardBody>
       </Card>
 
@@ -108,12 +88,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
               kind="methodology"
               buttonLabel={t("sections.methodologyButton")}
               summary={t("sections.methodologySummary")}
-            />
-            <ChartNarration
-              labels={narrationLabels}
-              what={t("narration.methodology.what")}
-              why={t("narration.methodology.why")}
-              how={t("narration.methodology.how")}
             />
           </CardBody>
         </Card>
@@ -140,13 +114,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
         />
         <CardBody>
           <LazyMonthlyTrade />
-          <ChartNarration
-            labels={narrationLabels}
-            what={t("narration.monthly.what")}
-            why={t("narration.monthly.why")}
-            how={t("narration.monthly.how")}
-            source={t("narration.monthly.source")}
-          />
         </CardBody>
       </Card>
 
@@ -160,12 +127,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           />
           <CardBody>
             <LazyExportStructure />
-            <ChartNarration
-              labels={narrationLabels}
-              what={t("narration.structure.what")}
-              why={t("narration.structure.why")}
-              how={t("narration.structure.how")}
-            />
           </CardBody>
         </Card>
         <Card tone="agree">
@@ -177,12 +138,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
           />
           <CardBody>
             <LazyImportStructure />
-            <ChartNarration
-              labels={narrationLabels}
-              what={t("narration.structure.what")}
-              why={t("narration.structure.why")}
-              how={t("narration.structure.how")}
-            />
           </CardBody>
         </Card>
       </div>
@@ -219,13 +174,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
                 </tbody>
               </table>
             </div>
-            <ChartNarration
-              className="mx-3 mb-3"
-              labels={narrationLabels}
-              what={t("narration.categories.what")}
-              why={t("narration.categories.why")}
-              how={t("narration.categories.how")}
-            />
           </CardBody>
         </Card>
 
@@ -260,13 +208,6 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
                 </tbody>
               </table>
             </div>
-            <ChartNarration
-              className="mx-3 mb-3"
-              labels={narrationLabels}
-              what={t("narration.categories.what")}
-              why={t("narration.categories.why")}
-              how={t("narration.categories.how")}
-            />
           </CardBody>
         </Card>
       </div>

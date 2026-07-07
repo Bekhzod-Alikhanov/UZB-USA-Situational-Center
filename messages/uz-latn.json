@@ -430,46 +430,6 @@
       "share": "Ulush",
       "value": "Qiymat, $M"
     },
-    "narrationLabels": {
-      "what": "Bu nimani anglatadi",
-      "why": "Nega muhim",
-      "how": "Qanday foydalanish",
-      "source": "Manba va birlik"
-    },
-    "narration": {
-      "annual": {
-        "what": "Yillik jadval aylanma, eksport, import va saldo uchun iqtibosga tayyor asosiy qatordir.",
-        "why": "U rahbariyatga izchil sarlavha qatorini beradi va AQSh reporter tomoni ma’lumotlari bilan aralashish xavfini kamaytiradi.",
-        "how": "Tashqi yillik bayonotlar uchun ishlating; Census yoki Comtrade bilan solishtirganda metodologiya izohlarini ko‘rsating.",
-        "source": "Mln AQSh dollari, O‘zbekiston Statistika qo‘mitasi."
-      },
-      "methodology": {
-        "what": "UZ Stat, U.S. Census va Comtrade bir xil oqimni turlicha tasvirlashi mumkin.",
-        "why": "Oynaviy tafovutlar har doim xato emas; ular qiymat, vaqt, reporter tomoni yoki tasnif farqlarini ko‘rsatishi mumkin.",
-        "how": "Analitik yoki siyosatchi ikki ochiq manba nega mos kelmasligini so‘raganda shu grafikdan foydalaning."
-      },
-      "flow": {
-        "what": "Chiziqli ko‘rinish 2017-2025 yillardagi yo‘nalish va volatillikni ko‘rsatadi.",
-        "why": "U eksport, import va aylanma birga harakatlanyaptimi yoki ajralyaptimi, tez ko‘rsatadi.",
-        "how": "Oylik va mahsulot jadvallariga o‘tishdan oldin ijro brifinglari uchun ishlating."
-      },
-      "monthly": {
-        "what": "U.S. Census oylik ma’lumotlari yaqin muddatli savdo pulsi va mavsumiy harakatni ko‘rsatadi.",
-        "why": "U yangi o‘zgarishlarni kuzatish uchun foydali, ammo iqtibosga tayyor yillik UZ Stat ko‘rinishini almashtirmaydi.",
-        "how": "Monitoring grafigi sifatida foydalaning va tashqi da’volar uchun yillik metodologiyani ko‘rinadigan qoldiring.",
-        "source": "AQSh dollari qiymatlari, U.S. Census reporter tomoni tovarlar qatori."
-      },
-      "structure": {
-        "what": "Tarkib grafiklari ikki tomonlama tovar savdosini qaysi kategoriyalar ko‘tarayotganini aniqlaydi.",
-        "why": "Ular siyosiy suhbatni aniq mahsulot yo‘nalishlari va bozorga kirish savollari bilan bog‘laydi.",
-        "how": "Qaysi yo‘nalishda HS/Comtrade yoki ITC tahlili chuqurlashishini tanlash uchun ishlating."
-      },
-      "categories": {
-        "what": "Reyting jadvallari eng katta eksport va import kategoriyalarini iqtibos va taqqoslash uchun qulay qiladi.",
-        "why": "Ular savdo sahifasi faqat vaqt qatori dashboardi bo‘lib qolishining oldini oladi.",
-        "how": "Uchrashuv qaydlari uchun reyting jadvallaridan foydalaning, HS aniqligi uchun kengaytirilgan tahlilni oching."
-      }
-    },
     "ranking": {
       "exporters": "AQShga eksport qiluvchi UZ kompaniyalari",
       "importers": "O‘zbekistonga import qiluvchi AQSh kompaniyalari"
@@ -505,7 +465,6 @@
     "tabs": {
       "timeline": "Xronologiya",
       "grid": "Kartalar",
-      "table": "Jadval",
       "calendar": "Taqvim"
     }
   },
@@ -516,8 +475,6 @@
     "upcomingTitle": "Kutilayotgan va joriy tashriflar",
     "completedTitle": "Yakunlangan tashriflar",
     "noUpcoming": "Kutilayotgan tashriflar ro'yxatga olinmagan.",
-    "outcomesTitle": "Yakunlar · reja va fakt",
-    "outcomesSub": "{count} tasdiqlangan yoki kutilayotgan solishtiruv — har bir tashrif bo'yicha siklni yakunlaydi",
     "card": {
       "direction": {
         "uzToUsa": "O'z → AQSh",

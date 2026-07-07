@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Target, ShieldCheck } from "lucide-react";
-import { Card, CardBody, CardHeader } from "@/components/ui/Card";
-import { OutcomesTable } from "@/components/visit-prep/OutcomesTable";
+import { ShieldCheck } from "lucide-react";
 import { VisitCard } from "@/components/visit-prep/VisitCard";
-import { upcomingVisits, visitOutcomes } from "@/data/visit-prep";
+import { upcomingVisits } from "@/data/visit-prep";
 import { getRouteSeo } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -67,18 +65,6 @@ export default async function PreparePage({ params }: { params: Promise<{ locale
           <VisitCard key={visit.id} visit={visit} locale={locale} />
         ))}
       </section>
-
-      <Card tone="visits">
-        <CardHeader
-          icon={<Target className="size-3.5" />}
-          tone="visits"
-          title={t("outcomesTitle")}
-          sub={t("outcomesSub", { count: visitOutcomes.length })}
-        />
-        <CardBody className="p-0">
-          <OutcomesTable />
-        </CardBody>
-      </Card>
     </div>
   );
 }

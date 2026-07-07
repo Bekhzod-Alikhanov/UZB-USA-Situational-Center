@@ -64,7 +64,6 @@ Advanced charts, maps, and analytical exhibits are preserved through hierarchy i
 | Styling       | Tailwind CSS v4 · CSS-var design tokens                                              |
 | State         | Zustand v5 + persist                                                                 |
 | i18n          | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru`                                      |
-| Tables        | TanStack Table v8                                                                    |
 | Charts        | Recharts (line/bar/area) · Visx (sankey/chord/treemap) · zero-dep SVG `<MiniBars />` |
 | Maps          | maplibre-gl (OpenFreeMap) · Globe.gl · d3-geo Albers USA (lazy-loaded)               |
 | Drag-and-drop | @dnd-kit (Visit Prep Kanban)                                                         |
