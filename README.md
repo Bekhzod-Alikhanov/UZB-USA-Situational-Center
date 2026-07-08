@@ -60,7 +60,7 @@ Advanced charts, maps, and analytical exhibits are preserved through hierarchy i
 
 | Layer         | Choice                                                                               |
 | ------------- | ------------------------------------------------------------------------------------ |
-| Framework     | Next.js 16.2.9 · App Router · Turbopack · React 19.2                                 |
+| Framework     | Next.js 16.2.10 · App Router · Turbopack · React 19.2                                |
 | Styling       | Tailwind CSS v4 · CSS-var design tokens                                              |
 | State         | Zustand v5 + persist                                                                 |
 | i18n          | next-intl v4 · 3 locales: `en`, `uz-latn`, `ru`                                      |
