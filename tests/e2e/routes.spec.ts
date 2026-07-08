@@ -38,10 +38,18 @@ test.describe("localized public routes", () => {
 test("landing page serves the executive brief inside the shell", async ({ page }) => {
   await page.goto("/en");
 
-  // Brief KPI band is server-rendered; the sidebar must stay visible now
+  // Brief KPI band is server-rendered; the shell nav must stay present now
   // that the brief is an in-shell page rather than a fixed overlay.
   await expect(page.getByText("Trade turnover", { exact: false }).first()).toBeVisible();
-  await expect(page.locator("aside").first()).toBeVisible();
+
+  // Nav chrome differs by breakpoint: the persistent <aside> sidebar on desktop
+  // (hidden lg:flex), and the hamburger menu trigger on mobile (lg:hidden).
+  const isDesktop = (page.viewportSize()?.width ?? 1280) >= 1024;
+  if (isDesktop) {
+    await expect(page.locator("aside").first()).toBeVisible();
+  } else {
+    await expect(page.getByRole("button", { name: "Open menu" })).toBeVisible();
+  }
 });
 
 test("overview keeps the working-dashboard layers behind progressive disclosure", async ({ page }) => {
@@ -51,7 +59,9 @@ test("overview keeps the working-dashboard layers behind progressive disclosure"
   await expect(summary).toBeVisible();
   await summary.click();
   await expect(page.getByText("Executive command center")).toBeVisible();
-  await expect(page.getByText("Priority actions").first()).toBeVisible();
+  // The section heading (not the summary counter chip, which is `hidden lg:inline`
+  // and therefore invisible on mobile) proves the readout body expanded.
+  await expect(page.getByRole("heading", { name: "Priority actions", exact: true })).toBeVisible();
 });
 
 test("admin route redirects to login when unauthenticated", async ({ page }) => {
