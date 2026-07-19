@@ -1,0 +1,37 @@
+{
+  "releaseId": "legacy-2026-07-09",
+  "publishedAt": "2026-07-09T00:00:00.000Z",
+  "projectionVersion": 1,
+  "hashAlgorithm": "sha256-canonical-json-v1",
+  "approvalStatus": "technical-migration-attested",
+  "domains": {
+    "executive": {
+      "contentHash": "edad3b4ab845f4e206f14918f1d9bbdd9372b7199401f90f020020a23bcced90",
+      "approvalAttestationIds": [
+        "PRESERVATION_MANIFEST.json:legacy-2026-07-09",
+        "tests/unit/public-api-v1.test.ts:governance-reconciliation"
+      ]
+    },
+    "trade": {
+      "contentHash": "ed5b5c992db86c1c8e635e44bdd35ae3f40eb08e59e1f9f5af3008f5efafbb96",
+      "approvalAttestationIds": [
+        "PRESERVATION_MANIFEST.json:legacy-2026-07-09",
+        "tests/unit/public-api-v1.test.ts:governance-reconciliation"
+      ]
+    },
+    "investments": {
+      "contentHash": "a9b8feb497d8a0ebc1b34f99ad1c5fd58c47c09f2caaba306ec9f21d4ee0cbfb",
+      "approvalAttestationIds": [
+        "PRESERVATION_MANIFEST.json:legacy-2026-07-09",
+        "tests/unit/public-api-v1.test.ts:governance-reconciliation"
+      ]
+    },
+    "roadmaps": {
+      "contentHash": "31fee7a70e3c9f9304cd7a8cd2f188d73eef94fbfe1cb119e3916348b64932a8",
+      "approvalAttestationIds": [
+        "PRESERVATION_MANIFEST.json:legacy-2026-07-09",
+        "tests/unit/public-api-v1.test.ts:governance-reconciliation"
+      ]
+    }
+  }
+}

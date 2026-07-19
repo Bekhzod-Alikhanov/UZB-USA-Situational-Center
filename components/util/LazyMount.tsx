@@ -34,7 +34,6 @@ export function LazyMount({ children, rootMargin = "240px", minHeight = 280, fal
     if (!node) return;
     if (typeof IntersectionObserver === "undefined") {
       // Old browser / no support — render immediately.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
       return;
     }

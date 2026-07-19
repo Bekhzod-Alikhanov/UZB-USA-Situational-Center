@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Route } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { RegionCards } from "@/components/roadmaps/RegionCards";
 import { RoadmapsExplorer } from "@/components/roadmaps/RoadmapsExplorer";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { roadmapProjects } from "@/data/roadmaps";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,16 +19,18 @@ export default async function RoadmapsPage({ params }: { params: Promise<{ local
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("roadmaps");
+  const tPublic = await getTranslations("publicPage");
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">{t("subtitle")}</p>
-        </div>
-        <PrintButton />
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="rose"
+        icon={<Route className="size-6 sm:size-7" />}
+        actions={<PrintButton />}
+      />
 
       <RegionCards />
 

@@ -41,10 +41,7 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     key: "executive",
     icon: Activity,
-    items: [
-      { key: "brief", href: "", icon: Activity, tone: "primary", audience: "executive" },
-      { key: "overview", href: "/overview", icon: LineChart, tone: "primary", audience: "analyst" },
-    ],
+    items: [{ key: "overview", href: "", icon: Activity, tone: "primary", audience: "executive" }],
   },
   {
     key: "economic",
@@ -78,6 +75,7 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { key: "map", href: "/map", icon: Globe2, tone: "people", audience: "advanced" },
       { key: "benchmark", href: "/benchmark", icon: Gauge, tone: "slate", audience: "advanced" },
+      { key: "sources", href: "/sources", icon: BookOpen, tone: "primary", audience: "advanced" },
     ],
   },
   {

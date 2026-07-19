@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 interface SourceBadgeProps {
   /** Source ID from data/sources.ts */
   sourceId: string;
-  /** Render mode: "chip" full label, "compact" small inline */
-  variant?: "chip" | "compact";
+  /** Render mode: full label, compact ID, or minimal source-level mark. */
+  variant?: "chip" | "compact" | "mark";
   className?: string;
 }
 
@@ -40,28 +40,36 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
       ? "border-[var(--color-primary)]/30 bg-[var(--color-primary-soft)] text-[var(--color-primary)]"
       : "border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-ink-muted)]";
 
-  const inner = (
-    <>
-      <Icon className={variant === "chip" ? "size-3" : "size-2.5"} />
-      <span className={variant === "chip" ? "font-medium" : ""}>
-        {variant === "chip" ? src.name : `[${src.level}] ${src.id}`}
-      </span>
-    </>
-  );
+  const inner =
+    variant === "mark" ? (
+      <span className="font-semibold">[{src.level}]</span>
+    ) : (
+      <>
+        <Icon className={variant === "chip" ? "size-3" : "size-2.5"} />
+        <span className={variant === "chip" ? "font-medium" : ""}>
+          {variant === "chip" ? src.name : `[${src.level}] ${src.id}`}
+        </span>
+      </>
+    );
 
   // The visible text must be contained in the accessible name (WCAG 2.5.3
   // Label in Name); prepend it to the descriptive aria-label below.
-  const visibleText = variant === "chip" ? src.name : `[${src.level}] ${src.id}`;
+  const visibleText =
+    variant === "chip" ? src.name : variant === "mark" ? `[${src.level}]` : `[${src.level}] ${src.id}`;
 
   const baseClass = cn(
     "inline-flex items-center gap-1 rounded border px-1.5 py-0.5 transition",
-    variant === "chip" ? "text-[11px]" : "text-[9.5px] uppercase tracking-wider",
+    variant === "chip"
+      ? "text-[11px]"
+      : variant === "mark"
+        ? "text-[9px] uppercase tracking-wider"
+        : "text-[9.5px] uppercase tracking-wider",
     tone,
     isExternal && "hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-contrast)]",
     className,
   );
 
-  if (isExternal) {
+  if (isExternal && variant !== "mark") {
     return (
       <a
         href={src.url}
@@ -79,8 +87,16 @@ export function SourceBadge({ sourceId, variant = "compact", className }: Source
   return (
     <span
       className={baseClass}
-      title={`${src.name} - ${src.sourceFile ?? "internal"} - fetched ${src.fetched_at}`}
-      aria-label={`${visibleText}. Source: ${src.name}. Attached or internal source fetched ${src.fetched_at}.`}
+      title={
+        isExternal
+          ? `${src.name} - fetched ${src.fetched_at}`
+          : `${src.name} - ${src.sourceFile ?? "internal"} - fetched ${src.fetched_at}`
+      }
+      aria-label={
+        isExternal
+          ? `${visibleText}. Source: ${src.name}. External source fetched ${src.fetched_at}.`
+          : `${visibleText}. Source: ${src.name}. Attached or internal source fetched ${src.fetched_at}.`
+      }
     >
       {inner}
     </span>

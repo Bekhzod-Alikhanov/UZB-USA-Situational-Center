@@ -25,7 +25,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lhci": "node scripts/run-lhci.mjs",
-    "verify": "pnpm lint && pnpm typecheck && pnpm validate:data && pnpm test:governance && pnpm test:unit"
+    "verify": "corepack pnpm lint && corepack pnpm typecheck && corepack pnpm validate:data && corepack pnpm test:governance && corepack pnpm test:unit"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.19",
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
+    "@electric-sql/pglite": "^0.5.4",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4.3.2",

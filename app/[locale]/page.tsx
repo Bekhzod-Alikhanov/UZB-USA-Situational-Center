@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getRouteSeo } from "@/lib/seo";
 import { tradeAnnualUz } from "@/data/trade";
@@ -11,7 +11,6 @@ import { roadmapProjects, roadmapDonePct, regionRoadmaps } from "@/data/roadmaps
 import { sourcesMeta } from "@/data/sources";
 import { yoyPct, investmentHighlights, intlLocale, parseDay } from "@/components/brief/brief-data";
 import { briefVoice } from "@/components/brief/fonts";
-import { BriefIntro } from "@/components/brief/BriefIntro";
 import { BriefNumber } from "@/components/brief/BriefNumber";
 import { BriefClocks } from "@/components/brief/BriefClocks";
 import { BriefTradeChart } from "@/components/brief/BriefTradeChart";
@@ -51,7 +50,7 @@ function PanelLink({ href, label }: { href: string; label: string }) {
  * bounded panel INSIDE the normal shell (sidebar + topbar visible) instead
  * of a fixed overlay; every KPI tile and panel deep-links into its detail
  * section, and a fullscreen button restores the projector presentation
- * mode. The staff working dashboard lives on /overview.
+ * mode. Secondary analysis stays available through progressive disclosure.
  */
 export default async function BriefHomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -80,15 +79,6 @@ export default async function BriefHomePage({ params }: { params: Promise<{ loca
 
   return (
     <div id="brief-stage" className={`brief-stage ${briefVoice.variable}`}>
-      {/* Synchronous pre-paint gate: returning visitors this session skip the
-          intro with zero flash (see BriefIntro for the full replay matrix). */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `try{if(sessionStorage.getItem("uzus-brief-intro"))document.documentElement.setAttribute("data-brief-intro-done","")}catch(e){}`,
-        }}
-      />
-      <BriefIntro title={t("intro.title")} subtitle={t("intro.subtitle")} />
-
       <div className="brief-frame">
         {/* Header strip: wordmark · live clocks · fullscreen · print */}
         <div className="brief-reveal brief-reveal-1 flex min-h-[64px] flex-wrap items-center justify-between gap-x-6 gap-y-2 py-2.5">
@@ -230,68 +220,78 @@ export default async function BriefHomePage({ params }: { params: Promise<{ loca
           </div>
         </section>
 
-        {/* Bottom row: sectors + flagship · execution + attention · agreements */}
-        <section className="brief-reveal brief-reveal-4 mt-4 grid gap-4 xl:grid-cols-12">
-          <div className="brief-panel xl:col-span-4">
-            <div className="brief-panel-head">
-              <span className="brief-panel-title">{t("invest.title")}</span>
-              <PanelLink href={`/${locale}/investments`} label={`${openDetail}: ${t("invest.title")}`} />
+        {/* Secondary analysis remains intact but no longer competes with the
+            three principal decision panels in the initial executive scan. */}
+        <details className="brief-analysis brief-reveal brief-reveal-4 mt-4">
+          <summary className="brief-analysis-summary">
+            <span>
+              <span className="brief-analysis-title">{t("analysis.title")}</span>
+              <span className="brief-analysis-sub">{t("analysis.summary")}</span>
+            </span>
+            <ChevronDown aria-hidden className="brief-analysis-chevron size-5 shrink-0" />
+          </summary>
+          <section className="mt-4 grid gap-4 xl:grid-cols-12">
+            <div className="brief-panel xl:col-span-4">
+              <div className="brief-panel-head">
+                <span className="brief-panel-title">{t("invest.title")}</span>
+                <PanelLink href={`/${locale}/investments`} label={`${openDetail}: ${t("invest.title")}`} />
+              </div>
+              <div className="brief-panel-body brief-print-block">
+                <ul className="space-y-3.5">
+                  {sectors.map((s) => (
+                    <li key={s.sector}>
+                      <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
+                        <span className="text-[var(--brief-ink)]">{t(`invest.sector.${s.sector}`)}</span>
+                        <span className="tabular-nums text-[var(--brief-ink-muted)]">
+                          {t("invest.valueMln", { value: nf.format(s.valueMusd) })} ·{" "}
+                          {t("invest.projects", { count: s.projects })}
+                        </span>
+                      </div>
+                      <div className="mt-1.5 h-[6px] w-full rounded-full bg-[var(--brief-surface-2)]">
+                        <div
+                          className="h-full rounded-full bg-[var(--brief-accent)]"
+                          style={{ width: `${Math.max(6, (s.valueMusd / maxSectorValue) * 100)}%` }}
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {flagship ? (
+                  <div className="mt-5 border-t border-[var(--brief-border)] pt-3.5">
+                    <div className="brief-eyebrow">{t("docs.title")}</div>
+                    <p className="mt-1.5 text-[13px] font-semibold leading-snug text-[var(--brief-ink)]">
+                      {t("docs.flagshipTitle")}
+                    </p>
+                    <p className="mt-0.5 text-[11.5px] text-[var(--brief-ink-muted)]">
+                      {t("docs.flagshipMeta", { date: df.format(parseDay(flagship.signedOn)) })}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <div className="brief-panel-body brief-print-block">
-              <ul className="space-y-3.5">
-                {sectors.map((s) => (
-                  <li key={s.sector}>
-                    <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
-                      <span className="text-[var(--brief-ink)]">{t(`invest.sector.${s.sector}`)}</span>
-                      <span className="tabular-nums text-[var(--brief-ink-muted)]">
-                        {t("invest.valueMln", { value: nf.format(s.valueMusd) })} ·{" "}
-                        {t("invest.projects", { count: s.projects })}
-                      </span>
-                    </div>
-                    <div className="mt-1.5 h-[6px] w-full rounded-full bg-[var(--brief-surface-2)]">
-                      <div
-                        className="h-full rounded-full bg-[var(--brief-accent)]"
-                        style={{ width: `${Math.max(6, (s.valueMusd / maxSectorValue) * 100)}%` }}
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              {flagship ? (
-                <div className="mt-5 border-t border-[var(--brief-border)] pt-3.5">
-                  <div className="brief-eyebrow">{t("docs.title")}</div>
-                  <p className="mt-1.5 text-[13px] font-semibold leading-snug text-[var(--brief-ink)]">
-                    {t("docs.flagshipTitle")}
-                  </p>
-                  <p className="mt-0.5 text-[11.5px] text-[var(--brief-ink-muted)]">
-                    {t("docs.flagshipMeta", { date: df.format(parseDay(flagship.signedOn)) })}
-                  </p>
-                </div>
-              ) : null}
-            </div>
-          </div>
 
-          <div className="brief-panel xl:col-span-4">
-            <div className="brief-panel-head">
-              <span className="brief-panel-title">{t("execution.title")}</span>
-              <PanelLink href={`/${locale}/roadmaps`} label={`${openDetail}: ${t("execution.title")}`} />
+            <div className="brief-panel xl:col-span-4">
+              <div className="brief-panel-head">
+                <span className="brief-panel-title">{t("execution.title")}</span>
+                <PanelLink href={`/${locale}/roadmaps`} label={`${openDetail}: ${t("execution.title")}`} />
+              </div>
+              <div className="brief-panel-body">
+                <RoadmapExecutionBar />
+                <AttentionList />
+              </div>
             </div>
-            <div className="brief-panel-body">
-              <RoadmapExecutionBar />
-              <AttentionList />
-            </div>
-          </div>
 
-          <div className="brief-panel xl:col-span-4">
-            <div className="brief-panel-head">
-              <span className="brief-panel-title">{t("agreementsChart.title")}</span>
-              <PanelLink href={`/${locale}/agreements`} label={`${openDetail}: ${t("agreementsChart.title")}`} />
+            <div className="brief-panel xl:col-span-4">
+              <div className="brief-panel-head">
+                <span className="brief-panel-title">{t("agreementsChart.title")}</span>
+                <PanelLink href={`/${locale}/agreements`} label={`${openDetail}: ${t("agreementsChart.title")}`} />
+              </div>
+              <div className="brief-panel-body">
+                <BriefAgreementsDonut />
+              </div>
             </div>
-            <div className="brief-panel-body">
-              <BriefAgreementsDonut />
-            </div>
-          </div>
-        </section>
+          </section>
+        </details>
 
         {/* Footer strip */}
         <div className="brief-reveal brief-reveal-4 mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--brief-border)] pt-3">

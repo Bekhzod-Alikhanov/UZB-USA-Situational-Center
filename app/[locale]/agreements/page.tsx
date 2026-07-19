@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { BarChart3, Library } from "lucide-react";
+import { BarChart3, Library, ScrollText } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { AgreementsTable } from "@/components/agreements/AgreementsTable";
 import { AgreementsStats } from "@/components/agreements/AgreementsStats";
 import { AgreementsTimeline } from "@/components/agreements/AgreementsTimeline";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,32 +18,31 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("agreements");
-  const registryCopy =
-    locale === "ru"
-      ? { title: "Реестр", sub: "Фильтр по категории, сфере и поиск по названию" }
-      : locale === "uz-latn"
-        ? { title: "Reestr", sub: "Kategoriya, soha bo‘yicha filtrlash va nomi bo‘yicha qidirish" }
-        : { title: "Registry", sub: "Filter by category, sphere, search by title" };
+  const tPublic = await getTranslations("publicPage");
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">{t("subtitle")}</p>
-        </div>
-        <div className="text-right text-[11px] text-[var(--color-ink-muted)]">
-          <div>Ministry of Foreign Affairs of the Republic of Uzbekistan</div>
-          <div className="mono">Full texts on request · MFA registry</div>
-        </div>
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="agree"
+        icon={<ScrollText className="size-6 sm:size-7" />}
+        meta={
+          <>
+            <span>{t("overview.sourceOwner")}</span>
+            <span aria-hidden>·</span>
+            <span>{t("overview.sourceAvailability")}</span>
+          </>
+        }
+      />
 
       <Card tone="agree">
         <CardHeader
           icon={<BarChart3 className="size-3.5" />}
           tone="agree"
-          title="Aggregate"
-          sub="By category and year"
+          title={t("overview.aggregateTitle")}
+          sub={t("overview.aggregateSub")}
         />
         <CardBody className="flex flex-col gap-8">
           <AgreementsStats />
@@ -54,8 +54,8 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
         <CardHeader
           icon={<Library className="size-3.5" />}
           tone="agree"
-          title={registryCopy.title}
-          sub={registryCopy.sub}
+          title={t("overview.registryTitle")}
+          sub={t("overview.registrySub")}
         />
         <CardBody>
           <AgreementsTable />
@@ -64,7 +64,7 @@ export default async function AgreementsPage({ params }: { params: Promise<{ loc
 
       <div className="flex flex-wrap items-center gap-2 rounded-md border border-dashed border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-[11px] text-[var(--color-ink-muted)]">
         <span className="font-medium uppercase tracking-wider text-[var(--color-ink-faint)]">
-          UZ-side legal anchors:
+          {t("overview.sourceAnchors")}:
         </span>
         <SourceBadge sourceId="lex_uz" />
         <SourceBadge sourceId="lex_uz_visa_free_2025" />

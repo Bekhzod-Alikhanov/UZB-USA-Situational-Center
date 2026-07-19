@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { locales, type Locale } from "@/lib/i18n/config";
+import { locales, requirePublicLocale, type Locale } from "@/lib/i18n/config";
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://uz-us-center.vercel.app";
 export const siteTitle = "Uzbekistan-USA Economic and Investment Intelligence Platform";
@@ -16,6 +16,11 @@ function routeFor(locale: Locale, path = "") {
   return `/${locale}${normalizePath(path)}`;
 }
 
+export const localeHrefLang: Record<Locale, string> = {
+  en: "en",
+  "uz-latn": "uz-Latn",
+};
+
 export const SEO_ROUTES = {
   brief: "",
   overview: "/overview",
@@ -29,22 +34,22 @@ export const SEO_ROUTES = {
   compliance: "/compliance",
   grants: "/grants",
   contacts: "/contacts",
+  sources: "/sources",
   prepare: "/prepare",
   adminLogin: "/admin/login",
 } as const;
 
 export type SeoRouteKey = keyof typeof SEO_ROUTES;
 
-function safeLocale(locale: string): Locale {
-  return locales.includes(locale as Locale) ? (locale as Locale) : "en";
-}
-
 export function localeAlternates(locale: string, path = ""): Metadata["alternates"] {
-  const activeLocale = safeLocale(locale);
+  const activeLocale = requirePublicLocale(locale);
 
   return {
     canonical: routeFor(activeLocale, path),
-    languages: Object.fromEntries(locales.map((item) => [item === "uz-latn" ? "uz-Latn" : item, routeFor(item, path)])),
+    languages: {
+      ...Object.fromEntries(locales.map((item) => [localeHrefLang[item], routeFor(item, path)])),
+      "x-default": routeFor("en", path),
+    },
   };
 }
 
@@ -59,7 +64,7 @@ export async function getRouteSeo({
   path?: string;
   values?: Record<string, string | number>;
 }): Promise<Metadata> {
-  const activeLocale = safeLocale(locale);
+  const activeLocale = requirePublicLocale(locale);
   const t = await getTranslations({ locale: activeLocale, namespace: `seo.routes.${routeKey}` });
   const routePath = path ?? SEO_ROUTES[routeKey];
 

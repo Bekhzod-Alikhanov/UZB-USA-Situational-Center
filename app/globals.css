@@ -292,7 +292,7 @@
   body {
     background: var(--color-bg);
     color: var(--color-ink);
-    font-family: var(--font-sans);
+    font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "cv11", "ss01", "ss03";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -348,11 +348,11 @@
   font-variant-numeric: tabular-nums;
 }
 @utility mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
   font-variant-numeric: tabular-nums;
 }
 @utility serif {
-  font-family: var(--font-serif);
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
   letter-spacing: -0.01em;
 }
 
@@ -456,7 +456,7 @@
     border: 1px solid color-mix(in oklab, var(--chip-tone, var(--color-primary)) 22%, transparent);
   }
   .icon-chip-sm {
-    @apply inline-flex size-7 items-center justify-center rounded-md;
+    @apply inline-flex size-8 items-center justify-center rounded-lg;
     background: color-mix(in oklab, var(--chip-tone, var(--color-primary)) 14%, transparent);
     color: var(--chip-tone, var(--color-primary));
     border: 1px solid color-mix(in oklab, var(--chip-tone, var(--color-primary)) 22%, transparent);
@@ -1087,6 +1087,61 @@
   padding: 13px 16px 15px;
   min-width: 0;
 }
+/* `.brief-panel` is declared after Tailwind's utilities, so its flex display
+   would otherwise override the mobile `hidden md:flex` globe treatment. */
+@media (max-width: 767px) {
+  .brief-panel.hidden {
+    display: none;
+  }
+}
+.brief-analysis {
+  border: 1px solid var(--brief-border);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--brief-surface) 72%, transparent);
+}
+.brief-analysis-summary {
+  display: flex;
+  min-height: 52px;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 16px;
+  color: var(--brief-ink-muted);
+}
+.brief-analysis-summary::-webkit-details-marker {
+  display: none;
+}
+.brief-analysis-summary:focus-visible {
+  outline: 2px solid var(--brief-accent-bright);
+  outline-offset: 3px;
+}
+.brief-analysis-title,
+.brief-analysis-sub {
+  display: block;
+}
+.brief-analysis-title {
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brief-ink);
+}
+.brief-analysis-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.brief-analysis-chevron {
+  transition: transform 160ms var(--ease-out);
+}
+.brief-analysis[open] .brief-analysis-chevron {
+  transform: rotate(180deg);
+}
+.brief-analysis > section {
+  padding: 0 16px 16px;
+}
 /* Live clocks in the header strip. */
 .brief-clock {
   font-variant-numeric: tabular-nums;
@@ -1236,19 +1291,19 @@
 }
 /* Dashboard content rises softly out of the intro. Only transform/opacity. */
 .brief-reveal {
-  animation: brief-reveal-up 0.8s var(--ease-out) both;
+  animation: brief-reveal-up 160ms var(--ease-out) both;
 }
 .brief-reveal-1 {
-  animation-delay: 2.7s;
+  animation-delay: 0ms;
 }
 .brief-reveal-2 {
-  animation-delay: 2.85s;
+  animation-delay: 40ms;
 }
 .brief-reveal-3 {
-  animation-delay: 3s;
+  animation-delay: 80ms;
 }
 .brief-reveal-4 {
-  animation-delay: 3.15s;
+  animation-delay: 120ms;
 }
 @keyframes brief-fade-scale {
   from {
@@ -1306,6 +1361,9 @@ html[data-brief-intro-done] .brief-reveal {
     opacity: 1;
     transform: none;
   }
+  .brief-analysis-chevron {
+    transition: none;
+  }
 }
 
 @media print {
@@ -1323,6 +1381,12 @@ html[data-brief-intro-done] .brief-reveal {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+  .brief-analysis > section {
+    display: grid !important;
+  }
+  .brief-analysis-summary {
+    display: none !important;
   }
   :root,
   :root.dark,

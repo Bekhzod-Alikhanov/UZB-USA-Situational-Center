@@ -6,7 +6,9 @@ try {
   response = await fetch(url);
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
-  console.error(`Live-data probe could not reach ${url}. Start the app first with "pnpm dev" or "pnpm start".`);
+  console.error(
+    `Live-data probe could not reach ${url}. Start the app first with "corepack pnpm dev" or "corepack pnpm start".`,
+  );
   console.error(message);
   process.exit(1);
 }

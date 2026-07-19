@@ -75,7 +75,9 @@ const usProgramRefs = [...grantsText.matchAll(/\bid:\s*"g-usaid-/g)].length;
 if (internalGrantRefs !== 7) fail(`Expected 7 internal grant workbook rows; found ${internalGrantRefs}.`);
 if (usProgramRefs !== 4) fail(`Expected 4 major U.S. assistance program records; found ${usProgramRefs}.`);
 
-const locales = ["en", "ru", "uz-latn"];
+const runtimeLocales = ["en", "uz-latn"];
+const archivedLocales = ["ru"];
+const locales = [...runtimeLocales, ...archivedLocales];
 const messageKeySets = new Map();
 for (const locale of locales) {
   try {
@@ -86,7 +88,7 @@ for (const locale of locales) {
   }
 }
 const baseKeys = messageKeySets.get("en") ?? new Set();
-for (const locale of locales.filter((locale) => locale !== "en")) {
+for (const locale of runtimeLocales.filter((locale) => locale !== "en")) {
   const keys = messageKeySets.get(locale) ?? new Set();
   const missing = [...baseKeys].filter((key) => !keys.has(key));
   const extra = [...keys].filter((key) => !baseKeys.has(key));
@@ -112,6 +114,7 @@ const expectedRoutes = [
   "contacts",
   "compliance",
   "benchmark",
+  "sources",
 ];
 
 for (const route of expectedRoutes) {
@@ -187,7 +190,7 @@ for (const relPath of trackedFiles()) {
 }
 
 console.log(
-  `Validated ${sourceIds.length} sources, ${sourceRefCount} source references, ${dataFiles.length} data files, ${locales.length} locale files, and ${expectedRoutes.length} localized routes.`,
+  `Validated ${sourceIds.length} sources, ${sourceRefCount} source references, ${dataFiles.length} data files, ${runtimeLocales.length} runtime locale files, ${archivedLocales.length} archived locale file, and ${expectedRoutes.length} localized routes.`,
 );
 for (const message of warnings) console.warn(`Warning: ${message}`);
 if (failures.length) {

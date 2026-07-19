@@ -8,6 +8,7 @@ import { ForeignAssistanceView } from "@/components/grants/ForeignAssistanceView
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { grants, grantsMeta } from "@/data/grants";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -18,6 +19,7 @@ export default async function GrantsPage({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("grants");
+  const tPublic = await getTranslations("publicPage");
 
   const internalGrants = grants.filter((g) => g.sourceId === "input_grants_xlsx");
   const usAssistancePrograms = grants.filter((g) => g.sourceId !== "input_grants_xlsx");
@@ -25,17 +27,20 @@ export default async function GrantsPage({ params }: { params: Promise<{ locale:
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">{t("subtitle")}</p>
-        </div>
-        <div className="hidden gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
-          <Stat label={t("stats.programs")} value={`${internalGrants.length} + ${usAssistancePrograms.length}`} />
-          <Stat label={t("stats.value")} value={`$${grantsMeta.total.toFixed(2)}M`} tone="pos" />
-          <Stat label={t("stats.donors")} value={donorCount.toString()} tone="primary" />
-        </div>
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="invest"
+        icon={<Gift className="size-6 sm:size-7" />}
+        stats={
+          <>
+            <Stat label={t("stats.programs")} value={`${internalGrants.length} + ${usAssistancePrograms.length}`} />
+            <Stat label={t("stats.value")} value={`$${grantsMeta.total.toFixed(2)}M`} tone="pos" />
+            <Stat label={t("stats.donors")} value={donorCount.toString()} tone="primary" />
+          </>
+        }
+      />
 
       <Card tone="invest">
         <CardHeader

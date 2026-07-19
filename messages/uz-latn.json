@@ -1,4 +1,7 @@
 {
+  "publicPage": {
+    "intelligenceBrief": "Ikki tomonlama tahliliy ma'lumot"
+  },
   "brief": {
     "intro": {
       "title": "O‘zbekiston — AQSH",
@@ -102,6 +105,9 @@
       "overdue": "Muddati o'tgan",
       "dueSoon": "Muddat yaqin",
       "due": "muddat — {date}",
+      "overdueCount": "Muddati o'tgan yo'l xaritasi vazifalari: {count} ta",
+      "dueSoonCount": "Muddati yaqin yo'l xaritasi vazifalari: {count} ta",
+      "earliestDue": "Eng yaqin muddat · {date}",
       "allGreen": "Yo'l xaritasi vazifalarining barchasi yashil zonada."
     },
     "agreementsChart": {
@@ -119,6 +125,10 @@
       "sources": "{count, plural, other {# ta rasmiy manba}}",
       "print": "PDF eksport",
       "methodologies": "O‘z milliy statistikasi · U.S. Census Bureau · TIV reestri"
+    },
+    "analysis": {
+      "title": "Qo‘shimcha tahlil",
+      "summary": "Investitsiya tarmoqlari, ijro nazorati va ikki tomonlama huquqiy baza"
     },
     "openDetail": "Bo'limni ochish",
     "execution": {
@@ -150,7 +160,8 @@
     "contacts": "Kontaktlar",
     "admin": "Boshqaruv",
     "brief": "Brifing",
-    "roadmaps": "Yo'l xaritalari"
+    "roadmaps": "Yo'l xaritalari",
+    "sources": "Manbalar va metodologiya"
   },
   "navGroups": {
     "executive": "Ijro brifi",
@@ -265,6 +276,10 @@
       "roadmaps": {
         "title": "Hududlar yo'l xaritalari",
         "description": "Samarqand va Xorazm imzolangan yo'l xaritalari ijro monitori: 61 loyiha, hujjat muddatlari, mas'ullar, avtomatik holat."
+      },
+      "sources": {
+        "title": "Manbalar va metodologiya",
+        "description": "Boshqariladigan manbalar reestri, nashr standartlari, ishonch yorliqlari, savdo metodologiyasi chegaralari va iqtibos uchun xavfsiz dalil qoidalari."
       }
     }
   },
@@ -523,6 +538,15 @@
   "agreements": {
     "title": "Ikki tomonlama bitimlar",
     "subtitle": "138 asos hujjat + 16 investitsiya bitim",
+    "overview": {
+      "aggregateTitle": "Bitimlar portfeli",
+      "aggregateSub": "Toifa va imzolangan yil bo‘yicha taqsimot",
+      "registryTitle": "Bitimlar reestri",
+      "registrySub": "Toifa va soha bo‘yicha filtrlang yoki nomi bo‘yicha qidiring",
+      "sourceOwner": "O‘zbekiston Respublikasi Tashqi ishlar vazirligi",
+      "sourceAvailability": "To‘liq matnlar TIV reestri orqali so‘rov asosida taqdim etiladi",
+      "sourceAnchors": "O‘zbekiston huquqiy manbalari"
+    },
     "categories": {
       "all": "Barcha toifalar",
       "interstate": "Davlatlararo",
@@ -1031,6 +1055,496 @@
       "ago": "{days} kun oldin"
     },
     "linkedVisit": "Bog‘langan tashrif"
+  },
+  "today": {
+    "meta": {
+      "title": "Bugun | O‘zbekiston–AQSh Boshqaruv markazi",
+      "description": "Rahbariyat qarorlari, ijro xatarlari, tashrif tayyorgarligi va tasdiqlangan ikki tomonlama ko‘rsatkichlar."
+    },
+    "skip": "Rahbariyat ustuvorliklariga o‘tish",
+    "brandAria": "O‘zbekiston–Amerika Qo‘shma Shtatlari Situatsion markazi",
+    "brand": "O‘zbekiston — AQSh",
+    "center": "Situatsion markaz",
+    "title": "Vaziyat tasmasi",
+    "dataState": "Statik zaxira · {date} holatiga",
+    "openBrief": "Ertalabki brifingni ochish",
+    "languageNav": "Til",
+    "ribbon": {
+      "since": "So‘nggi brifingdan beri",
+      "today": "Bugun",
+      "next": "Keyingi 7 kun"
+    },
+    "owner": "Mas’ul",
+    "due": "Muddat",
+    "evidence": "Dalil",
+    "status": "Holat",
+    "notApplicable": "Yo‘q",
+    "notSet": "Sana yo‘q",
+    "sourceNeeded": "Manba kerak",
+    "sourceRegister": "Reyestr",
+    "verified": "Tasdiqlangan",
+    "verifiedOfficial": "Rasmiy tasdiqlangan",
+    "informed": "Ma’lumot uchun",
+    "pendingReview": "Tekshiruv",
+    "actionNeeded": "Chora",
+    "overdue": "Muddati o‘tgan",
+    "pending": "Kutilmoqda",
+    "inReview": "Ko‘rib chiqishda",
+    "demoSourceNeeded": "Demo / manba kerak",
+    "owners": {
+      "dataDesk": "Ma’lumotlar bo‘limi",
+      "roadmapRegister": "Reyestr"
+    },
+    "updates": {
+      "trade": {
+        "title": "{year}-yil savdo aylanmasi e’lon qilindi",
+        "detail": "AQSh bilan tashqi savdo ${value} mln bo‘lib, yillik hisobda {yoy}% kamaydi."
+      },
+      "investment": {
+        "title": "AQSh investitsiyalarini tekshirish yangilanishi",
+        "detail": "Tasdiqlangan AQSh investitsiyasi ${verified} mlrd; ${pending} mln hali tekshirilmoqda."
+      },
+      "roadmap": {
+        "title": "Yo‘l xaritasi vazifalari e’tibor talab qiladi",
+        "detail": "Samarqand va Xorazm yo‘l xaritalarida {count} ta vazifa muddati o‘tgan."
+      }
+    },
+    "actions": {
+      "roadmaps": {
+        "title": "Muddati o‘tgan vazifalarni eskalatsiya qilish",
+        "detail": "Ikki imzolangan yo‘l xaritasida {count} ta vazifa muddati o‘tgan."
+      },
+      "investment": {
+        "title": "Investitsiya tekshiruvini ko‘rib chiqish",
+        "detail": "Rasmiy tasdiqlangan jamidan tashqarida saqlangan ${value} mlnni ko‘rib chiqing."
+      },
+      "platform": {
+        "title": "Platformani takomillashtirish paketini tasdiqlash",
+        "detail": "Ko‘rsatkichlarni aniqlashtirish va pilot ma’lumotlar bo‘shliqlarini yopish."
+      }
+    },
+    "leadership": {
+      "title": "Rahbariyat e’tibori",
+      "subtitle": "Qaror, aralashuv yoki mas’ul kuzatuvni talab qiladigan asosiy harakatlar",
+      "viewAll": "Barcha harakatlarni ko‘rish"
+    },
+    "readiness": {
+      "title": "Tashrif dalillari tayyorgarligi",
+      "subtitle": "Samarqand va Xorazmning AQShga missiyalari · 2026-yil may",
+      "agenda": "Kun tartibi",
+      "previewOnly": "Faqat namuna",
+      "entries": "{count} ta band",
+      "materials": "Materiallar",
+      "verified": "Tasdiqlangan",
+      "artifacts": "{count} ta hujjat",
+      "approvals": "Tasdiqlar",
+      "risks": "Xatarlar",
+      "unavailable": "Mavjud emas",
+      "openWorkspace": "Tashrif ish maydonini ochish"
+    },
+    "baseline": {
+      "title": "Rahbariyat uchun asosiy ko‘rsatkichlar",
+      "trade": "{year}-yil savdo aylanmasi",
+      "yoy": "yillik o‘zgarish",
+      "investment": "Tasdiqlangan AQSh investitsiyasi",
+      "pendingVerification": "tekshirilmoqda",
+      "delivery": "Ijro",
+      "projects": "loyiha",
+      "complete": "bajarilgan",
+      "overdue": "muddati o‘tgan"
+    },
+    "period": "Davr: {value}",
+    "publication": "E’lon: {date}",
+    "sources": {
+      "trade": "Milliy statistika qo‘mitasi",
+      "investment": "ITA konchilik qo‘llanmasi",
+      "roadmaps": "Imzolangan hududiy yo‘l xaritalari"
+    },
+    "openIntelligence": "Tahlillarni ochish",
+    "governanceShort": "Iqtibos uchun xavfsiz jami faqat rasmiy tasdiqlangan yozuvlarni qamrab oladi.",
+    "governanceNote": "Rasmiy sarlavha ko‘rsatkichlariga demo, ichki tasdiqlanmagan, OAV xabari va manbasi yetishmaydigan yozuvlar kiritilmaydi. Tasdiqlangan manbalar berilmaguncha tashrif tayyorgarligi ochiq belgilangan holda qoladi.",
+    "mobileNav": {
+      "label": "Boshqaruv markazi navigatsiyasi",
+      "today": "Bugun",
+      "visits": "Tashriflar",
+      "delivery": "Ijro",
+      "explore": "Ko‘rib chiqish"
+    }
+  },
+  "sourcesPage": {
+    "meta": {
+      "title": "Manbalar va metodologiya | O‘zbekiston–AQSh tahliliy platformasi",
+      "description": "O‘zbekiston–AQSh tahliliy platformasi uchun manbalar reyestri, ishonchlilik mezonlari, e’lon qilish qoidalari va metodologiya."
+    },
+    "hero": {
+      "eyebrow": "Dalillar ofisi · ochiq reyestr",
+      "title": "Har bir raqam keyingi savolga bardosh berishi kerak.",
+      "subtitle": "Ushbu reyestr platformadagi dalillar qayerdan olinishi, ishonchlilik qanday belgilanishi va raqamni rasmiy ma’lumot sifatida keltirishdan oldin qaysi shartlar bajarilishi kerakligini ko‘rsatadi.",
+      "metrics": {
+        "registry": "Reyestrdagi manbalar",
+        "public": "Ochiq / tashqi",
+        "attached": "Biriktirilgan / ichki",
+        "latest": "Reyestrning so‘nggi yangilanishi"
+      },
+      "standard": {
+        "title": "Manbaga havola — tekshiruvning boshlanishi, yakuni emas.",
+        "body": "Iqtibos uchun xavfsiz e’lon to‘g‘ri davr, hisobot beruvchi tomon, metod, ishonchlilik, ko‘rib chiqish holati va o‘zgarmas relizni ham talab qiladi.",
+        "example": "Manba izchilligi belgisi namunasi. Ochiq manba yangi oynada nashriyot sahifasini ochadi."
+      }
+    },
+    "trust": {
+      "eyebrow": "Ishonch modeli",
+      "title": "Daraja kelib chiqishni, ishonchlilik esa foydalanish chegarasini bildiradi.",
+      "intro": "Reyestrdagi A/B darajasi manba platformaga qanday kirganini qayd etadi. Uning o‘zi da’vo tasdiqlanganini yoki rahbariyat sarlavhasiga mosligini belgilamaydi."
+    },
+    "levels": {
+      "b": {
+        "mark": "B daraja",
+        "title": "Ochiq yoki tashqi manba",
+        "body": "E’lon qilingan havola yoki ochiq ma’lumotlar nuqtasi. U rasmiy idora, hamkor yoki hosilaviy manba bo‘lishi mumkin; nashriyot va metodologiya baribir tekshiriladi."
+      },
+      "a": {
+        "mark": "A daraja",
+        "title": "Biriktirilgan yoki ichki manba",
+        "body": "Markazga taqdim etilgan hujjat yoki jadval. Ochiq reyestr uning kelib chiqish yozuvini ko‘rsatadi, ammo faylning o‘zi yoki yopiq dalil manzilini oshkor qilmaydi."
+      },
+      "warningTitle": "Muhim:",
+      "warningBody": "B daraja avtomatik ravishda rasmiy tasdiqlangan degani emas; A daraja ham avtomatik ravishda e’lon qilish mumkinligini anglatmaydi. Ishonchlilik va tasdiq alohida nazorat bosqichlaridir."
+    },
+    "confidence": {
+      "eyebrow": "Ishonchlilik lug‘ati",
+      "title": "Olti belgi, yashirin ravishda oshirish yo‘q",
+      "intro": "Ishonchlilik belgisi da’vo bilan birga ko‘rib chiqish, diagramma, jadval, xarita, eksport va keyingi e’lon relizlarigacha saqlanadi.",
+      "items": {
+        "verifiedOfficial": {
+          "title": "Rasmiy tasdiqlangan",
+          "body": "Tasdiqlangan rasmiy manba va metodologiya bilan tekshirilgan; tasdiqdan so‘ng iqtibos uchun xavfsiz e’longa mos."
+        },
+        "companyConfirmed": {
+          "title": "Kompaniya tasdiqlagan",
+          "body": "Ko‘rsatilgan kompaniya tasdiqlagan, ammo rasmiy davlat statistikasi sifatida talqin qilinmaydi."
+        },
+        "mediaReported": {
+          "title": "OAV xabari",
+          "body": "OAV manbasi xabar qilgan va rasmiy yoki kompaniya tasdiqlagan da’volardan aniq ajratilgan."
+        },
+        "internalUnverified": {
+          "title": "Ichki / tasdiqlanmagan",
+          "body": "Ichki ish uchun foydali, ammo ochiq jami, reyting yoki iqtibosga tayyor ma’lumotnoma uchun tasdiqlanmagan."
+        },
+        "sourceNeeded": {
+          "title": "Manba zarur",
+          "body": "Yetarli kelib chiqish dalilini kutayotgan da’vo; rasmiy e’londan ajratilgan holda saqlanadi."
+        },
+        "illustrativeDemo": {
+          "title": "Ko‘rgazmali demo",
+          "body": "Faqat namoyish uchun sintetik yoki ko‘rgazmali jarayon ma’lumoti; rasmiy natijalarga hech qachon kiritilmaydi."
+        }
+      }
+    },
+    "publication": {
+      "eyebrow": "E’lon chegarasi",
+      "title": "Hech qachon aralashmaydigan uch yo‘lak",
+      "intro": "Ochiq portal tasdiqlangan e’lon proyeksiyalaridan tuziladi. Ko‘rib chiqilayotgan materiallar va demo yozuvlar o‘z boshqariladigan yo‘laklarida qoladi.",
+      "official": {
+        "kicker": "E’lon qilingan",
+        "title": "Rasmiy proyeksiya",
+        "body": "Faqat manba izchilligi, davr va metodologiyaga ega, sifat bo‘yicha to‘sqinlik qiluvchi bayroqchasi yo‘q, tasdiqlangan rasmiy da’volar."
+      },
+      "review": {
+        "kicker": "Tekshiruvda",
+        "title": "Dalillar ish maydoni",
+        "body": "Kompaniya, OAV, ichki va manbasi yetishmaydigan da’volar vakolatli tekshiruvchilar uchun ochiq, ammo rasmiy sarlavha jamilaridan tashqarida qoladi."
+      },
+      "sandbox": {
+        "kicker": "Faqat namoyish",
+        "title": "Ko‘rgazmali sinov maydoni",
+        "body": "Demo yozuvlar interfeys va jarayon sinoviga xizmat qilishi mumkin, ammo KPI, reyting, xarita intensivligi, eksport yoki ogohlantirishlarga ta’sir qilmaydi."
+      }
+    },
+    "fallback": {
+      "title": "Statik zaxira — yashirin almashtirish emas, xavfsizlik holati.",
+      "body": "Yangilash muvaffaqiyatsiz bo‘lsa, portal oxirgi tasdiqlangan muhrlangan relizni saqlaydi. Ma’lumot rejimi va eskirgan yoki pasaygan holat ko‘rinib turadi; yo‘q yoki noto‘g‘ri qiymat hech qachon nolga aylantirilmaydi."
+    },
+    "methodology": {
+      "eyebrow": "Taqqoslash intizomi",
+      "title": "Metodologiya raqam bilan birga yuradi.",
+      "body": "O‘zbekiston hisobotchisi va AQSh hisobotchisi bo‘yicha savdo qatorlari turli hisobot savollariga javob beradi. Ular alohida saqlanadi va tasdiqlangan muvofiqlashtirish usulisiz birlashtirilmaydi.",
+      "dimensionsTitle": "Taqqoslashdan oldin ushbu o‘lchamlarni tekshiring",
+      "dimensions": {
+        "reporter": {
+          "title": "Hisobotchi tomon",
+          "body": "Operatsiyani qaysi mamlakat yoki idora qayd etgan?"
+        },
+        "flow": {
+          "title": "Oqim yo‘nalishi",
+          "body": "Eksport, import, aylanma, majburiyat, o‘zlashtirish yoki kelishuv."
+        },
+        "period": {
+          "title": "Davr",
+          "body": "Kalendar, moliyaviy, yillik, oylik, jamlanma yoki aniq sanadagi holat."
+        },
+        "currency": {
+          "title": "Valyuta va o‘lchov",
+          "body": "Nominal valyuta, konvertatsiya sanasi hamda birlik ming, million yoki milliardda ekanligi."
+        },
+        "valuation": {
+          "title": "Baholash asosi",
+          "body": "Bojxona qiymati, e’lon qilingan loyiha summasi, amalga oshirilgan investitsiya yoki moliyalashtirish ruxsati."
+        },
+        "coverage": {
+          "title": "Qamrov",
+          "body": "Tovar, xizmat, HS tasnifi, EBOPS tasnifi yoki boshqa aniq belgilangan to‘plam."
+        }
+      },
+      "warning": "Tovar va xizmatlar, e’lon qilingan qiymat va real oqimlar, shuningdek AQSh-hisobotchi va O‘zbekiston-hisobotchi ma’lumotlari e’lon qilingan metodologiya ularni ochiq muvofiqlashtirmaguncha alohida saqlanishi shart."
+    },
+    "registry": {
+      "eyebrow": "Manbalar ko‘rsatkichi",
+      "title": "Dalillar reyestridan qidiring",
+      "intro": "Nashriyot, manba identifikatori, mavzu yoki reyestr izohi bo‘yicha qidiring. Manba nomi kuzatuvchanligi saqlanadi, ochiq tavsiflar esa ingliz va o‘zbek lotin tillarida alohida tasdiqlanadi.",
+      "searchLabel": "Manbalar reyestrida qidirish",
+      "searchPlaceholder": "Manba, ID, mavzu yoki izohni qidiring…",
+      "filterLabel": "Manbalarni kelib chiqish darajasi bo‘yicha filtrlash",
+      "filters": {
+        "all": "Barcha manbalar",
+        "B": "B daraja",
+        "A": "A daraja"
+      },
+      "resultCount": "{count} ta manba ko‘rsatildi",
+      "groups": {
+        "B": {
+          "title": "B daraja · ochiq va tashqi manbalar"
+        },
+        "A": {
+          "title": "A daraja · biriktirilgan va ichki manbalar"
+        }
+      },
+      "groupCount": "{count} ta yozuv",
+      "showDetail": "Manba qamrovini ko‘rsatish",
+      "coverageLabel": "Qamrov:",
+      "noteLabel": "Reyestr izohi:",
+      "originalMetadata": "Tasdiqlangan ochiq reyestr metama’lumoti kuzatuvchanlik uchun ko‘rsatiladi va uning o‘zi e’lon qilishga ruxsat bermaydi.",
+      "metadata": {
+        "census_goods_uz": {
+          "dataType": "Tovarlar savdosining oylik va yillik hajmi, million AQSh dollarida",
+          "note": "AQSh Aholini ro‘yxatga olish byurosining rasmiy balans jadvali. Yaxlitlash sababli tarkibiy qismlar jami bilan teng bo‘lmasligi mumkin."
+        },
+        "ustr_uzbekistan": {
+          "dataType": "Tovarlar va xizmatlar savdosi bo‘yicha qisqacha ma’lumot",
+          "note": "USTRning mamlakat bo‘yicha rasmiy ma’lumotnomasi."
+        },
+        "state_history_uz": { "dataType": "Diplomatik tan olish va ikki tomonlama munosabatlar sanalari" },
+        "exim_buy_american": {
+          "dataType": "Eksportni moliyalashtirish doirasi haqidagi xabar",
+          "note": "EXIMning 2025-yil 10-noyabrdagi xabari."
+        },
+        "dfc_joint_framework": {
+          "dataType": "Asosiy shartlar va Qo‘shma investitsiya doirasi haqidagi xabar",
+          "note": "DFCning 2026-yil 18-fevraldagi xabari."
+        },
+        "us_uz_gateway": { "dataType": "Kengash ishga tushirilishi, yangiliklar va portal konteksti" },
+        "us_uz_council": { "dataType": "Kengash a’zolari va ularning vazifalari" },
+        "input_roadmap_samarkand_docx": {
+          "dataType": "Hokimiyat tasdiqlagan yo‘l xaritasi: 48 loyiha, 1,5 mlrd dollar, muddatlar va mas’ul mansabdorlar",
+          "note": "O‘zbek kirill yozuvidagi manba asli so‘zma-so‘z saqlanadi; tasdiqlangan inglizcha va o‘zbek lotin yozuvidagi kontekst alohida yuritiladi."
+        },
+        "input_roadmap_khorezm_docx": {
+          "dataType": "Hokimiyat tasdiqlagan yo‘l xaritasi: 13 loyiha, 1,0 mlrd dollar, muddatlar va mas’ul mansabdorlar",
+          "note": "O‘zbek kirill yozuvidagi manba asli so‘zma-so‘z saqlanadi; tasdiqlangan inglizcha va o‘zbek lotin yozuvidagi kontekst alohida yuritiladi."
+        },
+        "input_deep_review_docx": {
+          "dataType": "Ichiga rasmiy havolalar kiritilgan jamlanma tahliliy sharh",
+          "note": "Rahbariyat taqdim etgan, bir nechta manbaga havolali tahliliy sharh."
+        },
+        "input_trade_stat_docx": {
+          "dataType": "O‘zbekiston-hisobotchi savdo qatori va 2025-yil eksport-import tarkibi",
+          "note": "Hujjatda manba sifatida Milliy statistika qo‘mitasi ko‘rsatilgan."
+        },
+        "input_grants_xlsx": {
+          "dataType": "Jami 15,381 mln dollarlik yettita grant loyihasi yozuvi",
+          "note": "Ishchi kitob nomi: Grant mablag'larini jalb qilish to'g'risida ma'lumot."
+        },
+        "input_agreements_docx": {
+          "dataType": "Huquqiy turi bo‘yicha bitimlar soni",
+          "note": "138 ta imzolangan hujjat qayd etilgan: 1 ta davlatlararo, 71 ta hukumatlararo, 44 ta idoralararo va 22 ta boshqa hujjat."
+        },
+        "input_diplomatic_docx": {
+          "dataType": "Diplomatik xronologiya, tashriflar, maslahatlashuvlar, C5+1 va Kongress aloqalari"
+        },
+        "input_figma_pdf": {
+          "dataType": "Prototip ko‘rsatkichlari, loyihalar portfeli holati va vizual maqsadlar",
+          "note": "Asosiy loyihalar reyestri olinmaguncha portfel darajasidagi ko‘rsatkichlar uchun ishlatiladi."
+        },
+        "govuz_business_forum_2025": {
+          "dataType": "Forum ko‘rsatkichlari: savdo, AQSh to‘g‘ridan-to‘g‘ri investitsiyalari, korxonalar, erkin iqtisodiy zonalar va ustuvor tarmoqlar",
+          "note": "2025-yil iyun forumining ko‘rsatkichlarini o‘zaro tekshirish uchun ishlatiladi."
+        },
+        "tradegov_market_opportunities": { "dataType": "Savdo va investitsiya uchun ustuvor tarmoqlar" },
+        "tradegov_mining_2025": { "dataType": "Konchilik, muhim minerallar va AQSh bilan bog‘liq loyihalar" },
+        "tradegov_agreements": { "dataType": "TIFA va investitsiya bitimlari konteksti" },
+        "ustr_wto_2024": {
+          "dataType": "JSTga a’zo bo‘lish bosqichi va ikki tomonlama bozorga kirish muzokaralari",
+          "note": "2024-yil 19-dekabrdagi bayonot."
+        },
+        "usaid_wave": {
+          "dataType": "Mintaqaviy suv va atrof-muhit faoliyati bo‘yicha ma’lumotnoma",
+          "note": "Markaziy Osiyoni qamrab oluvchi USAIDning besh yillik, 21,5 mln dollarlik faoliyati."
+        },
+        "usaid_eras_ii": {
+          "dataType": "Orol dengizini tiklash loyihasi bo‘yicha ma’lumotnoma",
+          "note": "Qoraqalpog‘iston Respublikasi Mo‘ynoq tumanidagi USAIDning 1,65 mln dollarlik faoliyati."
+        },
+        "govuz_us_visa_free_2026": { "dataType": "2026-yildan AQSh fuqarolari uchun 30 kunlik vizasiz tartib" },
+        "govuz_us_tourism_2025": { "dataType": "2025-yilda AQShdan 37 mingdan ortiq tashrif buyuruvchi" },
+        "state_visa_stats": {
+          "dataType": "Immigratsion va noimmigratsion vizalar berilishi bo‘yicha oylik va yillik hisobotlar",
+          "note": "Jadval tuzilishi tekshirilgach, mobillik va ta’lim safarlari ko‘rsatkichlari uchun mo‘ljallangan."
+        },
+        "dhs_ohss_nonimmigrant": {
+          "dataType": "Vaqtinchalik tashrif buyuruvchilarni toifa va mamlakat bo‘yicha qabul qilish; yillik oqim hisobotlari",
+          "note": "Qabul soni noyob sayohatchilarni emas, kirish holatlarini hisoblaydi."
+        },
+        "iie_open_doors": {
+          "dataType": "AQSh Davlat departamenti homiyligidagi xalqaro talabalar va xorijda o‘qish almashinuvi ma’lumotlari",
+          "note": "Mamlakat darajasidagi jadvallar ajratib olingach, ta’lim diplomatiyasi tahlili uchun mo‘ljallangan."
+        },
+        "uzbek_embassy_dc": { "dataType": "Elchixona manzili, telefoni va asosiy xodimlari" },
+        "us_embassy_tashkent": { "dataType": "Elchixona manzili, telefoni va asosiy xodimlari" },
+        "aucc_online": { "dataType": "Biznes uyushmasi a’zoligi va aloqa ma’lumotlari" },
+        "invest_uzbekistan": { "dataType": "Investitsiya loyihalarini yagona darcha orqali qabul qilish" },
+        "f4_ordinance_2026": {
+          "dataType": "Markaz joylashuvi, shtati, vakolat doirasi va jamlanma sonlar",
+          "note": "Ishlab chiqarish muhitida e’lon qilishdan oldin imzolangan mandatning asli biriktirilishi shart."
+        },
+        "gpd_protocol_2026": {
+          "dataType": "Loyiha ofisining 2026-yil 15-maydan 2027-yil 15-aprelgacha muddatli o‘n ikki oylik natijasi",
+          "note": "Situatsion markaz fuqarolik-huquqiy shartnomasining 1-ilovasi."
+        },
+        "cbu_statistics": {
+          "dataType": "Valyuta kurslari, zaxiralar, to‘lov balansi, xalqaro investitsiya pozitsiyasi va tashqi qarz",
+          "note": "XLSX, PDF, XML, CSV va JSON shakllari; kunlik valyuta kurslari hamda oylik yoki choraklik statistika."
+        },
+        "census_intl_trade_api": {
+          "dataType": "Texnik integratsiya uchun mamlakat va HS kodi bo‘yicha oylik tovar savdosi",
+          "note": "Statik c4644 balans jadvalining dasturiy CSV va JSON kirishini ta’minlovchi qo‘shimcha manba."
+        },
+        "bea_developers": {
+          "dataType": "USTRning 603 mln dollarlik xizmatlar savdosi ko‘rsatkichini asoslovchi xizmatlar savdosi va xalqaro operatsiyalar ma’lumotlari"
+        },
+        "imf_data_api": {
+          "dataType": "Makroiqtisodiy va moliyaviy ma’lumotlar uchun SDMX APIlari; kelgusida kurs, to‘lov balansi, zaxiralar va makro kontekst",
+          "note": "Ulagich reyestrga tayyor; e’lon qilishdan oldin har bir ma’lumotlar to‘plami xaritasi tasdiqlanishi kerak."
+        },
+        "exim_authorizations_data": {
+          "dataType": "Eksport-import banki ruxsatlari, summalar, eksport qiymati, mamlakat va bitim metama’lumotlari",
+          "note": "Eksport krediti konteksti uchun; bu amalga oshirilgan investitsiya yoki savdo oqimiga teng emas."
+        },
+        "exim_cls": {
+          "dataType": "EXIM ko‘magining tarmoq va muddat bo‘yicha mamlakat qamrovi holati",
+          "note": "Faqat moliyalashtirishga tayyorlik belgisi; qamrov mavjudligi majburiyat yoki tasdiq emas."
+        },
+        "dfc_active_projects": {
+          "dataType": "Mamlakat, tarmoq, vosita va majburiyat darajasi bo‘yicha faol DFC majburiyatlari",
+          "note": "Sxema ko‘rib chiqilgach ishlatiladi; DFC mamlakat qamrovi har chorakda o‘zgarishi mumkin."
+        },
+        "stat_uz": {
+          "dataType": "O‘zbekistonning rasmiy makroiqtisodiy, savdo, investitsiya, demografiya va tarmoq statistikasi",
+          "note": "O‘zbekiston tomoni bo‘yicha asosiy manba; uning metodologiyasi AQSh Census va BEA ma’lumotlaridan alohida yuritiladi."
+        },
+        "data_egov_uz": {
+          "dataType": "O‘zbekistonning rasmiy ochiq ma’lumotlar katalogi va davlat nashriyotlarining mashina o‘qiydigan to‘plamlari",
+          "note": "E’lon qilishdan oldin to‘plamning dolzarbligi va kirish talablari tekshirilishi shart."
+        },
+        "state_spd_3_joint": {
+          "dataType": "Bitimlar va tashriflarni asoslovchi Strategik sheriklik muloqoti xronologiyasi va qo‘shma bayonotlari"
+        },
+        "state_spd_2_joint": { "dataType": "Ikkinchi Strategik sheriklik muloqotining qo‘shma bayonoti" },
+        "state_c5_1_2015": {
+          "dataType": "Davlat kotibi Kerrining C5+1 vazirlar formatini ishga tushirish haqidagi nutqi"
+        },
+        "state_blinken_c5_2023": {
+          "dataType": "Davlat kotibi Blinkenning Toshkent tashrifi va C5+1 vazirlar uchrashuvi"
+        },
+        "state_c5_summit_2023": {
+          "dataType": "BMT Bosh Assambleyasi doirasidagi C5+1 davlat rahbarlari sammitining qo‘shma bayonoti"
+        },
+        "state_pompeo_c5_2020": {
+          "dataType": "Davlat kotibi Pompeoning Toshkent tashrifi va C5+1 tashqi ishlar vazirlari uchrashuvi"
+        },
+        "whitehouse_us_uz_2018": {
+          "dataType": "2018-yil maydagi Tramp–Mirziyoyev tashrifi chog‘ida e’lon qilingan qo‘shma bayonot"
+        },
+        "whitehouse_c5_2025": { "dataType": "C5+1 davlat rahbarlarining ikkinchi sammiti qo‘shma bayonoti" },
+        "usaid_power_visit_2023": {
+          "dataType": "Administrator Pauerning Toshkent va Samarqand tashrifi haqidagi xabar"
+        },
+        "foreign_assistance_gov": {
+          "dataType": "AQSh hukumatining O‘zbekistonga grantlari va majburiyatlari: idora, tarmoq va yil kesimida",
+          "note": "Mahalliy biriktirilgan grant ishchi kitobini to‘ldiruvchi nufuzli manba."
+        },
+        "worldbank_data": {
+          "dataType": "Markaziy Osiyo va Kavkaz taqqoslashlari uchun YaIM, TTXI kirimi, aholi va biznes muhiti ko‘rsatkichlari"
+        },
+        "trademap_itc": {
+          "dataType": "Ikki tomonlama HS-6 mahsulot savdosi, EBOPS 2010 xizmatlari hamda ITC eksport salohiyati va diversifikatsiya tahlili",
+          "note": "Rahbariyat taqdim etgan, autentifikatsiyalangan ITC Trade Map seansidan eksport. UN Comtrade bazasi va ITC tahliliy qatlamlaridan foydalanadi; xizmatlar O‘zbekiston tomonidan hisobot qilingan, to‘liq EBOPS tafsiloti faqat 2021-yilda mavjud."
+        },
+        "comtrade_hs6": {
+          "dataType": "Har ikki hisobotchi bo‘yicha O‘zbekiston–AQSh yillik HS-6 tovar savdosi, 2021–2025",
+          "note": "API kalitisiz ochiq ko‘rish nuqtasi. O‘zbekiston odatiy hisobot kechikishi sababli 2025-yilni hali taqdim etmagan; shu asosiy baza ITC Trade Mapda ham ishlatiladi."
+        },
+        "oecd_data_api": { "dataType": "Mamlakatlararo taqqoslash uchun makroiqtisodiy va savdo ko‘rsatkichlari" },
+        "lex_uz": {
+          "dataType": "Farmonlar, qarorlar va ratifikatsiyalarni qamrab oluvchi O‘zbekiston qonunchilik hujjatlarining asosiy bazasi",
+          "note": "Ikki tomonlama bitim va tashriflarda tilga olingan O‘zbekiston huquqiy hujjatlari uchun asosiy tayanch."
+        },
+        "lex_uz_visa_free_2025": {
+          "dataType": "AQSh fuqarolari uchun 2026-yil 1-yanvardan 30 kunlik vizasiz kirishni joriy etuvchi Prezident farmoni",
+          "note": "Prezident Mirziyoyev imzolagan; vizasiz tartibning O‘zbekiston tomoni bo‘yicha huquqiy tayanchi."
+        },
+        "lex_uz_embassy_us_1993": {
+          "dataType": "O‘zbekistonning Vashingtondagi elchixonasini tashkil etish to‘g‘risidagi Vazirlar Mahkamasi qarori"
+        },
+        "lex_uz_diplomatic_missions_1992": {
+          "dataType": "O‘zbekiston diplomatik vakolatxonalari, jumladan AQShdagi vakolatxona rahbarlarini tayinlash bo‘yicha asosiy qaror"
+        }
+      },
+      "openSource": "Tashqi manbani ochish: {source}. Yangi oynada ochiladi.",
+      "attachedMarker": "A daraja · nazoratda",
+      "emptyTitle": "Qidiruvga mos manba topilmadi",
+      "emptyBody": "Nashriyot nomi, manba IDsi yoki kengroq mavzuni sinab ko‘ring."
+    },
+    "quoteSafe": {
+      "title": "Iqtibos uchun xavfsiz standart",
+      "intro": "Rahbariyat ma’lumotnomasi faqat salobatli ko‘rinishi emas, dalilga oid savolga bir necha soniyada javob bera olishi kerak.",
+      "rules": {
+        "confidence": {
+          "title": "Tasdiqlangan ishonchlilik",
+          "body": "Da’vo rasmiy tasdiqlangan; demo, ichki, OAV, kompaniya yoki manbasi yetishmaydigan qiymat sarlavhaga kirmaydi."
+        },
+        "lineage": {
+          "title": "Kuzatiladigan izchillik",
+          "body": "Manba identifikatori va lokator tasdiqlangan dalil hamda uning o‘zgarmas kontent yozuviga olib boradi."
+        },
+        "context": {
+          "title": "To‘liq kontekst",
+          "body": "Davr, holat sanasi, birlik, hisobotchi, oqim, qamrov va metodologiya qiymat yonida ko‘rsatiladi."
+        },
+        "quality": {
+          "title": "To‘suvchi sifat bayroqchasi yo‘q",
+          "body": "Noto‘g‘ri, yo‘q, ziddiyatli, eskirgan yoki pasaygan kirish ma’lumoti yashirin e’lon emas, tekshiruvni ishga tushiradi."
+        },
+        "separation": {
+          "title": "Qat’iy ajratish",
+          "body": "Rasmiy, ko‘rib chiqilayotgan va demo proyeksiyalar jami, diagramma, xarita, eksport va ogohlantirishlarda alohida qoladi."
+        },
+        "release": {
+          "title": "Tasdiqlangan reliz",
+          "body": "E’lon ikki tilda tasdiqlangan va tahrir metama’lumoti ko‘rinadigan o‘zgarmas, qaytariladigan relizdan foydalanadi."
+        }
+      }
+    }
   },
   "roadmaps": {
     "title": "Hududlar yo'l xaritalari",

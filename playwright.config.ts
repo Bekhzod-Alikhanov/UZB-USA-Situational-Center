@@ -19,7 +19,7 @@ export default defineConfig({
     video: "retain-on-failure",
   },
   webServer: {
-    command: `pnpm exec next start -p ${PORT}`,
+    command: `corepack pnpm exec next start -p ${PORT}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

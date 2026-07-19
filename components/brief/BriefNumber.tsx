@@ -47,7 +47,6 @@ export function BriefNumber({
   useEffect(() => {
     const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplay(value);
       return;
     }

@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "./lib/i18n/config";
+import { legacyRussianRedirectPath } from "./lib/i18n/routing";
 import { ADMIN_COOKIE, verifyGateSessionToken } from "./lib/auth/admin";
 
 const intlMiddleware = createMiddleware({
@@ -14,23 +15,36 @@ const intlMiddleware = createMiddleware({
  * page) must carry a valid signed auth cookie. The cookie is set by the
  * login server action; since stage 2 the password decides the ROLE:
  * ADMIN_PASSWORD → "admin" (Center, full access), REGION_PASSWORD_* →
- * hokimiyat editors. `/prepare` is open to any authenticated role (visit
- * dossiers, CLAUDE.md hard rule #8); `/admin` stays admin-only.
+ * hokimiyat editors. `/today` and `/prepare` are open to any authenticated
+ * role; `/admin` stays admin-only.
  */
-const GATED_SECTIONS = new Set(["admin", "prepare"]);
+type GatedSection = "admin" | "prepare" | "today";
 
-function gatedSection(pathname: string): "admin" | "prepare" | null {
+const GATED_SECTIONS = new Set<GatedSection>(["admin", "prepare", "today"]);
+
+function gatedSection(pathname: string): GatedSection | null {
   // Match /<locale>/<section> or deeper, but not the login page.
   const segments = pathname.split("/").filter(Boolean);
   if (segments.length < 2) return null;
-  if (!GATED_SECTIONS.has(segments[1])) return null;
+  const section = segments[1] as GatedSection;
+  if (!GATED_SECTIONS.has(section)) return null;
   // Allow the login page through unauthenticated.
   if (segments[1] === "admin" && segments[2] === "login") return null;
-  return segments[1] as "admin" | "prepare";
+  return section;
 }
 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // Russian UI routes were retired for V2. Keep old bookmarks and shared
+  // links useful with a permanent, route-for-route redirect to Uzbek Latin.
+  // Cloning the incoming URL preserves its complete query string.
+  const legacyRedirectPath = legacyRussianRedirectPath(pathname);
+  if (legacyRedirectPath) {
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.pathname = legacyRedirectPath;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
 
   const section = gatedSection(pathname);
   if (section) {

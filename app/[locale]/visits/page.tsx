@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { CalendarDays } from "lucide-react";
 import { VisitsTabs } from "@/components/visits/VisitsTabs";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -13,6 +15,7 @@ export default async function VisitsPage({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("visits");
+  const tPublic = await getTranslations("publicPage");
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -20,10 +23,19 @@ export default async function VisitsPage({ params }: { params: Promise<{ locale:
 
   return (
     <div className="flex flex-col gap-5">
-      <div>
-        <h1 className="section-title">{t("title")}</h1>
-        <p className="section-sub">{t("subtitle")}</p>
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="visits"
+        icon={<CalendarDays className="size-6 sm:size-7" />}
+        meta={
+          <>
+            <SourceBadge sourceId="state_history_uz" />
+            <SourceBadge sourceId="whitehouse_c5_2025" />
+          </>
+        }
+      />
 
       <div className="card p-0">
         <div className="px-4 pt-3">
