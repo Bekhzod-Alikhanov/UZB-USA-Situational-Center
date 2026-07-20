@@ -36,7 +36,6 @@ export function LocaleSwitch() {
             pending && "opacity-60",
           )}
         >
-          <span>{current.flag}</span>
           <span className="tabular">{current.code}</span>
           <ChevronDown className="size-3 text-[var(--color-ink-muted)]" />
         </button>
@@ -60,7 +59,6 @@ export function LocaleSwitch() {
                     : "text-[var(--color-ink)] hover:bg-[var(--color-surface-2)]",
                 )}
               >
-                <span>{meta.flag}</span>
                 <span className="flex-1">{meta.label}</span>
                 <span className="text-[10px] text-[var(--color-ink-muted)] tabular">{meta.code}</span>
               </DropdownMenu.Item>

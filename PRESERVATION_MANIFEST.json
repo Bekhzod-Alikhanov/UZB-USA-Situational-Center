@@ -1,0 +1,3670 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "legacy-2026-07-09",
+  "generatedBy": "scripts/generate-preservation-manifest.mjs",
+  "policy": {
+    "dataTreatment": "inventory-only-no-records-deleted-or-reclassified",
+    "demoTreatment": "demo-records-remain-preserved-and-must-not-enter-verified-headlines",
+    "visualizationTreatment": "keep-pending-owner-approved-parity-review",
+    "hashAlgorithm": "sha256",
+    "deterministic": true
+  },
+  "summary": {
+    "dataModules": 48,
+    "syntacticallyCountedRecords": 1611,
+    "explicitStableIds": 445,
+    "recordsWithoutExplicitStableId": 1177,
+    "sourceArtifacts": 60,
+    "sourceReferences": 107,
+    "demoFlagsTrue": 80,
+    "demoFlagsFalse": 232,
+    "visualizationComponents": 49,
+    "visualizationExhibits": 71,
+    "visualizationParityApproved": 0
+  },
+  "dataModules": [
+    {
+      "id": "dataset:agreements",
+      "path": "data/agreements.ts",
+      "contentHash": "3ce70847115b5faf6efb5f7bf136395967e23ad9b483ce4e4d1296d42132ed7f",
+      "bytes": 10765,
+      "lines": 345,
+      "recordCount": 26,
+      "explicitStableIds": [
+        "a-1992-relations",
+        "a-1993-embassy-dc",
+        "a-1994-bit",
+        "a-2002-strategic-framework",
+        "a-2004-tifa",
+        "a-2018-strategic-partnership",
+        "a-2021-strategic-dialogue",
+        "a-2024-critical-minerals-mou",
+        "a-2024-customs-maa",
+        "a-2024-minerals-dialogue",
+        "a-2024-wto-market-access",
+        "a-2025-exim-buy-american",
+        "a-2025-visa-free-us",
+        "a-2026-dfc-framework",
+        "a-2026-investment-platform",
+        "a-2026-minerals-mou",
+        "a-demo-air-services",
+        "a-demo-customs",
+        "a-demo-export-import",
+        "a-demo-fbi-law",
+        "a-demo-fulbright",
+        "a-demo-gsp",
+        "a-demo-ifdc",
+        "a-demo-tax-dta",
+        "a-demo-usaid-health",
+        "a-demo-usda"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "agreements", "initializer": "array", "directRecords": 26 },
+        { "name": "agreementsAggregate", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [
+        "dfc_joint_framework",
+        "exim_buy_american",
+        "input_agreements_docx",
+        "input_deep_review_docx",
+        "input_diplomatic_docx",
+        "lex_uz_embassy_us_1993",
+        "lex_uz_visa_free_2025",
+        "state_history_uz",
+        "tradegov_agreements",
+        "ustr_wto_2024"
+      ],
+      "confidence": { "isDemoTrue": 10, "isDemoFalse": 17, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 13, "literalSum": 293 },
+      "consumingRoutes": ["/[locale]/agreements", "/[locale]"]
+    },
+    {
+      "id": "dataset:benchmark",
+      "path": "data/benchmark.ts",
+      "contentHash": "74560cecead712c23f9f73849eaca90a62d3f3a88dce045010e0411dad2d8f14",
+      "bytes": 4156,
+      "lines": 141,
+      "recordCount": 7,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 7,
+      "exports": [
+        { "name": "benchmark", "initializer": "array", "directRecords": 7 },
+        { "name": "benchmarkMeta", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": ["worldbank_data"],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 7, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 49, "literalSum": 26879.128 },
+      "consumingRoutes": ["/[locale]/benchmark"]
+    },
+    {
+      "id": "dataset:center-milestones",
+      "path": "data/center-milestones.ts",
+      "contentHash": "fb1f9619a9b87d34175271368045d6c6851621174b8809cfb75a9f3fd3599dc9",
+      "bytes": 7282,
+      "lines": 187,
+      "recordCount": 12,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 12,
+      "exports": [
+        { "name": "centerMilestones", "initializer": "array", "directRecords": 12 },
+        { "name": "centerMilestonesMeta", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": ["gpd_protocol_2026"],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 13, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 18, "literalSum": 1252 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:compliance",
+      "path": "data/compliance.ts",
+      "contentHash": "96cdfb79fe31588106f7eedc0ef98d3d1f9f2292393937461ff54b2b4614a492",
+      "bytes": 3920,
+      "lines": 128,
+      "recordCount": 13,
+      "explicitStableIds": [
+        "ear-country-group",
+        "ear-dual-use",
+        "fatf",
+        "gsp",
+        "itar",
+        "mfn",
+        "ofac-caatsa",
+        "ofac-sanctions"
+      ],
+      "recordsWithoutExplicitStableId": 5,
+      "exports": [
+        { "name": "complianceStatuses", "initializer": "array", "directRecords": 8 },
+        { "name": "eccnSamples", "initializer": "array", "directRecords": 5 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 1, "isDemoFalse": 7, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/compliance"]
+    },
+    {
+      "id": "dataset:comtrade-hs2",
+      "path": "data/comtrade-hs2.ts",
+      "contentHash": "bf80ca9e73436794565e4dc7217d83b76113aedc14f1456e56dd7adbe613a1bc",
+      "bytes": 28790,
+      "lines": 1713,
+      "recordCount": 211,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 211,
+      "exports": [
+        { "name": "hs2_2024_usExports", "initializer": "array", "directRecords": 55 },
+        { "name": "hs2_2024_usImports", "initializer": "array", "directRecords": 50 },
+        { "name": "hs2_2025_usExports", "initializer": "array", "directRecords": 53 },
+        { "name": "hs2_2025_usImports", "initializer": "array", "directRecords": 53 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 211, "literalSum": 909509075 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:comtrade-hs6",
+      "path": "data/comtrade-hs6.ts",
+      "contentHash": "bce74632579a95819a3538d902b1d060cfd5c96afd48f79870d880bbc841407b",
+      "bytes": 55836,
+      "lines": 2439,
+      "recordCount": 300,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 300,
+      "exports": [
+        { "name": "topUsExportsToUzByYear", "initializer": "object", "directRecords": 150 },
+        { "name": "topUsImportsFromUzByYear", "initializer": "object", "directRecords": 150 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 300, "literalSum": 1903102961 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:comtrade-meta",
+      "path": "data/comtrade-meta.ts",
+      "contentHash": "b53dea5a3b3b35573283e8c07a6d2b25138c776f2305fa77c63bac2a1be644bf",
+      "bytes": 1644,
+      "lines": 93,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "comtradeAnnualUsReporter", "initializer": "object", "directRecords": 0 },
+        { "name": "comtradeAnnualUzReporter", "initializer": "object", "directRecords": 0 },
+        { "name": "comtradeMeta", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 1, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 27, "literalSum": 3300708903.011002 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:comtrade-mirror",
+      "path": "data/comtrade-mirror.ts",
+      "contentHash": "f38fdd1a0ff868c49292d5e43bdadd8b6f7355695ef5afd1530f5b11cd853690",
+      "bytes": 11079,
+      "lines": 573,
+      "recordCount": 40,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 40,
+      "exports": [{ "name": "mirror2024", "initializer": "array", "directRecords": 40 }],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 160, "literalSum": 520877600.72 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:comtrade-trends",
+      "path": "data/comtrade-trends.ts",
+      "contentHash": "7a921fe92c53c6ea94b4e76da8dcfaa9da06d541de3c14c95509a27857836244",
+      "bytes": 6328,
+      "lines": 377,
+      "recordCount": 20,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 20,
+      "exports": [
+        { "name": "trendTopUsExports", "initializer": "array", "directRecords": 10 },
+        { "name": "trendTopUsImports", "initializer": "array", "directRecords": 10 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 100, "literalSum": 334624138 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:comtrade-types",
+      "path": "data/comtrade-types.ts",
+      "contentHash": "97fbcdab4318019116625a41426b1092a72e89e511e7cd7b12044723ab544f50",
+      "bytes": 765,
+      "lines": 38,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:contacts",
+      "path": "data/contacts.ts",
+      "contentHash": "026a098e696b27805e6c683ac065629c9a1ecc35ce836d61af6c1e0fdd05cae9",
+      "bytes": 6504,
+      "lines": 164,
+      "recordCount": 7,
+      "explicitStableIds": [
+        "k-aucc",
+        "k-commercial-service",
+        "k-emb-us",
+        "k-emb-uz",
+        "k-hq",
+        "k-invest-uz",
+        "k-usuz-council"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "contacts", "initializer": "array", "directRecords": 7 }],
+      "sourceIds": [
+        "aucc_online",
+        "invest_uzbekistan",
+        "tradegov_market_opportunities",
+        "us_embassy_tashkent",
+        "us_uz_council",
+        "uzbek_embassy_dc"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 37, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/contacts"]
+    },
+    {
+      "id": "dataset:counterparts",
+      "path": "data/counterparts.ts",
+      "contentHash": "0ce3fe3864029e2eb4b3b0264a202c1b9935d1999de5e3fca231e6ca4120478a",
+      "bytes": 13038,
+      "lines": 370,
+      "recordCount": 20,
+      "explicitStableIds": [
+        "c-adams-nyc",
+        "c-adams-sen",
+        "c-brez",
+        "c-daines",
+        "c-fogel",
+        "c-galdiz",
+        "c-gonzalez",
+        "c-gor",
+        "c-henick",
+        "c-kelly",
+        "c-landau",
+        "c-meyer",
+        "c-miller",
+        "c-orr",
+        "c-power",
+        "c-rogers",
+        "c-rubio",
+        "c-trump",
+        "c-waltz",
+        "c-zampolli"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "counterparts", "initializer": "array", "directRecords": 20 },
+        { "name": "PARTY_TONE", "initializer": "object", "directRecords": 0 },
+        { "name": "ROLE_LABEL", "initializer": "object", "directRecords": 0 },
+        { "name": "STANCE_CHIP", "initializer": "object", "directRecords": 0 },
+        { "name": "STANCE_TEXT", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": ["input_diplomatic_docx", "us_embassy_tashkent", "us_uz_council"],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 20, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/contacts"]
+    },
+    {
+      "id": "dataset:delegations",
+      "path": "data/delegations.ts",
+      "contentHash": "3bc3d47ed77459f10027a39716c8848a6a9dfe4603a5c1a6629fdc475e53603d",
+      "bytes": 1804,
+      "lines": 72,
+      "recordCount": 3,
+      "explicitStableIds": ["d-1", "d-2", "d-3"],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "liveDelegations", "initializer": "array", "directRecords": 3 }],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 3, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 9, "literalSum": 344.6495 },
+      "consumingRoutes": ["/[locale]/investments"]
+    },
+    {
+      "id": "dataset:demo-registry",
+      "path": "data/demo-registry.ts",
+      "contentHash": "349ef5c39b07ff512b4bc64dba72d597f4721d0175f500c6533e0fd89cfc5e3b",
+      "bytes": 2057,
+      "lines": 71,
+      "recordCount": 8,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 8,
+      "exports": [{ "name": "demoRegistry", "initializer": "array", "directRecords": 8 }],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/admin"]
+    },
+    {
+      "id": "dataset:events",
+      "path": "data/events.ts",
+      "contentHash": "978e8e4742ed290588c10a96775f5a110f8835954df7ea18ce737026921566c9",
+      "bytes": 4747,
+      "lines": 139,
+      "recordCount": 10,
+      "explicitStableIds": [
+        "e-b51-bishkek-2026",
+        "e-council-launch-washington-2026",
+        "e-council-peace-feb-2026",
+        "e-davos-cp-2026",
+        "e-dfc-framework-2026",
+        "e-minerals-feb-2026",
+        "e-sd5-2026",
+        "e-tiif-2026",
+        "e-us-uz-bc-april-2026",
+        "e-ustr-council-2026"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "events", "initializer": "array", "directRecords": 10 }],
+      "sourceIds": ["dfc_joint_framework", "input_deep_review_docx", "input_diplomatic_docx", "us_uz_gateway"],
+      "confidence": { "isDemoTrue": 1, "isDemoFalse": 9, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]", "/[locale]/prepare", "/[locale]/roadmaps", "/[locale]/today", "/[locale]/visits"]
+    },
+    {
+      "id": "dataset:executive",
+      "path": "data/executive.ts",
+      "contentHash": "d76b463e306b6275811c96f1dec48c00bcdff00fd848da82f7a9bfcf3ccaf88d",
+      "bytes": 18715,
+      "lines": 406,
+      "recordCount": 0,
+      "explicitStableIds": [
+        "opp-census-live",
+        "opp-dfc",
+        "opp-education",
+        "opp-visa",
+        "risk-demo-investments",
+        "risk-methodology-mix"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [],
+      "sourceIds": [
+        "census_intl_trade_api",
+        "dfc_joint_framework",
+        "foreign_assistance_gov",
+        "govuz_us_visa_free_2026",
+        "iie_open_doors",
+        "input_figma_pdf"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": ["uz-latn"],
+      "numericChecksum": { "literalCount": 22, "literalSum": 2166 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:external-data",
+      "path": "data/external-data.ts",
+      "contentHash": "5ade7167e226771e2efeb325cac6b4105ec1898fd6bf3318c993c788f13fcaf6",
+      "bytes": 8923,
+      "lines": 200,
+      "recordCount": 15,
+      "explicitStableIds": [
+        "bea-services",
+        "cbu-open-data",
+        "census-hs-trade",
+        "data-egov-uz",
+        "dfc-active-projects",
+        "dhs-ohss",
+        "exim-authorizations",
+        "exim-cls",
+        "foreign-assistance",
+        "iie-open-doors",
+        "imf-data",
+        "operational-db",
+        "stat-uz",
+        "state-visa",
+        "world-bank-wdi"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "externalDataConnectors", "initializer": "array", "directRecords": 15 },
+        { "name": "externalDataSummary", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [
+        "bea_developers",
+        "cbu_statistics",
+        "census_intl_trade_api",
+        "data_egov_uz",
+        "dfc_active_projects",
+        "dhs_ohss_nonimmigrant",
+        "exim_authorizations_data",
+        "exim_cls",
+        "f4_ordinance_2026",
+        "foreign_assistance_gov",
+        "iie_open_doors",
+        "imf_data_api",
+        "stat_uz",
+        "state_visa_stats",
+        "worldbank_data"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/admin"]
+    },
+    {
+      "id": "dataset:foreign-assistance",
+      "path": "data/foreign-assistance.ts",
+      "contentHash": "75533f5e95520d8fd02f44de76c61b41a5eb5b25ffc47737fb6ada6719d0b441",
+      "bytes": 2277,
+      "lines": 64,
+      "recordCount": 10,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 10,
+      "exports": [
+        { "name": "foreignAssistanceFy2024Agencies", "initializer": "array", "directRecords": 5 },
+        { "name": "foreignAssistanceFy2024Categories", "initializer": "array", "directRecords": 2 },
+        { "name": "foreignAssistanceMeta", "initializer": "object", "directRecords": 0 },
+        { "name": "foreignAssistanceYears", "initializer": "array", "directRecords": 3 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 4, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 22, "literalSum": 8696.665 },
+      "consumingRoutes": ["/[locale]/grants"]
+    },
+    {
+      "id": "dataset:grants",
+      "path": "data/grants.ts",
+      "contentHash": "6729a586ba511c29cf1c7b00a54692226d433064db6dec78ec5a4b43318d5f6f",
+      "bytes": 5888,
+      "lines": 182,
+      "recordCount": 11,
+      "explicitStableIds": [
+        "g-1",
+        "g-2",
+        "g-3",
+        "g-4",
+        "g-5",
+        "g-6",
+        "g-7",
+        "g-usaid-business-support",
+        "g-usaid-doag-edu",
+        "g-usaid-eras-ii",
+        "g-usaid-wave"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "grants", "initializer": "array", "directRecords": 11 },
+        { "name": "grantsMeta", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": ["foreign_assistance_gov", "input_grants_xlsx", "usaid_eras_ii", "usaid_wave"],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 12, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 23, "literalSum": 22356.231 },
+      "consumingRoutes": ["/[locale]/grants"]
+    },
+    {
+      "id": "dataset:investments",
+      "path": "data/investments.ts",
+      "contentHash": "78f42e4e6ca0416776b579b4c8ff07b4d05bf96fba4d667543f5c19f5b26be4c",
+      "bytes": 22879,
+      "lines": 846,
+      "recordCount": 45,
+      "explicitStableIds": [
+        "inv-1",
+        "inv-10",
+        "inv-11",
+        "inv-12",
+        "inv-13",
+        "inv-14",
+        "inv-15",
+        "inv-16",
+        "inv-17",
+        "inv-18",
+        "inv-19",
+        "inv-2",
+        "inv-20",
+        "inv-21",
+        "inv-22",
+        "inv-23",
+        "inv-24",
+        "inv-25",
+        "inv-26",
+        "inv-27",
+        "inv-28",
+        "inv-29",
+        "inv-3",
+        "inv-30",
+        "inv-31",
+        "inv-32",
+        "inv-33",
+        "inv-34",
+        "inv-35",
+        "inv-4",
+        "inv-5",
+        "inv-6",
+        "inv-7",
+        "inv-8",
+        "inv-9",
+        "real-ai-digital-fund",
+        "real-air-products-fergana-h2",
+        "real-air-products-gtl",
+        "real-air-products-navoiy-co2",
+        "real-coca-cola-expansion",
+        "real-franklin-templeton-uznif",
+        "real-gf6-css-prime",
+        "real-mining-metallurgy-200",
+        "real-mining-metallurgy-850",
+        "real-traxys-critical-minerals"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "investmentCredibilitySummary", "initializer": "object", "directRecords": 0 },
+        { "name": "investments", "initializer": "array", "directRecords": 45 },
+        { "name": "investmentsTotals", "initializer": "object", "directRecords": 0 },
+        { "name": "privatizationOpportunities", "initializer": "array", "directRecords": 0 }
+      ],
+      "sourceIds": ["input_deep_review_docx", "input_figma_pdf", "tradegov_mining_2025"],
+      "confidence": { "isDemoTrue": 36, "isDemoFalse": 10, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 157, "literalSum": 158238 },
+      "consumingRoutes": [
+        "/[locale]/investments",
+        "/[locale]/map",
+        "/[locale]",
+        "/[locale]/prepare",
+        "/[locale]/roadmaps",
+        "/[locale]/today"
+      ]
+    },
+    {
+      "id": "dataset:news",
+      "path": "data/news.ts",
+      "contentHash": "2283b86f54c518dbeb694072fece83113cbd8fe9a106bb9583ea4255fe1184ab",
+      "bytes": 3936,
+      "lines": 104,
+      "recordCount": 6,
+      "explicitStableIds": [
+        "n-census-2025-trade",
+        "n-dfc-2026-02",
+        "n-gateway-council-2026",
+        "n-gateway-council-roster",
+        "n-govuz-tourism-2025",
+        "n-govuz-visa-free-2026"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "news", "initializer": "array", "directRecords": 6 }],
+      "sourceIds": [
+        "census_goods_uz",
+        "dfc_joint_framework",
+        "govuz_us_tourism_2025",
+        "govuz_us_visa_free_2026",
+        "us_uz_council",
+        "us_uz_gateway"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 6, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:overview",
+      "path": "data/overview.ts",
+      "contentHash": "9458a65b7c91ab4708c715494d9e248eb854ffd247adb09d505425aa72e24830",
+      "bytes": 6340,
+      "lines": 197,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 44, "literalSum": 5137.9 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:production-readiness",
+      "path": "data/production-readiness.ts",
+      "contentHash": "110d474beca48de9c2b84174ee0c66a1893e88187bfaf134b7ac8a1d1bd8ef70",
+      "bytes": 3854,
+      "lines": 104,
+      "recordCount": 10,
+      "explicitStableIds": [
+        "briefing",
+        "ci",
+        "cron-ingestion",
+        "e2e",
+        "live-data",
+        "operational-db",
+        "real-auth",
+        "signed-admin-cookie",
+        "source-registry",
+        "workflow"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "productionReadinessItems", "initializer": "array", "directRecords": 10 }],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/admin"]
+    },
+    {
+      "id": "dataset:regions",
+      "path": "data/regions.ts",
+      "contentHash": "b338765a15bdb0df93e94e2052ef4802fcf581fbc4443010da6943a62c56e654",
+      "bytes": 4625,
+      "lines": 186,
+      "recordCount": 22,
+      "explicitStableIds": [
+        "andijan",
+        "bukhara",
+        "fergana",
+        "jizzakh",
+        "karakalpakstan",
+        "kashkadarya",
+        "khorezm",
+        "namangan",
+        "navoi",
+        "samarkand",
+        "sirdarya",
+        "surkhandarya",
+        "tashkent",
+        "tashkent-city"
+      ],
+      "recordsWithoutExplicitStableId": 8,
+      "exports": [
+        { "name": "usMajorCities", "initializer": "array", "directRecords": 8 },
+        { "name": "uzRegions", "initializer": "array", "directRecords": 14 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 14, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 58, "literalSum": 2516.7437 },
+      "consumingRoutes": ["/[locale]/investments"]
+    },
+    {
+      "id": "dataset:relationship-pillars",
+      "path": "data/relationship-pillars.ts",
+      "contentHash": "e9cc96af0f5c24727e3f6490803742f8915f492e85ffa457c3aca92fead47a98",
+      "bytes": 4598,
+      "lines": 118,
+      "recordCount": 7,
+      "explicitStableIds": [
+        "diplomacy",
+        "education-aid",
+        "investment",
+        "people-mobility",
+        "regional-strategy",
+        "security-minerals",
+        "trade"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "relationshipPillars", "initializer": "array", "directRecords": 7 }],
+      "sourceIds": [
+        "census_goods_uz",
+        "dfc_joint_framework",
+        "foreign_assistance_gov",
+        "govuz_us_visa_free_2026",
+        "input_diplomatic_docx",
+        "tradegov_mining_2025",
+        "worldbank_data"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 5, "literalSum": 1002 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/_source-pre-2025-visits",
+      "path": "data/restored/_source-pre-2025-visits.ts",
+      "contentHash": "f66d6d8bd96a822cf4001b38d315d8ec473d6352e49abcfc2628daabe57bc775",
+      "bytes": 10072,
+      "lines": 314,
+      "recordCount": 20,
+      "explicitStableIds": [
+        "v-1992-02-19",
+        "v-1992-us-sec-baker",
+        "v-2000-albright",
+        "v-2001-powell",
+        "v-2010-clinton-1",
+        "v-2011-clinton-2",
+        "v-2015-kerry",
+        "v-2017-12-19-phone",
+        "v-2017-riyadh",
+        "v-2017-unga",
+        "v-2018-05-state",
+        "v-2020-pompeo",
+        "v-2021-strategic-dialogue-1",
+        "v-2022-12-sd-2",
+        "v-2023-09-unga-biden",
+        "v-2023-10-power",
+        "v-2023-11-sd-3",
+        "v-2023-blinken",
+        "v-2024-03-daines",
+        "v-2024-sd-4"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "historicalVisitSourceRecords", "initializer": "array", "directRecords": 20 }],
+      "sourceIds": [
+        "state_blinken_c5_2023",
+        "state_c5_1_2015",
+        "state_c5_summit_2023",
+        "state_history_uz",
+        "state_pompeo_c5_2020",
+        "state_spd_2_joint",
+        "state_spd_3_joint",
+        "usaid_power_visit_2023",
+        "whitehouse_us_uz_2018"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 20, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/_source-pre-2026-events",
+      "path": "data/restored/_source-pre-2026-events.ts",
+      "contentHash": "c2c05aeef02fe45d6f54190edf84c192d186173731665f29f9e0c82904e0f437",
+      "bytes": 4048,
+      "lines": 120,
+      "recordCount": 8,
+      "explicitStableIds": [
+        "e-business-forum-tashkent-2025",
+        "e-c51-kc-bus",
+        "e-c51-ny-2023",
+        "e-c51-samarkand-2015",
+        "e-c51-wash-2025",
+        "e-exim-buy-american-2025",
+        "e-spd4-washington-2024",
+        "e-ustr-tai-2024"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "historicalEventSourceRecords", "initializer": "array", "directRecords": 8 }],
+      "sourceIds": [
+        "exim_buy_american",
+        "govuz_business_forum_2025",
+        "input_diplomatic_docx",
+        "us_uz_gateway",
+        "ustr_visit_2024"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 8, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/_source-uz-reporter-hs6",
+      "path": "data/restored/_source-uz-reporter-hs6.ts",
+      "contentHash": "a73784243ef731f78f5ec9969dbacb9b9af2eca9b9dbe7a68342713167d9e73b",
+      "bytes": 43922,
+      "lines": 1964,
+      "recordCount": 240,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 240,
+      "exports": [
+        { "name": "topUzExportsToUsByYear", "initializer": "object", "directRecords": 120 },
+        { "name": "topUzImportsFromUsByYear", "initializer": "object", "directRecords": 120 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 240, "literalSum": 988918994.151001 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/index",
+      "path": "data/restored/index.ts",
+      "contentHash": "b7c750cfd5f8e8ada96eb6260785f0a3423f667bf30642909130940e8f492b23",
+      "bytes": 260,
+      "lines": 5,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/pre-2025-visits",
+      "path": "data/restored/pre-2025-visits.ts",
+      "contentHash": "bc48577d8be15e11d3cb84817d81eb4dfa7192fa961eb3ddd788be82e3085dbc",
+      "bytes": 618,
+      "lines": 15,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "PRE_2025_VISITS_PROVENANCE", "initializer": "object", "directRecords": 0 },
+        { "name": "restoredPre2025Visits", "initializer": "call", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/pre-2026-events",
+      "path": "data/restored/pre-2026-events.ts",
+      "contentHash": "e467a25082f369cdbcf6062ae121602e0d4036066541c9a9aa7fcd40fcb3fdf9",
+      "bytes": 618,
+      "lines": 15,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "PRE_2026_EVENTS_PROVENANCE", "initializer": "object", "directRecords": 0 },
+        { "name": "restoredPre2026Events", "initializer": "call", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/quarantine",
+      "path": "data/restored/quarantine.ts",
+      "contentHash": "474b9108a7d20d2d385dccc4c115c7bd9d341c5b040178b360392e8316c8f365",
+      "bytes": 1694,
+      "lines": 52,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [],
+      "sourceIds": [],
+      "confidence": {
+        "isDemoTrue": 0,
+        "isDemoFalse": 0,
+        "explicitLabels": { "internal_unverified": 2, "source_needed": 1 }
+      },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/types",
+      "path": "data/restored/types.ts",
+      "contentHash": "23e83e7b596ed41d86ce7d3ea098301dcd3d7774141ac1be6edb975f7c61ae1d",
+      "bytes": 919,
+      "lines": 34,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:restored/uz-reporter-hs6",
+      "path": "data/restored/uz-reporter-hs6.ts",
+      "contentHash": "6cdd180ba1eb25cf2cfc933401761bdb6ecd630ab0cc3325f5e8da4cac438ef0",
+      "bytes": 2480,
+      "lines": 67,
+      "recordCount": 0,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "restoredUzReporterHs6Rows", "initializer": "array", "directRecords": 0 },
+        { "name": "UZ_REPORTER_HS6_METHODOLOGY", "initializer": "AsExpression", "directRecords": 0 },
+        { "name": "UZ_REPORTER_HS6_PROVENANCE", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 4, "literalSum": 3404 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:roadmaps",
+      "path": "data/roadmaps.ts",
+      "contentHash": "e840c8045ca38d9166f3325e12929f4ed5620a2f0d58c067d644d5edaf0ca2c9",
+      "bytes": 54707,
+      "lines": 1235,
+      "recordCount": 15,
+      "explicitStableIds": [
+        "khz-01",
+        "khz-02",
+        "khz-03",
+        "khz-04",
+        "khz-05",
+        "khz-06",
+        "khz-07",
+        "khz-08",
+        "khz-09",
+        "khz-10",
+        "khz-11",
+        "khz-12",
+        "khz-13"
+      ],
+      "recordsWithoutExplicitStableId": 2,
+      "exports": [
+        { "name": "khorezmProjects", "initializer": "array", "directRecords": 13 },
+        { "name": "regionRoadmaps", "initializer": "array", "directRecords": 2 },
+        { "name": "roadmapProjects", "initializer": "array", "directRecords": 0 },
+        { "name": "samarkandProjects", "initializer": "array", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 14, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 171, "literalSum": 86406629.6 },
+      "consumingRoutes": ["/[locale]", "/[locale]/prepare", "/[locale]/roadmaps", "/[locale]/today"]
+    },
+    {
+      "id": "dataset:search-index",
+      "path": "data/search-index.ts",
+      "contentHash": "dec64fc5631baa5cb1ea0723fbe03fd8b80f5ad563ec807ba82f2093cdaaa753",
+      "bytes": 14229,
+      "lines": 549,
+      "recordCount": 105,
+      "explicitStableIds": [
+        "a-1992-relations",
+        "a-1993-embassy-dc",
+        "a-1994-bit",
+        "a-2002-strategic-framework",
+        "a-2004-tifa",
+        "a-2018-strategic-partnership",
+        "a-2021-strategic-dialogue",
+        "a-2024-critical-minerals-mou",
+        "a-2024-customs-maa",
+        "a-2024-minerals-dialogue",
+        "a-2024-wto-market-access",
+        "a-2025-exim-buy-american",
+        "a-2025-visa-free-us",
+        "a-2026-dfc-framework",
+        "a-2026-investment-platform",
+        "a-2026-minerals-mou",
+        "a-demo-air-services",
+        "a-demo-customs",
+        "a-demo-export-import",
+        "a-demo-fbi-law",
+        "a-demo-fulbright",
+        "a-demo-gsp",
+        "a-demo-ifdc",
+        "a-demo-tax-dta",
+        "a-demo-usaid-health",
+        "a-demo-usda",
+        "c-adams-nyc",
+        "c-adams-sen",
+        "c-brez",
+        "c-daines",
+        "c-fogel",
+        "c-galdiz",
+        "c-gonzalez",
+        "c-gor",
+        "c-henick",
+        "c-kelly",
+        "c-landau",
+        "c-meyer",
+        "c-miller",
+        "c-orr",
+        "c-power",
+        "c-rogers",
+        "c-rubio",
+        "c-trump",
+        "c-waltz",
+        "c-zampolli",
+        "inv-1",
+        "inv-10",
+        "inv-11",
+        "inv-12",
+        "inv-13",
+        "inv-14",
+        "inv-15",
+        "inv-16",
+        "inv-17",
+        "inv-18",
+        "inv-19",
+        "inv-2",
+        "inv-20",
+        "inv-21",
+        "inv-22",
+        "inv-23",
+        "inv-24",
+        "inv-25",
+        "inv-26",
+        "inv-27",
+        "inv-28",
+        "inv-29",
+        "inv-3",
+        "inv-30",
+        "inv-31",
+        "inv-32",
+        "inv-33",
+        "inv-34",
+        "inv-35",
+        "inv-4",
+        "inv-5",
+        "inv-6",
+        "inv-7",
+        "inv-8",
+        "inv-9",
+        "real-ai-digital-fund",
+        "real-air-products-fergana-h2",
+        "real-air-products-gtl",
+        "real-air-products-navoiy-co2",
+        "real-coca-cola-expansion",
+        "real-franklin-templeton-uznif",
+        "real-gf6-css-prime",
+        "real-mining-metallurgy-200",
+        "real-mining-metallurgy-850",
+        "real-traxys-critical-minerals",
+        "v-2025-03-miller",
+        "v-2025-04-saidov",
+        "v-2025-08-zampolli",
+        "v-2025-09-unga",
+        "v-2025-10-gor-landau",
+        "v-2025-11-adams",
+        "v-2025-11-c5-1",
+        "v-2025-11-miit",
+        "v-2025-11-utah",
+        "v-2026-01-davos",
+        "v-2026-02-04-minerals",
+        "v-2026-02-06-gor",
+        "v-2026-02-17-state",
+        "v-2026-04-upcoming-council"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "searchAgreements", "initializer": "array", "directRecords": 26 },
+        { "name": "searchCounterparts", "initializer": "array", "directRecords": 20 },
+        { "name": "searchInvestments", "initializer": "array", "directRecords": 45 },
+        { "name": "searchVisits", "initializer": "array", "directRecords": 14 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:sectors",
+      "path": "data/sectors.ts",
+      "contentHash": "c2ba6fa2eca2f2588f28e41fffa9c6080e0a1bcbdc3ab4b70d4ce19521f1bd42",
+      "bytes": 5216,
+      "lines": 120,
+      "recordCount": 8,
+      "explicitStableIds": [
+        "sector-agri-food",
+        "sector-banking-capital-markets",
+        "sector-critical-minerals",
+        "sector-green-energy",
+        "sector-health-pharma",
+        "sector-it-digital",
+        "sector-privatization-soe",
+        "sector-tourism-people"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "sectorOpportunities", "initializer": "array", "directRecords": 8 },
+        { "name": "sectorsMeta", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [
+        "govuz_business_forum_2025",
+        "govuz_us_tourism_2025",
+        "tradegov_market_opportunities",
+        "tradegov_mining_2025"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 1, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": ["/[locale]/investments"]
+    },
+    {
+      "id": "dataset:source-policies",
+      "path": "data/source-policies.ts",
+      "contentHash": "34e0c5f77eb5e2b48d773f35cc6da70fd9248fd1fda305962d2ee3eaafc2eecd",
+      "bytes": 5051,
+      "lines": 163,
+      "recordCount": 14,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 14,
+      "exports": [{ "name": "sourceVersionPolicies", "initializer": "array", "directRecords": 14 }],
+      "sourceIds": [
+        "bea_developers",
+        "cbu_statistics",
+        "census_intl_trade_api",
+        "data_egov_uz",
+        "dfc_active_projects",
+        "dhs_ohss_nonimmigrant",
+        "exim_authorizations_data",
+        "exim_cls",
+        "foreign_assistance_gov",
+        "iie_open_doors",
+        "imf_data_api",
+        "stat_uz",
+        "state_visa_stats",
+        "worldbank_data"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 28, "literalSum": 46365.54 },
+      "consumingRoutes": []
+    },
+    {
+      "id": "dataset:sources",
+      "path": "data/sources.ts",
+      "contentHash": "b046fa025d7c49a350a9811cf05faa80ad2aa9658f58f7678f045e58594af5cc",
+      "bytes": 23794,
+      "lines": 564,
+      "recordCount": 60,
+      "explicitStableIds": [
+        "aucc_online",
+        "bea_developers",
+        "cbu_statistics",
+        "census_goods_uz",
+        "census_intl_trade_api",
+        "comtrade_hs6",
+        "data_egov_uz",
+        "dfc_active_projects",
+        "dfc_joint_framework",
+        "dhs_ohss_nonimmigrant",
+        "exim_authorizations_data",
+        "exim_buy_american",
+        "exim_cls",
+        "f4_ordinance_2026",
+        "foreign_assistance_gov",
+        "govuz_business_forum_2025",
+        "govuz_us_tourism_2025",
+        "govuz_us_visa_free_2026",
+        "gpd_protocol_2026",
+        "iie_open_doors",
+        "imf_data_api",
+        "input_agreements_docx",
+        "input_deep_review_docx",
+        "input_diplomatic_docx",
+        "input_figma_pdf",
+        "input_grants_xlsx",
+        "input_roadmap_khorezm_docx",
+        "input_roadmap_samarkand_docx",
+        "input_trade_stat_docx",
+        "invest_uzbekistan",
+        "lex_uz",
+        "lex_uz_diplomatic_missions_1992",
+        "lex_uz_embassy_us_1993",
+        "lex_uz_visa_free_2025",
+        "oecd_data_api",
+        "stat_uz",
+        "state_blinken_c5_2023",
+        "state_c5_1_2015",
+        "state_c5_summit_2023",
+        "state_history_uz",
+        "state_pompeo_c5_2020",
+        "state_spd_2_joint",
+        "state_spd_3_joint",
+        "state_visa_stats",
+        "tradegov_agreements",
+        "tradegov_market_opportunities",
+        "tradegov_mining_2025",
+        "trademap_itc",
+        "us_embassy_tashkent",
+        "us_uz_council",
+        "us_uz_gateway",
+        "usaid_eras_ii",
+        "usaid_power_visit_2023",
+        "usaid_wave",
+        "ustr_uzbekistan",
+        "ustr_wto_2024",
+        "uzbek_embassy_dc",
+        "whitehouse_c5_2025",
+        "whitehouse_us_uz_2018",
+        "worldbank_data"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "sources", "initializer": "array", "directRecords": 60 },
+        { "name": "sourcesMeta", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 0, "literalSum": 0 },
+      "consumingRoutes": [
+        "/[locale]/agreements",
+        "/[locale]/benchmark",
+        "/[locale]/contacts",
+        "/[locale]/grants",
+        "/[locale]/investments",
+        "/[locale]",
+        "/[locale]/prepare",
+        "/[locale]/roadmaps",
+        "/[locale]/sources",
+        "/[locale]/today",
+        "/[locale]/trade",
+        "/[locale]/visits"
+      ]
+    },
+    {
+      "id": "dataset:trade-services",
+      "path": "data/trade-services.ts",
+      "contentHash": "f92f5373d482999a545e763682a3e6dc741a9b6fa195c753b65eda3fd20ad070",
+      "bytes": 8189,
+      "lines": 308,
+      "recordCount": 26,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 26,
+      "exports": [
+        { "name": "servicesMeta", "initializer": "object", "directRecords": 0 },
+        { "name": "servicesUzToUs", "initializer": "array", "directRecords": 26 },
+        { "name": "servicesUzToUsYearTotals", "initializer": "object", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 1, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 112, "literalSum": 63362090 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:trade",
+      "path": "data/trade.ts",
+      "contentHash": "4cc261a08b19546defdfd7537d7146b11aefb9c88ed9608cdf31ec863d6a444c",
+      "bytes": 12396,
+      "lines": 333,
+      "recordCount": 77,
+      "explicitStableIds": ["bea-services", "govuz-forum", "us-census", "ustr", "uz-stat"],
+      "recordsWithoutExplicitStableId": 72,
+      "exports": [
+        { "name": "exportStructure2025", "initializer": "array", "directRecords": 14 },
+        { "name": "importStructure2025", "initializer": "array", "directRecords": 14 },
+        { "name": "methodologyNotes", "initializer": "array", "directRecords": 5 },
+        { "name": "topExportCategoriesUZ", "initializer": "call", "directRecords": 0 },
+        { "name": "topImportCategoriesUS", "initializer": "call", "directRecords": 0 },
+        { "name": "tradeAnnual", "initializer": "alias", "directRecords": 0 },
+        { "name": "tradeAnnualUs", "initializer": "array", "directRecords": 9 },
+        { "name": "tradeAnnualUz", "initializer": "array", "directRecords": 9 },
+        { "name": "tradeJan2026", "initializer": "object", "directRecords": 0 },
+        { "name": "tradeMeta", "initializer": "object", "directRecords": 0 },
+        { "name": "tradeMonthlyMeta", "initializer": "object", "directRecords": 0 },
+        { "name": "tradeMonthlyUs", "initializer": "array", "directRecords": 26 }
+      ],
+      "sourceIds": [
+        "bea_developers",
+        "census_goods_uz",
+        "govuz_business_forum_2025",
+        "input_trade_stat_docx",
+        "ustr_uzbekistan"
+      ],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 4, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 265, "literalSum": 64916.386 },
+      "consumingRoutes": ["/[locale]", "/[locale]/prepare", "/[locale]/roadmaps", "/[locale]/today", "/[locale]/trade"]
+    },
+    {
+      "id": "dataset:trademap-products",
+      "path": "data/trademap-products.ts",
+      "contentHash": "d56b5ee92304c5d4f48a1591ac87a08c906768faf3b14fa752fd3081bf66ba10",
+      "bytes": 38450,
+      "lines": 1082,
+      "recordCount": 100,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 100,
+      "exports": [
+        { "name": "trademap2024Meta", "initializer": "object", "directRecords": 0 },
+        { "name": "usExportsToUz2024Top", "initializer": "array", "directRecords": 60 },
+        { "name": "uzExportsToUs2024Top", "initializer": "array", "directRecords": 40 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 1, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 492, "literalSum": 836834368.166613 },
+      "consumingRoutes": ["/[locale]/trade"]
+    },
+    {
+      "id": "dataset:us-state-metrics",
+      "path": "data/us-state-metrics.ts",
+      "contentHash": "f7f287dfd168fcaba85001b13403a0f19ba45cdc7c593d308ca27d18621349c9",
+      "bytes": 6116,
+      "lines": 131,
+      "recordCount": 51,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 51,
+      "exports": [
+        { "name": "usStateMetrics", "initializer": "array", "directRecords": 51 },
+        { "name": "usStateMetricsMeta", "initializer": "AsExpression", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 0, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 159, "literalSum": 38757.062 },
+      "consumingRoutes": ["/[locale]/map"]
+    },
+    {
+      "id": "dataset:us-states",
+      "path": "data/us-states.ts",
+      "contentHash": "109e18c73b31656f3250d456c6b68d09293fcc952650b1be185af70ae37a1e0c",
+      "bytes": 11471,
+      "lines": 285,
+      "recordCount": 51,
+      "explicitStableIds": [],
+      "recordsWithoutExplicitStableId": 51,
+      "exports": [
+        { "name": "councilMembersByState", "initializer": "object", "directRecords": 0 },
+        { "name": "investmentsByState", "initializer": "call", "directRecords": 0 },
+        { "name": "usStates", "initializer": "array", "directRecords": 51 },
+        { "name": "usStatesMeta", "initializer": "object", "directRecords": 0 },
+        { "name": "visitsByState", "initializer": "call", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 1, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 15, "literalSum": 15 },
+      "consumingRoutes": ["/[locale]/map"]
+    },
+    {
+      "id": "dataset:uz-missions-us",
+      "path": "data/uz-missions-us.ts",
+      "contentHash": "81482963840adc8f2beee6514245547410f7c0a2e5d9e1cdcf9e9f404dc6992f",
+      "bytes": 3213,
+      "lines": 124,
+      "recordCount": 7,
+      "explicitStableIds": [
+        "uz-cg-ny",
+        "uz-cons-chicago",
+        "uz-cons-orlando",
+        "uz-cons-philadelphia",
+        "uz-cons-seattle",
+        "uz-emb-dc",
+        "uz-un-ny"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "uzMissionsUs", "initializer": "array", "directRecords": 7 },
+        { "name": "uzMissionsUsMeta", "initializer": "AsExpression", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 7, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 14, "literalSum": 869.8748 },
+      "consumingRoutes": ["/[locale]/map", "/[locale]"]
+    },
+    {
+      "id": "dataset:uz-planned-visits-us",
+      "path": "data/uz-planned-visits-us.ts",
+      "contentHash": "e12dff56131b6951f3e4d9410aa7fe05aa5cae6974badc93265f3ca780e08617",
+      "bytes": 4056,
+      "lines": 133,
+      "recordCount": 8,
+      "explicitStableIds": [
+        "pv-aviation-2026-wa",
+        "pv-bc-april-2026",
+        "pv-bc-april-2026-fl",
+        "pv-energy-2026-tx",
+        "pv-itpark-2026-ca",
+        "pv-mining-2026-az",
+        "pv-spd5-2026-dc",
+        "pv-tiif-2026-ny"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [
+        { "name": "uzPlannedVisitsUs", "initializer": "array", "directRecords": 8 },
+        { "name": "uzPlannedVisitsUsMeta", "initializer": "AsExpression", "directRecords": 0 }
+      ],
+      "sourceIds": [],
+      "confidence": { "isDemoTrue": 6, "isDemoFalse": 2, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 16, "literalSum": 1057.3097 },
+      "consumingRoutes": ["/[locale]/map"]
+    },
+    {
+      "id": "dataset:visit-prep",
+      "path": "data/visit-prep.ts",
+      "contentHash": "c534455b981f6ca76d642be308a94fceb3f5e1f92d39c3443a9d3ab4cfc421dd",
+      "bytes": 11919,
+      "lines": 303,
+      "recordCount": 4,
+      "explicitStableIds": [
+        "uv-khorezm-usa-2026-05",
+        "uv-samarkand-usa-2026-05",
+        "uv-unga-followup-2026-09",
+        "uv-us-delegation-tashkent-2026-07",
+        "vm-khz-roadmap",
+        "vm-smq-roadmap",
+        "vm-tashkent-program",
+        "vm-tashkent-samarkand-deck",
+        "vm-unga-planfact"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "upcomingVisits", "initializer": "array", "directRecords": 4 }],
+      "sourceIds": ["f4_ordinance_2026", "input_roadmap_khorezm_docx", "input_roadmap_samarkand_docx"],
+      "confidence": { "isDemoTrue": 23, "isDemoFalse": 2, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 5, "literalSum": 4 },
+      "consumingRoutes": ["/[locale]", "/[locale]/prepare", "/[locale]/roadmaps", "/[locale]/today"]
+    },
+    {
+      "id": "dataset:visits",
+      "path": "data/visits.ts",
+      "contentHash": "494422ed7da300503e2dbc9a024cea872538ed2007b52dac06bab3d1674b893f",
+      "bytes": 7825,
+      "lines": 238,
+      "recordCount": 14,
+      "explicitStableIds": [
+        "v-2025-03-miller",
+        "v-2025-04-saidov",
+        "v-2025-08-zampolli",
+        "v-2025-09-unga",
+        "v-2025-10-gor-landau",
+        "v-2025-11-adams",
+        "v-2025-11-c5-1",
+        "v-2025-11-miit",
+        "v-2025-11-utah",
+        "v-2026-01-davos",
+        "v-2026-02-04-minerals",
+        "v-2026-02-06-gor",
+        "v-2026-02-17-state",
+        "v-2026-04-upcoming-council"
+      ],
+      "recordsWithoutExplicitStableId": 0,
+      "exports": [{ "name": "visits", "initializer": "array", "directRecords": 14 }],
+      "sourceIds": ["whitehouse_c5_2025"],
+      "confidence": { "isDemoTrue": 0, "isDemoFalse": 14, "explicitLabels": {} },
+      "localizedFields": [],
+      "numericChecksum": { "literalCount": 3, "literalSum": 4 },
+      "consumingRoutes": ["/[locale]/map", "/[locale]", "/[locale]/visits"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "aucc_online",
+      "level": "B",
+      "locator": "https://aucconline.com/",
+      "contentHash": "eab107f0fc94051e16aa6f7f4b564b9de49031f307b9bae87432c85357cbba56",
+      "consumingDataModules": ["data/contacts.ts"]
+    },
+    {
+      "id": "bea_developers",
+      "level": "B",
+      "locator": "https://www.bea.gov/resources/for-developers",
+      "contentHash": "4fafe46e7565b5d0f5b520f81730ed832db5353286ce7fe13442a65308c0c636",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts", "data/trade.ts"]
+    },
+    {
+      "id": "cbu_statistics",
+      "level": "B",
+      "locator": "https://cbu.uz/en/statistics/",
+      "contentHash": "97b05d971559a9c6f6bf47c5798cd7037980986fdf69cfc324bfe3c8d652cdc2",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "census_goods_uz",
+      "level": "B",
+      "locator": "https://www.census.gov/foreign-trade/balance/c4644.html",
+      "contentHash": "f73f0b20c8de4977eda2b646468e79c6279eec32042bbd4efe2cab9210bc942e",
+      "consumingDataModules": ["data/news.ts", "data/relationship-pillars.ts", "data/trade.ts"]
+    },
+    {
+      "id": "census_intl_trade_api",
+      "level": "B",
+      "locator": "https://www.census.gov/data/developers/data-sets/international-trade.html",
+      "contentHash": "0a4d6b40c97df8024d82371c50e93d86e960038c77c122b0bc328261f6febc6a",
+      "consumingDataModules": ["data/executive.ts", "data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "comtrade_hs6",
+      "level": "B",
+      "locator": "https://comtradeapi.un.org/public/v1/preview/C/A/HS",
+      "contentHash": "497e26310ba6b13d98c8ec4456e8e6e106cd0df9fe408c1df72242d8e55f9200",
+      "consumingDataModules": []
+    },
+    {
+      "id": "data_egov_uz",
+      "level": "B",
+      "locator": "https://data.egov.uz/eng/",
+      "contentHash": "a4f3851b2e0bf9ae7d578a454cf46107a6c5054ae47389d2eecb1ea228e4c2d4",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "dfc_active_projects",
+      "level": "B",
+      "locator": "https://www3.dfc.gov/DFCProjects",
+      "contentHash": "d1f222f7ac0e8f457633b4b6d94e9a043aeb5d16c58d3663510e5e1ddd8a0fb0",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "dfc_joint_framework",
+      "level": "B",
+      "locator": "https://www.dfc.gov/media/press-releases/dfc-leadership-lays-foundation-investment-partnership-uzbekistan",
+      "contentHash": "79dd2ef047f6cbbb3e430050b539a03a921b8c77cf36698d92457a51eb599108",
+      "consumingDataModules": [
+        "data/agreements.ts",
+        "data/events.ts",
+        "data/executive.ts",
+        "data/news.ts",
+        "data/relationship-pillars.ts"
+      ]
+    },
+    {
+      "id": "dhs_ohss_nonimmigrant",
+      "level": "B",
+      "locator": "https://ohss.dhs.gov/topics/immigration/nonimmigrant/annual-flow-report",
+      "contentHash": "dfc4360f35cab175f01d189d42d83deaedf075f61f15fa02326531530723ebb3",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "exim_authorizations_data",
+      "level": "B",
+      "locator": "https://catalog.data.gov/dataset/authorizations-from-10-01-2006-thru-06-30-2025",
+      "contentHash": "66c298fa6af8b9a15259c9f5e5e3871c6e1ea7fd26db7d5e5dfb72ef26d85412",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "exim_buy_american",
+      "level": "B",
+      "locator": "https://www.exim.gov/news/exim-signs-buy-american-build-future-agreement-uzbekistan-boost-exports-and-support-american",
+      "contentHash": "06fa5b7971b190fdcc59dd4a145f94ed6940288b7b63d41641e402e15debdc7e",
+      "consumingDataModules": ["data/agreements.ts", "data/restored/_source-pre-2026-events.ts"]
+    },
+    {
+      "id": "exim_cls",
+      "level": "B",
+      "locator": "https://www.exim.gov/resources/country-limitation-schedule",
+      "contentHash": "788a0d1c1682eb8d06af13c7ba0fde9d345fcb66089f41a2d4826442189a0cb3",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "f4_ordinance_2026",
+      "level": "A",
+      "locator": "(internal mandate document)",
+      "contentHash": "753e576dc9f97c6fa752c3614fa9fc80e78560d33654d5745e77b581d8675e20",
+      "consumingDataModules": ["data/external-data.ts", "data/visit-prep.ts"]
+    },
+    {
+      "id": "foreign_assistance_gov",
+      "level": "B",
+      "locator": "https://foreignassistance.gov/",
+      "contentHash": "b793a4822917ec24a1a97fe6b53222ffeb90f77a8c1fc137dab3082b87406494",
+      "consumingDataModules": [
+        "data/executive.ts",
+        "data/external-data.ts",
+        "data/grants.ts",
+        "data/relationship-pillars.ts",
+        "data/source-policies.ts"
+      ]
+    },
+    {
+      "id": "govuz_business_forum_2025",
+      "level": "B",
+      "locator": "https://gov.uz/en/news/view/59822",
+      "contentHash": "924de752e530bcc3803ee05857cde0208e455647e78cb5c3263e988a55c8ab8e",
+      "consumingDataModules": ["data/restored/_source-pre-2026-events.ts", "data/sectors.ts", "data/trade.ts"]
+    },
+    {
+      "id": "govuz_us_tourism_2025",
+      "level": "B",
+      "locator": "https://gov.uz/en/uzbektourism/news/view/124526",
+      "contentHash": "0d80ab68de9581196551621bb475cad1817c059b81b7d2b8b5a9a83e1396ffaa",
+      "consumingDataModules": ["data/news.ts", "data/sectors.ts"]
+    },
+    {
+      "id": "govuz_us_visa_free_2026",
+      "level": "B",
+      "locator": "https://gov.uz/en/uzbektourism/news/view/99187",
+      "contentHash": "092e2abc7cb61d40ac4a6b7e34e5ec9e9b49d9f1faeb20eff603a219d685d9b3",
+      "consumingDataModules": ["data/executive.ts", "data/news.ts", "data/relationship-pillars.ts"]
+    },
+    {
+      "id": "gpd_protocol_2026",
+      "level": "A",
+      "locator": "(internal — Agency for Strategic Development and Reforms)",
+      "contentHash": "058ac5945f2e43d60bcbb7ea376f0a7c1aec3aab890d4b268cfcb3669e4a5803",
+      "consumingDataModules": ["data/center-milestones.ts"]
+    },
+    {
+      "id": "iie_open_doors",
+      "level": "B",
+      "locator": "https://www.iie.org/research-initiatives/open-doors/",
+      "contentHash": "c6cd684bd9f49df7bac5a7a73104865ea552a2b7b055096539b2578f363ab4c6",
+      "consumingDataModules": ["data/executive.ts", "data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "imf_data_api",
+      "level": "B",
+      "locator": "https://data.imf.org/en/Resource-Pages/IMF-API",
+      "contentHash": "5a0e75264c3a60bef2bda5d3734795a49314d2bfe4a8f0135f9fb393db736684",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "input_agreements_docx",
+      "level": "A",
+      "locator": "input/Данные к US_SC/Двухсторонние соглашения/Документ Microsoft Word.docx",
+      "contentHash": "be8a6c0e8d1515079cf9329653e7507624b1b3c91a5b1cb862086f902b1acd26",
+      "consumingDataModules": ["data/agreements.ts"]
+    },
+    {
+      "id": "input_deep_review_docx",
+      "level": "A",
+      "locator": "input/us_uz_deep_review.docx",
+      "contentHash": "9f93d9d09fe457a018306b5595a23b5b11a97fe64cd8164fae2dda8f8a00c913",
+      "consumingDataModules": ["data/agreements.ts", "data/events.ts", "data/investments.ts"]
+    },
+    {
+      "id": "input_diplomatic_docx",
+      "level": "A",
+      "locator": "input/Данные к US_SC/Дипломатические связи/Документ Microsoft Word.docx",
+      "contentHash": "37d8e60189035d795b063c2b64f4dd536782174609c386318682403f1a69ec90",
+      "consumingDataModules": [
+        "data/agreements.ts",
+        "data/counterparts.ts",
+        "data/events.ts",
+        "data/relationship-pillars.ts",
+        "data/restored/_source-pre-2026-events.ts"
+      ]
+    },
+    {
+      "id": "input_figma_pdf",
+      "level": "A",
+      "locator": "input/Данные к US_SC/Страница (FIGMA)/O'ZBЕKISTON – AQSH SITUATSION MARKAZ.pdf",
+      "contentHash": "18558fea9c90feed3e1c2eddfc95a64cd891934ae39222bd5c3283b7447b8745",
+      "consumingDataModules": ["data/executive.ts", "data/investments.ts"]
+    },
+    {
+      "id": "input_grants_xlsx",
+      "level": "A",
+      "locator": "input/Данные к US_SC/Грант 2025/Грант_по_проектно.xlsx",
+      "contentHash": "5190a21b3cea03ecf4bdfc2e94c8217fcc68751b86979a79c5563ae2815b9b94",
+      "consumingDataModules": ["data/grants.ts"]
+    },
+    {
+      "id": "input_roadmap_khorezm_docx",
+      "level": "A",
+      "locator": "input/3. Хоразм (АҚШ).docx",
+      "contentHash": "9429e34840dce738d60813d2718d1277c7549accd5476006c3a5c7373583a43e",
+      "consumingDataModules": ["data/visit-prep.ts"]
+    },
+    {
+      "id": "input_roadmap_samarkand_docx",
+      "level": "A",
+      "locator": "input/2. Самарқанд (АҚШ).docx",
+      "contentHash": "ae4fdbbd20e5d8db4beda9782d32047f586ad225c0fab9ad23c5d0107704e902",
+      "consumingDataModules": ["data/visit-prep.ts"]
+    },
+    {
+      "id": "input_trade_stat_docx",
+      "level": "A",
+      "locator": "input/Данные к US_SC/ВЭД/Показатели_внешней_торговли_Узбекистана_с_США_2017_2025.docx",
+      "contentHash": "d598aef1bfd97bbdc6b9acd01c4452dcfa33f8a5394a3c99e1f4a3e919453df9",
+      "consumingDataModules": ["data/trade.ts"]
+    },
+    {
+      "id": "invest_uzbekistan",
+      "level": "B",
+      "locator": "https://invest.gov.uz",
+      "contentHash": "0c8e098b4116e8cf28ba218c7eb02c77e0a015a0560df9f71d4ccb42a52a0841",
+      "consumingDataModules": ["data/contacts.ts"]
+    },
+    {
+      "id": "lex_uz",
+      "level": "B",
+      "locator": "https://lex.uz/ru/",
+      "contentHash": "7b603dad1e2e83ed2b16a676946966d2e47aedaf883c63806784c52f37844305",
+      "consumingDataModules": []
+    },
+    {
+      "id": "lex_uz_diplomatic_missions_1992",
+      "level": "B",
+      "locator": "https://lex.uz/ru/docs/19509",
+      "contentHash": "12ebcf0d47ba33a941078eefe471a579a0c357624b673de803004ff0776ff75d",
+      "consumingDataModules": []
+    },
+    {
+      "id": "lex_uz_embassy_us_1993",
+      "level": "B",
+      "locator": "https://lex.uz/docs/521494",
+      "contentHash": "40986ce39ab3793d4fd8efbb232b5372b9ee837622360587f577804217a70946",
+      "consumingDataModules": ["data/agreements.ts"]
+    },
+    {
+      "id": "lex_uz_visa_free_2025",
+      "level": "B",
+      "locator": "https://lex.uz/ru/docs/7807760",
+      "contentHash": "7d02d2460befb37316305fefeee3e649c64ef65ba91153608d13d0e6b2f0ecbb",
+      "consumingDataModules": ["data/agreements.ts"]
+    },
+    {
+      "id": "oecd_data_api",
+      "level": "B",
+      "locator": "https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html",
+      "contentHash": "decdd7c7fb758d6c32ded7018a7771a44dabba9402fc7bd23f2164f3e96ab7a5",
+      "consumingDataModules": []
+    },
+    {
+      "id": "stat_uz",
+      "level": "B",
+      "locator": "https://stat.uz/en/",
+      "contentHash": "7d8793f02feda820c1f8f5ab60f371fc37dc713d62d98a2445ec74a2f6c9e293",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "state_blinken_c5_2023",
+      "level": "B",
+      "locator": "https://2021-2025.state.gov/secretary-antony-j-blinken-travel-to-kazakhstan-uzbekistan-and-india/",
+      "contentHash": "ce59ce8f971d743f0e2608dbe0bec3273368d4054845bc7e6e2943450c11e823",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_c5_1_2015",
+      "level": "B",
+      "locator": "https://2009-2017.state.gov/secretary/remarks/2015/11/249260.htm",
+      "contentHash": "a7353708e5c3d269e89c2807a097f5a54fd958d8f8e3d8f8b7f2094b9840fb6e",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_c5_summit_2023",
+      "level": "B",
+      "locator": "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2023/09/19/joint-statement-of-the-c51-presidential-summit/",
+      "contentHash": "8b32e362ab4ca89d7c4883d2625fe912b909c4abd01105bd9717a29ae569da71",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_history_uz",
+      "level": "B",
+      "locator": "https://history.state.gov/countries/uzbekistan/1000",
+      "contentHash": "ec448c9454b17fed8996d14361c7404c79d31762ca8c1464f35aa1c23dedb448",
+      "consumingDataModules": ["data/agreements.ts", "data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_pompeo_c5_2020",
+      "level": "B",
+      "locator": "https://2017-2021.state.gov/secretary-michael-r-pompeos-travel-to-the-united-kingdom-ukraine-belarus-kazakhstan-uzbekistan/",
+      "contentHash": "eb5d127e52c8bad00f2fedba3a089b431d18def777186cd531a69ab50a7ed565",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_spd_2_joint",
+      "level": "B",
+      "locator": "https://2021-2025.state.gov/joint-statement-on-the-second-united-states-uzbekistan-strategic-partnership-dialogue/",
+      "contentHash": "1cfd3010cbb16f2a2cde1ae82af61dc698cf6c961709f365eb68cf5641f22b65",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_spd_3_joint",
+      "level": "B",
+      "locator": "https://2021-2025.state.gov/joint-statement-on-the-united-states-uzbekistan-strategic-partnership-dialogue-3/",
+      "contentHash": "9b84230bdb04813d2dc4a8f94c930c84673fbc54705571c9f5741fc23f5ef26e",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "state_visa_stats",
+      "level": "B",
+      "locator": "https://travel.state.gov/content/travel/en/legal/visa-law0/visa-statistics.html",
+      "contentHash": "b06557e11adc9aeb5553e8dda2a9c08964ab91b1a6a6854b97f8f4228c5df5d9",
+      "consumingDataModules": ["data/external-data.ts", "data/source-policies.ts"]
+    },
+    {
+      "id": "tradegov_agreements",
+      "level": "B",
+      "locator": "https://www.trade.gov/country-commercial-guides/uzbekistan-trade-agreements",
+      "contentHash": "d2a97dcf5577f391ee8c376598d641bfa8cbb444c0aef03e10b8c6ee86fee2a0",
+      "consumingDataModules": ["data/agreements.ts"]
+    },
+    {
+      "id": "tradegov_market_opportunities",
+      "level": "B",
+      "locator": "https://www.trade.gov/country-commercial-guides/uzbekistan-market-opportunities",
+      "contentHash": "a931bfd5fde5ae3e5c49a745db62145c100dd7c74a7b3cd202163230c353905f",
+      "consumingDataModules": ["data/contacts.ts", "data/sectors.ts"]
+    },
+    {
+      "id": "tradegov_mining_2025",
+      "level": "B",
+      "locator": "https://www.trade.gov/country-commercial-guides/uzbekistan-mining-and-quarrying-sectors",
+      "contentHash": "709b27a84daa7163b5259594477ef26c2828fb39c0a9e67ffbdeb527b43fc13e",
+      "consumingDataModules": ["data/investments.ts", "data/relationship-pillars.ts", "data/sectors.ts"]
+    },
+    {
+      "id": "trademap_itc",
+      "level": "B",
+      "locator": "https://www.trademap.org/",
+      "contentHash": "b40ded7af0815e4ba916b857ad84dd2f9bf0763e68abf8b3c90c0cbe15209864",
+      "consumingDataModules": []
+    },
+    {
+      "id": "us_embassy_tashkent",
+      "level": "B",
+      "locator": "https://uz.usembassy.gov/contact/",
+      "contentHash": "51a73f0989273de2b654ab85b19a34a21efd419b77b7db2b933a21b96e61e35c",
+      "consumingDataModules": ["data/contacts.ts", "data/counterparts.ts"]
+    },
+    {
+      "id": "us_uz_council",
+      "level": "B",
+      "locator": "https://us-uz.gov.uz/en/about/council",
+      "contentHash": "397f3d59927cd9ce7a65c8c38891ead9921950ea873eee95fc2d33e7a3435e6f",
+      "consumingDataModules": ["data/contacts.ts", "data/counterparts.ts", "data/news.ts"]
+    },
+    {
+      "id": "us_uz_gateway",
+      "level": "B",
+      "locator": "https://us-uz.gov.uz/en",
+      "contentHash": "ba6ae1d2e9341d85a77c087edede1983711b877a8a3bf039d32ef10330910d71",
+      "consumingDataModules": ["data/events.ts", "data/news.ts", "data/restored/_source-pre-2026-events.ts"]
+    },
+    {
+      "id": "usaid_eras_ii",
+      "level": "B",
+      "locator": "https://www.usaid.gov/sites/default/files/2022-10/ERAS_II_-_USAID_Environment_Restoration_of_the_Aral_Sea_II_-_ENG_factsheet.docx.pdf",
+      "contentHash": "e9aae792b4848c0367b9132484fd1ed19c1fcd2045b53432abeb6c704e208da6",
+      "consumingDataModules": ["data/grants.ts"]
+    },
+    {
+      "id": "usaid_power_visit_2023",
+      "level": "B",
+      "locator": "https://www.usaid.gov/news-information/press-releases/oct-23-2023-administrator-samantha-power-travel-uzbekistan-and-kazakhstan",
+      "contentHash": "94222786e90ccfdfa9ab29723456b0489f90d6ab774b26007624128aaf8c7155",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "usaid_wave",
+      "level": "B",
+      "locator": "https://pdf.usaid.gov/pdf_docs/PA00ZQVJ.pdf",
+      "contentHash": "8f2d2ecedf92024d63f8d7c9ffab3b2b2ac98f4d69539813acb5866c18e2300c",
+      "consumingDataModules": ["data/grants.ts"]
+    },
+    {
+      "id": "ustr_uzbekistan",
+      "level": "B",
+      "locator": "https://ustr.gov/Uzbekistan",
+      "contentHash": "238ed637303a32f906d23ad092a4e10eb03aba6216cee848d8473559572b3802",
+      "consumingDataModules": ["data/trade.ts"]
+    },
+    {
+      "id": "ustr_wto_2024",
+      "level": "B",
+      "locator": "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/december/statement-ambassador-katherine-tai-uzbekistans-work-toward-accession-world-trade-organization",
+      "contentHash": "fba0da2186a266167c556052ed35f9f93f3b00b7fedf2947cea91697bd4bba08",
+      "consumingDataModules": ["data/agreements.ts"]
+    },
+    {
+      "id": "uzbek_embassy_dc",
+      "level": "B",
+      "locator": "https://uzbekistan.org/contact-us/",
+      "contentHash": "a1d50262ce01a5b217037bd770f9674c64608c501809ca1ade01b6b1ba13ca8c",
+      "consumingDataModules": ["data/contacts.ts"]
+    },
+    {
+      "id": "whitehouse_c5_2025",
+      "level": "B",
+      "locator": "https://www.whitehouse.gov/briefings-statements/2025/11/joint-statement-of-the-c5-1-summit/",
+      "contentHash": "125bebd662ad6c9712b7ae368eee310b851fdb0f833f04cefecf2e827abfe531",
+      "consumingDataModules": ["data/visits.ts"]
+    },
+    {
+      "id": "whitehouse_us_uz_2018",
+      "level": "B",
+      "locator": "https://trumpwhitehouse.archives.gov/briefings-statements/joint-statement-united-states-uzbekistan-launching-new-era-strategic-partnership/",
+      "contentHash": "24a64a7ef822d1da7ad2b0ec02a23a58c7dd1e174ecd1e024f9e2441476bbabd",
+      "consumingDataModules": ["data/restored/_source-pre-2025-visits.ts"]
+    },
+    {
+      "id": "worldbank_data",
+      "level": "B",
+      "locator": "https://data.worldbank.org/",
+      "contentHash": "6ae7e9882465de40e494fa346220a0928949c064be615ea098c616a133098ac3",
+      "consumingDataModules": [
+        "data/benchmark.ts",
+        "data/external-data.ts",
+        "data/relationship-pillars.ts",
+        "data/source-policies.ts"
+      ]
+    }
+  ],
+  "visualizations": [
+    {
+      "id": "visual:components/agreements/AgreementsStats",
+      "currentComponent": "components/agreements/AgreementsStats.tsx",
+      "exports": ["AgreementsStats"],
+      "exhibits": [
+        {
+          "id": "visual:components/agreements/AgreementsStats#agreements-statistics",
+          "name": "agreements-statistics",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/agreements/AgreementsStats#agreement-category-distribution",
+          "name": "agreement-category-distribution",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/agreements.ts"],
+      "decisionQuestion": "What is the legal base, its composition, and its chronology?",
+      "valueProvided": "What is the legal base, its composition, and its chronology?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/agreements"],
+      "targetV2Location": "/[locale]/agreements",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "653cf3f1188763af919fa720f4bd78cfb8a7a63d6e4479c5d528da98c9e1c260"
+    },
+    {
+      "id": "visual:components/agreements/AgreementsTable",
+      "currentComponent": "components/agreements/AgreementsTable.tsx",
+      "exports": ["AgreementsTable"],
+      "exhibits": [
+        {
+          "id": "visual:components/agreements/AgreementsTable#agreements-register",
+          "name": "agreements-register",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/agreements.ts", "data/sources.ts"],
+      "decisionQuestion": "What is the legal base, its composition, and its chronology?",
+      "valueProvided": "What is the legal base, its composition, and its chronology?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/agreements"],
+      "targetV2Location": "/[locale]/agreements",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "4bd4bc3a97f30607fb3cd44f3a5efff098cd86f9ebd5e803a93d09bb9831c87b"
+    },
+    {
+      "id": "visual:components/agreements/AgreementsTimeline",
+      "currentComponent": "components/agreements/AgreementsTimeline.tsx",
+      "exports": ["AgreementsTimeline"],
+      "exhibits": [
+        {
+          "id": "visual:components/agreements/AgreementsTimeline#agreements-timeline",
+          "name": "agreements-timeline",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/agreements.ts"],
+      "decisionQuestion": "What is the legal base, its composition, and its chronology?",
+      "valueProvided": "What is the legal base, its composition, and its chronology?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/agreements"],
+      "targetV2Location": "/[locale]/agreements",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "33819f1e5f6a04b87e77b3c586a4a0d0e92c43359fa91d431b99ef952514565e"
+    },
+    {
+      "id": "visual:components/benchmark/BenchmarkChart",
+      "currentComponent": "components/benchmark/BenchmarkChart.tsx",
+      "exports": ["BenchmarkChart"],
+      "exhibits": [
+        {
+          "id": "visual:components/benchmark/BenchmarkChart#BenchmarkChart",
+          "name": "BenchmarkChart",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [],
+      "decisionQuestion": "How does Uzbekistan compare with relevant regional peers?",
+      "valueProvided": "How does Uzbekistan compare with relevant regional peers?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/benchmark"],
+      "targetV2Location": "/[locale]/benchmark",
+      "sourceConfidenceTreatment": "not-applicable-or-manual-review",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "42cc9ae14884772bc6a0fa00ec89e4d46b1e0c312e64262e896a86eb8bfe8e02"
+    },
+    {
+      "id": "visual:components/benchmark/BenchmarkView",
+      "currentComponent": "components/benchmark/BenchmarkView.tsx",
+      "exports": ["BenchmarkView"],
+      "exhibits": [
+        {
+          "id": "visual:components/benchmark/BenchmarkView#benchmark-analysis",
+          "name": "benchmark-analysis",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/benchmark/BenchmarkView#benchmark-table",
+          "name": "benchmark-table",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/benchmark.ts"],
+      "decisionQuestion": "How does Uzbekistan compare with relevant regional peers?",
+      "valueProvided": "How does Uzbekistan compare with relevant regional peers?",
+      "currentProblem": "bilingual-label-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/benchmark"],
+      "targetV2Location": "/[locale]/benchmark",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "lazy-or-dynamic-detected",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "88de5f7f2dbadbf493c6b7a0404729ee4694edf2beaf97b051bacdd9a7835b5d"
+    },
+    {
+      "id": "visual:components/brief/AttentionList",
+      "currentComponent": "components/brief/AttentionList.tsx",
+      "exports": ["AttentionList"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/AttentionList#executive-attention-list",
+          "name": "executive-attention-list",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/trade.ts",
+        "data/visit-prep.ts"
+      ],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "16adaf70a0dc698145dac9f5db9c9922399b202ace6b00f30f0629366d51c830"
+    },
+    {
+      "id": "visual:components/brief/BriefAgreementsDonut",
+      "currentComponent": "components/brief/BriefAgreementsDonut.tsx",
+      "exports": ["BriefAgreementsDonut"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/BriefAgreementsDonut#BriefAgreementsDonut",
+          "name": "BriefAgreementsDonut",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/agreements.ts",
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/trade.ts",
+        "data/visit-prep.ts"
+      ],
+      "decisionQuestion": "What is the legal base, its composition, and its chronology?",
+      "valueProvided": "What is the legal base, its composition, and its chronology?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "5ca81011f494f781a126657fb9ad0af22dfb650e7653ecb5c66269597672bf0e"
+    },
+    {
+      "id": "visual:components/brief/BriefGlobe",
+      "currentComponent": "components/brief/BriefGlobe.tsx",
+      "exports": ["BriefGlobe"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/BriefGlobe#BriefGlobe",
+          "name": "BriefGlobe",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/uz-missions-us.ts",
+        "data/visit-prep.ts",
+        "data/visits.ts"
+      ],
+      "decisionQuestion": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "valueProvided": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "dfa0ee3b2f0bc781c900306b417ba4676e1e572040b961d3ef58737b0f69369c"
+    },
+    {
+      "id": "visual:components/brief/BriefTradeChart",
+      "currentComponent": "components/brief/BriefTradeChart.tsx",
+      "exports": ["BriefTradeChart"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/BriefTradeChart#BriefTradeChart",
+          "name": "BriefTradeChart",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/trade.ts",
+        "data/visit-prep.ts"
+      ],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "3d3f877e47cd75aed8db7aa071ee8dab1dfc468197823edaf1fdb4c46c844e2a"
+    },
+    {
+      "id": "visual:components/brief/GlobeSection",
+      "currentComponent": "components/brief/GlobeSection.tsx",
+      "exports": ["GlobeSection"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/GlobeSection#GlobeSection",
+          "name": "GlobeSection",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/trade.ts",
+        "data/uz-missions-us.ts",
+        "data/visit-prep.ts",
+        "data/visits.ts"
+      ],
+      "decisionQuestion": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "valueProvided": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "lazy-or-dynamic-detected",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "eed06edf8099027d9a413bcc71c45dad5291c784a786a65c04bb440ab4bd22fa"
+    },
+    {
+      "id": "visual:components/brief/RoadmapExecutionBar",
+      "currentComponent": "components/brief/RoadmapExecutionBar.tsx",
+      "exports": ["RoadmapExecutionBar"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/RoadmapExecutionBar#executive-roadmap-summary",
+          "name": "executive-roadmap-summary",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/trade.ts",
+        "data/visit-prep.ts"
+      ],
+      "decisionQuestion": "Which delivery steps are complete, due, blocked, or overdue?",
+      "valueProvided": "Which delivery steps are complete, due, blocked, or overdue?",
+      "currentProblem": "source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]/roadmaps",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "3e08042698fb0de397e6ba23fcb322e78bcf2d4fb2f63cb3eaa96aa73943e024"
+    },
+    {
+      "id": "visual:components/brief/Sparkline",
+      "currentComponent": "components/brief/Sparkline.tsx",
+      "exports": ["Sparkline"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/Sparkline#Sparkline",
+          "name": "Sparkline",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "bilingual-label-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "not-applicable-or-manual-review",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "3606ab9408a8261b3e767c702301766b50c4e82d0aa67977efc176ac7f65e32f"
+    },
+    {
+      "id": "visual:components/brief/VisitPanel",
+      "currentComponent": "components/brief/VisitPanel.tsx",
+      "exports": ["VisitPanel"],
+      "exhibits": [
+        {
+          "id": "visual:components/brief/VisitPanel#executive-visits-summary",
+          "name": "executive-visits-summary",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/trade.ts",
+        "data/visit-prep.ts"
+      ],
+      "decisionQuestion": "What is the bilateral engagement sequence and what requires preparation?",
+      "valueProvided": "What is the bilateral engagement sequence and what requires preparation?",
+      "currentProblem": "accessible-equivalent-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "public"],
+      "currentRoutes": ["/[locale]"],
+      "targetV2Location": "/[locale]/visits",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "37a99216905e541e9a758e29e35c832de3968a3d18d377505cd43a61f76f6d9c"
+    },
+    {
+      "id": "visual:components/charts/ChartFrame",
+      "currentComponent": "components/charts/ChartFrame.tsx",
+      "exports": ["ChartFrame"],
+      "exhibits": [
+        {
+          "id": "visual:components/charts/ChartFrame#ChartFrame",
+          "name": "ChartFrame",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/benchmark", "/[locale]", "/[locale]/trade"],
+      "targetV2Location": "owner_review_required",
+      "sourceConfidenceTreatment": "not-applicable-or-manual-review",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "ded91ffc4f809fc865ecc8997423cc4454b266f4c5b40a476aac02fa12d4db95"
+    },
+    {
+      "id": "visual:components/charts/MiniBars",
+      "currentComponent": "components/charts/MiniBars.tsx",
+      "exports": ["MiniBars"],
+      "exhibits": [
+        {
+          "id": "visual:components/charts/MiniBars#MiniBars",
+          "name": "MiniBars",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "bilingual-label-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/grants"],
+      "targetV2Location": "owner_review_required",
+      "sourceConfidenceTreatment": "not-applicable-or-manual-review",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "b44aedebd26c137dfc8dcb3ad13e26b7500b7a0a7d16fdeac813dcafe03f6a3f"
+    },
+    {
+      "id": "visual:components/charts/TradeFlowChart",
+      "currentComponent": "components/charts/TradeFlowChart.tsx",
+      "exports": ["TradeFlowChart"],
+      "exhibits": [
+        {
+          "id": "visual:components/charts/TradeFlowChart#TradeFlowChart",
+          "name": "TradeFlowChart",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "3f50652a2f3b9441c544f29f0c4a1176e2eade996b149ed0a1fa808bf67ae0f0"
+    },
+    {
+      "id": "visual:components/grants/ForeignAssistanceView",
+      "currentComponent": "components/grants/ForeignAssistanceView.tsx",
+      "exports": ["ForeignAssistanceView"],
+      "exhibits": [
+        {
+          "id": "visual:components/grants/ForeignAssistanceView#assistance-annual-bars",
+          "name": "assistance-annual-bars",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/grants/ForeignAssistanceView#assistance-agency-table",
+          "name": "assistance-agency-table",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/grants/ForeignAssistanceView#assistance-category-split",
+          "name": "assistance-category-split",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/foreign-assistance.ts", "data/sources.ts"],
+      "decisionQuestion": "How much assistance is recorded, by programme, agency, category, and year?",
+      "valueProvided": "How much assistance is recorded, by programme, agency, category, and year?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/grants"],
+      "targetV2Location": "/[locale]/grants",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "54c53d63b8e8b25e1a7ae4f5162d9cafe5016b33d1e569df08720a5fd8de5722"
+    },
+    {
+      "id": "visual:components/grants/GrantsView",
+      "currentComponent": "components/grants/GrantsView.tsx",
+      "exports": ["GrantsView"],
+      "exhibits": [
+        {
+          "id": "visual:components/grants/GrantsView#grant-project-register-cards",
+          "name": "grant-project-register-cards",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/grants.ts", "data/sources.ts"],
+      "decisionQuestion": "How much assistance is recorded, by programme, agency, category, and year?",
+      "valueProvided": "How much assistance is recorded, by programme, agency, category, and year?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/grants"],
+      "targetV2Location": "/[locale]/grants",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "afeb976cb4e9605b7f91d52f8a463fbc18925e9daa4f2cab8dd065dd95fe397a"
+    },
+    {
+      "id": "visual:components/investments/InvestmentsView",
+      "currentComponent": "components/investments/InvestmentsView.tsx",
+      "exports": ["InvestmentsView"],
+      "exhibits": [
+        {
+          "id": "visual:components/investments/InvestmentsView#investment-stage-board",
+          "name": "investment-stage-board",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/investments/InvestmentsView#investment-register-table",
+          "name": "investment-register-table",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/investments/InvestmentsView#investment-map",
+          "name": "investment-map",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/investments/InvestmentsView#privatization-pipeline",
+          "name": "privatization-pipeline",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/delegations.ts", "data/investments.ts", "data/regions.ts", "data/sources.ts"],
+      "decisionQuestion": "Which opportunities are verified, material, geographically relevant, and actionable?",
+      "valueProvided": "Which opportunities are verified, material, geographically relevant, and actionable?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/investments"],
+      "targetV2Location": "/[locale]/investments",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "lazy-or-dynamic-detected",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "c651e662954309a90f33c4b903bdc9658b622cb455c777fdfaa3019e490b1dd3"
+    },
+    {
+      "id": "visual:components/map/FlatMap",
+      "currentComponent": "components/map/FlatMap.tsx",
+      "exports": ["FlatMap"],
+      "exhibits": [
+        {
+          "id": "visual:components/map/FlatMap#FlatMap",
+          "name": "FlatMap",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/delegations.ts", "data/investments.ts", "data/regions.ts"],
+      "decisionQuestion": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "valueProvided": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/investments"],
+      "targetV2Location": "/[locale]/map",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "345e7a806b4a30d6fc96a90297e260104f19e45a3327b1f47a3d561f969b35c8"
+    },
+    {
+      "id": "visual:components/map/MapLoadGate",
+      "currentComponent": "components/map/MapLoadGate.tsx",
+      "exports": ["MapLoadGate"],
+      "exhibits": [
+        {
+          "id": "visual:components/map/MapLoadGate#MapLoadGate",
+          "name": "MapLoadGate",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/investments.ts",
+        "data/us-state-metrics.ts",
+        "data/us-states.ts",
+        "data/uz-missions-us.ts",
+        "data/uz-planned-visits-us.ts",
+        "data/visits.ts"
+      ],
+      "decisionQuestion": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "valueProvided": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/map"],
+      "targetV2Location": "/[locale]/map",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "lazy-or-dynamic-detected",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "fe0ac0f20e4d8c26c14a3c044a5a765c2d3f098e03a97748a768f2f24bf29a85"
+    },
+    {
+      "id": "visual:components/map/UsCenteredMap",
+      "currentComponent": "components/map/UsCenteredMap.tsx",
+      "exports": ["UsCenteredMap"],
+      "exhibits": [
+        {
+          "id": "visual:components/map/UsCenteredMap#us-footprint-map",
+          "name": "us-footprint-map",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/investments.ts",
+        "data/us-state-metrics.ts",
+        "data/us-states.ts",
+        "data/uz-missions-us.ts",
+        "data/uz-planned-visits-us.ts",
+        "data/visits.ts"
+      ],
+      "decisionQuestion": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "valueProvided": "Where are bilateral ties, activities, and opportunities concentrated?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/map"],
+      "targetV2Location": "/[locale]/map",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "7d0435e12a4edefe8bb8453ebc2d8ed66f2120ad402086cce93e79a7e1499546"
+    },
+    {
+      "id": "visual:components/overview/CounterpartsRank",
+      "currentComponent": "components/overview/CounterpartsRank.tsx",
+      "exports": ["CounterpartsRank"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/CounterpartsRank#counterparts-ranking",
+          "name": "counterparts-ranking",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/grants.ts", "data/investments.ts", "data/overview.ts", "data/trade.ts"],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "44905cb63850d661a07060728613827940fe724659259ee6b5035a4a749056e3"
+    },
+    {
+      "id": "visual:components/overview/ExecutiveCommandCenter",
+      "currentComponent": "components/overview/ExecutiveCommandCenter.tsx",
+      "exports": ["ExecutiveCommandCenter"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/ExecutiveCommandCenter#executive-command-summary",
+          "name": "executive-command-summary",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/overview/ExecutiveCommandCenter#verified-metric-grid",
+          "name": "verified-metric-grid",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/overview/ExecutiveCommandCenter#decision-queues",
+          "name": "decision-queues",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/agreements.ts",
+        "data/events.ts",
+        "data/executive.ts",
+        "data/external-data.ts",
+        "data/grants.ts",
+        "data/investments.ts",
+        "data/news.ts",
+        "data/relationship-pillars.ts",
+        "data/roadmaps.ts",
+        "data/sources.ts",
+        "data/visits.ts"
+      ],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "9cf083f97f72150c84244be1ff14c93dc03941d595c1929ec57eec4ed476fbe6"
+    },
+    {
+      "id": "visual:components/overview/GrantsDonut",
+      "currentComponent": "components/overview/GrantsDonut.tsx",
+      "exports": ["GrantsDonut"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/GrantsDonut#GrantsDonut",
+          "name": "GrantsDonut",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/grants.ts", "data/investments.ts", "data/overview.ts", "data/trade.ts"],
+      "decisionQuestion": "How much assistance is recorded, by programme, agency, category, and year?",
+      "valueProvided": "How much assistance is recorded, by programme, agency, category, and year?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "5454d338b12a6c2d02ad3b221e1ecc39867860fa2e1b95e628e806513ad4cbe5"
+    },
+    {
+      "id": "visual:components/overview/Horizon",
+      "currentComponent": "components/overview/Horizon.tsx",
+      "exports": ["Horizon"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/Horizon#visits-events-horizon",
+          "name": "visits-events-horizon",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/events.ts", "data/visits.ts"],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "d37ee1d8c4693100932551555ffe3616b977aab42ec4cc91ca3a153fd301edcf"
+    },
+    {
+      "id": "visual:components/overview/MonthlyBars",
+      "currentComponent": "components/overview/MonthlyBars.tsx",
+      "exports": ["MonthlyBars"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/MonthlyBars#MonthlyBars",
+          "name": "MonthlyBars",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/grants.ts", "data/investments.ts", "data/overview.ts", "data/trade.ts"],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "b1fa325d87821239685e67a09f81ceb11106199138a78bae68a0b0124ef0a914"
+    },
+    {
+      "id": "visual:components/overview/RiskRadar",
+      "currentComponent": "components/overview/RiskRadar.tsx",
+      "exports": ["RiskRadar"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/RiskRadar#risk-radar",
+          "name": "risk-radar",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/agreements.ts", "data/center-milestones.ts", "data/roadmaps.ts", "data/visit-prep.ts"],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "2bfa7c2d84e5b8551e3ba602963e3f54b8e7a0e770cdc2bb83c89c3b0aee8f7f"
+    },
+    {
+      "id": "visual:components/overview/SectorsGrid",
+      "currentComponent": "components/overview/SectorsGrid.tsx",
+      "exports": ["SectorsGrid"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/SectorsGrid#sector-summary-grid",
+          "name": "sector-summary-grid",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/grants.ts", "data/investments.ts", "data/overview.ts", "data/trade.ts"],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "6ca0f24e73aadb75cba2f6cb2c7adc8e0a6f8896b2e58e0f65b5ed3d7794232f"
+    },
+    {
+      "id": "visual:components/overview/TodayDecisionStrip",
+      "currentComponent": "components/overview/TodayDecisionStrip.tsx",
+      "exports": ["TodayDecisionStrip"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/TodayDecisionStrip#today-decision-strip",
+          "name": "today-decision-strip",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/agreements.ts",
+        "data/events.ts",
+        "data/executive.ts",
+        "data/external-data.ts",
+        "data/grants.ts",
+        "data/investments.ts",
+        "data/news.ts",
+        "data/relationship-pillars.ts",
+        "data/roadmaps.ts",
+        "data/sources.ts",
+        "data/visits.ts"
+      ],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "accessible-equivalent-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "d20b5a6459201dc35ac0518425dfd3c8e798e14167ce83d48255c5351b112bcc"
+    },
+    {
+      "id": "visual:components/overview/TradeFlowEditorial",
+      "currentComponent": "components/overview/TradeFlowEditorial.tsx",
+      "exports": ["TradeFlowEditorial"],
+      "exhibits": [
+        {
+          "id": "visual:components/overview/TradeFlowEditorial#TradeFlowEditorial",
+          "name": "TradeFlowEditorial",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": [],
+      "targetV2Location": "/[locale]",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "7e5380f059fa415281ced7a666d0838caade94359f0f6b5e97aa7814d10c2b64"
+    },
+    {
+      "id": "visual:components/roadmaps/RoadmapsExplorer",
+      "currentComponent": "components/roadmaps/RoadmapsExplorer.tsx",
+      "exports": ["RoadmapsExplorer"],
+      "exhibits": [
+        {
+          "id": "visual:components/roadmaps/RoadmapsExplorer#regional-roadmap-explorer",
+          "name": "regional-roadmap-explorer",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/roadmaps/RoadmapsExplorer#roadmap-step-register",
+          "name": "roadmap-step-register",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/events.ts",
+        "data/investments.ts",
+        "data/roadmaps.ts",
+        "data/sources.ts",
+        "data/trade.ts",
+        "data/visit-prep.ts"
+      ],
+      "decisionQuestion": "Which delivery steps are complete, due, blocked, or overdue?",
+      "valueProvided": "Which delivery steps are complete, due, blocked, or overdue?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/roadmaps"],
+      "targetV2Location": "/[locale]/roadmaps",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "63606b1225948d83e89431f876b2517439e42d57973de96332c70c2c4864b929"
+    },
+    {
+      "id": "visual:components/roadmaps/StepUpdateForm",
+      "currentComponent": "components/roadmaps/StepUpdateForm.tsx",
+      "exports": ["StepUpdateForm"],
+      "exhibits": [
+        {
+          "id": "visual:components/roadmaps/StepUpdateForm#StepUpdateForm",
+          "name": "StepUpdateForm",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/roadmaps.ts"],
+      "decisionQuestion": "Which delivery steps are complete, due, blocked, or overdue?",
+      "valueProvided": "Which delivery steps are complete, due, blocked, or overdue?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/roadmaps"],
+      "targetV2Location": "/[locale]/roadmaps",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "c1673f431daf2f3143197dc677723d8a55238bb4b98f890833d96f6a8a79f40a"
+    },
+    {
+      "id": "visual:components/sectors/SectorsView",
+      "currentComponent": "components/sectors/SectorsView.tsx",
+      "exports": ["SectorsView"],
+      "exhibits": [
+        {
+          "id": "visual:components/sectors/SectorsView#sector-opportunity-matrix",
+          "name": "sector-opportunity-matrix",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/sectors/SectorsView#sector-analysis-cards",
+          "name": "sector-analysis-cards",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sectors.ts", "data/sources.ts"],
+      "decisionQuestion": "What executive signal does this exhibit preserve?",
+      "valueProvided": "What executive signal does this exhibit preserve?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/investments"],
+      "targetV2Location": "/[locale]/investments#sector-analysis",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "0bf26922c557d7a213f9c502add94e4b613f9cd17c5512f8faf7d1173c52279b"
+    },
+    {
+      "id": "visual:components/trade/AdvancedTradeAnalysis",
+      "currentComponent": "components/trade/AdvancedTradeAnalysis.tsx",
+      "exports": ["AdvancedTradeAnalysis"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/AdvancedTradeAnalysis#AdvancedTradeAnalysis",
+          "name": "AdvancedTradeAnalysis",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/comtrade-hs2.ts",
+        "data/comtrade-hs6.ts",
+        "data/comtrade-meta.ts",
+        "data/comtrade-mirror.ts",
+        "data/comtrade-trends.ts",
+        "data/comtrade-types.ts",
+        "data/sources.ts",
+        "data/trade-services.ts",
+        "data/trade.ts",
+        "data/trademap-products.ts"
+      ],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "d641c67c63ba0ba5915de7b2fc4b8e45387d564ea4002175644949c486bad7dd"
+    },
+    {
+      "id": "visual:components/trade/ComtradeTrendSparklines",
+      "currentComponent": "components/trade/ComtradeTrendSparklines.tsx",
+      "exports": ["ComtradeTrendSparklines"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/ComtradeTrendSparklines#ComtradeTrendSparklines",
+          "name": "ComtradeTrendSparklines",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/comtrade-meta.ts", "data/comtrade-trends.ts", "data/comtrade-types.ts", "data/sources.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "0ca709d4e33060f5759e3ede751b4615eae9638aaf205494bbe71819ad860b47"
+    },
+    {
+      "id": "visual:components/trade/DualMethodologyChart",
+      "currentComponent": "components/trade/DualMethodologyChart.tsx",
+      "exports": ["DualMethodologyChart"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/DualMethodologyChart#DualMethodologyChart",
+          "name": "DualMethodologyChart",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sources.ts", "data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "4accb7300f74ccf8b7431c31c7ded326889c576de54cccef69d6c153f5deedec"
+    },
+    {
+      "id": "visual:components/trade/Hs2ChapterTreemap",
+      "currentComponent": "components/trade/Hs2ChapterTreemap.tsx",
+      "exports": ["Hs2ChapterTreemap"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/Hs2ChapterTreemap#Hs2ChapterTreemap",
+          "name": "Hs2ChapterTreemap",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/comtrade-hs2.ts", "data/comtrade-meta.ts", "data/comtrade-types.ts", "data/sources.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "9ab05c27e2c595643866d80aa4495e0d3d9b8e308967bfeccff30cfb39662808"
+    },
+    {
+      "id": "visual:components/trade/LazyCharts",
+      "currentComponent": "components/trade/LazyCharts.tsx",
+      "exports": [
+        "LazyComtradeHs6",
+        "LazyComtradeMirror",
+        "LazyComtradeTrendSparklines",
+        "LazyExportStructure",
+        "LazyHs2ChapterTreemap",
+        "LazyImportStructure",
+        "LazyMonthlyTrade",
+        "LazyServicesEbops",
+        "LazyTrademapExhibits",
+        "LazyTrademapProducts"
+      ],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/LazyCharts#LazyComtradeHs6",
+          "name": "LazyComtradeHs6",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyComtradeMirror",
+          "name": "LazyComtradeMirror",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyComtradeTrendSparklines",
+          "name": "LazyComtradeTrendSparklines",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyExportStructure",
+          "name": "LazyExportStructure",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyHs2ChapterTreemap",
+          "name": "LazyHs2ChapterTreemap",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyImportStructure",
+          "name": "LazyImportStructure",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyMonthlyTrade",
+          "name": "LazyMonthlyTrade",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyServicesEbops",
+          "name": "LazyServicesEbops",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyTrademapExhibits",
+          "name": "LazyTrademapExhibits",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/trade/LazyCharts#LazyTrademapProducts",
+          "name": "LazyTrademapProducts",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [
+        "data/comtrade-hs2.ts",
+        "data/comtrade-hs6.ts",
+        "data/comtrade-meta.ts",
+        "data/comtrade-mirror.ts",
+        "data/comtrade-trends.ts",
+        "data/comtrade-types.ts",
+        "data/sources.ts",
+        "data/trade-services.ts",
+        "data/trade.ts",
+        "data/trademap-products.ts"
+      ],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "lazy-or-dynamic-detected",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "52f7398905312bb9d921b809fdea6b00f44df869c6b0c9e8a4872072394cf4bc"
+    },
+    {
+      "id": "visual:components/trade/MonthlyTradeChart",
+      "currentComponent": "components/trade/MonthlyTradeChart.tsx",
+      "exports": ["MonthlyTradeChart"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/MonthlyTradeChart#MonthlyTradeChart",
+          "name": "MonthlyTradeChart",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sources.ts", "data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "ed0ffdbde96ba24ae650d6b9e773154b7e3e4503be0a5bf3cb91b5d97148f889"
+    },
+    {
+      "id": "visual:components/trade/ServicesEbops",
+      "currentComponent": "components/trade/ServicesEbops.tsx",
+      "exports": ["ServicesEbops"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/ServicesEbops#ServicesEbops",
+          "name": "ServicesEbops",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sources.ts", "data/trade-services.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "bilingual-label-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "8f911551f743d547de6413f957265dac6411f5f5fda0650e5c706c8a38813458"
+    },
+    {
+      "id": "visual:components/trade/StructureTreemap",
+      "currentComponent": "components/trade/StructureTreemap.tsx",
+      "exports": ["StructureTreemap"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/StructureTreemap#StructureTreemap",
+          "name": "StructureTreemap",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "bilingual-label-review, source-confidence-treatment-review, eager-heavy-runtime-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "eager-heavy-runtime-review",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "34924a61e1950f883328f3b43d45b98b9644262802045c26ac761307eec4f02e"
+    },
+    {
+      "id": "visual:components/trade/TradeAnnualSummary",
+      "currentComponent": "components/trade/TradeAnnualSummary.tsx",
+      "exports": ["TradeAnnualSummary"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/TradeAnnualSummary#TradeAnnualSummary",
+          "name": "TradeAnnualSummary",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "99304c6a05a088e5562b8668cf40094415a2d5ea1f0d009930e299d34b20e9fc"
+    },
+    {
+      "id": "visual:components/trade/TradeChartDisclosure",
+      "currentComponent": "components/trade/TradeChartDisclosure.tsx",
+      "exports": ["TradeChartDisclosure"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/TradeChartDisclosure#TradeChartDisclosure",
+          "name": "TradeChartDisclosure",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sources.ts", "data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "lazy-or-dynamic-detected",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "04bd30f0ea9ed923acdd83850b75549c8ab69298cedb238babd0f82f5a13c3a9"
+    },
+    {
+      "id": "visual:components/trade/TrademapExhibits",
+      "currentComponent": "components/trade/TrademapExhibits.tsx",
+      "exports": ["TrademapExhibits"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/TrademapExhibits#TrademapExhibits",
+          "name": "TrademapExhibits",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": [],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "no-static-blocker-detected",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "low-static-review",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "not-applicable-or-manual-review",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "e47994679281600b6028205aed5385671ff412da4f7f4ab8dc87886ead5f0423"
+    },
+    {
+      "id": "visual:components/trade/TrademapProducts",
+      "currentComponent": "components/trade/TrademapProducts.tsx",
+      "exports": ["TrademapProducts"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/TrademapProducts#TrademapProducts",
+          "name": "TrademapProducts",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sources.ts", "data/trademap-products.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "bilingual-label-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade#advanced-analysis",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "c311e88a7c3717312a9ba0af8b61aa435947c4f84f1304429d4fc5c1798bbd71"
+    },
+    {
+      "id": "visual:components/trade/TradeTable",
+      "currentComponent": "components/trade/TradeTable.tsx",
+      "exports": ["TradeTable"],
+      "exhibits": [
+        {
+          "id": "visual:components/trade/TradeTable#TradeTable",
+          "name": "TradeTable",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/trade.ts"],
+      "decisionQuestion": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "valueProvided": "How are bilateral trade flows changing, and which products or methods explain the movement?",
+      "currentProblem": "source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/trade"],
+      "targetV2Location": "/[locale]/trade",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "text-or-semantic-equivalent-detected",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "a513da201f12fa6d7a162dcbc0069f78edda32c2b8ea77905223f69b1ea29225"
+    },
+    {
+      "id": "visual:components/visits/VisitsTabs",
+      "currentComponent": "components/visits/VisitsTabs.tsx",
+      "exports": ["VisitsTabs"],
+      "exhibits": [
+        {
+          "id": "visual:components/visits/VisitsTabs#visits-timeline",
+          "name": "visits-timeline",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/visits/VisitsTabs#visits-grid",
+          "name": "visits-grid",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        },
+        {
+          "id": "visual:components/visits/VisitsTabs#visits-calendar",
+          "name": "visits-calendar",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/events.ts", "data/sources.ts", "data/visits.ts"],
+      "decisionQuestion": "What is the bilateral engagement sequence and what requires preparation?",
+      "valueProvided": "What is the bilateral engagement sequence and what requires preparation?",
+      "currentProblem": "accessible-equivalent-review, source-confidence-treatment-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/visits"],
+      "targetV2Location": "/[locale]/visits",
+      "sourceConfidenceTreatment": "manual-review-required",
+      "bilingualLabels": "locale-contract-detected",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "e564770284609a3aa7414b6d60be1676c0145bccadcbb964ab8218a725eca239"
+    },
+    {
+      "id": "visual:components/visits/VisitsTimeline",
+      "currentComponent": "components/visits/VisitsTimeline.tsx",
+      "exports": ["VisitsTimeline"],
+      "exhibits": [
+        {
+          "id": "visual:components/visits/VisitsTimeline#VisitsTimeline",
+          "name": "VisitsTimeline",
+          "parityApproval": "pending-owner-review",
+          "recommendation": "keep-pending-parity-review"
+        }
+      ],
+      "dataInputs": ["data/sources.ts", "data/visits.ts"],
+      "decisionQuestion": "What is the bilateral engagement sequence and what requires preparation?",
+      "valueProvided": "What is the bilateral engagement sequence and what requires preparation?",
+      "currentProblem": "accessible-equivalent-review, bilingual-label-review",
+      "whatRemainsPreserved": "Component implementation, typed data relationships, current route access, and visible source/demo treatment.",
+      "migrationRisk": "medium-owner-review-required",
+      "confidenceLevel": "medium-static-analysis",
+      "audience": ["executive", "analyst"],
+      "currentRoutes": ["/[locale]/visits"],
+      "targetV2Location": "/[locale]/visits",
+      "sourceConfidenceTreatment": "visible-treatment-detected",
+      "bilingualLabels": "manual-review-required",
+      "accessibleEquivalent": "manual-review-required",
+      "performanceStrategy": "standard-bundle",
+      "parityApproval": "pending-owner-review",
+      "recommendation": "keep-pending-parity-review",
+      "contentHash": "fb39b5608f18457a38253a2f02a2188036d8ea8b75d00f818fc9fb6f559a97d0"
+    }
+  ],
+  "integrity": {
+    "algorithm": "sha256",
+    "contentHash": "c282e060d13bee210fc62e426c68bed9a6256e0809a7b23cca506a64509953a2"
+  }
+}

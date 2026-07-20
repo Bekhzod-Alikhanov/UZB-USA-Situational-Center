@@ -6,15 +6,15 @@ const chromePath = chromium.executablePath();
 
 if (!existsSync(chromePath)) {
   console.error(`Playwright Chromium was not found at ${chromePath}.`);
-  console.error("Run `pnpm exec playwright install chromium` before running `pnpm lhci`.");
+  console.error("Run `corepack pnpm exec playwright install chromium` before running `corepack pnpm lhci`.");
   process.exit(1);
 }
 
-const command = process.platform === "win32" ? "cmd.exe" : "pnpm";
+const command = process.platform === "win32" ? "cmd.exe" : "corepack";
 const args =
   process.platform === "win32"
-    ? ["/d", "/s", "/c", "pnpm exec lhci autorun --config=lhci.config.cjs"]
-    : ["exec", "lhci", "autorun", "--config=lhci.config.cjs"];
+    ? ["/d", "/s", "/c", "corepack pnpm exec lhci autorun --config=lhci.config.cjs"]
+    : ["pnpm", "exec", "lhci", "autorun", "--config=lhci.config.cjs"];
 
 const child = spawn(command, args, {
   env: {

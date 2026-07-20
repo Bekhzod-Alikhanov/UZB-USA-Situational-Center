@@ -23,6 +23,7 @@ import { TradeFlowChart } from "@/components/charts/TradeFlowChart";
 import { LazyMonthlyTrade, LazyExportStructure, LazyImportStructure } from "@/components/trade/LazyCharts";
 import { topExportCategoriesUZ, topImportCategoriesUS, tradeMeta } from "@/data/trade";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -33,20 +34,25 @@ export default async function TradePage({ params }: { params: Promise<{ locale: 
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("trade");
+  const tPublic = await getTranslations("publicPage");
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">{t("subtitle")}</p>
-        </div>
-        <div className="text-right text-[11px] text-[var(--color-ink-muted)]">
-          <div>{t("source")}</div>
-          <div className="mono">
-            {t("updated")} {tradeMeta.last_updated}
-          </div>
-        </div>
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="trade"
+        icon={<TrendingUp className="size-6 sm:size-7" />}
+        meta={
+          <>
+            <span className="mono tabular">
+              {t("updated")} {tradeMeta.last_updated}
+            </span>
+            <SourceBadge sourceId="input_trade_stat_docx" />
+            <SourceBadge sourceId="census_goods_uz" />
+          </>
+        }
+      />
 
       <Card tone="trade">
         <CardHeader

@@ -7,8 +7,9 @@ const failOnFindings = process.argv.includes("--fail-on-findings");
 const baseUrlArg = process.argv.find((arg) => arg.startsWith("--base-url="));
 const baseUrl = (baseUrlArg?.slice("--base-url=".length) || process.env.I18N_BASE_URL || "").replace(/\/$/, "");
 
-const locales = ["en", "ru", "uz-latn"];
-const nonEnglishLocales = ["ru", "uz-latn"];
+const locales = ["en", "uz-latn"];
+const nonEnglishLocales = ["uz-latn"];
+const archivedLocales = ["ru"];
 
 const findings = [];
 
@@ -27,6 +28,30 @@ function flattenKeys(value, prefix = "") {
 
 function loadMessages(locale) {
   return Object.fromEntries(flattenKeys(JSON.parse(read(`messages/${locale}.json`))).filter(([key]) => Boolean(key)));
+}
+
+function auditArchivedLocaleBundles() {
+  for (const locale of archivedLocales) {
+    try {
+      const messages = loadMessages(locale);
+      if (!Object.keys(messages).length) {
+        addFinding({
+          severity: "error",
+          area: "archive",
+          file: `messages/${locale}.json`,
+          message: "Archived locale bundle is empty.",
+        });
+      }
+    } catch (error) {
+      addFinding({
+        severity: "error",
+        area: "archive",
+        file: `messages/${locale}.json`,
+        message: "Archived locale bundle is missing or invalid JSON.",
+        evidence: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
 }
 
 function auditMessageParity() {
@@ -185,6 +210,7 @@ async function auditRenderedRoutes() {
     "roadmaps",
     "compliance",
     "grants",
+    "sources",
     "admin/login",
   ];
 
@@ -232,7 +258,7 @@ async function auditRenderedRoutes() {
 
       const visibleHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
       const ruHits = russianShellPatterns.filter((pattern) => visibleHtml.includes(pattern));
-      if (locale !== "ru" && ruHits.length) {
+      if (ruHits.length) {
         addFinding({
           severity: "error",
           area: "rendered-route",
@@ -279,6 +305,7 @@ function printSummary() {
 }
 
 auditMessageParity();
+auditArchivedLocaleBundles();
 auditSourceHotspots();
 await auditRenderedRoutes();
 printSummary();

@@ -1,12 +1,11 @@
 const baseUrl = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, "");
-const locales = ["en", "ru", "uz-latn"];
+const locales = ["en", "uz-latn"];
 // "/brief" and "/commitments" are intentionally absent: they are
 // permanentRedirect stubs (this fetch does not follow redirects); the e2e
 // suite covers both redirects. "/prepare" is password-gated and checked as a
 // redirect below, next to /admin.
 const routes = [
   "",
-  "overview",
   "trade",
   "visits",
   "roadmaps",
@@ -17,6 +16,7 @@ const routes = [
   "contacts",
   "compliance",
   "benchmark",
+  "sources",
   "admin/login",
 ];
 
@@ -29,13 +29,38 @@ async function checkGet(pathname, expected = [200]) {
   }
 }
 
+async function checkLegacyRussianRedirect(pathname, expectedPathAndQuery) {
+  const response = await fetch(`${baseUrl}${pathname}`, { redirect: "manual" });
+  if (response.status !== 308) {
+    failures.push(`${pathname}: expected permanent redirect 308 but received ${response.status}`);
+    return;
+  }
+
+  const location = response.headers.get("location");
+  if (!location) {
+    failures.push(`${pathname}: redirect did not include a Location header`);
+    return;
+  }
+
+  const redirectUrl = new URL(location, baseUrl);
+  if (`${redirectUrl.pathname}${redirectUrl.search}` !== expectedPathAndQuery) {
+    failures.push(
+      `${pathname}: expected redirect to ${expectedPathAndQuery} but received ${redirectUrl.pathname}${redirectUrl.search}`,
+    );
+  }
+}
+
 for (const locale of locales) {
   for (const route of routes) {
     await checkGet(`/${locale}${route ? `/${route}` : ""}`);
   }
   await checkGet(`/${locale}/admin`, [302, 303, 307, 308]);
   await checkGet(`/${locale}/prepare`, [302, 303, 307, 308]);
+  await checkGet(`/${locale}/overview`, [308]);
 }
+
+await checkLegacyRussianRedirect("/ru", "/uz-latn");
+await checkLegacyRussianRedirect("/ru/trade?period=2024&flow=exports", "/uz-latn/trade?period=2024&flow=exports");
 
 const liveHealth = await fetch(`${baseUrl}/api/live-data/health`, { redirect: "manual" });
 if (liveHealth.status !== 200) {
@@ -48,6 +73,10 @@ for (const endpoint of [
   "/api/data/assistance/latest",
   "/api/data/mobility/latest",
   "/api/data/finance/latest",
+  "/api/v1/public/executive",
+  "/api/v1/public/trade",
+  "/api/v1/public/investments",
+  "/api/v1/public/roadmaps",
 ]) {
   const response = await fetch(`${baseUrl}${endpoint}`, { redirect: "manual" });
   if (response.status !== 200) {
@@ -67,5 +96,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Route smoke test passed for ${locales.length * (routes.length + 1)} localized route checks plus API health/data/cron checks against ${baseUrl}.`,
+  `Route smoke test passed for ${locales.length * (routes.length + 1)} localized route checks, 2 Russian redirect checks, plus API health/data/cron checks against ${baseUrl}.`,
 );

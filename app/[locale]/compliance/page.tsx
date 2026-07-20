@@ -5,6 +5,7 @@ import { ExportCalculator } from "@/components/compliance/ExportCalculator";
 import { complianceStatuses, eccnSamples } from "@/data/compliance";
 import { ExternalLink, ShieldCheck } from "lucide-react";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -15,13 +16,17 @@ export default async function CompliancePage({ params }: { params: Promise<{ loc
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("compliance");
+  const tPublic = await getTranslations("publicPage");
 
   return (
     <div className="flex flex-col gap-5">
-      <div>
-        <h1 className="section-title">{t("title")}</h1>
-        <p className="section-sub">{t("subtitle")}</p>
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="slate"
+        icon={<ShieldCheck className="size-6 sm:size-7" />}
+      />
 
       <Card>
         <CardHeader

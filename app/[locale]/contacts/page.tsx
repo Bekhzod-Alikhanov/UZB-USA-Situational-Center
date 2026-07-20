@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { UsersRound } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { ContactsView } from "@/components/contacts/ContactsView";
 import { CounterpartsGrid } from "@/components/counterparts/CounterpartsGrid";
 import { contacts } from "@/data/contacts";
 import { counterparts } from "@/data/counterparts";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
+import { Stat } from "@/components/ui/Stat";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -24,27 +27,27 @@ export default async function ContactsPage({
   const q = String(sp.q ?? "");
   setRequestLocale(locale);
   const t = await getTranslations("contacts");
+  const tPublic = await getTranslations("publicPage");
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">{t("subtitle")}</p>
-        </div>
-        <div className="hidden items-center gap-4 text-right text-[11px] text-[var(--color-ink-muted)] md:flex">
-          <div className="flex flex-col items-end">
-            <span className="mono text-[10px] uppercase tracking-wider opacity-70">{t("stats.organizations")}</span>
-            <span className="mono text-[15px] font-medium tabular text-[var(--color-ink)]">{contacts.length}</span>
-          </div>
-          <div className="flex flex-col items-end">
-            <span className="mono text-[10px] uppercase tracking-wider opacity-70">{t("stats.staff")}</span>
-            <span className="mono text-[15px] font-medium tabular text-[var(--color-primary)]">
-              {contacts.reduce((a, c) => a + (c.people?.length ?? 0), 0)}
-            </span>
-          </div>
-        </div>
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="people"
+        icon={<UsersRound className="size-6 sm:size-7" />}
+        stats={
+          <>
+            <Stat label={t("stats.organizations")} value={contacts.length} />
+            <Stat
+              label={t("stats.staff")}
+              value={contacts.reduce((a, c) => a + (c.people?.length ?? 0), 0)}
+              tone="primary"
+            />
+          </>
+        }
+      />
 
       <Card>
         <CardHeader title={t("card.title")} sub={t("card.sub")} />

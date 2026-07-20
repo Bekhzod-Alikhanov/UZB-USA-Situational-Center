@@ -86,8 +86,8 @@ export function CardHeader({
           </span>
         ) : null}
         <div className="min-w-0">
-          <div className="truncate text-[13.5px] font-semibold tracking-tight text-[var(--color-ink)]">{title}</div>
-          {sub ? <div className="mt-0.5 text-[11.5px] text-[var(--color-ink-muted)]">{sub}</div> : null}
+          <div className="text-[15px] font-semibold leading-snug tracking-tight text-[var(--color-ink)]">{title}</div>
+          {sub ? <div className="mt-0.5 text-[12.5px] leading-relaxed text-[var(--color-ink-muted)]">{sub}</div> : null}
         </div>
       </div>
       {right ? <div className="shrink-0">{right}</div> : null}

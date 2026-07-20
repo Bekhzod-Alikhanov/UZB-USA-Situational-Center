@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  // Keep tracing and Turbopack resolution inside this pnpm workspace. A
+  // user-level package-lock.json must never redefine the application root.
+  turbopack: {
+    root: process.cwd(),
+  },
   // Next.js 16: typedRoutes promoted out of experimental.
   typedRoutes: false,
   experimental: {

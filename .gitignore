@@ -64,6 +64,8 @@ lh-*.html
 # Local server test logs
 dev-server.*.log
 route-test-server.*.log
+.next-server.*.log
+api-v1-server.*.log
 
 # QA tool outputs
 /playwright-report/

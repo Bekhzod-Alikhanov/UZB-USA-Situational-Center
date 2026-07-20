@@ -56,3 +56,43 @@ The following are sourced from attached inputs but require primary source confir
 1. Every new `is_demo: true` flag added to a `data/*.ts` file MUST add a row here.
 2. Every value upgraded from demo to source-traced MUST move to the "No longer demo" section.
 3. The auditable view of this registry is `data/demo-registry.ts` (typed, used in the Admin UI).
+
+<!-- BEGIN GENERATED DEMO COVERAGE -->
+
+## Generated demo and confidence coverage
+
+Baseline `legacy-2026-07-09` contains **80** explicit `is_demo: true` flags and **232** explicit `is_demo: false` flags. These counts include nested workflow rows and metadata so that hidden demo content cannot silently disappear from governance review.
+
+| Module                                     | Demo true | Demo false | Explicit confidence / visibility labels  | Source IDs | SHA-256      |
+| ------------------------------------------ | --------: | ---------: | ---------------------------------------- | ---------: | ------------ |
+| `data/agreements.ts`                       |        10 |         17 | No explicit labels                       |         10 | 3ce70847115b |
+| `data/benchmark.ts`                        |         0 |          7 | No explicit labels                       |          1 | 74560cecead7 |
+| `data/center-milestones.ts`                |         0 |         13 | No explicit labels                       |          1 | fb1f9619a9b8 |
+| `data/compliance.ts`                       |         1 |          7 | No explicit labels                       |          0 | 96cdfb79fe31 |
+| `data/comtrade-meta.ts`                    |         0 |          1 | No explicit labels                       |          0 | b53dea5a3b3b |
+| `data/contacts.ts`                         |         0 |         37 | No explicit labels                       |          6 | 026a098e696b |
+| `data/counterparts.ts`                     |         0 |         20 | No explicit labels                       |          3 | 0ce3fe386402 |
+| `data/delegations.ts`                      |         3 |          0 | No explicit labels                       |          0 | 3bc3d47ed774 |
+| `data/events.ts`                           |         1 |          9 | No explicit labels                       |          4 | 978e8e4742ed |
+| `data/foreign-assistance.ts`               |         0 |          4 | No explicit labels                       |          0 | 75533f5e9552 |
+| `data/grants.ts`                           |         0 |         12 | No explicit labels                       |          4 | 6729a586ba51 |
+| `data/investments.ts`                      |        36 |         10 | No explicit labels                       |          3 | 78f42e4e6ca0 |
+| `data/news.ts`                             |         0 |          6 | No explicit labels                       |          6 | 2283b86f54c5 |
+| `data/regions.ts`                          |         0 |         14 | No explicit labels                       |          0 | b338765a15bd |
+| `data/restored/_source-pre-2025-visits.ts` |         0 |         20 | No explicit labels                       |          9 | f66d6d8bd96a |
+| `data/restored/_source-pre-2026-events.ts` |         0 |          8 | No explicit labels                       |          5 | c2c05aeef02f |
+| `data/restored/quarantine.ts`              |         0 |          0 | internal_unverified: 2, source_needed: 1 |          0 | 474b9108a7d2 |
+| `data/roadmaps.ts`                         |         0 |         14 | No explicit labels                       |          0 | e840c8045ca3 |
+| `data/sectors.ts`                          |         0 |          1 | No explicit labels                       |          4 | c2ba6fa2eca2 |
+| `data/trade-services.ts`                   |         0 |          1 | No explicit labels                       |          0 | f92f5373d482 |
+| `data/trade.ts`                            |         0 |          4 | No explicit labels                       |          5 | 4cc261a08b19 |
+| `data/trademap-products.ts`                |         0 |          1 | No explicit labels                       |          0 | d56b5ee92304 |
+| `data/us-states.ts`                        |         0 |          1 | No explicit labels                       |          0 | 109e18c73b31 |
+| `data/uz-missions-us.ts`                   |         0 |          7 | No explicit labels                       |          0 | 81482963840a |
+| `data/uz-planned-visits-us.ts`             |         6 |          2 | No explicit labels                       |          0 | e12dff56131b |
+| `data/visit-prep.ts`                       |        23 |          2 | No explicit labels                       |          3 | c534455b981f |
+| `data/visits.ts`                           |         0 |         14 | No explicit labels                       |          1 | 494422ed7da3 |
+
+> This generated coverage supplements the owner/status registry above. It does not upgrade confidence, validate a claim, or authorize a demo row for official totals.
+
+<!-- END GENERATED DEMO COVERAGE -->

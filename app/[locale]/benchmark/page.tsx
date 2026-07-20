@@ -1,11 +1,13 @@
 ﻿import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Gauge } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { BenchmarkView } from "@/components/benchmark/BenchmarkView";
 import { PrintButton } from "@/components/exports/PrintButton";
 import { SourceBadge } from "@/components/demo-markers/SourceBadge";
 import { benchmarkMeta } from "@/data/benchmark";
 import { getRouteSeo } from "@/lib/seo";
+import { PublicPageIntro } from "@/components/layout/PublicPageIntro";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -16,16 +18,19 @@ export default async function BenchmarkPage({ params }: { params: Promise<{ loca
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "benchmarkPage" });
+  const tPublic = await getTranslations({ locale, namespace: "publicPage" });
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">{t("title")}</h1>
-          <p className="section-sub">{t("subtitle")}</p>
-        </div>
-        <PrintButton label={t("print")} />
-      </div>
+      <PublicPageIntro
+        eyebrow={tPublic("intelligenceBrief")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="slate"
+        icon={<Gauge className="size-6 sm:size-7" />}
+        actions={<PrintButton label={t("print")} />}
+        meta={<SourceBadge sourceId="worldbank_data" />}
+      />
 
       <Card>
         <CardHeader

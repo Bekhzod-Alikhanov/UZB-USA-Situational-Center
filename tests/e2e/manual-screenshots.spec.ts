@@ -5,19 +5,14 @@ import path from "node:path";
 const outDir = path.join("test-results", "manual-screenshots");
 const routes: Array<[string, string]> = [
   ["en", ""],
-  ["ru", ""],
   ["uz-latn", ""],
   ["en", "trade"],
-  ["ru", "trade"],
   ["uz-latn", "trade"],
   ["en", "investments"],
-  ["ru", "investments"],
   ["uz-latn", "investments"],
   ["en", "map"],
-  ["ru", "map"],
   ["uz-latn", "map"],
   ["en", "benchmark"],
-  ["ru", "benchmark"],
   ["uz-latn", "benchmark"],
 ];
 

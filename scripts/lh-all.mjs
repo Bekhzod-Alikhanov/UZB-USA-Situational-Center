@@ -6,7 +6,6 @@ import fs from "node:fs";
 
 const routes = [
   "",
-  "overview",
   "trade",
   "visits",
   "roadmaps",
@@ -17,6 +16,7 @@ const routes = [
   "contacts",
   "compliance",
   "benchmark",
+  "sources",
 ];
 
 const BASE = process.env.LH_BASE || "http://localhost:3100/en";

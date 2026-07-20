@@ -55,8 +55,9 @@ describe("gate roles (stage 2)", () => {
     expect(await verifyGateSessionToken(old)).toBeNull();
   });
 
-  it("keeps /prepare a valid post-login target but never login itself", () => {
+  it("keeps authenticated workspaces as valid post-login targets but never login itself", () => {
     expect(isSafeAdminRedirect("/ru/prepare", "ru")).toBe(true);
+    expect(isSafeAdminRedirect("/ru/today", "ru")).toBe(true);
     expect(isSafeAdminRedirect("/ru/admin", "ru")).toBe(true);
     expect(isSafeAdminRedirect("/ru/admin/login", "ru")).toBe(false);
     expect(isSafeAdminRedirect("/ru/roadmaps", "ru")).toBe(false);

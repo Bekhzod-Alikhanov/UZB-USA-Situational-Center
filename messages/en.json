@@ -1,4 +1,7 @@
 {
+  "publicPage": {
+    "intelligenceBrief": "Bilateral intelligence brief"
+  },
   "brief": {
     "intro": {
       "title": "Uzbekistan — United States",
@@ -102,6 +105,9 @@
       "overdue": "Overdue",
       "dueSoon": "Due soon",
       "due": "due {date}",
+      "overdueCount": "{count, plural, one {# overdue roadmap task} other {# overdue roadmap tasks}}",
+      "dueSoonCount": "{count, plural, one {# roadmap task due soon} other {# roadmap tasks due soon}}",
+      "earliestDue": "Earliest deadline · {date}",
       "allGreen": "All roadmap tasks are tracking green."
     },
     "agreementsChart": {
@@ -120,6 +126,10 @@
       "print": "Export PDF",
       "methodologies": "UZ national statistics · U.S. Census Bureau · MFA registry"
     },
+    "analysis": {
+      "title": "Supporting analysis",
+      "summary": "Investment sectors, delivery attention and the bilateral legal base"
+    },
     "openDetail": "Open section",
     "execution": {
       "title": "Roadmap execution",
@@ -137,7 +147,7 @@
     "full": "Situational Center on cooperation of the Republic of Uzbekistan with the United States of America"
   },
   "nav": {
-    "overview": "Executive Brief",
+    "overview": "Overview",
     "trade": "Trade & Economic Flows",
     "investments": "Investment & Privatization",
     "visits": "Visits & delegations",
@@ -150,7 +160,8 @@
     "contacts": "Contacts",
     "admin": "Admin",
     "brief": "Brief",
-    "roadmaps": "Regional roadmaps"
+    "roadmaps": "Regional roadmaps",
+    "sources": "Sources & methodology"
   },
   "navGroups": {
     "executive": "Executive brief",
@@ -265,6 +276,10 @@
       "roadmaps": {
         "title": "Regional Roadmaps",
         "description": "Execution monitor for the signed Samarkand and Khorezm investment roadmaps: 61 projects, document deadlines, responsible officials, derived health."
+      },
+      "sources": {
+        "title": "Sources & Methodology",
+        "description": "Governed source registry, publication standards, confidence labels, trade-methodology boundaries, and quote-safe evidence rules."
       }
     }
   },
@@ -523,6 +538,15 @@
   "agreements": {
     "title": "Bilateral agreements",
     "subtitle": "138 base documents + 16 investment agreements",
+    "overview": {
+      "aggregateTitle": "Agreement portfolio",
+      "aggregateSub": "Distribution by category and signature year",
+      "registryTitle": "Agreement registry",
+      "registrySub": "Filter by category and sphere, or search by title",
+      "sourceOwner": "Ministry of Foreign Affairs of the Republic of Uzbekistan",
+      "sourceAvailability": "Full texts available on request through the MFA registry",
+      "sourceAnchors": "Uzbekistan legal anchors"
+    },
     "categories": {
       "all": "All categories",
       "interstate": "Interstate",
@@ -1031,6 +1055,483 @@
       "ago": "{days}d ago"
     },
     "linkedVisit": "Linked visit"
+  },
+  "today": {
+    "meta": {
+      "title": "Today | UZ-US Control Room",
+      "description": "Executive decisions, delivery risks, visit readiness, and verified bilateral indicators."
+    },
+    "skip": "Skip to executive priorities",
+    "brandAria": "Uzbekistan–United States Situational Center",
+    "brand": "Uzbekistan — United States",
+    "center": "Situational Center",
+    "title": "Situation Ribbon",
+    "dataState": "Static fallback · as of {date}",
+    "openBrief": "Open morning brief",
+    "languageNav": "Language",
+    "ribbon": {
+      "since": "Since last brief",
+      "today": "Today",
+      "next": "Next 7 days"
+    },
+    "owner": "Owner",
+    "due": "Due",
+    "evidence": "Evidence",
+    "status": "Status",
+    "notApplicable": "—",
+    "notSet": "Not set",
+    "sourceNeeded": "Source needed",
+    "sourceRegister": "Register",
+    "verified": "Verified",
+    "verifiedOfficial": "Verified official",
+    "informed": "Informed",
+    "pendingReview": "Review",
+    "actionNeeded": "Act now",
+    "overdue": "Overdue",
+    "pending": "Pending",
+    "inReview": "In review",
+    "demoSourceNeeded": "Demo / source-needed",
+    "owners": {
+      "dataDesk": "Data Desk",
+      "roadmapRegister": "Registry"
+    },
+    "updates": {
+      "trade": {
+        "title": "Trade turnover {year} published",
+        "detail": "External trade with the USA was ${value}M, down {yoy}% year over year."
+      },
+      "investment": {
+        "title": "U.S. investment verification update",
+        "detail": "Verified U.S. investment is ${verified}B; ${pending}M remains pending verification."
+      },
+      "roadmap": {
+        "title": "Roadmap tasks require attention",
+        "detail": "{count, plural, one {# task is} other {# tasks are}} overdue across the Samarkand and Khorezm roadmaps."
+      }
+    },
+    "actions": {
+      "roadmaps": {
+        "title": "Escalate overdue tasks",
+        "detail": "{count, plural, one {# task is overdue} other {# tasks are overdue}} across the two signed roadmaps."
+      },
+      "investment": {
+        "title": "Review investment verification",
+        "detail": "Review ${value}M kept outside the verified official total."
+      },
+      "platform": {
+        "title": "Approve platform improvement package",
+        "detail": "Refine indicators and close pilot data gaps."
+      }
+    },
+    "leadership": {
+      "title": "Leadership attention",
+      "subtitle": "Top actions requiring a decision, intervention, or accountable follow-up",
+      "viewAll": "View all actions"
+    },
+    "readiness": {
+      "title": "Visit evidence readiness",
+      "subtitle": "Samarkand and Khorezm missions to the USA · May 2026",
+      "agenda": "Agenda",
+      "previewOnly": "Preview only",
+      "entries": "{count, plural, one {# entry} other {# entries}}",
+      "materials": "Materials",
+      "verified": "Verified",
+      "artifacts": "{count, plural, one {# artifact} other {# artifacts}}",
+      "approvals": "Approvals",
+      "risks": "Risks",
+      "unavailable": "Unavailable",
+      "openWorkspace": "Open visit workspace"
+    },
+    "baseline": {
+      "title": "Executive baseline",
+      "trade": "Trade turnover {year}",
+      "yoy": "year over year",
+      "investment": "Verified U.S. investment",
+      "pendingVerification": "pending verification",
+      "delivery": "Delivery",
+      "projects": "projects",
+      "complete": "complete",
+      "overdue": "overdue"
+    },
+    "period": "Period: {value}",
+    "publication": "Publication: {date}",
+    "sources": {
+      "trade": "National Statistics Committee",
+      "investment": "ITA mining guide",
+      "roadmaps": "Signed regional roadmaps"
+    },
+    "openIntelligence": "Open intelligence",
+    "governanceShort": "Quote-safe totals include verified official records only.",
+    "governanceNote": "Official headline totals exclude illustrative, internal-unverified, media-reported, and source-needed records. Visit readiness remains visibly marked until approved source records are supplied.",
+    "mobileNav": {
+      "label": "Control room navigation",
+      "today": "Today",
+      "visits": "Visits",
+      "delivery": "Delivery",
+      "explore": "Explore"
+    }
+  },
+  "sourcesPage": {
+    "meta": {
+      "title": "Sources & Methodology | UZ–US Intelligence Platform",
+      "description": "Source registry, confidence framework, publication rules, and methodology for the Uzbekistan–United States intelligence platform."
+    },
+    "hero": {
+      "eyebrow": "Evidence office · public register",
+      "title": "Every number should survive the next question.",
+      "subtitle": "This register shows where the platform’s evidence comes from, how confidence is assigned, and what must be true before a figure can be quoted as official.",
+      "metrics": {
+        "registry": "Registered sources",
+        "public": "Public / external",
+        "attached": "Attached / internal",
+        "latest": "Latest registry fetch"
+      },
+      "standard": {
+        "title": "A source link is the beginning of verification—not the end.",
+        "body": "Quote-safe publication also requires the right period, reporter, method, confidence, review state, and immutable release.",
+        "example": "Example provenance badge. Open public sources lead to the publisher in a new tab."
+      }
+    },
+    "trust": {
+      "eyebrow": "The trust model",
+      "title": "Level describes provenance. Confidence describes use.",
+      "intro": "The registry’s A/B level records how a source enters the platform. It does not, by itself, decide whether a claim is verified or suitable for an executive headline."
+    },
+    "levels": {
+      "b": {
+        "mark": "Level B",
+        "title": "Public or external source",
+        "body": "A published URL or open data endpoint. It may be an official authority, a partner, or a derived reference; the publisher and methodology still require review."
+      },
+      "a": {
+        "mark": "Level A",
+        "title": "Attached or internal source",
+        "body": "A document or workbook supplied to the Center. The public register shows its provenance record, but never exposes the attached file or private evidence path."
+      },
+      "warningTitle": "Important:",
+      "warningBody": "Level B does not automatically mean verified official, and Level A does not automatically mean publishable. Confidence and approval remain separate gates."
+    },
+    "confidence": {
+      "eyebrow": "Confidence vocabulary",
+      "title": "Six labels, no silent upgrades",
+      "intro": "Confidence remains attached to the claim through review, charts, tables, maps, exports, and any later publication release.",
+      "items": {
+        "verifiedOfficial": {
+          "title": "Verified official",
+          "body": "Confirmed against an approved official source and methodology; eligible for quote-safe publication after approval."
+        },
+        "companyConfirmed": {
+          "title": "Company confirmed",
+          "body": "Confirmed by the named company, but not treated as an official government statistic."
+        },
+        "mediaReported": {
+          "title": "Media reported",
+          "body": "Reported by a media source and kept visibly separate from official or company-confirmed claims."
+        },
+        "internalUnverified": {
+          "title": "Internal / unverified",
+          "body": "Useful for internal work, but not cleared for public totals, rankings, or quote-safe briefs."
+        },
+        "sourceNeeded": {
+          "title": "Source needed",
+          "body": "A candidate claim awaiting adequate provenance; it remains quarantined from official publication."
+        },
+        "illustrativeDemo": {
+          "title": "Illustrative demo",
+          "body": "Synthetic or illustrative workflow content used for demonstrations only; never included in official outputs."
+        }
+      }
+    },
+    "publication": {
+      "eyebrow": "Publication boundary",
+      "title": "Three lanes that never blur",
+      "intro": "The public portal is built from approved publication projections. Review material and demonstration records remain in their own governed lanes.",
+      "official": {
+        "kicker": "Published",
+        "title": "Official projection",
+        "body": "Only approved, verified-official claims with source lineage, period, methodology, and no blocking quality flags."
+      },
+      "review": {
+        "kicker": "Held for review",
+        "title": "Evidence workspace",
+        "body": "Company, media, internal, and source-needed claims remain visible to authorized reviewers but outside official headline totals."
+      },
+      "sandbox": {
+        "kicker": "Demonstration only",
+        "title": "Illustrative sandbox",
+        "body": "Demo rows may support interface and workflow testing, but cannot affect KPIs, rankings, map intensity, exports, or alerts."
+      }
+    },
+    "fallback": {
+      "title": "Static fallback is a safety state, not a hidden substitution.",
+      "body": "If a refresh fails, the portal keeps the last approved sealed release. The data mode and stale or degraded state stay visible; missing or invalid values never become zero."
+    },
+    "methodology": {
+      "eyebrow": "Comparison discipline",
+      "title": "Methodology travels with the number.",
+      "body": "Uzbekistan-reporter and United States-reporter trade series answer different reporting questions. They are preserved separately and must not be blended without an approved reconciliation method.",
+      "dimensionsTitle": "Check these dimensions before comparison",
+      "dimensions": {
+        "reporter": {
+          "title": "Reporter",
+          "body": "Which country or institution recorded the transaction?"
+        },
+        "flow": {
+          "title": "Flow direction",
+          "body": "Export, import, turnover, obligation, disbursement, or commitment."
+        },
+        "period": {
+          "title": "Period",
+          "body": "Calendar, fiscal, annual, monthly, cumulative, or point-in-time."
+        },
+        "currency": {
+          "title": "Currency and scale",
+          "body": "Nominal currency, conversion date, and whether units are thousands, millions, or billions."
+        },
+        "valuation": {
+          "title": "Valuation basis",
+          "body": "Customs valuation, announced project value, realized investment, or financing authorization."
+        },
+        "coverage": {
+          "title": "Coverage",
+          "body": "Goods, services, HS classification, EBOPS classification, or another defined universe."
+        }
+      },
+      "warning": "Goods and services, announced values and realized flows, and U.S.-reporter and Uzbekistan-reporter data must remain distinct unless the published methodology explicitly reconciles them."
+    },
+    "registry": {
+      "eyebrow": "Source index",
+      "title": "Search the evidence register",
+      "intro": "Search by publisher, source ID, subject, or registry note. Source titles remain traceable while public descriptors are independently approved in English and Uzbek Latin.",
+      "searchLabel": "Search the source registry",
+      "searchPlaceholder": "Search source, ID, subject, or note…",
+      "filterLabel": "Filter sources by provenance level",
+      "filters": {
+        "all": "All sources",
+        "B": "Level B",
+        "A": "Level A"
+      },
+      "resultCount": "{count, plural, one {# source shown} other {# sources shown}}",
+      "groups": {
+        "B": {
+          "title": "Level B · public and external sources"
+        },
+        "A": {
+          "title": "Level A · attached and internal sources"
+        }
+      },
+      "groupCount": "{count, plural, one {# record} other {# records}}",
+      "showDetail": "Show source coverage",
+      "coverageLabel": "Coverage:",
+      "noteLabel": "Registry note:",
+      "originalMetadata": "Approved public registry metadata is shown for traceability and does not, by itself, confer publication approval.",
+      "metadata": {
+        "census_goods_uz": {
+          "dataType": "Monthly and annual goods trade, USD millions",
+          "note": "Official Census balance table. Components may not equal totals because of rounding."
+        },
+        "ustr_uzbekistan": { "dataType": "Goods and services trade summary", "note": "Official USTR country summary." },
+        "state_history_uz": { "dataType": "Diplomatic recognition and bilateral-relations dates" },
+        "exim_buy_american": {
+          "dataType": "Export-finance framework announcement",
+          "note": "EXIM release dated 10 November 2025."
+        },
+        "dfc_joint_framework": {
+          "dataType": "Heads of Terms and Joint Investment Framework announcement",
+          "note": "DFC release dated 18 February 2026."
+        },
+        "us_uz_gateway": { "dataType": "Council launch, news, and gateway context" },
+        "us_uz_council": { "dataType": "Council members and roles" },
+        "input_roadmap_samarkand_docx": {
+          "dataType": "Hokimiyat-approved roadmap: 48 projects, $1.5B, deadlines, and responsible officials",
+          "note": "The Uzbek Cyrillic source original is preserved verbatim; approved English and Uzbek Latin context is maintained separately."
+        },
+        "input_roadmap_khorezm_docx": {
+          "dataType": "Hokimiyat-approved roadmap: 13 projects, $1.0B, deadlines, and responsible officials",
+          "note": "The Uzbek Cyrillic source original is preserved verbatim; approved English and Uzbek Latin context is maintained separately."
+        },
+        "input_deep_review_docx": {
+          "dataType": "Compiled analytical review with embedded official links",
+          "note": "Principal-supplied analytical review with cross-source citations."
+        },
+        "input_trade_stat_docx": {
+          "dataType": "Uzbekistan-reporter trade series and 2025 export/import structure",
+          "note": "The document identifies the National Statistics Committee as its source."
+        },
+        "input_grants_xlsx": {
+          "dataType": "Seven grant-project records totaling $15.381M",
+          "note": "Workbook title: Grant mablag'larini jalb qilish to'g'risida ma'lumot."
+        },
+        "input_agreements_docx": {
+          "dataType": "Agreement counts by legal type",
+          "note": "Records 138 signed documents: 1 interstate, 71 intergovernmental, 44 interagency, and 22 other."
+        },
+        "input_diplomatic_docx": {
+          "dataType": "Diplomatic chronology, visits, consultations, C5+1, and congressional links"
+        },
+        "input_figma_pdf": {
+          "dataType": "Prototype metrics, project-portfolio status, and visual targets",
+          "note": "Used for portfolio-level figures pending receipt of the underlying project register."
+        },
+        "govuz_business_forum_2025": {
+          "dataType": "Forum indicators: trade, U.S. FDI, enterprises, free economic zones, and priority sectors",
+          "note": "Used to cross-check the June 2025 forum indicators."
+        },
+        "tradegov_market_opportunities": { "dataType": "Priority sectors for trade and investment" },
+        "tradegov_mining_2025": { "dataType": "Mining, critical minerals, and U.S.-linked projects" },
+        "tradegov_agreements": { "dataType": "TIFA and investment-treaty context" },
+        "ustr_wto_2024": {
+          "dataType": "WTO-accession milestone and bilateral market-access negotiations",
+          "note": "Statement dated 19 December 2024."
+        },
+        "usaid_wave": {
+          "dataType": "Regional water and environment activity fact sheet",
+          "note": "Five-year, $21.5M USAID activity covering Central Asia."
+        },
+        "usaid_eras_ii": {
+          "dataType": "Aral Sea restoration project fact sheet",
+          "note": "$1.65M USAID activity in Muynak district, Karakalpakstan."
+        },
+        "govuz_us_visa_free_2026": { "dataType": "30-day visa-free travel for U.S. citizens from 2026" },
+        "govuz_us_tourism_2025": { "dataType": "More than 37,000 U.S. visitors in 2025" },
+        "state_visa_stats": {
+          "dataType": "Monthly and annual immigrant and nonimmigrant visa-issuance reports",
+          "note": "Intended for mobility and education-travel indicators after table-schema review."
+        },
+        "dhs_ohss_nonimmigrant": {
+          "dataType": "Temporary-visitor admissions by class and country; annual flow reports",
+          "note": "Admissions count entries, not unique travelers."
+        },
+        "iie_open_doors": {
+          "dataType": "International student and study-abroad exchange data sponsored by the U.S. Department of State",
+          "note": "Intended for education-diplomacy analysis after country-level table extraction."
+        },
+        "uzbek_embassy_dc": { "dataType": "Embassy address, telephone, and key staff" },
+        "us_embassy_tashkent": { "dataType": "Embassy address, telephone, and key staff" },
+        "aucc_online": { "dataType": "Business-association membership and contact details" },
+        "invest_uzbekistan": { "dataType": "Single-window investment-project intake" },
+        "f4_ordinance_2026": {
+          "dataType": "Center location, staffing, scope, and aggregate counts",
+          "note": "The original signed mandate must be attached before production publication."
+        },
+        "gpd_protocol_2026": {
+          "dataType": "Twelve monthly Project Office deliverables, with deadlines from 15 May 2026 to 15 April 2027",
+          "note": "Annex 1 to the Situational Center civil-law contract."
+        },
+        "cbu_statistics": {
+          "dataType": "Exchange rates, reserves, balance of payments, international investment position, and external debt",
+          "note": "XLSX, PDF, XML, CSV, and JSON formats; daily exchange rates and monthly or quarterly statistics."
+        },
+        "census_intl_trade_api": {
+          "dataType": "Monthly merchandise trade by country and HS code for technical integration",
+          "note": "Companion to the static c4644 balance table, providing programmatic CSV and JSON access."
+        },
+        "bea_developers": {
+          "dataType": "Services-trade and international-transaction datasets supporting USTR's $603M services-trade figure"
+        },
+        "imf_data_api": {
+          "dataType": "SDMX APIs for macroeconomic and financial data; future exchange-rate, balance-of-payments, reserves, and macro context",
+          "note": "The connector is registry-ready; dataset-specific mapping requires approval before publication."
+        },
+        "exim_authorizations_data": {
+          "dataType": "Export-Import Bank authorizations, amounts, export value, country, and transaction metadata",
+          "note": "For export-credit context; this is not the same as realized investment or trade flow."
+        },
+        "exim_cls": {
+          "dataType": "EXIM country-cover status by sector and tenor",
+          "note": "Financing-readiness signal only; availability of cover is not a commitment or approval."
+        },
+        "dfc_active_projects": {
+          "dataType": "Active DFC commitments by country, sector, instrument, and commitment level",
+          "note": "Use follows schema review; DFC country coverage may change quarterly."
+        },
+        "stat_uz": {
+          "dataType": "Official Uzbekistan macroeconomic, trade, investment, demographic, and sector statistics",
+          "note": "Uzbekistan-side source of record; its methodology remains separate from U.S.-side Census and BEA data."
+        },
+        "data_egov_uz": {
+          "dataType": "Official Uzbekistan open-data catalog and machine-readable datasets from state publishers",
+          "note": "Dataset relevance and access requirements must be reviewed before publication."
+        },
+        "state_spd_3_joint": {
+          "dataType": "Strategic Partnership Dialogue chronology and joint statements supporting agreements and visits"
+        },
+        "state_spd_2_joint": { "dataType": "Second Strategic Partnership Dialogue joint statement" },
+        "state_c5_1_2015": { "dataType": "Secretary Kerry's remarks launching the C5+1 ministerial format" },
+        "state_blinken_c5_2023": { "dataType": "Secretary Blinken's Tashkent visit and C5+1 ministerial" },
+        "state_c5_summit_2023": {
+          "dataType": "Joint statement from the C5+1 Heads of State summit on the UN General Assembly margins"
+        },
+        "state_pompeo_c5_2020": { "dataType": "Secretary Pompeo's Tashkent visit and C5+1 foreign ministers' meeting" },
+        "whitehouse_us_uz_2018": { "dataType": "Joint statement issued during the May 2018 Trump–Mirziyoyev visit" },
+        "whitehouse_c5_2025": { "dataType": "Joint statement from the second C5+1 Heads of State summit" },
+        "usaid_power_visit_2023": { "dataType": "Announcement of Administrator Power's Tashkent and Samarkand visit" },
+        "foreign_assistance_gov": {
+          "dataType": "U.S. government grants and obligations to Uzbekistan by agency, sector, and year",
+          "note": "Authoritative complement to the locally attached grant workbook."
+        },
+        "worldbank_data": {
+          "dataType": "GDP, FDI inflows, population, and business-environment inputs for Central Asia and Caucasus benchmarks"
+        },
+        "trademap_itc": {
+          "dataType": "Bilateral HS-6 product trade, EBOPS 2010 services, and ITC export-potential and diversification analysis",
+          "note": "Principal-supplied export from an authenticated ITC Trade Map session. It uses the UN Comtrade database with ITC analytical layers; services are Uzbekistan-reported, and only 2021 has full EBOPS detail."
+        },
+        "comtrade_hs6": {
+          "dataType": "Annual Uzbekistan–U.S. HS-6 merchandise trade from both reporters, 2021–2025",
+          "note": "Public preview endpoint requiring no API key. Uzbekistan has not yet reported 2025, consistent with the usual reporting lag; the underlying database is also used by ITC Trade Map."
+        },
+        "oecd_data_api": { "dataType": "Cross-country macroeconomic and trade indicators for benchmark comparisons" },
+        "lex_uz": {
+          "dataType": "Canonical Uzbekistan legal-acts database covering decrees, ordinances, and ratifications",
+          "note": "Primary anchor for Uzbekistan-side legal instruments referenced in bilateral agreements and visits."
+        },
+        "lex_uz_visa_free_2025": {
+          "dataType": "Presidential decree introducing 30-day visa-free entry for U.S. citizens from 1 January 2026",
+          "note": "Signed by President Mirziyoyev; Uzbekistan-side legal anchor for the visa-free regime."
+        },
+        "lex_uz_embassy_us_1993": {
+          "dataType": "Cabinet of Ministers resolution establishing the Embassy of Uzbekistan in Washington"
+        },
+        "lex_uz_diplomatic_missions_1992": {
+          "dataType": "Framework resolution for appointing heads of Uzbekistan's diplomatic missions, including in the United States"
+        }
+      },
+      "openSource": "Open external source: {source}. Opens in a new tab.",
+      "attachedMarker": "Level A · controlled",
+      "emptyTitle": "No source matches this search",
+      "emptyBody": "Try a publisher name, source ID, or a broader subject."
+    },
+    "quoteSafe": {
+      "title": "The quote-safe standard",
+      "intro": "A senior briefing should make the evidence answerable in seconds, not merely look authoritative.",
+      "rules": {
+        "confidence": {
+          "title": "Verified confidence",
+          "body": "The claim is marked verified official; no demo, internal, media, company, or source-needed value enters the headline."
+        },
+        "lineage": {
+          "title": "Traceable lineage",
+          "body": "Source IDs and locators lead back to the approved evidence and its immutable content record."
+        },
+        "context": {
+          "title": "Complete context",
+          "body": "Period, as-of date, units, reporter, flow, coverage, and methodology appear beside the value."
+        },
+        "quality": {
+          "title": "No blocking quality flag",
+          "body": "Invalid, absent, conflicting, stale, or downgraded inputs trigger review instead of silent publication."
+        },
+        "separation": {
+          "title": "Strict separation",
+          "body": "Official, review, and illustrative projections remain distinct in totals, charts, maps, exports, and alerts."
+        },
+        "release": {
+          "title": "Approved release",
+          "body": "Publication uses an immutable, reversible release with bilingual approval and visible revision metadata."
+        }
+      }
+    }
   },
   "roadmaps": {
     "title": "Regional roadmaps",
